@@ -1,0 +1,275 @@
+{
+  "repository": "Firmingo",
+  "commit": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+  "protocol_major": 1,
+  "files": [
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/binary-data.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/binary-data.hex",
+      "bytes": 72,
+      "sha256": "35de8304ec76ce2de65acf0dd1d70e20ce7b51734446ae3e745ec3add35c9201"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/diagnostics-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/diagnostics-request.hex",
+      "bytes": 129,
+      "sha256": "ab28b0f13696a771636db82f83bc0557f9a662a3ec45260a77b826e1f1918b70"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/diagnostics-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/diagnostics-response.hex",
+      "bytes": 510,
+      "sha256": "8e2336af96ee16e5d47411e7592f192e11254c4eedc765b69304b340729731a0"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/hello-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/hello-request.hex",
+      "bytes": 90,
+      "sha256": "6153a7eb049fb0283c2ef5e491c2a357f92f8adc87f77b1ad6c69e68becd418f"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/hello-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/hello-response.hex",
+      "bytes": 1059,
+      "sha256": "9fb87afa323de64a74ae5bc40af6045b69d97e150eaf758be1bb669a90a0956b"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/README.md",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/README.md",
+      "bytes": 1881,
+      "sha256": "6d0dbc9e16349a6665ff5d7c5b0994d59b4e171d7f0aff306b02f277fc72553f"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/abort-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/abort-request.hex",
+      "bytes": 192,
+      "sha256": "6ceb1168e9bfdf6407094629926fd16e5791c2cc4a22f9ed7b11a24124d0f601"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/aborted-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/aborted-response.hex",
+      "bytes": 624,
+      "sha256": "69643378c1311ca6067d4e4f9d3ab8b4f71708a29c6b4d8aa8ef2578ce83d19e"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/accepted-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/accepted-response.hex",
+      "bytes": 621,
+      "sha256": "8dbb1e07f6802a298c21ad87f88cc383412203bce2233cba8ec21ea359ce7f4d"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/begin-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/begin-request.hex",
+      "bytes": 591,
+      "sha256": "b0c6a742e2eef69f479093df12da1715507490c6c00a21fb5af8a7f8a3cfdd09"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/boot-confirmed-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/boot-confirmed-response.hex",
+      "bytes": 642,
+      "sha256": "d788910fa68ae497b7c018f0decfa26fc4107293f10b006b1afbf11826792e72"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/chunk-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/chunk-response.hex",
+      "bytes": 627,
+      "sha256": "41106b9e6383edc8858054133f71a6b80507851f8849b3c7c2fa7a3b52604f45"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/chunk.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/chunk.hex",
+      "bytes": 864,
+      "sha256": "a2f85c0c043a3006757186ca7afa3a09648aecb9d623941ffff2d8d24855e416"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/commit-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/commit-request.hex",
+      "bytes": 195,
+      "sha256": "dd03e071b3577fdbfeb4bc85bc8957c17c77ae0145db6fff784392dcceebbf66"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/committing-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/committing-response.hex",
+      "bytes": 633,
+      "sha256": "dc4ccdfd808b8d743debd43a91c69a2dd2a8fe873f81228657c478651af8c574"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/disconnected-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/disconnected-response.hex",
+      "bytes": 648,
+      "sha256": "f2817d2578d85c212da6a14a0d575e127a3babea40f519f7260da4a216bf4bc9"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/finish-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/finish-request.hex",
+      "bytes": 195,
+      "sha256": "2b4cc241b0ddbc6101063ffc46d47e8f1b2b728d7a28fad5b483dab2e7e5e4ca"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/hello-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/hello-request.hex",
+      "bytes": 90,
+      "sha256": "3ad3a44ce98bf9b9ca6529d303cc20fab72621484af3986b76d0f068ced05b99"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/hello-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/hello-response.hex",
+      "bytes": 1359,
+      "sha256": "cd1f00747278a8e4cd0591598115660255b73cd5706a1cbbbc72d00d7baee5e9"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/install-failed-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/install-failed-response.hex",
+      "bytes": 648,
+      "sha256": "1ae673e6655a42206dcd44a97bcd511dfe1c547dc150bb49b418d603dc396d99"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/installed-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/installed-response.hex",
+      "bytes": 627,
+      "sha256": "90c2d0bef3ae799800d1ef34fe89e7d0054f7b62957c64a2f0f7864059fb2110"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/status-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/status-request.hex",
+      "bytes": 195,
+      "sha256": "66a1b21b630d4b097ccb45af15c2552bb6c9c7ca619cc2b3b1b5e8d83d5387e8"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/unauthorized-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/unauthorized-response.hex",
+      "bytes": 255,
+      "sha256": "19be09548cf8aeb0ce9976edc88ceefaa1f382ab6d337db687def75836b74861"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/verified-response.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/managed-upload/verified-response.hex",
+      "bytes": 627,
+      "sha256": "f51552e1e21fc3926e8a2b2db72d86e0c0c063818b7c5b7a227ca52a0d137a30"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/reset-request.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/reset-request.hex",
+      "bytes": 162,
+      "sha256": "a7d775e3a33e1c6aad0656093088a18b29f214ffbea2810ac7ead6274ec188ef"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/reset-unsupported.hex",
+      "upstream_path": "tests/fixtures/protocol-v1/reset-unsupported.hex",
+      "bytes": 249,
+      "sha256": "cefbd2871088f15a92e55330efd6cf3a1c2e80d9ad838d84ac7966e3721e7d3b"
+    }
+  ],
+  "references": [
+    {
+      "path": "docs/protocol.md",
+      "bytes": 36142,
+      "sha256": "bea85fa390bb2d072dd8fdf8f845262f2d76f37334bee6c3e9319699dfdf611f"
+    },
+    {
+      "path": "docs/integration/managed-sketch-sdk.md",
+      "bytes": 11601,
+      "sha256": "d6a91790f4b3cef751ca57416acd3e99bb04163f1a0995cb2ce12d2596367bc8"
+    },
+    {
+      "path": "docs/boards.md",
+      "bytes": 2455,
+      "sha256": "56808e196d6edb3e4540399808bf6aebeec3600e58c1a988099cd89348fc69f9"
+    },
+    {
+      "path": "docs/releasing.md",
+      "bytes": 3711,
+      "sha256": "14344d4ddfd59a8eb0ff170d4a4e12ad93f0bdfea9349de3c56a7c43bb46be6a"
+    },
+    {
+      "path": "docs/development.md",
+      "bytes": 23130,
+      "sha256": "a7e38dd375e824403c5b57f018e4ab13e04f21bc532b7546a9cde85cd858379d"
+    },
+    {
+      "path": "boards/nano_rp2040_connect/baseline.json",
+      "bytes": 898,
+      "sha256": "227cf02f03d35fa36b227fd32be1c5e784f35f89c0be18387e683a42c3c2a23a"
+    },
+    {
+      "path": "boards/raspberry_pi_pico/baseline.json",
+      "bytes": 884,
+      "sha256": "81acae1b02676f3939cb676de37f36627dc2ed2aae0360b2b8ee148986030335"
+    },
+    {
+      "path": "src/core/protocol.h",
+      "bytes": 2074,
+      "sha256": "567095d2bccd32c9567269a08de51829b6b4d6363bfdd294615498970016fa04"
+    },
+    {
+      "path": "src/core/protocol.cpp",
+      "bytes": 2314,
+      "sha256": "d6cc26fd08340302a45d71277e86c43310e9f4ef8e656977f77bb5f530adb1f0"
+    },
+    {
+      "path": "src/core/json.h",
+      "bytes": 1245,
+      "sha256": "4e02c851c8baf68051ea7b34ebc940492e187e0696f255a0c62eb3fbca75f257"
+    },
+    {
+      "path": "src/core/json.cpp",
+      "bytes": 8198,
+      "sha256": "55f9c37253a1a7f60f19dfcfbd4705117045e74a0f6fb6d5fed35883dd0cfb56"
+    },
+    {
+      "path": "src/core/session.h",
+      "bytes": 4249,
+      "sha256": "97323f38b93d06e4aedfcc689f82bfda6601a9f2ea7ac825e27d83fb20a24665"
+    },
+    {
+      "path": "src/core/session.cpp",
+      "bytes": 33141,
+      "sha256": "b9d88edf3da86eb56a9a593fd8d5f4fc2a6d0cd9cdc01ad7a614cb9039b8126d"
+    },
+    {
+      "path": "src/core/session_upload.cpp",
+      "bytes": 4763,
+      "sha256": "aa7602e1b5278569a3c689a4c9de04887ed49548a261ad7a1b9cd4191c7fadbe"
+    },
+    {
+      "path": "experiments/managed_sketch/abi.h",
+      "bytes": 814,
+      "sha256": "941fd824a765e1dc9efaa5c9bdd670d77bdb26fedef98c47d9c7969d5bb6ad2a"
+    },
+    {
+      "path": "experiments/managed_sketch/image.h",
+      "bytes": 1399,
+      "sha256": "658ceac8716a6a6709714f2b51e2e01684a06ba87db999ee0d75cff0b9e6ffd9"
+    },
+    {
+      "path": "experiments/managed_sketch/image.cpp",
+      "bytes": 5935,
+      "sha256": "b694ed15b5c6c84b819da31e14961e48cf4ab8338bb6e1fee538f964a3501ca5"
+    },
+    {
+      "path": "experiments/managed_sketch/stage.cpp",
+      "bytes": 2722,
+      "sha256": "e28478489a97ae231d98dff7daa3eaa4ee5ed96f4af132fc5be831eb1db9c29d"
+    },
+    {
+      "path": "experiments/managed_sketch/fmgo_upload.cpp",
+      "bytes": 5717,
+      "sha256": "4f9240f6cab4968b69e18398ec7fc834d031f1539b7dfa0628c4bd75a6d15c2c"
+    },
+    {
+      "path": "experiments/managed_sketch/build_module.py",
+      "bytes": 6000,
+      "sha256": "ca3cf9afc9170d6e06025d4e61ba9994e7b43400cc145b5b3ceb527f618314f4"
+    },
+    {
+      "path": "experiments/managed_sketch/fmgo_upload.py",
+      "bytes": 8384,
+      "sha256": "362ca483399ab3dee30482daf84fd359dc5311c139c09c7120b90ac6a08b832f"
+    },
+    {
+      "path": "experiments/managed_sketch/upload.py",
+      "bytes": 8497,
+      "sha256": "a7cbf3094ae009760b365c443838e641d585608605f70babc29891ea1a6d448a"
+    }
+  ]
+}

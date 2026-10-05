@@ -1,0 +1,50 @@
+{
+  "repository": "Firmingo",
+  "commit": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+  "local_differences": [
+    "AGENTS.md (guidance only, outside selected compiler contract)"
+  ],
+  "scope": "Pinned managed-format/linker/facade contract; not a qualified Clang/WASM recipe. Integration guide used for responsibility and restrictions.",
+  "references": [
+    {
+      "path": "experiments/managed_sketch/build_module.py",
+      "bytes": 6000,
+      "sha256": "ca3cf9afc9170d6e06025d4e61ba9994e7b43400cc145b5b3ceb527f618314f4"
+    },
+    {
+      "path": "experiments/managed_sketch/module.ld",
+      "bytes": 596,
+      "sha256": "3fd5e2ba42dec5f10bfb15bc70e35faefc1b44a7de3cd68de0573ed7d6428110"
+    },
+    {
+      "path": "experiments/managed_sketch/module_entry.cpp",
+      "bytes": 248,
+      "sha256": "cf7458999069224ada262c13f40792c5cef3b6ed3e3760e11fa8062c3c9306df"
+    },
+    {
+      "path": "experiments/managed_sketch/facade/Arduino.h",
+      "bytes": 2236,
+      "sha256": "b35175c2569f4203dac411dadff9e340e562cd5a09f89f82e119e78ed4bca6b3"
+    },
+    {
+      "path": "experiments/managed_sketch/abi.h",
+      "bytes": 814,
+      "sha256": "941fd824a765e1dc9efaa5c9bdd670d77bdb26fedef98c47d9c7969d5bb6ad2a"
+    },
+    {
+      "path": "experiments/managed_sketch/image.h",
+      "bytes": 1399,
+      "sha256": "658ceac8716a6a6709714f2b51e2e01684a06ba87db999ee0d75cff0b9e6ffd9"
+    },
+    {
+      "path": "experiments/managed_sketch/blink_a.ino",
+      "bytes": 402,
+      "sha256": "bc4a7de53729caa10f3d9d955bdce16bcd4cda646617e0e109fcae077acf0726"
+    },
+    {
+      "path": "docs/integration/managed-sketch-sdk.md",
+      "bytes": 11601,
+      "sha256": "d6a91790f4b3cef751ca57416acd3e99bb04163f1a0995cb2ce12d2596367bc8"
+    }
+  ]
+}

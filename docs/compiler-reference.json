@@ -1,0 +1,231 @@
+{
+  "repository": "ArduinoKit",
+  "commit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+  "local_differences": [],
+  "adapted_files": [],
+  "references": [
+    {
+      "path": "README.md",
+      "bytes": 3492,
+      "sha256": "ab3ed3cbe8d85974cf854fee7f6038a87814d42b508a16a30c9524c893295f0b"
+    },
+    {
+      "path": "Package.swift",
+      "bytes": 776,
+      "sha256": "dc673f72d1f1812af428767da3477ed71b799a620c777dd408d29f1276496d19"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/README.md",
+      "bytes": 6810,
+      "sha256": "d3ebeaba12396bc9391cc7f1d7cfc11c3085797e093d30d6757640c69f2f262c"
+    },
+    {
+      "path": "Source/Compiler/SketchCompiling.swift",
+      "bytes": 605,
+      "sha256": "a7deca400f799b8b00d5c75186a34b2b854ce56cff40d81019080ba3b5b8c7b6"
+    },
+    {
+      "path": "Source/Compiler/CompilationRequest.swift",
+      "bytes": 1306,
+      "sha256": "8425fffda3ec22a1126c3ae97af6ac008732b119d7bc1c490bd3c504d912c056"
+    },
+    {
+      "path": "Source/Compiler/CompilationResult.swift",
+      "bytes": 1501,
+      "sha256": "9607ae822d925dcbfde9b4d80abdbc16628f9f6d692bf9666ba9802f7fe9c4ac"
+    },
+    {
+      "path": "Source/CompilerRuntime/DirectWebAssemblySketchCompiler.swift",
+      "bytes": 5893,
+      "sha256": "4464a1cc4b8ed914105cd7189569dfddc10442f803971c868cee58995d2860d2"
+    },
+    {
+      "path": "Source/Resources/direct-toolchain-assets.json",
+      "bytes": 1063,
+      "sha256": "63a5a0c8c3ca60f52176e8643471809270bb78554f7490fd44d311cf8589329b"
+    },
+    {
+      "path": "Source/Compiler/ArduinoSketchPreprocessor.swift",
+      "bytes": 9688,
+      "sha256": "92dd661f72da42f875bfc9342261f1b5865e52243156a703c1b01db7498a8158"
+    },
+    {
+      "path": "Source/Compiler/ArduinoSketchLexicalState.swift",
+      "bytes": 454,
+      "sha256": "f008906b6cfb9695f87cf31fd237668c532b846916b2b49f4a06dccc867785f9"
+    },
+    {
+      "path": "Source/Compiler/CompilationDiagnostic.swift",
+      "bytes": 1426,
+      "sha256": "fd427b85dd819953a698dbb8e3369a9b0de76d19cea838bb34795e191923d7d3"
+    },
+    {
+      "path": "Source/Compiler/PreprocessedSketch.swift",
+      "bytes": 1034,
+      "sha256": "ea1951ecb84d0a0ecb553e7f52c4c29e913ebb7701fa4c07e161f90d1d0cc41d"
+    },
+    {
+      "path": "Source/Compiler/ELFImageParser.swift",
+      "bytes": 3313,
+      "sha256": "c296cbae72c83da53b36d06f39dc7a77114b71745e47e72d7c2fa34d4bf4ab4e"
+    },
+    {
+      "path": "Source/Compiler/BinaryDataReader.swift",
+      "bytes": 2411,
+      "sha256": "294813df3e9d3a901214d329b2d4d2d0cb8ba525afde63ae076b850e64435c7b"
+    },
+    {
+      "path": "Source/Compiler/RP2040UF2Converter.swift",
+      "bytes": 7802,
+      "sha256": "43ce2afd0894b0d2df0ecc6b172562e97da8ee9142c1c1ebeee8ccc7e6b67f45"
+    },
+    {
+      "path": "Source/CompilerRuntime/DirectWASMToolchainManifest.swift",
+      "bytes": 1172,
+      "sha256": "089b6360d2936ebd790bc1093994e2f6921de4462695bbfc8c60410578322882"
+    },
+    {
+      "path": "Source/CompilerRuntime/DirectWASMToolchainLoader.swift",
+      "bytes": 1755,
+      "sha256": "f6e24694e5211d07d63379d8cb29acc365e60524bf89e08670c791b21b646708"
+    },
+    {
+      "path": "Source/CompilerRuntime/DirectWASMToolchainVerifier.swift",
+      "bytes": 5703,
+      "sha256": "a92b527f95788ca552b0580bd9eadbd7a61d8e4045562ca952ad1e46b21ca14e"
+    },
+    {
+      "path": "Source/CompilerRuntime/DirectWASMCompilerHost.swift",
+      "bytes": 12718,
+      "sha256": "c7f7c1e5e29c016bb97061535c07f5cfee679745f4dbd4fa7ebd590eebfa1af1"
+    },
+    {
+      "path": "Source/CompilerRuntime/DirectWASMCompilerHost+Extensions.swift",
+      "bytes": 2574,
+      "sha256": "00561cb43ab4a97364bdf29933be93e122b3c3dbccaf3bb248dd1d6940311f9b"
+    },
+    {
+      "path": "Source/CompilerRuntime/CompilerResourceSchemeHandler.swift",
+      "bytes": 4808,
+      "sha256": "9a087c4893f5bedb2b97cdc0c0abee1dbd981e341a7842f0105d7806166127b7"
+    },
+    {
+      "path": "Source/CompilerRuntime/DirectWASMBridgeContract.swift",
+      "bytes": 900,
+      "sha256": "74b320fb9dcf5896b1ecbd20abe670aa2e4af1579c90f06cddae66114c1da31e"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/Sources/BuildRecipe.js",
+      "bytes": 6615,
+      "sha256": "01ca52d8d41ea6a17b092108b303b8281e3a053de0a7d0eed55ffe7651bc80f9"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/Sources/DiagnosticParser.js",
+      "bytes": 1177,
+      "sha256": "881d7b3340e08c7d6bbefa7d76b2d2305873988b0a6be36fddc49c5817bc69f1"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/CompilerService/Sources/ArduinoCompilerService.cpp",
+      "bytes": 2790,
+      "sha256": "c49e75f5afb7aae4ef0d6e9ed31c96332053de2d5f74117c5db366ff283aa816"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/CompilerService/include/ArduinoCompilerService.h",
+      "bytes": 3153,
+      "sha256": "06de306587d78fad8c16c829ec58f4907e35bcca6e3e1d6ad3cc2121732e8db5"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/CompilerService/build-wasi-service.sh",
+      "bytes": 2325,
+      "sha256": "ea7ab7ed085da87fb2c76b993c0fef35cf877867b496b66c19590a282de1aed1"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/Sources/DirectCompilerBridge.js",
+      "bytes": 5449,
+      "sha256": "dec5d6ea0e847d28fc81541f98dccfa974546911f3d82a3b8ecec1a7e922d867"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/Sources/DirectCompilerWorker.js",
+      "bytes": 7283,
+      "sha256": "dfe56e523ebcf803aa8ea1938ed073728c7f38bdcaa30ad4af5770df88ae750c"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/Sources/VirtualFileSystem.js",
+      "bytes": 4764,
+      "sha256": "7d9b072f91045714df0947520593958cc53389cefd95cef61bc43aa71c7a4f38"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/Sources/USTARArchive.js",
+      "bytes": 5273,
+      "sha256": "e493412fa97c73b8341cb0cc6709569696a560303066a8dfec85a62e09ada772"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/build-host-page.mjs",
+      "bytes": 2761,
+      "sha256": "0e3d6d4c1759ee3b1307d48c459cd8fcd12c6b9a835bd274cbab8a8c28be91c9"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/package.json",
+      "bytes": 305,
+      "sha256": "a78f7b27b716332871027acc9c793055dc52d8c305936d3b289bfc9401ea02ac"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/package-lock.json",
+      "bytes": 14869,
+      "sha256": "a1d524305b0df53e0c658e87471c03c96afbef304d29c28e21b18b1dfc086285"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/CompilerService/Sources/ResponseFile.cpp",
+      "bytes": 1359,
+      "sha256": "16382ce779ca095014d83deb8d1f5af2f0d915524a3be55ca2cab8d9231b89a7"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/CompilerService/Sources/CompilerDriver.cpp",
+      "bytes": 4362,
+      "sha256": "c027b54e2256d49d6f07d2b00ccb727ea4b7560d2a474d064acda9a6ca2476c1"
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/CompilerService/Sources/LinkerDriver.cpp",
+      "bytes": 1400,
+      "sha256": "e34b743ec78188bed8055661fbd69eb8b2cd3e7b286b8ba24dffd3c43ed37689"
+    },
+    {
+      "path": "Tests/ArduinoKitTests/DirectWebAssemblyCompilerIntegrationTests.swift",
+      "bytes": 1877,
+      "sha256": "ee2c24fc520ae2d36a53d1a7ce085b3f638423127f4824d3118d92f70d84d0d1"
+    }
+  ],
+  "independently_authored_adaptations": [
+    "Sources/FirmingoKit/Compiler/SketchSourceSnapshot.swift",
+    "Sources/FirmingoKit/Compiler/ManagedSketchBuildRequest.swift",
+    "Sources/FirmingoKit/Compiler/ManagedSketchPreprocessor.swift",
+    "Sources/FirmingoKit/Compiler/PreparedManagedSketch.swift",
+    "Sources/FirmingoKit/Compiler/SketchDiagnostic.swift",
+    "Sources/FirmingoKit/Compiler/SketchBuildError.swift",
+    "Sources/FirmingoKit/Compiler/ManagedELFImage.swift",
+    "Sources/FirmingoKit/Compiler/ManagedELFConverter.swift",
+    "Sources/FirmingoKit/Compiler/ManagedELFProvenance.swift",
+    "Sources/FirmingoKit/Compiler/ManagedSketchArtifact.swift",
+    "Tools/ManagedWASM/Sources/ModuleMemory.js",
+    "Tools/ManagedWASM/Sources/WorkerResponse.js",
+    "Tools/ManagedWASM/Sources/ManagedRecipe.js",
+    "Tools/ManagedWASM/Sources/ManagedService.js",
+    "Tools/ManagedWASM/Sources/BrowserWorker.js",
+    "Tools/ManagedWASM/Sources/Workspace.js",
+    "Tools/ManagedWASM/Sources/WorkerCore.js",
+    "Sources/FirmingoKit/Compiler/ManagedCompilationPhase.swift",
+    "Sources/FirmingoKit/Compiler/ManagedCompilationResult.swift",
+    "Sources/FirmingoKit/Compiler/ManagedCompilerError.swift",
+    "Sources/FirmingoKit/Compiler/ManagedSketchCompiler.swift",
+    "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerOrigin.swift",
+    "Sources/FirmingoKit/CompilerRuntime/ManagedWebKitHost.swift",
+    "Sources/FirmingoKit/CompilerRuntime/ManagedWorkerOutput.swift",
+    "Sources/FirmingoKit/CompilerRuntime/VerifiedManagedToolchain.swift",
+    "Sources/FirmingoKit/Models/ManagedResidentBinding+Record.swift",
+    "Tools/ManagedWASM/HostBridge.js",
+    "Tools/ManagedWASM/Sources/Digest.js",
+    "Tools/ManagedWASM/stage-sdk-runtime.mjs",
+    "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerBundle.swift"
+  ],
+  "adaptation_note": "New Swift packaging and Tools/ManagedWASM runtime/recipe are independently authored. No custom ArduinoKit runtime/service source copied. Licensed third-party browser_wasi_shim 0.4.2 vendored separately with full licenses/receipts. Compiler module copied/adapted only under ignored SDK .build for development checks; redistribution pending. The SDK now packages the independently authored staged WebKit host/worker/recipe and licensed third-party shim, with a pinned integrity manifest. It never packages the custom service binary or copies custom reference source."
+}

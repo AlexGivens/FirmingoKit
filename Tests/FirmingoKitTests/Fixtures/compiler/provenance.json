@@ -1,0 +1,13 @@
+{
+  "commit": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+  "origin": "Hand-authored ELF32 ARM layout from AAELF32 2025Q1 and pinned module.ld; .text is the firmware non-executable parser capsule vector. NEVER UPLOAD OR EXECUTE. Not compiler or hardware evidence.",
+  "synthetic_decoded_bytes": 712,
+  "synthetic_decoded_sha256": "bda1e92d1cd5eaa6acaee2e8495072a716d3937bc4b4e7d7bd72304e5045fa52",
+  "files": [
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler/stateless.elf.hex",
+      "bytes": 2136,
+      "sha256": "39275358ab631f0b43601e4aea3a6372638e908e71a1216746e0e257e44edc56"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "recipe": {
+    "identifier": "nano-stateless-clang-22.1.8-v1-experimental",
+    "sha256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
+    "board": "nano_rp2040_connect",
+    "profile": "nano-managed-v1",
+    "sourceContract": "nano-stateless-facade-v1",
+    "qualification": "experimental-unqualified"
+  },
+  "service": {
+    "path": "compiler.wasm",
+    "bytes": 101196044,
+    "sha256": "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33",
+    "abi": 2,
+    "distributionReview": "pending"
+  },
+  "files": [
+    {
+      "path": "manifest.json",
+      "bytes": 641,
+      "sha256": "fb732842e1b94b1f3ca5055fb6aaa0a0f71e0a6d3e9c1a173063955f21a0b76a"
+    },
+    {
+      "path": "host.html",
+      "bytes": 121703,
+      "sha256": "7284f555cf210a6eae0966e9c8363f94be77b4eee5f43c3c7ca01bfc5a10d83b"
+    },
+    {
+      "path": "LICENSE-MIT",
+      "bytes": 1023,
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+    },
+    {
+      "path": "LICENSE-APACHE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "catalogue.json",
+      "bytes": 33,
+      "sha256": "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db"
+    }
+  ]
+}

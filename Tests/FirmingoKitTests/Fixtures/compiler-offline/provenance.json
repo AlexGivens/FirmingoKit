@@ -1,0 +1,10 @@
+{
+  "provenance": "Independent Python hashlib/struct/compact JSON; synthetic parser metadata/code NEVER DEPLOY. No compiler or board execution.",
+  "files": [
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-offline/expectations.json",
+      "bytes": 1367,
+      "sha256": "d92c847790d62b6c5ed06d27cb4d84273f927716803b7450f1a7251682c81f31"
+    }
+  ]
+}

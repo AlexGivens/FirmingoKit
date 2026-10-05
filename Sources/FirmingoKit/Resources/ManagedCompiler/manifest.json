@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "recipe": "nano-stateless-clang-22.1.8-v1-experimental",
+  "serviceABI": 2,
+  "recipeSHA256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
+  "files": [
+    {
+      "path": "host.html",
+      "bytes": 121703,
+      "sha256": "7284f555cf210a6eae0966e9c8363f94be77b4eee5f43c3c7ca01bfc5a10d83b"
+    },
+    {
+      "path": "LICENSE-MIT",
+      "bytes": 1023,
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+    },
+    {
+      "path": "LICENSE-APACHE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    }
+  ]
+}

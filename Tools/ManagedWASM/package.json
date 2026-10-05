@@ -1,0 +1,7 @@
+{
+  "name": "firmingokit-managed-wasm-development",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test Tests/*.test.mjs" },
+  "engines": { "node": ">=22" }
+}

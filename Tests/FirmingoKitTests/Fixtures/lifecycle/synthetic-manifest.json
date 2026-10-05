@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "product": "Firmingo",
+  "version": "0.1.0",
+  "release_channel": "beta",
+  "artifact_format": "UF2",
+  "files": [
+    {
+      "path": "nano_rp2040_connect/application/firmingo-0.1.0-nano_rp2040_connect-application.uf2",
+      "board_id": "nano_rp2040_connect",
+      "profile": "application",
+      "firmware_version": "0.1.0",
+      "bytes": 1024,
+      "sha256": "3081bc65e24e5fb98dec86bd956dfbf375366e73696dda7d71e38cf1e679ca5f",
+      "fqbn": "rp2040:rp2040:arduino_nano_connect:usbstack=picosdk,flash=16777216_0,freq=125,ipbtstack=ipv4only,opt=Small,rtti=Disabled,exceptions=Disabled",
+      "flash_bytes": 512,
+      "static_ram_bytes": 4096,
+      "qualification": "compile-tested",
+      "build_report_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}

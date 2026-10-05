@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "board": "nano_rp2040_connect",
+  "profile": "nano-managed-v1",
+  "backend": "application",
+  "firmwareVersion": "0.1.0-m9exp1",
+  "firmwareCommit": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+  "residentELFSHA256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "firmwareImageSHA256": "1111111111111111111111111111111111111111111111111111111111111111",
+  "buildReportSHA256": "2222222222222222222222222222222222222222222222222222222222222222",
+  "apiAddress": 268577952,
+  "residentABI": 1,
+  "targetID": 1,
+  "maximumCapsuleBytes": 4096,
+  "recipeIdentifier": "nano-stateless-clang-22.1.8-v1-experimental",
+  "recipeSHA256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
+  "qualification": "experimental"
+}

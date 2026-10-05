@@ -1,0 +1,69 @@
+{
+  "date": "2026-09-30",
+  "status": "Host-only process-local document-window coordination; no hardware, UI, signed-sandbox or cross-process qualification.",
+  "referenceCommits": {
+    "ArduinoKit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+    "Firmingo": "f17fdf0301256ba48270230cbf213126e70aa8d0"
+  },
+  "referenceState": "Read-only: ArduinoKit clean; Firmingo retains its pre-existing AGENTS.md modification.",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "xcode": "27.0 (27A266a)"
+  },
+  "sdkRuntimeChanged": false,
+  "compilerServiceBundled": false,
+  "deviceConnectionsOrWrites": 0,
+  "validation": {
+    "coordinationHarness": "Passed twelve competing Runs, cross-action reservations, stale owner/write rejection, stale window Run/review/clear gates, refreshed context, corrupted journals, retained history, cancellation and storage failure. Uses synthetic persistence fields, no compiler or device.",
+    "realDemoHarness": "Passed real WebKit document edit cancellation, next revision artifact identity, selection invalidation, resident reimport, durable journals and explicit corrupt-context clear. All compiled capsules use synthetic resident bindings and must NEVER be uploaded.",
+    "firmwareJournalHarness": "Passed durable save/load, retained operation files, corruption and storage failure. No ROM writer invoked.",
+    "packageTests": {
+      "discovered": 120,
+      "ordinaryPassed": 116,
+      "optInWebKitSkipped": 4
+    },
+    "unsignedDemoBuilds": [
+      "macOS",
+      "generic iOS Simulator",
+      "generic iOS device"
+    ],
+    "commands": "Tools/ManagedWASM/README.md and docs/development.md",
+    "logPrefix": ".build/device-coordination-",
+    "notRepeated": [
+      "Unchanged JavaScript runtime tests",
+      "Unchanged SDK public DocC generation"
+    ]
+  },
+  "sources": [
+    {
+      "path": "Demo/Shared/DemoOperationError.swift",
+      "bytes": 1311,
+      "sha256": "10461b5f7eae4d51eac7534d0887398fb872ef3db55a717e91053bc48dd78a9a"
+    },
+    {
+      "path": "Demo/Shared/InstallationRecordStore.swift",
+      "bytes": 9435,
+      "sha256": "a87a1677ec7ccb9b3f8ac338134720fad97a5965ed1ab0bd33244a778178fdba"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchBuildModel.swift",
+      "bytes": 17651,
+      "sha256": "7c664046988c923060d7a3f0aae755c184bd56361582c85639937943c548ebe0"
+    },
+    {
+      "path": "Demo/Shared/InstallationReviewModel.swift",
+      "bytes": 12903,
+      "sha256": "27256c2bf4e21f1c92947ba32dedb76290a45dad3dfc4ea5e2ef77270fa3072c"
+    },
+    {
+      "path": "Tools/verify-demo-device-operations.swift",
+      "bytes": 10960,
+      "sha256": "4862fc09d177a5478762ae34e1a3cfd2db0893197880874cc06c2636a4425009"
+    },
+    {
+      "path": "Tools/ManagedWASM/VerifyDemoBuild.swift",
+      "bytes": 6753,
+      "sha256": "211cf6903365aca441be1b7d02955395d8e14105c7e785018293344410cfa833"
+    }
+  ]
+}

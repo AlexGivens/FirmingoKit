@@ -1,0 +1,201 @@
+{
+  "date": "2026-09-30",
+  "status": "Experimental demo integration of SDK-owned default catalogue/resource verification, with explicit independent development sources. Current bundled catalogue remains empty and compiler service approval remains pending; no successful production bundled compilation is claimed.",
+  "referenceCommits": {
+    "ArduinoKit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+    "Firmingo": "f17fdf0301256ba48270230cbf213126e70aa8d0"
+  },
+  "referenceState": "All 38 ArduinoKit and eight Firmingo selected compiler-reference hashes and pinned committed bytes verified. Neither reference checkout written or built. ArduinoKit clean; Firmingo pre-existing AGENTS.md change only.",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4"
+  },
+  "publicAPI": "ManagedSketchCompiler.verifyResources() async throws: shared busy reservation, cancellation, fresh asset verification off UI execution; no preprocessing, WebKit startup, board I/O or cache. Success establishes asset integrity only.",
+  "demoBehavior": [
+    "Startup uses SDK catalogue loading and resource verification without selecting a descriptor, device or trust.",
+    "Compiler and catalogue providers are independent explicit SDK/development choices; imports and legacy mode are under Development resources.",
+    "Provider/service changes invalidate previous output and review; SDK compiler selection releases the unused imported service capability.",
+    "No automatic fallback/reimport; late startup cannot replace two completed development selections.",
+    "Failed reload and cancelled late delivery cannot publish stale metadata/readiness. SDK choices remain empty and compiler pending.",
+    "Actual builds revalidate selected resources even after setup verification; Run retains durable association/journal reservations before compiler loading."
+  ],
+  "compatibility": "Existing explicit compiler/catalogue imports, legacy build APIs, toolchain/recipe/service identities and persistence schemas remain compatible. Replacing a service now requires renewed physical-device review.",
+  "resources": {
+    "inventorySHA256": "9a2a074d1d3ba5135f37edba7b8d2937b934a1759dc3d10fedceafb601b92d82",
+    "catalogueSHA256": "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db",
+    "runtimeRecipeAndPackagedAssetBytesChanged": false,
+    "compilerServiceBundled": false,
+    "productionDescriptorsBundled": false,
+    "service": {
+      "path": "compiler.wasm",
+      "bytes": 101196044,
+      "sha256": "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33",
+      "abi": 2,
+      "distributionReview": "pending"
+    }
+  },
+  "deviceConnectionsOrWrites": 0,
+  "visualInspectionUsed": false,
+  "validation": {
+    "ordinaryMacOSTests": {
+      "discovered": 149,
+      "passed": 141,
+      "optInWebKitSkipped": 8,
+      "suites": 16
+    },
+    "actualWebKitWASITests": {
+      "passed": 8,
+      "durationSeconds": 9.457,
+      "newCoverage": "Explicit selected service verification succeeds; verification rejects concurrent build as busy. Existing actual compilation, cancellation, deadline, offline/legacy exclusivity and test-only approved inventory checks pass. Synthetic bindings must never deploy.",
+      "blinkCapsuleSHA256": "018c94a4a49b71880d6f04aecbe08e809c8ecf49e4278261c45dad3ead205720",
+      "toolchainSHA256": "c0e5829d10a2135e8dbccc79ee1332a53b8320b5c34a9424993685260d28a75f"
+    },
+    "iOSSimulatorTests": {
+      "passed": 141,
+      "suites": 15,
+      "durationSeconds": 1.612,
+      "os": "iOS 27.0",
+      "deviceID": "48DD1F0D-419C-44F7-B736-253597BF20F6"
+    },
+    "demoHarnesses": {
+      "passed": 5,
+      "names": [
+        "Tools/ManagedWASM/VerifyDemoDefaults.swift",
+        "Tools/ManagedWASM/VerifyDemoCatalogue.swift",
+        "Tools/ManagedWASM/VerifyDemoBuild.swift (legacy)",
+        "Tools/verify-demo-associations.swift",
+        "Tools/verify-demo-device-operations.swift"
+      ],
+      "newCoverage": "Actual empty/pending SDK startup, explicit providers, independent source combinations, review invalidation, released service selection, failed reload, cancelled late catalogue/verifier delivery, closure/stop, retry, actual default build revalidation despite injected test readiness, no board I/O. Existing catalogue stale-journal check renews review after compiler file replacement."
+    },
+    "demoBuilds": "Passed unsigned macOS, generic iOS Simulator and generic iOS device builds.",
+    "docc": "Passed final documentation generation without warnings and updated BundledCompilerResources Swift example typecheck against generated package module, using local module cache.",
+    "buildWarnings": [
+      "Existing AppIntents metadata extraction warning"
+    ],
+    "initialCorrections": "Wrong Swift Testing throws assertion, stale standalone harness resource bundle and synthetic catalogue anchor, and review renewal in the existing stale-journal harness were corrected before final passing runs. Focused typecheck uses local cache after sandbox cache denial; final Xcode documentation build passed with normal cache/service access.",
+    "notRepeated": [
+      "Unchanged JavaScript/WASI tests",
+      "Separate package consumer and archive checks",
+      "Complete-image journal harness"
+    ],
+    "commands": "docs/development.md and Tools/ManagedWASM/README.md",
+    "logs": [
+      ".build/demo-default-package-tests.log",
+      ".build/demo-default-runtime.log",
+      ".build/demo-default-ios-tests.log",
+      ".build/demo-default-defaults.log",
+      ".build/demo-default-catalogue.log",
+      ".build/demo-default-legacy.log",
+      ".build/demo-default-association.log",
+      ".build/demo-default-coordination.log",
+      ".build/demo-default-macos.log",
+      ".build/demo-default-simulator.log",
+      ".build/demo-default-device.log",
+      ".build/demo-default-docc.log",
+      ".build/demo-default-examples.log"
+    ]
+  },
+  "limitations": [
+    "Compiler-service/component redistribution and reproducible-build review unresolved; exact trusted production firmware descriptors not staged.",
+    "Default verification/build throws serviceApprovalPending; no successful production bundled compilation.",
+    "No signed sandbox, minimum-OS, physical iPad, hardware deployment or useful device behavior qualification.",
+    "No visual, layout, VoiceOver or native UI inspection; explicitly disabled by user.",
+    "Catalogue/inventory identity does not authenticate publisher or attest installed image.",
+    "Pico managed Build/Run remains unavailable.",
+    "Host-only injected verifier/catalogue fixtures exercise controller state, never grant production approval or deployment records."
+  ],
+  "sources": [
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedSketchCompiler.swift",
+      "bytes": 6441,
+      "sha256": "277f4ae962b2975765eff80606c5a1b533ffc7f2fd35108c987a6fff4855fe88"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/ManagedCompilerResourceTests.swift",
+      "bytes": 11059,
+      "sha256": "3d7ba446f8a99495e2b39c2ad36d743f43d3972bb5be317043d5aaddd483bd95"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/ManagedWebKitCompilerTests.swift",
+      "bytes": 15194,
+      "sha256": "4d35493596481138119319d6efa7ab087439253c8930a47160d9994dd9e9685f"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchBuildModel.swift",
+      "bytes": 39194,
+      "sha256": "d882642ec849dffd1e5f939eaa7569d92234a5a6437ed44f193e50a367ea14af"
+    },
+    {
+      "path": "Demo/Shared/CompilerSelectionView.swift",
+      "bytes": 11246,
+      "sha256": "078ab6aef694601503cdf70ff8d7322e8ee9c84ed0fb3a89b2f603293c511aec"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchView.swift",
+      "bytes": 10292,
+      "sha256": "befc83b3e8f681bcce6cf9815718dda89f9cf9e641870b189ee5f78244c18578"
+    },
+    {
+      "path": "Tools/ManagedWASM/VerifyDemoDefaults.swift",
+      "bytes": 12659,
+      "sha256": "4e2eb416832cf3e7b79d7b50a6b63b26fe99c7bf421598596f961a74ae62b649"
+    },
+    {
+      "path": "Tools/ManagedWASM/VerifyDemoCatalogue.swift",
+      "bytes": 12413,
+      "sha256": "088ce0ddd41fff1c95bff4ecdf7027fee2c8249e6dfb3f8e74222054fde7642f"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/BundledCompilerResources.md",
+      "bytes": 4471,
+      "sha256": "efbeb85b35eb983f63bf902b38542334544de2436f470ec3df581631f8cfda51"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 54398,
+      "sha256": "7f8945e008ec48bf020f3cbe12d6b5ff45adea3a69ed378589f3c39e69c4b695"
+    },
+    {
+      "path": "Demo/AGENTS.md",
+      "bytes": 4031,
+      "sha256": "53c3a238d677d32eb9d1466898dd417f28a0403a67f806931c5b9a08977305ea"
+    },
+    {
+      "path": "TODO.md",
+      "bytes": 38108,
+      "sha256": "3bd14ff07689db0480e916880c1e448457907de72b89a4eaad5a80e1ba281be2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7775,
+      "sha256": "0f06be5295353f367c5b33e79701070a43e61daa6712ad9daf639f219e10dd67"
+    },
+    {
+      "path": "docs/compiler.md",
+      "bytes": 24462,
+      "sha256": "721f6725984eab96cd4b437494a69183cc276c8e8e8a8b16294ff00880c191d9"
+    },
+    {
+      "path": "docs/compiler-catalogue.md",
+      "bytes": 18603,
+      "sha256": "6b57b0e1623db13c35a041c560c74935ac83d4712c970f0af6286654b7e2fd41"
+    },
+    {
+      "path": "docs/demo-design.md",
+      "bytes": 20027,
+      "sha256": "a7479b4752acf888af1465649a89a820200f6cd7f8120e34c9c1b3cfc323e887"
+    },
+    {
+      "path": "docs/development.md",
+      "bytes": 40441,
+      "sha256": "d95178bc4a5939711765174306079b3f9d30eef5f9c13eb2baac2f58f442c222"
+    },
+    {
+      "path": "Tools/ManagedWASM/README.md",
+      "bytes": 18288,
+      "sha256": "f0ac810b08f356a70aae4e10b0d17c903e226e9389add93400d9f89c51cf11e6"
+    }
+  ]
+}

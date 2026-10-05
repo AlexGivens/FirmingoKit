@@ -1,0 +1,21 @@
+{
+  "reference_head": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+  "status": "Provisional ignored GCC outputs, copied once into SDK .build for structural comparison only. No source compilation, installed-image association, execution or hardware evidence. Firmware image binding in the check is explicitly synthetic.",
+  "files": [
+    {
+      "path": "build/managed_sketch/sdk-example/blink_a/blink_a.elf",
+      "bytes": 2800,
+      "sha256": "be2891049f517332905d0549583849fde852e1907214317ba2fb24c1490f3f20"
+    },
+    {
+      "path": "build/managed_sketch/sdk-example/blink_a/blink_a.fms",
+      "bytes": 688,
+      "sha256": "4e92dbd5a9d24952c712bd32d8348a6d0a3de5c54441e42bd8908822564ad3b7"
+    },
+    {
+      "path": "build/managed_sketch/sdk-example/blink_a/report.json",
+      "bytes": 1458,
+      "sha256": "427effc2a6e4d44baefd875a01737cf14581c21a7c5ae4adb19310410947e302"
+    }
+  ]
+}

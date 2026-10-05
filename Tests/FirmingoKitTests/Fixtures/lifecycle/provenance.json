@@ -1,0 +1,76 @@
+{
+  "commit": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+  "files": [
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/lifecycle/observed-manifest.json",
+      "bytes": 2805,
+      "sha256": "39b5fd642579137ae813ca00d498d4115fa532c3cda4718e5d4f925728861aa8"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/lifecycle/synthetic-manifest.json",
+      "bytes": 826,
+      "sha256": "221feead61e915c0cb5af0d380ca5c0c11f959166aa8744b2b04f7efbc0b8deb"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/lifecycle/synthetic.uf2.hex",
+      "bytes": 3072,
+      "sha256": "4974b74590d01bcc3a196980fddf779cb28532ce5f6ccc466185af529b34eee3"
+    }
+  ],
+  "references": [
+    {
+      "path": "docs/releasing.md",
+      "bytes": 3711,
+      "sha256": "14344d4ddfd59a8eb0ff170d4a4e12ad93f0bdfea9349de3c56a7c43bb46be6a"
+    },
+    {
+      "path": "tools/package_release.py",
+      "bytes": 6089,
+      "sha256": "00b64a4178f1e2efaa61be18db6335434c7cdb22a475339c2817232648eb39a1"
+    },
+    {
+      "path": "tools/dev.py",
+      "bytes": 18729,
+      "sha256": "0473428e40ecc13290be06b7ae44cf77514501855ad50a2f32f5b250d8a34231"
+    },
+    {
+      "path": "boards/nano_rp2040_connect/baseline.json",
+      "bytes": 898,
+      "sha256": "227cf02f03d35fa36b227fd32be1c5e784f35f89c0be18387e683a42c3c2a23a"
+    },
+    {
+      "path": "boards/raspberry_pi_pico/baseline.json",
+      "bytes": 884,
+      "sha256": "81acae1b02676f3939cb676de37f36627dc2ed2aae0360b2b8ee148986030335"
+    },
+    {
+      "path": "docs/protocol.md",
+      "bytes": 36142,
+      "sha256": "bea85fa390bb2d072dd8fdf8f845262f2d76f37334bee6c3e9319699dfdf611f"
+    },
+    {
+      "path": "src/core/session.cpp",
+      "bytes": 33141,
+      "sha256": "b9d88edf3da86eb56a9a593fd8d5f4fc2a6d0cd9cdc01ad7a614cb9039b8126d"
+    },
+    {
+      "path": "src/core/version.h",
+      "bytes": 194,
+      "sha256": "443f78edc69d78813b2dac15fb707290744441805ec7f6ff2fe075962b9dd029"
+    },
+    {
+      "path": "examples/firmingo_application/firmingo_application.ino",
+      "bytes": 4768,
+      "sha256": "028cfaa87940566d3af70993054047636c7e72bcf9d583ac13367e878046ee41"
+    },
+    {
+      "path": "examples/firmingo_uart/firmingo_uart.ino",
+      "bytes": 4552,
+      "sha256": "58638a97ec0242f64ecdc153b3f5bc2c3e06b916dfe5976f625b5f317cd0aaf0"
+    }
+  ],
+  "observed_manifest_origin": "Read-only ignored dist output observed 2026-09-29; not committed release evidence or publisher authentication.",
+  "synthetic_origin": "Literal Microsoft UF2 header constants; zero-filled payloads, reversed block order, hand-authored release metadata. Non-executable; never flash.",
+  "synthetic_decoded_bytes": 1024,
+  "synthetic_decoded_sha256": "3081bc65e24e5fb98dec86bd956dfbf375366e73696dda7d71e38cf1e679ca5f"
+}

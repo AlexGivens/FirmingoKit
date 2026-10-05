@@ -1,0 +1,134 @@
+{
+  "date": "2026-09-30",
+  "status": "Additive metadata foundation only; host-supplied catalogue, strict immutable descriptors, persisted host device evidence and matching legacy binding adapter. No production catalogue/service or offline compiler API migration.",
+  "referenceCommits": {
+    "ArduinoKit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+    "Firmingo": "f17fdf0301256ba48270230cbf213126e70aa8d0"
+  },
+  "referenceReceipts": [
+    "docs/compiler-reference.json",
+    "docs/compiler-firmware-reference.json"
+  ],
+  "referenceVerification": "Every listed file matched its recorded byte count/SHA-256 and pinned git-show bytes before and after this change. ArduinoKit clean; Firmingo only pre-existing AGENTS.md modification. Both reference checkouts read-only.",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4"
+  },
+  "compilerServiceBundled": false,
+  "productionFirmwareDescriptorsBundled": false,
+  "deviceConnectionsOrWrites": 0,
+  "validation": {
+    "focusedCatalogueTests": 10,
+    "macOSPackageTests": {
+      "discovered": 130,
+      "ordinaryPassed": 126,
+      "optInWebKitPassed": 4,
+      "optInRuntimeSeconds": 5.1
+    },
+    "ordinaryRun": "126 passed; four opt-in WebKit tests skipped without service selection.",
+    "iOSSimulatorTests": {
+      "passed": 126,
+      "suites": 13,
+      "device": "iPhone 18 Pro / iOS 27.0",
+      "id": "48DD1F0D-419C-44F7-B736-253597BF20F6"
+    },
+    "packageBuilds": [
+      "generic iOS Simulator",
+      "generic iOS device"
+    ],
+    "unsignedDemoBuilds": [
+      "macOS",
+      "generic iOS Simulator",
+      "generic iOS device"
+    ],
+    "documentation": "DocC build without warnings; catalogue Swift example typechecked against the macOS demo package module; generated catalogue guide and all five new landing references resolved.",
+    "fixtures": "26 protocol, three lifecycle, one ELF and three independent metadata parser files passed local byte/hash verification; independent Python canonical descriptor ID matched.",
+    "logPrefix": ".build/catalogue-",
+    "commands": "docs/development.md catalogue metadata increment",
+    "notRepeated": [
+      "Unchanged JavaScript/WASI runtime tests",
+      "Unchanged demo operation/journal harnesses"
+    ],
+    "limitations": [
+      "No publisher authentication or referenced ELF/report validation by metadata APIs",
+      "No installed-image attestation",
+      "No fully device-independent compiler request/receipt",
+      "No production catalogue, default service loader or demo catalogue UI",
+      "Service/component redistribution and reproducible-build review remains unresolved",
+      "No visual DocC preview, signed sandbox, minimum-OS, physical iPad, resident ABI or hardware qualification"
+    ]
+  },
+  "sources": [
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedCatalogueError.swift",
+      "bytes": 1800,
+      "sha256": "4050a3a216613556e532f265c31838513666fd8729b9392aa8e821ff57e3bbc0"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedFirmwareBuildDescriptor.swift",
+      "bytes": 6090,
+      "sha256": "f8236fc895374e054a4809bea73ed153a2dab2803206c7190fd2066a001deaf4"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedCompilerCatalogue.swift",
+      "bytes": 4483,
+      "sha256": "66b68e724b652c3e5f017e0887617164e8eb29bef4d319532b58e7c667db18e8"
+    },
+    {
+      "path": "Sources/FirmingoKit/Models/ManagedDeviceAssociation.swift",
+      "bytes": 4146,
+      "sha256": "85dc3403f19a0d2fa1799cff3cb19f8cfbaa8b6a722be9488aa159ec14b00108"
+    },
+    {
+      "path": "Sources/FirmingoKit/Models/ManagedResidentBinding+Association.swift",
+      "bytes": 818,
+      "sha256": "87ea3648f9749aa9509dc5dc01744300aaebf36086f039585e6985b906845bb4"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/ManagedCatalogueTests.swift",
+      "bytes": 13706,
+      "sha256": "b1d67a74c7772339c6fda55d9d8afaf2a430176b02c453b76ef1d210c8270a6b"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/descriptor.json",
+      "bytes": 773,
+      "sha256": "0aba07a8cf184481c19372d24bded8bee5deffc5709003f30c3dab4226b9fc6a"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/catalogue.json",
+      "bytes": 890,
+      "sha256": "7eb09989cbab271b0ba0350950fdc684a30a2ac2825488d58bcbfb3a32feba07"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/association.json",
+      "bytes": 171,
+      "sha256": "a2d7ed6d7c0947ea6fe5eaf89cb3f7440803ab05105ed5ea2ca91fc2f345f642"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/provenance.json",
+      "bytes": 998,
+      "sha256": "6669937f98fef18f69ee3dd1853edad418ed0e510b1074165ba317f4841a20d2"
+    },
+    {
+      "path": "Tools/verify-fixtures.py",
+      "bytes": 3048,
+      "sha256": "c665f5b338f3bb99396275ef0d27fed953e6707631e6408e275e5fd75b6512e6"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/ManagedCatalogue.md",
+      "bytes": 5050,
+      "sha256": "572772c512f47f14b9bb17d98711134b5436aa1e89004ca0842cf8ca8475231b"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/ManagedCompilation.md",
+      "bytes": 4785,
+      "sha256": "9183896bb548b539bccf6166fd42d10ae3a7e331aac47c35865543f2802ef79e"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/FirmingoKit.md",
+      "bytes": 4592,
+      "sha256": "544dae1f3a660b2084c8a64ba607edfecc8f2efb2f831b965062b6c9f4b4b9b7"
+    }
+  ]
+}

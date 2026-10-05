@@ -1,0 +1,139 @@
+{
+  "date": "2026-09-30",
+  "status": "Experimental demo association persistence with explicit save/restore/forget, renewed Run review, strict exact metadata and process-local compare/recheck guards. No production compiler/catalogue resources added.",
+  "referenceCommits": {
+    "ArduinoKit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+    "Firmingo": "f17fdf0301256ba48270230cbf213126e70aa8d0"
+  },
+  "referenceState": "All 38 ArduinoKit and eight Firmingo selected compiler references match recorded hashes and pinned git-show bytes after host-only changes. No sibling writes; ArduinoKit clean; Firmingo pre-existing AGENTS.md difference.",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4"
+  },
+  "sdkPublicAPIOrRuntimeChanged": false,
+  "compilerServiceBundled": false,
+  "productionDescriptorsBundled": false,
+  "deviceConnectionsOrWrites": 0,
+  "storage": {
+    "schema": 1,
+    "file": "device-associations-v1.json",
+    "maximumBytes": 16384,
+    "maximumDevices": 16,
+    "records": "Base64 encoded strict ManagedDeviceAssociation JSON, independently revalidated by SDK",
+    "automaticReviewOrSelection": false,
+    "legacyMigration": "Explicit new reviewed association required; no descriptor identity inferred",
+    "concurrency": "Actor/process-local; exact roster comparison for mutations and selected record recheck for Run; no cross-process lock"
+  },
+  "validation": {
+    "associationHarness": "Passed durable reopen, no automatic selection/trust, exact/missing descriptors, save/restore/forget including orphaned records, unrelated-device preservation, stale mutations/Run, renewed review, reservation guards, bounds, corruption/future schema/duplicate devices/invalid SDK records, symlinks, cancellation and storage failure. No compiler service or network required.",
+    "catalogueHarness": "Passed actual WebKit offline compilation/edit cancellation, exact source receipt, separate evidence review/save, device independence, stale journal and bounded metadata imports; synthetic NEVER DEPLOY data.",
+    "legacyHarness": "Passed actual WebKit legacy compilation/edit cancellation and durable managed journal checks; no network.",
+    "coordinationHarness": "Passed twelve competing reservations, stale Run/review/clear, corruption, cancellation and storage failure.",
+    "completeImageJournalHarness": "Passed durable records, retained history, corruption and storage failure without bootloader backend.",
+    "ordinaryPackageTests": {
+      "discovered": 140,
+      "passed": 133,
+      "optInWebKitSkipped": 7
+    },
+    "unsignedDemoBuilds": [
+      "macOS",
+      "generic iOS Simulator",
+      "generic iOS device"
+    ],
+    "uiInspection": "Disabled by user. No running UI, screenshot, accessibility tree or computer-use inspection performed.",
+    "commands": "Tools/ManagedWASM/README.md and docs/development.md",
+    "notRepeated": [
+      "Unchanged package iOS platform tests",
+      "Unchanged SDK DocC",
+      "Unchanged JavaScript/WASI tests",
+      "Full seven opt-in SDK runtime tests"
+    ]
+  },
+  "limitations": [
+    "Production resources/default loading and service redistribution/provenance review remain open",
+    "No physical iPad, signed sandbox, minimum-OS or real app restart qualification",
+    "No layout/file-picker/keyboard/VoiceOver qualification",
+    "No hardware deployment or image attestation",
+    "Corrupt archives are not automatically repaired; explicit reload follows external correction",
+    "No automatic legacy descriptor migration",
+    "No cross-process coordination"
+  ],
+  "sources": [
+    {
+      "path": "Demo/Shared/InstallationRecordStore.swift",
+      "bytes": 13551,
+      "sha256": "31acd90306ad608d5e5153cb999956592de7b38a9cfbc4879cd832e4a29e3e7a"
+    },
+    {
+      "path": "Demo/Shared/DemoOperationError.swift",
+      "bytes": 2138,
+      "sha256": "7433d20ccf8e7240abe2593b37884ad30a3941d4f727241bce37eb7695946fb3"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchBuildModel.swift",
+      "bytes": 33193,
+      "sha256": "86156328d4f967860a224b6332d2a10b8dc1b2529b4f834197a47d89f483b74c"
+    },
+    {
+      "path": "Demo/Shared/CompilerSelectionView.swift",
+      "bytes": 9745,
+      "sha256": "2b6538d23a64583c29e3a0c6af5839147dc85377c5fae0fbc90c337f69f2ef83"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchView.swift",
+      "bytes": 10265,
+      "sha256": "e182ac87d7f65e5cf42333068eb2d3cdc7019cbde1a5b6f03836ca475c45a4af"
+    },
+    {
+      "path": "Tools/verify-demo-associations.swift",
+      "bytes": 11472,
+      "sha256": "fa334ed9ab2db33cfa8d7710ca0b02550c3b38094b15bdbd062db78e4cd643b9"
+    },
+    {
+      "path": "Tools/ManagedWASM/VerifyDemoCatalogue.swift",
+      "bytes": 12232,
+      "sha256": "460c670f24e015276d1e24b55a0a6fa7f519ad42865055e28ba73dfdbf494a12"
+    },
+    {
+      "path": "Tools/ManagedWASM/README.md",
+      "bytes": 14311,
+      "sha256": "b5e6ee15d12471af557ee58d8a0b63c9cdc96d73e2b8b54f280a546071d3b27a"
+    },
+    {
+      "path": "Demo/AGENTS.md",
+      "bytes": 3629,
+      "sha256": "0cc8d0f03cfc2dc6f219bb02d07b3c6a7092769e412fdbb97e867c246e7c901d"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 53933,
+      "sha256": "49b4080262f410eda05a7811bfd7d2d369f71d626e3c46022573ac5b5713f525"
+    },
+    {
+      "path": "TODO.md",
+      "bytes": 36855,
+      "sha256": "8b05b5fa5a7b6e4f01ca1a6c7263cf497073ad4cf3fe93304f85cce9390312c5"
+    },
+    {
+      "path": "docs/demo-design.md",
+      "bytes": 17650,
+      "sha256": "384710ad2a7c209c0bb88a493cf8c331853a65c312f3124cfcbb5e41dfa4d81b"
+    },
+    {
+      "path": "docs/compiler.md",
+      "bytes": 22062,
+      "sha256": "ffcc732405be668bbbd5ffba28287858b0b85f96f2327d41604cd13655e1dc7f"
+    },
+    {
+      "path": "docs/compiler-catalogue.md",
+      "bytes": 15309,
+      "sha256": "338a08f4a01aba60cd2658d221b7d4e0fb49d294cf559287a6b7190368d2044c"
+    },
+    {
+      "path": "docs/development.md",
+      "bytes": 31721,
+      "sha256": "2f88090c625e309760b6895dc113021760136ac68c94d3ddbd160a42a2910563"
+    }
+  ]
+}

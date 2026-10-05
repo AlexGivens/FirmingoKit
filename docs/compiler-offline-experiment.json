@@ -1,0 +1,172 @@
+{
+  "date": "2026-09-30",
+  "status": "Experimental device-independent SDK WASM compile/link, shared preparation/ELF/FMS1/report validation, offline receipts and explicit association binding; legacy APIs and receipt schemas retained. No production service/catalogue or demo UI migration.",
+  "referenceCommits": {
+    "ArduinoKit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+    "Firmingo": "f17fdf0301256ba48270230cbf213126e70aa8d0"
+  },
+  "referenceReceipts": [
+    "docs/compiler-reference.json",
+    "docs/compiler-firmware-reference.json"
+  ],
+  "referenceVerification": "All listed reference files matched their recorded byte count/SHA-256 and pinned git-show bytes before and after the increment. ArduinoKit remained clean; Firmingo only pre-existing AGENTS.md modification. Both read-only.",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4"
+  },
+  "compilerServiceBundled": false,
+  "productionFirmwareDescriptorsBundled": false,
+  "recipeOrServiceBytesChanged": false,
+  "deviceConnectionsOrWrites": 0,
+  "validation": {
+    "focusedLegacyFormatTests": 25,
+    "focusedOfflineTests": 7,
+    "macOSPackageTests": {
+      "discovered": 140,
+      "ordinaryPassed": 133,
+      "optInWebKitPassed": 7,
+      "optInSuiteSeconds": 10.041
+    },
+    "ordinaryRun": "133 passed; seven opt-in WebKit tests skipped without service selection.",
+    "iOSSimulatorTests": {
+      "passed": 133,
+      "suites": 14,
+      "device": "iPhone 18 Pro / iOS 27.0",
+      "id": "48DD1F0D-419C-44F7-B736-253597BF20F6"
+    },
+    "packageBuilds": [
+      "generic iOS Simulator",
+      "generic iOS device"
+    ],
+    "unsignedDemoBuilds": [
+      "macOS",
+      "generic iOS Simulator",
+      "generic iOS device"
+    ],
+    "addedRealRuntimeTests": "Offline Blink/Console match independent FMS1 digests; receipt selection identities retained; source diagnostics; cancellation with legacy reentry; mixed-overload busy rejection in both directions.",
+    "documentation": "Final DocC build without warnings; both offline/current-selection guide examples typechecked against the built package; new guide and all four public landing references resolved.",
+    "fixtures": "34 SDK-local files including independent Python offline input/capsule expectation hashes passed byte/hash verification. All synthetic metadata/code is parser-only NEVER DEPLOY.",
+    "commands": "docs/development.md device-independent compiler increment",
+    "logPrefix": ".build/offline-",
+    "notRepeated": [
+      "Unchanged JavaScript/WASI recipe/runtime tests",
+      "Unchanged demo operation/journal harnesses"
+    ],
+    "limitations": [
+      "External service and trusted manifest inputs still required",
+      "No bundled production descriptors or automatic service loader",
+      "Demo remains on legacy combined resident record workflow",
+      "Metadata and evidence declarations do not attest installed bytes or authenticate publishers",
+      "No visual DocC preview, signed sandbox, minimum-OS, physical iPad, resident ABI execution or hardware qualification"
+    ]
+  },
+  "fixtures": "Tests/FirmingoKitTests/Fixtures/compiler-offline/provenance.json",
+  "sources": [
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedOfflineBuildRequest.swift",
+      "bytes": 1328,
+      "sha256": "bed421f3b7c012c96bce69ddfc6918ba78c572682b009faa23b567d3d7db037c"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/PreparedManagedOfflineSketch.swift",
+      "bytes": 1489,
+      "sha256": "7fbb4080e9ccfb9e623b4a36e45ca918b1417749ac989f86979fe8eb8eb7ec13"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedOfflineSketchArtifact.swift",
+      "bytes": 5804,
+      "sha256": "4da691facb2d79fa550818f6bac8686bc5232e3662a66f59e2f4317e50601277"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedOfflineCompilationResult.swift",
+      "bytes": 658,
+      "sha256": "4e9c78317aac95ff6b9c4cfea500b46028b5dec442ece9025ba5f7aa1d45a315"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedSketchCompiler.swift",
+      "bytes": 5006,
+      "sha256": "33cf6297371c3a9b1a7aead92c5534797a6d316fa86d3337b2546ac1e6458e25"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedSketchPreprocessor.swift",
+      "bytes": 9462,
+      "sha256": "f81aa63be19d44ff84fb231905a0b97c55076f06267afa7103f1143a752a2220"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedELFConverter.swift",
+      "bytes": 6243,
+      "sha256": "3d30291ccfcfc1592c9cf951d793e878f7c94e5c8ff706d6f02693161660cedb"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedELFPackage.swift",
+      "bytes": 3672,
+      "sha256": "7413bb8f61d70cb23363258be191e4934004817a22ec8959a305d584bb5342f8"
+    },
+    {
+      "path": "Sources/FirmingoKit/Models/ManagedCapsule.swift",
+      "bytes": 2497,
+      "sha256": "cac0969c94e907f6a4617f74d456424b3c5febdc8f33d3f852dcd942d7ef4d4b"
+    },
+    {
+      "path": "Sources/FirmingoKit/Models/ManagedCapsulePayload.swift",
+      "bytes": 6978,
+      "sha256": "e37374e8c1ad1388b6ab8bcae1ef8de603c4ca4208039cfe66892a3884718841"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/ManagedWebKitHost.swift",
+      "bytes": 8572,
+      "sha256": "144664939ce10b9811566229d90ffae53d393552c044d673a7828974fa442b7a"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/OfflineCompilerFixtures.swift",
+      "bytes": 1908,
+      "sha256": "681f091bc1781e31e833498d89291669b609e51afe59c767ae16bbecf99885cc"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/ManagedOfflineBuildTests.swift",
+      "bytes": 10049,
+      "sha256": "6ff56e43378780db12f51c42fc3ba6d1c5519f2f85d67c07bdd836fdbcebb7b1"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/ManagedWebKitCompilerTests.swift",
+      "bytes": 12291,
+      "sha256": "7718a043754680c4539b2250cfc8643cd51919f6b98f3253bd40bdd0f78e6922"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-offline/expectations.json",
+      "bytes": 1367,
+      "sha256": "d92c847790d62b6c5ed06d27cb4d84273f927716803b7450f1a7251682c81f31"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-offline/provenance.json",
+      "bytes": 365,
+      "sha256": "278020780ae885ec58ee19b5a18211c05d0623e0261f06bfe875f85158df524e"
+    },
+    {
+      "path": "Tools/verify-fixtures.py",
+      "bytes": 3105,
+      "sha256": "b64b193fc170f9eabbaeb5a57f2189dd80d9119c6e14b697d90a54935ccc909e"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/OfflineManagedCompilation.md",
+      "bytes": 6230,
+      "sha256": "8fda21daf14efcd412ffa769fa70796bb5161a311f4ff4cd0af09fbada6dc305"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/ManagedCatalogue.md",
+      "bytes": 5092,
+      "sha256": "153aeae1056ad7971aa233c2e32a4d991f00a5e9c77c280aa1fd2e312d8ad309"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/ManagedCompilation.md",
+      "bytes": 4845,
+      "sha256": "e3b21b3f1f3482c1b0a02f1b42c4a5779ff41fc8c3f7d8bbaf5448ded442b8fa"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/FirmingoKit.md",
+      "bytes": 5039,
+      "sha256": "d3c649001eb51a527cfb80510af976fd44be16812b4aeecfc183c578d29044be"
+    }
+  ]
+}

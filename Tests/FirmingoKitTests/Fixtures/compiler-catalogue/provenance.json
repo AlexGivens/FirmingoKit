@@ -1,0 +1,21 @@
+{
+  "provenance": "Independently authored parser-only synthetic metadata. No resident/image/report hashes identify a real build. NEVER DEPLOY. No firmware or compiler resource is bundled by this fixture. Python hashlib and sorted compact JSON generate the independent content-ID expectation.",
+  "descriptorID": "818e03b95a375fdeeb584ec1daf7261561bf918255dec3b14fb3b22e75750d4d",
+  "files": [
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/descriptor.json",
+      "bytes": 773,
+      "sha256": "0aba07a8cf184481c19372d24bded8bee5deffc5709003f30c3dab4226b9fc6a"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/catalogue.json",
+      "bytes": 890,
+      "sha256": "7eb09989cbab271b0ba0350950fdc684a30a2ac2825488d58bcbfb3a32feba07"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/association.json",
+      "bytes": 171,
+      "sha256": "a2d7ed6d7c0947ea6fe5eaf89cb3f7440803ab05105ed5ea2ca91fc2f345f642"
+    }
+  ]
+}

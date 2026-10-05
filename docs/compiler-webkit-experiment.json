@@ -1,0 +1,181 @@
+{
+  "date": "2026-09-30",
+  "status": "Real SDK macOS WebKit/WASI compile/link/packaging and demo controller checks; all resident/image bindings synthetic, NEVER UPLOAD. No hardware, signed-sandbox, minimum-OS or physical iOS/iPadOS qualification. Custom-service redistribution licensing pending.",
+  "host": {
+    "os": "macOS 27.0",
+    "build": "26A428",
+    "xcode": "27.0",
+    "xcodeBuild": "27A266a"
+  },
+  "referenceCommit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+  "firmwareContractCommit": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+  "sdkState": "Uncommitted working-tree implementation; no release/qualification claim",
+  "runtimeManifestSHA256": "fb732842e1b94b1f3ca5055fb6aaa0a0f71e0a6d3e9c1a173063955f21a0b76a",
+  "packagedRuntimeBytes": 134724,
+  "runtimeManifest": {
+    "schema": 1,
+    "recipe": "nano-stateless-clang-22.1.8-v1-experimental",
+    "serviceABI": 2,
+    "recipeSHA256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
+    "files": [
+      {
+        "path": "host.html",
+        "bytes": 121703,
+        "sha256": "7284f555cf210a6eae0966e9c8363f94be77b4eee5f43c3c7ca01bfc5a10d83b"
+      },
+      {
+        "path": "LICENSE-MIT",
+        "bytes": 1023,
+        "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+      },
+      {
+        "path": "LICENSE-APACHE",
+        "bytes": 11357,
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    ]
+  },
+  "externalService": {
+    "bytes": 101196044,
+    "sha256": "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33",
+    "maximumLinearMemoryBytes": 268435456,
+    "packaged": false,
+    "licenseStatus": "Pending custom service and component provenance review"
+  },
+  "tests": {
+    "macOSOptIn": 120,
+    "macOSDefault": {
+      "available": 120,
+      "skippedRealService": 4
+    },
+    "iOSSimulator": 116,
+    "javascriptWithRealService": 24
+  },
+  "checks": [
+    "Real SDK/WebKit Blink and Console compile/link/capsules",
+    "Original syntax diagnostic filename/line with status-zero failure",
+    "Cancellation during compilation then fresh independent build",
+    "Overlapping build rejection across actor suspension",
+    "Native page deadline then fresh independent SDK build",
+    "Editor edit during real compilation: no stale artifact",
+    "New document revision and target invalidation",
+    "Resident reimport without accidental metadata-load cancellation",
+    "Synchronized managed latest/history records, corruption blocker and explicit clear",
+    "Existing complete-firmware journal regression checks",
+    "macOS/iOS Simulator/iOS device SDK/demo builds",
+    "Native DocC generation, no documentation warnings",
+    "Missing entire SDK resource bundle fails gracefully instead of trapping"
+  ],
+  "notRun": [
+    "Any actual board connection, upload, programming, reset or execution",
+    "Physical iOS/iPadOS WebKit compiler",
+    "Signed sandbox and actual file picker",
+    "Declared minimum-OS execution",
+    "UI launch, accessibility and visual interaction",
+    "Cold/warm process-peak performance or executable resident-ABI behavior"
+  ],
+  "outputs": [
+    {
+      "source": "Blink.ino",
+      "fmsBytes": 336,
+      "fmsSHA256": "018c94a4a49b71880d6f04aecbe08e809c8ecf49e4278261c45dad3ead205720"
+    },
+    {
+      "source": "Console.ino",
+      "fmsBytes": 392,
+      "fmsSHA256": "8d8ff53e0ab800a4f68eb6c62b00e001bc8304b2dee2fdf0f815b2e503c5aeff"
+    }
+  ],
+  "sourceReceipts": [
+    {
+      "path": "Demo/Shared/InstallationRecordStore.swift",
+      "bytes": 6518,
+      "sha256": "f63d75d66e8ec89027cccbca1449b105a4202bb00e1f75f77b20dbf66d1ee648"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchBuildModel.swift",
+      "bytes": 15674,
+      "sha256": "be7a91b4a42b56647427fd17e43ec348f37f1572c87dd29cba62e472c0a0f6e9"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchModel.swift",
+      "bytes": 12949,
+      "sha256": "853678c70c3e2d0b7e26be291006cfdb4893135f6c08c6a3058d6f8c6814879c"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchView.swift",
+      "bytes": 11848,
+      "sha256": "0db7e6d3e0b9c91a58b1c3393dc624f27fdae5a563583cfe7797a0a2d0cb6d94"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedCompilationPhase.swift",
+      "bytes": 596,
+      "sha256": "117213229272339f02f1a76f4643a8a04875ccc5435c047b947f8cd566dfe3d8"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedCompilationResult.swift",
+      "bytes": 523,
+      "sha256": "9ea7036ccaf8d9a626d4468ca23394d8fe0cfe5e52c75ef8097d779646143b41"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedCompilerError.swift",
+      "bytes": 1338,
+      "sha256": "4d119f12cbf182b5f81db7e5e09358963f6ff7455dfcb549af56b04d1a829615"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedSketchCompiler.swift",
+      "bytes": 2882,
+      "sha256": "22943f5b4a05a38657aaff0a4b1898d3e9bf9afa66a2a976721832e551a62aba"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerOrigin.swift",
+      "bytes": 1971,
+      "sha256": "902926a99587336440a7cdd6ead30bcece353a05aa5245b7801ec27f252661ec"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/ManagedWebKitHost.swift",
+      "bytes": 7208,
+      "sha256": "00d8f8baf633fbf45fd1ead1bdb6ca15c2198d1b24ecabdccc047d72dd6e334d"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/ManagedWorkerOutput.swift",
+      "bytes": 5341,
+      "sha256": "476ec6d797b3b1a159b1306f1eda5d7dbfb790dddb386a955fd568e3415b763e"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/VerifiedManagedToolchain.swift",
+      "bytes": 5593,
+      "sha256": "fb2658eb4f10e16b00ffc343901c9a30c9dd9080a4677c8dd8f1d76f03ea3563"
+    },
+    {
+      "path": "Sources/FirmingoKit/Models/ManagedResidentBinding+Record.swift",
+      "bytes": 1276,
+      "sha256": "3cfacccb6b3be26ef5fda6642a3003f3c81c519524894de50944188e3b0ae0a6"
+    },
+    {
+      "path": "Tools/ManagedWASM/HostBridge.js",
+      "bytes": 2961,
+      "sha256": "0fde7f64747d2ede111758739083c99cf18186f803dda390f77362379eab3b8a"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/Digest.js",
+      "bytes": 3284,
+      "sha256": "beb3123e82c1e4f2e228b8ea37e4c9b5e8b1821faf60017f9bf4f7d2c90a3635"
+    },
+    {
+      "path": "Tools/ManagedWASM/VerifyDemoBuild.swift",
+      "bytes": 6650,
+      "sha256": "f3cf8f0aad27a375e2f4d6be6f6ae0a3bbe7b250c5e8894686fd1ac32f2b42fb"
+    },
+    {
+      "path": "Tools/ManagedWASM/stage-sdk-runtime.mjs",
+      "bytes": 5732,
+      "sha256": "eb50481ed6f803401a98ea4c869549cba3bb4f678b1b529520aa2815cd177017"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerBundle.swift",
+      "bytes": 1174,
+      "sha256": "e70e40d76785904ff7690c533658c48ddfb6378f0942f096959db126151be5a4"
+    }
+  ]
+}

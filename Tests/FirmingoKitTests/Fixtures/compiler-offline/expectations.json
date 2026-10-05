@@ -1,0 +1,25 @@
+{
+  "inputs": {
+    "version": 1,
+    "documentID": "00010203-0405-0607-0809-0A0B0C0D0E0F",
+    "sourceRevision": 7,
+    "sourceFilename": "Sketch.ino",
+    "sourceSHA256": "0c780126909b7263933e016c526cd183bb3c8e642be9544b0159aa3381a0ab74",
+    "translationUnitSHA256": "9a298b76d01802f89c360908c473933a9ff814b794ec40a07f49fdabe0e386f4",
+    "catalogueSHA256": "7eb09989cbab271b0ba0350950fdc684a30a2ac2825488d58bcbfb3a32feba07",
+    "firmwareBuildID": "818e03b95a375fdeeb584ec1daf7261561bf918255dec3b14fb3b22e75750d4d",
+    "boardID": "nano_rp2040_connect",
+    "profile": "nano-managed-v1",
+    "provenance": {
+      "compiler": "parser fixture, no compiler execution",
+      "recipeIdentifier": "nano-stateless-clang-22.1.8-v1-experimental",
+      "recipeSHA256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
+      "toolchainSHA256": "5555555555555555555555555555555555555555555555555555555555555555"
+    }
+  },
+  "buildInputSHA256": "6eda36837048ebb3d5b2eaefa705bcbcf539d0c7398b6375d6aec7dd9291b55e",
+  "linkedELFSHA256": "bda1e92d1cd5eaa6acaee2e8495072a716d3937bc4b4e7d7bd72304e5045fa52",
+  "capsuleSHA256": "25b07297d525330681648e35027d17d189594dcd91666c5a1709a1320732d7c7",
+  "capsuleBytes": 264,
+  "origin": "Independent Python hashlib/struct/compact JSON; synthetic parser metadata/code NEVER DEPLOY. No compiler or board execution."
+}

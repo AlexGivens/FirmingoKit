@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "product": "Firmingo",
+  "version": "0.1.0",
+  "release_channel": "beta",
+  "artifact_format": "UF2",
+  "files": [
+    {
+      "path": "nano_rp2040_connect/application/firmingo-0.1.0-nano_rp2040_connect-application.uf2",
+      "board_id": "nano_rp2040_connect",
+      "profile": "application",
+      "firmware_version": "0.1.0",
+      "bytes": 288256,
+      "sha256": "2e2d6082d07fd25257664918de02737ce77585451f3945add56cdcf99643f0a6",
+      "fqbn": "rp2040:rp2040:arduino_nano_connect:usbstack=picosdk,flash=16777216_0,freq=125,ipbtstack=ipv4only,opt=Small,rtti=Disabled,exceptions=Disabled",
+      "flash_bytes": 125968,
+      "static_ram_bytes": 88192,
+      "qualification": "compile-tested",
+      "build_report_sha256": "31c2ad970b73e3c7d3c8eaab588b0a97b88068e8aeaae4791ff384f6746a2cea"
+    },
+    {
+      "path": "nano_rp2040_connect/uart/firmingo-0.1.0-nano_rp2040_connect-uart.uf2",
+      "board_id": "nano_rp2040_connect",
+      "profile": "uart",
+      "firmware_version": "0.1.0",
+      "bytes": 288768,
+      "sha256": "c100171a604d8da80e2ab982c73d192a561fbdad234d563dd282fe873713d538",
+      "fqbn": "rp2040:rp2040:arduino_nano_connect:usbstack=picosdk,flash=16777216_0,freq=125,ipbtstack=ipv4only,opt=Small,rtti=Disabled,exceptions=Disabled",
+      "flash_bytes": 126664,
+      "static_ram_bytes": 87408,
+      "qualification": "compile-tested",
+      "build_report_sha256": "0c6cc64920a0e4240405203feb78ce656d8e358eeec0ebc827619388798a0c09"
+    },
+    {
+      "path": "raspberry_pi_pico/application/firmingo-0.1.0-raspberry_pi_pico-application.uf2",
+      "board_id": "raspberry_pi_pico",
+      "profile": "application",
+      "firmware_version": "0.1.0",
+      "bytes": 288256,
+      "sha256": "38a17203e35d8cdf286af80fafb0f0032680c0bf55b4014fe18356c8acc075a4",
+      "fqbn": "rp2040:rp2040:rpipico:usbstack=picosdk,flash=2097152_0,freq=125,ipbtstack=ipv4only,opt=Small,rtti=Disabled,exceptions=Disabled",
+      "flash_bytes": 125876,
+      "static_ram_bytes": 88160,
+      "qualification": "compile-tested",
+      "build_report_sha256": "30bec203698af695cd3298d23425a40c40c5ec2355587be07ea20d129c33c134"
+    },
+    {
+      "path": "raspberry_pi_pico/uart/firmingo-0.1.0-raspberry_pi_pico-uart.uf2",
+      "board_id": "raspberry_pi_pico",
+      "profile": "uart",
+      "firmware_version": "0.1.0",
+      "bytes": 288256,
+      "sha256": "6a1211abcc768ff0541d9419216eefda378d5ce2aa33c1aa32817e3c8d8ae79b",
+      "fqbn": "rp2040:rp2040:rpipico:usbstack=picosdk,flash=2097152_0,freq=125,ipbtstack=ipv4only,opt=Small,rtti=Disabled,exceptions=Disabled",
+      "flash_bytes": 126572,
+      "static_ram_bytes": 87384,
+      "qualification": "compile-tested",
+      "build_report_sha256": "f70046d4b6a86c70f123455cc599faab5cdd91aaf88652c8c1aa898d75fb2e43"
+    }
+  ]
+}

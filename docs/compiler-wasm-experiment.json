@@ -1,0 +1,330 @@
+{
+  "date": "2026-09-29",
+  "reference_commit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+  "firmware_contract_commit": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+  "status": "SDK-local development Node/WASI compile/link plus Swift packaging; synthetic resident/image binding; NEVER UPLOAD. Not SDK WebKit compiler, physical-host, minimum-OS or hardware qualification. Custom service redistribution license pending.",
+  "node_version": "22.12.0",
+  "memory_adaptation": {
+    "sourceSHA256": "bce6632512852bf86baf7ca7b6eddd07209c0c4e29ae3b2288ec27e69028887d",
+    "sourceBytes": 101196042,
+    "derivedSHA256": "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33",
+    "derivedBytes": 101196044,
+    "sourceMemory": {
+      "minimum": 384,
+      "maximum": null,
+      "sectionStart": 158550,
+      "sectionEnd": 158556
+    },
+    "derivedMemory": {
+      "minimum": 384,
+      "maximum": 4096,
+      "sectionStart": 158550,
+      "sectionEnd": 158558
+    },
+    "adaptation": "Only defined-memory limits/section length changed; hard 4096-page maximum. No compiler instructions/data changed. Redistribution pending."
+  },
+  "recipe_manifest_sha256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
+  "outputs": [
+    {
+      "source": "Blink.ino",
+      "elf": {
+        "bytes": 880,
+        "sha256": "8ce37c6a98215ead61a713ef292b2c49714570295c16fa0729180528865036aa"
+      },
+      "fms": {
+        "bytes": 336,
+        "sha256": "018c94a4a49b71880d6f04aecbe08e809c8ecf49e4278261c45dad3ead205720"
+      }
+    },
+    {
+      "source": "Console.ino",
+      "elf": {
+        "bytes": 1116,
+        "sha256": "30563cb6c528a1eea8856f9292028816968b52bc807b9fc96234676429578b97"
+      },
+      "fms": {
+        "bytes": 392,
+        "sha256": "8d8ff53e0ab800a4f68eb6c62b00e001bc8304b2dee2fdf0f815b2e503c5aeff"
+      }
+    }
+  ],
+  "node_observations": {
+    "status": "Development Node/WASI compile-link only; no WebKit, installed-resident or hardware qualification",
+    "contract": {
+      "schema": 1,
+      "serviceABI": 2,
+      "recipe": "nano-stateless-clang-22.1.8-v1-experimental",
+      "board": "nano_rp2040_connect",
+      "profile": "nano-managed-v1",
+      "target": "armv6m-none-eabi"
+    },
+    "identity": {
+      "bytes": 101196044,
+      "sha256": "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33"
+    },
+    "compilationMilliseconds": 221.470708,
+    "observations": [
+      {
+        "filename": "Blink.ino",
+        "expected": true,
+        "stages": [
+          "compiling",
+          "compiling",
+          "linking"
+        ],
+        "initializationMilliseconds": 22.049707999999953,
+        "succeeded": true,
+        "status": 0,
+        "canRunAgain": true,
+        "diagnostics": [],
+        "timings": [
+          {
+            "phase": "compiling",
+            "milliseconds": 207.64183299999996
+          },
+          {
+            "phase": "compiling",
+            "milliseconds": 34.21054199999992
+          },
+          {
+            "phase": "linking",
+            "milliseconds": 15.144374999999968
+          }
+        ],
+        "memoryBytes": 27983872,
+        "sourceSHA256": "dd9fa8213ade55c36c2520dce529a82ac9173e8991d7314ec18f6dd49690fa62",
+        "elfBytes": 880,
+        "elfSHA256": "8ce37c6a98215ead61a713ef292b2c49714570295c16fa0729180528865036aa"
+      },
+      {
+        "filename": "Console.ino",
+        "expected": true,
+        "stages": [
+          "compiling",
+          "compiling",
+          "linking"
+        ],
+        "initializationMilliseconds": 6.262583999999947,
+        "succeeded": true,
+        "status": 0,
+        "canRunAgain": true,
+        "diagnostics": [],
+        "timings": [
+          {
+            "phase": "compiling",
+            "milliseconds": 93.38454200000001
+          },
+          {
+            "phase": "compiling",
+            "milliseconds": 27.761499999999955
+          },
+          {
+            "phase": "linking",
+            "milliseconds": 2.5751249999999573
+          }
+        ],
+        "memoryBytes": 27983872,
+        "sourceSHA256": "6e16320f383f8a1ab5877f889f7903f76fa20a813dbb77cd1e89fdd6e7ab338b",
+        "elfBytes": 1116,
+        "elfSHA256": "30563cb6c528a1eea8856f9292028816968b52bc807b9fc96234676429578b97"
+      },
+      {
+        "filename": "Syntax.ino",
+        "expected": false,
+        "stages": [
+          "compiling"
+        ],
+        "initializationMilliseconds": 4.407666000000063,
+        "succeeded": false,
+        "status": 0,
+        "canRunAgain": true,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "message": "use of undeclared identifier 'missingFunction'",
+            "filename": "Syntax.ino",
+            "line": 1,
+            "column": 16
+          },
+          {
+            "severity": "note",
+            "message": "    1 | void setup() { missingFunction(); }",
+            "filename": null,
+            "line": null,
+            "column": null
+          },
+          {
+            "severity": "note",
+            "message": "      |                ^~~~~~~~~~~~~~~",
+            "filename": null,
+            "line": null,
+            "column": null
+          }
+        ],
+        "timings": [
+          {
+            "phase": "compiling",
+            "milliseconds": 8.017790999999988
+          }
+        ],
+        "memoryBytes": 26083328,
+        "sourceSHA256": "549abff4f1864caef1435f7a49720ea2d27be5985e47cc96f0b16c35b518f83e"
+      },
+      {
+        "filename": "Globals.ino",
+        "expected": false,
+        "stages": [
+          "compiling",
+          "compiling",
+          "linking"
+        ],
+        "initializationMilliseconds": 5.793667000000028,
+        "succeeded": false,
+        "status": 1,
+        "canRunAgain": true,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "message": "Firmingo modules cannot have uninitialized mutable storage",
+            "filename": null,
+            "line": null,
+            "column": null
+          }
+        ],
+        "timings": [
+          {
+            "phase": "compiling",
+            "milliseconds": 33.331458999999995
+          },
+          {
+            "phase": "compiling",
+            "milliseconds": 27.484959000000003
+          },
+          {
+            "phase": "linking",
+            "milliseconds": 1.2072090000000344
+          }
+        ],
+        "memoryBytes": 27983872,
+        "sourceSHA256": "5bf355b8e1d235b1b384ce601cf70d5afb564b45edc33dc5733f91692609fda2"
+      },
+      {
+        "filename": "Constructors.ino",
+        "expected": false,
+        "stages": [
+          "compiling",
+          "compiling",
+          "linking"
+        ],
+        "initializationMilliseconds": 6.397458000000029,
+        "succeeded": false,
+        "status": 1,
+        "canRunAgain": true,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "message": "Firmingo modules cannot have runtime constructors",
+            "filename": null,
+            "line": null,
+            "column": null
+          }
+        ],
+        "timings": [
+          {
+            "phase": "compiling",
+            "milliseconds": 36.073541999999975
+          },
+          {
+            "phase": "compiling",
+            "milliseconds": 31.42762499999992
+          },
+          {
+            "phase": "linking",
+            "milliseconds": 0.9552919999999858
+          }
+        ],
+        "memoryBytes": 27983872,
+        "sourceSHA256": "66071ede1c56e45f92e0ee74a2b33b9642c372a93799acdf66e0f4dec5903701"
+      },
+      {
+        "filename": "Division.ino",
+        "expected": false,
+        "stages": [
+          "compiling",
+          "compiling",
+          "linking"
+        ],
+        "initializationMilliseconds": 6.924750000000017,
+        "succeeded": false,
+        "status": 1,
+        "canRunAgain": true,
+        "diagnostics": [
+          {
+            "severity": "error",
+            "message": "undefined symbol: __aeabi_uidiv",
+            "filename": null,
+            "line": null,
+            "column": null
+          },
+          {
+            "severity": "note",
+            "message": ">>> referenced by Sketch.cpp",
+            "filename": null,
+            "line": null,
+            "column": null
+          },
+          {
+            "severity": "note",
+            "message": ">>>               /workspace/Sketch.o:(loop())",
+            "filename": null,
+            "line": null,
+            "column": null
+          }
+        ],
+        "timings": [
+          {
+            "phase": "compiling",
+            "milliseconds": 34.96087499999999
+          },
+          {
+            "phase": "compiling",
+            "milliseconds": 26.649749999999926
+          },
+          {
+            "phase": "linking",
+            "milliseconds": 2.0577919999999494
+          }
+        ],
+        "memoryBytes": 27983872,
+        "sourceSHA256": "1ecb4d85ab1cd8c0671989dceafb79a0e1edfe5b1b59484dd4257eae82e598ff"
+      }
+    ]
+  },
+  "additional_readonly_observations": [
+    {
+      "path": "Tools/ArduinoDirectWASM/stage-direct-resources.mjs",
+      "bytes": 7932,
+      "sha256": "0945cf82b807ad29dc3e4bf266fdfedc5e09371bd6c1dc050f06d39d0f56eafc",
+      "scope": "Selected staging/viability sections inspected; full source review remains open."
+    },
+    {
+      "path": "Tools/ArduinoDirectWASM/HostRuntime/run-service-viability.mjs",
+      "bytes": 7948,
+      "sha256": "2c490e92d5ae0e66ec768d5a18a221122bd6d62b9ba883749c5761bbaf7bfb8c",
+      "scope": "Selected staging/viability sections inspected; full source review remains open."
+    },
+    {
+      "path": "build/llvm-project-22.1.8/lld/ELF/OutputSections.cpp",
+      "bytes": 36981,
+      "sha256": "e24bfc8d87e2a2cfcee43c6de30d22abc42c89cd6adfccaf5d254ff93645159b",
+      "scope": "Provisional ignored LLVM source; selected output-section/parser portions inspected, not a pinned ArduinoKit tracked contract."
+    },
+    {
+      "path": "build/llvm-project-22.1.8/lld/ELF/ScriptParser.cpp",
+      "bytes": 60756,
+      "sha256": "03bea05d2ef2e5f8d5e0df27cbd9f47b3bf5a4e0f1e49ba789ae17b65e9df549",
+      "scope": "Provisional ignored LLVM source; selected output-section/parser portions inspected, not a pinned ArduinoKit tracked contract."
+    }
+  ],
+  "toolchain_manifest_sha256": "97bb299a4386e5795d6ca519b605b05c12a22c046388310e35b21f4bf0e575dd"
+}

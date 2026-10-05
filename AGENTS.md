@@ -17,16 +17,23 @@ The SDK must also compile Arduino sketches locally for supported boards running 
 - Prefer the smallest cohesive implementation that satisfies the contract. Avoid speculative abstractions and dependencies.
 - When a missing decision affects compatibility or observable behavior, explain it and request clarification while continuing independent work. Resolve routine implementation details using these instructions.
 - Never equate a successful build, mocked test, or simulator run with hardware qualification.
+- The user disabled visual inspection. Do not use screenshots, computer-use/native UI inspection, or ask to enable that capability. Validate through source review, deterministic tests, controller harnesses and builds; state the remaining UI/accessibility qualification limits.
 
 ## 2. Repository facts and proposed layout
 
-Snapshot verified on 2026-09-29:
+Snapshot verified on 2026-09-30:
 
-- `Package.swift` declares the `FirmingoKit` library and `FirmingoKitTests` test target, Swift tools 6.4, and `ApproachableConcurrency` for both targets.
-- `Sources/FirmingoKit/` and `Tests/FirmingoKitTests/` contain starter code. The test target uses Swift Testing.
-- No demo app, declared platform minimums, DocC plugin dependency, or CI workflow is configured. `Mac/`, `iOS/`, and `Shared/` are not existing source directories.
+- `Package.swift` declares the `FirmingoKit` library and `FirmingoKitTests` test target, Swift tools 6.4, and `ApproachableConcurrency` for both targets. `Sources/FirmingoKit/Lifecycle/` provides bounded local complete-image acquisition, release/UF2 validation, artifact preflight, experimental macOS ROM programming with one-shot execution/durable record gates, and fresh-hello verification; hardware/sandbox qualification remains open.
+- The package declares macOS 14 and iOS 17 deployment minimums. `Sources/FirmingoKit/` contains bounded FMGO framing, hello inspection, persistent serial sessions, experimental Nano FMS1/report validation and managed upload/reconciliation, and public domain models; `Tests/FirmingoKitTests/` uses Swift Testing and packaged pinned firmware vectors plus non-executable lifecycle parser fixtures. These workflows have no SDK hardware qualification.
+- `Validation/FirmingoKit.xcworkspace` provides a shared package scheme. `Demo/FirmingoDemo.xcodeproj` is a separate native document app consuming the local package; it supports `.ino` editing, read-only device inspection, a live serial console, local Firmingo image/installation-plan review, explicit experimental macOS installation, and saved operation context/verification. Experimental Build/Run use SDK-filtered catalogue selections, device-independent compilation and separate reviewed associations, or explicit legacy resident records; durable managed journals and cross-window guards remain. The demo starts with SDK-owned catalogue loading and compiler-resource verification; explicit development catalogue/service sources remain available under advanced controls pending approved production resources. Explicitly saved per-device associations restore a bounded roster without automatic selection/trust; Run rechecks current saved evidence before compiler loading, and stale save/delete requests cannot overwrite newer records. Legacy descriptor migration is explicit. Programming, compilation, UI and restart behavior are not hardware/sandbox-qualified.
+- A DocC overview and native Xcode documentation build are configured. No Swift-DocC plugin dependency or CI workflow is configured. `Demo/Shared/` exists; root `Mac/`, `iOS/`, and `Shared/` are not source directories.
+- `Sources/FirmingoKit/Compiler/` provides immutable single-file source/target selection, bounded facade-only preprocessing with source diagnostics, and strict independently linked stateless Nano ELF-to-FMS1 packaging/receipts. `ManagedSketchCompiler` and `CompilerRuntime/` now provide experimental local WebKit/WASI compilation using packaged independently authored host/worker/recipe and licensed WASI shim resources. The exact memory-bounded service is host-supplied pending redistribution review; no qualified Clang/hardware recipe is claimed. Preparation and packaging alone do not compile source. Tests include non-executable compiler parser fixtures.
+- `ManagedCompilerCatalogue` verifies bounded host-supplied metadata and exposes explicit experimental build choices; `ManagedFirmwareBuildDescriptor` separates static metadata from persistable `ManagedDeviceAssociation` evidence. `ManagedOfflineBuildRequest` and the experimental compiler/preprocessor/converter overloads produce device-independent artifacts/receipts with explicit association binding; legacy APIs/receipt schemas remain compatible. Shared source/ELF/FMS1 gates avoid fake device IDs. The demo exposes these APIs through imported development metadata; default SDK resource-loading APIs verify a bounded inventory and intentionally empty catalogue; default builds explicitly fail pending service review. Approved service/production descriptor packaging and normal bundled demo compilation remain open. Synthetic catalogue/offline fixtures are test-only, never deployment records.
+- `Tools/ManagedWASM/` provides an independently authored experimental Nano recipe and browser-capable worker core tested through Node/WASI, with bounded workspaces, strict bridge responses, cancellation/deadlines, licensed third-party shim receipts, and SDK ELF/capsule validation. The service binary/derived memory-bounded copy stays only under `.build`; no service binary is packaged; the SDK WebKit host and opt-in real-runtime tests now exercise the same independently authored core. Outputs use synthetic resident bindings and must never reach hardware; custom-service redistribution/license review and qualification remain open.
 
 Reinspect these facts before relying on them. Update this section when the structure changes.
+
+`Demo/Shared/InstallationRecordStore` also coordinates device actions across document windows in one app process. Run and firmware installation recheck durable managed context; stale outcome/clear requests cannot replace newer valid records. Offline builds remain independent. `Tools/verify-demo-device-operations.swift` exercises these host-only gates without a compiler module or device connection; cross-process/hardware qualification remains open.
 
 Use the following locations as work requires them; do not create empty architecture in advance:
 
@@ -38,6 +45,7 @@ Use the following locations as work requires them; do not create empty architect
 | `docs/firmware-compatibility.md` | Firmware contract revision, fixture provenance, capability and qualification matrix |
 | `docs/firmware-lifecycle.md` | Board-specific Firmingo installation, update, interruption recovery, artifact provenance, and platform limitations |
 | `docs/compiler.md` | ArduinoKit reference provenance, WASM runtime, board recipes, bundled assets, artifact contracts, and compiler qualification |
+| `docs/compiler-catalogue.md` | Accepted bundled-resource/catalogue design, offline build metadata, per-device association, implementation order, and acceptance gates |
 | `docs/development.md` | Reproducible setup and validation commands |
 | `docs/demo-design.md` | Demo product requirements when demo work begins |
 | `Demo/` | Separate host app project; not a Swift package target |
@@ -136,6 +144,18 @@ Use ArduinoKit's `Source/Compiler/RP2040UF2Converter.swift` and `Tools/ArduinoDi
 - Validate bridge schemas, service ABI, recipe/board/target identity, resource sizes/hashes, and bounded outputs. Reject path traversal, unsafe archive entries, arbitrary shell arguments, and incompatible assets. Package approved resources with FirmingoKit and retain reproducible maintenance scripts/receipts there; never depend on ArduinoKit's checkout at runtime.
 - Serialize builds per runtime or isolate concurrent jobs. Preserve cancellation, timeouts, worker termination, content-process recovery, and safe-reentry checks before warm reuse. Key any build cache by all source, dependency, recipe, toolchain, and resident-binding inputs. Never return a stale artifact as the result of a newer document revision.
 - Keep WebKit interactions on the required main actor while compilation executes in its isolated worker. Avoid blocking UI with hashing, unpacking, or conversion. Measure cold/warm duration, memory, and packaged resource size on macOS and physical iOS/iPadOS devices; do not claim sandbox compatibility, minimum-OS support, or distribution suitability from a macOS build alone.
+
+### Accepted bundled compiler and firmware catalogue
+
+The user accepted this direction on 2026-09-30. Apply [docs/compiler-catalogue.md](docs/compiler-catalogue.md) when implementing the compiler/catalogue scope; it distinguishes delivered metadata/offline compiler/demo selection APIs from the remaining backlog. Actual compilation still requires explicit service selection pending service review; default SDK resource-loading APIs now verify the bundled inventory/empty catalogue and report the pending service explicitly; the demo imports verified development catalogues and separate reviewed associations, with a legacy compatibility mode. This documentation does not authorize hardware operations or edits/builds in either reference checkout.
+
+- Bundle approved compiler/runtime assets, explicit board/profile recipes, versioned trusted firmware-build descriptors and licenses in FirmingoKit resources. Provide SDK catalogue queries and default verified compiler loading so every host, including the demo, uses the same SDK-owned resources and compatibility logic. Do not duplicate assets or selection logic in the demo.
+- Separate immutable firmware-build metadata (board/profile, exact resident ELF/image hashes, ABI/API address, recipe and provenance) from persisted per-device association/installation records and managed transaction journals. Review public API and persistence compatibility before refining the current combined `ManagedResidentBinding` model.
+- Offline Build must use an exact verified target descriptor without a connected board or fabricated device identity. Preserve descriptor/catalogue/recipe/toolchain/source identities in artifacts and receipts; adapt device-bound artifact APIs deliberately rather than filling their fields with synthetic values.
+- Run must validate a real selected device association and fresh negotiated capabilities against the build. A catalogue hash, board selection, version string or matching API address does not attest installed firmware. Use trusted installation/build evidence or explicit existing-device setup, report verification limits, and never automatically rebind an association to "latest" firmware.
+- Normal demo selection is driven by SDK catalogue entries and clear experimental/unavailable reasons. Move manual compiler/record import to an optional advanced path after automatic loading exists; preserve its validation. Keep unsupported Pico managed Build/Run unavailable, and keep source/API/library restrictions explicit.
+- Resolve compiler-service/component redistribution licenses, attribution and exact firmware metadata provenance before shipping affected resources. Continue independent catalogue/model/test work while blocked; do not bundle unapproved services or invented records. Share identical compiler assets across compatible recipes and retain SDK-local reproducible maintenance receipts.
+- Validate clean package consumers/archive resource loading and actual offline compilation in signed macOS and physical iPad hosts. Measure duration, total memory and packaged size; qualify deployment separately through SDK uploads and useful behavior. Keep initial installation/recovery separate, explicit and platform-gated, with no Arduino restoration or silent resident replacement.
 
 ### Firmingo installation, updates, and interruption recovery
 
@@ -238,7 +258,7 @@ For each claimed Firmingo sketch-compilation target, also compile source through
 
 - Keep Swift tools 6.4 and Swift 6 language semantics unless the task explicitly changes compatibility. Preserve the existing concurrency settings unless a documented correction is necessary.
 - Xcode 27.0 with Apple Swift 6.4 was available when this proposal was written. Use it as the initial Apple-platform validation baseline; record the exact toolchain used. Other toolchains are not qualified merely by accepting the manifest.
-- Proposed minimum deployment targets are macOS 14 and iOS/iPadOS 17, aligned with the ArduinoKit compiler reference. These are design choices, not current manifest settings or tested FirmingoKit support claims. When platform setup is in scope, declare `.macOS(.v14)` and `.iOS(.v17)` in `Package.swift` and validate the full compiler runtime before advertising support.
+- Declared minimum deployment targets are macOS 14 and iOS/iPadOS 17, aligned with the ArduinoKit compiler reference. These are build settings, not tested runtime or compiler support claims. Validate the full compiler runtime on supported hosts before advertising compilation support.
 - Use availability checks for newer APIs. Do not raise platform minimums just to use the latest UI component. Do not promise older-runtime support based only on a build against the latest SDK.
 
 ### Commands and setup status
@@ -253,7 +273,7 @@ swift test
 git diff --check
 ```
 
-For iOS compilation, an Xcode workspace exposing a shared `FirmingoKit` scheme must first be configured and verified. It is absent from the current scaffold. When platform validation setup is requested, establish a validation workspace at `Validation/FirmingoKit.xcworkspace` that references the local package, document its setup, and use:
+For iOS compilation, the committed validation workspace at `Validation/FirmingoKit.xcworkspace` references the local package and exposes a verified shared `FirmingoKit` scheme. Use:
 
 ```sh
 xcodebuild -list -workspace Validation/FirmingoKit.xcworkspace
@@ -271,11 +291,11 @@ xcodebuild build \
   CODE_SIGNING_ALLOWED=NO
 ```
 
-These are the intended commands after setup, not checks already proven to work. Verify the shared scheme and commit the reproducible configuration when establishing this workflow. For simulator tests, select an installed simulator from `xcodebuild -showdestinations` and record its ID in the actual test command; a generic destination cannot run tests.
+These commands passed for the initial inspection increment; exact results and limits are in `docs/development.md`. For simulator tests, select an installed simulator from `xcodebuild -showdestinations` and record its ID in the actual test command; a generic destination cannot run tests.
 
 Run package tests for behavioral changes, Apple-platform builds for platform/concurrency/dependency changes, and documentation generation for API/documentation changes. CI should exercise macOS tests, both iOS build destinations, and DocC generation once configured. Run focused checks first, then the applicable full checks; do not repeat unchanged successful checks without a reason.
 
-When compiler integration is implemented, record exact FirmingoKit-local commands for WASM service/resource validation, JavaScript tests, real-runtime Swift integration tests, and sandbox host execution in `docs/compiler.md` and CI. These workflows are not configured yet. A simulator compilation check and a device-target build do not replace physical-device compiler execution.
+The development-only Node/WASI recipe, resource validation, JavaScript tests and Swift capsule check are recorded in `Tools/ManagedWASM/README.md` and `docs/development.md`. When production compiler integration is implemented, record exact FirmingoKit-local commands for real-runtime Swift integration tests and sandbox host execution in `docs/compiler.md` and CI. The experimental WebKit integration and opt-in macOS tests are configured; approved service packaging, signed sandbox/physical-device qualification and CI remain open. A simulator compilation check and a device-target build do not replace physical-device compiler execution.
 
 If setup, SDKs, permissions, or hardware are unavailable, report the exact blocked check and complete the independent checks. Do not claim that a proposed command passed. Prose-only changes require review of links, factual claims, commands, and diff hygiene, not new implementation tests.
 
@@ -314,7 +334,7 @@ Resolve documentation warnings introduced by the change. Preview the generated s
 Move detailed requirements into `docs/demo-design.md` and these UI conventions into `Demo/AGENTS.md` when creating the demo. Keep the root focused on SDK integration boundaries.
 
 - Build a native document-based host for Arduino-style `.ino` files, with an editor and console. Treat roughly two-thirds editor and one-third console as initial proportions; allow resizing and smaller-screen adaptations.
-- Show the selected/connected board and connection state. Provide Build and Run in platform-appropriate toolbars or menus. Provide a utility to flash new boards using Firmingo or default Arduino builds. Use macOS window/toolbars and keyboard commands, and iOS/iPadOS navigation patterns.
+- Show the selected/connected board and connection state. Provide Build and Run in platform-appropriate toolbars or menus. Provide a utility to install supported Firmingo images on new boards. Use macOS window/toolbars and keyboard commands, and iOS/iPadOS navigation patterns.
 - Provide Install Firmingo and supported Firmingo update/recovery workflows backed by the SDK lifecycle APIs. Present the exact board, selected release/build, effect on existing data, physical steps, progress, verification result, and recovery options in plain language. Make bootloader-based Firmingo recovery reachable when Firmingo is disconnected or unresponsive; do not route it through managed-sketch Run. A Restore Arduino feature is not part of this repository's SDK demo requirements; a host-app developer may implement it separately.
 - Build passes the document snapshot and selected board/profile to the SDK's WASM compiler and displays its structured diagnostics/progress. Run builds, validates a supported target/artifact, uploads through the SDK, reconciles the outcome, and opens the console when appropriate. A failed, cancelled, or stale build must prevent upload.
 - Explain unavailable compilation or upload capabilities. Do not imply that choosing any `.ino` document guarantees a supported build. Use the SDK's local sandbox-compatible compiler on iOS/iPadOS; do not require an external CLI or silently send source to a remote build service.

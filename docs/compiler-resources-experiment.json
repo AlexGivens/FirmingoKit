@@ -1,0 +1,184 @@
+{
+  "date": "2026-09-30",
+  "status": "Experimental SDK-owned default resource-loading foundation. Inventory pins existing runtime/recipe/license/catalogue roles and pending service review. Bundled catalogue intentionally empty; no service or production descriptor is shipped.",
+  "referenceCommits": {
+    "ArduinoKit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+    "Firmingo": "f17fdf0301256ba48270230cbf213126e70aa8d0"
+  },
+  "referenceState": "All 38 ArduinoKit and eight Firmingo selected compiler-reference hashes/committed bytes verified before and after. No writes or builds in siblings; ArduinoKit clean; Firmingo pre-existing AGENTS.md change only.",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4"
+  },
+  "publicAPIs": [
+    "ManagedCompilerCatalogue.loadBundled()",
+    "ManagedSketchCompiler.init()",
+    "ManagedCompilerResourceError"
+  ],
+  "compatibility": "Existing explicit service/catalogue APIs, runtime manifest, recipe/service digests and receipt/toolchain identities unchanged. No runtime fallback or public bundled-review override.",
+  "inventorySHA256": "9a2a074d1d3ba5135f37edba7b8d2937b934a1759dc3d10fedceafb601b92d82",
+  "catalogueSHA256": "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db",
+  "compilerServiceBundled": false,
+  "productionDescriptorsBundled": false,
+  "deviceConnectionsOrWrites": 0,
+  "visualInspectionUsed": false,
+  "validation": {
+    "ordinaryResourceTestFunctions": 8,
+    "ordinaryMacOSTests": {
+      "discovered": 149,
+      "passed": 141,
+      "optInWebKitSkipped": 8,
+      "suites": 16
+    },
+    "actualWebKitWASITests": {
+      "passed": 8,
+      "durationSeconds": 9.936,
+      "newTest": "Internal isolated test-approved inventory loads exact development service and compiles known offline Blink FMS1 digest. No production approval or hardware binding.",
+      "blinkCapsuleSHA256": "018c94a4a49b71880d6f04aecbe08e809c8ecf49e4278261c45dad3ead205720",
+      "toolchainSHA256": "c0e5829d10a2135e8dbccc79ee1332a53b8320b5c34a9424993685260d28a75f"
+    },
+    "iOSSimulatorTests": {
+      "passed": 141,
+      "suites": 15,
+      "os": "iOS 27.0",
+      "deviceID": "48DD1F0D-419C-44F7-B736-253597BF20F6"
+    },
+    "iOSDeviceBuild": "Passed unsigned generic iOS package build",
+    "cleanLocalConsumer": "Generated separate SwiftPM executable, only FirmingoKit local dependency, verified empty catalogue discovery and default actor construction; no metadata/service import, no successful bundled compilation.",
+    "archive": "Passed unsigned universal macOS demo archive and exact inventory/five-role/empty catalogue/absent service checks. ManagedCompiler directory is 136067 bytes excluding bundle metadata/code.",
+    "docc": "Passed generation without warnings and focused new-guide example typecheck. Initial broad snippet extraction lacked existing host-supplied lifecycle parameters; no claim of typechecking unchanged examples.",
+    "buildWarnings": [
+      "AppIntents extraction warning",
+      "Demo archive existing missing App Category"
+    ],
+    "commands": "docs/development.md and Tools/ManagedWASM/README.md",
+    "notRepeated": [
+      "Unchanged JavaScript/WASI tests",
+      "Unchanged demo controller/journal harnesses",
+      "Unchanged DocC examples"
+    ]
+  },
+  "limitations": [
+    "Service/component redistribution and reproducible-build provenance review unresolved",
+    "Trusted production firmware-build descriptors not exported/staged",
+    "Default compile currently throws serviceApprovalPending; no successful production bundled compile",
+    "No signed sandbox, physical iPad, minimum-OS or hardware qualification",
+    "No UI/VoiceOver/layout inspection; user disabled visual inspection",
+    "Catalogue metadata and inventory anchors do not authenticate publisher or attest installed firmware",
+    "Pico managed Build/Run unavailable",
+    "Unsigned archive packaging is not signed runtime/distribution evidence"
+  ],
+  "sources": [
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedSketchCompiler.swift",
+      "bytes": 5677,
+      "sha256": "e939366d54ff71ebe911ff002d81b83b40915ea739d9707d0e8ef0989b40b737"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedCompilerCatalogue.swift",
+      "bytes": 5082,
+      "sha256": "5c195c89f4de8be268925a7eff78ba77d32387656e5d36c6fc00edea66599bc9"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedCompilerResourceError.swift",
+      "bytes": 2263,
+      "sha256": "9a78d1ca85cfbc57cc223a7aa62d0d5ca94768437ca7e202a46c1ef55c6388b7"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerResourceInventory.swift",
+      "bytes": 5230,
+      "sha256": "61c04d3d7fd1ee0378025945a078fbbb4990ff30da5593209954ad88132f2bf5"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerResourceReader.swift",
+      "bytes": 2156,
+      "sha256": "611d273999e0752bf01b57604677f60e639041972ed9ff9aab677e20fa3f9f20"
+    },
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/VerifiedManagedResources.swift",
+      "bytes": 4733,
+      "sha256": "2ba2acf5d5c084d242b1e6deb2b769d2240f68ad024b2de1d0e1a782a4c275b6"
+    },
+    {
+      "path": "Sources/FirmingoKit/Resources/ManagedCompiler/inventory.json",
+      "bytes": 1310,
+      "sha256": "9a2a074d1d3ba5135f37edba7b8d2937b934a1759dc3d10fedceafb601b92d82"
+    },
+    {
+      "path": "Sources/FirmingoKit/Resources/ManagedCompiler/catalogue.json",
+      "bytes": 33,
+      "sha256": "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/ManagedCompilerResourceTests.swift",
+      "bytes": 10533,
+      "sha256": "846e848625d5d3d8cab7020c40d941ba656640520245b8e58900d70971606493"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/ManagedWebKitCompilerTests.swift",
+      "bytes": 14907,
+      "sha256": "681e54b7be47e9e1b2ff0d372052602af3ba4e40d3f455da189a64cec21d4ea5"
+    },
+    {
+      "path": "Tools/ManagedWASM/update-resource-inventory.py",
+      "bytes": 2552,
+      "sha256": "c6965229f87db7cb8e5464cb09e2afb38c644523ef5e97a019d917dcaa84d4f3"
+    },
+    {
+      "path": "Tools/ManagedWASM/make-resource-consumer.py",
+      "bytes": 1816,
+      "sha256": "587a4e7c1daf36cb2ac5c8187ed6df0e177cbc2dcb0f2d002a00e3de23e520d6"
+    },
+    {
+      "path": "Tools/ManagedWASM/verify-resource-archive.py",
+      "bytes": 2525,
+      "sha256": "667d21c6ecca522cb8801b7eb90e40e1a9eca4f04ceb30c05fdaa03e7b9cf05d"
+    },
+    {
+      "path": "Tools/ManagedWASM/README.md",
+      "bytes": 16694,
+      "sha256": "869af591cb81c49ad8afb9625d0a019ddde6f4b7b39e681967b83464a644f4be"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/BundledCompilerResources.md",
+      "bytes": 3773,
+      "sha256": "d9825c882385729436d197ad7d56769e0a032600c2b78e59fae487e66a264161"
+    },
+    {
+      "path": "Sources/FirmingoKit/FirmingoKit.docc/FirmingoKit.md",
+      "bytes": 5210,
+      "sha256": "f6796ba1798c26274d1876abf73cb29d5ae5fa2db933d7c75d39a2271e309ee5"
+    },
+    {
+      "path": "docs/compiler.md",
+      "bytes": 23449,
+      "sha256": "4b2d5dd77fe511cca4a9f98f97e9d7ddee07ac9f73996407835013a897e5d49d"
+    },
+    {
+      "path": "docs/compiler-catalogue.md",
+      "bytes": 17982,
+      "sha256": "275b63c7cef3db44e604e7029daf00749b8ee2172b878b1862b734d00ae9b64a"
+    },
+    {
+      "path": "docs/development.md",
+      "bytes": 36299,
+      "sha256": "672883e27ded50b742dd5ff57aa4b1139ced70dda51b5f7af6cd110dd6709684"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 54269,
+      "sha256": "c2f2048e0403c4b8a9e8cdea9680f5bfbdddc052d10c86bc7e1e731ee2fa52d5"
+    },
+    {
+      "path": "TODO.md",
+      "bytes": 37558,
+      "sha256": "1db06dada1f8ccd45089b646d16f499be1a8fb45bbc3354e41c9a9a48ad3ad66"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7643,
+      "sha256": "7ad9546bcdc1508922a1a2055f88c2281e5354c3b18bcf0395a35aaad744c223"
+    }
+  ]
+}

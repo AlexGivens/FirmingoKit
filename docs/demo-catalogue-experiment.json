@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-30",
+  "status": "Experimental demo SDK-filtered catalogue selection/offline Build and separate reviewed device associations for Run, using explicit development imports. Retained legacy compatibility and durable upload gates. No production resources or automatic loading.",
+  "referenceCommits": {
+    "ArduinoKit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+    "Firmingo": "f17fdf0301256ba48270230cbf213126e70aa8d0"
+  },
+  "referenceState": "Read-only pinned file byte/hash/git-show verification before and after. ArduinoKit clean; Firmingo only pre-existing AGENTS.md modification.",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4"
+  },
+  "sdkPublicAPIOrRuntimeChanged": false,
+  "compilerServiceBundled": false,
+  "productionDescriptorsBundled": false,
+  "deviceConnectionsOrWrites": 0,
+  "validation": {
+    "catalogueHarness": "Passed exact SDK selection/no latest fallback, unknown-ID clearing, Pico unavailable, real offline edit cancellation/fresh receipt and invalid endpoint/backend independence, matching/mismatched association evidence, review revocation during compilation, stale journal rejection before service loading/connection, changed anchors including during import, cancellation/reentry, oversized and symlink rejection. Synthetic metadata and capsules NEVER DEPLOY; never calls Run with an empty current journal.",
+    "legacyHarness": "Passed real WebKit edit cancellation, fresh exact receipts, target/trust changes, reimport, durable managed context/history, corruption and explicit clear without connection.",
+    "coordinationHarness": "Passed twelve competing reservations, install/review/clear conflicts, stale owners/windows, refresh, corruption, retained history, cancellation and storage failures without connection.",
+    "ordinaryPackageTests": {
+      "discovered": 140,
+      "passed": 133,
+      "optInWebKitSkipped": 7
+    },
+    "unsignedDemoBuilds": [
+      "macOS",
+      "generic iOS Simulator",
+      "generic iOS device"
+    ],
+    "uiInspection": "Attempted twice, blocked by pending macOS Accessibility/Screen Recording permissions. No permissions granted/bypassed. No screenshot or accessibility tree obtained.",
+    "viewReviewOnly": "Firmware evidence controls disabled during programming; view revokes review on both start/end. Source reviewed and all platform builds passed; actual UI behavior unqualified.",
+    "notRepeated": [
+      "Unchanged SDK public DocC generation",
+      "Unchanged package iOS simulator tests",
+      "Unchanged JavaScript/WASI runtime tests",
+      "Unchanged complete-firmware journal harness"
+    ],
+    "commands": "Tools/ManagedWASM/README.md and docs/development.md",
+    "logPrefix": ".build/demo-catalogue-"
+  },
+  "limitations": [
+    "Compiler service and trusted catalogue still imported; packaging/provenance review open",
+    "Imported associations are window context, reimported/reviewed after restart; automatic persistent roster/migration open",
+    "Host evidence is not publisher authentication or installed-image attestation",
+    "Device mutations in other apps/windows require renewed exact association review; process reservations alone do not attest resident bytes",
+    "No actual UI/file-picker/VoiceOver/light/dark/increased-contrast or keyboard qualification",
+    "No signed sandbox, minimum-OS, physical iPad, resident ABI, upload/startup/useful behavior or hardware qualification"
+  ],
+  "sources": [
+    {
+      "path": "Demo/Shared/WorkbenchBuildModel.swift",
+      "bytes": 27719,
+      "sha256": "082322150f220e5a6ba574c8b4de138da07ef1ce413c8a8dcfd7b27ecb510219"
+    },
+    {
+      "path": "Demo/Shared/CompilerRecordReader.swift",
+      "bytes": 1859,
+      "sha256": "62c36b9c611b6fad0461b83e60d932bfcdebb9b21e53524c0e538f99ca4d7c78"
+    },
+    {
+      "path": "Demo/Shared/CompilerSelectionView.swift",
+      "bytes": 6794,
+      "sha256": "1be4fe09b942d7d3293393b97f310aab34dd0fb7d5e0966a2959a1059215dc38"
+    },
+    {
+      "path": "Demo/Shared/WorkbenchView.swift",
+      "bytes": 10229,
+      "sha256": "b7b4f0ac6cd2853a75d9626db22e02d05d7b780b149f1f77ea744f07c2bf21d3"
+    },
+    {
+      "path": "Tools/ManagedWASM/VerifyDemoCatalogue.swift",
+      "bytes": 12128,
+      "sha256": "7dbac5e0780d3a49fd7047e1e5bacd7728e3c919ffcec2921e9792b00394778f"
+    },
+    {
+      "path": "Tools/ManagedWASM/README.md",
+      "bytes": 12610,
+      "sha256": "5d073f333cdd951643ce5367464e64547a7edbc0f146863f3d2f1f547036f739"
+    },
+    {
+      "path": "Demo/AGENTS.md",
+      "bytes": 3323,
+      "sha256": "3ce3a87cd1450131583cd7b127cc1a28731b4cf6635a990035e44e36f2c07986"
+    },
+    {
+      "path": "docs/demo-design.md",
+      "bytes": 15444,
+      "sha256": "06d0474f1e5a68001977a382890531d26b9e52f5685917ef8c0652c94ec6b648"
+    }
+  ]
+}
