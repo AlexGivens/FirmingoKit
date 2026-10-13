@@ -395,3 +395,9 @@ SDK compilation releases the imported service capability. Default Build calls th
 SDK default initializer rather than reusing an old imported service. No production
 resources were added. Evidence and remaining limits are in
 [demo-default-resources-experiment.json](demo-default-resources-experiment.json).
+
+## Source-built development-service hosting — 2026-10-13
+
+[Native maintenance hosting](built-service-webkit.md) now exercises explicitly
+anchored source-built assets through the compiler-owned standard-worker harness.
+This does not change public SDK asset acceptance or the imported source package.

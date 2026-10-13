@@ -86,3 +86,38 @@ All compiler test bindings are synthetic and their capsules must never reach
 hardware. Service-source/distribution review, verified production resident exports,
 signed/minimum-OS and physical iOS/iPadOS execution, and hardware deployment remain
 open. Removing duplicate tools establishes ownership, not those capabilities.
+
+## Explicit source-built asset qualification host
+
+`VerifyBuiltServiceWebKit.swift` is a maintenance-only native host for the compiler
+repository's fixed standard-worker checks. It does not import the SDK module or
+change its public service acceptance. Build with Xcode 27.0/Swift 6.4:
+
+```sh
+mkdir -p .build/owned-service-webkit
+xcrun swiftc -swift-version 6 -enable-upcoming-feature ApproachableConcurrency \
+  -warnings-as-errors -parse-as-library \
+  -module-cache-path .build/owned-service-webkit/cache -target arm64-apple-macos14.0 \
+  Tools/ManagedWASM/VerifyBuiltServiceWebKit.swift \
+  -o .build/owned-service-webkit/VerifyBuiltServiceWebKit
+.build/owned-service-webkit/VerifyBuiltServiceWebKit --check-inputs
+```
+
+The real address checks accept one exact numeric loopback origin and reject ten
+external/ambiguous variants without launching WebKit. To run actual compilation,
+explicitly pass this executable to Firmingo-Compiler's `test-built-webkit`, along
+with its candidate service, trusted digest, selected resident descriptor and new
+output directory. The compiler tool supplies the ephemeral origin and report path;
+no ordinary build searches sibling checkouts. Direct host syntax is
+`VerifyBuiltServiceWebKit http://127.0.0.1:PORT/ new-report.json`, with an existing
+output parent and a new `policy` subdirectory. The compiler driver cleans its
+isolated temporary policy/report directory after success or failure.
+
+The host never displays a window or inspects UI. It bounds navigation, resources,
+progress/report messages and lifetime, and explicitly awaits the fixed page
+operation. The compiler caller independently checks results before publishing
+ELF/capsule files. This is macOS HTTP-loopback maintenance evidence, separate from
+public SDK/private-scheme, signed sandbox, minimum-OS and physical iOS/iPadOS
+qualification. No device is connected or changed. The manual SDK CI definition
+compiles this tool and runs `--check-inputs`; it deliberately does not fetch a WASM
+candidate or depend on a sibling compiler checkout.

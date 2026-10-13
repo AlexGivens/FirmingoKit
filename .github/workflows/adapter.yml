@@ -26,6 +26,12 @@ jobs:
           swift --version | grep -q 'Swift version 6.4'
       - name: SDK fixture, service-free preparation/ELF packaging, resource and deployment-boundary regressions
         run: node Tools/ManagedWASM/run-validation.mjs 2>&1 | tee .build/adapter-ci/tests.log
+      - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
+        run: |
+          mkdir -p .build/owned-service-webkit
+          xcrun swiftc -swift-version 6 -enable-upcoming-feature ApproachableConcurrency -warnings-as-errors -parse-as-library -module-cache-path .build/owned-service-webkit/cache -target arm64-apple-macos14.0 Tools/ManagedWASM/VerifyBuiltServiceWebKit.swift -o .build/owned-service-webkit/VerifyBuiltServiceWebKit 2>&1 | tee .build/adapter-ci/built-host-compile.log
+          .build/owned-service-webkit/VerifyBuiltServiceWebKit --check-inputs 2>&1 | tee .build/adapter-ci/built-host-inputs.log
+          echo 'Owned development WASM qualification requires an explicit reviewed asset and compiler-maintenance harness; absent assets never count as execution.' >> "$GITHUB_STEP_SUMMARY"
       - name: Observe real-runtime availability separately
         run: |
           env -u FIRMINGOKIT_WASM_MODULE swift test --filter ManagedWebKitCompilerTests 2>&1 | tee .build/adapter-ci/runtime.log

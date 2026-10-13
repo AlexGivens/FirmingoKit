@@ -263,3 +263,16 @@ Artifact validation and upload can start with independently built, validated exe
 - [ ] Update the repository facts in `AGENTS.md` as structure changes; inspect final diffs and run `git diff --check` for each implementation increment.
 - [ ] Prepare a release only when its declared scope meets the acceptance gates; list experimental features and unqualified board/platform combinations explicitly.
 - [ ] For later firmware fixes, upgrades, or additional boards, pin the new contract/artifacts, update fixtures and recipes, review compatibility, and repeat the affected qualification matrix before expanding support claims.
+
+## Source-built compiler host qualification — 2026-10-13
+
+- [x] Add a macOS-only explicit maintenance WebKit host; reject external/ambiguous
+  addresses before starting WebKit and bound native page/report lifetime.
+- [x] Run nine actual standard-worker source-built service checks on the recorded
+  macOS host; verify artifacts against independent firmware validation.
+- [ ] Qualify an approved candidate through public SDK APIs/private resources and
+  a packaged consumer before updating consumer pins. Signed/minimum-OS and physical
+  iOS/iPadOS/device qualification remain separate.
+
+See [maintenance hosting evidence](docs/built-service-webkit.md). Normal consumers
+and SDK resources are unchanged; distribution review remains unresolved.
