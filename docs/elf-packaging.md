@@ -79,3 +79,16 @@ remain open. No firmware executable or device operation changed.
 
 Portable APIs/schemas and the developer command are in
 [the Compiler guide](https://github.com/AlexGivens/Firmingo-Compiler/blob/main/docs/declared-elf-packaging.md).
+
+## Commit and CI record — 2026-10-13
+
+The tested SDK adapter is committed at `9e42b255dafd15cab7e4e1bd86ca8c0c470d1253` and the shared compiler
+at `9eef0f82b397cd6642d226fc057f8a23eacbc72f`. Both are pushed to main.
+[Compiler run 38359879060](https://github.com/AlexGivens/Firmingo-Compiler/actions/runs/38359879060)
+has six inspected successful jobs: 108 contract passes/one optional memory skip on
+both hosts, 4000/5000 mutation passes and three service-absent browser passes,
+including declared packaging. Eight actual runtime cases and six browser compiler
+cases explicitly skip there. Log artifacts were finalized. SDK GitHub inspection
+confirms zero self-hosted runners and zero workflow runs, so no SDK CI pass is claimed.
+The ordinary local SDK run reports 152 tests with its nine actual compiler-service
+cases explicitly skipped; service-free conversion remains exercised and passes.
