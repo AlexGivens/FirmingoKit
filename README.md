@@ -141,3 +141,9 @@ qualification, actual resident metadata and service distribution remain open.
 Both public preparation overloads now use the shared compiler worker without a
 WASM service; [service-free preparation](docs/service-free-preparation.md) records
 package identities, compatibility and actual checks.
+
+## License
+
+FirmingoKit is licensed under the [GNU General Public License version 3](LICENSE)
+(`GPL-3.0-only`), matching Firmingo-Compiler. Third-party components and imported
+fixtures retain their accompanying licenses and notices.
