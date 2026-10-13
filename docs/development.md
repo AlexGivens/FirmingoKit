@@ -1,5 +1,19 @@
 # Development and validation
 
+Current public preparation integration and updated package identities: [service-free preparation](service-free-preparation.md). Earlier records remain historical evidence.
+
+Current compiler/SDK validation commands and standalone-runtime retirement are recorded in [compiler-retirement.md](compiler-retirement.md) and [Tools/ManagedWASM/README.md](../Tools/ManagedWASM/README.md). Older commands below refer to their dated reference revisions.
+
+
+Current build-facade/package integration: [shared compiler adapter](compiler-adapter.md).
+The following original implementation records remain historical evidence where they describe SDK-owned compiler execution or earlier resource hashes.
+
+The [compiler migration inventory](compiler-migration.md) records the ownership
+split accepted on 2026-10-12. This documentation increment does not change any
+commands, resource hashes, fixture manifests, public APIs, or schemas below.
+Keep existing SDK-local compiler checks until portable replacements pass; retain
+Swift/web-host, consumer-package, and device-safety checks in this repository.
+
 Use Xcode 27.0 (build 27A266a), Apple Swift 6.4
 (`swift-driver version 1.168.6`, `swiftlang-6.4.0.34.1`) for this initial
 increment. The package declares Swift tools 6.4, macOS 14, and iOS/iPadOS 17.

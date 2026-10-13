@@ -1,6 +1,22 @@
 # FirmingoKit project checklist
 
-Implementation and qualification roadmap based on [AGENTS.md](AGENTS.md). That file remains the canonical source of project rules. Work through the dependencies below; this checklist does not authorize flashing hardware, modifying reference projects, or publishing releases.
+Implementation and qualification roadmap based on [AGENTS.md](AGENTS.md). That file remains the canonical source of project rules. Work through dependencies without treating this checklist as authorization for hardware or publication. Requested coordinated work may touch FirmingoKit, Firmingo-Compiler, and Firmingo; ArduinoKit stays read-only.
+
+## Current position — compiler split, 2026-10-12
+
+Ownership guidance, integration documents, and the [migration inventory](docs/compiler-migration.md) are refocused. Both SDK build APIs now delegate to the pinned shared compiler package; public preparation/conversion compatibility APIs remain. Fixture manifests and stored records are retained. Completed compiler entries below record earlier SDK implementation, not completion in Firmingo-Compiler. Compiler-only backlog now belongs to that repository's M1–M7/M9 milestones; SDK hosting, package consumption, public API/persistence, associations, installation, and upload checks remain here.
+
+Firmingo-Compiler now has a pinned Nano baseline, portable request/preprocessing/
+ELF/FMS1 stages, unchanged recipe assets, and a distinct independent-packaging
+receipt with golden tests. The real isolated Node/WASI path, event/receipt contract
+and explicit-service CLI now pass local compile/link/failure/disposal tests. The
+standard module-worker path also passes nine headless Chrome/HTTP-loopback cases;
+the macOS SDK WebKit adapter also passes nine actual cases and a separate packaged consumer; signed/physical Apple-host and other browser execution remain open.
+See its `docs/interface.md`, `docs/portable-pipeline.md` and
+`docs/compatibility.md` for implemented versus proposed behavior.
+
+The old SDK standalone Node compiler and ELF-only bridge are retired, with traceable source hashes in `docs/compiler-retirement.json`. Next: migrate the public preparation/conversion compatibility paths deliberately and qualify signed/physical Apple hosts. See `docs/compiler-adapter.md` for the completed local adapter checks. Exact firmware exports and approved service assets
+remain dependencies, not reasons to weaken deployment checks.
 
 ## Starting point — inspected 2026-09-29
 
@@ -14,13 +30,13 @@ Mark implementation tasks complete only with relevant checks and evidence. Recor
 
 ## 1. Establish contracts, scope, and acceptance criteria
 
-- [ ] Inspect Firmingo and ArduinoKit in place, read-only. Record full commits and relevant local differences; use pinned committed files or a checksummed contract bundle when concurrent changes prevent a consistent snapshot.
+- [ ] Select consistent Firmingo and Firmingo-Compiler inputs for each implementation increment; record full commits/local differences or checksummed bundles. ArduinoKit remains read-only. The initial split inventory is recorded in section 7.2 without selecting a new protocol compatibility baseline.
 - [ ] Read Firmingo's protocol, managed-sketch SDK handoff, board baselines, release/development guidance, applicable release manifests, protocol/upload fixtures, and relevant implementation/evidence identified in `AGENTS.md`.
 - [x] Create `docs/firmware-compatibility.md` with the selected firmware revision, protocol major, profiles, relevant file/fixture checksums, and provisional changes kept separate from committed evidence.
 - [x] Build a capability and qualification matrix for Nano RP2040 Connect and Raspberry Pi Pico on macOS and iOS/iPadOS. Track communication, initial installation, updates, interruption recovery, compilation, and managed upload independently.
 - [x] Recheck release versus experimental capabilities, application versus UART behavior, managed target availability, and physical authorization requirements. Keep unsupported combinations explicit; do not infer Pico support from Nano evidence.
 - [ ] Define first-release acceptance criteria against that matrix, including experimental labels and deferred firmware dependencies. Preserve the longer-term board/platform requirements as open work.
-- [ ] Resolve contract conflicts before implementing affected behavior. Write firmware handoffs inside FirmingoKit with the limitation, proposed contract, compatibility effect, and acceptance tests; coordinate with the firmware agent only when authorized.
+- [ ] Resolve contract conflicts before implementing affected behavior. Record limitation, proposed behavior, compatibility effect and acceptance tests; make requested changes in the owning repository or document a deferred handoff. Messages to other agents/chats require user authorization.
 - [x] Establish fixture import/provenance conventions so tests and builds never depend on sibling checkouts. Keep all adaptations, tools, assets, and validation outputs inside FirmingoKit.
 
 **Gate:** The selected contract and intended support matrix are explicit. Missing firmware capabilities are tracked dependencies rather than invented SDK behavior.
@@ -48,7 +64,7 @@ Mark implementation tasks complete only with relevant checks and evidence. Recor
 - [ ] Keep public APIs independent of UI frameworks and global application state. Keep WebKit compiler hosting internal and usable without a visible host-supplied view.
 - [ ] Document named declarations and public behavior as implementation lands, following `AGENTS.md`; review API visibility, `Sendable` correctness, and source compatibility.
 
-**Gate:** A host can own presentation and user decisions while the SDK owns compilation, communication, and Firmingo lifecycle logic.
+**Gate:** A host owns presentation/user decisions; the SDK wraps the shared compiler and owns communication, device evidence, and Firmingo lifecycle logic.
 
 ## 4. Implement protocol framing and payload validation
 
@@ -95,7 +111,13 @@ This track can progress alongside communication after contract selection. Initia
 
 **Gate:** Plans and execution are separate, unsafe inputs cannot reach a writer, and interrupted operations preserve actionable context without false success claims.
 
-## 7. Adapt the local WASM compiler
+## 7. Preserve the existing compiler until extraction passes
+
+The completed entries below retain their original evidence. Portable preprocessing,
+recipes, runtime execution, ELF/capsule packaging, and related maintenance move to
+Firmingo-Compiler under [the inventory](docs/compiler-migration.md). Former unchecked
+compiler implementation tasks are transferred to its roadmap rather than treated
+as new SDK ownership. Current SDK work is in sections 7.1–7.2.
 
 - [x] Add immutable single-file snapshot/revision, explicit Nano managed profile and offline resident selection, without a compiler stub or board side effect.
 - [x] Implement bounded facade-only preprocessing, BOM/line-ending normalization, original source diagnostics, explicit forward-declaration policy and original/generated hashes. Keep C++ checking and stateless linking separate.
@@ -110,47 +132,38 @@ This track can progress alongside communication after contract selection. Initia
 - [x] Add strict native bridge schema/type/diagnostic/base64 validation, bounded record import and real macOS WebKit compile/link/cancellation/overlap/deadline/fresh-state tests. Keep signed-sandbox/minimum-OS/physical-device qualification separate.
 - [x] Validate actual demo editor-change cancellation, fresh revision results, selection invalidation and bounded synchronized managed transaction journals/corrupt-context gates using SDK-local harness storage.
 - [x] Serialize demo Run/outcome review/clear and firmware installation across document windows. Recheck durable context before deployment, reject stale clear/review decisions, refresh conflicts without replay, and test competing reservations/cancellation/storage failures without boards. Cross-process and hardware qualification remain open.
-- [ ] Read the ArduinoKit compiler API, preprocessor, runtime, manifest/verifier, resource handler, build recipe, bridge/worker, service/staging tools, ELF/UF2 code, and integration tests listed in `AGENTS.md`.
-- [ ] Complete `docs/compiler.md` license/component review, recording the selected ArduinoKit commit, relevant local differences, adapted files, asset hashes, licenses/attribution, and reproducible FirmingoKit-local maintenance commands.
-- [ ] Define immutable build inputs: source snapshot/revision, board/profile, supported dependencies/options, and required resident binding. Return source-mapped diagnostics, phase progress, typed artifacts, and a build receipt.
-- [ ] Support offline target/resident descriptions. Ensure compilation never connects to or modifies a board.
-- [ ] Adapt preprocessing with documented sketch layouts, source mapping, supported Arduino APIs/libraries, and actionable rejection of unsupported constructs.
-- [ ] Implement an explicit board/profile recipe registry defining CPU/triple, facade/core, headers/libraries, flags, linker script, memory limits, artifact format, and ABI requirements. Map ArduinoKit/Firmingo Nano identifiers explicitly.
-- [ ] Inspect Firmingo's selected managed-build recipe, linker script, module entry, facade, ABI, and image headers. Establish Clang/LLD compatibility independently of the reference GCC proof.
-- [ ] Bind managed code to exact verified resident ABI/API metadata; reject missing/incompatible bindings without guessing addresses or deriving ELF identity from hello.
-- [ ] Package verified host-page, compiler-module, sysroot, and recipe assets within FirmingoKit with versioned service ABI, sizes, and hashes. Include reproducible staging/service build scripts and receipts.
-- [ ] Implement isolated local WebKit/WASI workers, read-only asset access, and separate writable build workspaces. Validate bridge messages, bound outputs, and reject path traversal, unsafe archives, and unsupported arguments.
-- [ ] Keep WebKit interactions on the main actor and expensive hashing/unpacking/conversion off UI execution. Restrict resource loads to intended local assets.
-- [ ] Implement verify → preprocess → compile → link → validate → package with real phase progress and structured failures; no runtime shell, compiler subprocess, remote service, or sibling-checkout dependency.
-- [ ] Serialize builds per runtime or isolate jobs; implement timeouts, cancellation, worker termination, content-process recovery, and safe warm reuse.
-- [ ] Reject stale results using source revision/build identity. If caching is introduced, key it on every source, dependency, recipe, toolchain, and resident-binding input.
 - [x] Validate independently linked ELF ranges/entry points and generate the selected Nano `nano-managed-v1` FMS1 `.fms` capsule with required size, digests, entry points, and build report. Development WASM linkage is demonstrated; signed-host/runtime distribution and recipe qualification remain open above.
-- [ ] Keep Pico and other missing managed recipes explicitly unavailable until their firmware target, recipe, and independent qualification exist; do not silently replace resident firmware to enable Run.
-- [ ] Add preprocessing, diagnostic mapping, missing/corrupt asset, bridge/ABI, workspace isolation, invalid ELF/capsule, cancellation, crash/reentry, and stale-result tests.
-- [ ] Add actual WASM compile/link integration tests using packaged resources and FirmingoKit-local JavaScript/WASI tests. Compare artifact semantics against independent firmware vectors/validators.
-- [ ] Measure cold/warm build duration, peak memory, and package size in sandboxed macOS and physical iOS/iPadOS hosts, including the claimed minimum OS versions.
+
+Transferred backlog: portable source/diagnostic behavior, explicit recipes,
+ABI-compatible linking, service/component review and asset production, WASI worker
+isolation/limits, ELF/capsule validation, and portable real-service regressions
+belong to Firmingo-Compiler M1–M5/M7. Broader boards/libraries belong to its M9;
+SDK hosting, stale-result/deployment safeguards, and Apple-host measurements stay
+in sections 7.1–7.2 below. No transferred task is marked complete by this move.
 
 **Gate:** Supported source compiles locally through the actual runtime to independently validated Firmingo artifacts. Mocked tests and ArduinoKit's conventional UF2 results do not establish this gate.
 
 ### 7.1 Accepted bundled compiler and firmware catalogue
 
-The user accepted this direction on 2026-09-30. Follow
-`docs/compiler-catalogue.md` and the root agent instructions. These tasks replace
+The self-contained experience was accepted on 2026-09-30; ownership changed on
+2026-10-12. Follow `docs/compiler-catalogue.md` and the migration inventory. Completed
+SDK-owned packaging entries describe the previous implementation. Going forward,
+the compiler produces static assets/metadata and the SDK verifies/consumes them. These tasks replace
 normal external-file setup once delivered; the current compiler/demo APIs still
 use an explicitly selected service with catalogue or legacy resident metadata. Catalogue
 availability, platform execution and hardware qualification are separate gates.
 
 - [x] Document SDK-owned resource packaging, catalogue selection, firmware-build/device-record separation, demo flow, blockers and acceptance criteria. This completes planning only.
 - [x] Implement the additive metadata foundation: bounded hash-verified host-supplied catalogue, explicit Nano/Pico availability queries, content-identified firmware-build descriptors, strict persistable device associations and a matching-ID legacy binding adapter. Ten tests cover independent golden identities, bounds, cancellation, duplicate/conflicting metadata, unsupported ABI/recipe/board fields and restored/mismatched evidence. No production descriptors/service, offline compiler migration or demo selection is delivered by this task.
-- [ ] Complete the compiler-service/component license, attribution and reproducible-build review above before bundling the affected binary. Pin trusted firmware-build metadata; document missing exports/decisions without inventing production records.
-- [x] Define the bounded SDK-pinned schema-one resource inventory linking the existing descriptor catalogue, exact Nano/profile/recipe/source contract, ABI-two service identity/pending review and five runtime/license/catalogue roles with byte counts/hashes. Strict role/path/scalar/duplicate/integrity tests pass; qualification remains experimental/unqualified. Production catalogue is intentionally empty and no service is staged; additional recipes/qualification require deliberate schema/anchor updates.
+- [ ] Verify a selected compiler package has recorded service/component distribution, attribution, reproducible-build and real firmware-metadata evidence before SDK bundling. Firmingo-Compiler owns production/review; Firmingo owns exact-build exports. Missing inputs stay explicit.
+- [x] Define the bounded SDK-pinned schema-one resource inventory linking the existing descriptor catalogue, exact Nano/profile/recipe/source contract, ABI-two service identity/pending review and eight runtime/source/license/catalogue roles with byte counts/hashes. Strict role/path/scalar/duplicate/integrity tests pass; qualification remains experimental/unqualified. Production catalogue is intentionally empty and no service is staged; additional recipes/qualification require deliberate schema/anchor updates.
 - [x] Separate immutable firmware-build descriptors, persisted physical-device associations and upload journals through additive SDK APIs and explicit demo Save/Restore/Forget. Bounded versioned app-private storage preserves exact IDs, never persists trust, rejects stale mutations/Run before compiler loading and keeps offline Build independent. Legacy records remain compatible but cannot be inferred into catalogue descriptors; migration requires explicit reviewed new evidence. Restart/controller/schema/concurrency checks pass; real signed app restart and hardware qualification remain open.
 - [x] Add default SDK loading APIs: `ManagedCompilerCatalogue.loadBundled()` verifies package metadata and returns the empty catalogue; `ManagedSketchCompiler()` verifies SDK resources and fails explicitly before preprocessing while service review is pending. Preserve explicit development APIs without fallback. Resource bounds/integrity/approval tests, actual test-only approved runtime parity, separate local consumer and unsigned archive packaging checks validate the foundation; successful production bundled compilation remains blocked.
 - [ ] Implement catalogue queries for supported, experimental and unavailable combinations with actionable reasons, plus default verified SDK resource loading. Report missing/corrupt/unapproved resources explicitly; normal consumers need no file picker, sibling checkout, Node, shell, native compiler or remote service.
 - [x] Add device-independent offline build inputs, artifact packaging and receipts tied to exact source/catalogue/recipe/toolchain/firmware-build identities. `ManagedOfflineBuildRequest`, shared preparation/ELF/FMS1 validation and the compiler overload produce `ManagedOfflineSketchArtifact` without any device ID. Explicit association binding yields the existing capsule type; legacy APIs/receipts remain compatible. Seven ordinary tests and three added real-WebKit tests cover identities, cancellation, source diagnostics, packaging, binding and mixed-overload exclusion. Production resources, automatic loading, demo selection and hardware qualification remain separate open tasks.
 - [x] Connect the demo to SDK catalogue queries and offline Build through an explicit development import path. Select exact board/build IDs without a latest fallback, validate catalogue bytes against independently supplied provenance, import/review separate device evidence before Run, bind the fresh artifact and retain journal/one-commit/cross-window gates. Preserve explicit legacy record compatibility. Controller/real-WebKit harnesses and Apple builds validate this increment; no production resources, automatic loading, association-store migration, visual UI or hardware qualification is claimed.
 - [x] Connect default SDK loading/resource verification to demo startup and explicit independent compiler/catalogue providers. Move imports/provider selection/legacy mode under Development resources, show empty/pending SDK availability, invalidate old output/review and release unused service capabilities. Verify cancellation, failed reload, late startup and fresh Build revalidation through host-only controller checks; retain real-WASM and journaling harnesses. Actual bundled compilation, UI/accessibility and hardware qualification remain open.
-- [ ] Stage approved compiler/runtime/recipe/metadata/license resources inside FirmingoKit, preserving local maintenance scripts and reviewed receipts. Keep complete-firmware images/lifecycle validation separate if included; never package Arduino restoration assets.
+- [ ] Consume pinned approved compiler-package assets/metadata/notices through SDK staging/loading without independently maintaining recipes or service binaries. Retain SDK consumer/archive verification. Keep complete-firmware lifecycle validation separate; no restoration assets are added.
 - [ ] Bind an offline artifact to a real selected device only after valid association evidence and fresh protocol/backend/advertised-target checks. Reject stale/missing/mismatched evidence before staging; do not infer installed bytes from hello or automatically rebind to a "latest" descriptor.
 - [ ] Test catalogue/schema/resource bounds, unsafe paths, corrupted/missing assets, ambiguous recipe selection, ABI/board/profile mismatch, stale/removed descriptors, restored associations, source revision changes, cancellation and fresh subsequent builds. Preserve current one-commit, uncertainty and journaling behavior.
 - [ ] Verify a separate minimal package consumer and archive can load all required resources without sibling checkouts or imported compiler files. Execute actual offline compilation in signed macOS and physical iPad hosts; record cold/repeated duration, total memory, resource/app size and minimum-OS evidence.
@@ -160,6 +173,25 @@ availability, platform execution and hardware qualification are separate gates.
 and compile using only approved SDK resources, then deploy only with valid real
 device association and negotiated capabilities. No bundled-record authenticity or
 hardware-support claim exceeds its recorded evidence.
+
+### 7.2 Compiler split — prerequisite work and SDK adapter
+
+- [x] Refocus root/demo ownership guidance, README, compiler/catalogue/handoff documents, and roadmap; preserve implementation and original evidence.
+- [x] Record source commits/initial working state and source/resource hashes in `docs/compiler-migration-reference.json`; preserve pre-existing Firmingo guidance edits and read-only ArduinoKit.
+- [x] Map portable extraction, retained Swift/device responsibilities, mixed tests/tools, compatibility gates, and unresolved exports/service distribution in `docs/compiler-migration.md`.
+- [x] Translate the versioned portable request/event/result contract through the existing Swift facade and WebKit host, preserving public source/diagnostic/progress/error/cancellation behavior where practical.
+- [x] Preserve legacy/offline receipt and descriptor identities or version changes explicitly; test persisted associations, journals, incompatible/stale records, and deliberate migration without granting trust or replaying writes.
+- [x] Verify pinned compiler-package loading, trusted anchors, strict bridge bounds, local resource access, content-process failure, cancellation/deadline/reentry, and offline clean consumers without sibling dependencies.
+- [x] Run actual compile/link/package through the adapter; retain independent SDK capsule/report/device binding and fresh capability gates before writes. Verify current source/selection and durable one-commit/uncertainty behavior.
+- [x] Retire the replaced standalone SDK Node/WASI/recipe/vendor stack and old ELF-only bridge after shared compiler, real WebKit and consumer checks pass; record 36 unchanged original file hashes. Compiler-owned memory adaptation and tests now live in Firmingo-Compiler. Retain Swift/platform/package/deployment regressions.
+- [x] Delegate both public Swift preparation overloads to the shared service-free compiler worker; remove the duplicate Swift lexical scanner and preserve source/generated hashes, revisions and line mapping. Record explicit resource/host requirements and corrected first-line BOM columns.
+- [ ] Migrate supplied-ELF conversion compatibility with an explicit declared-provenance design; preserve legacy receipt meaning and independent deployment checks.
+- [x] Update SDK CI definitions, development commands and DocC for the adapter/package change. Local macOS tests, iOS builds and DocC pass; CI runner/run, signed sandbox, physical iOS/iPadOS and hardware execution remain explicitly unqualified.
+
+**Gate:** Prerequisite documentation/inventory is complete. Migration is complete
+only when the SDK consumes the shared compiler through a tested adapter, public
+compatibility/persistence is deliberate, and existing deployment safeguards pass.
+Local shared-compiler integration is evidenced in `docs/compiler-adapter.md`; compatibility-path retirement and signed/physical-host/deployment qualification remain separate work.
 
 ## 8. Implement managed upload and reconciliation
 
@@ -217,7 +249,7 @@ Artifact validation and upload can start with independently built, validated exe
 - [ ] Generate documentation under `.build/`, resolve introduced warnings, and verify public symbol links, examples, navigation, and assets.
 - [ ] Establish the intended Git remote and verify the actual GitHub Pages destination before configuring deployment. Use `/FirmingoKit/` only if it matches that destination.
 - [ ] Preview static documentation under its intended base path and configure CI artifact publication/deployment when publishing is requested; verify the deployed site separately from generation.
-- [ ] Audit third-party asset licenses, attribution, resource integrity, versioned recipes, and reproducible toolchain maintenance. Verify a clean package/demo consumer needs no sibling checkouts or native compiler installation.
+- [ ] Audit the consumed compiler package's notices, distribution/provenance record, resource integrity, and compatible versions; compiler toolchain maintenance belongs to Firmingo-Compiler. Verify a clean package/demo consumer needs no sibling checkouts or native compiler installation.
 - [ ] Define versioning, compatibility/deprecation policy, changelog, release checks, and the process for adding boards or updating firmware contracts and compiler assets together with tests.
 
 **Gate:** A new host-app developer can integrate the package using published APIs and accurate documentation, with reproducible assets and clearly stated limitations.

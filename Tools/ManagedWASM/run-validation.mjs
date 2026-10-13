@@ -1,48 +1,32 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { resolve, dirname } from "node:path";
+import { spawnSync } from "node:child_process";
+import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createHash } from "node:crypto";
-import { compileModule, ManagedService } from "./Sources/ManagedService.js";
-import { contract } from "./Sources/ManagedRecipe.js";
-import { loadRecipeAssets } from "./DevelopmentAssets.mjs";
 
-/** Explicit local-only development invocation; all outputs must live under SDK .build. */
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
-const modulePath = resolve(root, ".build/managed-wasm/compiler-bounded.wasm");
-const output = resolve(root, ".build/managed-wasm/results");
-mkdirSync(output, { recursive: true });
-/** Fixed development inputs include two distinct useful sketches and negative stateless/diagnostic cases. */
-const cases = [
-  ["Blink.ino", "void setup() { pinMode(LED_BUILTIN, OUTPUT); }\nvoid loop() { digitalWrite(LED_BUILTIN, HIGH); delay(100); digitalWrite(LED_BUILTIN, LOW); delay(100); }", true],
-  ["Console.ino", "void setup() { Serial.begin(115200); Serial.println(\"ready\"); }\nvoid loop() { const int value = Serial.read(); if(value >= 0) Serial.write(uint8_t(value)); }", true],
-  ["Syntax.ino", "void setup() { missingFunction(); }\nvoid loop() {}", false],
-  ["Globals.ino", "volatile unsigned value;\nvoid setup() { value = 1; }\nvoid loop() { ++value; }", false],
-  ["Constructors.ino", "struct X { X(); }; X::X() { pinMode(6, 1); } X object;\nvoid setup() {} void loop() {}", false],
-  ["Division.ino", "void setup() {}\nvoid loop() { digitalWrite(6, millis() / 250); }", false],
-];
-/** Verifies the development service and materializes independently authored recipe resources. */
-const identity = { bytes: 101196044, sha256: "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33" };
-const start = performance.now();
-const module = await compileModule(new Uint8Array(readFileSync(modulePath)), identity);
-const compilationMilliseconds = performance.now() - start;
-const files = new Map(loadRecipeAssets().map(asset => [asset.name, asset.bytes]));
-const observations = [];
-for (const [filename, source, expected] of cases) {
-  const instanceStart = performance.now(); const service = await ManagedService.create(module, files);
-  const initializationMilliseconds = performance.now() - instanceStart;
-  const input = { schema: 1, recipe: contract.recipe, board: contract.board, profile: contract.profile,
-    filename, apiAddress: 0x10022ca0, translationUnit: `#include <Arduino.h>\n#line 1 "${filename}"\n${source}\n` };
-  const stages = []; const result = service.run(input, stage => stages.push(stage));
-  if (result.succeeded !== expected) { throw new Error(`Unexpected ${filename} outcome: ${JSON.stringify(result.diagnostics)}`); }
-  if (result.succeeded) { writeFileSync(resolve(output, filename + ".elf"), result.elf); }
-  writeFileSync(resolve(output, filename), source + "\n");
-  const { elf, ...metadata } = result;
-  const observation = { filename, expected, stages, initializationMilliseconds, ...metadata,
-    sourceSHA256: createHash("sha256").update(source + "\n").digest("hex"),
-    ...(elf ? { elfBytes: elf.length, elfSHA256: createHash("sha256").update(elf).digest("hex") } : {}) };
-  observations.push(observation);
-  console.log(JSON.stringify(observation));
+const root = fileURLToPath(new URL("../../", import.meta.url));
+
+/** SDK checks only; compiler maintenance and portable/Node builds belong to Firmingo-Compiler. */
+function run(command, args, env = process.env) {
+  const result = spawnSync(command, args, { cwd: root, env, stdio: "inherit", timeout: 180000 });
+  if (result.error || result.signal || result.status !== 0)
+    throw new Error(result.error?.message || `${command} failed (${result.signal || result.status})`);
 }
-writeFileSync(resolve(output, "receipt.json"), JSON.stringify({ status: "Development Node/WASI compile-link only; no WebKit, installed-resident or hardware qualification",
-  contract, identity, compilationMilliseconds, observations }, null, 2) + "\n");
+
+const args = process.argv.slice(2);
+if (args.length === 1 && args[0] === "--help") {
+  console.log("Usage: node Tools/ManagedWASM/run-validation.mjs [explicit-pinned-service.wasm]\n"
+    + "Checks SDK fixtures, packaged resources, Swift adapters and deployment boundaries.\n"
+    + "Actual WebKit compilation is explicitly skipped when the service argument is absent.\n"
+    + "Portable/Node compilation and service-memory adaptation: Firmingo-Compiler tools/dev.mjs.\n"
+    + "No sibling lookup, binary copying, installation, device access or network fallback.");
+} else {
+  if (args.length > 1 || args[0] === "" || args[0]?.startsWith("-")) throw new Error("Select at most one explicit local service; use --help");
+  run("python3", ["Tools/verify-fixtures.py"]);
+  run("python3", ["Tools/ManagedWASM/update-resource-inventory.py", "--check"]);
+  const env = { ...process.env };
+  delete env.FIRMINGOKIT_WASM_MODULE;
+  if (args[0]) env.FIRMINGOKIT_WASM_MODULE = resolve(args[0]);
+  run("swift", ["test"], env);
+  console.log(JSON.stringify({ status: "sdk_adapter_checks_completed", actualRuntimeRequested: Boolean(args[0]),
+    qualification: "local SDK tests only; absent-service runtime cases skip; no hardware qualification" }));
+}

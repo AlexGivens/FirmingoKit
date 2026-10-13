@@ -4,7 +4,8 @@ import Foundation
 struct ManagedCompilerResourceInventory: Sendable {
     /// Exact finite local resource roles; paths cannot be supplied by a sketch or host app.
     static let fileBounds = ["manifest.json": 16_384, "host.html": 512 * 1024,
-                             "LICENSE-MIT": 16_384, "LICENSE-APACHE": 16_384, "catalogue.json": 128 * 1024]
+                             "LICENSE-MIT": 16_384, "LICENSE-APACHE": 16_384, "catalogue.json": 128 * 1024,
+                             "Firmingo-Compiler-LICENSE": 65_536, "compiler-package.json": 16_384, "compiler-sources.json": 512 * 1024]
     /// Fixed compiler filename, usable only after the SDK-pinned distribution review passes.
     static let servicePath = "compiler.wasm"
     /// Fixed recipe shared by all compatible resident builds; no service copy per descriptor is needed.

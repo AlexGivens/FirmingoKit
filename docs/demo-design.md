@@ -2,9 +2,15 @@
 
 The intended journey is select board → install Firmingo → connect → edit and build
 supported source → upload → confirm useful behavior → use console → update/recover.
-The SDK owns compiler, protocol, serial ownership, upload, and installation logic.
+The SDK owns Swift compiler hosting, protocol, serial ownership, device evidence,
+upload, and installation logic. Firmingo-Compiler owns portable preprocessing,
+WASM execution, recipes, packaging, diagnostics, and static build metadata.
 The demo owns documents, immutable source snapshots/revisions, presentation, and
 explicit user decisions. It contains no Arduino restoration feature.
+
+Ownership revised on 2026-10-12; the existing compiler remains SDK-local until
+[the migration gates](compiler-migration.md) pass. The demo continues using SDK
+APIs and gains no direct compiler-service dependency or device bypass.
 
 ## First increment
 

@@ -2,6 +2,14 @@
 
 ## Accepted direction and current status
 
+Ownership revised on 2026-10-12: the self-contained SDK experience accepted on
+2026-09-30 remains, while Firmingo-Compiler now produces the portable compiler,
+recipes, static catalogues/descriptors, and receipts. FirmingoKit owns Swift
+hosting/loading/query APIs and real-device evidence/deployment. Firmingo exports
+verified resident facts. See [the migration inventory](compiler-migration.md).
+The existing implementation and dated evidence below remain SDK-local until
+replacement gates pass; no resources, identities, or persistence schemas changed.
+
 On 2026-09-30 the user accepted a self-contained FirmingoKit compiler experience:
 a host app receives the necessary approved compiler resources, supported board
 recipes and trusted firmware-build metadata through the package. The native demo
@@ -67,19 +75,27 @@ The service's redistribution/component-license and reproducible build-provenance
 review remains unresolved. Catalogue models, validation, tests and UI design can
 progress independently. Do not package the service, fabricated firmware metadata
 or synthetic development bindings as production resources to remove that blocker.
-Neither reference checkout may be modified or built by this work.
+Requested coordinated work may touch the three Firmingo repositories; ArduinoKit
+remains strictly read-only. Preserve other work and pinned consumer inputs.
 
 ## Ownership and resource contents
 
-FirmingoKit owns resource discovery, verification, catalogue interpretation,
-recipe selection, firmware compatibility, compilation and artifact/device
-validation. The demo owns presentation, source snapshots, user selection and
-persisting SDK-issued context. Keep these capabilities independent of demo UI and
-usable from another macOS or iOS/iPadOS host without visible WebKit integration.
+Firmingo-Compiler owns portable compilation, recipe selection/compatibility,
+static catalogue/descriptor production, artifact packaging, and compiler resource
+maintenance. FirmingoKit owns platform resource discovery/access, trusted package
+verification, Swift catalogue queries, web hosting, device associations, and
+independent deployment validation. The demo owns presentation, source snapshots,
+user selection, and host persistence. Keep SDK capabilities usable without a
+visible web view or the demo.
 
-Package approved resources under `Sources/FirmingoKit/Resources/`, following the
-existing runtime organization rather than creating duplicate demo copies. Retain
-SDK-local maintenance scripts and receipts under `Tools/ManagedWASM/` and `docs/`.
+Produce approved versioned assets in Firmingo-Compiler. FirmingoKit consumes a
+pinned package through its own resource/distribution adapter; the delivery mechanism
+must be selected and tested during migration, without adding a Swift requirement
+or sibling-path dependency to the compiler. Existing staged SDK resources and
+maintenance tools stay until replacement checks pass. Do not independently edit
+an upstream recipe/runtime in a staged copy. Historical SDK-local staging receipts
+remain evidence, not an instruction to keep compiler maintenance here.
+
 The shipped resource set must include:
 
 - The approved WASM service, reviewed host/worker/runtime dependencies and licenses.
@@ -103,7 +119,9 @@ If complete Firmingo installation images are included, validate and acquire them
 through the existing release/lifecycle boundary, with separate provenance and
 platform/backend gates. Catalogue selection never flashes, upgrades or reinstalls
 firmware; managed capsules and complete-firmware UF2 remain distinct operations.
-No default-Arduino compilation, images or restoration workflow belongs here.
+Conventional Arduino compilation is a secondary Firmingo-Compiler track, not a
+managed recipe or an SDK restoration requirement. No restoration feature is added
+by this migration; any future SDK programming support needs its own explicit scope.
 
 ## Separate build metadata from physical-device association
 
@@ -115,7 +133,7 @@ documented and tested before changing existing callers or stored records.
 
 | Record | Responsibility | Lifetime |
 | --- | --- | --- |
-| Firmware-build descriptor | Exact board/profile, ELF/image/ABI/API binding, recipe compatibility and trusted provenance | Immutable, versioned SDK resource |
+| Firmware-build descriptor | Firmware exports actual resident facts; compiler adds compatible recipe/catalogue identity; SDK verifies/reads the result | Immutable, versioned compiler-package metadata |
 | Device association/installation record | Link one selected physical device to an exact descriptor and record the evidence and verification limits | Persisted host context, updated through explicit setup/installation |
 | Managed transaction record | Device/boot/upload identity, capsule size/digest and reconciliation context | Existing one-shot upload/recovery workflow |
 
@@ -139,9 +157,10 @@ a descriptor by board name, IP address, shared chip, firmware version or API add
 The selected hello contract cannot attest exact installed ELF/UF2 bytes. Bundled
 hashes verify expected build metadata and assets, not installed flash or publisher
 authentication. Do not claim cryptographic device attestation. If automatic exact
-identification requires a firmware change, write an SDK-local handoff with the
-compatibility impact and acceptance tests; pause only that dependent behavior and
-coordinate with the firmware agent only when the user authorizes messaging.
+identification requires a firmware change, document compatibility impact and
+acceptance tests and make it in Firmingo only when required by the authorized
+increment. Continue unaffected work. Messaging other agents/chats still requires
+user authorization.
 
 Stored associations must reference immutable descriptor identities, not a mutable
 "latest" entry. Retain old compatible descriptors deliberately or report a
@@ -187,38 +206,32 @@ library, statelessness or execution restrictions automatically.
 
 ## Implementation order and acceptance
 
-1. **Inventory and clearance:** pin reference snapshots; resolve service/component
-   licenses, attribution, permitted distribution and reproducible build inputs.
-   Identify exact firmware descriptors available from trusted evidence. Document
-   missing exports/decisions and continue independent work without inventing records.
-2. **Catalogue and models:** define bounded schemas, explicit compatibility rules,
-   immutable firmware-build and device-association boundaries, persistence and API
-   migration. Test invalid schemas, duplicate/ambiguous selections, wrong ABI/board,
-   stale associations and removal/replacement of a descriptor.
-3. **Verified packaging and offline Build:** stage only cleared assets, verify the
-   catalogue and each recipe dependency off UI execution, add default SDK loading
-   and a device-independent build/receipt path. Test missing/corrupt resources,
-   unsafe paths, unsupported targets, cancellation and different source revisions.
-4. **Demo and deployment binding:** drive normal selection from SDK data, retain
-   explicit existing-device setup, validate current artifact/device association
-   before staging, preserve journaling/reconciliation and cross-window guards.
-   Test mismatch rejection before writes and migration of existing host context.
-5. **Consumer and qualification evidence:** build/archive a separate minimal host
-   against FirmingoKit with no sibling checkouts or external file selection. Execute
-   real offline WASM compilation in signed macOS and physical iPad hosts; check
-   cold/repeated duration, total process memory, resource/app size, minimum OS,
-   diagnostics, cancellation and fresh subsequent builds. Qualify actual sketch
-   deployment independently for each supported board/profile/platform through the
-   SDK, including startup and expected useful behavior. Hardware operations require
-   a separately authorized workflow; documentation approval does not authorize them.
+1. **Inventory and contract:** align repository ownership, pin references, and map
+   extraction versus retained wrapper behavior. The inventory is documented; code
+   migration remains open. Firmware export and service-review gaps are dependencies.
+2. **Portable compiler:** Firmingo-Compiler defines bounded request/result/resource
+   schemas, extracts the Nano pipeline, and tests real CLI/web WASM output against
+   independent firmware validators. Service distribution review progresses alongside
+   opt-in local-service tests without invented production descriptors.
+3. **SDK adapter and catalogue:** retain public Swift APIs where practical, consume
+   pinned compiler metadata/assets, translate progress/diagnostics/artifacts, and
+   preserve resource limits, descriptor identity, persistence, cancellation/reentry,
+   explicit selection, and unsupported-target errors before retiring duplicate code.
+4. **Demo and deployment:** continue selecting through SDK APIs; require real device
+   evidence and current source/build identity before staging, preserving journals,
+   one commit, reconciliation, and cross-window guards. Test rejection before writes.
+5. **Packaged consumers and qualification:** ship only reviewed reproducible assets
+   and real descriptors derived from firmware exports. Verify consumer/archive
+   loading without sibling inputs, actual signed macOS/physical iPad compilation,
+   memory/timing/minimum-OS behavior, then separately authorized hardware deployment.
 
 Completion requires a new host to compile supported source using only approved
-SDK resources and an explicit target descriptor, then deploy only after valid
+compiler assets hosted through the SDK and an explicit target descriptor, then deploy only after valid
 device association and capability checks. Record each gate as implemented,
 experimental, qualified, unsupported or blocked with evidence. The current service
 is 101196044 bytes; plan for package/app size and repeated hashing costs, and
 measure actual distribution/runtime behavior. Bundled catalogue changes require
-coordinated SDK/app resource releases; remote catalogue updates are outside this
+pinned compiler-package updates and coordinated SDK/app resource releases; remote catalogue updates are outside this
 increment. Simulator builds, reference tests and packaging alone do not qualify
 physical iPad execution or managed sketch behavior.
 
@@ -241,7 +254,7 @@ production resources exist.
 The closed schema-one inventory is 16-KiB/1024-token bounded and pinned in SDK
 code. It describes one explicit Nano recipe/profile, `nano-stateless-facade-v1`
 source contract and experimental/unqualified status, the exact ABI-two service
-identity and pending review, and five finite local resource roles with byte counts
+identity and pending review, and eight finite local runtime/source/license/catalogue roles with byte counts
 and digests. Paths, duplicate roles/keys, scalar types, recipe/board/ABI identities
 and size limits are validated before any role is read. Inventory integrity precedes
 interpretation of its review declaration. Service approval is checked before

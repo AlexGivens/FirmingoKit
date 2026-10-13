@@ -4,7 +4,10 @@ Prepare an offline source revision and package independently linked Nano code wi
 
 ## Scope
 
-``ManagedSketchPreprocessor`` prepares C++ input. ``ManagedELFConverter`` validates
+``ManagedSketchPreprocessor`` prepares C++ input through the verified shared compiler package
+in a private WebKit worker. No WASM service, service approval or visible view is
+required. Missing/corrupt resources and host/cancellation failures throw explicitly.
+First-line diagnostic byte columns include any original UTF-8 BOM. ``ManagedELFConverter`` validates
 an independently linked ELF and produces an experimental FMS1 capsule. Neither
 compiles source. The separate experimental ``ManagedSketchCompiler`` compiles prepared source through an internal WebKit worker; see <doc:ManagedCompilation>.
 Packaging proves structure and digests, with no source-to-code or hardware attestation.

@@ -1,13 +1,19 @@
 import Foundation
 import WebKit
 
-/// Serves two immutable verified capabilities; arbitrary files, paths and network requests are unavailable.
+/// Serves the selected immutable verified capabilities; arbitrary files, paths and network requests are unavailable.
 @MainActor final class ManagedCompilerOrigin: NSObject, WKURLSchemeHandler {
     /// Exact local resources for this build, held only until its page is disposed.
     private let resources: [String: Data]
     /// Captures already verified bytes without filesystem access on the WebKit actor.
-    init(toolchain: VerifiedManagedToolchain) {
-        resources = ["/host.html": toolchain.page, "/compiler.wasm": toolchain.service]
+    convenience init(toolchain: VerifiedManagedToolchain) {
+        self.init(page: toolchain.page, service: toolchain.service)
+    }
+    /// Service-free operations expose only the verified page; no compiler module can be fetched.
+    init(page: Data, service: Data? = nil) {
+        var selected = ["/host.html": page]
+        if let service { selected["/compiler.wasm"] = service }
+        resources = selected
     }
     /// Validates exact origin/path/method and responds atomically from immutable in-memory bytes.
     func webView(_ webView: WKWebView, start urlSchemeTask: any WKURLSchemeTask) {

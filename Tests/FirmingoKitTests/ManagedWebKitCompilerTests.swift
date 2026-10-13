@@ -6,7 +6,7 @@ import Testing
 
 /// Opt-in actual SDK/WebKit/WASI tests use an explicitly supplied local service and synthetic resident metadata.
 /// Ordinary package tests skip these, never locate a sibling checkout, and never communicate with a board.
-@Suite(.serialized, .enabled(if: ProcessInfo.processInfo.environment["FIRMINGOKIT_WASM_MODULE"] != nil))
+@Suite(.serialized, .enabled(if: ProcessInfo.processInfo.environment["FIRMINGOKIT_WASM_MODULE"].map { !$0.isEmpty } ?? false))
 @MainActor struct ManagedWebKitCompilerTests {
     /// Defines exact source bytes for independently recorded development artifact hashes.
     private let blink = "void setup() { pinMode(LED_BUILTIN, OUTPUT); }\nvoid loop() { digitalWrite(LED_BUILTIN, HIGH); delay(100); digitalWrite(LED_BUILTIN, LOW); delay(100); }\n"
@@ -15,7 +15,9 @@ import Testing
     /// Obtains only the explicit opt-in capability and initializes the command-line host's AppKit environment.
     private func serviceURL() throws -> URL {
         _ = NSApplication.shared
-        return URL(fileURLWithPath: try #require(ProcessInfo.processInfo.environment["FIRMINGOKIT_WASM_MODULE"]))
+        let path = try #require(ProcessInfo.processInfo.environment["FIRMINGOKIT_WASM_MODULE"])
+        guard !path.isEmpty else { throw ManagedCompilerError.unavailable("Select a nonempty explicit service path") }
+        return URL(fileURLWithPath: path)
     }
     /// Synthetic record is structural offline evidence only; none of these capsules may be uploaded.
     private func request(source: String, name: String, revision: UInt64 = 1) throws -> ManagedSketchBuildRequest {
@@ -41,17 +43,48 @@ import Testing
         try bytes.write(to: root.appendingPathComponent("inventory.json"))
         let resources = try await VerifiedManagedResources.load(root: root, expectedSHA256: NanoManagedContract.digest(bytes))
         let toolchain = try await resources.toolchain()
-        #expect(toolchain.toolchainSHA256 == "c0e5829d10a2135e8dbccc79ee1332a53b8320b5c34a9424993685260d28a75f")
+        #expect(toolchain.toolchainSHA256 == "213de1ae8f130db33ba9edf1e63c9cc4453d5868d3dea5b46c4a55fe368789cf")
         #expect(toolchain.recipeSHA256 == ManagedCompilerResourceInventory.recipeSHA256)
         let selected = try await OfflineCompilerFixtures.request(source: blink, revision: 1, filename: "Blink.ino")
-        let prepared = try await ManagedSketchPreprocessor.prepare(selected)
-        let output = try await ManagedWorkerOutput.decode(ManagedWebKitHost().run(prepared: prepared, toolchain: toolchain, progress: { _ in }))
-        let provenance = try ManagedELFProvenance(compiler: "Clang/LLD 22.1.8 ABI-two WASI service, isolated WebKit worker",
-            recipeIdentifier: selected.firmwareBuild.recipeIdentifier, recipeSHA256: toolchain.recipeSHA256,
-            toolchainSHA256: toolchain.toolchainSHA256)
-        let artifact = try await ManagedELFConverter.convert(output.elf, prepared: prepared, provenance: provenance)
-        #expect(artifact.sha256 == "018c94a4a49b71880d6f04aecbe08e809c8ecf49e4278261c45dad3ead205720")
-        #expect(artifact.receipt.firmwareBuildID == selected.firmwareBuild.id)
+        let portable = try ManagedPortableRequest(selected)
+        let output = try await ManagedPortableOutput.decode(ManagedWebKitHost().run(request: portable, toolchain: toolchain, progress: { _ in }), request: portable)
+        #expect(NanoManagedContract.digest(output.bytes) == "018c94a4a49b71880d6f04aecbe08e809c8ecf49e4278261c45dad3ead205720")
+        let receipt = try WireJSON.parse(output.executionReceiptJSON)
+        #expect(try receipt.required("firmwareBuildID").string() == selected.firmwareBuild.id)
+    }
+    /// Actual portable receipts survive the native boundary; stale hashes, correlation and byte substitutions fail.
+    @Test func portableReceiptsAndTampering() async throws {
+        let selected = try await OfflineCompilerFixtures.request(source: "\u{feff}// café 🎵\r\n" + blink, revision: .max, filename: "Unicode.ino")
+        let portable = try ManagedPortableRequest(selected)
+        let toolchain = try await VerifiedManagedToolchain.load(serviceURL: serviceURL())
+        let json = try await ManagedWebKitHost().run(request: portable, toolchain: toolchain, progress: { _ in })
+        let output = try await ManagedPortableOutput.decode(json, request: portable)
+        #expect(output.sourceBOMBytes == 3)
+        #expect(output.sourceSHA256 == NanoManagedContract.digest(Data(selected.snapshot.source.utf8)))
+        let valid = try #require(JSONSerialization.jsonObject(with: Data(json.utf8)) as? [String: Any])
+        for mutation in ["requestSHA256", "sourceRevision", "firmwareBuildID", "buildInputSHA256", "service", "bytes", "buildID", "sequence"] {
+            var root = valid
+            var event = try #require(root["event"] as? [String: Any])
+            var artifact = try #require(event["artifact"] as? [String: Any])
+            var receipt = try #require(artifact["receipt"] as? [String: Any])
+            switch mutation {
+            case "bytes": artifact["bytes"] = Data(repeating: 0, count: 316).base64EncodedString()
+            case "buildID": event["buildID"] = "stale"
+            case "sequence": event["sequence"] = 1
+            case "service":
+                var service = try #require(receipt["service"] as? [String: Any]); service["serviceABI"] = 1; receipt["service"] = service
+            default: receipt[mutation] = String(repeating: "0", count: 64)
+            }
+            artifact["receipt"] = receipt; event["artifact"] = artifact; root["event"] = event
+            let changed = String(decoding: try ManagedPortableRequest.canonical(root), as: UTF8.self)
+            await #expect(throws: FirmingoError.self) { _ = try await ManagedPortableOutput.decode(changed, request: portable) }
+        }
+        let legacy = try await ManagedSketchCompiler(serviceURL: serviceURL()).build(request(source: blink, name: "Legacy.ino", revision: .max))
+        let raw = try #require(legacy.artifact.compilerReceiptJSON)
+        let receipt = try WireJSON.parse(raw)
+        #expect(try receipt.required("residentBindingID").string().count == 64)
+        #expect(!String(decoding: raw, as: UTF8.self).contains("deviceID"))
+        #expect(legacy.artifact.receipt.sourceRevision == .max)
     }
     /// Real WebKit compiles distinct source revisions to independently recorded FMS1 outputs and maps syntax errors.
     @Test func realBuildsAndDiagnostics() async throws {

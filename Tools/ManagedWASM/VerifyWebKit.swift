@@ -11,12 +11,15 @@ import FirmingoKit
     /// Runs the development checks, propagating a failure to the command-line entry point.
     @MainActor static func validate() async throws {
         _ = NSApplication.shared
-        let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        let compiler = ManagedSketchCompiler(serviceURL: root.appendingPathComponent(".build/managed-wasm/compiler-bounded.wasm"))
+        guard CommandLine.arguments.count == 2 else { throw ManagedCompilerError.runtime("Select one explicit pinned development service") }
+        let compiler = ManagedSketchCompiler(serviceURL: URL(fileURLWithPath: CommandLine.arguments[1]))
         let resident = try ManagedResidentBinding(deviceID: "0102030405060708", residentELFSHA256: String(repeating:"0",count:64),
             firmwareImageSHA256: String(repeating:"1",count:64), apiAddress: 0x10022ca0)
-        for name in ["Blink.ino", "Console.ino", "Syntax.ino"] {
-            let source = try String(contentsOf: root.appendingPathComponent(".build/managed-wasm/results/"+name), encoding:.utf8)
+        let sketches = [
+            ("Blink.ino", "void setup() { pinMode(LED_BUILTIN, OUTPUT); }\nvoid loop() { digitalWrite(LED_BUILTIN, HIGH); delay(100); digitalWrite(LED_BUILTIN, LOW); delay(100); }\n"),
+            ("Console.ino", "void setup() { Serial.begin(115200); Serial.println(\"ready\"); }\nvoid loop() { const int value = Serial.read(); if(value >= 0) Serial.write(uint8_t(value)); }\n"),
+            ("Syntax.ino", "void setup() { missingFunction(); }\nvoid loop() {}\n")]
+        for (name, source) in sketches {
             let request = try ManagedSketchBuildRequest(snapshot: SketchSourceSnapshot(documentID:UUID(), revision:1, filename:name,source:source),
                 board:.nanoRP2040Connect,profile:.nanoManagedV1,resident:resident)
             do {

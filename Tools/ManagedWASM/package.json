@@ -1,7 +1,7 @@
 {
-  "name": "firmingokit-managed-wasm-development",
+  "name": "firmingokit-compiler-adapter-development",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test Tests/*.test.mjs" },
-  "engines": { "node": ">=22" }
+  "scripts": { "test": "node run-validation.mjs" },
+  "engines": { "node": "22.12.0" }
 }

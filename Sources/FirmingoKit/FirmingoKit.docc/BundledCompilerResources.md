@@ -5,7 +5,7 @@ Discover verified metadata and compiler resources without an external toolchain.
 ## Current availability
 
 ``ManagedCompilerCatalogue/loadBundled()`` loads the SDK-owned inventory and its
-five bounded runtime/license/catalogue roles off UI execution. The current
+eight bounded runtime/source/license/catalogue roles off UI execution. The current
 catalogue is intentionally empty: trusted production firmware-build descriptors
 have not been staged. No board or latest build is selected automatically. A
 successful catalogue load is separate from compiler availability.

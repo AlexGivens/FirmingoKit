@@ -1,5 +1,11 @@
 # Compile a managed sketch locally
 
+The build facade hosts the version-one Firmingo-Compiler source package in its
+private WebKit worker. The optional artifact `compilerReceiptJSON` preserves the
+distinct portable execution receipt; existing native receipt schemas and device
+association/upload gates retain their meaning. An independently supplied ELF has
+no compiler execution receipt. Runtime provenance identifies the imported package.
+
 Build one immutable Nano source revision without connecting to a microcontroller.
 
 ## Experimental support

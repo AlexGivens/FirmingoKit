@@ -77,7 +77,8 @@ struct ManagedCompilerResourceTests {
     }
 
     /// Every role, including licenses/catalogue, is independently verified; same-size byte changes fail.
-    @Test(arguments: ["manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json"])
+    @Test(arguments: ["manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json",
+                      "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"])
     func corruptedResource(_ path: String) async throws {
         try await withCopy { root in
             let url = root.appendingPathComponent(path)
@@ -100,7 +101,8 @@ struct ManagedCompilerResourceTests {
                 try FileManager.default.removeItem(at: url)
                 await #expect(throws: ManagedCompilerResourceError.invalidFile("host.html")) { _ = try await VerifiedManagedResources.load(root: root) }
             case "oversized":
-                try Data(repeating: 32, count: 121_704).write(to: url)
+                let expected = try #require(ManagedCompilerResourceInventory(data: Data(contentsOf: root.appendingPathComponent("inventory.json"))).files.first { $0.path == "host.html" })
+                try Data(repeating: 32, count: expected.bytes + 1).write(to: url)
                 await #expect(throws: ManagedCompilerResourceError.invalidFile("host.html")) { _ = try await VerifiedManagedResources.load(root: root) }
             case "symlink":
                 try FileManager.default.moveItem(at: url, to: root.appendingPathComponent("other.html"))

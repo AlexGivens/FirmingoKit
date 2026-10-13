@@ -4,6 +4,14 @@ FirmingoKit is a Swift package for host apps working with microcontrollers that
 run Firmingo firmware. This is an early implementation, not a complete SDK or a
 hardware-qualified release.
 
+The agreed repository split assigns preprocessing, WASM execution, board recipes,
+ELF/capsule packaging, compiler diagnostics, and static build metadata to
+**Firmingo-Compiler**. FirmingoKit owns the Swift compiler facade/web host, device
+communication, installation, uploads, device associations, and deployment checks.
+**Firmingo** owns device firmware and its resident/protocol contracts. The compiler build facade now delegates to the pinned Firmingo-Compiler package
+through a tested macOS WebKit adapter; compatibility preparation/conversion APIs remain;
+[the migration inventory](docs/compiler-migration.md) records that transition.
+
 The implemented public operations are **FMGO protocol-one inspection, a live
 channel-one serial session, and experimental Nano managed upload**. Connections use an explicitly selected numeric TCP endpoint,
 send hello once, and validate the selected board. A session also requires the
@@ -32,8 +40,9 @@ invokes it from Build/Run. Approved service redistribution, signed-sandbox/physi
 iPad execution and hardware qualification remain pending.
 
 The accepted next direction is a [bundled compiler and firmware catalogue](docs/compiler-catalogue.md)
-owned by FirmingoKit. Host apps will select supported board/profile/firmware-build
-targets and compile offline using approved package resources; deployment will
+produced by Firmingo-Compiler from verified Firmingo exports and consumed through
+FirmingoKit's Swift APIs. Host apps will select supported board/profile/firmware-build
+targets and compile offline using approved versioned package resources; deployment will
 separately require a real device association. The demo will consume these same
 APIs, with file imports retained as an optional advanced path. Bounded catalogue
 metadata, immutable firmware-build descriptors and separate persisted device
@@ -124,3 +133,11 @@ See [development checks](docs/development.md), [firmware compatibility](docs/fir
 [complete-firmware preflight](docs/firmware-lifecycle.md), and
 [the implementation checklist](TODO.md) for exact scope and remaining work.
 No sibling checkout is needed for a normal build or test.
+
+The [shared compiler adapter](docs/compiler-adapter.md) records its imported package,
+receipt compatibility and local tests. Signed sandbox/physical iOS and hardware
+qualification, actual resident metadata and service distribution remain open.
+
+Both public preparation overloads now use the shared compiler worker without a
+WASM service; [service-free preparation](docs/service-free-preparation.md) records
+package identities, compatibility and actual checks.

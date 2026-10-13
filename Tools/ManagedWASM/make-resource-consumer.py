@@ -27,6 +27,26 @@ import FirmingoKit
         guard catalogue.firmwareBuilds.isEmpty else { throw CocoaError(.fileReadCorruptFile) }
         print("Verified bundled catalogue:", catalogue.manifestSHA256)
         print(catalogue.unavailableReason(for: .nanoRP2040Connect) ?? "Unexpected available metadata")
+        if CommandLine.arguments.count == 2 {
+            // Synthetic local compiler evidence only: never deploy this test capsule.
+            let resident = try ManagedResidentBinding(deviceID: "0102030405060708",
+                residentELFSHA256: String(repeating: "0", count: 64), firmwareImageSHA256: String(repeating: "1", count: 64),
+                apiAddress: 0x10022ca0)
+            let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: .max, filename: "Blink.ino",
+                source: "void setup() { pinMode(LED_BUILTIN, OUTPUT); } void loop() { digitalWrite(LED_BUILTIN, HIGH); delay(100); digitalWrite(LED_BUILTIN, LOW); delay(100); }")
+            let request = try ManagedSketchBuildRequest(snapshot: snapshot, board: .nanoRP2040Connect, profile: .nanoManagedV1, resident: resident)
+            let result = try await ManagedSketchCompiler(serviceURL: URL(fileURLWithPath: CommandLine.arguments[1])).build(request)
+            guard result.artifact.compilerReceiptJSON != nil, result.artifact.receipt.sourceRevision == .max,
+                  result.artifact.capsule.sha256 == "018c94a4a49b71880d6f04aecbe08e809c8ecf49e4278261c45dad3ead205720" else { throw CocoaError(.fileReadCorruptFile) }
+            print("Synthetic packaged-consumer WASM compilation verified:", result.artifact.capsule.sha256)
+        } else if CommandLine.arguments.count != 1 { throw CocoaError(.fileReadInvalidFileName) }
+        let resident = try ManagedResidentBinding(deviceID: "0102030405060708", residentELFSHA256: String(repeating: "0", count: 64),
+            firmwareImageSHA256: String(repeating: "1", count: 64), apiAddress: 0x10022ca0)
+        let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: .max, filename: "Prepare.ino", source: "void setup() {} void loop() {}")
+        let selected = try ManagedSketchBuildRequest(snapshot: snapshot, board: .nanoRP2040Connect, profile: .nanoManagedV1, resident: resident)
+        let prepared = try await ManagedSketchPreprocessor.prepare(selected)
+        guard prepared.request.snapshot.revision == .max, prepared.translationUnit.hasSuffix(snapshot.source + "\\n") else { throw CocoaError(.fileReadCorruptFile) }
+        print("Packaged service-free preparation verified:", prepared.translationUnitSHA256)
         _ = compiler
     }
 }

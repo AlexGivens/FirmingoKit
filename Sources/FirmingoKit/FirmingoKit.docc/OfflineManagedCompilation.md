@@ -1,5 +1,11 @@
 # Compile for a firmware build without a device
 
+The build facade hosts the version-one Firmingo-Compiler source package in its
+private WebKit worker. The optional artifact `compilerReceiptJSON` preserves the
+distinct portable execution receipt; existing native receipt schemas and device
+association/upload gates retain their meaning. An independently supplied ELF has
+no compiler execution receipt. Runtime provenance identifies the imported package.
+
 Build an exact source revision against verified catalogue metadata, then bind its artifact explicitly for deployment.
 
 ## Build offline
@@ -106,3 +112,7 @@ Current macOS real-runtime tests establish offline compilation and structural
 packaging only. Synthetic development descriptors and parser fixtures are never
 deployment evidence. Signed sandbox, minimum-OS execution, physical iPad,
 resident ABI execution, startup and useful sketch behavior remain unqualified.
+
+The source-preparation overload also uses the shared compiler worker without a
+service or device. Source/generated hashes and revision identity remain unchanged;
+resource verification and WebKit host availability apply to that async API.

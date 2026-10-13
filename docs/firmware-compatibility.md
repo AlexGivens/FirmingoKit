@@ -46,7 +46,10 @@ cannot supply the exact resident binding required by a managed build. Bonjour
 discovery is absent; numeric endpoints must be explicitly selected.
 
 The accepted [bundled catalogue design](compiler-catalogue.md) adds future
-SDK-owned compiler/recipe resources and immutable firmware-build descriptors,
+compiler-owned assets/recipes and immutable firmware-build descriptors consumed
+through SDK APIs. Ownership revised on 2026-10-12 is recorded in
+[the migration inventory](compiler-migration.md); current executable resources
+still live in FirmingoKit. Static build metadata remains
 separate from real per-device associations. It does not change the selected wire
 contract or qualification matrix. A bundled descriptor cannot attest installed
 ELF/UF2 bytes or enable Pico managed upload; deployment retains fresh capability

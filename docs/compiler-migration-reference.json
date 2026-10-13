@@ -1,0 +1,801 @@
+{
+  "inventory_schema": 1,
+  "recorded_on": "2026-10-12",
+  "status": "pre-extraction reference inventory; documentation-only refocus; not a release or new compatibility selection",
+  "notes": [
+    "All listed bytes are unchanged source/resource/tool/fixture inputs at the inspected commits.",
+    "Firmingo had pre-existing AGENTS.md CI edits; these are preserved and are not compiler-contract changes.",
+    "Markdown guidance is revised by this increment and is deliberately excluded from this source inventory.",
+    "Historical compiler/protocol receipts and fixture manifests are unchanged.",
+    "ArduinoKit is read-only; no source/service assets were copied."
+  ],
+  "repositories": {
+    "Firmingo": {
+      "source_commit": "f17fdf0301256ba48270230cbf213126e70aa8d0",
+      "initial_working_changes": [
+        " M AGENTS.md"
+      ],
+      "files": {
+        "boards/nano_rp2040_connect/baseline.json": {
+          "bytes": 898,
+          "sha256": "227cf02f03d35fa36b227fd32be1c5e784f35f89c0be18387e683a42c3c2a23a"
+        },
+        "boards/nano_rp2040_connect/core-lock.json": {
+          "bytes": 1110,
+          "sha256": "a53fc4653d6ffda348f3fed36c86d68d7f13b31aa4fda98b0a9aec5934242b24"
+        },
+        "experiments/managed_sketch/abi.h": {
+          "bytes": 814,
+          "sha256": "941fd824a765e1dc9efaa5c9bdd670d77bdb26fedef98c47d9c7969d5bb6ad2a"
+        },
+        "experiments/managed_sketch/blink_a.ino": {
+          "bytes": 402,
+          "sha256": "bc4a7de53729caa10f3d9d955bdce16bcd4cda646617e0e109fcae077acf0726"
+        },
+        "experiments/managed_sketch/blink_b.ino": {
+          "bytes": 402,
+          "sha256": "0567a5ce22beef11cde8cdefa58c5e33e41ff2482fb2ff1b086a8aae3ffb1b25"
+        },
+        "experiments/managed_sketch/build_composite.py": {
+          "bytes": 6251,
+          "sha256": "a6b491462473fadc6d03ea4514ea3c541352d3281b0a0cbd363fc8e97a81a9b6"
+        },
+        "experiments/managed_sketch/build_module.py": {
+          "bytes": 6000,
+          "sha256": "ca3cf9afc9170d6e06025d4e61ba9994e7b43400cc145b5b3ceb527f618314f4"
+        },
+        "experiments/managed_sketch/build_resident.py": {
+          "bytes": 6889,
+          "sha256": "8275e77a15741d65253bdee7fe4133870da5d11688ed7628363021b232c9ab67"
+        },
+        "experiments/managed_sketch/console.h": {
+          "bytes": 7038,
+          "sha256": "3b43b649f6896b27135bebcf6f59ab63b9805d7245424b293ea9eef76033b6c2"
+        },
+        "experiments/managed_sketch/core1_pause.cpp": {
+          "bytes": 1383,
+          "sha256": "25a48ec0ac94bca0b1f1e8307576d6d0ff28c0b5faa51e6eae3d96de10fea5f7"
+        },
+        "experiments/managed_sketch/core1_pause.h": {
+          "bytes": 609,
+          "sha256": "07184403ec59786b1b6196d292c853fb42222ac08a9ab795a624d6e5f82e387c"
+        },
+        "experiments/managed_sketch/export_sdk_contract.py": {
+          "bytes": 2433,
+          "sha256": "5f54a7f13b4059e05a52a1ec25b7daa7a28147ae7bebeb54fa3df1be82f24afd"
+        },
+        "experiments/managed_sketch/facade/Arduino.h": {
+          "bytes": 2236,
+          "sha256": "b35175c2569f4203dac411dadff9e340e562cd5a09f89f82e119e78ed4bca6b3"
+        },
+        "experiments/managed_sketch/firmingo_managed_resident/firmingo_managed_resident.ino": {
+          "bytes": 12077,
+          "sha256": "6304a426470e062b7896521eda7bd746356a30c42e326d0a32bc09edf257ae5e"
+        },
+        "experiments/managed_sketch/flash_initial.py": {
+          "bytes": 5592,
+          "sha256": "8c771d44205faf8b295a9c1f769fe7e55c2ec520d4dcfed3be0a2ebfe215b012"
+        },
+        "experiments/managed_sketch/fmgo_upload.cpp": {
+          "bytes": 5717,
+          "sha256": "4f9240f6cab4968b69e18398ec7fc834d031f1539b7dfa0628c4bd75a6d15c2c"
+        },
+        "experiments/managed_sketch/fmgo_upload.h": {
+          "bytes": 1853,
+          "sha256": "c3910530d9bfd2388e6ba933012a06e4fefe67417ca5fe8e7c870b23655bbee6"
+        },
+        "experiments/managed_sketch/fmgo_upload.py": {
+          "bytes": 8384,
+          "sha256": "362ca483399ab3dee30482daf84fd359dc5311c139c09c7120b90ac6a08b832f"
+        },
+        "experiments/managed_sketch/image.cpp": {
+          "bytes": 5935,
+          "sha256": "b694ed15b5c6c84b819da31e14961e48cf4ab8338bb6e1fee538f964a3501ca5"
+        },
+        "experiments/managed_sketch/image.h": {
+          "bytes": 1399,
+          "sha256": "658ceac8716a6a6709714f2b51e2e01684a06ba87db999ee0d75cff0b9e6ffd9"
+        },
+        "experiments/managed_sketch/inspect_hello.py": {
+          "bytes": 2629,
+          "sha256": "dfb5b6a777d19cfd104aded8d3c71002b89e0a6fb5f19823a1b2cd5c2e320cec"
+        },
+        "experiments/managed_sketch/install.cpp": {
+          "bytes": 2069,
+          "sha256": "64dad1c48cf6b3d213690ccd53a5efd91a9e3738dc83df9c742223751cfb14f6"
+        },
+        "experiments/managed_sketch/install.h": {
+          "bytes": 1441,
+          "sha256": "0f535ceaf848db3471bc62e8b7592a82a7ccc3129049cc75a88351be76b1e3cc"
+        },
+        "experiments/managed_sketch/mailbox.h": {
+          "bytes": 1880,
+          "sha256": "5e045689f76d5c7e557864a969c6e99ecb835c31ba498ff1df7eb1ccd7983890"
+        },
+        "experiments/managed_sketch/module.ld": {
+          "bytes": 596,
+          "sha256": "3fd5e2ba42dec5f10bfb15bc70e35faefc1b44a7de3cd68de0573ed7d6428110"
+        },
+        "experiments/managed_sketch/module_entry.cpp": {
+          "bytes": 248,
+          "sha256": "cf7458999069224ada262c13f40792c5cef3b6ed3e3760e11fa8062c3c9306df"
+        },
+        "experiments/managed_sketch/pause_probe.ino": {
+          "bytes": 828,
+          "sha256": "afd2c8860ddcdf8f420b95d7109e5e5c0dd75ff498e81fc59b3dccdfc899514f"
+        },
+        "experiments/managed_sketch/probe_pause.py": {
+          "bytes": 4286,
+          "sha256": "3c54a2c211662b92ae9138d71857eb69568cba422691a7c27750ca04551870a6"
+        },
+        "experiments/managed_sketch/probe_stall.py": {
+          "bytes": 5381,
+          "sha256": "7ccc61bc2c7aafdd95b06bb47c0ea4dedd6292e9dccdeaedd9a32f0ce00f17bc"
+        },
+        "experiments/managed_sketch/smoke.py": {
+          "bytes": 4809,
+          "sha256": "34c0e3cd5555c56e553e7103ab650b5953fae015eeb5c278efdfbc1a4a604c9f"
+        },
+        "experiments/managed_sketch/stage.cpp": {
+          "bytes": 2722,
+          "sha256": "e28478489a97ae231d98dff7daa3eaa4ee5ed96f4af132fc5be831eb1db9c29d"
+        },
+        "experiments/managed_sketch/stage.h": {
+          "bytes": 1306,
+          "sha256": "68ef748719a1cde5a1ab9b85e36ac637b928d14c312c49e48bcc6edadffee0f4"
+        },
+        "experiments/managed_sketch/stall_probe.ino": {
+          "bytes": 828,
+          "sha256": "d8eb445db6db49fec8225fcd78cd8f3db21bd264ec8e2e8cc7d0085218234a59"
+        },
+        "experiments/managed_sketch/switch.cpp": {
+          "bytes": 2009,
+          "sha256": "bf390ced8f264cd17e0fd84b70666297ad78a90aac6d38b50e11495e7091ecc9"
+        },
+        "experiments/managed_sketch/switch.h": {
+          "bytes": 1345,
+          "sha256": "ade36181bafdb084cbe6403dc9b02395c510f213b04c035a3e1662887527b7ed"
+        },
+        "experiments/managed_sketch/upload.py": {
+          "bytes": 8497,
+          "sha256": "a7cbf3094ae009760b365c443838e641d585608605f70babc29891ea1a6d448a"
+        },
+        "experiments/managed_sketch/upload_server.cpp": {
+          "bytes": 6384,
+          "sha256": "c537fa8c383d5fb65cf63dfc595c3090c639d641c08dcceae2bd725d44810628"
+        },
+        "experiments/managed_sketch/upload_server.h": {
+          "bytes": 1818,
+          "sha256": "cd0bff4932d2e9553709859e7bb5135a52413608387da75334877ed69c3dce70"
+        },
+        "experiments/managed_sketch/upload_wire.cpp": {
+          "bytes": 3240,
+          "sha256": "c0db8617797aa414e05a117508d83a966172188fda44875773c064e085b74d77"
+        },
+        "experiments/managed_sketch/upload_wire.h": {
+          "bytes": 1175,
+          "sha256": "d12d1258da800bae86f7720c88af367ab926901767d65e52f88f9eab93321101"
+        },
+        "src/core/protocol.cpp": {
+          "bytes": 2314,
+          "sha256": "d6cc26fd08340302a45d71277e86c43310e9f4ef8e656977f77bb5f530adb1f0"
+        },
+        "src/core/protocol.h": {
+          "bytes": 2074,
+          "sha256": "567095d2bccd32c9567269a08de51829b6b4d6363bfdd294615498970016fa04"
+        },
+        "src/core/session_upload.cpp": {
+          "bytes": 4763,
+          "sha256": "aa7602e1b5278569a3c689a4c9de04887ed49548a261ad7a1b9cd4191c7fadbe"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/abort-request.hex": {
+          "bytes": 192,
+          "sha256": "6ceb1168e9bfdf6407094629926fd16e5791c2cc4a22f9ed7b11a24124d0f601"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/aborted-response.hex": {
+          "bytes": 624,
+          "sha256": "69643378c1311ca6067d4e4f9d3ab8b4f71708a29c6b4d8aa8ef2578ce83d19e"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/accepted-response.hex": {
+          "bytes": 621,
+          "sha256": "8dbb1e07f6802a298c21ad87f88cc383412203bce2233cba8ec21ea359ce7f4d"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/begin-request.hex": {
+          "bytes": 591,
+          "sha256": "b0c6a742e2eef69f479093df12da1715507490c6c00a21fb5af8a7f8a3cfdd09"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/boot-confirmed-response.hex": {
+          "bytes": 642,
+          "sha256": "d788910fa68ae497b7c018f0decfa26fc4107293f10b006b1afbf11826792e72"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/chunk-response.hex": {
+          "bytes": 627,
+          "sha256": "41106b9e6383edc8858054133f71a6b80507851f8849b3c7c2fa7a3b52604f45"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/chunk.hex": {
+          "bytes": 864,
+          "sha256": "a2f85c0c043a3006757186ca7afa3a09648aecb9d623941ffff2d8d24855e416"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/commit-request.hex": {
+          "bytes": 195,
+          "sha256": "dd03e071b3577fdbfeb4bc85bc8957c17c77ae0145db6fff784392dcceebbf66"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/committing-response.hex": {
+          "bytes": 633,
+          "sha256": "dc4ccdfd808b8d743debd43a91c69a2dd2a8fe873f81228657c478651af8c574"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/disconnected-response.hex": {
+          "bytes": 648,
+          "sha256": "f2817d2578d85c212da6a14a0d575e127a3babea40f519f7260da4a216bf4bc9"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/finish-request.hex": {
+          "bytes": 195,
+          "sha256": "2b4cc241b0ddbc6101063ffc46d47e8f1b2b728d7a28fad5b483dab2e7e5e4ca"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/hello-request.hex": {
+          "bytes": 90,
+          "sha256": "3ad3a44ce98bf9b9ca6529d303cc20fab72621484af3986b76d0f068ced05b99"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/hello-response.hex": {
+          "bytes": 1359,
+          "sha256": "cd1f00747278a8e4cd0591598115660255b73cd5706a1cbbbc72d00d7baee5e9"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/install-failed-response.hex": {
+          "bytes": 648,
+          "sha256": "1ae673e6655a42206dcd44a97bcd511dfe1c547dc150bb49b418d603dc396d99"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/installed-response.hex": {
+          "bytes": 627,
+          "sha256": "90c2d0bef3ae799800d1ef34fe89e7d0054f7b62957c64a2f0f7864059fb2110"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/status-request.hex": {
+          "bytes": 195,
+          "sha256": "66a1b21b630d4b097ccb45af15c2552bb6c9c7ca619cc2b3b1b5e8d83d5387e8"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/unauthorized-response.hex": {
+          "bytes": 255,
+          "sha256": "19be09548cf8aeb0ce9976edc88ceefaa1f382ab6d337db687def75836b74861"
+        },
+        "tests/fixtures/protocol-v1/managed-upload/verified-response.hex": {
+          "bytes": 627,
+          "sha256": "f51552e1e21fc3926e8a2b2db72d86e0c0c063818b7c5b7a227ca52a0d137a30"
+        }
+      }
+    },
+    "FirmingoKit": {
+      "source_commit": "05cae8fa8e58c706eceb6a15812d7ca500375d7b",
+      "initial_working_changes": [],
+      "files": {
+        "Sources/FirmingoKit/Compiler/ManagedCatalogueError.swift": {
+          "bytes": 1800,
+          "sha256": "4050a3a216613556e532f265c31838513666fd8729b9392aa8e821ff57e3bbc0"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedCompilationPhase.swift": {
+          "bytes": 596,
+          "sha256": "117213229272339f02f1a76f4643a8a04875ccc5435c047b947f8cd566dfe3d8"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedCompilationResult.swift": {
+          "bytes": 523,
+          "sha256": "9ea7036ccaf8d9a626d4468ca23394d8fe0cfe5e52c75ef8097d779646143b41"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedCompilerCatalogue.swift": {
+          "bytes": 5082,
+          "sha256": "5c195c89f4de8be268925a7eff78ba77d32387656e5d36c6fc00edea66599bc9"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedCompilerError.swift": {
+          "bytes": 1338,
+          "sha256": "4d119f12cbf182b5f81db7e5e09358963f6ff7455dfcb549af56b04d1a829615"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedCompilerResourceError.swift": {
+          "bytes": 2263,
+          "sha256": "9a78d1ca85cfbc57cc223a7aa62d0d5ca94768437ca7e202a46c1ef55c6388b7"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedELFConverter.swift": {
+          "bytes": 6243,
+          "sha256": "3d30291ccfcfc1592c9cf951d793e878f7c94e5c8ff706d6f02693161660cedb"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedELFImage.swift": {
+          "bytes": 14568,
+          "sha256": "894953d39606f68e2552c82cee4d123a03ec1e4102c05914fa6ba9ba54ed7aee"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedELFPackage.swift": {
+          "bytes": 3672,
+          "sha256": "7413bb8f61d70cb23363258be191e4934004817a22ec8959a305d584bb5342f8"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedELFProvenance.swift": {
+          "bytes": 1717,
+          "sha256": "aa51bc114f11e6abf2f2e8ee2e8f1ec38f52f71d4f2a958ef93bb4e13d984821"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedFirmwareBuildDescriptor.swift": {
+          "bytes": 6090,
+          "sha256": "f8236fc895374e054a4809bea73ed153a2dab2803206c7190fd2066a001deaf4"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedOfflineBuildRequest.swift": {
+          "bytes": 1328,
+          "sha256": "bed421f3b7c012c96bce69ddfc6918ba78c572682b009faa23b567d3d7db037c"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedOfflineCompilationResult.swift": {
+          "bytes": 658,
+          "sha256": "4e9c78317aac95ff6b9c4cfea500b46028b5dec442ece9025ba5f7aa1d45a315"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedOfflineSketchArtifact.swift": {
+          "bytes": 5804,
+          "sha256": "4da691facb2d79fa550818f6bac8686bc5232e3662a66f59e2f4317e50601277"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedSketchArtifact.swift": {
+          "bytes": 4181,
+          "sha256": "cd4415a8e949bcaa6fc90306eab1c79a2558e50583deaafe40e75a5244184fe1"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedSketchBuildRequest.swift": {
+          "bytes": 1579,
+          "sha256": "3a8ff590effaed565156f629468e28a92e5e4dda5322a210021b2b7be426e987"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedSketchCompiler.swift": {
+          "bytes": 6441,
+          "sha256": "277f4ae962b2975765eff80606c5a1b533ffc7f2fd35108c987a6fff4855fe88"
+        },
+        "Sources/FirmingoKit/Compiler/ManagedSketchPreprocessor.swift": {
+          "bytes": 9462,
+          "sha256": "f81aa63be19d44ff84fb231905a0b97c55076f06267afa7103f1143a752a2220"
+        },
+        "Sources/FirmingoKit/Compiler/PreparedManagedOfflineSketch.swift": {
+          "bytes": 1489,
+          "sha256": "7fbb4080e9ccfb9e623b4a36e45ca918b1417749ac989f86979fe8eb8eb7ec13"
+        },
+        "Sources/FirmingoKit/Compiler/PreparedManagedSketch.swift": {
+          "bytes": 1683,
+          "sha256": "717159e08002a98cefb614383a81ca7d218ae2c3c0349782fe11cbd69a377f0b"
+        },
+        "Sources/FirmingoKit/Compiler/SketchBuildError.swift": {
+          "bytes": 1395,
+          "sha256": "d32dc9e64d4bc7ce77b4c43fcc3d2e9c256e6504be098b6281168c40fd10683f"
+        },
+        "Sources/FirmingoKit/Compiler/SketchDiagnostic.swift": {
+          "bytes": 1318,
+          "sha256": "952bd8eb6fd67e12e9ff33c45a1f4ea6096d09af7813012e40970ccc61721d51"
+        },
+        "Sources/FirmingoKit/Compiler/SketchSourceSnapshot.swift": {
+          "bytes": 2178,
+          "sha256": "d9f10b793089c789f4b30d6a7d386741f16f9281c6a4d09267fc98b376d97d08"
+        },
+        "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerBundle.swift": {
+          "bytes": 1174,
+          "sha256": "e70e40d76785904ff7690c533658c48ddfb6378f0942f096959db126151be5a4"
+        },
+        "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerOrigin.swift": {
+          "bytes": 1971,
+          "sha256": "902926a99587336440a7cdd6ead30bcece353a05aa5245b7801ec27f252661ec"
+        },
+        "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerResourceInventory.swift": {
+          "bytes": 5230,
+          "sha256": "61c04d3d7fd1ee0378025945a078fbbb4990ff30da5593209954ad88132f2bf5"
+        },
+        "Sources/FirmingoKit/CompilerRuntime/ManagedCompilerResourceReader.swift": {
+          "bytes": 2156,
+          "sha256": "611d273999e0752bf01b57604677f60e639041972ed9ff9aab677e20fa3f9f20"
+        },
+        "Sources/FirmingoKit/CompilerRuntime/ManagedWebKitHost.swift": {
+          "bytes": 8572,
+          "sha256": "144664939ce10b9811566229d90ffae53d393552c044d673a7828974fa442b7a"
+        },
+        "Sources/FirmingoKit/CompilerRuntime/ManagedWorkerOutput.swift": {
+          "bytes": 5341,
+          "sha256": "476ec6d797b3b1a159b1306f1eda5d7dbfb790dddb386a955fd568e3415b763e"
+        },
+        "Sources/FirmingoKit/CompilerRuntime/VerifiedManagedResources.swift": {
+          "bytes": 4733,
+          "sha256": "2ba2acf5d5c084d242b1e6deb2b769d2240f68ad024b2de1d0e1a782a4c275b6"
+        },
+        "Sources/FirmingoKit/CompilerRuntime/VerifiedManagedToolchain.swift": {
+          "bytes": 5593,
+          "sha256": "fb2658eb4f10e16b00ffc343901c9a30c9dd9080a4677c8dd8f1d76f03ea3563"
+        },
+        "Sources/FirmingoKit/Models/ManagedCapsule.swift": {
+          "bytes": 2497,
+          "sha256": "cac0969c94e907f6a4617f74d456424b3c5febdc8f33d3f852dcd942d7ef4d4b"
+        },
+        "Sources/FirmingoKit/Models/ManagedCapsulePayload.swift": {
+          "bytes": 6978,
+          "sha256": "e37374e8c1ad1388b6ab8bcae1ef8de603c4ca4208039cfe66892a3884718841"
+        },
+        "Sources/FirmingoKit/Models/ManagedDeviceAssociation.swift": {
+          "bytes": 4146,
+          "sha256": "85dc3403f19a0d2fa1799cff3cb19f8cfbaa8b6a722be9488aa159ec14b00108"
+        },
+        "Sources/FirmingoKit/Models/ManagedResidentBinding+Association.swift": {
+          "bytes": 818,
+          "sha256": "87ea3648f9749aa9509dc5dc01744300aaebf36086f039585e6985b906845bb4"
+        },
+        "Sources/FirmingoKit/Models/ManagedResidentBinding+Record.swift": {
+          "bytes": 1276,
+          "sha256": "3cfacccb6b3be26ef5fda6642a3003f3c81c519524894de50944188e3b0ae0a6"
+        },
+        "Sources/FirmingoKit/Models/ManagedResidentBinding.swift": {
+          "bytes": 1693,
+          "sha256": "9037a2c34776e6c4561122f28f067ff2d5a7b2f20b63ff0f9b4c7d82d54456fd"
+        },
+        "Sources/FirmingoKit/Models/ManagedUploadError.swift": {
+          "bytes": 1414,
+          "sha256": "f6d2f2f97eeec3fca221777395f95b4e23ffe08ac7c31a9e5d691946fa523fe8"
+        },
+        "Sources/FirmingoKit/Models/ManagedUploadProgress.swift": {
+          "bytes": 560,
+          "sha256": "a730af3fed0b32ee6c70d66a750440fca23baccfdb5d9ea5ad1ca8530a54f55b"
+        },
+        "Sources/FirmingoKit/Models/ManagedUploadReconciliation.swift": {
+          "bytes": 1097,
+          "sha256": "3a1b848b656c6d7789414bb911cceb58fdfcbafaf6f375239dade243c71abc40"
+        },
+        "Sources/FirmingoKit/Models/ManagedUploadRecord.swift": {
+          "bytes": 4969,
+          "sha256": "9168cd92056a104e80d60547ad1f58de21739a0ab1ccad47435adee66b06abbb"
+        },
+        "Sources/FirmingoKit/Models/ManagedUploadSnapshot.swift": {
+          "bytes": 3734,
+          "sha256": "ac9fd19daa8f78fe4ffaa83e8014014fdef2cebf50505c2eb65a70191cd54706"
+        },
+        "Sources/FirmingoKit/Protocol/NanoManagedContract.swift": {
+          "bytes": 1783,
+          "sha256": "8bd33e0eb8917f160541b4a573d8a1d44fd2e9cf8315b2ade669371b101c098e"
+        },
+        "Sources/FirmingoKit/Resources/ManagedCompiler/LICENSE-APACHE": {
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "Sources/FirmingoKit/Resources/ManagedCompiler/LICENSE-MIT": {
+          "bytes": 1023,
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        },
+        "Sources/FirmingoKit/Resources/ManagedCompiler/catalogue.json": {
+          "bytes": 33,
+          "sha256": "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db"
+        },
+        "Sources/FirmingoKit/Resources/ManagedCompiler/host.html": {
+          "bytes": 121703,
+          "sha256": "7284f555cf210a6eae0966e9c8363f94be77b4eee5f43c3c7ca01bfc5a10d83b"
+        },
+        "Sources/FirmingoKit/Resources/ManagedCompiler/inventory.json": {
+          "bytes": 1310,
+          "sha256": "9a2a074d1d3ba5135f37edba7b8d2937b934a1759dc3d10fedceafb601b92d82"
+        },
+        "Sources/FirmingoKit/Resources/ManagedCompiler/manifest.json": {
+          "bytes": 641,
+          "sha256": "fb732842e1b94b1f3ca5055fb6aaa0a0f71e0a6d3e9c1a173063955f21a0b76a"
+        },
+        "Tests/FirmingoKitTests/CompilerFixtures.swift": {
+          "bytes": 3565,
+          "sha256": "ef57762d205de28b371109ba21da9881f09b4c2c77c265500ff1228de894234e"
+        },
+        "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/association.json": {
+          "bytes": 171,
+          "sha256": "a2d7ed6d7c0947ea6fe5eaf89cb3f7440803ab05105ed5ea2ca91fc2f345f642"
+        },
+        "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/catalogue.json": {
+          "bytes": 890,
+          "sha256": "7eb09989cbab271b0ba0350950fdc684a30a2ac2825488d58bcbfb3a32feba07"
+        },
+        "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/descriptor.json": {
+          "bytes": 773,
+          "sha256": "0aba07a8cf184481c19372d24bded8bee5deffc5709003f30c3dab4226b9fc6a"
+        },
+        "Tests/FirmingoKitTests/Fixtures/compiler-catalogue/provenance.json": {
+          "bytes": 998,
+          "sha256": "6669937f98fef18f69ee3dd1853edad418ed0e510b1074165ba317f4841a20d2"
+        },
+        "Tests/FirmingoKitTests/Fixtures/compiler-offline/expectations.json": {
+          "bytes": 1367,
+          "sha256": "d92c847790d62b6c5ed06d27cb4d84273f927716803b7450f1a7251682c81f31"
+        },
+        "Tests/FirmingoKitTests/Fixtures/compiler-offline/provenance.json": {
+          "bytes": 365,
+          "sha256": "278020780ae885ec58ee19b5a18211c05d0623e0261f06bfe875f85158df524e"
+        },
+        "Tests/FirmingoKitTests/Fixtures/compiler/provenance.json": {
+          "bytes": 609,
+          "sha256": "f9d33bd2a2e895f95d1ea95a04052828dd9f0e4fa4f507209056769407ad508c"
+        },
+        "Tests/FirmingoKitTests/Fixtures/compiler/stateless.elf.hex": {
+          "bytes": 2136,
+          "sha256": "39275358ab631f0b43601e4aea3a6372638e908e71a1216746e0e257e44edc56"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/abort-request.hex": {
+          "bytes": 192,
+          "sha256": "6ceb1168e9bfdf6407094629926fd16e5791c2cc4a22f9ed7b11a24124d0f601"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/aborted-response.hex": {
+          "bytes": 624,
+          "sha256": "69643378c1311ca6067d4e4f9d3ab8b4f71708a29c6b4d8aa8ef2578ce83d19e"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/accepted-response.hex": {
+          "bytes": 621,
+          "sha256": "8dbb1e07f6802a298c21ad87f88cc383412203bce2233cba8ec21ea359ce7f4d"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/begin-request.hex": {
+          "bytes": 591,
+          "sha256": "b0c6a742e2eef69f479093df12da1715507490c6c00a21fb5af8a7f8a3cfdd09"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/boot-confirmed-response.hex": {
+          "bytes": 642,
+          "sha256": "d788910fa68ae497b7c018f0decfa26fc4107293f10b006b1afbf11826792e72"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/chunk-response.hex": {
+          "bytes": 627,
+          "sha256": "41106b9e6383edc8858054133f71a6b80507851f8849b3c7c2fa7a3b52604f45"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/chunk.hex": {
+          "bytes": 864,
+          "sha256": "a2f85c0c043a3006757186ca7afa3a09648aecb9d623941ffff2d8d24855e416"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/commit-request.hex": {
+          "bytes": 195,
+          "sha256": "dd03e071b3577fdbfeb4bc85bc8957c17c77ae0145db6fff784392dcceebbf66"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/committing-response.hex": {
+          "bytes": 633,
+          "sha256": "dc4ccdfd808b8d743debd43a91c69a2dd2a8fe873f81228657c478651af8c574"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/disconnected-response.hex": {
+          "bytes": 648,
+          "sha256": "f2817d2578d85c212da6a14a0d575e127a3babea40f519f7260da4a216bf4bc9"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/finish-request.hex": {
+          "bytes": 195,
+          "sha256": "2b4cc241b0ddbc6101063ffc46d47e8f1b2b728d7a28fad5b483dab2e7e5e4ca"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/hello-request.hex": {
+          "bytes": 90,
+          "sha256": "3ad3a44ce98bf9b9ca6529d303cc20fab72621484af3986b76d0f068ced05b99"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/hello-response.hex": {
+          "bytes": 1359,
+          "sha256": "cd1f00747278a8e4cd0591598115660255b73cd5706a1cbbbc72d00d7baee5e9"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/install-failed-response.hex": {
+          "bytes": 648,
+          "sha256": "1ae673e6655a42206dcd44a97bcd511dfe1c547dc150bb49b418d603dc396d99"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/installed-response.hex": {
+          "bytes": 627,
+          "sha256": "90c2d0bef3ae799800d1ef34fe89e7d0054f7b62957c64a2f0f7864059fb2110"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/status-request.hex": {
+          "bytes": 195,
+          "sha256": "66a1b21b630d4b097ccb45af15c2552bb6c9c7ca619cc2b3b1b5e8d83d5387e8"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/unauthorized-response.hex": {
+          "bytes": 255,
+          "sha256": "19be09548cf8aeb0ce9976edc88ceefaa1f382ab6d337db687def75836b74861"
+        },
+        "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload/verified-response.hex": {
+          "bytes": 627,
+          "sha256": "f51552e1e21fc3926e8a2b2db72d86e0c0c063818b7c5b7a227ca52a0d137a30"
+        },
+        "Tests/FirmingoKitTests/ManagedCapsuleTests.swift": {
+          "bytes": 4642,
+          "sha256": "cfda7496e487332aa470298b6de3df9cab3b5ab46ef15c5bf628472d6d603f56"
+        },
+        "Tests/FirmingoKitTests/ManagedCatalogueTests.swift": {
+          "bytes": 13706,
+          "sha256": "b1d67a74c7772339c6fda55d9d8afaf2a430176b02c453b76ef1d210c8270a6b"
+        },
+        "Tests/FirmingoKitTests/ManagedCompilerBridgeTests.swift": {
+          "bytes": 6176,
+          "sha256": "0e84cb5f0374fa197a3dab1e51249d6d3370b4f52914a18e0c4d6c3a1cb122b8"
+        },
+        "Tests/FirmingoKitTests/ManagedCompilerResourceTests.swift": {
+          "bytes": 11059,
+          "sha256": "3d7ba446f8a99495e2b39c2ad36d743f43d3972bb5be317043d5aaddd483bd95"
+        },
+        "Tests/FirmingoKitTests/ManagedELFConverterTests.swift": {
+          "bytes": 11097,
+          "sha256": "6e7d7878fc6100a7cbaf3e8c50ccf3a71b0b3709d6a0534ec9a44935df4ac6bf"
+        },
+        "Tests/FirmingoKitTests/ManagedOfflineBuildTests.swift": {
+          "bytes": 10049,
+          "sha256": "6ff56e43378780db12f51c42fc3ba6d1c5519f2f85d67c07bdd836fdbcebb7b1"
+        },
+        "Tests/FirmingoKitTests/ManagedUploadTests.swift": {
+          "bytes": 22119,
+          "sha256": "80833b2df6b3749ee6a4075fd5d6b830c64706b5ea271828da44ddf6f416819d"
+        },
+        "Tests/FirmingoKitTests/ManagedWebKitCompilerTests.swift": {
+          "bytes": 15194,
+          "sha256": "4d35493596481138119319d6efa7ab087439253c8930a47160d9994dd9e9685f"
+        },
+        "Tests/FirmingoKitTests/OfflineCompilerFixtures.swift": {
+          "bytes": 1908,
+          "sha256": "681f091bc1781e31e833498d89291669b609e51afe59c767ae16bbecf99885cc"
+        },
+        "Tests/FirmingoKitTests/SketchPreparationTests.swift": {
+          "bytes": 7433,
+          "sha256": "51a3825954b3000a04f8d53db471b84c7866526a180c1baa911c9500e620bb44"
+        },
+        "Tools/ManagedWASM/DevelopmentAssets.mjs": {
+          "bytes": 2773,
+          "sha256": "0fe6738906a7267e8bd98122a160909d65c284ed71b87982a2689dc42a0b5046"
+        },
+        "Tools/ManagedWASM/HostBridge.js": {
+          "bytes": 2961,
+          "sha256": "0fde7f64747d2ede111758739083c99cf18186f803dda390f77362379eab3b8a"
+        },
+        "Tools/ManagedWASM/NodeController.mjs": {
+          "bytes": 2385,
+          "sha256": "a08bb72d79770da994cb8e01d0ef6e8025bda139719933951d19614937e81a3b"
+        },
+        "Tools/ManagedWASM/NodeWorker.mjs": {
+          "bytes": 420,
+          "sha256": "2ea6008eb099cea6b23d5d59222ebff67e43d7afe0682e59c99487a4701b1326"
+        },
+        "Tools/ManagedWASM/Recipe/Arduino.h": {
+          "bytes": 5022,
+          "sha256": "46e2ecc7ac653b12c6f63ab616e4a49c347c6ece360e203011337733987d60da"
+        },
+        "Tools/ManagedWASM/Recipe/Entry.cpp": {
+          "bytes": 572,
+          "sha256": "80e5f48e6512d61f247d61e6637c40abeb25a2b9c84093e81390ee8aeed6d88d"
+        },
+        "Tools/ManagedWASM/Recipe/Module.ld": {
+          "bytes": 1078,
+          "sha256": "a8ded6a674337881bd650ed38b39cdba1299cd469f5e238317989e1e96de0da8"
+        },
+        "Tools/ManagedWASM/Recipe/manifest.json": {
+          "bytes": 1263,
+          "sha256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9"
+        },
+        "Tools/ManagedWASM/Sources/BrowserWorker.js": {
+          "bytes": 298,
+          "sha256": "4f1e2a37485b588d8c6f739b3ea85209727035155fd6bff9dbd50be89bab96fc"
+        },
+        "Tools/ManagedWASM/Sources/Digest.js": {
+          "bytes": 3284,
+          "sha256": "beb3123e82c1e4f2e228b8ea37e4c9b5e8b1821faf60017f9bf4f7d2c90a3635"
+        },
+        "Tools/ManagedWASM/Sources/ManagedRecipe.js": {
+          "bytes": 3496,
+          "sha256": "e30c8f523d7938cb92127f4bb430ebb88d59f7b32dd3c430665409477e4a058e"
+        },
+        "Tools/ManagedWASM/Sources/ManagedService.js": {
+          "bytes": 10439,
+          "sha256": "bf8e3f657e173b0b443b3a57d5f64f5e8372bbcf85584d8371391d13e20a8fc2"
+        },
+        "Tools/ManagedWASM/Sources/ModuleMemory.js": {
+          "bytes": 3772,
+          "sha256": "7f74944a72f92307670e6c710e4a3f09c3f556f3e52161c76f4f308275009719"
+        },
+        "Tools/ManagedWASM/Sources/WorkerCore.js": {
+          "bytes": 3282,
+          "sha256": "58c98f54f2432444e2f2c3b6743d25bacaf82f1ccd7135bf97ae67109a58effc"
+        },
+        "Tools/ManagedWASM/Sources/WorkerResponse.js": {
+          "bytes": 3818,
+          "sha256": "a23475a3e75f833b2b99598dbea19e32980166654dcc6b031ea8beeb42fa5007"
+        },
+        "Tools/ManagedWASM/Sources/Workspace.js": {
+          "bytes": 11420,
+          "sha256": "16ea8b04c3abe5587984c8c691b9044c615f3e8dff86837d160f134430e68ecc"
+        },
+        "Tools/ManagedWASM/Tests/bridge.test.mjs": {
+          "bytes": 2084,
+          "sha256": "3e23079ad52dfb7961ab92eb15e126d6540d615eda31e6edef481fc25f0e62d6"
+        },
+        "Tools/ManagedWASM/Tests/runtime.test.mjs": {
+          "bytes": 13686,
+          "sha256": "ef1164454e1b5aed8c0b295bb4d1d6bf31f19c9fd573a442493370ff5d82caad"
+        },
+        "Tools/ManagedWASM/Tests/worker.integration.test.mjs": {
+          "bytes": 5422,
+          "sha256": "5cdac04ed5e7db02dc7598814830e654a0bbc2e8f2cad85e86d1ddfc79b1dd4d"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/LICENSE-APACHE": {
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/LICENSE-MIT": {
+          "bytes": 1023,
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/debug.js": {
+          "bytes": 414,
+          "sha256": "a91848ee180529e2a60c05dfb9584cad19cd4e1c6f391fdb76a938bcae4c0328"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/fd.js": {
+          "bytes": 1906,
+          "sha256": "9e82e1fc1bfd3e3573f64349dc42b4b624ed61d24e5c553f2bb4d041444f166c"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/fs_mem.js": {
+          "bytes": 12206,
+          "sha256": "85dbc9e0ee784d9ff8b55452644e00bf7058e32355aab974f8b71d7d85772324"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/fs_opfs.js": {
+          "bytes": 2280,
+          "sha256": "4b96aaeb5ac5986cf802cbf22b975c656682d22a38248160c96fc2ded5644869"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/index.js": {
+          "bytes": 316,
+          "sha256": "7e2fd52ee3f728bb0b1d6e449724e0f13e3d586bb25bde6e02a66366175b5605"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/strace.js": {
+          "bytes": 318,
+          "sha256": "ece435d3784d928d02bff4d015b7cb686f8c06de8536ff9f8ebc38a8f403a3be"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/wasi.js": {
+          "bytes": 16429,
+          "sha256": "168eb977a826f75ab0c39f9322f78cc58dbd5b233019ad1d6a7e940af8a7c4aa"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/wasi_defs.js": {
+          "bytes": 9027,
+          "sha256": "0db0f42ba330749a7b05095ea1fd0ff63fd2b30e84cead30fe4c28359d15f194"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/package.json": {
+          "bytes": 1373,
+          "sha256": "4025e157abfadd44037158899001a4ea0407651c2ee9c8a9f51d5c9d0ecf613c"
+        },
+        "Tools/ManagedWASM/Vendor/browser_wasi_shim/receipt.json": {
+          "bytes": 2153,
+          "sha256": "1ad1971d3617837d1bc858a31c488d112b20ec6f8df9eecfccb361af2303087d"
+        },
+        "Tools/ManagedWASM/VerifyCapsules.swift": {
+          "bytes": 2768,
+          "sha256": "5a94a897f9efcf4a25232c22d329274dff8afff4813d5121fa6440adf709d146"
+        },
+        "Tools/ManagedWASM/VerifyDemoBuild.swift": {
+          "bytes": 6753,
+          "sha256": "211cf6903365aca441be1b7d02955395d8e14105c7e785018293344410cfa833"
+        },
+        "Tools/ManagedWASM/VerifyDemoCatalogue.swift": {
+          "bytes": 12413,
+          "sha256": "088ce0ddd41fff1c95bff4ecdf7027fee2c8249e6dfb3f8e74222054fde7642f"
+        },
+        "Tools/ManagedWASM/VerifyDemoDefaults.swift": {
+          "bytes": 12659,
+          "sha256": "4e2eb416832cf3e7b79d7b50a6b63b26fe99c7bf421598596f961a74ae62b649"
+        },
+        "Tools/ManagedWASM/VerifyWebKit.swift": {
+          "bytes": 2245,
+          "sha256": "d47ffaaee09faf6857755db735e94057f7b8c38b35ad81509620d973ad6d1805"
+        },
+        "Tools/ManagedWASM/bound-service-memory.mjs": {
+          "bytes": 1544,
+          "sha256": "4c8f035cdf22b6eac5142e536ff0a0f598c5701440850dee3f6a646acff5f2ea"
+        },
+        "Tools/ManagedWASM/make-development-manifest.mjs": {
+          "bytes": 1862,
+          "sha256": "fbe1b76ef3be20ca00a087c77fc9b1dedf49e4598172a3d25d6efa021240a2fb"
+        },
+        "Tools/ManagedWASM/make-resource-consumer.py": {
+          "bytes": 1816,
+          "sha256": "587a4e7c1daf36cb2ac5c8187ed6df0e177cbc2dcb0f2d002a00e3de23e520d6"
+        },
+        "Tools/ManagedWASM/package.json": {
+          "bytes": 182,
+          "sha256": "83f92f2a75292be6eccf6802b22d7fbe7dca73520d14be561c02a58aabf64569"
+        },
+        "Tools/ManagedWASM/run-validation.mjs": {
+          "bytes": 3618,
+          "sha256": "3be9a9e31cd5559848993b0cca1d7a89b6fa88e7caeaa9d531eb41a82fd16547"
+        },
+        "Tools/ManagedWASM/stage-sdk-runtime.mjs": {
+          "bytes": 5732,
+          "sha256": "eb50481ed6f803401a98ea4c869549cba3bb4f678b1b529520aa2815cd177017"
+        },
+        "Tools/ManagedWASM/update-recipe-manifest.mjs": {
+          "bytes": 1239,
+          "sha256": "8b9e1a7bdbda667caccbf0a25b88e558ad85b3b6575c56de456acc72ae6e811d"
+        },
+        "Tools/ManagedWASM/update-resource-inventory.py": {
+          "bytes": 2552,
+          "sha256": "c6965229f87db7cb8e5464cb09e2afb38c644523ef5e97a019d917dcaa84d4f3"
+        },
+        "Tools/ManagedWASM/verify-resource-archive.py": {
+          "bytes": 2525,
+          "sha256": "667d21c6ecca522cb8801b7eb90e40e1a9eca4f04ceb30c05fdaa03e7b9cf05d"
+        }
+      }
+    }
+  },
+  "ArduinoKit_reference": {
+    "source_commit": "0eb3cd1841147dfc7ea25bf076545e38b01601e4",
+    "initial_working_changes": [],
+    "access": "read-only reference; no copied assets"
+  }
+}

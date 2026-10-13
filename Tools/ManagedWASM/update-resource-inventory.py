@@ -13,7 +13,7 @@ def main():
     root = Path(__file__).resolve().parents[2] / "Sources/FirmingoKit/Resources/ManagedCompiler"
     if (root / "compiler.wasm").exists():
         raise SystemExit("Unapproved service must not be staged in the package")
-    allowed = {"manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json", "inventory.json"}
+    allowed = {"manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json", "inventory.json", "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"}
     if any(p.name not in allowed or p.is_symlink() or not p.is_file() for p in root.iterdir()):
         raise SystemExit("Unexpected or unsafe staged compiler resource")
     catalogue = b'{"schema":1,"firmwareBuilds":[]}\n'
@@ -37,7 +37,7 @@ def main():
         },
         "files": [],
     }
-    for name in ["manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json"]:
+    for name in ["manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json", "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"]:
         data = (root / name).read_bytes()
         inventory["files"].append({"path": name, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()})
     data = (json.dumps(inventory, indent=2) + "\n").encode()

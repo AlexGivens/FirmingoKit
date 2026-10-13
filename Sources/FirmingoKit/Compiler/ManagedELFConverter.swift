@@ -51,6 +51,11 @@ public enum ManagedELFConverter {
         return artifact
     }
 
+    /// Reuses the unchanged legacy receipt identity for already independently validated compiler output.
+    static func receiptInputSHA256(prepared: PreparedManagedSketch, provenance: ManagedELFProvenance) throws -> String {
+        let encoder = JSONEncoder(); encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+        return NanoManagedContract.digest(try encoder.encode(InputIdentity(prepared: prepared, provenance: provenance)))
+    }
     /// Serializes all current build-affecting inputs deterministically; no cache or stale artifact reuse exists.
     private struct InputIdentity: Encodable {
         /// Original document identity/revision/name, preventing silent reuse for another edit.

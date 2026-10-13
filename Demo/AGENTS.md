@@ -7,14 +7,18 @@ The user disabled visual inspection. Do not inspect the running UI or screenshot
 and do not request permissions to restore that capability. Use source review,
 controller harnesses and builds; retain honest UI/accessibility qualification limits.
 
-- Keep all compiler, protocol, ownership, upload, and firmware lifecycle logic in
-  FirmingoKit. The demo owns documents, source revision/snapshot selection, and UI.
+- Keep Swift compiler hosting, protocol, device ownership, upload, and firmware
+  lifecycle logic in FirmingoKit. Portable compiler execution, preprocessing,
+  recipes, packaging, diagnostics, and static metadata belong to Firmingo-Compiler;
+  consume them through SDK APIs. The demo owns documents, source selection, and UI.
 - Follow docs/demo-design.md. Expose only implemented SDK operations; explain
   unavailable workflows without false success, simulated progress, or fallback builds.
 - Implement the accepted bundled-resource flow described in ../docs/compiler-catalogue.md
   when that scope is requested. Board/profile/firmware-build choices and availability
-  must come from SDK catalogue APIs; compiler resources and compatibility decisions
-  remain package-owned. SDK-filtered selection and offline Build now work with
+  must come from SDK catalogue APIs. The compiler produces static resources/recipe
+  compatibility; the SDK loads them and checks device deployment. Existing bytes
+  remain SDK-local until the migration in ../docs/compiler-migration.md passes.
+  SDK-filtered selection and offline Build now work with
   SDK-owned default metadata loading/resource verification or explicitly imported,
   hash-verified development catalogues. The shipped catalogue is empty and compiler
   review is pending; never add synthetic default entries to remove those limits.

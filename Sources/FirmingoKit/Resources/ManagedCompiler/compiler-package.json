@@ -1,0 +1,304 @@
+{
+  "schema": 1,
+  "package": "firmingo-compiler",
+  "version": "0.0.0-development",
+  "interfaceVersion": 1,
+  "serviceABI": 2,
+  "recipeSHA256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
+  "service": {
+    "bytes": 101196044,
+    "sha256": "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33",
+    "serviceABI": 2,
+    "compiler": "Clang/LLD 22.1.8 ABI-two WASI service",
+    "maximumMemoryBytes": 268435456
+  },
+  "sourceRecords": [
+    {
+      "path": ".node-version",
+      "bytes": 8,
+      "sha256": "ccb4022e91abb8575a29d306d7aff041f578bb86eb1180d69475bb86a5c4512c"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "package.json",
+      "bytes": 691,
+      "sha256": "cb3a419bf09465fd5dc817b2e3e259147d4b5bc7e9be6bec229e87827f2b8b27"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect/Recipe/Arduino.h",
+      "bytes": 5022,
+      "sha256": "46e2ecc7ac653b12c6f63ab616e4a49c347c6ece360e203011337733987d60da"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect/Recipe/Entry.cpp",
+      "bytes": 572,
+      "sha256": "80e5f48e6512d61f247d61e6637c40abeb25a2b9c84093e81390ee8aeed6d88d"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect/Recipe/Module.ld",
+      "bytes": 1078,
+      "sha256": "a8ded6a674337881bd650ed38b39cdba1299cd469f5e238317989e1e96de0da8"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect/Sources/ManagedRecipe.js",
+      "bytes": 3496,
+      "sha256": "e30c8f523d7938cb92127f4bb430ebb88d59f7b32dd3c430665409477e4a058e"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect/manifest.json",
+      "bytes": 1263,
+      "sha256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9"
+    },
+    {
+      "path": "runtime/ManagedService.js",
+      "bytes": 10850,
+      "sha256": "151491dbbb3267e5e86d59ba7e794d4a48ab24b5294c1a5d56a44eb67cb802ea"
+    },
+    {
+      "path": "runtime/ModuleMemory.js",
+      "bytes": 3772,
+      "sha256": "7f74944a72f92307670e6c710e4a3f09c3f556f3e52161c76f4f308275009719"
+    },
+    {
+      "path": "runtime/Workspace.js",
+      "bytes": 11550,
+      "sha256": "bb67a5c4aefdb26537ec2205bb30b3849994769a8f49e7af80754dcc3b6f6516"
+    },
+    {
+      "path": "runtime/browser-worker.js",
+      "bytes": 331,
+      "sha256": "4ef440915619f938bab9cde604af21c29051225d1997e2150ef11aaf0f971fd8"
+    },
+    {
+      "path": "runtime/build.js",
+      "bytes": 7531,
+      "sha256": "c3057f9e002bb62d506b665e80fb786eb3fe80f9891196932567161a81840aae"
+    },
+    {
+      "path": "runtime/controller.js",
+      "bytes": 6998,
+      "sha256": "cf4ac3ee6b73f5cd60a71a48e0db9817722f04840bf869ed78d59c1ac598e9a4"
+    },
+    {
+      "path": "runtime/messages.js",
+      "bytes": 6008,
+      "sha256": "1dc1dae67c0dd26f593b9909478e7e01e13ea240f5f1f6cf7a4b7608e250cdd3"
+    },
+    {
+      "path": "runtime/pins.js",
+      "bytes": 1072,
+      "sha256": "c9ff83d579fc6345599d268ce45722b48b8242a47739279df6ee4085fad8c1e9"
+    },
+    {
+      "path": "runtime/portable-sha256.js",
+      "bytes": 2998,
+      "sha256": "b25cfde8a92e0da71583837da0f5a78115e37def89a2327df88dfd581402e9db"
+    },
+    {
+      "path": "runtime/preparation-controller.js",
+      "bytes": 5377,
+      "sha256": "36fe914edbc2614b0451172df472b6c1a0d59fc09b8f9a3cf6fefb594c3927fd"
+    },
+    {
+      "path": "runtime/preparation-worker-core.js",
+      "bytes": 926,
+      "sha256": "4d542ff59dfed080b84cc5bb81c45d00330d3900a5c3f94f6d8326fbcd4b3b8e"
+    },
+    {
+      "path": "runtime/preparation-worker.js",
+      "bytes": 299,
+      "sha256": "eb1f74851c176160aadd84f2fb13da4a704fad4e34bbaa858285588728f140a6"
+    },
+    {
+      "path": "runtime/serialization.js",
+      "bytes": 1616,
+      "sha256": "6aeb6b83357791744f9596635a265c2c1198fc934044f05945a27f22a1c20acd"
+    },
+    {
+      "path": "runtime/worker-core.js",
+      "bytes": 1104,
+      "sha256": "9bf29421b045b2406cba7f2211e8217d2953db9c2a27e8ea69ff3ac525e3b17e"
+    },
+    {
+      "path": "src/capsule.js",
+      "bytes": 7179,
+      "sha256": "0a9d0bd0b44e676e5eb32f51bdbea719e5cc10e89132766080a3308a5c91b05a"
+    },
+    {
+      "path": "src/contract.js",
+      "bytes": 8183,
+      "sha256": "99c984444782f057100b2300d2464f5e184bb263421b6c6332635e73d684caed"
+    },
+    {
+      "path": "src/elf.js",
+      "bytes": 8705,
+      "sha256": "39b9d8504e74a24dc80f1e47608695b4c070ab57d04cbb5425728df48e1fe0ef"
+    },
+    {
+      "path": "src/errors.js",
+      "bytes": 278,
+      "sha256": "6092c432844c320fae2b4c780aa328e386b4cc1a860ea9d6ac916b8b1e150a7f"
+    },
+    {
+      "path": "src/hash.js",
+      "bytes": 934,
+      "sha256": "dffd89a8a4272104bf26cfcdd92d470636e82d45a01274980578a517f0d95fb0"
+    },
+    {
+      "path": "src/index.js",
+      "bytes": 985,
+      "sha256": "df789d183300f357f7a98356ec449719f002f94e3d8d31cddff27899cd22913f"
+    },
+    {
+      "path": "src/json.js",
+      "bytes": 3046,
+      "sha256": "65d12a4e07086467bc7050c936ba4afa2581cd0a45651bfe19f3f0e0e8153e7e"
+    },
+    {
+      "path": "src/limits.js",
+      "bytes": 708,
+      "sha256": "2f4a7a20fb44b79c17d02c1fcd6ad7e4e392320a4a4815f7b111ac38cda80cac"
+    },
+    {
+      "path": "src/nano-recipe.js",
+      "bytes": 3249,
+      "sha256": "02805060974b704831cf10c491e6b56e77088d33a97fed05777eefdcf206b8b1"
+    },
+    {
+      "path": "src/pipeline-error.js",
+      "bytes": 1558,
+      "sha256": "e160a2f7b8b35d0e2408f3db3b83d52d123c8fde0d7467c6dd0ccafd9bbb2281"
+    },
+    {
+      "path": "src/preprocess.js",
+      "bytes": 6571,
+      "sha256": "3d0503d4adab547f3aed86d74b27d03f628fc1bda5bcc4bf2654d068bf6eebb1"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/LICENSE-APACHE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/LICENSE-MIT",
+      "bytes": 1023,
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/dist/debug.js",
+      "bytes": 414,
+      "sha256": "a91848ee180529e2a60c05dfb9584cad19cd4e1c6f391fdb76a938bcae4c0328"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/dist/fd.js",
+      "bytes": 1906,
+      "sha256": "9e82e1fc1bfd3e3573f64349dc42b4b624ed61d24e5c553f2bb4d041444f166c"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/dist/fs_mem.js",
+      "bytes": 12206,
+      "sha256": "85dbc9e0ee784d9ff8b55452644e00bf7058e32355aab974f8b71d7d85772324"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/dist/fs_opfs.js",
+      "bytes": 2280,
+      "sha256": "4b96aaeb5ac5986cf802cbf22b975c656682d22a38248160c96fc2ded5644869"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/dist/index.js",
+      "bytes": 316,
+      "sha256": "7e2fd52ee3f728bb0b1d6e449724e0f13e3d586bb25bde6e02a66366175b5605"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/dist/strace.js",
+      "bytes": 318,
+      "sha256": "ece435d3784d928d02bff4d015b7cb686f8c06de8536ff9f8ebc38a8f403a3be"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/dist/wasi.js",
+      "bytes": 16429,
+      "sha256": "168eb977a826f75ab0c39f9322f78cc58dbd5b233019ad1d6a7e940af8a7c4aa"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/dist/wasi_defs.js",
+      "bytes": 9027,
+      "sha256": "0db0f42ba330749a7b05095ea1fd0ff63fd2b30e84cead30fe4c28359d15f194"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/package.json",
+      "bytes": 1373,
+      "sha256": "4025e157abfadd44037158899001a4ea0407651c2ee9c8a9f51d5c9d0ecf613c"
+    },
+    {
+      "path": "third_party/browser_wasi_shim/receipt.json",
+      "bytes": 2153,
+      "sha256": "1ad1971d3617837d1bc858a31c488d112b20ec6f8df9eecfccb361af2303087d"
+    },
+    {
+      "path": "tools/bundle.mjs",
+      "bytes": 3860,
+      "sha256": "ecc8e6e27c0e03cd9e86b18f0f68a1a7975edea0eba18cea217bbd90cbe12c6f"
+    },
+    {
+      "path": "tools/export-web.mjs",
+      "bytes": 3585,
+      "sha256": "db9d9749ac308937c45838696632405c47147d7bac7e98ced6a140d884b0968a"
+    },
+    {
+      "path": "tools/verify-recipe.mjs",
+      "bytes": 694,
+      "sha256": "22968b3a8d468aaf37f63e340afc9b31bd9256c669e10021e2a91124baaa09ee"
+    },
+    {
+      "path": "tools/verify-vendor.mjs",
+      "bytes": 1239,
+      "sha256": "ee6c976a3c80a966341b6c36e88d145dabf4243f1825174d2cc40584023cd99c"
+    }
+  ],
+  "files": [
+    {
+      "path": "compiler.js",
+      "bytes": 159763,
+      "sha256": "7db709eb3ef261b65f199c4aeea2edf1d9d3a710aa19d7c7ec678c51b0ef54e9"
+    },
+    {
+      "path": "worker.js",
+      "bytes": 138617,
+      "sha256": "84fa2737a153391cf7d284b481f2091fb78931e5632405e2c11be2da872b37cc"
+    },
+    {
+      "path": "preparation-worker.js",
+      "bytes": 27502,
+      "sha256": "12154ec75a64f537f6f067c57a9d4b07e59b4ab557089b128181c12bca821f2c"
+    },
+    {
+      "path": "resources.json",
+      "bytes": 40674,
+      "sha256": "57709441c4dccb02224e268eefb83e6da78f31b5276c19d993f1f43b4cc30938"
+    },
+    {
+      "path": "LICENSE-MIT",
+      "bytes": 1023,
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+    },
+    {
+      "path": "LICENSE-APACHE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "Firmingo-Compiler-LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "sources.json",
+      "bytes": 224635,
+      "sha256": "7d0538c6b41252aa7f771cddc3cd5a8da1a6b94c2929c5ac896ada26e3018512"
+    }
+  ]
+}

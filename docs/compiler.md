@@ -1,5 +1,27 @@
 # Local compiler implementation status
 
+Current public preparation integration and updated package identities: [service-free preparation](service-free-preparation.md). Earlier records remain historical evidence.
+
+The [standalone retirement record](compiler-retirement.md) identifies removed developer paths and current SDK validation commands; public compatibility APIs remain available.
+
+Current build-facade/package integration: [shared compiler adapter](compiler-adapter.md).
+The following original implementation records remain historical evidence where they describe SDK-owned compiler execution or earlier resource hashes.
+
+## Ownership transition — 2026-10-12
+
+Firmingo-Compiler now owns the intended language-neutral preprocessing, WASM
+pipeline, recipes, ELF/capsule packaging, compiler diagnostics, and static build
+metadata. FirmingoKit owns the Swift facade/web-host adapter, resource access,
+device associations and deployment checks. Firmware constraints and actual resident
+build facts remain authoritative in Firmingo. See [the migration inventory](compiler-migration.md).
+
+The implementation and evidence below describe the existing SDK-local path; no
+code/assets/APIs or historical receipts have moved in this documentation increment.
+Keep those checks until replacements pass. Portable asset maintenance and service
+distribution/provenance review move with the compiler; Swift integration and
+Apple-host qualification remain SDK work. The empty default catalogue and pending
+service behavior remain unchanged.
+
 FirmingoKit now provides experimental local single-file Nano compilation through
 `ManagedSketchCompiler`: verify → preprocess → isolated WebKit/WASI compile/link →
 strict ARM ELF validation → FMS1 capsule/report/receipt. Its public API contains no
@@ -23,9 +45,9 @@ and SDK-local staging/validation workflow. See [the reproducible workflow](../To
 
 ## SDK runtime and demo integration
 
-The accepted next implementation is an SDK-owned bundled compiler and versioned
-firmware catalogue, specified in [compiler-catalogue.md](compiler-catalogue.md)
-and tracked in TODO section 7.1. It adds automatic resource loading and offline
+The accepted next implementation consumes a compiler-owned versioned asset package
+and firmware catalogue through the SDK, specified in [compiler-catalogue.md](compiler-catalogue.md)
+and tracked in TODO sections 7.1–7.2. It retains automatic SDK resource loading and offline
 firmware-build selection, separates static build metadata from per-device
 associations, and drives the demo through the same SDK APIs. The additive metadata
 foundation and experimental offline compiler inputs/receipts are implemented;

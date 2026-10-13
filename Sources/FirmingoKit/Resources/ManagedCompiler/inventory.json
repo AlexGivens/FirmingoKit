@@ -18,13 +18,13 @@
   "files": [
     {
       "path": "manifest.json",
-      "bytes": 641,
-      "sha256": "fb732842e1b94b1f3ca5055fb6aaa0a0f71e0a6d3e9c1a173063955f21a0b76a"
+      "bytes": 1211,
+      "sha256": "edba580f8c47fbe4b7a74b97d57d5e5fb4a3630d5b5d16ce69ad518c0389ae7b"
     },
     {
       "path": "host.html",
-      "bytes": 121703,
-      "sha256": "7284f555cf210a6eae0966e9c8363f94be77b4eee5f43c3c7ca01bfc5a10d83b"
+      "bytes": 376042,
+      "sha256": "f87c9f7762306cfeb99a3e929abc03c06c7284ab6f25a9bdd22558a97595ae21"
     },
     {
       "path": "LICENSE-MIT",
@@ -40,6 +40,21 @@
       "path": "catalogue.json",
       "bytes": 33,
       "sha256": "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db"
+    },
+    {
+      "path": "Firmingo-Compiler-LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "compiler-package.json",
+      "bytes": 9653,
+      "sha256": "65c40e9f33a6ae2838f19c3a1597d4094374fec827df790c5a72c7480792b3a5"
+    },
+    {
+      "path": "compiler-sources.json",
+      "bytes": 224635,
+      "sha256": "7d0538c6b41252aa7f771cddc3cd5a8da1a6b94c2929c5ac896ada26e3018512"
     }
   ]
 }

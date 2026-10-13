@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "recordedOn": "2026-10-12",
+  "sourceCommit": "05cae8fa8e58c706eceb6a15812d7ca500375d7b",
+  "status": "retired unchanged SDK standalone compiler and obsolete bridge; public Swift compatibility APIs and independent deployment validators retained",
+  "replacement": {
+    "portableRuntimeRecipeVendorAndTests": "Firmingo-Compiler runtime/, recipes/, third_party/, tests/, tools/dev.mjs",
+    "nativeBridge": "CompilerRuntime/ManagedPortableRequest.swift, ManagedPortableOutput.swift, ManagedWebKitHost.swift",
+    "SDKChecks": "Tools/ManagedWASM/run-validation.mjs (Swift SDK checks only)"
+  },
+  "files": [
+    {
+      "path": "Sources/FirmingoKit/CompilerRuntime/ManagedWorkerOutput.swift",
+      "bytes": 5341,
+      "sha256": "476ec6d797b3b1a159b1306f1eda5d7dbfb790dddb386a955fd568e3415b763e"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/ManagedCompilerBridgeTests.swift",
+      "bytes": 6176,
+      "sha256": "0e84cb5f0374fa197a3dab1e51249d6d3370b4f52914a18e0c4d6c3a1cb122b8"
+    },
+    {
+      "path": "Tools/ManagedWASM/DevelopmentAssets.mjs",
+      "bytes": 2773,
+      "sha256": "0fe6738906a7267e8bd98122a160909d65c284ed71b87982a2689dc42a0b5046"
+    },
+    {
+      "path": "Tools/ManagedWASM/HostBridge.js",
+      "bytes": 2961,
+      "sha256": "0fde7f64747d2ede111758739083c99cf18186f803dda390f77362379eab3b8a"
+    },
+    {
+      "path": "Tools/ManagedWASM/NodeController.mjs",
+      "bytes": 2385,
+      "sha256": "a08bb72d79770da994cb8e01d0ef6e8025bda139719933951d19614937e81a3b"
+    },
+    {
+      "path": "Tools/ManagedWASM/NodeWorker.mjs",
+      "bytes": 420,
+      "sha256": "2ea6008eb099cea6b23d5d59222ebff67e43d7afe0682e59c99487a4701b1326"
+    },
+    {
+      "path": "Tools/ManagedWASM/Recipe/Arduino.h",
+      "bytes": 5022,
+      "sha256": "46e2ecc7ac653b12c6f63ab616e4a49c347c6ece360e203011337733987d60da"
+    },
+    {
+      "path": "Tools/ManagedWASM/Recipe/Entry.cpp",
+      "bytes": 572,
+      "sha256": "80e5f48e6512d61f247d61e6637c40abeb25a2b9c84093e81390ee8aeed6d88d"
+    },
+    {
+      "path": "Tools/ManagedWASM/Recipe/Module.ld",
+      "bytes": 1078,
+      "sha256": "a8ded6a674337881bd650ed38b39cdba1299cd469f5e238317989e1e96de0da8"
+    },
+    {
+      "path": "Tools/ManagedWASM/Recipe/manifest.json",
+      "bytes": 1263,
+      "sha256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/BrowserWorker.js",
+      "bytes": 298,
+      "sha256": "4f1e2a37485b588d8c6f739b3ea85209727035155fd6bff9dbd50be89bab96fc"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/Digest.js",
+      "bytes": 3284,
+      "sha256": "beb3123e82c1e4f2e228b8ea37e4c9b5e8b1821faf60017f9bf4f7d2c90a3635"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/ManagedRecipe.js",
+      "bytes": 3496,
+      "sha256": "e30c8f523d7938cb92127f4bb430ebb88d59f7b32dd3c430665409477e4a058e"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/ManagedService.js",
+      "bytes": 10439,
+      "sha256": "bf8e3f657e173b0b443b3a57d5f64f5e8372bbcf85584d8371391d13e20a8fc2"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/ModuleMemory.js",
+      "bytes": 3772,
+      "sha256": "7f74944a72f92307670e6c710e4a3f09c3f556f3e52161c76f4f308275009719"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/WorkerCore.js",
+      "bytes": 3282,
+      "sha256": "58c98f54f2432444e2f2c3b6743d25bacaf82f1ccd7135bf97ae67109a58effc"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/WorkerResponse.js",
+      "bytes": 3818,
+      "sha256": "a23475a3e75f833b2b99598dbea19e32980166654dcc6b031ea8beeb42fa5007"
+    },
+    {
+      "path": "Tools/ManagedWASM/Sources/Workspace.js",
+      "bytes": 11420,
+      "sha256": "16ea8b04c3abe5587984c8c691b9044c615f3e8dff86837d160f134430e68ecc"
+    },
+    {
+      "path": "Tools/ManagedWASM/Tests/bridge.test.mjs",
+      "bytes": 2084,
+      "sha256": "3e23079ad52dfb7961ab92eb15e126d6540d615eda31e6edef481fc25f0e62d6"
+    },
+    {
+      "path": "Tools/ManagedWASM/Tests/runtime.test.mjs",
+      "bytes": 13686,
+      "sha256": "ef1164454e1b5aed8c0b295bb4d1d6bf31f19c9fd573a442493370ff5d82caad"
+    },
+    {
+      "path": "Tools/ManagedWASM/Tests/worker.integration.test.mjs",
+      "bytes": 5422,
+      "sha256": "5cdac04ed5e7db02dc7598814830e654a0bbc2e8f2cad85e86d1ddfc79b1dd4d"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/LICENSE-APACHE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/LICENSE-MIT",
+      "bytes": 1023,
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/debug.js",
+      "bytes": 414,
+      "sha256": "a91848ee180529e2a60c05dfb9584cad19cd4e1c6f391fdb76a938bcae4c0328"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/fd.js",
+      "bytes": 1906,
+      "sha256": "9e82e1fc1bfd3e3573f64349dc42b4b624ed61d24e5c553f2bb4d041444f166c"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/fs_mem.js",
+      "bytes": 12206,
+      "sha256": "85dbc9e0ee784d9ff8b55452644e00bf7058e32355aab974f8b71d7d85772324"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/fs_opfs.js",
+      "bytes": 2280,
+      "sha256": "4b96aaeb5ac5986cf802cbf22b975c656682d22a38248160c96fc2ded5644869"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/index.js",
+      "bytes": 316,
+      "sha256": "7e2fd52ee3f728bb0b1d6e449724e0f13e3d586bb25bde6e02a66366175b5605"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/strace.js",
+      "bytes": 318,
+      "sha256": "ece435d3784d928d02bff4d015b7cb686f8c06de8536ff9f8ebc38a8f403a3be"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/wasi.js",
+      "bytes": 16429,
+      "sha256": "168eb977a826f75ab0c39f9322f78cc58dbd5b233019ad1d6a7e940af8a7c4aa"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/dist/wasi_defs.js",
+      "bytes": 9027,
+      "sha256": "0db0f42ba330749a7b05095ea1fd0ff63fd2b30e84cead30fe4c28359d15f194"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/package.json",
+      "bytes": 1373,
+      "sha256": "4025e157abfadd44037158899001a4ea0407651c2ee9c8a9f51d5c9d0ecf613c"
+    },
+    {
+      "path": "Tools/ManagedWASM/Vendor/browser_wasi_shim/receipt.json",
+      "bytes": 2153,
+      "sha256": "1ad1971d3617837d1bc858a31c488d112b20ec6f8df9eecfccb361af2303087d"
+    },
+    {
+      "path": "Tools/ManagedWASM/bound-service-memory.mjs",
+      "bytes": 1544,
+      "sha256": "4c8f035cdf22b6eac5142e536ff0a0f598c5701440850dee3f6a646acff5f2ea"
+    },
+    {
+      "path": "Tools/ManagedWASM/make-development-manifest.mjs",
+      "bytes": 1862,
+      "sha256": "fbe1b76ef3be20ca00a087c77fc9b1dedf49e4598172a3d25d6efa021240a2fb"
+    },
+    {
+      "path": "Tools/ManagedWASM/update-recipe-manifest.mjs",
+      "bytes": 1239,
+      "sha256": "8b9e1a7bdbda667caccbf0a25b88e558ad85b3b6575c56de456acc72ae6e811d"
+    }
+  ]
+}

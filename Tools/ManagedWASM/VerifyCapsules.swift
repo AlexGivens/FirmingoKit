@@ -1,34 +1,41 @@
 import Foundation
 import FirmingoKit
-import CryptoKit
 
-/// Development-only check consumes real WASM-linked ELF using SDK source preparation and capsule validation.
+/// Read-only independent SDK deployment validation of explicitly selected capsule/report/binding files.
 @main struct VerifyCapsules {
-    /// Validates both executable development outputs without any connection or device-changing operation.
-    static func main() async throws {
-        let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        let directory = root.appendingPathComponent(".build/managed-wasm/results")
-        let recipe = try Data(contentsOf: root.appendingPathComponent("Tools/ManagedWASM/Recipe/manifest.json"))
-        let recipeHash = SHA256.hash(data: recipe).map { String(format: "%02x", $0) }.joined()
-        let toolchain = try Data(contentsOf: root.appendingPathComponent(".build/managed-wasm/toolchain-manifest.json"))
-        let toolchainHash = SHA256.hash(data: toolchain).map { String(format: "%02x", $0) }.joined()
-        let provenance = try ManagedELFProvenance(compiler: "Clang/LLD 22.1.8 ABI-two WASI service, Node development runner",
-            recipeIdentifier: "nano-stateless-clang-22.1.8-v1-experimental", recipeSHA256: recipeHash,
-            toolchainSHA256: toolchainHash)
-        // These resident/image hashes are deliberately synthetic. The outputs must never reach hardware.
-        let resident = try ManagedResidentBinding(deviceID: "0102030405060708", residentELFSHA256: String(repeating: "0", count: 64),
-            firmwareImageSHA256: String(repeating: "1", count: 64), apiAddress: 0x10022ca0)
-        for name in ["Blink.ino", "Console.ino"] {
-            let source = try String(contentsOf: directory.appendingPathComponent(name), encoding: .utf8)
-            let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: 1, filename: name, source: source)
-            let request = try ManagedSketchBuildRequest(snapshot: snapshot, board: .nanoRP2040Connect, profile: .nanoManagedV1, resident: resident)
-            let prepared = try await ManagedSketchPreprocessor.prepare(request)
-            let elf = try Data(contentsOf: directory.appendingPathComponent(name + ".elf"))
-            let result = try await ManagedELFConverter.convert(elf, prepared: prepared, provenance: provenance)
-            try result.capsule.bytes.write(to: directory.appendingPathComponent(name + ".fms"))
-            try result.reportJSON.write(to: directory.appendingPathComponent(name + ".report.json"))
-            try JSONEncoder().encode(result.receipt).write(to: directory.appendingPathComponent(name + ".receipt.json"))
-            print("\(name): real WASM ELF \(elf.count) bytes → validated FMS1 \(result.capsule.bytes.count) bytes, SHA-256 \(result.capsule.sha256). Synthetic resident; never upload.")
+    /// Verifies bytes and declared binding without compilation, packaging, connection or device writes.
+    static func main() {
+        do { try validate() }
+        catch { print("SDK capsule validation failed:", error); exit(1) }
+    }
+    /// Keeps validation failures at a readable nonzero CLI outcome rather than an unhandled Swift error.
+    private static func validate() throws {
+        guard CommandLine.arguments.count == 4 else {
+            print("Usage: verify-capsules <capsule.fms> <report.json> <resident-binding.json>")
+            throw CocoaError(.fileReadInvalidFileName)
         }
+        let resident = try ManagedResidentBinding(recordJSON: read(CommandLine.arguments[3], maximum: 16_384))
+        let capsule = try ManagedCapsule(bytes: read(CommandLine.arguments[1], maximum: 4096),
+            reportJSON: read(CommandLine.arguments[2], maximum: 16_384), resident: resident)
+        print("SDK capsule/report/binding validation passed:", capsule.sha256)
+        print("Declared metadata is not installed-image attestation or permission to upload.")
+    }
+    /// Bounds regular-file reads before allocating data; symlinks and oversized inputs fail explicitly.
+    private static func read(_ path: String, maximum: Int) throws -> Data {
+        let url = URL(fileURLWithPath: path)
+        let facts = try url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey])
+        guard facts.isRegularFile == true, facts.isSymbolicLink != true,
+              let size = facts.fileSize, size <= maximum else { throw CocoaError(.fileReadCorruptFile) }
+        let handle = try FileHandle(forReadingFrom: url)
+        let data: Data
+        do {
+            data = try handle.read(upToCount: maximum + 1) ?? Data()
+        } catch {
+            try handle.close()
+            throw error
+        }
+        try handle.close()
+        guard data.count == size, data.count <= maximum else { throw CocoaError(.fileReadCorruptFile) }
+        return data
     }
 }

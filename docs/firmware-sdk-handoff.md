@@ -1,25 +1,41 @@
-# Firmware requests for the FirmingoKit packaged compiler workflow
+# Firmware deliverables for Firmingo-Compiler and FirmingoKit
 
 Prepared 2026-09-30 against Firmingo commit
 `f17fdf0301256ba48270230cbf213126e70aa8d0`. This is a request for the firmware
-maintainer, not a claim that these deliverables exist or are qualified. No firmware
-files were changed, firmware tools run, or hardware accessed from FirmingoKit.
+maintainer, not a claim that these deliverables exist or are qualified. Preparing
+the original request did not change firmware files, run firmware tools, or access
+hardware. The later ownership revision below changes documentation only.
 
-## Copyable request to the firmware agent
+## Current ownership — revised 2026-10-12
 
-Please provide the following firmware-side deliverables, in priority order, to
-support FirmingoKit's SDK-owned catalogue and local WASM compiler. Start with the
+The original prepared date and selected hashes above/below remain historical
+provenance. The repository refocus changes the requested ownership, not the
+firmware contract, fixture bytes, or evidence. Cross-repository work is authorized
+when required by the requested increment; this document does not send a message,
+implement an exporter, or authorize hardware/publication.
+
+Firmingo exports verified build facts and device constraints; Firmingo-Compiler
+owns compatible recipes, static descriptors/catalogues, and source-to-artifact
+execution; FirmingoKit hosts the compiler and owns device evidence/deployment.
+See [the migration inventory](compiler-migration.md) and
+[the firmware export plan](../../Firmingo/docs/integration/compiler-contract.md).
+
+## Prioritized firmware-side deliverables
+
+Provide the following firmware-side deliverables to support the compiler package
+and Swift wrapper. Start with the
 experimental Nano RP2040 Connect application backend and `nano-managed-v1`.
 Inspect existing implementations before adding features; reuse or extend them
 where they already satisfy the requirement. Keep experimental and measured
-hardware support separate. Compilation and SDK resource staging remain owned by
-FirmingoKit; do not implement a second host compiler in Firmingo.
+hardware support separate. Portable compilation and asset production belong to
+Firmingo-Compiler; Swift hosting/package-consumer checks belong to FirmingoKit.
+Keep native firmware proof builds here without introducing a second consumer compiler.
 
 ### 1. Export one exact managed-capable firmware build
 
 Add an explicit, non-flashing export command for a selected existing build, or
 extend the current handoff tooling. The existing contract ZIP deliberately has
-no ELF, UF2 or executable module; it cannot supply the SDK catalogue's build facts.
+no ELF, UF2 or executable module; it cannot supply the compiler catalogue's build facts.
 The ordinary beta release also does not establish a managed target.
 
 Include:
@@ -41,10 +57,11 @@ changes explicitly or require a committed source snapshot. Export to a new
 destination, without connecting, flashing or publishing. Test corrupted/mismatched
 inputs, duplicate/unsafe archive paths and reproducible output where supported.
 
-Acceptance: the SDK can independently verify the archive and derive a real
-descriptor without dummy hashes, sample API addresses or a live device. Firmware
-exports native build facts; FirmingoKit adds its own compatible recipe identity
-and catalogue content ID. Do not copy synthetic SDK fixture values into releases.
+Acceptance: the compiler can verify the archive and derive a real descriptor
+without dummy hashes, sample API addresses or a live device; the SDK independently
+verifies installation/deployment inputs. Firmware exports native build facts;
+Firmingo-Compiler adds compatible recipe identity and catalogue content ID.
+Do not copy synthetic SDK fixture values into releases.
 
 ### 2. Publish a versioned managed ABI and image compatibility contract
 
@@ -66,13 +83,13 @@ address, entry points, bounds and capsule integrity have deterministic rejection
 tests. Preserve existing compatible protocol behavior or explicitly version a
 change and provide an SDK migration handoff before relying on it.
 
-### 3. Qualify SDK-produced Clang/LLD capsules against that resident
+### 3. Qualify compiler-produced Clang/LLD capsules through the SDK
 
-Accept independently supplied FirmingoKit artifacts and receipts for this exact
+Accept Firmingo-Compiler artifacts/receipts supplied through FirmingoKit for this exact
 resident. First add offline contract/validation checks; when hardware operations
 are separately authorized, execute two supported sketches through FMGO and verify
 LED/timing and exact console behavior, replacement, startup and cold replug.
-Compare the SDK Clang/LLD path with the existing GCC proof rather than treating GCC
+Compare the shared compiler Clang/LLD path with the existing GCC proof rather than treating GCC
 evidence as Clang qualification. Cover the exposed facade calls and record limits
 of any calls or pins not exercised.
 
@@ -81,7 +98,7 @@ test results. Exercise wrong ABI/API-address inputs and the SDK's independent
 resident-hash mismatch gate before slot writes; do not claim the capsule format
 alone attests to an exact resident ELF.
 Structural validation, `installed`, `boot_confirmed` and useful sketch behavior
-are separate outcomes. Do not change firmware merely to accept a malformed SDK
+are separate outcomes. Do not change firmware merely to accept a malformed compiler
 artifact; report any genuine SDK/firmware incompatibility for coordinated repair.
 
 ### 4. Validate the Nano FMGO connection path on physical iPad
@@ -94,7 +111,7 @@ Internet access. Diagnose firmware DHCP/NCM/session issues and provide log-based
 evidence. Existing local-only or older firmware evidence is not this qualification.
 
 Acceptance: document supported combinations and unresolved limitations. The SDK
-still performs local compilation; the firmware does not need a compiler. Do not
+hosts the shared local compiler; the firmware does not need a compiler. Do not
 require screenshots or UI inspection for this handoff.
 
 ### 5. Close interrupted-operation and installation-contract gaps
@@ -135,14 +152,15 @@ machine-readable provenance and human-readable limitations. Do not publish, flas
 or perform destructive tests solely because this request describes those future
 qualification tasks; obtain the applicable explicit hardware/release authorization.
 
-The first acceptance milestone is a verified Nano resident export that FirmingoKit
-can turn into one experimental catalogue entry. Compiler-service redistribution
-and SDK packaging are separate FirmingoKit/ArduinoKit-owner tasks; the firmware
-agent is not being asked to resolve ownership of that service.
+The first firmware acceptance milestone is a verified Nano resident export that
+Firmingo-Compiler can turn into one experimental compatible catalogue entry.
+Compiler-service distribution/provenance and portable packaging belong to
+Firmingo-Compiler; Swift consumer packaging/host qualification belong to FirmingoKit.
+ArduinoKit remains read-only. Firmware does not own or resolve the host service.
 
 ## Reference snapshot
 
-The selected compiler-contract hashes remain recorded in
+The historically selected compiler-contract hashes remain recorded in
 [compiler-firmware-reference.json](compiler-firmware-reference.json). In particular,
 the managed SDK integration guide's SHA-256 is
 `d6a91790f4b3cef751ca57416acd3e99bb04163f1a0995cb2ce12d2596367bc8`.
@@ -153,4 +171,5 @@ the requests above extend and qualify those foundations.
 The accepted SDK design and acceptance order are in
 [compiler-catalogue.md](compiler-catalogue.md). This handoff does not change the
 pinned SDK protocol, introduce a new firmware operation, qualify hardware, or
-authorize writes to the reference checkout.
+implement any of these deliverables. Coordinated changes use their owning repository
+under the user's authorization; hardware/publication remain separate workflows.

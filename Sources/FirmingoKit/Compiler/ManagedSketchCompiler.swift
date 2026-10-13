@@ -48,16 +48,21 @@ public actor ManagedSketchCompiler {
         try Task.checkCancellation()
         progress(.verifying)
         let toolchain = try await loadToolchain()
-        progress(.preparing)
-        let prepared = try await ManagedSketchPreprocessor.prepare(request)
+        let portable = try ManagedPortableRequest(request)
         let host = await ManagedWebKitHost()
-        let json = try await host.run(prepared: prepared, toolchain: toolchain, progress: progress)
-        let output = try await ManagedWorkerOutput.decode(json)
-        progress(.packaging)
+        let json = try await host.run(request: portable, toolchain: toolchain, progress: progress)
+        let output = try await ManagedPortableOutput.decode(json, request: portable)
+        let prepared = PreparedManagedSketch(request: request, sourceSHA256: output.sourceSHA256, translationUnit: output.translationUnit,
+            translationUnitSHA256: output.translationUnitSHA256, sourceLineCount: output.sourceLineCount)
         let provenance = try ManagedELFProvenance(compiler: "Clang/LLD 22.1.8 ABI-two WASI service, isolated WebKit worker",
-            recipeIdentifier: "nano-stateless-clang-22.1.8-v1-experimental", recipeSHA256: toolchain.recipeSHA256,
-            toolchainSHA256: toolchain.toolchainSHA256)
-        let artifact = try await ManagedELFConverter.convert(output.elf, prepared: prepared, provenance: provenance)
+            recipeIdentifier: "nano-stateless-clang-22.1.8-v1-experimental", recipeSHA256: toolchain.recipeSHA256, toolchainSHA256: toolchain.toolchainSHA256)
+        let report = try output.sdkReport(provenance: provenance)
+        let capsule = try ManagedCapsule(bytes: output.bytes, reportJSON: report, resident: request.resident)
+        let receipt = ManagedSketchArtifact.Receipt(prepared: prepared, provenance: provenance,
+            buildInputSHA256: try ManagedELFConverter.receiptInputSHA256(prepared: prepared, provenance: provenance),
+            linkedELFSHA256: output.linkedELFSHA256, capsuleSHA256: capsule.sha256)
+        let artifact = ManagedSketchArtifact(capsule: capsule, filename: String(request.snapshot.filename.dropLast(4)) + ".fms",
+            reportJSON: report, receipt: receipt, compilerReceiptJSON: output.executionReceiptJSON)
         try Task.checkCancellation()
         return ManagedCompilationResult(artifact: artifact, diagnostics: output.diagnostics, linearMemoryBytes: output.memoryBytes)
     }
@@ -78,16 +83,17 @@ public actor ManagedSketchCompiler {
         guard toolchain.recipeSHA256 == request.firmwareBuild.recipeSHA256 else {
             throw SketchBuildError.invalidProvenance
         }
-        progress(.preparing)
-        let prepared = try await ManagedSketchPreprocessor.prepare(request)
+        let portable = try ManagedPortableRequest(request)
         let host = await ManagedWebKitHost()
-        let json = try await host.run(prepared: prepared, toolchain: toolchain, progress: progress)
-        let output = try await ManagedWorkerOutput.decode(json)
-        progress(.packaging)
+        let json = try await host.run(request: portable, toolchain: toolchain, progress: progress)
+        let output = try await ManagedPortableOutput.decode(json, request: portable)
+        let prepared = PreparedManagedOfflineSketch(request: request, source: ManagedSketchPreprocessor.Source(sourceSHA256: output.sourceSHA256,
+            translationUnit: output.translationUnit, translationUnitSHA256: output.translationUnitSHA256, sourceLineCount: output.sourceLineCount))
         let provenance = try ManagedELFProvenance(compiler: "Clang/LLD 22.1.8 ABI-two WASI service, isolated WebKit worker",
-            recipeIdentifier: request.firmwareBuild.recipeIdentifier, recipeSHA256: toolchain.recipeSHA256,
-            toolchainSHA256: toolchain.toolchainSHA256)
-        let artifact = try await ManagedELFConverter.convert(output.elf, prepared: prepared, provenance: provenance)
+            recipeIdentifier: request.firmwareBuild.recipeIdentifier, recipeSHA256: toolchain.recipeSHA256, toolchainSHA256: toolchain.toolchainSHA256)
+        let report = try output.sdkReport(provenance: provenance)
+        let artifact = try ManagedOfflineSketchArtifact(bytes: output.bytes, sha256: NanoManagedContract.digest(output.bytes), reportJSON: report,
+            prepared: prepared, provenance: provenance, linkedELFSHA256: output.linkedELFSHA256, compilerReceiptJSON: output.executionReceiptJSON)
         try Task.checkCancellation()
         return ManagedOfflineCompilationResult(artifact: artifact, diagnostics: output.diagnostics, linearMemoryBytes: output.memoryBytes)
     }

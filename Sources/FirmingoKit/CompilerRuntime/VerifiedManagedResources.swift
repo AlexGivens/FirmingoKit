@@ -3,7 +3,7 @@ import Foundation
 /// SDK-owned immutable verified runtime/catalogue capabilities, independent of device identity or deployment.
 struct VerifiedManagedResources: Sendable {
     /// Independently compiled-in anchor changed only with deliberate SDK resource review.
-    static let inventorySHA256 = "9a2a074d1d3ba5135f37edba7b8d2937b934a1759dc3d10fedceafb601b92d82"
+    static let inventorySHA256 = "0ca0c5a50b32674d9656112fbcd22dca82adca79897ff4e5366e86b27301e258"
     /// Local resource directory; no sibling lookup, network fetch or environment override.
     private let root: URL
     /// Closed metadata verified before resource path construction.
@@ -13,7 +13,7 @@ struct VerifiedManagedResources: Sendable {
     /// Verified descriptor metadata; it does not establish service approval or installed-image identity.
     let catalogue: ManagedCompilerCatalogue
 
-    /// Verifies the inventory and all five runtime/license/catalogue roles off UI execution.
+    /// Verifies the inventory and all eight runtime/source/license/catalogue roles off UI execution.
     /// Finite root/hash injection is internal for tests; public callers can load only the SDK-owned bundle.
     @concurrent static func load(root: URL? = ManagedCompilerBundle.root(),
                                 expectedSHA256: String = inventorySHA256) async throws -> Self {

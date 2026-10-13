@@ -12,12 +12,16 @@ public struct ManagedSketchArtifact: Sendable {
     /// Typed receipt for revision checks and retained provenance; it is never upload authorization.
     public let receipt: Receipt
 
+    /// Distinct verified portable execution receipt when built through the shared compiler; nil for independent ELF packaging.
+    public let compilerReceiptJSON: Data?
+
     /// SDK-only construction after complete linked-output and capsule/report validation.
-    init(capsule: ManagedCapsule, filename: String, reportJSON: Data, receipt: Receipt) {
+    init(capsule: ManagedCapsule, filename: String, reportJSON: Data, receipt: Receipt, compilerReceiptJSON: Data? = nil) {
         self.capsule = capsule
         self.filename = filename
         self.reportJSON = reportJSON
         self.receipt = receipt
+        self.compilerReceiptJSON = compilerReceiptJSON
     }
 
     /// Schema-one immutable input/output evidence; the receipt alone cannot authenticate source association or hardware execution.

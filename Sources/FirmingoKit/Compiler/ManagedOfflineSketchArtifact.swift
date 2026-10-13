@@ -16,10 +16,13 @@ public struct ManagedOfflineSketchArtifact: Sendable {
     /// Immutable offline input/output identity for revision and target checks; never execution permission.
     public let receipt: Receipt
 
+    /// Distinct portable execution receipt for actual shared-compiler builds; nil for independently supplied ELF.
+    public let compilerReceiptJSON: Data?
+
     /// Issues a result after shared ELF/capsule/report validation and recipe identity checks.
     init(bytes: Data, sha256: String, reportJSON: Data, prepared: PreparedManagedOfflineSketch,
-         provenance: ManagedELFProvenance, linkedELFSHA256: String) throws {
-        self.bytes = bytes; self.sha256 = sha256; self.reportJSON = reportJSON
+         provenance: ManagedELFProvenance, linkedELFSHA256: String, compilerReceiptJSON: Data? = nil) throws {
+        self.bytes = bytes; self.sha256 = sha256; self.reportJSON = reportJSON; self.compilerReceiptJSON = compilerReceiptJSON
         firmwareBuild = prepared.request.firmwareBuild
         filename = String(prepared.request.snapshot.filename.dropLast(4)) + ".fms"
         receipt = try Receipt(prepared: prepared, provenance: provenance,

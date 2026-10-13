@@ -1,0 +1,75 @@
+name: SDK compiler adapter
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+defaults:
+  run:
+    shell: bash
+# Explicitly provisioned Xcode 27.0/Swift 6.4 host; runner availability is a separate prerequisite.
+jobs:
+  package:
+    runs-on: [self-hosted, macOS, ARM64, firmingo-xcode-27]
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      - uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version: '22.12.0'
+          package-manager-cache: false
+      - name: Check toolchain and bundled resources
+        run: |
+          mkdir -p .build/adapter-ci
+          xcodebuild -version 2>&1 | tee .build/adapter-ci/xcode.log
+          swift --version 2>&1 | tee .build/adapter-ci/swift.log
+          test "$(xcodebuild -version | head -1)" = 'Xcode 27.0'
+          swift --version | grep -q 'Swift version 6.4'
+      - name: SDK fixture, resource, package and deployment-boundary regressions
+        run: node Tools/ManagedWASM/run-validation.mjs 2>&1 | tee .build/adapter-ci/tests.log
+      - name: Observe real-runtime availability separately
+        run: |
+          env -u FIRMINGOKIT_WASM_MODULE swift test --filter ManagedWebKitCompilerTests 2>&1 | tee .build/adapter-ci/runtime.log
+          echo 'Actual WASM tests skip without an explicit local service. No service is distributed or fetched by this workflow.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Separate consumer discovers packaged resources
+        run: |
+          python3 Tools/ManagedWASM/make-resource-consumer.py
+          swift run --package-path .build/compiler-resource-consumer ResourceConsumer 2>&1 | tee .build/adapter-ci/consumer.log
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        if: always()
+        with:
+          name: sdk-package-logs
+          path: .build/adapter-ci/*.log
+          if-no-files-found: warn
+  apple-builds:
+    runs-on: [self-hosted, macOS, ARM64, firmingo-xcode-27]
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: ios-simulator
+            operation: build
+            destination: generic/platform=iOS Simulator
+          - name: ios-device
+            operation: build
+            destination: generic/platform=iOS
+          - name: docc
+            operation: docbuild
+            destination: generic/platform=macOS
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      - name: Check installed toolchain
+        run: |
+          mkdir -p .build/adapter-ci
+          xcodebuild -version 2>&1 | tee .build/adapter-ci/xcode.log
+          swift --version 2>&1 | tee .build/adapter-ci/swift.log
+          test "$(xcodebuild -version | head -1)" = 'Xcode 27.0'
+          swift --version | grep -q 'Swift version 6.4'
+      - name: Build the SDK for the selected Apple destination
+        run: xcodebuild '${{ matrix.operation }}' -workspace Validation/FirmingoKit.xcworkspace -scheme FirmingoKit -destination '${{ matrix.destination }}' -derivedDataPath '.build/adapter-ci-${{ matrix.name }}' CODE_SIGNING_ALLOWED=NO 2>&1 | tee '.build/adapter-ci/${{ matrix.name }}.log'
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        if: always()
+        with:
+          name: sdk-${{ matrix.name }}-logs
+          path: .build/adapter-ci/*.log
+          if-no-files-found: warn
