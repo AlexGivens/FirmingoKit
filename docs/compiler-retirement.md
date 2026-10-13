@@ -1,5 +1,7 @@
 # Retiring the SDK standalone compiler — 2026-10-12
 
+Current supplied-ELF conversion and package identities: [shared ELF packaging](elf-packaging.md). Earlier implementation records below remain historical evidence.
+
 Current public preparation integration and updated package identities: [service-free preparation](service-free-preparation.md). Earlier records remain historical evidence.
 
 The SDK's real build facade already passed the shared-compiler adapter gates. This

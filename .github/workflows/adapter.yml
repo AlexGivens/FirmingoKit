@@ -24,7 +24,7 @@ jobs:
           swift --version 2>&1 | tee .build/adapter-ci/swift.log
           test "$(xcodebuild -version | head -1)" = 'Xcode 27.0'
           swift --version | grep -q 'Swift version 6.4'
-      - name: SDK fixture, resource, package and deployment-boundary regressions
+      - name: SDK fixture, service-free preparation/ELF packaging, resource and deployment-boundary regressions
         run: node Tools/ManagedWASM/run-validation.mjs 2>&1 | tee .build/adapter-ci/tests.log
       - name: Observe real-runtime availability separately
         run: |

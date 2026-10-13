@@ -1,5 +1,6 @@
 """Create a separate SDK-local minimal SwiftPM consumer for package resource discovery checks."""
 from pathlib import Path
+import base64
 
 
 def main():
@@ -8,6 +9,8 @@ def main():
     root = sdk / ".build/compiler-resource-consumer"
     source = root / "Sources/ResourceConsumer"
     source.mkdir(parents=True, exist_ok=True)
+    # Embed only the unchanged non-executable parser fixture in this developer consumer.
+    elf = bytes.fromhex((sdk / "Tests/FirmingoKitTests/Fixtures/compiler/stateless.elf.hex").read_text())
     (root / "Package.swift").write_text('''// swift-tools-version: 6.4
 import PackageDescription
 let package = Package(name: "ResourceConsumer", platforms: [.macOS(.v14)],
@@ -41,16 +44,25 @@ import FirmingoKit
             print("Synthetic packaged-consumer WASM compilation verified:", result.artifact.capsule.sha256)
         } else if CommandLine.arguments.count != 1 { throw CocoaError(.fileReadInvalidFileName) }
         let resident = try ManagedResidentBinding(deviceID: "0102030405060708", residentELFSHA256: String(repeating: "0", count: 64),
-            firmwareImageSHA256: String(repeating: "1", count: 64), apiAddress: 0x10022ca0)
+            firmwareImageSHA256: String(repeating: "1", count: 64), apiAddress: 0x1002154c)
         let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: .max, filename: "Prepare.ino", source: "void setup() {} void loop() {}")
         let selected = try ManagedSketchBuildRequest(snapshot: snapshot, board: .nanoRP2040Connect, profile: .nanoManagedV1, resident: resident)
         let prepared = try await ManagedSketchPreprocessor.prepare(selected)
         guard prepared.request.snapshot.revision == .max, prepared.translationUnit.hasSuffix(snapshot.source + "\\n") else { throw CocoaError(.fileReadCorruptFile) }
         print("Packaged service-free preparation verified:", prepared.translationUnitSHA256)
+        guard let elf = Data(base64Encoded: "SYNTHETIC_PARSER_ELF_BASE64") else { throw CocoaError(.fileReadCorruptFile) }
+        let provenance = try ManagedELFProvenance(compiler: "independent non-executable parser fixture",
+            recipeIdentifier: "consumer-declared-v1", recipeSHA256: String(repeating: "4", count: 64),
+            toolchainSHA256: String(repeating: "5", count: 64))
+        let artifact = try await ManagedELFConverter.convert(elf, prepared: prepared, provenance: provenance)
+        guard artifact.capsule.sha256 == "ef8bff817d9b80026f6eaeac33d1c40fac2f41b046865de967d3c0cf2539d52a",
+              artifact.compilerReceiptJSON == nil, artifact.receipt.provenance == provenance,
+              artifact.receipt.sourceRevision == .max else { throw CocoaError(.fileReadCorruptFile) }
+        print("Packaged service-free ELF conversion verified:", artifact.capsule.sha256)
         _ = compiler
     }
 }
-''')
+'''.replace("SYNTHETIC_PARSER_ELF_BASE64", base64.b64encode(elf).decode("ascii")))
     print("Created .build/compiler-resource-consumer; run swift run --package-path .build/compiler-resource-consumer ResourceConsumer")
 
 

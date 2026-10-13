@@ -16,7 +16,7 @@ struct VerifiedManagedToolchain: Sendable {
     /// Exact approved module size, checked before reading or instantiating bytes.
     static let serviceBytes = 101_196_044
     /// Runtime manifest anchor, refreshed only by deliberate reviewed SDK-local staging.
-    static let manifestSHA256 = "edba580f8c47fbe4b7a74b97d57d5e5fb4a3630d5b5d16ce69ad518c0389ae7b"
+    static let manifestSHA256 = "d6c7458d085e43d069bda0a16b1e2ed3931c51528118c3ecba862c08dc36cadc"
 
     /// Loads packaged independent resources and a host-selected service, hashing off the main actor.
     /// There is no default sibling path, download, compiler subprocess or board side effect.
@@ -31,7 +31,7 @@ struct VerifiedManagedToolchain: Sendable {
         guard manifest.schema == 1, manifest.serviceABI == 2,
               manifest.recipe == "nano-stateless-clang-22.1.8-v1-experimental",
               manifest.recipeSHA256 == "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
-              manifest.compilerPackageSHA256 == "65c40e9f33a6ae2838f19c3a1597d4094374fec827df790c5a72c7480792b3a5",
+              manifest.compilerPackageSHA256 == "93f149a454b1fc1c60ea21775b7b860e99b1a4031f8c810fb1f5de3bc18c4fd4",
               manifest.files.count == 6, Set(manifest.files.map(\.path)) == ["host.html", "LICENSE-MIT", "LICENSE-APACHE", "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"] else {
             throw ManagedCompilerError.unavailable("incompatible runtime recipe")
         }

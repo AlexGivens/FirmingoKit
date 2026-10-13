@@ -158,7 +158,7 @@ struct ManagedPortableOutput: Sendable {
         return try ManagedPortableRequest.canonical(object)
     }
     /// Converts exact parsed JSON scalars for canonical hashing; no coercion or unknown data is introduced.
-    private static func dictionary(_ value: WireJSON.Value) throws -> [String: Any] {
+    static func dictionary(_ value: WireJSON.Value) throws -> [String: Any] {
         try value.object().reduce(into: [:]) { result, item in result[String(decoding: item.key, as: UTF8.self)] = try scalar(item.value) }
     }
     /// Recursively preserves parsed decimal integers, arrays and strings used by the receipt schema.

@@ -15,7 +15,7 @@ the macOS SDK WebKit adapter also passes nine actual cases and a separate packag
 See its `docs/interface.md`, `docs/portable-pipeline.md` and
 `docs/compatibility.md` for implemented versus proposed behavior.
 
-The old SDK standalone Node compiler and ELF-only bridge are retired, with traceable source hashes in `docs/compiler-retirement.json`. Next: migrate the public preparation/conversion compatibility paths deliberately and qualify signed/physical Apple hosts. See `docs/compiler-adapter.md` for the completed local adapter checks. Exact firmware exports and approved service assets
+The old SDK standalone Node compiler and ELF-only bridge are retired, with traceable source hashes in `docs/compiler-retirement.json`. Both preparation and conversion overloads now delegate to the shared service-free worker; native lexical scanning, ELF parsing and capsule production are removed while receipts/deployment validators remain. See `docs/elf-packaging.md` and its retirement inventory. Next: qualify signed/physical Apple hosts and provision SDK CI. Exact firmware exports and approved service assets
 remain dependencies, not reasons to weaken deployment checks.
 
 ## Starting point — inspected 2026-09-29
@@ -185,7 +185,7 @@ hardware-support claim exceeds its recorded evidence.
 - [x] Run actual compile/link/package through the adapter; retain independent SDK capsule/report/device binding and fresh capability gates before writes. Verify current source/selection and durable one-commit/uncertainty behavior.
 - [x] Retire the replaced standalone SDK Node/WASI/recipe/vendor stack and old ELF-only bridge after shared compiler, real WebKit and consumer checks pass; record 36 unchanged original file hashes. Compiler-owned memory adaptation and tests now live in Firmingo-Compiler. Retain Swift/platform/package/deployment regressions.
 - [x] Delegate both public Swift preparation overloads to the shared service-free compiler worker; remove the duplicate Swift lexical scanner and preserve source/generated hashes, revisions and line mapping. Record explicit resource/host requirements and corrected first-line BOM columns.
-- [ ] Migrate supplied-ELF conversion compatibility with an explicit declared-provenance design; preserve legacy receipt meaning and independent deployment checks.
+- [x] Migrate both supplied-ELF conversion overloads through separate declared-provenance packaging; preserve legacy/offline receipt goldens, retire native ELF parsing/capsule production and retain deployment validation. Record resource/WebKit requirements.
 - [x] Update SDK CI definitions, development commands and DocC for the adapter/package change. Local macOS tests, iOS builds and DocC pass; CI runner/run, signed sandbox, physical iOS/iPadOS and hardware execution remain explicitly unqualified.
 
 **Gate:** Prerequisite documentation/inventory is complete. Migration is complete

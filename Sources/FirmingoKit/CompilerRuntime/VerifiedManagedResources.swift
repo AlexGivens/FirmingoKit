@@ -3,7 +3,7 @@ import Foundation
 /// SDK-owned immutable verified runtime/catalogue capabilities, independent of device identity or deployment.
 struct VerifiedManagedResources: Sendable {
     /// Independently compiled-in anchor changed only with deliberate SDK resource review.
-    static let inventorySHA256 = "0ca0c5a50b32674d9656112fbcd22dca82adca79897ff4e5366e86b27301e258"
+    static let inventorySHA256 = "0758bebfdb81c920bab244e31a2d9b4b49aa1d4d697796d1e366f8ee3d7c5ed7"
     /// Local resource directory; no sibling lookup, network fetch or environment override.
     private let root: URL
     /// Closed metadata verified before resource path construction.

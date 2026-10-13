@@ -19,12 +19,12 @@
     {
       "path": "manifest.json",
       "bytes": 1211,
-      "sha256": "edba580f8c47fbe4b7a74b97d57d5e5fb4a3630d5b5d16ce69ad518c0389ae7b"
+      "sha256": "d6c7458d085e43d069bda0a16b1e2ed3931c51528118c3ecba862c08dc36cadc"
     },
     {
       "path": "host.html",
-      "bytes": 376042,
-      "sha256": "f87c9f7762306cfeb99a3e929abc03c06c7284ab6f25a9bdd22558a97595ae21"
+      "bytes": 416780,
+      "sha256": "ee3012b38d47685abc66584185c2af0f79f888b6386831b24e6e28a37b979562"
     },
     {
       "path": "LICENSE-MIT",
@@ -48,13 +48,13 @@
     },
     {
       "path": "compiler-package.json",
-      "bytes": 9653,
-      "sha256": "65c40e9f33a6ae2838f19c3a1597d4094374fec827df790c5a72c7480792b3a5"
+      "bytes": 9822,
+      "sha256": "93f149a454b1fc1c60ea21775b7b860e99b1a4031f8c810fb1f5de3bc18c4fd4"
     },
     {
       "path": "compiler-sources.json",
-      "bytes": 224635,
-      "sha256": "7d0538c6b41252aa7f771cddc3cd5a8da1a6b94c2929c5ac896ada26e3018512"
+      "bytes": 236986,
+      "sha256": "2063039b1eb5f3b2dd78bb3110d5bc2c558f31cfcb58e5b2ff149197c2fbebb0"
     }
   ]
 }

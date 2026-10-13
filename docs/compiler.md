@@ -1,5 +1,7 @@
 # Local compiler implementation status
 
+Current supplied-ELF conversion and package identities: [shared ELF packaging](elf-packaging.md). Earlier implementation records below remain historical evidence.
+
 Current public preparation integration and updated package identities: [service-free preparation](service-free-preparation.md). Earlier records remain historical evidence.
 
 The [standalone retirement record](compiler-retirement.md) identifies removed developer paths and current SDK validation commands; public compatibility APIs remain available.

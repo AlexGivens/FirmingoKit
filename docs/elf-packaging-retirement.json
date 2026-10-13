@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "sourceCommit": "5465792737054d00302f4f3ad9f51d3734dee034",
+  "recordedOn": "2026-10-12",
+  "status": "Retired native compiler-owned ELF parser and capsule producer after real shared-worker conversion/receipt parity checks; SDK deployment validators retained",
+  "files": [
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedELFImage.swift",
+      "bytes": 14568,
+      "sha256": "894953d39606f68e2552c82cee4d123a03ec1e4102c05914fa6ba9ba54ed7aee"
+    },
+    {
+      "path": "Sources/FirmingoKit/Compiler/ManagedELFPackage.swift",
+      "bytes": 3672,
+      "sha256": "7413bb8f61d70cb23363258be191e4934004817a22ec8959a305d584bb5342f8"
+    }
+  ],
+  "testMigration": {
+    "path": "Tests/FirmingoKitTests/ManagedELFConverterTests.swift",
+    "originalBytes": 11097,
+    "originalSHA256": "6e7d7878fc6100a7cbaf3e8c50ccf3a71b0b3709d6a0534ec9a44935df4ac6bf",
+    "retiredCases": [
+      "readonlyMergedStrings",
+      "truncationAndFileBounds",
+      "malformedELFMatrix",
+      "refusesConventionalArtifacts"
+    ],
+    "replacement": "Firmingo-Compiler tests/pipeline.test.mjs: readonly flags, every truncation, malformed matrix, nonshared views/conventional artifacts, undefined/common symbols; tests/declared-packaging.test.mjs: isolated conversion/lifecycle/correlation; Swift public API and native trust-boundary tests retained"
+  }
+}

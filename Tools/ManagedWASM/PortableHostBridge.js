@@ -14,6 +14,7 @@ const workerFactory = source => () => {
 };
 const controller = new FirmingoCompiler.CompilerController({ workerFactory: workerFactory(workerSource) });
 const preparationController = new FirmingoCompiler.PreparationController({ workerFactory: workerFactory(preparationWorkerSource) });
+const packagingController = new FirmingoCompiler.PackagingController({ workerFactory: workerFactory(preparationWorkerSource) });
 /** Bounded ELF transfer for independent native validation/receipt translation, never native packaging. */
 function encodeBytes(bytes) {
   const chunks = []; for (let offset = 0; offset < bytes.length; offset += 16384) chunks.push(String.fromCharCode(...bytes.subarray(offset, offset + 16384)));
@@ -71,4 +72,27 @@ async function cancel() {
   if (pending) { try { await pending; } catch {} }
   return true;
 }
-globalThis.firmingoCompiler = Object.freeze({ compile, prepare, cancel });
+/** Declared supplied-ELF conversion through the shared service-free worker, without recipe/service substitution. */
+async function packageELF(inputJSON, elfBase64) {
+  if (consumed || cancelled) throw new Error("Compiler page already consumed/cancelled");
+  consumed = true; cancellation = new AbortController();
+  const request = FirmingoCompiler.parseDeclaredPackagingRequest(inputJSON);
+  if (typeof elfBase64 !== "string" || elfBase64.length > 2796204) throw new Error("Excessive ELF transfer");
+  const decoded = atob(elfBase64);
+  if (decoded.length < 52 || decoded.length > 2097152 || btoa(decoded) !== elfBase64) throw new Error("Invalid ELF transfer");
+  const elfBytes = Uint8Array.from(decoded, value => value.charCodeAt(0));
+  pending = (async () => {
+    const common = { schema: 1, operation: "package_elf", buildID: request.buildID,
+      requestSHA256: await FirmingoCompiler.declaredPackagingIdentity(request) };
+    try {
+      const artifact = await packagingController.package(elfBytes, request, { signal: cancellation.signal });
+      return JSON.stringify({ ...common, outcome: "succeeded", artifact: { format: artifact.format, filename: artifact.filename,
+        bytes: encodeBytes(artifact.bytes), sha256: artifact.sha256, reportJSON: artifact.reportJSON, receipt: artifact.receipt } });
+    } catch (error) {
+      return JSON.stringify({ ...common, outcome: error.code === "cancelled" ? "cancelled" : error.code === "timed_out" ? "timed_out" : "failed",
+        error: { code: error.code || "runtime_failed", stage: error.stage || "packaging", message: error.message }, diagnostics: error.diagnostics || [] });
+    }
+  })();
+  return await pending;
+}
+globalThis.firmingoCompiler = Object.freeze({ compile, prepare, packageELF, cancel });

@@ -217,3 +217,7 @@ SDK executable code/resources and saved records remain unchanged until that pass
 ## Standalone runtime retirement — 2026-10-12
 
 The [retirement record](compiler-retirement.md) and exact [source inventory](compiler-retirement.json) replace the obsolete SDK developer runtime/recipe/vendor stack with compiler-owned tooling. Retained public Swift preparation/conversion APIs and independent deployment validators remain explicit SDK compatibility/safety responsibilities.
+
+## Supplied-ELF conversion retirement — 2026-10-12
+
+Both public conversion overloads now use shared declared-provenance packaging. Native ELF parsing/capsule production are removed with exact [retirement hashes](elf-packaging-retirement.json); public receipt meaning and independent deployment checks remain. See [current contract and verification](elf-packaging.md).

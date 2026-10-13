@@ -39,7 +39,7 @@ They are never invoked implicitly by SDK or consumer builds.
 ## Explicit package maintenance
 
 `PortableHostBridge.js` is only the native WebKit adapter. It uses imported compiler
-code for every source-to-artifact build. To intentionally import a reviewed source
+code for builds, preparation and service-free supplied-ELF packaging; it does not parse ELF or produce capsules. To intentionally import a reviewed source
 export, select its directory and independently trusted manifest SHA-256:
 
 ```sh
@@ -78,7 +78,7 @@ and `VerifyDemoDefaults.swift` remain host-controller checks; they do not connec
 or deploy, and their original commands/evidence remain in `docs/development.md`.
 
 `make-resource-consumer.py` creates a separate local SwiftPM consumer under `.build/`
-for bundle discovery and optional explicit-service compilation; `verify-resource-archive.py`
+for bundle discovery, service-free preparation/ELF conversion and optional explicit-service compilation; `verify-resource-archive.py`
 checks an explicitly selected unsigned demo archive's current resources. Archive,
 signed sandbox and physical-device checks must be recorded separately when run.
 

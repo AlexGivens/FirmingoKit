@@ -89,6 +89,11 @@
       "sha256": "1dc1dae67c0dd26f593b9909478e7e01e13ea240f5f1f6cf7a4b7608e250cdd3"
     },
     {
+      "path": "runtime/packaging-controller.js",
+      "bytes": 6429,
+      "sha256": "07b59916b9a12b9c0deb63ef0722d091e152fbc41a8be3ac744095d184ee8880"
+    },
+    {
       "path": "runtime/pins.js",
       "bytes": 1072,
       "sha256": "c9ff83d579fc6345599d268ce45722b48b8242a47739279df6ee4085fad8c1e9"
@@ -105,13 +110,13 @@
     },
     {
       "path": "runtime/preparation-worker-core.js",
-      "bytes": 926,
-      "sha256": "4d542ff59dfed080b84cc5bb81c45d00330d3900a5c3f94f6d8326fbcd4b3b8e"
+      "bytes": 1653,
+      "sha256": "2b38d83f02f7cdf89d1929948aa4181254c27a6366695ed59a7ffef2d165c783"
     },
     {
       "path": "runtime/preparation-worker.js",
-      "bytes": 299,
-      "sha256": "eb1f74851c176160aadd84f2fb13da4a704fad4e34bbaa858285588728f140a6"
+      "bytes": 319,
+      "sha256": "516032a913761781a5e7f996cde679f801b278cee92d63cd238da99cf0e969e2"
     },
     {
       "path": "runtime/serialization.js",
@@ -125,13 +130,13 @@
     },
     {
       "path": "src/capsule.js",
-      "bytes": 7179,
-      "sha256": "0a9d0bd0b44e676e5eb32f51bdbea719e5cc10e89132766080a3308a5c91b05a"
+      "bytes": 7816,
+      "sha256": "f7cbbb12aa27ccb4157b22e64a15f412343ffc24ad32a256fc6ecbd18cc57809"
     },
     {
       "path": "src/contract.js",
-      "bytes": 8183,
-      "sha256": "99c984444782f057100b2300d2464f5e184bb263421b6c6332635e73d684caed"
+      "bytes": 11500,
+      "sha256": "3ef93442dc16db1fe147fa93c70f95915541796e21e40ef67c94f12e75f91cf2"
     },
     {
       "path": "src/elf.js",
@@ -150,8 +155,8 @@
     },
     {
       "path": "src/index.js",
-      "bytes": 985,
-      "sha256": "df789d183300f357f7a98356ec449719f002f94e3d8d31cddff27899cd22913f"
+      "bytes": 1266,
+      "sha256": "b60e62c6c307c23257322209316f6c0f1c1107ea64201176159090b5716fd7c0"
     },
     {
       "path": "src/json.js",
@@ -175,8 +180,8 @@
     },
     {
       "path": "src/preprocess.js",
-      "bytes": 6571,
-      "sha256": "3d0503d4adab547f3aed86d74b27d03f628fc1bda5bcc4bf2654d068bf6eebb1"
+      "bytes": 7023,
+      "sha256": "f6f466d7f2792cf3b8be0a37b80ea46cf2e2421338111294ba64033d5575607c"
     },
     {
       "path": "third_party/browser_wasi_shim/LICENSE-APACHE",
@@ -262,18 +267,18 @@
   "files": [
     {
       "path": "compiler.js",
-      "bytes": 159763,
-      "sha256": "7db709eb3ef261b65f199c4aeea2edf1d9d3a710aa19d7c7ec678c51b0ef54e9"
+      "bytes": 171537,
+      "sha256": "9376c983d94803d60bab1adf48f9ba241917e86c20808e9eb307e0cb85ee6b05"
     },
     {
       "path": "worker.js",
-      "bytes": 138617,
-      "sha256": "84fa2737a153391cf7d284b481f2091fb78931e5632405e2c11be2da872b37cc"
+      "bytes": 143295,
+      "sha256": "5b2d66b77e5bf3d394385730ea83f5e37f70b41fe3eccfd396c08e414f9f3624"
     },
     {
       "path": "preparation-worker.js",
-      "bytes": 27502,
-      "sha256": "12154ec75a64f537f6f067c57a9d4b07e59b4ab557089b128181c12bca821f2c"
+      "bytes": 49211,
+      "sha256": "9594c70735c60cea882f2c22ddcfc0acdcd4e0f29c1e40bfbbb0939557904333"
     },
     {
       "path": "resources.json",
@@ -297,8 +302,8 @@
     },
     {
       "path": "sources.json",
-      "bytes": 224635,
-      "sha256": "7d0538c6b41252aa7f771cddc3cd5a8da1a6b94c2929c5ac896ada26e3018512"
+      "bytes": 236986,
+      "sha256": "2063039b1eb5f3b2dd78bb3110d5bc2c558f31cfcb58e5b2ff149197c2fbebb0"
     }
   ]
 }

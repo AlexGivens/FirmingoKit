@@ -9,14 +9,14 @@ public enum ManagedELFConverter {
     /// globals/runtime initialization, unresolved symbols, relocations and unsupported layout.
     /// Input ELF is limited to 2 MiB; code is 4–3840 bytes. Work runs off the main actor with cancellation
     /// checks. A result establishes structural packaging only; trusted code/hardware qualification is separate.
+    /// Parsing/packaging runs in the verified shared compiler's private WebKit worker with no WASM service.
+    /// A missing/corrupt source package or unavailable web host fails explicitly; there is no native fallback.
     @concurrent public static func convert(_ elfData: Data, prepared: PreparedManagedSketch,
                                           provenance: ManagedELFProvenance) async throws -> ManagedSketchArtifact {
         try Task.checkCancellation()
         let resident = prepared.request.resident
-        let package = try ManagedELFPackage(elfData, snapshot: prepared.request.snapshot,
-            sourceSHA256: prepared.sourceSHA256, translationUnitSHA256: prepared.translationUnitSHA256,
-            board: prepared.request.board, profile: prepared.request.profile, apiAddress: resident.apiAddress,
-            residentELFSHA256: resident.residentELFSHA256, provenance: provenance)
+        let package = try await packageELF(elfData, request: ManagedPortableRequest(prepared.request, provenance: provenance),
+            sourceSHA256: prepared.sourceSHA256, translationUnitSHA256: prepared.translationUnitSHA256)
         let validated = try ManagedCapsule(bytes: package.payload.bytes, reportJSON: package.reportJSON, resident: resident)
         let capsuleHash = package.payload.sha256
         let encoder = JSONEncoder()
@@ -41,14 +41,24 @@ public enum ManagedELFConverter {
         guard provenance.recipeIdentifier == firmware.recipeIdentifier, provenance.recipeSHA256 == firmware.recipeSHA256 else {
             throw SketchBuildError.invalidProvenance
         }
-        let package = try ManagedELFPackage(elfData, snapshot: prepared.request.snapshot,
-            sourceSHA256: prepared.sourceSHA256, translationUnitSHA256: prepared.translationUnitSHA256,
-            board: firmware.board, profile: firmware.profile, apiAddress: firmware.apiAddress,
-            residentELFSHA256: firmware.residentELFSHA256, provenance: provenance)
+        let package = try await packageELF(elfData, request: ManagedPortableRequest(prepared.request, provenance: provenance),
+            sourceSHA256: prepared.sourceSHA256, translationUnitSHA256: prepared.translationUnitSHA256)
         let artifact = try ManagedOfflineSketchArtifact(bytes: package.payload.bytes, sha256: package.payload.sha256,
             reportJSON: package.reportJSON, prepared: prepared, provenance: provenance, linkedELFSHA256: package.linkedELFSHA256)
         try Task.checkCancellation()
         return artifact
+    }
+
+    /// Loads verified compiler sources and delegates ELF parsing/packaging to its isolated service-free worker.
+    private static func packageELF(_ elf: Data, request: ManagedPortableRequest, sourceSHA256: String,
+                                   translationUnitSHA256: String) async throws -> ManagedPortablePackaging {
+        try Task.checkCancellation()
+        guard (52...2 * 1024 * 1024).contains(elf.count) else { throw SketchBuildError.invalidELF("Expected bounded independently linked ELF bytes") }
+        let resources = try await VerifiedManagedResources.load()
+        let host = await ManagedWebKitHost()
+        let json = try await host.package(elf: elf, request: request, page: resources.page)
+        return try await ManagedPortablePackaging.decode(json, request: request, elf: elf,
+            sourceSHA256: sourceSHA256, translationUnitSHA256: translationUnitSHA256)
     }
 
     /// Reuses the unchanged legacy receipt identity for already independently validated compiler output.

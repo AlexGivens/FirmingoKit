@@ -1,5 +1,7 @@
 # Shared compiler adapter — 2026-10-12
 
+Current supplied-ELF conversion and package identities: [shared ELF packaging](elf-packaging.md). Earlier implementation records below remain historical evidence.
+
 Current public preparation integration and updated package identities: [service-free preparation](service-free-preparation.md). Earlier records remain historical evidence.
 
 Both `ManagedSketchCompiler.build` overloads now use Firmingo-Compiler for raw-source

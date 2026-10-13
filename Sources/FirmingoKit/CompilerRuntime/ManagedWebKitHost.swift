@@ -16,6 +16,8 @@ import AppKit
     private var deadline: Task<Void, Never>?
     /// Immutable JSON-compatible source selection, created before navigation.
     private var inputJSON = ""
+    /// Bounded canonical supplied-ELF bytes, passed separately from request JSON as a data argument.
+    private var elfBase64 = ""
     /// Reviewed bridge entry point, selected only by the native operation overload.
     private var bridgeFunction = "compile"
     /// Exact active correlation validated in every bridge event.
@@ -48,14 +50,23 @@ import AppKit
     func prepare(request: ManagedPortableRequest, page: Data, timeout: Duration = .seconds(60)) async throws -> String {
         try await run(request: request, page: page, service: nil, function: "prepare", progress: { _ in }, timeout: timeout)
     }
+    /// Packages independently supplied ELF with no service capability and the same owned cleanup/deadline path.
+    func package(elf: Data, request: ManagedPortableRequest, page: Data, timeout: Duration = .seconds(60)) async throws -> String {
+        guard (52...2 * 1024 * 1024).contains(elf.count), request.packagingProvenance != nil else {
+            throw SketchBuildError.invalidELF("Expected bounded independently linked ELF bytes")
+        }
+        return try await run(request: request, page: page, service: nil, function: "packageELF",
+            elfBase64: elf.base64EncodedString(), progress: { _ in }, timeout: timeout)
+    }
     /// Admits one page operation with exact resource capabilities and a native loading-through-disposal deadline.
-    private func run(request: ManagedPortableRequest, page: Data, service: Data?, function: String,
+    private func run(request: ManagedPortableRequest, page: Data, service: Data?, function: String, elfBase64: String = "",
                      progress: @escaping @Sendable (ManagedCompilationPhase) -> Void, timeout: Duration) async throws -> String {
         try Task.checkCancellation()
         #if os(macOS)
         _ = NSApplication.shared
         #endif
         bridgeFunction = function
+        self.elfBase64 = elfBase64
         inputJSON = String(decoding: request.json, as: UTF8.self); buildID = request.buildID
         self.progress = progress
         let configuration = WKWebViewConfiguration()
@@ -87,8 +98,8 @@ import AppKit
             do {
                 guard let self, completion != nil else { return }
                 compileDispatched = true
-                let result = try await webView.callAsyncJavaScript("return await globalThis.firmingoCompiler[operation](inputJSON);",
-                    arguments: ["inputJSON": inputJSON, "operation": bridgeFunction],
+                let result = try await webView.callAsyncJavaScript("return await globalThis.firmingoCompiler[operation](inputJSON, elfBase64);",
+                    arguments: ["inputJSON": inputJSON, "elfBase64": elfBase64, "operation": bridgeFunction],
                     in: nil, contentWorld: .page)
                 guard let json = result as? String, json.utf8.count <= 3_500_000 else {
                     throw ManagedCompilerError.runtime("invalid native bridge output")
@@ -135,7 +146,7 @@ import AppKit
     /// Resolves once after removing all page/handler/task ownership; a late callback cannot affect another build.
     private func finish(_ result: Result<String, any Error>) {
         guard let continuation = completion else { return }
-        completion = nil; progress = nil; inputJSON = ""
+        completion = nil; progress = nil; inputJSON = ""; elfBase64 = ""
         deadline?.cancel(); deadline = nil; invocation?.cancel(); invocation = nil
         let view = webView; webView = nil
         if let view {

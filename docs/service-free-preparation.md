@@ -1,5 +1,7 @@
 # Shared service-free preparation — 2026-10-12
 
+Current supplied-ELF conversion and package identities: [shared ELF packaging](elf-packaging.md). Earlier implementation records below remain historical evidence.
+
 Both public `ManagedSketchPreprocessor.prepare` overloads now delegate lexical
 preparation to Firmingo-Compiler through an isolated private WebKit worker.
 The SDK's duplicate Swift scanner/masks are removed. Public request/prepared types,
