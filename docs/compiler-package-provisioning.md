@@ -48,3 +48,22 @@ prepared package; firmware evidence images are not SDK installation resources.
 Signed/minimum-OS/physical hosts and device qualification remain open. Preserve
 independent deployment/capability/source-freshness checks and explicit installed
 image/device evidence before any later Run.
+
+## Actual first prepared consumer
+
+Clean SDK commit `fbd5993…` produced 261 prepared files, manifest
+`5d47369942c75afe6ac5d7bfcbba22dea817f645929ab0a74535c7ff5bfc3566`.
+A fresh consumer using only that SDK copy passed default `loadBundled()` and
+`ManagedSketchCompiler()` execution with no service URL or compiler sibling lookup.
+GPIO/delay and binary console capsules match independent Node results (`958b861b…`,
+`b372c00e…`); a syntax error rejects and a fresh revision reproduces GPIO bytes.
+The independent firmware validator accepts both at the exact API and rejects
+the old address with `wrong_api`. No payload executes on a board.
+
+Ordinary SDK tests pass 152 functions with nine unavailable-service skips; actual
+explicit-service WebKit tests pass all nine cases. Thirteen-role corruption tests,
+the host-only default controller harness, iOS Simulator/device builds and DocC pass.
+Three SDK maintenance boundary tests pass. Signing/physical/device results remain
+open. Capsule bytes are reproducible; UUID-based request/receipt identities vary
+deliberately between snapshots. Logs remain local under `.build/consumer-package-*`
+and `.build/default-nano-consumer-r1.log`.

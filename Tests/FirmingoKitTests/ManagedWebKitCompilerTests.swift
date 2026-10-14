@@ -35,7 +35,9 @@ import Testing
             do { try FileManager.default.removeItem(at: root) }
             catch { Issue.record(error, "Test resource cleanup failed") }
         }
-        try FileManager.default.copyItem(at: serviceURL(), to: root.appendingPathComponent("compiler.wasm"))
+        let copiedService = root.appendingPathComponent("compiler.wasm")
+        if FileManager.default.fileExists(atPath: copiedService.path) { try FileManager.default.removeItem(at: copiedService) }
+        try FileManager.default.copyItem(at: serviceURL(), to: copiedService)
         var inventory = try #require(JSONSerialization.jsonObject(with: Data(contentsOf: root.appendingPathComponent("inventory.json"))) as? [String: Any])
         var service = try #require(inventory["service"] as? [String: Any])
         service["distributionReview"] = "approved"; inventory["service"] = service

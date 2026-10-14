@@ -4,8 +4,13 @@ import Testing
 
 /// Actual SDK resource bytes and independently mutated inventories exercise fail-closed bundled loading.
 struct ManagedCompilerResourceTests {
+    /// Distinguishes the service-free source checkout from an explicitly prepared SDK distribution.
+    private static var serviceBundled: Bool {
+        guard let root = ManagedCompilerBundle.root() else { return false }
+        return FileManager.default.fileExists(atPath: root.appendingPathComponent("compiler.wasm").path)
+    }
     /// Exact reviewed firmware metadata supplies an experimental choice without inventing a binary or device identity.
-    @Test func bundledCatalogueAndReviewedAbsentService() async throws {
+    @Test func bundledCatalogueAndServiceAvailability() async throws {
         let catalogue = try await ManagedCompilerCatalogue.loadBundled()
         #expect(catalogue.manifestSHA256 == "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e")
         #expect(catalogue.firmwareBuilds.count == 1)
@@ -16,11 +21,16 @@ struct ManagedCompilerResourceTests {
         #expect(catalogue.unavailableReason(for: .raspberryPiPico) != nil)
         let resources = try await VerifiedManagedResources.load()
         #expect(!resources.page.isEmpty)
-        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { _ = try await resources.toolchain() }
+        if Self.serviceBundled {
+            let toolchain = try await resources.toolchain()
+            #expect(toolchain.service.count == VerifiedManagedToolchain.serviceBytes)
+        } else {
+            await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { _ = try await resources.toolchain() }
+        }
     }
 
     /// Both default build overloads fail before preprocessing/WebKit and release the busy gate for fresh requests.
-    @Test func defaultCompilerFailsWithoutFallback() async throws {
+    @Test(.enabled(if: !ManagedCompilerResourceTests.serviceBundled)) func defaultCompilerFailsWithoutFallback() async throws {
         let compiler = ManagedSketchCompiler()
         await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { try await compiler.verifyResources() }
         let legacy = try CompilerFixtures.request(source: "int forbiddenGlobal = 1;\nvoid setup() {}\nvoid loop() {}")
@@ -160,7 +170,8 @@ struct ManagedCompilerResourceTests {
             try await compiler.verifyResources()
         }
         await #expect(throws: CancellationError.self) { try await verification.value }
-        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { try await compiler.verifyResources() }
+        if Self.serviceBundled { try await compiler.verifyResources() }
+        else { await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { try await compiler.verifyResources() } }
     }
 
     /// Loads current shipped metadata for independent mutation, never executable or deployment data.
