@@ -10,21 +10,21 @@
   },
   "service": {
     "path": "compiler.wasm",
-    "bytes": 101196044,
-    "sha256": "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33",
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493",
     "abi": 2,
-    "distributionReview": "pending"
+    "distributionReview": "approved"
   },
   "files": [
     {
       "path": "manifest.json",
       "bytes": 1211,
-      "sha256": "d6c7458d085e43d069bda0a16b1e2ed3931c51528118c3ecba862c08dc36cadc"
+      "sha256": "9fbf7807c22468083fd38fcf7870bd3c71b1b6d002b849631aa7a5cb31572c47"
     },
     {
       "path": "host.html",
       "bytes": 416780,
-      "sha256": "ee3012b38d47685abc66584185c2af0f79f888b6386831b24e6e28a37b979562"
+      "sha256": "f2a44df149d71d98c119370cededc9c727048c91942887a3ae2fdd87c181e5cd"
     },
     {
       "path": "LICENSE-MIT",
@@ -49,12 +49,32 @@
     {
       "path": "compiler-package.json",
       "bytes": 9822,
-      "sha256": "93f149a454b1fc1c60ea21775b7b860e99b1a4031f8c810fb1f5de3bc18c4fd4"
+      "sha256": "4cbdf856304063dbac59a27ea8703f74ffedbc534521b0d40d13013913d4dba5"
     },
     {
       "path": "compiler-sources.json",
       "bytes": 236986,
-      "sha256": "2063039b1eb5f3b2dd78bb3110d5bc2c558f31cfcb58e5b2ff149197c2fbebb0"
+      "sha256": "f4370f75d7cf6b643be05bf4e25040ed93143077a62235fbe06240c0095ebde8"
+    },
+    {
+      "path": "service-review.json",
+      "bytes": 3256,
+      "sha256": "2627a80ee5845929f030cfec6253f05e3cfc4f8c98bff69a0117b3d78114cb26"
+    },
+    {
+      "path": "service-source-notices.json",
+      "bytes": 116808,
+      "sha256": "6ea68ac9c6c2f898516bf450009c3f81d0605837242a059c3ab543339f38e817"
+    },
+    {
+      "path": "service-LICENSES.txt",
+      "bytes": 279797,
+      "sha256": "9ab50ae98ed397647627aaf95b5b4ab15bd0a6ffd1791f00b4b139ebf7dae817"
+    },
+    {
+      "path": "service-FILE-NOTICES.txt",
+      "bytes": 236570,
+      "sha256": "3cd2691f53b2dc6e2707c67202d5c1fd3a5941d4ae611880bf32a7023ce8a52a"
     }
   ]
 }

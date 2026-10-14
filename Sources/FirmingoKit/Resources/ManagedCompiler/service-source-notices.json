@@ -1,0 +1,3673 @@
+{
+  "schema": 1,
+  "operation": "candidate_service_notice_review",
+  "distributionStatus": "unresolved",
+  "binaryIncluded": false,
+  "completeCorrespondingSource": false,
+  "llvmCommit": "ca7933e47d3a3451d81e72ac174dcb5aa28b59d1",
+  "candidateService": {
+    "bytes": 101194565,
+    "path": "compiler.wasm",
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"
+  },
+  "sourceArchive": {
+    "bytes": 234305479,
+    "sha256": "dcdbe2d1fc2135dc726f06aa7b4fa4be9d81ac61f5fba2969d464f21b86089ef"
+  },
+  "sourceManifest": {
+    "bytes": 32340157,
+    "sha256": "7ba2a5cc1379a2c9c0e327a77846579e3010ac81fc76ed2e33d8254b6bb08b94"
+  },
+  "scope": "Conservative compiled-input notices, prior to section garbage collection; not final binary or delivery clearance",
+  "namedLicenseSources": [
+    {
+      "sourcePath": "LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "sourcePath": "service/source/LLVM-LICENSE.txt",
+      "bytes": 15141,
+      "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+    },
+    {
+      "sourcePath": "service/source/SOURCE-LICENSE.md",
+      "bytes": 1196,
+      "sha256": "434447b9abbd776991cd8efc98a89cb585ae90253b472ef4cb08a0be4f42f88b"
+    },
+    {
+      "sourcePath": "upstream/libc/LICENSE",
+      "bytes": 910,
+      "sha256": "2711a8b5a5cdfef0e639f96c1aca12ae23d7d64a02d0507f1bdf14d2b27bbc3a"
+    },
+    {
+      "sourcePath": "upstream/libc/LICENSE-APACHE",
+      "bytes": 10847,
+      "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+    },
+    {
+      "sourcePath": "upstream/libc/LICENSE-APACHE-LLVM",
+      "bytes": 12243,
+      "sha256": "268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5"
+    },
+    {
+      "sourcePath": "upstream/libc/LICENSE-MIT",
+      "bytes": 1023,
+      "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+    },
+    {
+      "sourcePath": "upstream/libc/fts/musl-fts/COPYING",
+      "bytes": 1514,
+      "sha256": "55af87e4017668f54467a3380e7ebbac5e672d8c763bfe95e6fc882a6fdc4046"
+    },
+    {
+      "sourcePath": "upstream/libc/fts/musl-fts/NOTICE.wasi-libc.md",
+      "bytes": 407,
+      "sha256": "6aa429513e3e883111aceab81f80f9da38613b7f74c966393ff33470c93a9daa"
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/LICENSE",
+      "bytes": 1292,
+      "sha256": "c8b789cf5a746611e6300a0cc7750dbf92b61912a709d04e639245f7290656d0"
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/COPYRIGHT",
+      "bytes": 6204,
+      "sha256": "f9bc4423732350eb0b3f7ed7e91d530298476f8fec0c6c427a1c04ade22655af"
+    },
+    {
+      "sourcePath": "upstream/libc/tools/wasi-headers/LICENSE",
+      "bytes": 12243,
+      "sha256": "268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/LICENSE.TXT",
+      "bytes": 15141,
+      "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/clang/LICENSE.TXT",
+      "bytes": 15140,
+      "sha256": "ebcd9bbf783a73d05c53ba4d586b8d5813dcdf3bbec50265860ccc885e606f47"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/compiler-rt/LICENSE.TXT",
+      "bytes": 16708,
+      "sha256": "1a8f1058753f1ba890de984e48f0242a3a5c29a6a8f2ed9fd813f36985387e8d"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libc/LICENSE.TXT",
+      "bytes": 15140,
+      "sha256": "ebcd9bbf783a73d05c53ba4d586b8d5813dcdf3bbec50265860ccc885e606f47"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/LICENSE.TXT",
+      "bytes": 16703,
+      "sha256": "539dd7aed86e8a4f12cbdd0e6c50c189c7d74847e4fecc64ce2c6ee3a01da38b"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxxabi/LICENSE.TXT",
+      "bytes": 16706,
+      "sha256": "e2b35be49f7284a45b7baca8fc7b3ab7440e7902392b2528a457816b5bb2a15c"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/lld/LICENSE.TXT",
+      "bytes": 15138,
+      "sha256": "f7891568956e34643eb6a0db1462db30820d40d7266e2a78063f2fe233ece5a0"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/LICENSE.TXT",
+      "bytes": 15141,
+      "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/include/llvm/Support/LICENSE.TXT",
+      "bytes": 303,
+      "sha256": "54cbc326a78b9400065bfc5830a57fdcdaf808286d4ac35d8a9e324aa77b7241"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/BLAKE3/LICENSE",
+      "bytes": 18691,
+      "sha256": "6a94bedb8b707ed97f6e310d0d015ab14e0683ffa0a612b02958581b9cc9fc0e"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/COPYRIGHT.regex",
+      "bytes": 2718,
+      "sha256": "0424e57d4303164dc59a8509c20dae0518b853692e5c2b0e98b11816fdbc97c7"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/test/YAMLParser/LICENSE.txt",
+      "bytes": 1058,
+      "sha256": "d0d8b09800a45cd982e9568fc7669d9c1a4c330e275a821bbe24d54366d16fe9"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/utils/lit/LICENSE.TXT",
+      "bytes": 15141,
+      "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/third-party/benchmark/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/third-party/boost-math/LICENSE",
+      "bytes": 1338,
+      "sha256": "c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/third-party/unittest/googlemock/LICENSE.txt",
+      "bytes": 1475,
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "sourcePath": "upstream/llvm/source/third-party/unittest/googletest/LICENSE.TXT",
+      "bytes": 1475,
+      "sha256": "9702de7e4117a8e2b20dafab11ffda58c198aede066406496bef670d40a22138"
+    },
+    {
+      "sourcePath": "upstream/wasiHeaders/tools/witx/LICENSE",
+      "bytes": 581,
+      "sha256": "8a29d5e911226e86f898fc689d939b2c6b2e3b238343fcbf1d0b4e7dc3c7ea40"
+    }
+  ],
+  "sourceExcerpts": [
+    {
+      "sourcePath": "upstream/libc/dlmalloc/src/malloc.c",
+      "sourceFile": {
+        "bytes": 224221,
+        "sha256": "9e7ce51d813331ae87ef235f6ca2d5ce2167692e30bb51a173513e3754a67f8f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 6,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 269,
+        "sha256": "80cd40e7a6955355308ece79af9e8dcb3646af20e79c75ac6f3f9bf02536e929"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/fts/musl-fts/fts.c",
+      "sourceFile": {
+        "bytes": 33105,
+        "sha256": "58ee0ad7198f74d941709576bab5334920352be2f5b6a1e13f6d1bddd99da697"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 31,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1662,
+        "sha256": "5ce58c570cb20ed99cf9da24941c84926602bb2c0b64a9c3ea963ae947fb2b65"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/fts/musl-fts/fts.h",
+      "sourceFile": {
+        "bytes": 5719,
+        "sha256": "e9c12ec01903fcff2a015fdf651d0a095ffcd080b227fbf4790236532541343a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 33,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1698,
+        "sha256": "49946d2772ae173585e5714126d6fffaad491689b0b805a89dafafbb3f624e50"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/common/clock.h",
+      "sourceFile": {
+        "bytes": 547,
+        "sha256": "8f15cc1239f1401ff2e064b0fd02b98a345b33f8f1a004a723acc96ae367ef63"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "ed47d75d2d0979da5ee8e4db706609b4a33a5ce6ad74c20c080b1e067f94dcdd"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/common/limits.h",
+      "sourceFile": {
+        "bytes": 1262,
+        "sha256": "8a54bebfb34bf4bc6e0974a9fe36bf3105d38452400d4121c58e745243a71c14"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/common/time.h",
+      "sourceFile": {
+        "bytes": 6057,
+        "sha256": "295584fa3edc844acc64397af5dd54117d1ecb4b55c9f71b6343a73d92bfd541"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/include/_/cdefs.h",
+      "sourceFile": {
+        "bytes": 1619,
+        "sha256": "5476bc1e1c36ef59a0f42e9237d87df3341ae25480aba5297ae49513dceaf8ba"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 23,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1338,
+        "sha256": "a0148dd3f54019196e64d239ad776a76eb7fd017fdd0883aa69d4ffb3ecb07d9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/closedir.c",
+      "sourceFile": {
+        "bytes": 193,
+        "sha256": "f1def7d7ce8a0a22feb274817ae10fded6b71d75fa761174dcf46aa622b8c051"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/dirent_impl.h",
+      "sourceFile": {
+        "bytes": 1528,
+        "sha256": "872f49c59273caecb6a241fbff8456b13daa96a243f844b7e1a38f32273c0a31"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/dirfd.c",
+      "sourceFile": {
+        "bytes": 181,
+        "sha256": "6a2be3606ab22164d93bf21b63089d7df399bf9d7bf3fe38b2264599ff1083bf"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/fdclosedir.c",
+      "sourceFile": {
+        "bytes": 334,
+        "sha256": "09a6ff99c7004a70cf15e797131d6cca4b7f56953891a945cba79f4cb8e1c481"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/fdopendir.c",
+      "sourceFile": {
+        "bytes": 2285,
+        "sha256": "3455b398547d82b9bb9d6af9fdbe76699da6362cf0cb44adab056ce7c0288bb4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/opendirat.c",
+      "sourceFile": {
+        "bytes": 552,
+        "sha256": "5bacc43e8b70371679bc3856de592edb5aba75032898d46658089f0b4efb54d3"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/readdir.c",
+      "sourceFile": {
+        "bytes": 10562,
+        "sha256": "cb8fa8a4b5c6af1d528154a744b0f6867ad34c07fa7d774c23dfdfc08f6125d8"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "f1f7e2563a0c22d7a5b15f0c3ce786059a3ed95ac76b07beb1c0e4cd958d755b"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/rewinddir.c",
+      "sourceFile": {
+        "bytes": 572,
+        "sha256": "6b0e838725aecf84ba2563d5ab3cc4eda34fe25d092eddfa1a616b3ea2551540"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/scandirat.c",
+      "sourceFile": {
+        "bytes": 1452,
+        "sha256": "d42922c725097c75f732fa210fa6f98f1f64507926300e9f7ef5a7ee885a3c23"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/seekdir.c",
+      "sourceFile": {
+        "bytes": 626,
+        "sha256": "5000813988f64ad952705a2d97fc67dc05abe922e265962bcf113613960bb0a2"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/dirent/telldir.c",
+      "sourceFile": {
+        "bytes": 344,
+        "sha256": "52637b2eb528a429b01ef4ed7033c11b5520f39e4c141ba051657f521c306574"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/errno/errno.c",
+      "sourceFile": {
+        "bytes": 5252,
+        "sha256": "9a72b24a7caa67a17a0d2596d00972d6924c109a8e2cbaf172d30a6eae101607"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/fcntl/fcntl.c",
+      "sourceFile": {
+        "bytes": 2399,
+        "sha256": "55f99b2e4b1d532412578b360f9b99a91935aa69322a58861e78970347dea09e"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/fcntl/openat.c",
+      "sourceFile": {
+        "bytes": 5465,
+        "sha256": "52d78b79ef8fdd19db41a47fdb7886d62d79bd274fb6082da34eb29d5bdf002a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/fcntl/posix_fadvise.c",
+      "sourceFile": {
+        "bytes": 2103,
+        "sha256": "ff18fcad8bcd2e95518a538ee463b6138203644b6ec6f3baebe33a749fb79e29"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/fcntl/posix_fallocate.c",
+      "sourceFile": {
+        "bytes": 515,
+        "sha256": "4e1d87a1f09ef663b1bccccaada8b855e019dbfa1f54355417d3f58e686dce67"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/poll/poll.c",
+      "sourceFile": {
+        "bytes": 10277,
+        "sha256": "fd403f6e39868b7b2f1c2b5aeddb8e6fcffe3b3ec765cc6596ac719b9071eafd"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sched/sched_yield.c",
+      "sourceFile": {
+        "bytes": 325,
+        "sha256": "4249ed029263cdcdb1fb71c1d76ca5dfc5962f89dea590eb28be6929695d5219"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/stdio/renameat.c",
+      "sourceFile": {
+        "bytes": 1552,
+        "sha256": "15516b321434c42ffd4ded518adccc0844b25419db53f11d660d8677d3a081af"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/stdlib/_Exit.c",
+      "sourceFile": {
+        "bytes": 494,
+        "sha256": "cf707b49505202a0af1d7115b1c28687f8c98286b5631dd893df42a072074b85"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/ioctl/ioctl.c",
+      "sourceFile": {
+        "bytes": 3092,
+        "sha256": "7dcbfb608b131dd02bacbb038b381fb275458811bddce4af4fcfd7255662ad1e"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/select/pselect.c",
+      "sourceFile": {
+        "bytes": 2995,
+        "sha256": "8051f34de0b3f6689b4694792203818f9368795cdf5f777b1c336f0fb0baff19"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/select/select.c",
+      "sourceFile": {
+        "bytes": 763,
+        "sha256": "4ed4bcf6b13f12e6fbf9964d4e72dc2681cd3545a5e2b1ab54b4877aac89164b"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/socket/getsockopt.c",
+      "sourceFile": {
+        "bytes": 1216,
+        "sha256": "0960c22d7a9cf3da086bbd17ae58c238133ba7ddd5b5290e8a4ea3a79980e1cb"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/socket/recv.c",
+      "sourceFile": {
+        "bytes": 1120,
+        "sha256": "b2f79dc66c2039972a7f55e9acb743047bfaeedd2422de847c89857eb2e80fd5"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "f1f7e2563a0c22d7a5b15f0c3ce786059a3ed95ac76b07beb1c0e4cd958d755b"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/socket/send.c",
+      "sourceFile": {
+        "bytes": 782,
+        "sha256": "bc90ba43a5255e5eeaec9f3f6c9ccf3ae51a1a26a281270a20aafa950085fd0e"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "f1f7e2563a0c22d7a5b15f0c3ce786059a3ed95ac76b07beb1c0e4cd958d755b"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/socket/shutdown.c",
+      "sourceFile": {
+        "bytes": 613,
+        "sha256": "4d0e9b3e477cfffe5900e3df7dfe27dc1b1cdd570a7e94a90d1957561166ebba"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/stat/fstat.c",
+      "sourceFile": {
+        "bytes": 804,
+        "sha256": "a43c8cecf91081015904d92045f2a7557c33a29bb3480350cd6c906b7412cf29"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/stat/fstatat.c",
+      "sourceFile": {
+        "bytes": 2713,
+        "sha256": "bade40ff28ff0d29e81107feb62a13144058344b4d4b3a009737a6aa3addeb0a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/stat/futimens.c",
+      "sourceFile": {
+        "bytes": 1663,
+        "sha256": "e7dedbb91a293dc84287fb0ef472f10e8027ea8d6a4b58695d9d301d3a77d449"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/stat/mkdirat.c",
+      "sourceFile": {
+        "bytes": 1177,
+        "sha256": "38c7a749317a755cb67f0ac6275cecd5a95d9354a1766944d62c4b1dc0fc5eb7"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/stat/stat_impl.h",
+      "sourceFile": {
+        "bytes": 7011,
+        "sha256": "993c148a4c4e028cb0fccf3ddeed3aa5e6bbe68343adfb4d91c0ac3b6c5673b8"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "f1f7e2563a0c22d7a5b15f0c3ce786059a3ed95ac76b07beb1c0e4cd958d755b"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/stat/utimensat.c",
+      "sourceFile": {
+        "bytes": 2582,
+        "sha256": "e8a45e50a47765b7432efefa8022921c50f20ddcab55b8edb8282c8f75fe0479"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/time/gettimeofday.c",
+      "sourceFile": {
+        "bytes": 775,
+        "sha256": "a43d3998203e1a1d5397382f0671afe366cb772c2a5bf40153a17a585cde5134"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/uio/preadv.c",
+      "sourceFile": {
+        "bytes": 1057,
+        "sha256": "4ad5586cd199ca12fee0240831018a4ba258e1ffd532b634e93da7c3dcf6b38c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/uio/pwritev.c",
+      "sourceFile": {
+        "bytes": 1068,
+        "sha256": "5b1b00bffd5548c7dcf2a0b187437132142bd683c2b86f4a6e6cc247501ac764"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/uio/readv.c",
+      "sourceFile": {
+        "bytes": 1605,
+        "sha256": "83217ce5a5d465ec48b19b259927345da9f1ff763ddf9f50a98f6066704b9964"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/sys/uio/writev.c",
+      "sourceFile": {
+        "bytes": 1717,
+        "sha256": "21a46792dfe7e674a015736edbf35f2be704ea672de66a4327398ca184636a74"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/time/CLOCK_MONOTONIC.c",
+      "sourceFile": {
+        "bytes": 421,
+        "sha256": "534da2fe7211c6233c3b155f74fa761d3509fab8453b95e03955e1c336229959"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "ed47d75d2d0979da5ee8e4db706609b4a33a5ce6ad74c20c080b1e067f94dcdd"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/time/CLOCK_REALTIME.c",
+      "sourceFile": {
+        "bytes": 416,
+        "sha256": "73c0e25943748a02db472bd4367e786196d60cd9722b570eb731740568d430e0"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "ed47d75d2d0979da5ee8e4db706609b4a33a5ce6ad74c20c080b1e067f94dcdd"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/time/clock_getres.c",
+      "sourceFile": {
+        "bytes": 1318,
+        "sha256": "90eea59e745e46afe29c3878b7d481c3f60512231e86ca2fc212e8a2848228d4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/time/clock_gettime.c",
+      "sourceFile": {
+        "bytes": 1144,
+        "sha256": "aba5229013ccda6ba5fe09f119e3f0a513c3fa6a08d4941d0ff3ed821ed95ddc"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/time/clock_nanosleep.c",
+      "sourceFile": {
+        "bytes": 2028,
+        "sha256": "63e9c71634e2abcf094434b48cc75fe5444991cc403213be442021c6a8a6e2f3"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/time/nanosleep.c",
+      "sourceFile": {
+        "bytes": 575,
+        "sha256": "f915671cc0fdc6313a8a0a0a0c277a432f03acf06841e0a6b24cdc29d51336af"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/time/time.c",
+      "sourceFile": {
+        "bytes": 731,
+        "sha256": "f4ccf475a401ef46c44cdb8140eb6c19d03fd377bc2e86625f5c6997067b7c53"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/faccessat.c",
+      "sourceFile": {
+        "bytes": 3421,
+        "sha256": "21ba82a146c7bf210e47fb189c135106b295ed877c74f1294f60a4ced7543485"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "ed47d75d2d0979da5ee8e4db706609b4a33a5ce6ad74c20c080b1e067f94dcdd"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/fdatasync.c",
+      "sourceFile": {
+        "bytes": 919,
+        "sha256": "674e2231c8312caddc2ef1ecf3c5fa49756be560681d6da7933d89527057859f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/fsync.c",
+      "sourceFile": {
+        "bytes": 887,
+        "sha256": "a20819292fe8ac2793c6a1439933e1dc657319e45d473341abf522ae923e430b"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/ftruncate.c",
+      "sourceFile": {
+        "bytes": 996,
+        "sha256": "ba5af91565149c08ce16c1db77a29d7c97536de4499d4fba1c29ce13e3bcb3f3"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/linkat.c",
+      "sourceFile": {
+        "bytes": 1925,
+        "sha256": "6006bf8a5aa826b884988b8ab53e6db06247fe991ca5ae20eaa94526b4c4e4e8"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/lseek.c",
+      "sourceFile": {
+        "bytes": 1202,
+        "sha256": "84f7b9c9ff75d83bccfd2d31ba3ed5afbd7e2cfcbecb4993d1d25e9e8c29554c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/pread.c",
+      "sourceFile": {
+        "bytes": 3133,
+        "sha256": "695244b6d36861c94795feccc8a17a884ad0df9b2d5c20f09595a963052cd3d9"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/pwrite.c",
+      "sourceFile": {
+        "bytes": 2922,
+        "sha256": "325842de54e1ac54ff280b6e1295ad38c7ed05b142bf82ac3312608271ed16b8"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/read.c",
+      "sourceFile": {
+        "bytes": 1078,
+        "sha256": "638705aadbb0b628c804aeb7ca81901b86d6649c7fe4e16f1448cca00845736c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/readlinkat.c",
+      "sourceFile": {
+        "bytes": 1828,
+        "sha256": "72c6670ba9bcb5c4412d565d0ace0fbc0266bc0daed2b2d78f0d5920767e2460"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/sleep.c",
+      "sourceFile": {
+        "bytes": 648,
+        "sha256": "4c4c8cc0df78553fe198c4b4012bd1d42d9f6c7f967b410e19ca3b54e955434d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "50fd38d8be8d149c498771f0b78e6e6ac8c42444a1685c2cf1954694fcfcc08e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/symlinkat.c",
+      "sourceFile": {
+        "bytes": 1464,
+        "sha256": "634da514519bc9cff5d774caafd4bc6f9c52c109c3034b6b09d84f944fa5844f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/unlinkat.c",
+      "sourceFile": {
+        "bytes": 393,
+        "sha256": "6ba5bf1b5ababf548a74feba8b36a6a6f0f8103f01bd41d518a65f2fd745d087"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/usleep.c",
+      "sourceFile": {
+        "bytes": 749,
+        "sha256": "4387833a8c3c96d54f077928b8e254b42dc46316bc5e275be973a9e16325c45d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 90,
+        "sha256": "ed47d75d2d0979da5ee8e4db706609b4a33a5ce6ad74c20c080b1e067f94dcdd"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-bottom-half/cloudlibc/src/libc/unistd/write.c",
+      "sourceFile": {
+        "bytes": 1100,
+        "sha256": "57091ac785c92213d4820357908084e3ca71874b1a16a300658945bc402f3207"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 95,
+        "sha256": "0511567481b0445b625bd92e7b4c2b204f9c27b1b5906c963587d9948a55c2c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/__cexp.c",
+      "sourceFile": {
+        "bytes": 3287,
+        "sha256": "ffcf569466b0ac3defff943c989b6b181c7c41dc4f9538c32944459a5272203b"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1426,
+        "sha256": "4185407562b2745b52609fc1aee8640d21b96d56c6d43be8d72342b7d3de5bf8"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/__cexpf.c",
+      "sourceFile": {
+        "bytes": 2419,
+        "sha256": "3cedd5c25cc80d78713bd44c53c7f3170dad26fde14ea5eb3b0028bfede24517"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1427,
+        "sha256": "929182ed1db73ac897a93d2921ab99b66a8e8e473fa5d8c3333b1fa05c89101f"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/catan.c",
+      "sourceFile": {
+        "bytes": 2546,
+        "sha256": "056cc1842d173fe90297adb4c088745cb3bcb37c95b56d72c246ae505e470eb5"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 60,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1814,
+        "sha256": "283bf32d75c4f711231481b6efc8b880a702e83c7e4f0b5507d35a1610a8b0d2"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/catanf.c",
+      "sourceFile": {
+        "bytes": 2357,
+        "sha256": "2dbd38c8d786140372a04bfde641a9e290a842fe29133d3d0cd9f629170b9fc7"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 55,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1580,
+        "sha256": "de92718eb20e81ae55faddffe195eb36d9fd3aeff067e714d94fb32600d0a869"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/catanl.c",
+      "sourceFile": {
+        "bytes": 2891,
+        "sha256": "3857a0a047869d9219421a12a4ada0f384e9fbe7c21b3c9516622852f475cf1a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 59,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1799,
+        "sha256": "270316857d829acc88d3b5a2190d630826ef9a9c726064b59ddfdda4cc661fdc"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/ccosh.c",
+      "sourceFile": {
+        "bytes": 4762,
+        "sha256": "9997abb272468781bc9b6b61a1550e95d1f956df109e0a646d578a3dc2c3aef9"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 36,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1689,
+        "sha256": "b5680ddf6458413c09519c65cee8ce6bfeb46c872268939075399d20e76ad5cb"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/ccoshf.c",
+      "sourceFile": {
+        "bytes": 3034,
+        "sha256": "6ebf4355682268356685ba79621a47f2f955ca910bf13ca6ed32bb52e893574f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 30,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1492,
+        "sha256": "d5e1ce612bddc55a2e86ff9fa4e74755d963270716e2ec23552177b7b6282d2c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/cexp.c",
+      "sourceFile": {
+        "bytes": 2852,
+        "sha256": "30943458b19d417812e326d8a61a2413ebce139c826c997ad6598dcddb6e673d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1427,
+        "sha256": "d2daf290be2ddd3ae6f19400c624c347b478a10c064c92c42b5df243676cf80c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/cexpf.c",
+      "sourceFile": {
+        "bytes": 2820,
+        "sha256": "7de06c6bebd823987c5eefe19821b8a473332ec724d6cc0a6a27955a33ba3734"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1428,
+        "sha256": "0730245c061cd9cd7ab21bf32a5e8baaf5296f86a3680be9cf9f897ede74e150"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/csinh.c",
+      "sourceFile": {
+        "bytes": 4748,
+        "sha256": "ed236ed0232c73d39a372a6799ba63b2eaeccc5f03aca0045fcb1504bb489489"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 36,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1687,
+        "sha256": "c954df6562dfc6b43e5357585369d227dc0478578d33adf005049f6ded2f806d"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/csinhf.c",
+      "sourceFile": {
+        "bytes": 2995,
+        "sha256": "4ed3be03188b48d701d8edaa88b0e282cb2ec88b8af1c2f0e2a3f76fba60a773"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 30,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1492,
+        "sha256": "9e79aee05d7fe85ccbd26b3dcb486477b50875a1d3d0bcc01eb5f51740eef538"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/csqrt.c",
+      "sourceFile": {
+        "bytes": 3139,
+        "sha256": "4f6cfa6aec61754c1ee2ea683ec00e7837eaa1993edafbc516c6c4978e3567b4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1428,
+        "sha256": "a314853abf46777e192cd204cd77cfbe93e41e8d9573ceb4a030f36979207379"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/csqrtf.c",
+      "sourceFile": {
+        "bytes": 2915,
+        "sha256": "8dd69a3ec2052cf54f38e61156b057c2ff74d00da9db64da63f646e30a36e8e3"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1429,
+        "sha256": "967b2da1d781226db594cd54f246b53368627e6f40af569827591eebd30e6b58"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/ctanh.c",
+      "sourceFile": {
+        "bytes": 4200,
+        "sha256": "7daa31e0831e9805934bd0e6a33816daf16c0bf1076babeb9799fe6e185ac045"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 65,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2490,
+        "sha256": "083617f0162ff523023feb471a1aacb7a6f3ddbd04571b2d48617f34965d7ea0"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/complex/ctanhf.c",
+      "sourceFile": {
+        "bytes": 2253,
+        "sha256": "1ebb7bddc872c96bf3e7c8d1a529c14f28db4cf75cc8237fdb1ad62764b405bf"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 30,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1474,
+        "sha256": "afc68428f18621ce0d02fb0d8dd29c271e53ba0ea49797dba347a3c492be57a3"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/crypt/crypt_blowfish.c",
+      "sourceFile": {
+        "bytes": 29664,
+        "sha256": "0f9054739e295e3e981e7aa29c8f287a190aef065b84a82a4c6817120d5da05d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 49,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2186,
+        "sha256": "8e178cd4324cf31ec3cdcc9c8db9de584d970a19eb967860145339b7fe818b30"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/crypt/crypt_des.c",
+      "sourceFile": {
+        "bytes": 34020,
+        "sha256": "546b4ee35446fb2a551d7414779395789f81d53aefbabd8914375686af5d228e"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 55,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2777,
+        "sha256": "1ea3b48775f547b8ad7c4eca104e8a931a91cd6eff8c54de29ce6a4d51066960"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/crypt/crypt_md5.c",
+      "sourceFile": {
+        "bytes": 8121,
+        "sha256": "85d1d364c100fc982e99adb0d176e1d4475d175fc5c12bba696cda9c62d62c6b"
+      },
+      "offset": 304,
+      "firstLine": 12,
+      "lineCount": 1,
+      "selection": "internal comment notice",
+      "excerpt": {
+        "bytes": 71,
+        "sha256": "12f74e03b9ba352153ad48d4c0099a758506b2b90b75b34346a784ccbd4cf3ff"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/crypt/crypt_md5.c",
+      "sourceFile": {
+        "bytes": 8121,
+        "sha256": "85d1d364c100fc982e99adb0d176e1d4475d175fc5c12bba696cda9c62d62c6b"
+      },
+      "offset": 4188,
+      "firstLine": 155,
+      "lineCount": 25,
+      "selection": "internal comment notice",
+      "excerpt": {
+        "bytes": 1358,
+        "sha256": "0210a0ce49f8e7a9871b9133a050d978ed056e4aab2ffc7644fdf28076c72b5d"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/crypt/crypt_sha256.c",
+      "sourceFile": {
+        "bytes": 8466,
+        "sha256": "26f3ae83a89a52640f3979df81eb50a431e75c83d5c18f1487325a39ee84fb73"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 9,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 371,
+        "sha256": "3a7552806d351a14123aadcb56588504b196c2633e2ee5899f7e22ccc218ced0"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/crypt/crypt_sha256.c",
+      "sourceFile": {
+        "bytes": 8466,
+        "sha256": "26f3ae83a89a52640f3979df81eb50a431e75c83d5c18f1487325a39ee84fb73"
+      },
+      "offset": 470,
+      "firstLine": 16,
+      "lineCount": 1,
+      "selection": "internal comment notice",
+      "excerpt": {
+        "bytes": 60,
+        "sha256": "7894cd037ed7157c9f588baab5fda771da62bedb415c0a9207e473eabf11ca2c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/crypt/crypt_sha512.c",
+      "sourceFile": {
+        "bytes": 11194,
+        "sha256": "7148156d195d9bef7eb57a1b2108439679a02372d0fac418004722513bd7b95c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 9,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 371,
+        "sha256": "123d0f2e5ece8c6ac740c7fbc8574174be29f654b4d89d86763931753c962d62"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/crypt/crypt_sha512.c",
+      "sourceFile": {
+        "bytes": 11194,
+        "sha256": "7148156d195d9bef7eb57a1b2108439679a02372d0fac418004722513bd7b95c"
+      },
+      "offset": 470,
+      "firstLine": 16,
+      "lineCount": 1,
+      "selection": "internal comment notice",
+      "excerpt": {
+        "bytes": 60,
+        "sha256": "5b592324f887645816b7560a92752dd32b16b0d82f4da35dc15aacf52253bf77"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__cos.c",
+      "sourceFile": {
+        "bytes": 2884,
+        "sha256": "3f0f774aab60a18d7ef935ffdf121bcda17cbadabff14096c614da22e31a42c1"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 50,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2264,
+        "sha256": "27047e42e3a4b71c63b76080ffe0717310b91d38ef4d15c940bbadc1eb8ff420"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__cosdf.c",
+      "sourceFile": {
+        "bytes": 1102,
+        "sha256": "0ba872cc7e26b93bb9784d19fee84b263e1fa3543a76ec3c0893aea47453a2a7"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 562,
+        "sha256": "2c5ca50ddd8ea3d2e5d6a02e212842567aae377abd6ed57e0d0e8888c9fb94ae"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__cosl.c",
+      "sourceFile": {
+        "bytes": 3855,
+        "sha256": "fd644ce4ab8797b1220e2197b284212094a3b299bdf2c4faf66ead81b0fc620d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 562,
+        "sha256": "143a675d5409a23faa8a6853e69b9a06d7dbde9060869d0c67322114176e4333"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__polevll.c",
+      "sourceFile": {
+        "bytes": 2305,
+        "sha256": "4fef0127318ba19fd5796b6b69a938030d22adb16aaab2ade3e634c8c5c93479"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 56,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1738,
+        "sha256": "623dd725dd81582fa9a4c57a7be715056559a30d453ded9e8ce25a4036a71fd5"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__rem_pio2.c",
+      "sourceFile": {
+        "bytes": 4904,
+        "sha256": "79dd77a6ccf3656263f650bb6ca7de3ea2f1dccc1ff58758ca06528aef6f7cbc"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 19,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 589,
+        "sha256": "0bd9382fac6f493f9dc5f4eaa4c2012cc04951048f045aea7121e5540b08d871"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__rem_pio2_large.c",
+      "sourceFile": {
+        "bytes": 16408,
+        "sha256": "b97f19fb5951c83a0c10506fab35646caefde13bd03100ad2af55ef00af0b9fb"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 124,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 4831,
+        "sha256": "82c5481a6eed4acef10144da0860ed303595437a9f054254ece6bc1584b0c89d"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__rem_pio2f.c",
+      "sourceFile": {
+        "bytes": 2424,
+        "sha256": "3292f317137014d2d1fea557f6b6d9ab849e819cb18f3944a3381a68a36e319b"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 22,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 732,
+        "sha256": "d35098402c1cc702758ebd75de69e834e6f24efe2c38ff419d7fbb9eb476bec8"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__rem_pio2l.c",
+      "sourceFile": {
+        "bytes": 4987,
+        "sha256": "4b6fe587b598d387fccd2ce9cd2edb44b07a0dff63ef3eb5f6b8e5950dd3a18f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 14,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 544,
+        "sha256": "d487153f0370371447fac301eb2ae8003e9cf763ff4bc9c3a6bdd7ef500edf8e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__sin.c",
+      "sourceFile": {
+        "bytes": 2364,
+        "sha256": "f3a37ef9bcfb8a2f9c809d8c7f1aa2c17c8c3319ad7fb2fe7c0a6284ea8859d2"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 41,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1710,
+        "sha256": "e651c1164fa50852a81332d2a3962dd0de64c64735f47b2f0e846f94f1da8d38"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__sindf.c",
+      "sourceFile": {
+        "bytes": 1101,
+        "sha256": "de7026bcd159b7d06a8cbcc162df722014f3b1a3cc4183116b6b7829eef1d118"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 549,
+        "sha256": "701b472045d066eaeab43d5a94c692d87aecf5401ecab9064dfbf93a6a1a0c2e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__sinl.c",
+      "sourceFile": {
+        "bytes": 2890,
+        "sha256": "b6dfffc327cac147a0a2b17a12e9f4ec8ff6df463733db55c316a55ef4bcdb96"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 14,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 561,
+        "sha256": "07408ceca7418281d9fdf2684d448079541295866020dd09c4469a881adaf881"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__tan.c",
+      "sourceFile": {
+        "bytes": 3963,
+        "sha256": "e18b65b69fced8dbb2d3ed1a3dc6daea0e9f857f2762f274380bd89a6f89d2c4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 45,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1916,
+        "sha256": "daeafcdba6eed4bac3fb9ab78e2e410f7bd5a8a9c733558645ec392725eb0b6b"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__tandf.c",
+      "sourceFile": {
+        "bytes": 1869,
+        "sha256": "60455f3cc0ac743f3eaf0017a3a4f0adbab37c0ee30d29397852d22904c40444"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 484,
+        "sha256": "cd8d03dca6657c0e15589067270f1d0760deb456d630c76b53929e8d3f151d23"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/__tanl.c",
+      "sourceFile": {
+        "bytes": 5411,
+        "sha256": "3788db7251d2e14b17e761bc2eccd0d8faa3c72c16eef7a56ca2ca75eca177df"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 13,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 495,
+        "sha256": "c060e5c6efa98c3267ee67929e4ec242161f972875c863a1087c826c78db6582"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/acos.c",
+      "sourceFile": {
+        "bytes": 2931,
+        "sha256": "cc6f9017e7e2e0ef01516fa12c68aa63865e6415c90dc039dfce9abffae09a4c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 35,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1194,
+        "sha256": "00e4450ab1ffd72751892acf5f406e6ef14dc25e31b9d2409091c27805a41153"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/acosf.c",
+      "sourceFile": {
+        "bytes": 1567,
+        "sha256": "b20b3dcb58ce7cc55963945f8cb83efbf064b29d2da3011f2cec5d08459f2aa7"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 518,
+        "sha256": "26f635e6704ab557c488f52d4bcf04448189831625e3877867528f73fdd6336c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/acosl.c",
+      "sourceFile": {
+        "bytes": 1610,
+        "sha256": "ed40b99c604aa593ee2ee71c02f928cb68c1afdf8a18243b0e7b6cc9a65586c1"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 534,
+        "sha256": "6cc7ef54b91edb77d086b0316f30a33bde2f22daff74ad4367a984354dd38d9c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/asin.c",
+      "sourceFile": {
+        "bytes": 3402,
+        "sha256": "9302dd0b2f302f7b7decce82e737ed250bae1bcc65c19eaf3d7ec19010892e63"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 41,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1546,
+        "sha256": "16e4c9d33a06c014651a46f607bc777d8f92cb625aeebca97fbf2efb6441a8c5"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/asinf.c",
+      "sourceFile": {
+        "bytes": 1462,
+        "sha256": "6bc9b2392b81efa4c6a80c8602a2c0898d3b5c77444f6d3266ac71c18df222c5"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 14,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 517,
+        "sha256": "4d883695a193d68437dce3c3239958e7b4b342c1f5ecc0ef17af9c3becfc1b68"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/asinl.c",
+      "sourceFile": {
+        "bytes": 1817,
+        "sha256": "4a0e729842b1bf3181bad43b2f048dd3652b73456e0a3f44f6e65c2c51765e9f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 534,
+        "sha256": "b76dcdbac1883c9ec0637f40f09c5d203a2c3a18c8dec98f02860283d6bcc56f"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/atan.c",
+      "sourceFile": {
+        "bytes": 3934,
+        "sha256": "1cffb67a65456ae0bc5f07a94df04a4f18ebc1ac0bffe3219250c4e0555ee01d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 32,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1308,
+        "sha256": "79d56218788d2a27bcb1cf05f51446c763f65d4c8f419a3bbcd074e464b735f5"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/atan2.c",
+      "sourceFile": {
+        "bytes": 3283,
+        "sha256": "a5f94b09b10b4e72bb15d94ae403c9dfd27d7ad881ecd729000004429acfca63"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 39,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1503,
+        "sha256": "02552e5f14ecd5d6ed4c022f38c88890f2e11e5722751f039032638ab3c663c4"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/atan2f.c",
+      "sourceFile": {
+        "bytes": 2216,
+        "sha256": "31a61a0a4c7b00db625b708525f24673a83df868a3e363042c9cc9dcf0aaeec8"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 519,
+        "sha256": "24e7fb6b73a5c519659bb305a4e668e8459d9cab949c9cde283b570d29d77a64"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/atan2l.c",
+      "sourceFile": {
+        "bytes": 2342,
+        "sha256": "c13d4d9e1329ffcbbf3ef1dd755602c771612f2dd98f38464fc9fb0f7bdf3c68"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 17,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 539,
+        "sha256": "a3ff443831c1771ea8af843ac0b7215bcd5a932752eb1f09b64b5698a4ce4481"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/atanf.c",
+      "sourceFile": {
+        "bytes": 2373,
+        "sha256": "e0533d7b72aabce311a758a1f94fd15e5d4067be73b716cb1f425df5bc9039d6"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 519,
+        "sha256": "78aa5bd1e4ac60fe0658e3571bf5e29fed01c342e6e2f03e06b38248c04694f2"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/atanl.c",
+      "sourceFile": {
+        "bytes": 5463,
+        "sha256": "5c6f655740e6f594db8a045e529582f20613d14ac2bca8bf3f881145bf459325"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 533,
+        "sha256": "efa46dd83d1c949b3b9d30c2b8183f3892a49fc0167e6aad12296e465b09deb0"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/cbrt.c",
+      "sourceFile": {
+        "bytes": 3761,
+        "sha256": "af442893d4048c0eb485b93b5628792fb796d45ffc0f88c682041366c7da611d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 17,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 509,
+        "sha256": "8b96b75f42c2319887a8f8a25a0dfe058539ef538d2e0741115b9804ceb61c51"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/cbrtf.c",
+      "sourceFile": {
+        "bytes": 1710,
+        "sha256": "87b7065f44ac0cef6d21385c2b453dde7e15a51e9008ae0d726cd9eaa2dc43da"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 19,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 604,
+        "sha256": "709082ccdab6291906c65f4e24b8537219e8e4183e4afba2cf6ce947e03ff5ed"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/cbrtl.c",
+      "sourceFile": {
+        "bytes": 3225,
+        "sha256": "ee82c17b1a24681dfd7de0161088b45ecbd2d0346ddeda9d4594b48e4da0d3e5"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 17,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 665,
+        "sha256": "4378762e10156c2fc17283dbc2434beb44f47ea186f47a5e3585681edaff7c58"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/cos.c",
+      "sourceFile": {
+        "bytes": 2111,
+        "sha256": "3a74e054057d636fa494bdd76a53a40db5cee618264f6ab31cb0538ba63c6bda"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 42,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1489,
+        "sha256": "3a74ecd1eabada0e4a750c7866b3e7c8d8fe48577b98baf10113cada5acc49a6"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/cosf.c",
+      "sourceFile": {
+        "bytes": 1921,
+        "sha256": "33cf828e8e733da2b72c723b9ff20057b9a4f10df72a3923dadcb626c23d222c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 549,
+        "sha256": "b678cacff093c1956507564f4b9ad9a1951cfb46cb87aebd88ee2031b25f9667"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/erf.c",
+      "sourceFile": {
+        "bytes": 10346,
+        "sha256": "795f05c9388ac277ab27cb5dc63fb4f82620a0ee11eaf8403201df5bc65c0f5b"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 105,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 4309,
+        "sha256": "a72a3ee825eb58aeb048aca60e1a15226450d24a4738e919d06d33a21f6a452e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/erff.c",
+      "sourceFile": {
+        "bytes": 5350,
+        "sha256": "876ad823d25e58330628ccdc5d24a3f10cc255135046a4e2903daf33cb75c18f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 517,
+        "sha256": "c9c0a35502ede5e105aa60388a3716bd442a917826ec4162c20667469dbe7d6e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/erfl.c",
+      "sourceFile": {
+        "bytes": 12311,
+        "sha256": "dcce5b86a37215aee265ae27c1a00526542ab13d1dd609a560de3e3e9049a3e6"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 100,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 4133,
+        "sha256": "3a46e7e1ba545e8ee9ffd00960eb758e46fc5ade4231bb4808ac91fa379c2df9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/exp.c",
+      "sourceFile": {
+        "bytes": 4485,
+        "sha256": "7db56f21ca9b8915d36dd5099b707aafeb6a736eae798e19b76b074764e75f34"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 113,
+        "sha256": "d879464986502f5a108b0b25095f85968c7fe617f656407b6ebb2d8b1be9874f"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/exp2.c",
+      "sourceFile": {
+        "bytes": 4096,
+        "sha256": "b771de769e1b69b931d1f95baa39b429a73c9904e8b5607e1736771c6ace92b1"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 113,
+        "sha256": "e1017045b7be3852669b46ce0d74a56f6cdaa3f68dda3b5a3190367abebd29f6"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/exp2f.c",
+      "sourceFile": {
+        "bytes": 1494,
+        "sha256": "1753e636d3b395160a03e9dd4a4ed4fba2abcd9ee12e4cf2d919f5a6bd7e2732"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 118,
+        "sha256": "c0d38bf9658ee5bebdb19a72064ca647b573547ab317d1c27a040120369429a2"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/exp2f_data.c",
+      "sourceFile": {
+        "bytes": 1323,
+        "sha256": "3da38c471cc5eb8dc1c2e283c6c00a36b1d353ba5c8ca1e82d95180948e26bd5"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 129,
+        "sha256": "4e078cb6cf5324ddf6bdeec63d52283d278c39c391651e3e92fbaa8f20a97c1a"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/exp2f_data.h",
+      "sourceFile": {
+        "bytes": 499,
+        "sha256": "fb52b690bef63df2e8996f2d2b3fd77f9ea08795863e73afdc882df04460e850"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 80,
+        "sha256": "f1302639ff01b3707be6eef965e58cb0a9d1190a3170ee072ce9a4eb8410f3ac"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/exp2l.c",
+      "sourceFile": {
+        "bytes": 20743,
+        "sha256": "0eeba2725b540b0d5dd84b732d4c496d8e8d9492cf863dbb5c83fe102771352c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1472,
+        "sha256": "dc88eee09618c4d61ff8e87a2334c6711260158d78c72eab5c094c851673e1ab"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/exp_data.c",
+      "sourceFile": {
+        "bytes": 6347,
+        "sha256": "c55dff64e369fe816cd8ce367064989bb119f85783599680d1a329031c660689"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 121,
+        "sha256": "af710fc02739f06f406db14d25b1432e1aafbecf2b064e63d2e8515c1894a99b"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/exp_data.h",
+      "sourceFile": {
+        "bytes": 540,
+        "sha256": "df77fca837edd02b260dd09a2914202775909ae67a059218ae38cfab104e6d16"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 75,
+        "sha256": "0fa9b54b296a10b434687151ecc47e103a3ed5f06d497758106cf59552d7d2f3"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/expf.c",
+      "sourceFile": {
+        "bytes": 1895,
+        "sha256": "225123b9b3a47a083c06f2580c6b73d5cadae5cec545f9e928f7041ff837b4b4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 118,
+        "sha256": "07a119201b1601e24ddf6c3142f92eaeb103120d6a37cc5349cb27eee4faf03f"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/expl.c",
+      "sourceFile": {
+        "bytes": 3583,
+        "sha256": "7218f10e56cd73c76f01a6924373dd1918730a0e793cf3c64670a34346173e68"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 67,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2190,
+        "sha256": "105deb76b04c71e121886e1187d219ea0587d0d5501aa8b7b818094f817fe659"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/expm1.c",
+      "sourceFile": {
+        "bytes": 6964,
+        "sha256": "c4764166cea03420f2dfc1840a6a7615934192d851b96d5d2dcc321cc1e39460"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 106,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 4559,
+        "sha256": "315b699168d3fc813e2f80370171b3284cb1c72af20999ae610f21c299907c6c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/expm1f.c",
+      "sourceFile": {
+        "bytes": 2731,
+        "sha256": "a7d4e8f8b41f04d4b977deb59e6bf96067371387062a5987fcc3b4464f54f5e9"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 519,
+        "sha256": "600c0e0c50dcd5ce98c3d57f4ac1bb6068df9b0515edfdd6f3657a2b8d954c97"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/expm1l.c",
+      "sourceFile": {
+        "bytes": 3665,
+        "sha256": "a8362abd18ef31f00a7dd74c8b618ef658a4e9c3919c456d03d65a12fe445c2f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 49,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1530,
+        "sha256": "87c1032d27d0ed348feebb4c65448ee7fc773b08430f46f17f6132c6b492d5ac"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/fmaf.c",
+      "sourceFile": {
+        "bytes": 3044,
+        "sha256": "e5baf54228b74b036da629902d811f9f57de26133a03ce290879b5ec6de04433"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1432,
+        "sha256": "ceba0b483522a5c09b22ae51b1833f2fabcf183c6e26077189f39f6a29c92ad5"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/fmal.c",
+      "sourceFile": {
+        "bytes": 8352,
+        "sha256": "4700b00ae3d5233bb13a4f6138c8e3045ba3ea65840c71ce29d05aa494f1c44c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 28,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1433,
+        "sha256": "541bf7c1610ec70e4c233de014d6e4cf739a56f16a53bae1703eaa8854f742c9"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/j0.c",
+      "sourceFile": {
+        "bytes": 13939,
+        "sha256": "88fc190ff03d253791b9fab281caf82e5943e5d4251052c91cc29b14b39055bd"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 56,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2351,
+        "sha256": "9df863b170b09a6983d5e84051c1b5aff9d0b8a3e9398ba06792b2fbfde02f9c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/j0f.c",
+      "sourceFile": {
+        "bytes": 9033,
+        "sha256": "d0721c1c30f12badb67820e33299a2db0d9cec0209f7993fddee2a40d8d296a4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 516,
+        "sha256": "efdb29f5f1cc9488e9fbc277e943258c80a7b0b26750d05dc19b45434f619036"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/j1.c",
+      "sourceFile": {
+        "bytes": 13433,
+        "sha256": "73ec22fae7f2e3fccd2cc6ea777b296d0022a7c1d137035f1ef45cbf0c75ed4e"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 56,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2424,
+        "sha256": "7f8d2f7a5d15b2856ba4af0fb589812b84fbae701d6ad099a3f63fd27bf9e71e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/j1f.c",
+      "sourceFile": {
+        "bytes": 8633,
+        "sha256": "1b16747ce913d4e65dec522710265bd004f923a7f33b5e88d7e4057b9c7b8d79"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 516,
+        "sha256": "16f0f987fed994bc4597d3bf2dd136c3bc59d7f8b839572e9fac23020ce2a02e"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/jn.c",
+      "sourceFile": {
+        "bytes": 7130,
+        "sha256": "cd602fc99cea2f33d8b39462f9f0523c8bc3da646fa349de87e206eb3bb2aded"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 36,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1312,
+        "sha256": "716300eada77aa92846d1879f25fb204506581658b46286419af3c942b57394a"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/jnf.c",
+      "sourceFile": {
+        "bytes": 4511,
+        "sha256": "cab6c734e9a718a3e7c41b22e0e69893453befa805f2ebdafca3264d81dbcf71"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 516,
+        "sha256": "1a07949cc89ca12f71d5aecb1854a084f5c63e29e34bafeda5bed76bb1f41bf6"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/lgamma_r.c",
+      "sourceFile": {
+        "bytes": 10349,
+        "sha256": "df81910c12c2ba5e82295cea6bfc6f3863e367cc6043d1bf91be1fb9597b2811"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 80,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 3281,
+        "sha256": "659444b5fd4826d7e723636d1f11998e4f007dc80b4a01c0f673dcaf51d768d2"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/lgammaf_r.c",
+      "sourceFile": {
+        "bytes": 6236,
+        "sha256": "5aa1db729889e0705ef94b2cb4d7ab5fa6a615d28fd74b7bdf7579a22f6e7ed4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 522,
+        "sha256": "2a57d54e54a045a877e0dd27e5ae53a7d88092329c68213aac87e81789687ee2"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/lgammal.c",
+      "sourceFile": {
+        "bytes": 11937,
+        "sha256": "852284cc7fb67db860bcf39a3a33c74481ef28ffa7818a16de82d7e2d534c312"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 87,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 3771,
+        "sha256": "13d8e556cfff0050b5eb422d2866d70a012c1be10f5ba649455c1a835bd865ac"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log.c",
+      "sourceFile": {
+        "bytes": 3030,
+        "sha256": "a0694d8587a0d145d0f8ae87cbffba014d7988bc2ebcbfad94cea73b394c9ecc"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 116,
+        "sha256": "3b0f4b6e0ba95a6f9205a61c3e20c272cb6f4d0b50ab2865340ff43a57c69932"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log10.c",
+      "sourceFile": {
+        "bytes": 2968,
+        "sha256": "ef9b4b1f0918cf1fcb797f9fa4d4ffe177bfa27f668d74a41d613bfbcd83850a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 19,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 691,
+        "sha256": "a10b1a81999d6e187cc65a869b53fcc2168bbd62b4b8ffb7b932726ddb2a5081"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log10f.c",
+      "sourceFile": {
+        "bytes": 1928,
+        "sha256": "b8de5c0f14be2c622eca1cb33e80e5b131576c7c229aeffb8ea9f1d61555f6b9"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 471,
+        "sha256": "38a62e94ec64429d40e70621dcd7177d1d87c90acbc87dc1b197cbba1de18536"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log10l.c",
+      "sourceFile": {
+        "bytes": 4836,
+        "sha256": "d23e3d61fe4111628efdef794ae7cd614e3443a81f70742e29070f99fdd078c4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 59,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1850,
+        "sha256": "73f4f5ef2a95f04a3d8d2d0b0b046b35551adaf30f5b00163e45de0042715ad3"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log1p.c",
+      "sourceFile": {
+        "bytes": 3865,
+        "sha256": "c76bbf714cd456a9f0de6e2c94853c27e7865581a2edfdef6d1f861739bbcb46"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 55,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2047,
+        "sha256": "2749569e3881bbf6491a7140ad7d9ebe76f36d17758f59b70e87e12fa74f8de1"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log1pf.c",
+      "sourceFile": {
+        "bytes": 1989,
+        "sha256": "6c01aff9fcee1dcaca4d4581f17357e0f069643321c00288c672adc3521d0cc8"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 12,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 436,
+        "sha256": "2cedca6545a7daf07dcb06545c86ad286f5cf5f8f3211ea7bff1b5ac43cf9b64"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log1pl.c",
+      "sourceFile": {
+        "bytes": 4440,
+        "sha256": "3846b55cbd55e3d3f90d7484216663030ec98c4c353e644ce3c4e3122080e4c4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 50,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1586,
+        "sha256": "40705faf8fff9cbc21aca95e6bf4d79bb82e28d8455643d28336cf0c2a3d9cf2"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log2.c",
+      "sourceFile": {
+        "bytes": 3446,
+        "sha256": "281e4fc0f737419e245019d8bc8a8ca53032c2d88c31d08561e9e59dcb4b4640"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 117,
+        "sha256": "1811ecaf980210c8286b1bbd6e08a494f751b73f9bbecc410de5f29ffee2ff8d"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log2_data.c",
+      "sourceFile": {
+        "bytes": 7964,
+        "sha256": "5a62bb213f19dc1364cddb612e3d13831e382f5ae6f7fafd7064362f53478dfb"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 97,
+        "sha256": "aeae385a739a08c7d276c5462f16c88f81ccab39dfca123ac70b219c4a9ae5b8"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log2_data.h",
+      "sourceFile": {
+        "bytes": 538,
+        "sha256": "b56e1a56f73a8700caa9787cd399fecf7f96038af56c2a590aeb6f0f8662ea8e"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 75,
+        "sha256": "0fa9b54b296a10b434687151ecc47e103a3ed5f06d497758106cf59552d7d2f3"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log2f.c",
+      "sourceFile": {
+        "bytes": 1743,
+        "sha256": "f2393ef18e78e6dc540e7349dbfea000018246d64fca3eefe73f11a286403352"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 119,
+        "sha256": "87c98c5b0ceb9c72e117cd0eff3a8686d02835ac4aec1d008c0386eeb96d3a97"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log2f_data.c",
+      "sourceFile": {
+        "bytes": 1084,
+        "sha256": "9261d7fdef29db26bd75310f029823593639ecf7c1cc089a6014623d49d21abe"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 114,
+        "sha256": "4f2d1ad05d73ffa598d2e5c4b7a5684b2e93cf8a165120794ce1c05f261d7c96"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log2f_data.h",
+      "sourceFile": {
+        "bytes": 360,
+        "sha256": "cb65ee48f557b19c8a6366a05f16ffba38aa46b00c4c136faf2dea8f53675a9b"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 80,
+        "sha256": "f1302639ff01b3707be6eef965e58cb0a9d1190a3170ee072ce9a4eb8410f3ac"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log2l.c",
+      "sourceFile": {
+        "bytes": 4601,
+        "sha256": "c3294ef6fcf96c061c4511fb3f6cd2886b2f513938deadcfb16fc19fb2a9ff03"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 54,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1745,
+        "sha256": "1e463ce84dff30ce9c0528b75b3571903cdde6d530226ef804b7b6483d1a9071"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log_data.c",
+      "sourceFile": {
+        "bytes": 13927,
+        "sha256": "e96bcd99d88fc57e0f3686299014f4b949a6212603ce237f39e16cedc155617a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 96,
+        "sha256": "13755d13feb33602c841286fcd7a637820a7bbe08474bdd8b14991584f336823"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/log_data.h",
+      "sourceFile": {
+        "bytes": 552,
+        "sha256": "a8dced6f0821f30cad040ba326b03e419fbe0a750ed8f3b0d7145992bee4bccc"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 75,
+        "sha256": "0fa9b54b296a10b434687151ecc47e103a3ed5f06d497758106cf59552d7d2f3"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/logf.c",
+      "sourceFile": {
+        "bytes": 1732,
+        "sha256": "eecf8e5dd0afd5f64f938ccae07c85b0a8e82919f5d4269936a3b8493fb64e47"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 118,
+        "sha256": "ecb8ce4061e2890f3c26f093f7c4d9bb254cb66c2329b79115c2f0b7ccff190a"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/logf_data.c",
+      "sourceFile": {
+        "bytes": 1087,
+        "sha256": "60b08342fcef877b393a76fc36d92c576d6340ce153459aad03aad3d4716f9b5"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 113,
+        "sha256": "0a70e240519b22b97cdd7fb8fb5030cf996343c07578670fa6f0fa4a1715c505"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/logf_data.h",
+      "sourceFile": {
+        "bytes": 406,
+        "sha256": "80176d1f045f162e917ca5c2879994ab0ed9e27b479086d752e5793c91135adf"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 80,
+        "sha256": "f1302639ff01b3707be6eef965e58cb0a9d1190a3170ee072ce9a4eb8410f3ac"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/logl.c",
+      "sourceFile": {
+        "bytes": 4630,
+        "sha256": "e1612b2bb9a010c1914beb93fa242981f69f323392bd9816415cafaaec0d94b0"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 54,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1773,
+        "sha256": "a26002f8270531dc1b92835b4aae057e90c51ad9ce0c0cec81bcf0903c4a21d6"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/pow.c",
+      "sourceFile": {
+        "bytes": 10817,
+        "sha256": "b06f0a08d74fcff8cced7afa2c0e47e301e3e8a19c0de5becdec28cd7b014027"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 113,
+        "sha256": "19941f43d6fb6c02a46feb375e14e57daccf9e400fe1f0b4c7dc08aae603d41c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/pow_data.c",
+      "sourceFile": {
+        "bytes": 10455,
+        "sha256": "2052ec913f9b4a2170a98a6fcbcd7694f5dec220036b00c36106a2b4b65a4c55"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 112,
+        "sha256": "e237d73cc422efa2525decfa88f5017a754b5e7d82719b4f989f28e6968ce977"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/pow_data.h",
+      "sourceFile": {
+        "bytes": 519,
+        "sha256": "5014345a7958adcf6ff835b5e96afa99dd5a98c40dfe968442288e002b8e01a3"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 75,
+        "sha256": "0fa9b54b296a10b434687151ecc47e103a3ed5f06d497758106cf59552d7d2f3"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/powf.c",
+      "sourceFile": {
+        "bytes": 5022,
+        "sha256": "74069b3a380cf954361e0243b38de2094ae680e2ecfb3e50af61ab576f13babf"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 5,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 81,
+        "sha256": "064421e9a1d9b06eb20f9a1224d899f915273864dc24f852073db05de592a766"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/powf_data.c",
+      "sourceFile": {
+        "bytes": 1388,
+        "sha256": "136f491b0f904842b926784134d0adba7a9103d2ce8a226276dd6e9260457398"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 7,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 113,
+        "sha256": "763a414f361cd820262f4c47d78a016d2546f3682433774cd9ef8c37eaea3a37"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/powf_data.h",
+      "sourceFile": {
+        "bytes": 555,
+        "sha256": "5d632276e5f21cdcd47f35c53cf792640ad347aabce1e1bd5774fad5371fc8d8"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 4,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 80,
+        "sha256": "f1302639ff01b3707be6eef965e58cb0a9d1190a3170ee072ce9a4eb8410f3ac"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/powl.c",
+      "sourceFile": {
+        "bytes": 12840,
+        "sha256": "6f397455b408d05f3755d618badc1b1e770079e99b1e8ea606fcec49a154e7e6"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 69,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2347,
+        "sha256": "6c44238579378a32e62df09937d36824c07fbc70f8884a85d6a782f584e74c99"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/scalb.c",
+      "sourceFile": {
+        "bytes": 915,
+        "sha256": "7f7eda8fd9d537105136d56661d70788f912b9584bb116dea185db340c78ada5"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 17,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 550,
+        "sha256": "60e8602fbc8156061f877f1aadd6d7a137a881db7622afb5a92e04c1010e5c90"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/scalbf.c",
+      "sourceFile": {
+        "bytes": 887,
+        "sha256": "b4a0485f7a11d994960c31947f0132c45afd47f599abbae4a9f2041f7f346a3f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 15,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 519,
+        "sha256": "b4d5f2c855168698779fb4bfc333f7238a8474b23e2b2a74ee9a7273bee10a0c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/sin.c",
+      "sourceFile": {
+        "bytes": 2192,
+        "sha256": "24e53a9d85f196f66919cc19247be5480bb607ef38844b1a24bc47c4fe4974ef"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 42,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1488,
+        "sha256": "bc263f1827be6be870e26a0b8a131bd7d5beb363778097a02fcdd4bf0a3fe62c"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/sincos.c",
+      "sourceFile": {
+        "bytes": 1345,
+        "sha256": "2b88cfba380b8d5aa8f8f6b9f055aee91fe112de9f967a4484807afcb5405d9d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 12,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 433,
+        "sha256": "f4aaef4b13468ac8664a46469257e4d00b045f5e56d890a51757cca5c50304ae"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/sincosf.c",
+      "sourceFile": {
+        "bytes": 2565,
+        "sha256": "0196bf2ccfa370be120b917f2379bb533950ea50818d329aeee076081690c95d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 549,
+        "sha256": "b6a2605352aea5dd02e594be2282448e0f9b2b26e3ef9c17120d608068fa6c48"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/sinf.c",
+      "sourceFile": {
+        "bytes": 1970,
+        "sha256": "2583af55446f07da3225186c368a7aae5a0a0a0edab268967f4122b92e222b87"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 549,
+        "sha256": "b6a2605352aea5dd02e594be2282448e0f9b2b26e3ef9c17120d608068fa6c48"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/tan.c",
+      "sourceFile": {
+        "bytes": 1965,
+        "sha256": "422d411bac962a1077ae394d14e54313012a6faa3476c20b2a66d3fb3f7a923f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 41,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1433,
+        "sha256": "b48f815fbb4269c92e8c70d45c6f961b3de4ceecc277a35501bff6b10bf92f69"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/tanf.c",
+      "sourceFile": {
+        "bytes": 1781,
+        "sha256": "38b39aaf03d33341e606b67b3743ee5fa436b7e8338af155994d4b794b366003"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 549,
+        "sha256": "32af7958518d0c3d2854d114f793823817fe691aae1ee15100367632b6644e1d"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/math/tgammal.c",
+      "sourceFile": {
+        "bytes": 6608,
+        "sha256": "b9f00584454232f6d4c6cf76b8198221a4cc047c92fa749e5f41476c9b54579f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 50,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1659,
+        "sha256": "91a976d6d3bc3a18dac891ad2ab0617715f94a5741e9f7ab53aa5f500fb45a21"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/misc/fmtmsg.c",
+      "sourceFile": {
+        "bytes": 2692,
+        "sha256": "a85cae227c15f4c00fbcd3c42532de80cb629412eb29e827ef0632782f2931b7"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 3,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 63,
+        "sha256": "1b4e9df39df235561f284b28d0b7b81a260c2666c87a3cdfedc0af0e1b6fce50"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/regex/regcomp.c",
+      "sourceFile": {
+        "bytes": 76218,
+        "sha256": "56b0a765e084a5cd3ed7113a893b50d259265ba76b6bea98889c45d7aec302a0"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 31,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1446,
+        "sha256": "340f121b7769a38bc0bea1857b53cf7ec4d944785e3d786cb97cccd07de4b911"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/regex/regexec.c",
+      "sourceFile": {
+        "bytes": 29091,
+        "sha256": "072e8a1092c98830b48e784fb74ce486f7c39e27207f79f1dd161e2c5d86ba77"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 31,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1448,
+        "sha256": "c2e8004b910e3806ccd56a2ab600dcffeb5702ecaa1c23db67552e6a304cb019"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/regex/tre-mem.c",
+      "sourceFile": {
+        "bytes": 4067,
+        "sha256": "4721979ce365a395fd7644335c847a8a97913e87f14348641f7f199b57b93e28"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1666,
+        "sha256": "9c57ac7bf68fb3e4e568756f99661bf75be44fe6a46ea2d446e23e75c5d0017d"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/regex/tre.h",
+      "sourceFile": {
+        "bytes": 7069,
+        "sha256": "7665d2787ac90c6c994997eae2514b05cdf85237c10d2bf00e25e26d08cd9849"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 31,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1426,
+        "sha256": "bd0d49fbc87566b07c82d6f2fce1436d2e86bd98612d2cdf8e56ba95d5c5f8e5"
+      }
+    },
+    {
+      "sourcePath": "upstream/libc/libc-top-half/musl/src/stdlib/qsort.c",
+      "sourceFile": {
+        "bytes": 5131,
+        "sha256": "3a838cc7f83f4746df6063f567be1ebb2f7d204243342122acd43f44d2434ec6"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 26,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1342,
+        "sha256": "8095fd5bdc520e0b8688763e208e4f8ef7690ede2134c89860db4f685ca9e3af"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/include/__algorithm/lower_bound.h",
+      "sourceFile": {
+        "bytes": 5187,
+        "sha256": "877c078130d29936bc80ae4d6a9d56acd8e16f6c7901f910cd4a955e6f3f30ce"
+      },
+      "offset": 1566,
+      "firstLine": 50,
+      "lineCount": 9,
+      "selection": "internal algorithm origin comment",
+      "excerpt": {
+        "bytes": 960,
+        "sha256": "e41cf4c455ec4c2a036898cb21e4d34b20a6e052a8768323126bc28d11ecd347"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/include/__atomic/atomic_ref.h",
+      "sourceFile": {
+        "bytes": 17453,
+        "sha256": "21d07fa90501dbacbe0b6168da4d66db48c460199c3628b5e5e5bcb5174b8587"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 661,
+        "sha256": "257100d540dee666406a0d397af43b431e2d7603589fecd849d11a3400aeb5ab"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/include/__format/escaped_output_table.h",
+      "sourceFile": {
+        "bytes": 42832,
+        "sha256": "03f7b32ef74f47f63013eefbf68a657f34ebf175ef27ae237ec349ac674c3af7"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 60,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2939,
+        "sha256": "cdbb5b96ab8a6c6399d49a57b2990e28cec2011bf49f80031dea37a4c5a68f49"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/include/__format/extended_grapheme_cluster_table.h",
+      "sourceFile": {
+        "bytes": 30768,
+        "sha256": "8b02da912dcd81f79c0a73df48eab88a31596b0f7d1da8ab3d511e6b39d8a8c9"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 60,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2950,
+        "sha256": "f636ef139288a5c9b3490728f88daca727f5bb586e11f3a6530221fc312dd6e8"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/include/__format/indic_conjunct_break_table.h",
+      "sourceFile": {
+        "bytes": 12797,
+        "sha256": "911f01c38f727c8dcb445b31ba45521c3303868007eb799f1d6ec42ab30e1095"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 60,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2945,
+        "sha256": "15377fe32bcbfaa44a525302a986036ed2ddb3967f1270dce4bb9d61ddf2730a"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/include/__format/width_estimation_table.h",
+      "sourceFile": {
+        "bytes": 13036,
+        "sha256": "8d11da3dfcc85884155533a8c757b454afc1ee6bc6e9b6e5794b2658ac6e509a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 60,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2941,
+        "sha256": "c3e00659731998ce93f1073a4154983032d0fcb4839b7f283bbd64e5c0960f5c"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/charconv.cpp",
+      "sourceFile": {
+        "bytes": 4041,
+        "sha256": "8df06f6d6e25c69671fc00c63bf7dc00c724652fb8629ef4445289abc5b64c66"
+      },
+      "offset": 1146,
+      "firstLine": 32,
+      "lineCount": 7,
+      "selection": "internal contribution credit",
+      "excerpt": {
+        "bytes": 298,
+        "sha256": "04ec1513e79152b153928e7fbda21c2718c08de4147186f044124e35380e88fb"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/common.h",
+      "sourceFile": {
+        "bytes": 4492,
+        "sha256": "5d0df36eb16d08610f226cc206fe1dcabbfe23bde33a481068381312401baed3"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1959,
+        "sha256": "2e911be3944510f762205a041a2723e031650b64822cc3f026a4ab0e19f01dca"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/d2fixed.h",
+      "sourceFile": {
+        "bytes": 2712,
+        "sha256": "eb44884fccbbfc39e21d9744fae1edc7f2cd2f1a2c59dacf2ac81cf4d62f6a3f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1959,
+        "sha256": "2e911be3944510f762205a041a2723e031650b64822cc3f026a4ab0e19f01dca"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/d2fixed_full_table.h",
+      "sourceFile": {
+        "bytes": 330700,
+        "sha256": "b68007164e979c0cca68b19f52057065b412395d819c9900810e1729f1991726"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1959,
+        "sha256": "2e911be3944510f762205a041a2723e031650b64822cc3f026a4ab0e19f01dca"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/d2s.h",
+      "sourceFile": {
+        "bytes": 2648,
+        "sha256": "46fad5fe88cd9a9986ed4a9c8bad0c302b4f3076cebd731bad14fa4a7714a566"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1959,
+        "sha256": "2e911be3944510f762205a041a2723e031650b64822cc3f026a4ab0e19f01dca"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/d2s_full_table.h",
+      "sourceFile": {
+        "bytes": 32707,
+        "sha256": "50206d8a5d1d9f05f0041a79f450490e88251961dd8c0df93106cbf67f4fae96"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1959,
+        "sha256": "2e911be3944510f762205a041a2723e031650b64822cc3f026a4ab0e19f01dca"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/d2s_intrinsics.h",
+      "sourceFile": {
+        "bytes": 10765,
+        "sha256": "5fdbfa56dfeb2fd5f445111bf6cb9cc5410e309220043fdc8c8f20450b27f3bb"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1959,
+        "sha256": "2e911be3944510f762205a041a2723e031650b64822cc3f026a4ab0e19f01dca"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/digit_table.h",
+      "sourceFile": {
+        "bytes": 2622,
+        "sha256": "b9e50c0b5506de9d104fbae85272bf9e3b1987df840d3ece5d566c5921e76ec2"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1959,
+        "sha256": "2e911be3944510f762205a041a2723e031650b64822cc3f026a4ab0e19f01dca"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/f2s.h",
+      "sourceFile": {
+        "bytes": 2396,
+        "sha256": "0685f0962c4121afa0f99603484d73dfccbadc54348fe8919d87f6242107471b"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 38,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1959,
+        "sha256": "2e911be3944510f762205a041a2723e031650b64822cc3f026a4ab0e19f01dca"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/ryu/ryu.h",
+      "sourceFile": {
+        "bytes": 5516,
+        "sha256": "f2ee014117048b62d243898821b75d37f65a59688d3c929734632a147f2dba6f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 39,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1974,
+        "sha256": "4b166b2cf6faef129254c8cb7db3d20c239dba4b68c638c42019d9c3924a777d"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/include/to_chars_floating_point.h",
+      "sourceFile": {
+        "bytes": 53943,
+        "sha256": "16b3b4882654a6f0ef6a450bd158eb32720b8586f1cbcaafa06e84765bbda601"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 13,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 545,
+        "sha256": "c1b321d6699e758aeb5101aa0d1dcfce6023c9eb65d73d94093e3edaf62f6d9f"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/ryu/d2fixed.cpp",
+      "sourceFile": {
+        "bytes": 24694,
+        "sha256": "e182d7b5a2cc2a59d25955cb41319ed8ec22ae43acc4434d04e82295a03d4fae"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 41,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2052,
+        "sha256": "da62fa9503ab2b5c6a45d33a850b68904a66f6ee1388abc045f51d1dc428b3c7"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/ryu/d2s.cpp",
+      "sourceFile": {
+        "bytes": 34979,
+        "sha256": "a2c7c814c5a5d98a60643ba7b107084189f7181f66da45177f4e56c0f8ffe6af"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 41,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2052,
+        "sha256": "da62fa9503ab2b5c6a45d33a850b68904a66f6ee1388abc045f51d1dc428b3c7"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/libcxx/src/ryu/f2s.cpp",
+      "sourceFile": {
+        "bytes": 31286,
+        "sha256": "6b20f690d560361141cc99032e40bf6be39b3e46b11c169fc0a2f478135a119b"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 41,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2052,
+        "sha256": "da62fa9503ab2b5c6a45d33a850b68904a66f6ee1388abc045f51d1dc428b3c7"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/include/llvm-c/blake3.h",
+      "sourceFile": {
+        "bytes": 3726,
+        "sha256": "6b88109a29982301663048d3584ef2b913b48a6fd34d8b2c17ea3f161123e81e"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1216,
+        "sha256": "febaa0fa2897dbe0078b04414d4bdee870168b1c3ecfab6061a9b1a4461e7877"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/include/llvm/Support/ConvertUTF.h",
+      "sourceFile": {
+        "bytes": 15556,
+        "sha256": "aa7fe3031b4810d0e7b28fc335f6c06fa0031f7d7287d9736e37c964998b38cb"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 104,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 5142,
+        "sha256": "7793b7079264ccf3a4dce31f32a31037bf817bdb541874f080fe98882c39b871"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/include/llvm/Support/MD5.h",
+      "sourceFile": {
+        "bytes": 3695,
+        "sha256": "a27dd8e5f9ceb72062bf0de61e9a81c21ae33e059e11ee8ca4a87ec53d7d4c1a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 27,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 996,
+        "sha256": "e16c3336041ded3e83a2ae128a0914b2986b6d7291ec5dc2a2042cdc7a4b27c1"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/include/llvm/Support/SHA1.h",
+      "sourceFile": {
+        "bytes": 2467,
+        "sha256": "efb5936cd67ef62be7ccb239efad724ae4aff5b4a7e8b244fa2809eef574bf04"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 14,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 653,
+        "sha256": "9aee3e5d1a671a4b2303e5972347db8c08323fa160c40646990cf7094738cdff"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/include/llvm/Support/SHA256.h",
+      "sourceFile": {
+        "bytes": 2648,
+        "sha256": "cb5576bc01142a1d2613bff86149dd696e59c46d53a2846ba967c1cc6c26fa1c"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 21,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 829,
+        "sha256": "5baaacc549d8169cc3d74198dd84ec4370086360b4f1909fadbd88c471884fac"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/include/llvm/Support/xxhash.h",
+      "sourceFile": {
+        "bytes": 2899,
+        "sha256": "9c0d211f1f04b755abfd82046effb17e67cce7cc27b95df015ccd0b624591aeb"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 37,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1719,
+        "sha256": "018fa8a8e347cfe1320aeb63caf1ba405da6a3b38fef30584ca17ab1a52df578"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/BLAKE3/blake3.c",
+      "sourceFile": {
+        "bytes": 29662,
+        "sha256": "bbb0ac6fa0e24525aae0d2bc35b3cc5866e59b6f23f3003fcb7b5771e6acdb88"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 8,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 568,
+        "sha256": "4911ba4a993aa0161a97ffdf3de3059e270eaeda0377ba2fe17ec7b8b5b4e1fc"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/ConvertUTF.cpp",
+      "sourceFile": {
+        "bytes": 29482,
+        "sha256": "85455b58238689b379a28e7a784b1097e1c63e9b08bcd9617dbd5b1f57f663eb"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 63,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 3221,
+        "sha256": "02b0333df8dbb9e0f9c43245c112df04da8071f4657a49cf38f4a6015d629f67"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/MD5.cpp",
+      "sourceFile": {
+        "bytes": 9841,
+        "sha256": "7b7e82f5508a7d5551b78a1140b1d6aa9cba87282168219743cb6377cd5f9acd"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 39,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1687,
+        "sha256": "fdf980d51caf7abb2f30d8208e4fef9cd0a03ea578fee141ae33f501da4f8678"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/SHA1.cpp",
+      "sourceFile": {
+        "bytes": 10556,
+        "sha256": "cc6c4b80b5c2a85f915fd336b72a87aeac696a03c30ce87756e71b060c5ca8a9"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 16,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 744,
+        "sha256": "af4dbab2a457a90c8e255d680ca435c8191cf6417e83da2de71ed9ec4b140701"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/SHA256.cpp",
+      "sourceFile": {
+        "bytes": 11123,
+        "sha256": "9b1f22d8181e5776527fe8d45948dc31d99d264a68065f6da6d8fab0db7ea232"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 21,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 829,
+        "sha256": "5baaacc549d8169cc3d74198dd84ec4370086360b4f1909fadbd88c471884fac"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/UnicodeNameToCodepointGenerated.cpp",
+      "sourceFile": {
+        "bytes": 1605175,
+        "sha256": "fdb2e6c531a8f82d2a6ef70b918abd598724fa109f93d4281f1ea1a1f9767f36"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 64,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2952,
+        "sha256": "a567d92e50432e038a661edce838f45422c6a0b511084260c0afd33e73e810fe"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regcomp.c",
+      "sourceFile": {
+        "bytes": 43186,
+        "sha256": "d2e4b3d1481555e435de252d0cb61d319473bdc93411be2cc2599ed3b0d944d9"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 37,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1860,
+        "sha256": "1eb453ecedcdcf7e47e643ab04e347bf52da613fa5ab3dc30f780ccca354dbb2"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regengine.inc",
+      "sourceFile": {
+        "bytes": 28906,
+        "sha256": "cfbc4a3fbf0d7e7dc806d3f68e4b3f3042cdce6306ffc22e6f62b232ca1efe6a"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 44,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2097,
+        "sha256": "b7433d901d568e77e21511bd31812e7620f49365e696d75e5caf87991e27b47a"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regerror.c",
+      "sourceFile": {
+        "bytes": 4525,
+        "sha256": "438f947e063eb351ed2830c384b8451a66a1caecfb36758f1c4395527c6bbf24"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 37,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1861,
+        "sha256": "d05019f608e32607975295b708023831facd794dfb89c6a6c379e0a37d3a13e5"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regex2.h",
+      "sourceFile": {
+        "bytes": 6982,
+        "sha256": "ce6f38306170673c9bda3a5d2d638e7af858662d388e0b3884372677998fb7dd"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 37,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1859,
+        "sha256": "a74a9989b2f48bae6bbd2ccff835e63109626410a0fc0f6458bd9eeeede40b08"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regex_impl.h",
+      "sourceFile": {
+        "bytes": 3759,
+        "sha256": "90cf33f4d2c50f516b669e8d17310e94f9241eb33b3ca2098478c41dab130f52"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 37,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1868,
+        "sha256": "090513c80e5290d51ac11848157ea355b41c33b60290ad9a86a1e21ec1f53ae7"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regexec.c",
+      "sourceFile": {
+        "bytes": 5851,
+        "sha256": "b26ab983413177c81034ad4dfa66280697fc304a8b27d15b5eb7bf1955cb9745"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 44,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 2091,
+        "sha256": "f5ae38ac5904bac528eecbe2736c36e82385b4ad8956dfd253d2a6f97727c5a7"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regfree.c",
+      "sourceFile": {
+        "bytes": 2554,
+        "sha256": "cab827cecccf9f9446f1b1990b7ad5ae3ba930ba004c3ea04daed5753ce4557d"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 37,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1860,
+        "sha256": "45d8db19db751980ee15c9946aca0d3f47e9ab0686a298be65c9b8fd18ecd9df"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regstrlcpy.c",
+      "sourceFile": {
+        "bytes": 1596,
+        "sha256": "b717e3355fdca040c161a7a179de9db1c9253da6519e60b77a074cbf5f7d423f"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 18,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 876,
+        "sha256": "2f577b238134af30a0a535bed5a8038a08c570073146097969aafd9afc82d9cd"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/regutils.h",
+      "sourceFile": {
+        "bytes": 2309,
+        "sha256": "80606b2d8f0f063b9ddaa7b909fc1ef9c344807f22fd2f3a8cb4187f88734ac3"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 37,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1858,
+        "sha256": "bed18e1d01fa0b308f4f8463e0a2a89f4ea404c1ff625554428350b91a2f4be7"
+      }
+    },
+    {
+      "sourcePath": "upstream/llvm/source/llvm/lib/Support/xxhash.cpp",
+      "sourceFile": {
+        "bytes": 38880,
+        "sha256": "b47e89a65e40f34c7e336a58f1902c958b7bd90b3370bd497c8cb788eb40c2d4"
+      },
+      "offset": 0,
+      "firstLine": 1,
+      "lineCount": 43,
+      "selection": "leading comment notice",
+      "excerpt": {
+        "bytes": 1969,
+        "sha256": "d319204cafdb7a5c1d9b9519e8c6107f3970e74d44b6b3d370569445051d4e6a"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "FILE-NOTICES.txt",
+      "bytes": 236570,
+      "sha256": "3cd2691f53b2dc6e2707c67202d5c1fd3a5941d4ae611880bf32a7023ce8a52a"
+    },
+    {
+      "path": "LICENSES.txt",
+      "bytes": 279797,
+      "sha256": "9ab50ae98ed397647627aaf95b5b4ab15bd0a6ffd1791f00b4b139ebf7dae817"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1657,
+      "sha256": "73d59920f0b70846854f1983a7f7f7e62a039fbc5e9601206a6624b84c8702ab"
+    }
+  ]
+}

@@ -4,8 +4,8 @@ import Testing
 
 /// Actual SDK resource bytes and independently mutated inventories exercise fail-closed bundled loading.
 struct ManagedCompilerResourceTests {
-    /// Shipped metadata has no invented descriptor, device identity or approved service.
-    @Test func bundledCatalogueAndPendingService() async throws {
+    /// Reviewed service metadata does not invent a bundled binary, descriptor or device identity.
+    @Test func bundledCatalogueAndReviewedAbsentService() async throws {
         let catalogue = try await ManagedCompilerCatalogue.loadBundled()
         #expect(catalogue.manifestSHA256 == "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db")
         #expect(catalogue.firmwareBuilds.isEmpty)
@@ -13,18 +13,18 @@ struct ManagedCompilerResourceTests {
         #expect(catalogue.unavailableReason(for: .raspberryPiPico) != nil)
         let resources = try await VerifiedManagedResources.load()
         #expect(!resources.page.isEmpty)
-        await #expect(throws: ManagedCompilerResourceError.serviceApprovalPending) { _ = try await resources.toolchain() }
+        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { _ = try await resources.toolchain() }
     }
 
     /// Both default build overloads fail before preprocessing/WebKit and release the busy gate for fresh requests.
     @Test func defaultCompilerFailsWithoutFallback() async throws {
         let compiler = ManagedSketchCompiler()
-        await #expect(throws: ManagedCompilerResourceError.serviceApprovalPending) { try await compiler.verifyResources() }
+        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { try await compiler.verifyResources() }
         let legacy = try CompilerFixtures.request(source: "int forbiddenGlobal = 1;\nvoid setup() {}\nvoid loop() {}")
         let offline = try await OfflineCompilerFixtures.request()
-        await #expect(throws: ManagedCompilerResourceError.serviceApprovalPending) { _ = try await compiler.build(legacy) }
-        await #expect(throws: ManagedCompilerResourceError.serviceApprovalPending) { _ = try await compiler.build(offline) }
-        await #expect(throws: ManagedCompilerResourceError.serviceApprovalPending) { _ = try await compiler.build(legacy) }
+        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { _ = try await compiler.build(legacy) }
+        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { _ = try await compiler.build(offline) }
+        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { _ = try await compiler.build(legacy) }
     }
 
     /// Anchoring precedes parsing; duplicate keys never change approval or schema interpretation.
@@ -78,7 +78,8 @@ struct ManagedCompilerResourceTests {
 
     /// Every role, including licenses/catalogue, is independently verified; same-size byte changes fail.
     @Test(arguments: ["manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json",
-                      "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"])
+                      "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json",
+                      "service-review.json", "service-source-notices.json", "service-LICENSES.txt", "service-FILE-NOTICES.txt"])
     func corruptedResource(_ path: String) async throws {
         try await withCopy { root in
             let url = root.appendingPathComponent(path)
@@ -116,21 +117,26 @@ struct ManagedCompilerResourceTests {
         }
     }
 
-    /// A copied service cannot bypass pending review; editing review requires a new independent anchor and exact bytes.
+    /// Wrong service bytes fail despite approved metadata; callers cannot rewrite the independently pinned review.
     @Test func approvalGateAndServiceIdentity() async throws {
         try await withCopy { root in
             let url = root.appendingPathComponent("compiler.wasm")
             try Data([0, 97, 115, 109]).write(to: url)
-            let pending = try await VerifiedManagedResources.load(root: root)
-            await #expect(throws: ManagedCompilerResourceError.serviceApprovalPending) { _ = try await pending.toolchain() }
+            let reviewed = try await VerifiedManagedResources.load(root: root)
+            await #expect(throws: ManagedCompilerResourceError.resourceIntegrityMismatch("compiler.wasm")) { _ = try await reviewed.toolchain() }
             var object = try inventory()
             var service = try #require(object["service"] as? [String: Any])
-            service["distributionReview"] = "approved"; object["service"] = service
+            service["distributionReview"] = "pending"; object["service"] = service
             let bytes = try JSONSerialization.data(withJSONObject: object)
             try bytes.write(to: root.appendingPathComponent("inventory.json"))
             await #expect(throws: ManagedCompilerResourceError.inventoryIntegrityMismatch) { _ = try await VerifiedManagedResources.load(root: root) }
             // Only internal test injection accepts this changed anchor; no public loader accepts it.
-            let approved = try await VerifiedManagedResources.load(root: root, expectedSHA256: NanoManagedContract.digest(bytes))
+            let pending = try await VerifiedManagedResources.load(root: root, expectedSHA256: NanoManagedContract.digest(bytes))
+            await #expect(throws: ManagedCompilerResourceError.serviceApprovalPending) { _ = try await pending.toolchain() }
+            service["distributionReview"] = "approved"; object["service"] = service
+            let approvedBytes = try JSONSerialization.data(withJSONObject: object)
+            try approvedBytes.write(to: root.appendingPathComponent("inventory.json"))
+            let approved = try await VerifiedManagedResources.load(root: root, expectedSHA256: NanoManagedContract.digest(approvedBytes))
             await #expect(throws: ManagedCompilerResourceError.resourceIntegrityMismatch("compiler.wasm")) { _ = try await approved.toolchain() }
             try FileManager.default.removeItem(at: url)
             await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { _ = try await approved.toolchain() }
@@ -151,7 +157,7 @@ struct ManagedCompilerResourceTests {
             try await compiler.verifyResources()
         }
         await #expect(throws: CancellationError.self) { try await verification.value }
-        await #expect(throws: ManagedCompilerResourceError.serviceApprovalPending) { try await compiler.verifyResources() }
+        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { try await compiler.verifyResources() }
     }
 
     /// Loads current shipped metadata for independent mutation, never executable or deployment data.

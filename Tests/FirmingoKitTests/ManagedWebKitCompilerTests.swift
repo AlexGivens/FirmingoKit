@@ -25,7 +25,7 @@ import Testing
             firmwareImageSHA256: String(repeating:"1",count:64), apiAddress:0x10022ca0)
         return try CompilerFixtures.request(source:source,revision:revision,filename:name,resident:binding)
     }
-    /// Exercises only an internal test-anchored approved inventory; production resources remain pending and service-free.
+    /// Exercises only an internal test-anchored approved inventory; production resources retain reviewed metadata and remain service-free.
     /// Loads identical verified toolchain identities and compiles the known offline Blink vector through real WebKit.
     @Test func resourceInventoryRuntimeParity() async throws {
         let source = try #require(ManagedCompilerBundle.root())
@@ -43,7 +43,7 @@ import Testing
         try bytes.write(to: root.appendingPathComponent("inventory.json"))
         let resources = try await VerifiedManagedResources.load(root: root, expectedSHA256: NanoManagedContract.digest(bytes))
         let toolchain = try await resources.toolchain()
-        #expect(toolchain.toolchainSHA256 == "3019c4bb872207aa77d4ab7f912387782b5e671e2bf74fc397be267ba0d10461")
+        #expect(toolchain.toolchainSHA256 == "3eda5778fdc515f974d683570a6d6d8e1891ec9a64d0285e473401ebae14dd86")
         #expect(toolchain.recipeSHA256 == ManagedCompilerResourceInventory.recipeSHA256)
         let selected = try await OfflineCompilerFixtures.request(source: blink, revision: 1, filename: "Blink.ino")
         let portable = try ManagedPortableRequest(selected)

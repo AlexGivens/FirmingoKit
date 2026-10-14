@@ -286,3 +286,19 @@ a deliberately reviewed package in the next integration increment, then qualify
 the actual public SDK/private WebKit scheme and a fresh packaged consumer before
 claiming candidate support. No SDK source change or hardware operation was needed
 for this metadata/export increment; see `docs/compiler.md`.
+
+## Reviewed compiler delivery — 2026-10-14
+
+- [x] Consume Compiler's exact reproduced service/source/notice review, deliberately
+  update source/runtime/service/inventory anchors and retain four service notice
+  documents in twelve verified resource roles. No WASM/source archive is bundled.
+- [x] Qualify the new service through all nine real public SDK/private-WebKit tests
+  and a fresh separate SwiftPM consumer using an SDK-local paired delivery.
+  Preserve source preparation, declared-ELF conversion, public receipts and
+  deployment/association checks; distinguish absent bytes from pending licensing.
+- [x] Check iOS Simulator/device builds and DocC on the recorded toolchain.
+- [ ] Provision reviewed binary/source downloads or bundled service resources,
+  trusted firmware catalogue, signed/minimum-OS/physical wrapper tests and selected
+  hardware deployment. Existing tests do not qualify those outcomes.
+
+See [delivery integration](docs/compiler-delivery.md) for exact identities and checks.

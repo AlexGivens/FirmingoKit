@@ -1,0 +1,4 @@
+# Resource identities are byte-exact on every checkout platform.
+Sources/FirmingoKit/Resources/ManagedCompiler/** -text
+# Unchanged upstream notice excerpts contain intentional source whitespace.
+Sources/FirmingoKit/Resources/ManagedCompiler/service-*.txt whitespace=-blank-at-eol,-blank-at-eof

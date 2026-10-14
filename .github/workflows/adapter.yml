@@ -24,6 +24,7 @@ jobs:
           swift --version 2>&1 | tee .build/adapter-ci/swift.log
           test "$(xcodebuild -version | head -1)" = 'Xcode 27.0'
           swift --version | grep -q 'Swift version 6.4'
+          python3 Tools/ManagedWASM/update-resource-inventory.py --check 2>&1 | tee .build/adapter-ci/service-notices.log
       - name: SDK fixture, service-free preparation/ELF packaging, resource and deployment-boundary regressions
         run: node Tools/ManagedWASM/run-validation.mjs 2>&1 | tee .build/adapter-ci/tests.log
       - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
@@ -35,7 +36,7 @@ jobs:
       - name: Observe real-runtime availability separately
         run: |
           env -u FIRMINGOKIT_WASM_MODULE swift test --filter ManagedWebKitCompilerTests 2>&1 | tee .build/adapter-ci/runtime.log
-          echo 'Actual WASM tests skip without an explicit local service. No service is distributed or fetched by this workflow.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Actual WASM tests skip without the exact reviewed source-built service. Source/notice review is pinned, but no binary is bundled, fetched or published by this workflow.' >> "$GITHUB_STEP_SUMMARY"
       - name: Separate consumer discovers packaged resources
         run: |
           python3 Tools/ManagedWASM/make-resource-consumer.py

@@ -1,12 +1,21 @@
 """Create a separate SDK-local minimal SwiftPM consumer for package resource discovery checks."""
 from pathlib import Path
+import argparse
 import base64
+import re
 
 
 def main():
     """Keep all generated consumer inputs/outputs under FirmingoKit .build; use only the local package dependency."""
     sdk = Path(__file__).resolve().parents[2]
-    root = sdk / ".build/compiler-resource-consumer"
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--fresh", help="new simple directory name beneath SDK .build; refuse an existing destination")
+    args = parser.parse_args()
+    if args.fresh and not re.fullmatch(r"[a-zA-Z0-9_-]{1,64}", args.fresh):
+        raise SystemExit("Use a bounded simple fresh consumer directory name")
+    root = sdk / ".build" / (args.fresh or "compiler-resource-consumer")
+    if args.fresh and root.exists():
+        raise SystemExit("Select a new fresh consumer directory")
     source = root / "Sources/ResourceConsumer"
     source.mkdir(parents=True, exist_ok=True)
     # Embed only the unchanged non-executable parser fixture in this developer consumer.
@@ -63,7 +72,7 @@ import FirmingoKit
     }
 }
 '''.replace("SYNTHETIC_PARSER_ELF_BASE64", base64.b64encode(elf).decode("ascii")))
-    print("Created .build/compiler-resource-consumer; run swift run --package-path .build/compiler-resource-consumer ResourceConsumer")
+    print("Created", root.relative_to(sdk), "; run swift run --package-path", root.relative_to(sdk), "ResourceConsumer")
 
 
 if __name__ == "__main__":

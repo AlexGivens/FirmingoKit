@@ -1,5 +1,9 @@
 # SDK compiler hosting and validation tools
 
+Current service/notice/source pins and actual private-origin/fresh-consumer checks
+are in [reviewed delivery integration](../../docs/compiler-delivery.md). No binary
+is bundled; licensing review is scoped to the exact source-built service.
+
 FirmingoKit wraps the version-one Firmingo-Compiler package. Portable preprocessing,
 WASI execution/workspaces, workers, recipes, ELF/capsule packaging, service maintenance
 and Node compiler tests are owned by Firmingo-Compiler. The SDK's former standalone
@@ -50,7 +54,10 @@ python3 Tools/ManagedWASM/update-resource-inventory.py --check
 
 Staging checks bounded files, exact hashes/roles and script syntax, then creates the
 SDK page/source/notices/runtime manifest. It does not fetch a service or approve
-its distribution. Review the printed identities and deliberately update compiled-in
+its distribution. Import service/source notice documents separately with
+`stage-sdk-service-review.mjs <paired-delivery> <trusted-manifest-sha256>`; this
+verifies all payloads before copying four documents, never the binary/archive.
+Review the printed identities and deliberately update compiled-in
 runtime/package/inventory anchors when changing imported bytes; these commands do
 not update Swift anchors automatically. Normal builds use committed resources only.
 
@@ -83,7 +90,7 @@ checks an explicitly selected unsigned demo archive's current resources. Archive
 signed sandbox and physical-device checks must be recorded separately when run.
 
 All compiler test bindings are synthetic and their capsules must never reach
-hardware. Service-source/distribution review, verified production resident exports,
+hardware. The exact source-built service/source/notice delivery is reviewed. Verified production resident exports,
 signed/minimum-OS and physical iOS/iPadOS execution, and hardware deployment remain
 open. Removing duplicate tools establishes ownership, not those capabilities.
 

@@ -11,12 +11,12 @@ struct VerifiedManagedToolchain: Sendable {
     let recipeSHA256: String
     /// Deterministic digest binding the pinned runtime manifest and actual service identity.
     let toolchainSHA256: String
-    /// Reviewed memory-bounded development service; redistribution remains pending.
-    static let serviceSHA256 = "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33"
+    /// Exact source-built service with reviewed paired-source delivery; supplied explicitly, not bundled.
+    static let serviceSHA256 = "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"
     /// Exact approved module size, checked before reading or instantiating bytes.
-    static let serviceBytes = 101_196_044
+    static let serviceBytes = 101_194_565
     /// Runtime manifest anchor, refreshed only by deliberate reviewed SDK-local staging.
-    static let manifestSHA256 = "d6c7458d085e43d069bda0a16b1e2ed3931c51528118c3ecba862c08dc36cadc"
+    static let manifestSHA256 = "9fbf7807c22468083fd38fcf7870bd3c71b1b6d002b849631aa7a5cb31572c47"
 
     /// Loads packaged independent resources and a host-selected service, hashing off the main actor.
     /// There is no default sibling path, download, compiler subprocess or board side effect.
@@ -25,13 +25,15 @@ struct VerifiedManagedToolchain: Sendable {
         guard serviceURL.isFileURL, let root = ManagedCompilerBundle.root() else {
             throw ManagedCompilerError.unavailable("select a local approved WASM service and include the SDK runtime bundle")
         }
+        // Verify paired source/notice documentation for an explicit service as well as bundled loading.
+        _ = try await VerifiedManagedResources.load(root: root)
         let manifestData = try boundedRead(root.appendingPathComponent("manifest.json"), maximum: 16_384)
         guard digest(manifestData) == manifestSHA256 else { throw ManagedCompilerError.unavailable("runtime manifest integrity mismatch") }
         let manifest = try JSONDecoder().decode(Manifest.self, from: manifestData)
         guard manifest.schema == 1, manifest.serviceABI == 2,
               manifest.recipe == "nano-stateless-clang-22.1.8-v1-experimental",
               manifest.recipeSHA256 == "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
-              manifest.compilerPackageSHA256 == "93f149a454b1fc1c60ea21775b7b860e99b1a4031f8c810fb1f5de3bc18c4fd4",
+              manifest.compilerPackageSHA256 == "4cbdf856304063dbac59a27ea8703f74ffedbc534521b0d40d13013913d4dba5",
               manifest.files.count == 6, Set(manifest.files.map(\.path)) == ["host.html", "LICENSE-MIT", "LICENSE-APACHE", "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"] else {
             throw ManagedCompilerError.unavailable("incompatible runtime recipe")
         }

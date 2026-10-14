@@ -24,7 +24,7 @@ import FirmingoKit
         defer { actual.stop() }
         await actual.restoreContext(); await actual.restoreAssociations()
         actual.loadSDKResources(); try await wait(actual)
-        let pending = ManagedCompilerResourceError.serviceApprovalPending.localizedDescription
+        let pending = ManagedCompilerResourceError.invalidFile("compiler.wasm").localizedDescription
         guard actual.catalogueSource == .bundled, actual.compilerSource == .bundled,
               actual.catalogue?.firmwareBuilds.isEmpty == true, actual.firmwareBuild == nil,
               !actual.bundledCompilerReady, actual.bundledCompilerReason == pending,
@@ -36,7 +36,7 @@ import FirmingoKit
         actual.buildBoard = .raspberryPiPico
         guard actual.firmwareBuilds.isEmpty, actual.catalogueUnavailableReason != nil else { throw Failure("Pico availability") }
         actual.buildBoard = .nanoRP2040Connect
-        print("Actual SDK startup: empty verified catalogue, pending compiler, no device/build/review/fallback")
+        print("Actual SDK startup: empty verified catalogue, reviewed-but-absent compiler, no device/build/review/fallback")
 
         let fixtures = root.appendingPathComponent("Tests/FirmingoKitTests/Fixtures/compiler-catalogue")
         let manifest = fixtures.appendingPathComponent("catalogue.json")
@@ -89,7 +89,7 @@ import FirmingoKit
         guard observedReady.status == pending, !observedReady.bundledCompilerReady, observedReady.bundledCompilerReason == pending,
               observedReady.offlineResult == nil, observedReady.result == nil,
               workbench.session == nil else { throw Failure("cached observation bypassed actual SDK verification") }
-        print("Default compiler selection: actual SDK recheck rejects pending service before preprocessing/runtime/device I/O")
+        print("Default compiler selection: actual SDK recheck rejects absent service before preprocessing/runtime/device I/O")
 
         let loader = ScriptedLoader(catalogue: catalogue)
         let failed = WorkbenchBuildModel(records: records, bundledCatalogueLoader: { try await loader.load() }, bundledCompilerVerifier: {})

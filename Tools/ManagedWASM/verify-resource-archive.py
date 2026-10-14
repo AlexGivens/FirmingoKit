@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def main():
-    """Require the exact current SDK inventory/roles, empty catalogue and absent unapproved service."""
+    """Require the exact current SDK inventory/roles, empty catalogue and absent service binary."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path)
     args = parser.parse_args()
@@ -17,7 +17,8 @@ def main():
         raise SystemExit("Expected exactly one macOS app SDK resource inventory")
     root = matches[0].parent
     roles = {"manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json",
-             "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"}
+             "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json",
+             "service-review.json", "service-source-notices.json", "service-LICENSES.txt", "service-FILE-NOTICES.txt"}
     allowed = roles | {"inventory.json"}
     if root.is_symlink() or any(p.name not in allowed or p.is_symlink() or not p.is_file() for p in root.iterdir()):
         raise SystemExit("Unexpected or unsafe archived compiler resource")
@@ -25,8 +26,8 @@ def main():
     if data != (expected_root / "inventory.json").read_bytes():
         raise SystemExit("Archived inventory differs from the current SDK resource set")
     inventory = json.loads(data)
-    if inventory["service"]["distributionReview"] != "pending" or (root / "compiler.wasm").exists():
-        raise SystemExit("This SDK resource set must remain pending and service-free")
+    if inventory["service"]["distributionReview"] != "approved" or (root / "compiler.wasm").exists():
+        raise SystemExit("This SDK resource set must remain reviewed and service-free")
     for file in inventory["files"]:
         if file["path"] not in roles:
             raise SystemExit("Unexpected resource role")
@@ -38,7 +39,7 @@ def main():
             raise SystemExit("Archived resource integrity mismatch: " + file["path"])
     if json.loads((root / "catalogue.json").read_bytes())["firmwareBuilds"]:
         raise SystemExit("No reviewed production descriptors are staged in this SDK")
-    print("Unsigned archive: inventory, eight roles, empty catalogue and absent service verified")
+    print("Unsigned archive: inventory, twelve roles, empty catalogue and absent service verified")
     print("ManagedCompiler directory bytes:", sum(p.stat().st_size for p in root.rglob("*") if p.is_file()))
 
 

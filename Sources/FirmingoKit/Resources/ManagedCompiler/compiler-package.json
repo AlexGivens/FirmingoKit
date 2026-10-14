@@ -6,8 +6,8 @@
   "serviceABI": 2,
   "recipeSHA256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
   "service": {
-    "bytes": 101196044,
-    "sha256": "3e2544acf7f88f6f1d5fbce34648df8eb96dfff47afa242a3e008bc8f86e2f33",
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493",
     "serviceABI": 2,
     "compiler": "Clang/LLD 22.1.8 ABI-two WASI service",
     "maximumMemoryBytes": 268435456
@@ -96,7 +96,7 @@
     {
       "path": "runtime/pins.js",
       "bytes": 1072,
-      "sha256": "c9ff83d579fc6345599d268ce45722b48b8242a47739279df6ee4085fad8c1e9"
+      "sha256": "5d6952538522aa116f27b584184b7930ddaf7faa7d9a86c35965ce065a354ce2"
     },
     {
       "path": "runtime/portable-sha256.js",
@@ -268,12 +268,12 @@
     {
       "path": "compiler.js",
       "bytes": 171537,
-      "sha256": "9376c983d94803d60bab1adf48f9ba241917e86c20808e9eb307e0cb85ee6b05"
+      "sha256": "785cd9766ece97d8fb7a3e271384f613be3c29e2e6a9ebc1b14acce80aaac6cc"
     },
     {
       "path": "worker.js",
       "bytes": 143295,
-      "sha256": "5b2d66b77e5bf3d394385730ea83f5e37f70b41fe3eccfd396c08e414f9f3624"
+      "sha256": "2358c460797f46d204a7342f13839d0293e9c89ca5e0e0a273c9b236a3d758de"
     },
     {
       "path": "preparation-worker.js",
@@ -303,7 +303,7 @@
     {
       "path": "sources.json",
       "bytes": 236986,
-      "sha256": "2063039b1eb5f3b2dd78bb3110d5bc2c558f31cfcb58e5b2ff149197c2fbebb0"
+      "sha256": "f4370f75d7cf6b643be05bf4e25040ed93143077a62235fbe06240c0095ebde8"
     }
   ]
 }

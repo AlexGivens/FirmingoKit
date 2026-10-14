@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "llvm-22.1.8-wasip1-abi2-r1",
+  "reviewDate": "2026-10-14",
+  "distributionStatus": "reviewed-paired-delivery",
+  "license": "GPL-3.0-only combined service; upstream terms retained",
+  "scope": "Only the identified rebuilt module, corresponding source and accompanying notices; no legacy binary, output-license exception, wrapper or hardware qualification",
+  "service": {
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493",
+    "abi": 2,
+    "maximumMemoryBytes": 268435456
+  },
+  "source": {
+    "bytes": 234305479,
+    "sha256": "dcdbe2d1fc2135dc726f06aa7b4fa4be9d81ac61f5fba2969d464f21b86089ef",
+    "files": 140303,
+    "completeCorrespondingSource": true,
+    "historicalArchiveStatus": "Candidate manifest remains unchanged; this later review records completed rebuild and notice reconciliation"
+  },
+  "buildReceiptSHA256": "233a99853f659461d5dffcf21910cce9c3a7695290e597049afc1e3d370725ed",
+  "buildInputsSHA256": "aa0c445d0baba090fb277133e9e700634cbbeb8974825da90f0e1e8cc302f522",
+  "proof": {
+    "path": "docs/evidence/packaged-service-rebuild.json",
+    "bytes": 10471,
+    "sha256": "0572bac5d9ba5807925002218e4faafaa4a3e9789f3a252e43127a9c73095cf9"
+  },
+  "noticeManifest": {
+    "path": "third_party/service-notice-review/manifest.json",
+    "bytes": 116808,
+    "sha256": "6ea68ac9c6c2f898516bf450009c3f81d0605837242a059c3ab543339f38e817"
+  },
+  "delivery": {
+    "binary": "compiler.wasm",
+    "source": "compiler-source.tar.gz",
+    "requirement": "Keep source, notices, GPL and rebuild instructions with every binary copy. For downloads, offer equivalent source access through the same place without an additional charge; retain it while the binary remains available.",
+    "publication": "Local staged delivery only; no release uploaded"
+  },
+  "reviewedComponents": [
+    "Original service and 13 patches: author GPL-3.0-only grant",
+    "LLVM/Clang/LLD/compiler-rt/libc++/libc++abi: Apache-2.0 WITH LLVM-exception and retained legacy terms",
+    "BLAKE3: retained CC0/Apache alternatives",
+    "LLVM regex: Henry Spencer and Regents terms with documentation credits and upstream modification attribution",
+    "Unicode conversion, name mapping and libc++ tables: retained permissions, disclaimers and modification attribution",
+    "xxHash: Yann Collet BSD 2-Clause; MD5/SHA: retained public-domain/fallback and origin credits",
+    "Ryu: Ulf Adams/Microsoft Boost/LLVM notices; Kokkos: Sandia/NTESS attribution",
+    "WASI libc/cloudlibc/musl-fts/musl: retained MIT/Apache/BSD texts and per-file math, complex, crypt, regex and sort notices",
+    "Source-only dependencies/tests: full source and original named notices retained"
+  ],
+  "modifications": "Source archive contains raw pinned sources, separate GPL patches and runtime adaptation/generation scripts; binary documentation identifies this as the modified Firmingo WASM service, not an unmodified upstream product",
+  "bootstrap": "General-purpose native build tools and system libraries are prerequisites, not redistributed binaries; the statically linked WASI runtime source is included",
+  "outputLicenseExceptionAdded": false,
+  "legacyBinaryCleared": false,
+  "hardwareQualified": false
+}
