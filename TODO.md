@@ -276,3 +276,13 @@ Artifact validation and upload can start with independently built, validated exe
 
 See [maintenance hosting evidence](docs/built-service-webkit.md). Normal consumers
 and SDK resources are unchanged; distribution review remains unresolved.
+
+## Candidate inventory handoff — 2026-10-13
+
+Firmware schema-2 source resources and the compiler's metadata-only candidate
+inventory are implemented in their owning repositories. SDK compiler resources,
+public service acceptance and descriptor identity remain unchanged. Consume only
+a deliberately reviewed package in the next integration increment, then qualify
+the actual public SDK/private WebKit scheme and a fresh packaged consumer before
+claiming candidate support. No SDK source change or hardware operation was needed
+for this metadata/export increment; see `docs/compiler.md`.

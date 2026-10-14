@@ -401,3 +401,20 @@ resources were added. Evidence and remaining limits are in
 [Native maintenance hosting](built-service-webkit.md) now exercises explicitly
 anchored source-built assets through the compiler-owned standard-worker harness.
 This does not change public SDK asset acceptance or the imported source package.
+
+## Versioned firmware contracts and candidate inventory — 2026-10-13
+
+Firmingo's resident exporter now emits schema 2 with exact ABI/image/facade/entry/
+linker/license resources from the selected source commit. Firmingo-Compiler verifies
+those resources against its reviewed Nano recipe mapping and records a metadata-only
+candidate package inventory. Legacy schema-1 metadata import remains compiler-side
+and explicitly lacks a verified source contract. Descriptor/build identity and
+runtime ABI/wire formats retain their existing meanings.
+
+The source-built candidate still differs from the SDK's accepted service pin.
+Candidate inventory is neither distribution approval nor a consumable compiler
+package. SDK resources, source package, public build acceptance and default empty
+catalogue remain unchanged. The next SDK integration gate is deliberate import
+of a reviewed package followed by public API/private-scheme, packaged-consumer,
+signed/physical-host and selected device qualification. Ordinary SDK builds never
+read a firmware checkout or run the compiler inventory tool.
