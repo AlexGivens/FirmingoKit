@@ -10,7 +10,7 @@ public struct ManagedCompilerCatalogue: Sendable {
     public let firmwareBuilds: [ManagedFirmwareBuildDescriptor]
 
     /// Loads only SDK-owned, inventory/hash-verified descriptor resources off UI execution, without a device or service.
-    /// The current bundle intentionally contains an empty catalogue pending trusted firmware-build exports.
+    /// The current bundle contains one exact, explicitly experimental Nano descriptor from a reviewed firmware export.
     /// Resource/schema/I/O errors propagate; cancellation remains CancellationError. No entry or latest build is
     /// synthesized, and successful metadata loading does not establish compiler availability or hardware support.
     @concurrent public static func loadBundled() async throws -> Self {
@@ -21,7 +21,7 @@ public struct ManagedCompilerCatalogue: Sendable {
     /// Required keys are `schema: 1` and `firmwareBuilds: [...]`; at most 32 descriptors, 128 KiB,
     /// and 8192 JSON tokens are accepted. Empty catalogues honestly expose no firmware builds.
     /// Duplicate descriptor IDs and conflicting metadata for one complete-image hash fail. Cancellation
-    /// remains CancellationError. All accepted entries retain experimental status; no resource is shipped here.
+    /// remains CancellationError. All accepted entries retain experimental status; loading does not qualify hardware.
     @concurrent public static func load(manifestJSON: Data, expectedSHA256: String) async throws -> Self {
         try Task.checkCancellation()
         guard manifestJSON.count <= 128 * 1024 else { throw ManagedCatalogueError.invalidCatalogue }

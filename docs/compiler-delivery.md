@@ -1,5 +1,9 @@
 # Reviewed source-built compiler integration — 2026-10-14
 
+Subsequent [consumer provisioning](compiler-package-provisioning.md) adds one exact
+experimental descriptor and thirteen roles. Empty-catalogue/twelve-role identities
+below describe the earlier increment; source-checkout binary absence remains.
+
 FirmingoKit now wraps the reproduced LLVM 22.1.8/WASI ABI-two service,
 101,194,565 bytes, SHA-256
 `a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493`.

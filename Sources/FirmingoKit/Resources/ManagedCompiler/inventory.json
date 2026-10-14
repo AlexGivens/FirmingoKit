@@ -38,8 +38,8 @@
     },
     {
       "path": "catalogue.json",
-      "bytes": 33,
-      "sha256": "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db"
+      "bytes": 890,
+      "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
     },
     {
       "path": "Firmingo-Compiler-LICENSE",
@@ -75,6 +75,11 @@
       "path": "service-FILE-NOTICES.txt",
       "bytes": 236570,
       "sha256": "3cd2691f53b2dc6e2707c67202d5c1fd3a5941d4ae611880bf32a7023ce8a52a"
+    },
+    {
+      "path": "consumer-package.json",
+      "bytes": 6670,
+      "sha256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
     }
   ]
 }

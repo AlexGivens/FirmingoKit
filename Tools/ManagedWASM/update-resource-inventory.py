@@ -1,4 +1,4 @@
-"""Maintain the reviewed service-free SDK inventory; never copy a compiler binary."""
+"""Maintain reviewed SDK metadata; actual binary inclusion belongs to explicit package preparation."""
 import argparse
 import hashlib
 import json
@@ -12,17 +12,21 @@ def main():
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2] / "Sources/FirmingoKit/Resources/ManagedCompiler"
     if (root / "compiler.wasm").exists():
-        raise SystemExit("Unapproved service must not be staged in the package")
+        raise SystemExit("Source checkout stays service-free; use prepare-sdk-package for reviewed binary inclusion")
     allowed = {"manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json", "inventory.json", "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json",
-               "service-review.json", "service-source-notices.json", "service-LICENSES.txt", "service-FILE-NOTICES.txt"}
+               "service-review.json", "service-source-notices.json", "service-LICENSES.txt", "service-FILE-NOTICES.txt", "consumer-package.json"}
     if any(p.name not in allowed or p.is_symlink() or not p.is_file() for p in root.iterdir()):
         raise SystemExit("Unexpected or unsafe staged compiler resource")
-    catalogue = b'{"schema":1,"firmwareBuilds":[]}\n'
-    if args.check:
-        if (root / "catalogue.json").read_bytes() != catalogue:
-            raise SystemExit("No reviewed production descriptors are staged; catalogue must remain empty")
-    else:
-        (root / "catalogue.json").write_bytes(catalogue)
+    consumer_bytes = (root / "consumer-package.json").read_bytes()
+    if hashlib.sha256(consumer_bytes).hexdigest() != "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c":
+        raise SystemExit("Consumer package differs from independently reviewed anchor")
+    consumer = json.loads(consumer_bytes)
+    catalogue = (root / "catalogue.json").read_bytes()
+    if hashlib.sha256(catalogue).hexdigest() != consumer["catalogueSHA256"]:
+        raise SystemExit("Catalogue differs from reviewed exact firmware export")
+    builds = json.loads(catalogue)["firmwareBuilds"]
+    if len(builds) != 1 or builds[0]["firmwareCommit"] != consumer["review"]["firmwareCommit"] or builds[0]["qualification"] != "experimental":
+        raise SystemExit("Only the exact reviewed experimental Nano descriptor may be staged")
     runtime = json.loads((root / "manifest.json").read_bytes())
     if hashlib.sha256((root / "service-review.json").read_bytes()).hexdigest() != "2627a80ee5845929f030cfec6253f05e3cfc4f8c98bff69a0117b3d78114cb26":
         raise SystemExit("Service review differs from independently reviewed pair")
@@ -50,7 +54,7 @@ def main():
         "files": [],
     }
     for name in ["manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json", "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json",
-                 "service-review.json", "service-source-notices.json", "service-LICENSES.txt", "service-FILE-NOTICES.txt"]:
+                 "service-review.json", "service-source-notices.json", "service-LICENSES.txt", "service-FILE-NOTICES.txt", "consumer-package.json"]:
         data = (root / name).read_bytes()
         inventory["files"].append({"path": name, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()})
     data = (json.dumps(inventory, indent=2) + "\n").encode()

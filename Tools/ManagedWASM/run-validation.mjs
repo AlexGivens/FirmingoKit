@@ -22,6 +22,7 @@ if (args.length === 1 && args[0] === "--help") {
 } else {
   if (args.length > 1 || args[0] === "" || args[0]?.startsWith("-")) throw new Error("Select at most one explicit local service; use --help");
   run("python3", ["Tools/verify-fixtures.py"]);
+  run(process.execPath, ["--test", "Tools/ManagedWASM/test-consumer-package.mjs"]);
   run("python3", ["Tools/ManagedWASM/update-resource-inventory.py", "--check"]);
   const env = { ...process.env };
   delete env.FIRMINGOKIT_WASM_MODULE;

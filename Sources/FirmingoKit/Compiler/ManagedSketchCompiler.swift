@@ -1,7 +1,7 @@
 import Foundation
 
 /// Local experimental Nano compiler using an internal isolated WebKit/WASI worker, with no board side effect.
-/// Default loading uses SDK resources and fails explicitly while service distribution review is pending. No shell/native
+/// Default loading uses verified SDK resources; an explicitly prepared SDK includes the reviewed service. No shell/native
 /// compiler fallback exists. A valid artifact establishes compile/link/structural packaging, not hardware behavior.
 public actor ManagedSketchCompiler {
     /// Optional explicit development service; nil uses only the SDK-pinned package resource inventory.
@@ -12,13 +12,13 @@ public actor ManagedSketchCompiler {
     /// Callers retain security-scoped access for the full build when their sandbox requires it.
     public init(serviceURL: URL) { self.serviceURL = serviceURL }
     /// Selects SDK-owned bundled resources without a picker, environment override or external toolchain.
-    /// Construction performs no I/O. Build verifies the inventory and assets off UI execution and currently
-    /// throws `ManagedCompilerResourceError.serviceApprovalPending`; no service is bundled pending review.
+    /// Construction performs no I/O. Build verifies the inventory and assets off UI execution. The source checkout
+    /// reports missing `compiler.wasm`; an explicitly prepared SDK supplies the reviewed binary.
     public init() { serviceURL = nil }
 
     /// Verifies the selected resources off UI execution without preparing source, starting WebKit or contacting a board.
     /// Useful for host setup/availability checks. Success confirms asset integrity only, not recipe/hardware behavior;
-    /// builds verify again and no bytes are cached. The current default selection throws serviceApprovalPending.
+    /// builds verify again and no bytes are cached. Missing or corrupt packaged assets fail explicitly.
     /// Shares the build reservation: overlapping verification/build requests throw busy; cancellation releases it.
     public func verifyResources() async throws {
         guard !building else { throw ManagedCompilerError.busy }

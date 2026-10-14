@@ -113,6 +113,13 @@ This track can progress alongside communication after contract selection. Initia
 
 ## 7. Preserve the existing compiler until extraction passes
 
+Current update: scoped service review is complete. One checked experimental Nano
+descriptor and complete compiler package are staged as thirteen metadata roles.
+Clean SDK preparation supplies the binary outside Git for default loading; ordinary
+source-checkout availability remains missing-service. See [provisioning](docs/compiler-package-provisioning.md).
+Earlier pending/empty-catalogue entries are historical checkpoints. Hosted delivery
+and signed/minimum-OS/physical/device qualification remain open.
+
 The completed entries below retain their original evidence. Portable preprocessing,
 recipes, runtime execution, ELF/capsule packaging, and related maintenance move to
 Firmingo-Compiler under [the inventory](docs/compiler-migration.md). Former unchecked

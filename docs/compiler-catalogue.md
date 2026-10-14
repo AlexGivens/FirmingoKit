@@ -2,6 +2,12 @@
 
 ## Accepted direction and current status
 
+Current update (2026-10-14): scoped service review is complete. One exact experimental
+Nano descriptor is staged from a checked firmware export. [SDK preparation](compiler-package-provisioning.md)
+supplies the reviewed binary for default API use without committing it to Git.
+Source-checkout builds still report missing bytes. Thirteen roles are independently
+anchored. Pending/empty-catalogue notes below describe earlier stages.
+
 Ownership revised on 2026-10-12: the self-contained SDK experience accepted on
 2026-09-30 remains, while Firmingo-Compiler now produces the portable compiler,
 recipes, static catalogues/descriptors, and receipts. FirmingoKit owns Swift

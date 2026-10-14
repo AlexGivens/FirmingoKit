@@ -5,18 +5,20 @@ Discover verified metadata and compiler resources without an external toolchain.
 ## Current availability
 
 ``ManagedCompilerCatalogue/loadBundled()`` loads the SDK-owned inventory and its
-twelve bounded runtime/source/license/catalogue/notice roles off UI execution. The current
-catalogue is intentionally empty: trusted production firmware-build descriptors
-have not been staged. No board or latest build is selected automatically. A
+thirteen bounded runtime/source/license/catalogue/notice/provenance roles off UI execution.
+The catalogue contains one exact experimental Nano descriptor from a verified
+firmware export. No board or latest build is selected automatically. A
 successful catalogue load is separate from compiler availability.
 
 ``ManagedSketchCompiler/init()`` selects the same SDK-owned resource set without
 file selection. Construction performs no I/O; each build verifies the inventory
 and exact assets before source preparation or WebKit execution. The current
 inventory records the exact source-built service's paired-delivery review. The
-WASM binary is still supplied explicitly rather than bundled, so a default build
-reports ``ManagedCompilerResourceError/invalidFile(_:)`` for `compiler.wasm`. No
-synthetic firmware descriptor is supplied to invent a build choice.
+source checkout omits the binary, so a default build there reports
+``ManagedCompilerResourceError/invalidFile(_:)`` for `compiler.wasm`. Explicit SDK
+package preparation supplies the reviewed service to app resources and retains
+complete paired source/notices outside them. The prepared SDK needs no compiler
+file picker or service URL. Its descriptor supplies no installed-device or hardware evidence.
 
 ```swift
 import FirmingoKit
@@ -36,11 +38,10 @@ if choices.isEmpty {
 }
 ```
 
-After approved resources and trusted descriptors are packaged, a host explicitly
-selects an exact SDK-listed descriptor, creates ``ManagedOfflineBuildRequest`` and
-calls the default compiler. Build remains offline and does not create a physical
-device association or authorize upload. That successful bundled compilation flow
-is not delivered by the current empty catalogue and absent service.
+A host using the prepared SDK selects an exact listed descriptor, creates
+``ManagedOfflineBuildRequest`` and calls the default compiler. Build remains offline
+and creates no device association or upload authorization. Normal consumption
+does not run Node/Python or discover a compiler checkout.
 
 ## Integrity and review boundaries
 

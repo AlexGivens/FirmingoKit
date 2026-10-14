@@ -7,7 +7,8 @@ struct ManagedCompilerResourceInventory: Sendable {
                              "LICENSE-MIT": 16_384, "LICENSE-APACHE": 16_384, "catalogue.json": 128 * 1024,
                              "Firmingo-Compiler-LICENSE": 65_536, "compiler-package.json": 16_384, "compiler-sources.json": 512 * 1024,
                              "service-review.json": 16_384, "service-source-notices.json": 131_072,
-                             "service-LICENSES.txt": 512 * 1024, "service-FILE-NOTICES.txt": 512 * 1024]
+                             "service-LICENSES.txt": 512 * 1024, "service-FILE-NOTICES.txt": 512 * 1024,
+                             "consumer-package.json": 65_536]
     /// Fixed compiler filename, usable only after the SDK-pinned distribution review passes.
     static let servicePath = "compiler.wasm"
     /// Fixed recipe shared by all compatible resident builds; no service copy per descriptor is needed.

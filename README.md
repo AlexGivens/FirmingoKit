@@ -4,6 +4,10 @@ FirmingoKit is a Swift package for host apps working with microcontrollers that
 run Firmingo firmware. This is an early implementation, not a complete SDK or a
 hardware-qualified release.
 
+[Self-contained SDK preparation](docs/compiler-package-provisioning.md) binds
+the reviewed compiler to one exact experimental Nano catalogue entry. Prepared
+packages support default API use; Git source retains explicit missing-binary behavior.
+
 The agreed repository split assigns preprocessing, WASM execution, board recipes,
 ELF/capsule packaging, compiler diagnostics, and static build metadata to
 **Firmingo-Compiler**. FirmingoKit owns the Swift compiler facade/web host, device
@@ -23,7 +27,8 @@ exact host-known resident binding, stages them in RAM, requires an explicit one-
 commit, and supports saved-record reconciliation. Complete-firmware local acquisition,
 release/UF2 validation, and artifact preflight are also implemented. Experimental macOS ROM programming, one-shot execution, persistable records, and
 fresh-hello verification are implemented. Experimental local WASM compilation is implemented with an explicitly supplied
-reviewed service; approved service redistribution and qualified updates remain pending; no programming/sandbox pair is hardware-qualified. Upload has no hardware
+reviewed service; its scoped paired-source distribution review is complete, while
+hosted delivery and qualified updates remain pending; no programming/sandbox pair is hardware-qualified. Upload has no hardware
 qualification; an advertisement alone is insufficient to start an upload.
 
 Offline single-file source preparation and strict stateless Nano ELF-to-FMS1

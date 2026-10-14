@@ -36,9 +36,11 @@ import FirmingoKit
     static func main() async throws {
         let catalogue = try await ManagedCompilerCatalogue.loadBundled()
         let compiler = ManagedSketchCompiler()
-        guard catalogue.firmwareBuilds.isEmpty else { throw CocoaError(.fileReadCorruptFile) }
+        guard catalogue.firmwareBuilds.count == 1,
+              catalogue.firmwareBuilds.first?.id == "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f"
+              else { throw CocoaError(.fileReadCorruptFile) }
         print("Verified bundled catalogue:", catalogue.manifestSHA256)
-        print(catalogue.unavailableReason(for: .nanoRP2040Connect) ?? "Unexpected available metadata")
+        print("Verified experimental resident metadata; compilation and device qualification are separate")
         if CommandLine.arguments.count == 2 {
             // Synthetic local compiler evidence only: never deploy this test capsule.
             let resident = try ManagedResidentBinding(deviceID: "0102030405060708",

@@ -41,6 +41,7 @@ jobs:
         run: |
           python3 Tools/ManagedWASM/make-resource-consumer.py
           swift run --package-path .build/compiler-resource-consumer ResourceConsumer 2>&1 | tee .build/adapter-ci/consumer.log
+          echo 'Exact experimental Nano metadata is bundled; default compilation requires reviewed SDK preparation. This service-free job supplies no binary and claims no compiler execution.' >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         if: always()
         with:

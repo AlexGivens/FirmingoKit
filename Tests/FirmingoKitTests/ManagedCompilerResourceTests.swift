@@ -4,12 +4,15 @@ import Testing
 
 /// Actual SDK resource bytes and independently mutated inventories exercise fail-closed bundled loading.
 struct ManagedCompilerResourceTests {
-    /// Reviewed service metadata does not invent a bundled binary, descriptor or device identity.
+    /// Exact reviewed firmware metadata supplies an experimental choice without inventing a binary or device identity.
     @Test func bundledCatalogueAndReviewedAbsentService() async throws {
         let catalogue = try await ManagedCompilerCatalogue.loadBundled()
-        #expect(catalogue.manifestSHA256 == "471f5f9b75800dd0097d1993e67e624654ace8d24a8dab87c5b29bd3c686e2db")
-        #expect(catalogue.firmwareBuilds.isEmpty)
-        #expect(catalogue.unavailableReason(for: .nanoRP2040Connect) != nil)
+        #expect(catalogue.manifestSHA256 == "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e")
+        #expect(catalogue.firmwareBuilds.count == 1)
+        #expect(catalogue.firmwareBuilds.first?.id == "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f")
+        #expect(catalogue.firmwareBuilds.first?.firmwareCommit == "e0a79d1e47aa90d5dda02ccd284d40b9c2922c12")
+        #expect(catalogue.firmwareBuilds.first?.apiAddress == 0x10022c9c)
+        #expect(catalogue.unavailableReason(for: .nanoRP2040Connect) == nil)
         #expect(catalogue.unavailableReason(for: .raspberryPiPico) != nil)
         let resources = try await VerifiedManagedResources.load()
         #expect(!resources.page.isEmpty)
@@ -79,7 +82,7 @@ struct ManagedCompilerResourceTests {
     /// Every role, including licenses/catalogue, is independently verified; same-size byte changes fail.
     @Test(arguments: ["manifest.json", "host.html", "LICENSE-MIT", "LICENSE-APACHE", "catalogue.json",
                       "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json",
-                      "service-review.json", "service-source-notices.json", "service-LICENSES.txt", "service-FILE-NOTICES.txt"])
+                      "service-review.json", "service-source-notices.json", "service-LICENSES.txt", "service-FILE-NOTICES.txt", "consumer-package.json"])
     func corruptedResource(_ path: String) async throws {
         try await withCopy { root in
             let url = root.appendingPathComponent(path)
@@ -150,7 +153,7 @@ struct ManagedCompilerResourceTests {
             return try await ManagedCompilerCatalogue.loadBundled()
         }
         await #expect(throws: CancellationError.self) { _ = try await cancelled.value }
-        #expect(try await ManagedCompilerCatalogue.loadBundled().firmwareBuilds.isEmpty)
+        #expect(try await ManagedCompilerCatalogue.loadBundled().firmwareBuilds.count == 1)
         let compiler = ManagedSketchCompiler()
         let verification = Task {
             withUnsafeCurrentTask { $0?.cancel() }

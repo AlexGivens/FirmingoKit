@@ -31,6 +31,16 @@ Public private-origin/fresh-consumer checks are recorded in
 `docs/compiler-delivery.md`; signing/minimum-OS/physical iOS/iPadOS and hardware
 remain unqualified. Older facts below are historical snapshots, not current pins.
 
+The experimental consumer package now supplies exact Nano descriptor `c44d25ef…`
+from Firmware `e0a79d1…`, catalogue `e341bfc0…`. Thirteen verified metadata roles
+include `consumer-package.json`; inventory `e3c6080b…` replaces the empty-catalogue
+inventory. `prepare-sdk-package.mjs` produces a clean SDK copy with the reviewed
+binary in app resources and complete source/notices outside them. No binary is
+committed or auto-downloaded. Source-checkout compilation still reports absent
+`compiler.wasm`; default API execution belongs to the prepared package. Metadata
+availability does not attest installed firmware or qualify hardware. See
+`docs/compiler-package-provisioning.md` for the maintenance/consumer workflow.
+
 Snapshot verified on 2026-09-30:
 
 Ownership update on 2026-10-12: the snapshot below describes the existing implementation, not its future owner. The portable preparation/ELF/capsule and actual isolated Node/WASI path now exists in Firmingo-Compiler, with event/receipt contracts, an explicit-service CLI and local compile/link/disposal evidence. The default standard module-worker path now also passes nine headless Chrome 154.0.8037.93/macOS arm64/HTTP-loopback checks. The pinned source-only compiler package now passes nine actual macOS WebKit cases and a separate SwiftPM consumer; see `docs/compiler-adapter.md`. Signed/minimum-OS and physical iOS/iPadOS execution, other browsers and hardware remain unqualified. FirmingoKit retains its working APIs/resources until the migration gates pass; compiler-owned code/tests/assets move to Firmingo-Compiler, while Swift hosting and device safeguards stay here.

@@ -26,7 +26,7 @@ import FirmingoKit
         actual.loadSDKResources(); try await wait(actual)
         let pending = ManagedCompilerResourceError.invalidFile("compiler.wasm").localizedDescription
         guard actual.catalogueSource == .bundled, actual.compilerSource == .bundled,
-              actual.catalogue?.firmwareBuilds.isEmpty == true, actual.firmwareBuild == nil,
+              actual.catalogue?.firmwareBuilds.count == 1, actual.firmwareBuild == nil,
               !actual.bundledCompilerReady, actual.bundledCompilerReason == pending,
               !actual.canBuild, !actual.canRun(on: workbench), actual.association == nil,
               workbench.session == nil else { throw Failure("shipped startup: catalogue=\(actual.catalogue?.manifestSHA256 ?? "none"), reason=\(actual.bundledCompilerReason ?? "none"), ready=\(actual.bundledCompilerReady), status=\(actual.status)") }
@@ -36,7 +36,7 @@ import FirmingoKit
         actual.buildBoard = .raspberryPiPico
         guard actual.firmwareBuilds.isEmpty, actual.catalogueUnavailableReason != nil else { throw Failure("Pico availability") }
         actual.buildBoard = .nanoRP2040Connect
-        print("Actual SDK startup: empty verified catalogue, reviewed-but-absent compiler, no device/build/review/fallback")
+        print("Actual SDK startup: exact experimental catalogue, reviewed-but-absent compiler, no implicit selection/device/build/review/fallback")
 
         let fixtures = root.appendingPathComponent("Tests/FirmingoKitTests/Fixtures/compiler-catalogue")
         let manifest = fixtures.appendingPathComponent("catalogue.json")
