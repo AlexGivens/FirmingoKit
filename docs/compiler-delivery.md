@@ -64,3 +64,35 @@ board operations and useful hardware behavior remain unqualified. No board is
 contacted or changed. Manual SDK CI requires a provisioned Xcode 27 runner;
 these local results do not claim a GitHub run. See [compiler adapter](compiler-adapter.md)
 and the retained review files in `Sources/FirmingoKit/Resources/ManagedCompiler/`.
+
+## Provisioning from a transferred transport
+
+Firmingo-Compiler now provides `service-release build|verify|extract` for a
+deterministic local ZIP with the reviewed service, source archive, notices and
+delivery manifest. A separate `release.json` binds the archive and delivery
+identities. The release inventory hash must come from a trusted package/release
+context, independently of the downloaded files. The transport has no downloader
+and creates no publication or automatic SDK resource installation.
+
+After verifying/extracting with the compiler's explicit maintenance CLI, use the
+SDK-local extracted directory as `EXPLICIT_PAIRED_DELIVERY` above. Supply its
+`compiler.wasm` explicitly to the existing compiler initializer/test environment.
+Keep the complete source/notices with shared binary delivery. Neither the SDK
+consumer nor its ordinary build needs a compiler checkout or maintenance tools.
+The source-only runtime import, twelve committed role identities and empty
+production descriptor catalogue remain unchanged.
+
+The first local transport has release inventory SHA-256
+`c7fca729708f4213ca586b35d4d7fdaef568e35a61209bce8b95976a3cd6b39b`;
+its 336,179,045-byte ZIP has SHA-256
+`fcb9dee7c117cab83d0f1597cf3a4a8dea3172d6abde72d3a83c6a3847a8d26f`.
+See the compiler's `docs/service-release.md` and `docs/release-qualification.md`
+for bounded verification and the remaining signed/physical host and device gates.
+
+A fresh `.build/transport-consumer-r1` package has now built and run against the
+SDK-local extracted service. Actual private-WebKit compilation reproduces the
+same synthetic Blink capsule; service-free preparation and declared-ELF conversion
+also pass. Execution has no compiler sibling lookup. The ordinary adapter harness
+passes all 152 SDK test functions with nine absent-service skips. Logs are
+`.build/transport-fresh-consumer.log` and `.build/transport-adapter-validation.log`.
+These results qualify local transfer/consumption only; no device is contacted.
