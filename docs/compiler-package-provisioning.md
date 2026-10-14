@@ -67,3 +67,22 @@ Three SDK maintenance boundary tests pass. Signing/physical/device results remai
 open. Capsule bytes are reproducible; UUID-based request/receipt identities vary
 deliberately between snapshots. Logs remain local under `.build/consumer-package-*`
 and `.build/default-nano-consumer-r1.log`.
+
+The full prepared-package suite exposed two historical test assumptions that all
+SDK packages omit compiler bytes. Dedicated resource checks now cover present
+and absent service states; preparation/ELF tests retain their service-independent
+assertions. Clean corrected commit `3927416…` prepares 261 records, manifest
+`ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e`.
+The complete native suite from that prepared copy reports 152 tests passing with
+ten explicit skips (nine opt-in compiler cases and one source-only absence case).
+The source checkout's sixteen focused adapter/resource functions also pass.
+
+Final source-checkout validation again reports 152 tests passing with nine
+unavailable-service skips and three maintenance boundary passes. The corrected
+prepared SDK separately passes all nine actual WebKit cases using its own local
+service, covering both build overloads, diagnostics and cancellation/deadline/
+fresh-state behavior. Final DocC succeeds without warnings. Logs are
+`.build/prepared-nano-sdk-r3-{tests,webkit}.log`,
+`.build/consumer-package-final-sdk-tests.log` and
+`.build/consumer-package-docc-final.log`. SDK CI still requires its provisioned
+Apple runner; local passes do not establish a remote run.
