@@ -5,7 +5,7 @@ import Testing
 /// Real service-free WebKit preparation and native boundary checks require no compiler binary or device.
 @Suite(.serialized)
 @MainActor struct ManagedPreparationAdapterTests {
-    /// Both request forms preserve identical preparation and the entire revision while the reviewed service remains unbundled.
+    /// Both request forms preserve identical preparation and the entire revision independently of compiler-service availability.
     @Test func serviceFreeLegacyAndOfflineParity() async throws {
         let source = "\u{feff}// café 🎵\r\nvoid setup() {}\rvoid loop() {}"
         let legacy = try CompilerFixtures.request(source: source, revision: .max)
@@ -17,7 +17,6 @@ import Testing
         #expect(first.translationUnit == second.translationUnit)
         #expect(first.request.snapshot.revision == .max)
         #expect(second.request.snapshot.revision == .max)
-        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { try await ManagedSketchCompiler().verifyResources() }
     }
     /// Actual prepared data is correlated before publication; altered input/output identities and additive fields fail.
     @Test func nativePreparationBoundary() async throws {

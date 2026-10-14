@@ -53,7 +53,6 @@ import Testing
         #expect(!String(decoding: request.json, as: UTF8.self).contains("deviceID"))
         #expect(request.packagingProvenance?.recipeIdentifier == "nano-test-v1")
         #expect(request.revisionToken.hasSuffix("18446744073709551615"))
-        await #expect(throws: ManagedCompilerResourceError.invalidFile("compiler.wasm")) { try await ManagedSketchCompiler().verifyResources() }
     }
 
     /// The shared parser rejects malformed/full-firmware bytes through the public API without any native ELF parser.
