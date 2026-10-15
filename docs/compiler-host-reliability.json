@@ -1,0 +1,361 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "scope": "Development-signed ARM64 Release build 2, physical paired iPad and iPhone over Wi-Fi; finite repeated builds, self-process footprint samples and forced whole-app termination/fresh recovery; no board operation",
+  "context": {
+    "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+    "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a",
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+  },
+  "hostInputsSHA256": "85f1862629a0cc0fde4d6bf502a1b3787bf6c6430c03903a44c87b6c8f3773c2",
+  "hostSourceFiles": [
+    {
+      "path": "Sources/QualificationApp.swift",
+      "bytes": 4004,
+      "sha256": "417f384b1712d6017d8e42faed34aa12d1f8f022a8ffcddccf8bd95da9f97abd"
+    },
+    {
+      "path": "Sources/QualificationChecks.swift",
+      "bytes": 12043,
+      "sha256": "fe3ee97cca92b3e8e352b05dd4d023271bfe445cc8745d570b912a18b2b17172"
+    },
+    {
+      "path": "Sources/QualificationStress.swift",
+      "bytes": 11163,
+      "sha256": "3a19418a84f9db7bc4e6d2346c4d0f8f47f873f688ed5e25e57b9c15c9346069"
+    }
+  ],
+  "toolchain": {
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4",
+    "iOSSDK": "27.0",
+    "deploymentMinimum": "17.0",
+    "configuration": "Release",
+    "buildOverrides": {
+      "CURRENT_PROJECT_VERSION": 2,
+      "ENABLE_DEBUG_DYLIB": "NO",
+      "CODE_SIGN_STYLE": "Automatic"
+    }
+  },
+  "signature": {
+    "strictDeepVerification": true,
+    "teamIdentifier": "WGR9T9JH4L",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.compilerqualification",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "executableSHA256": "35d7e97eb15d145cff6d21ffc2d6fe62da71c073e92ecd4b01238edba89857ff",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "buildVersion": "2",
+    "bothDevicesIncluded": true
+  },
+  "compilerWASM": {
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"
+  },
+  "hosts": [
+    {
+      "model": "iPad Pro (11-inch) (3rd generation)",
+      "productType": "iPad13,4",
+      "osVersion": "27.0.1",
+      "osBuild": "24A446",
+      "transport": "localNetwork",
+      "runs": [
+        {
+          "condition": "baseline",
+          "summary": {
+            "status": "passed_repeated_build_checks",
+            "runID": "1E4FFDF2-2E8C-406D-B3A6-D884C07B4CA9",
+            "iterations": 20,
+            "reportSHA256": "d57f37891d714e06a15a9fad1ef81277e6954f48647c24265a9b740237978cb6",
+            "context": {
+              "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+              "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+              "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+            },
+            "hostFootprintSampleCount": 291,
+            "hostFootprintFirstBytes": 13779592,
+            "hostFootprintLastBytes": 424936696,
+            "hostFootprintSampledPeakBytes": 828818992,
+            "droppedSamples": 0,
+            "memoryScope": "Host process samples only; excludes WebKit children and missed peaks; no leak-free claim"
+          },
+          "durationThroughLastSampleSeconds": 14.306619499999215,
+          "maximumSampleGapSeconds": 0.05575808334106114,
+          "observedPeakSample": {
+            "bytes": 828818992,
+            "seconds": 7.418167749987333,
+            "stage": "build-12-console"
+          },
+          "buildSeconds": [
+            0.7054664999886882,
+            0.7081277500110446,
+            0.6217223333369475,
+            0.6946754583332222,
+            0.6161824166629231,
+            0.6902195000002393,
+            0.6163025416753953,
+            0.6759674166678451,
+            0.6208868749963585,
+            0.675944916671142,
+            0.6145873333298368,
+            0.6955096250021597,
+            0.6179090416699182,
+            0.6921903333277442,
+            0.6233964999992168,
+            0.6886952500062762,
+            0.6267453750042478,
+            0.6883967499888968,
+            0.6228638750035316,
+            0.6842210833419813
+          ],
+          "artifactCounts": {
+            "gpio": 10,
+            "console": 10
+          },
+          "linearMemoryBytes": [
+            27983872
+          ]
+        },
+        {
+          "condition": "fresh app process after forced termination",
+          "summary": {
+            "status": "passed_repeated_build_checks",
+            "runID": "C7CB8F5C-40C3-4125-979F-7097FE582BC1",
+            "iterations": 20,
+            "reportSHA256": "269fe72e375976c9813b52b64d0fa9df88d7a0cc886b5e6324c67d04bbd5c9e4",
+            "context": {
+              "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+              "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+              "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+            },
+            "hostFootprintSampleCount": 289,
+            "hostFootprintFirstBytes": 13648496,
+            "hostFootprintLastBytes": 424543432,
+            "hostFootprintSampledPeakBytes": 732005768,
+            "droppedSamples": 0,
+            "memoryScope": "Host process samples only; excludes WebKit children and missed peaks; no leak-free claim"
+          },
+          "durationThroughLastSampleSeconds": 14.23020016666851,
+          "maximumSampleGapSeconds": 0.06080174999078736,
+          "observedPeakSample": {
+            "bytes": 732005768,
+            "seconds": 5.523007833326119,
+            "stage": "build-9-gpio"
+          },
+          "buildSeconds": [
+            0.6662306250073016,
+            0.6826480000017909,
+            0.611777666665148,
+            0.6857834583206568,
+            0.6157363333331887,
+            0.6887419999984559,
+            0.6162455000012415,
+            0.6860203333344543,
+            0.6225089999934426,
+            0.6922277083358495,
+            0.6129605833411915,
+            0.6912704166752519,
+            0.6131022083282005,
+            0.6871962916775374,
+            0.6182171249965904,
+            0.6839382500038482,
+            0.6285286666679895,
+            0.685719708329998,
+            0.6181647916673683,
+            0.6841335833451012
+          ],
+          "artifactCounts": {
+            "gpio": 10,
+            "console": 10
+          },
+          "linearMemoryBytes": [
+            27983872
+          ]
+        }
+      ],
+      "interruption": {
+        "status": "terminated_incomplete_run",
+        "runID": "6D5AE1E6-6DAF-403E-821E-CE6FEECCE4D7",
+        "durableStage": "build-12-console",
+        "completedBuilds": 11,
+        "requestedBuilds": 40,
+        "interruptedReportSHA256": "66ede292c15ad63f9a6dbbf6c6fcf8e56899e7d99298955fdbd76371143e0ff8",
+        "checkerRejectedIncomplete": true,
+        "journalUnchangedAfterFreshRecovery": true
+      }
+    },
+    {
+      "model": "iPhone 15 Pro Max",
+      "productType": "iPhone16,2",
+      "osVersion": "27.0",
+      "osBuild": "24A437",
+      "transport": "localNetwork",
+      "runs": [
+        {
+          "condition": "baseline",
+          "summary": {
+            "status": "passed_repeated_build_checks",
+            "runID": "B71C2AC6-6C2A-4B40-BA01-A40169C489E2",
+            "iterations": 20,
+            "reportSHA256": "e80274c362ca216f68ea8ac96451b014951228ada1bc4eb9e4061a6422b0656f",
+            "context": {
+              "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+              "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+              "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+            },
+            "hostFootprintSampleCount": 270,
+            "hostFootprintFirstBytes": 10274464,
+            "hostFootprintLastBytes": 317704272,
+            "hostFootprintSampledPeakBytes": 828033440,
+            "droppedSamples": 0,
+            "memoryScope": "Host process samples only; excludes WebKit children and missed peaks; no leak-free claim"
+          },
+          "durationThroughLastSampleSeconds": 13.224670499999775,
+          "maximumSampleGapSeconds": 0.06052895833272487,
+          "observedPeakSample": {
+            "bytes": 828033440,
+            "seconds": 3.946883708325913,
+            "stage": "build-7-gpio"
+          },
+          "buildSeconds": [
+            0.6848774583486374,
+            0.639252499997383,
+            0.5651329583488405,
+            0.6255631249805447,
+            0.5631418749981094,
+            0.6281590000144206,
+            0.5653051249973942,
+            0.622308875026647,
+            0.564905416656984,
+            0.629505374992732,
+            0.5611439583299216,
+            0.623269291681936,
+            0.5630494583456311,
+            0.6273421249934472,
+            0.5690177916549146,
+            0.6315784583275672,
+            0.5658497500116937,
+            0.6365045416750945,
+            0.5890181666472927,
+            0.6372984583431389
+          ],
+          "artifactCounts": {
+            "gpio": 10,
+            "console": 10
+          },
+          "linearMemoryBytes": [
+            27983872
+          ]
+        },
+        {
+          "condition": "fresh app process after forced termination",
+          "summary": {
+            "status": "passed_repeated_build_checks",
+            "runID": "DD81796B-92D3-405D-88D7-07704CD86A52",
+            "iterations": 20,
+            "reportSHA256": "644be103c2b7cb5386f3d665e1336d0f14788c93c4d0ef75ec7d3dc8ba8b5172",
+            "context": {
+              "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+              "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+              "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+            },
+            "hostFootprintSampleCount": 269,
+            "hostFootprintFirstBytes": 10274464,
+            "hostFootprintLastBytes": 216303600,
+            "hostFootprintSampledPeakBytes": 827869600,
+            "droppedSamples": 0,
+            "memoryScope": "Host process samples only; excludes WebKit children and missed peaks; no leak-free claim"
+          },
+          "durationThroughLastSampleSeconds": 13.136275791650405,
+          "maximumSampleGapSeconds": 0.06093904166482389,
+          "observedPeakSample": {
+            "bytes": 827869600,
+            "seconds": 3.811649374983972,
+            "stage": "build-7-gpio"
+          },
+          "buildSeconds": [
+            0.6086298333248124,
+            0.6239079166844022,
+            0.5535142916778568,
+            0.6229832083336078,
+            0.5643753749900497,
+            0.6233260833250824,
+            0.5598430416721385,
+            0.6284255833306815,
+            0.5632151666795835,
+            0.633793125016382,
+            0.5738847499887925,
+            0.6239684999745805,
+            0.5691949583415408,
+            0.6205625000002328,
+            0.5685364166565705,
+            0.6347962500003632,
+            0.5723718333465513,
+            0.6396411249879748,
+            0.5989155416609719,
+            0.6327538333134726
+          ],
+          "artifactCounts": {
+            "gpio": 10,
+            "console": 10
+          },
+          "linearMemoryBytes": [
+            27983872
+          ]
+        }
+      ],
+      "interruption": {
+        "status": "terminated_incomplete_run",
+        "runID": "59F188B7-BA21-42BE-A858-A2150FE8CF99",
+        "durableStage": "build-12-console",
+        "completedBuilds": 11,
+        "requestedBuilds": 40,
+        "interruptedReportSHA256": "8cd833e3e2d926211b464fd7a5cd035cbbcc2885a836a1c9864d14330f188910",
+        "checkerRejectedIncomplete": true,
+        "journalUnchangedAfterFreshRecovery": true
+      }
+    }
+  ],
+  "originalModeRegression": {
+    "status": "passed_original_six_checks",
+    "runID": "C42E4859-F7B4-4DF4-B7D8-EE4A55EBD47D",
+    "reportSHA256": "82634ce6132fb3734aaaf631ec4b04c697eb224fd5a9100a124dfc0ba2495b8c"
+  },
+  "validation": {
+    "reportedSDKTestFunctions": 152,
+    "expectedUnavailableServiceSkips": 9,
+    "hostToolFixtures": 7,
+    "macOSSourceTypecheck": "passed, warnings as errors",
+    "iOSSDKSourceBuild": "passed, signing disabled, no compiler binary",
+    "iOSHostOptimizedObjectCompilation": "passed, warnings as errors, no app linking/signing/assets",
+    "iOSNegativeControl": "original nonisolated Recorder rejected by the optimized source-only check",
+    "physicalReleaseBuild": "passed; standard AppIntents no-framework metadata note; no Swift warnings",
+    "remoteSDKCI": "not run; configured self-hosted runner remains unprovisioned",
+    "workflowYAMLAndShellSyntax": "passed",
+    "loggingFailurePropagation": "pipefail retained expected exit 1 from false piped to tee",
+    "actionlint": "not installed"
+  },
+  "profilingAttempt": {
+    "tool": "xctrace Activity Monitor",
+    "scope": "qualification app PID only, ten-second request, no all-processes recording",
+    "exitCode": 21,
+    "diagnostic": "Waiting for device to boot; Cannot find process for provided pid",
+    "memoryResult": "none; no child-process measurement"
+  },
+  "memoryFinding": {
+    "status": "investigation_required",
+    "scope": "Self-process phys_footprint only, sampled nominally every 50 ms; worker linear memory reported separately",
+    "maximumObservedHostBytes": 828818992,
+    "interpretation": "High host footprint warrants resource-loading/transfer investigation before broader qualification; these observations do not establish a leak, a budget pass, a true process peak or aggregate app/WebKit memory"
+  },
+  "limitations": [
+    "Twenty builds per complete run, not an unbounded soak; samples and journals add measurement overhead",
+    "Raw journals/samples remain local under .build; this record preserves checked summaries, peak observations, exact artifact counts, timings and report digests",
+    "SIGKILL targets only this app after an incomplete build-series journal; no instruction-level interruption point is claimed",
+    "No forced WebKit-child termination, real low-memory condition, background/foreground scenario or production-deadline expiry",
+    "No minimum-OS runtime, UI/accessibility, installed-resident evidence, Nano USB/Wi-Fi coexistence, upload or board execution",
+    "Compiler/service/recipe/catalogue inputs remain unchanged; no binary publication"
+  ]
+}

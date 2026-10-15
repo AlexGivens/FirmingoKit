@@ -25,10 +25,10 @@ jobs:
           test "$(xcodebuild -version | head -1)" = 'Xcode 27.0'
           swift --version | grep -q 'Swift version 6.4'
           python3 Tools/ManagedWASM/update-resource-inventory.py --check 2>&1 | tee .build/adapter-ci/service-notices.log
-      - name: SDK, qualification-generator fixtures, source-host type-check and deployment boundaries
+      - name: SDK, qualification-generator and stress-report fixtures, source-host type-check and deployment boundaries
         run: node Tools/ManagedWASM/run-validation.mjs 2>&1 | tee .build/adapter-ci/tests.log
       - name: Explain qualification app asset boundary
-        run: echo 'Host sources are type-checked with warnings as errors and generator/runner fixtures pass. Complete app builds/execution need anchored prepared SDK bytes and signing; these are deliberate CI exclusions until asset/runner provisioning. Local signed macOS evidence is separate.' >> "$GITHUB_STEP_SUMMARY"
+        run: echo 'Host sources including bounded self-footprint sampling are type-checked with warnings as errors; generator/runner/stress-report fixtures run without a compiler. Complete app builds/execution, repeated builds, profiling and physical interruption checks need anchored prepared SDK bytes, signing and explicitly selected devices; these are deliberate CI exclusions until asset/runner provisioning. Local signed/physical evidence is separate.' >> "$GITHUB_STEP_SUMMARY"
       - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
         run: |
           mkdir -p .build/owned-service-webkit
@@ -77,6 +77,9 @@ jobs:
           swift --version | grep -q 'Swift version 6.4'
       - name: Build the SDK for the selected Apple destination
         run: xcodebuild '${{ matrix.operation }}' -workspace Validation/FirmingoKit.xcworkspace -scheme FirmingoKit -destination '${{ matrix.destination }}' -derivedDataPath '.build/adapter-ci-${{ matrix.name }}' CODE_SIGNING_ALLOWED=NO 2>&1 | tee '.build/adapter-ci/${{ matrix.name }}.log'
+      - name: Compile optimized qualification-host sources against the iOS SDK without compiler assets or signing
+        if: matrix.name == 'ios-device'
+        run: python3 -I -S -B Tools/ManagedWASM/check-compiler-host.py --ios-products .build/adapter-ci-ios-device/Build/Products/Debug-iphoneos 2>&1 | tee .build/adapter-ci/ios-host-typecheck.log
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         if: always()
         with:

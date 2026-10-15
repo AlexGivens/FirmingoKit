@@ -16,6 +16,9 @@ spec.loader.exec_module(host)
 runner_spec = importlib.util.spec_from_file_location("compiler_host_runner", Path(__file__).with_name("run-compiler-host.py"))
 runner = importlib.util.module_from_spec(runner_spec)
 runner_spec.loader.exec_module(runner)
+stress_spec = importlib.util.spec_from_file_location("compiler_stress_checker", Path(__file__).with_name("check-compiler-stress.py"))
+stress = importlib.util.module_from_spec(stress_spec)
+stress_spec.loader.exec_module(stress)
 
 
 class CompilerHostTests(unittest.TestCase):
@@ -107,6 +110,32 @@ class CompilerHostTests(unittest.TestCase):
                        lambda value: value["steps"][0].update(seconds=float("nan"))):
             changed = copy.deepcopy(value); change(changed)
             with self.assertRaises(ValueError): runner.decode_report(envelope(changed), "fixture")
+
+    def test_repeated_build_report_rejects_interrupted_stale_corrupt_artifacts_and_invalid_memory(self):
+        # Parser-only observations; these values never qualify a compiler, device or memory budget.
+        value = {"schema": 2, "kind": "repeated-builds", "runID": "fixture", "status": "passed", "stage": "complete",
+                 "iterations": 2, "deviceOperations": False, "hostProcessID": 123,
+                 "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+                 "context": {"consumerManifestSHA256": self.value["consumerManifestSHA256"], "sdkCommit": "1" * 40, "preparedManifestSHA256": "a" * 64},
+                 "steps": [{"name": "build-1-gpio", "seconds": 0.1, "wasmLinearMemoryBytes": 27983872,
+                            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"},
+                           {"name": "build-2-console", "seconds": 0.1, "wasmLinearMemoryBytes": 27983872,
+                            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"}],
+                 "hostFootprintSamples": [{"seconds": 0.01, "bytes": 50000000, "stage": "resources"},
+                                          {"seconds": 1, "bytes": 51000000, "stage": "idle-after-builds"}], "droppedSamples": 0}
+        encode = lambda value: json.dumps(value).encode()
+        self.assertEqual(stress.check(encode(value), "fixture", 2)["hostFootprintSampledPeakBytes"], 51000000)
+        for change in (lambda value: value.update(status="running"), lambda value: value.update(runID="old"),
+                       lambda value: value.update(iterations=True), lambda value: value.update(error="failed"),
+                       lambda value: value["steps"].pop(), lambda value: value["steps"][1].update(capsuleSHA256="0" * 64),
+                       lambda value: value["hostFootprintSamples"][1].update(seconds=0),
+                       lambda value: value["hostFootprintSamples"][1].update(seconds=float("inf")),
+                       lambda value: value["hostFootprintSamples"][0].update(bytes=True),
+                       lambda value: value.update(droppedSamples=True)):
+            changed = copy.deepcopy(value); change(changed)
+            with self.assertRaises(ValueError): stress.check(encode(changed), "fixture", 2)
+        with self.assertRaises(ValueError): stress.check(b"x" * (2 * 1024**2 + 1), "fixture", 2)
+        with self.assertRaises(ValueError): stress.check(encode(value), "fixture", 41)
 
 
 if __name__ == "__main__":

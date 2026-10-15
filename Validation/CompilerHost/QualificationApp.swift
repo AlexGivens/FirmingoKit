@@ -38,15 +38,24 @@ import Foundation
         guard !launchConsumed else { return }; launchConsumed = true
         let arguments = ProcessInfo.processInfo.arguments
         if let index = arguments.firstIndex(of: "--qualification-run"), index + 1 < arguments.count,
-           let id = UUID(uuidString: arguments[index + 1]) { start(id: id) }
+           let id = UUID(uuidString: arguments[index + 1]) {
+            if let repeatIndex = arguments.firstIndex(of: "--qualification-stress-count") {
+                guard repeatIndex + 1 < arguments.count, let count = Int(arguments[repeatIndex + 1]), (2...40).contains(count) else {
+                    status = "Select 2 through 40 repeated builds"; return
+                }
+                start(id: id, iterations: count)
+            } else { start(id: id) }
+        }
     }
 
     /// Runs the public SDK asynchronously; results stay in this app's own Documents container.
-    func start(id: UUID = UUID()) {
+    func start(id: UUID = UUID(), iterations: Int? = nil) {
         guard !running else { return }; running = true; report = nil
         Task { @MainActor in
             do {
-                report = try await QualificationChecks.run(id: id) { status = $0 }
+                if let iterations {
+                    report = try await QualificationStress.run(id: id, iterations: iterations) { status = $0 }
+                } else { report = try await QualificationChecks.run(id: id) { status = $0 } }
             } catch { status = "Could not record compiler checks: " + String(error.localizedDescription.prefix(2048)) }
             running = false
             #if os(macOS)

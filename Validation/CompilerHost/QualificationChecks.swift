@@ -66,13 +66,13 @@ struct QualificationReport: Encodable {
     /// Exact experimental build from the independently checked Nano CI export.
     static let buildID = "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f"
     /// Supported GPIO input, identical to separately recorded Node/SDK artifact vectors.
-    private static let gpio = "void setup() { pinMode(6, 1); }\nvoid loop() { digitalWrite(6, 1); delay(10); }\n"
+    static let gpio = "void setup() { pinMode(6, 1); }\nvoid loop() { digitalWrite(6, 1); delay(10); }\n"
     /// A distinct supported console path; its output remains an unbound offline capsule.
-    private static let console = "void setup() { Serial.println(\"ready\"); }\nvoid loop() { int c = Serial.read(); if (c >= 0) Serial.write(uint8_t(c)); }\n"
+    static let console = "void setup() { Serial.println(\"ready\"); }\nvoid loop() { int c = Serial.read(); if (c >= 0) Serial.write(uint8_t(c)); }\n"
     /// Known exact capsule identities for the selected resident API.
-    private static let gpioSHA = "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+    static let gpioSHA = "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
     /// Independent second capsule identity from the same source-built compiler.
-    private static let consoleSHA = "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+    static let consoleSHA = "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
 
     /// Serializes a complete atomic journal after each state change; partial writes cannot become successful JSON.
     private static func persist(_ report: QualificationReport, at url: URL) throws {
@@ -81,7 +81,7 @@ struct QualificationReport: Encodable {
     }
 
     /// Creates one immutable request without inventing a physical-device identity or upload association.
-    private static func request(_ source: String, name: String, revision: UInt64,
+    static func request(_ source: String, name: String, revision: UInt64,
                                 catalogue: ManagedCompilerCatalogue) throws -> ManagedOfflineBuildRequest {
         let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: revision, filename: name + ".ino", source: source)
         return try ManagedOfflineBuildRequest(snapshot: snapshot, catalogue: catalogue, firmwareBuildID: buildID)

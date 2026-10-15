@@ -1,5 +1,11 @@
 # Development and validation
 
+Current signed/physical compiler host procedures, bounded repeated-build memory
+observations and whole-app interruption/recovery results are in
+[host qualification](compiler-host-qualification.md). The source CI path includes
+optimized iOS host-object compilation without compiler assets or signing; actual
+host runs remain explicit. The observed high host footprint is under investigation.
+
 Current public preparation integration and updated package identities: [service-free preparation](service-free-preparation.md). Earlier records remain historical evidence.
 
 Current compiler/SDK validation commands and standalone-runtime retirement are recorded in [compiler-retirement.md](compiler-retirement.md) and [Tools/ManagedWASM/README.md](../Tools/ManagedWASM/README.md). Older commands below refer to their dated reference revisions.

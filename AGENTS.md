@@ -60,6 +60,16 @@ collection using the identical signed app, with CoreDevice `localNetwork` before
 and after. See `docs/compiler-host-wireless.json`; ordinary device-ID CLI commands
 work over the paired network connection. Nano USB Ethernet/Wi-Fi coexistence,
 wireless debugger attachment and total-memory profiling remain untested.
+`QualificationStress` now records bounded repeated builds and self-process Mach
+footprint samples in separate schema-2 journals. On both devices, 20 baseline and
+20 fresh post-SIGKILL builds pass; incomplete journals are rejected and remain
+unchanged after recovery. See `docs/compiler-host-reliability.json`. Sampled host
+footprints reach about 790 MiB despite 27,983,872 worker linear bytes; investigate
+resource/transfer ownership before broader qualification. This is not aggregate
+app/WebKit memory or a leak-free claim. App-scoped `xctrace` attachment failed.
+The original six-check mode remains. Source CI now runs seven tool fixtures,
+macOS type-checking and optimized iOS host-object compilation without assets or
+signing; full host/device runs remain explicit and remote CI unprovisioned.
 
 Snapshot verified on 2026-09-30:
 

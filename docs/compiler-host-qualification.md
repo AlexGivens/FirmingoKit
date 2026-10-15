@@ -170,7 +170,95 @@ occupy the device's USB-C port while app deployment uses the network, but actual
 simultaneous Nano USB Ethernet/Wi-Fi routing still needs a separate measured test.
 This wireless increment performs no board operation or network configuration.
 
-Minimum-OS runtime, total app/child memory peaks, forced termination/deadline,
+## Repeated builds and forced app interruption — 2026-10-14
+
+The generator now copies an optional `QualificationStress.swift` host alongside
+the original six-check mode. With a fresh uppercase run UUID, append
+`--qualification-stress-count 20` to the existing device launch command. Counts
+are restricted to 2–40. The host alternates the pinned GPIO/console sources,
+checks every artifact/receipt, samples its own process footprint nominally every
+50 ms and records a separate schema-2 journal in the same per-run directory.
+It retains at most 4,096 samples and reports dropped samples. Kernel measurement
+failures produce failed journals rather than zero-valued successes. Individual
+builds retain the production deadline; new loop iterations stop being admitted
+after 120 seconds. The sampler is canceled on every normal/error exit.
+
+```sh
+xcrun devicectl device process launch --device "$DEVICE_ID" --terminate-existing --timeout 30 \
+  com.firmingokit.compilerqualification --qualification-run "$RUN_ID" --qualification-stress-count 20
+python3 -I -S -B Tools/ManagedWASM/check-compiler-stress.py REPORT_JSON "$RUN_ID" 20
+```
+
+Collection uses the preceding own-container copy command. The checker requires
+the correlated UUID, complete count, pinned artifact identities, finite durations,
+bounded worker memory and ordered nonzero footprint samples. Passing means those
+checks completed and measurements were collected; no memory budget or absence of
+leaks is asserted. `TASK_VM_INFO.phys_footprint` queries only this host process;
+see [Apple's task VM information](https://developer.apple.com/documentation/kernel/task_vm_info_data_t).
+It excludes WebKit children, and a periodic maximum can miss the true peak.
+
+The signed ARM64 Release app, build 2, was updated wirelessly using the existing
+profile. Each device completed 20 builds, then ran a separately selected 40-build
+series. Before termination, its correlated journal showed completed builds and
+an incomplete current stage. CoreDevice sent `--kill` only to the app PID from
+that launch, cross-checked against the app's own PID and executable path. Both
+post-kill journals remained `running`, with 11 completed builds and durable stage
+`build-12-console`; the checker rejected them. This identifies an interrupted
+build series, not an exact instruction/worker phase. Fresh app processes each
+completed another 20 builds. Re-copying the interrupted journals after recovery
+confirmed byte-identical content and no automatic replay/overwrite. In total,
+80 baseline/recovery builds passed, plus 22 completed before interruption. The
+updated iPhone app also passed the original six checks and exact capsule bytes.
+
+For a separately selected interruption run, request 40 builds and save the
+launch JSON with `--json-output RUN_LAUNCH_JSON` before the bundle identifier.
+Copy its own journal and confirm it is still running/incomplete, has the expected
+UUID/context, and reports the same PID as that app's launch/executable. Then:
+
+```sh
+xcrun devicectl device process terminate --device "$DEVICE_ID" --pid "$QUALIFICATION_PID" --kill --timeout 20
+```
+
+Collect that interrupted journal, verify the checker rejects it, and launch a new
+UUID with 20 builds for recovery. After recovery, re-copy the old journal and
+compare its bytes with the post-kill copy. This operation is confined to the
+explicitly selected qualification app and is separate from a normal completed run.
+
+| Host/run | Highest sampled host footprint | Last sampled host footprint |
+| --- | ---: | ---: |
+| iPad baseline | 790.4 MiB | 405.3 MiB |
+| iPad fresh recovery | 698.1 MiB | 404.9 MiB |
+| iPhone baseline | 789.7 MiB | 303.0 MiB |
+| iPhone fresh recovery | 789.5 MiB | 206.3 MiB |
+
+Every completed build reports 27,983,872 WASM linear bytes. The much higher host
+footprints warrant investigation of resource loading, temporary buffers and
+native/WebKit transfer ownership before broader qualification. Their cause is
+not established; neither a leak nor a memory-budget pass follows from these runs.
+The [reliability record](compiler-host-reliability.json) preserves checked summaries,
+timings, observed peak samples, raw report hashes and source/signature identities.
+Complete raw journals remain local under `.build/`.
+
+An app-scoped ten-second `xctrace` Activity Monitor attempt exited 21 with
+“Cannot find process for provided pid”; it yielded no memory result. No
+all-processes capture or private WebKit PID API was used. Aggregate app/WebKit
+memory remains open, along with real memory pressure, child-process termination,
+background/foreground transitions and forced production-deadline expiry.
+
+Seven tool fixtures and the maintained SDK validation pass (152 reported test
+functions, nine expected unavailable-service skips). macOS warnings-as-errors
+type-checking and a source-only iOS SDK build pass. Optimized iOS Release building
+initially caught a nested recorder's missing explicit main-actor annotation that
+macOS type-checking missed. The recorder is now explicitly isolated. The new CI
+iOS step compiles optimized host objects against built source-only SDK modules,
+without app linking, assets, signing or device access. A local negative control
+rejects the original actor error; final optimized object compilation passes.
+The physical Release build has no Swift warnings, only the standard AppIntents
+no-framework metadata note. Runner provisioning/remote SDK CI remains open.
+Workflow YAML and run-step shell syntax checks pass; the logging pipeline retains
+the failing command's exit status. `actionlint` is not installed on this host.
+
+Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an
 exact selected recoverable Nano resident and separately authorized SDK workflow.
