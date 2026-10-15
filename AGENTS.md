@@ -86,14 +86,19 @@ becomes inactive, and requires typed cancellation plus real background/return
 before a fresh build. Signed build 6 now passes on both physical devices, canceling
 attempts 3/5 with last progress `verifying`, no returned artifact and settlement
 in 11.3/4.6 ms. Known console builds pass after real background/return in the same
-process. See `docs/compiler-host-active-lifecycle.json`. This is test-host policy;
-worker compile/link interruption and real pressure remain unqualified.
+process. See `docs/compiler-host-active-lifecycle.json`. This is test-host policy.
+The separate worker-source result below extends this phase-specific evidence;
+link-stage interruption and real pressure remain unqualified.
 An opt-in `--qualification-worker-lifecycle` now uses a pinned 227,505-byte C++
 compile-time fixture that emits the unchanged GPIO capsule. It requires a real
 4–55-second preflight source-compile window, then first-source-compiling progress
-at inactivity; verification and entry-wrapper interruption cannot pass. Physical
-execution of this new mode is pending. Source CI now runs ten tool fixtures,
-macOS type-checking and optimized iOS host-object compilation without assets or
+at inactivity; verification and entry-wrapper interruption cannot pass. Signed
+build 7 passes on both physical devices: first-source compilation is interrupted
+on attempt 1, with 19.6/10.2-ms typed cancellation settlement and known fresh
+console capsules after actual background/return in the same process. See
+`docs/compiler-host-worker-lifecycle.json`. Callback timing/ordinals do not prove
+an instruction pointer, OS suspension or pressure recovery. Source CI now runs
+ten tool fixtures, macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.
 
 Snapshot verified on 2026-09-30:

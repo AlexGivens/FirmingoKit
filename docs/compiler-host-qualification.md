@@ -486,6 +486,7 @@ library support.
 Before asking for a manual start, this mode compiles the whole pinned fixture on
 the selected device and verifies the known capsule. The measured first source
 compile must take 4–55 seconds; otherwise the run fails before becoming ready.
+That range is eligibility for this manual test, not a compiler performance promise.
 After the start button, cancellation must observe `compiling` with exactly one
 compiling notification received for that attempt. The second notification starts
 entry-wrapper compilation, so it cannot qualify. The first observation time and
@@ -510,6 +511,34 @@ fixture and compiles the observer, without executing this workload. Actual app
 and device checks remain explicit. Callback timestamps/ordinals identify the
 observed source-compilation interval; they are not an instruction-pointer trace
 or evidence of OS suspension, memory pressure or background computation.
+
+Development-signed Release build 7 from host commit `d2f84e3…` now passes this
+mode on both recorded physical devices. The [worker lifecycle record](compiler-host-worker-lifecycle.json)
+pins the exact workload, generated sources, signature, unchanged prepared SDK,
+independent launch PID/context, report hashes and exported capsule bytes.
+
+| Host | Complete preflight source compile | Source interval elapsed at cancellation | Cancellation settlement | Background-to-active observations | Fresh console build |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| iPad Pro, iPadOS 27.0.1 | 10.001 s | 1.860 s | 19.6 ms | 12.171 s | 0.717 s |
+| iPhone 15 Pro Max, iOS 27.0 | 8.830 s | 3.557 s | 10.2 ms | 11.226 s | 0.705 s |
+
+Both calls are attempt 1 with exactly one compiling notification. Cancellation
+settles with `CancellationError` and no result before the background event;
+fresh admission follows settlement and actual active return through the same
+compiler instance. The four exported capsules match the known 316-byte GPIO and
+392-byte console vectors. Complete preflights report 28,049,408 worker linear
+bytes, and fresh console builds report 27,983,872. These are linear-memory values,
+not total process or app/WebKit memory measurements. CoreDevice reports connected
+`localNetwork` before/after both runs. Pre-manual snapshots remain preserved;
+terminal snapshots validate the same runs without relaunch.
+
+The identical build-7 iPhone app also passes the original six-check mode. Ten
+tool/report fixtures, macOS type-checking, optimized iOS host-object compilation,
+signed Release building and workflow YAML/shell syntax checks pass. All eleven
+generated inputs and six committed source/fixture inputs are rehashed. The SDK
+implementation/assets are unchanged; its full suite was not repeated for these
+host-only changes, and remote CI remains unprovisioned/unrun. Entry-wrapper/link
+interruption, OS suspension and real memory pressure remain separate gates.
 
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
