@@ -21,7 +21,7 @@ import Foundation
         WindowGroup {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Nano SDK qualification").font(.title)
+                    Text(NanoCandidate.stateful ? "Nano FMS2 qualification" : "Nano SDK qualification").font(.title)
                     Text("Status").font(.headline)
                     Text(model.status)
                     Button("Prepare offline test sketches") { model.prepare() }.disabled(model.busy || model.gate.state != .empty)
@@ -38,7 +38,7 @@ import Foundation
                     if model.permissionCheckOnly {
                         Text("Read-only permission check. Association, staging and installation are unavailable.")
                     } else {
-                        Text("Resident-only UF2 SHA-256: " + NanoGate.imageSHA).font(.caption).textSelection(.enabled)
+                        Text("Resident-only UF2 SHA-256: " + NanoCandidate.imageSHA).font(.caption).textSelection(.enabled)
                         Text("Hello does not identify installed image bytes. Review the selected Nano's exact installation/readback evidence.")
                         Group {
                             Text("Installed resident-only UF2 SHA-256").font(.headline)
@@ -51,8 +51,7 @@ import Foundation
                         Button("Record reviewed resident association") { model.associate() }.disabled(model.busy || model.gate.state != .inspected)
                         Text("Test sketch").font(.headline)
                         Picker("Test sketch", selection: $model.sketch) {
-                            Text("GPIO6 high / delay").tag("gpio")
-                            Text("Binary console echo").tag("console")
+                            ForEach(NanoCandidate.pins, id: \.0) { item in Text(item.1).tag(item.0) }
                         }.disabled(model.busy || [.staged, .commitAttempted].contains(model.gate.state))
                         Text("Staging requires D2/GPIO25 connected to GND. Keep the arm present through installation; REC/GND is the separate ROM recovery path.")
                         Button("Stage selected sketch in RAM") { model.stage() }.disabled(model.busy || model.gate.state != .associated)
@@ -63,6 +62,10 @@ import Foundation
                         }
                         Button("Check installation and startup status") { model.reconcile() }.disabled(model.busy || model.gate.state != .commitAttempted)
                         Button("Check exact 256-byte console echo") { model.echo() }.disabled(model.busy || model.gate.state != .confirmed)
+                        if NanoCandidate.stateful {
+                            Button("Check initialized and advancing state") { model.checkState() }.disabled(model.busy || model.gate.state != .confirmed)
+                            Button("Check state after manual RESET") { model.checkState(afterReboot: true) }.disabled(model.busy || model.gate.state != .confirmed)
+                        }
                         Text("GPIO6 / D13 observation").font(.headline)
                         TextField("Actual measurement or board-correct LED interpretation", text: $model.observation)
                             .textFieldStyle(.roundedBorder)

@@ -27,14 +27,18 @@ def main():
                "-enable-upcoming-feature", "ApproachableConcurrency", "-target", target,
                "-module-cache-path", str(cache), "-I", str(path), "-I", str(path / "Modules"),
                str(root / "Validation/NanoHost/NanoGate.swift"),
+               str(root / "Validation/NanoHost/NanoCandidate.swift"),
+               str(root / "Validation/NanoHost/NanoStateProbe.swift"),
                str(root / "Validation/NanoHost/NanoModel.swift"),
                str(root / "Validation/NanoHost/NanoApp.swift")]
     if args.ios_products:
         sdk = subprocess.run(["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], check=True, capture_output=True, text=True, timeout=15)
-        command.extend(["-sdk", sdk.stdout.strip(), "-o", str(cache / "nano-host.o")])
-    subprocess.run(command, cwd=root, check=True, timeout=90)
-    print("Source-only Nano qualification host " + ("optimized iOS compilation" if args.ios_products else "macOS type-check")
-          + " passed; no app linking/signing/runtime/device claim")
+        command.extend(["-sdk", sdk.stdout.strip()])
+    for name, flags in (("abi-one", []), ("fms2", ["-D", "FMS2_QUALIFICATION"])):
+        output = ["-o", str(cache / ("nano-host-" + name + ".o"))] if args.ios_products else []
+        subprocess.run(command + flags + output, cwd=root, check=True, timeout=90)
+        print("Source-only Nano " + name + " host " + ("optimized iOS compilation" if args.ios_products else "macOS type-check")
+              + " passed; no app linking/signing/runtime/device claim")
 
 
 if __name__ == "__main__":

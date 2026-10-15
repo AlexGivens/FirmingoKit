@@ -56,16 +56,61 @@ def test_inputs(root, expected):
     return plan
 
 
-def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=False):
+STATEFUL_EXPORT = '90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65'
+STATEFUL_CATALOGUE = '8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd'
+STATEFUL_BUILD = 'dacbf259b96de0e050514764253403f3ef1ef51d0f9efaf1f43a10d8654c0e18'
+
+
+def stateful_inputs(root, expected):
+    """Require independent consumer/export/catalogue anchors even when a test plan is reanchored."""
+    if root.is_symlink() or not root.is_dir(): raise ValueError('Select real FMS2 inputs')
+    plan = captured(root / 'test-plan.json', 65536, expected)
+    if (plan['schema'] != 2 or plan['kind'] != 'nano-fms2-sdk-qualification-inputs'
+            or plan['consumerManifestSHA256'] != CONSUMER or plan['exportManifestSHA256'] != STATEFUL_EXPORT
+            or plan['catalogueSHA256'] != STATEFUL_CATALOGUE or plan['firmwareBuildID'] != STATEFUL_BUILD
+            or plan['installed'] is not False or plan['deviceOperations'] is not False or plan['hardwareQualified'] is not False):
+        raise ValueError('Unsupported FMS2 plan')
+    captured(root / 'consumer-manifest.json', 65536, CONSUMER)
+    captured(root / 'catalogue.json', 16384, STATEFUL_CATALOGUE)
+    firmware = captured(root / 'firmware/manifest.json', 16384, STATEFUL_EXPORT)
+    records = [{'path': 'firmware/' + r['path'], 'bytes': r['bytes'], 'sha256': r['sha256']} for r in firmware['files']]
+    records += [{'path': 'firmware/manifest.json', **host.identity(root / 'firmware/manifest.json', 16384)},
+                {'path': 'catalogue.json', **host.identity(root / 'catalogue.json', 16384)},
+                {'path': 'consumer-manifest.json', **host.identity(root / 'consumer-manifest.json', 65536)}]
+    if (plan['files'] != records or len(records) != 42 or plan['profile'] != 'nano-managed-v2'
+            or plan['board'] != 'nano_rp2040_connect' or plan['firmwareCommit'] != firmware['firmwareCommit']
+            or plan['firmwareVersion'] != '0.1.0-statefulupload-exp1'
+            or plan['residentUF2SHA256'] != '1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f'):
+        raise ValueError('FMS2 plan evidence mismatch')
+    expected_paths = {r['path'] for r in records} | {'test-plan.json'}
+    observed = set()
+    for path in root.rglob('*'):
+        if path.is_symlink(): raise ValueError('Symlinked FMS2 evidence')
+        if not path.is_dir(): observed.add(path.relative_to(root).as_posix())
+    if observed != expected_paths: raise ValueError('Missing or extra FMS2 evidence')
+    for record in records:
+        if host.identity(root / record['path'], record['bytes']) != {k: record[k] for k in ('bytes', 'sha256')}: raise ValueError('Corrupt FMS2 evidence')
+    return plan
+
+
+def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=False, stateful=False):
     """Reuse the compiler host's anchored SDK verifier, then create a separate explicit device-capable app."""
-    plan = test_inputs(test_root, plan_anchor)
+    if stateful and permission_check: raise ValueError("Stateful qualification uses its own app identity")
+    plan = stateful_inputs(test_root, plan_anchor) if stateful else test_inputs(test_root, plan_anchor)
     host.generate(sdk, sdk_anchor, output)
     try:
         sources = output / 'Sources'
         for file in sources.iterdir():
             if file.name != 'qualification-context.json': file.unlink()
-        for name in ('NanoGate.swift', 'NanoModel.swift', 'NanoApp.swift'):
+        for name in ('NanoGate.swift', 'NanoCandidate.swift', 'NanoStateProbe.swift', 'NanoModel.swift', 'NanoApp.swift'):
             shutil.copyfile(ROOT / 'Validation/NanoHost' / name, sources / name)
+        if stateful:
+            for name in ('state-a.ino', 'state-b.ino'): shutil.copyfile(ROOT / 'Validation/NanoHost' / name, sources / name)
+            shutil.copyfile(test_root / 'catalogue.json', sources / 'fms2-catalogue.json')
+            context_path = sources / 'qualification-context.json'
+            context = json.loads(context_path.read_bytes())
+            context.update(testPlanSHA256=plan_anchor, exportManifestSHA256=STATEFUL_EXPORT, catalogueSHA256=STATEFUL_CATALOGUE)
+            context_path.write_text(json.dumps(context, indent=2) + '\n')
         old_project = output / 'CompilerQualification.xcodeproj'; project = output / 'NanoQualification.xcodeproj'
         old_project.rename(project)
         for file in [project / 'project.pbxproj', project / 'xcshareddata/xcschemes/CompilerQualification.xcscheme']:
@@ -73,6 +118,10 @@ def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=F
         (project / 'xcshareddata/xcschemes/CompilerQualification.xcscheme').rename(project / 'xcshareddata/xcschemes/NanoQualification.xcscheme')
         (output / 'CompilerQualification.entitlements').rename(output / 'NanoQualification.entitlements')
         info = plistlib.loads((output / 'Info.plist').read_bytes())
+        if stateful:
+            file = project / 'project.pbxproj'
+            file.write_text(file.read_text().replace('com.firmingokit.nanoqualification', 'com.firmingokit.nanostateful').replace('SWIFT_VERSION = 6.0;', 'SWIFT_VERSION = 6.0; OTHER_SWIFT_FLAGS = "$(inherited) -D FMS2_QUALIFICATION";'))
+            info['CFBundleDisplayName'] = 'NanoStateful'
         if permission_check:
             file = project / 'project.pbxproj'
             file.write_text(file.read_text().replace('com.firmingokit.nanoqualification', 'com.firmingokit.nanopermission'))
@@ -88,7 +137,7 @@ def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=F
         files = [{'path': f.relative_to(output).as_posix(), **host.identity(f)} for f in sorted(output.rglob('*')) if f.is_file()]
         receipt = {'schema': 1, 'operation': 'generated_nano_sdk_qualification_host', 'files': files,
                    'preparedManifestSHA256': sdk_anchor, 'testPlanSHA256': plan_anchor, 'consumerManifestSHA256': CONSUMER,
-                   'firmwareBuildID': BUILD, 'permissionCheckBundle': permission_check,
+                   'firmwareBuildID': STATEFUL_BUILD if stateful else BUILD, 'statefulContract': stateful, 'permissionCheckBundle': permission_check,
                    'signed': False, 'installed': False, 'deviceOperations': False}
         (output / 'host-inputs.json').write_text(json.dumps(receipt, indent=2) + '\n'); return receipt
     except BaseException: shutil.rmtree(output); raise
@@ -100,8 +149,9 @@ def main():
     p.add_argument('sdk', type=Path); p.add_argument('sdk_sha256'); p.add_argument('test_inputs', type=Path)
     p.add_argument('test_plan_sha256'); p.add_argument('output', type=Path)
     p.add_argument('--permission-check-bundle', action='store_true', help='separate read-only NanoPermission identity/display name; no SDK product-name override')
+    p.add_argument('--stateful-contract', action='store_true', help='separate explicit FMS2 NanoStateful bundle and state probes')
     a = p.parse_args()
-    result = generate(a.sdk.absolute(), a.sdk_sha256, a.test_inputs.absolute(), a.test_plan_sha256, a.output.absolute(), a.permission_check_bundle)
+    result = generate(a.sdk.absolute(), a.sdk_sha256, a.test_inputs.absolute(), a.test_plan_sha256, a.output.absolute(), a.permission_check_bundle, a.stateful_contract)
     print(json.dumps({'status': result['operation'], 'files': len(result['files']), 'deviceOperations': False}))
 
 

@@ -6,6 +6,10 @@ struct NanoGate {
     static let buildID = "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f"
     /// Exact resident-only image; the operator must establish its installed association separately.
     static let imageSHA = "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983"
+    /// Explicit candidate image accepted by this host instance; defaults to the legacy profile.
+    private let expectedImageSHA: String
+    /// Keeps the one-shot policy identical across separately selected resident profiles.
+    init(imageSHA: String = Self.imageSHA) { expectedImageSHA = imageSHA }
     /// State transitions require explicit host commands; restart never restores a commit capability.
     enum State { case empty, prepared, inspected, associated, staged, commitAttempted, confirmed, aborted }
     /// Current local admission state, separate from actual firmware transaction state.
@@ -37,7 +41,7 @@ struct NanoGate {
     /// Requires explicit matching operator selection and exact reviewed installation candidate, not hello attestation.
     mutating func associate(address: String, deviceID: String, imageSHA: String, note: String) throws {
         guard state == .inspected, self.address == address, self.deviceID == deviceID,
-              imageSHA == Self.imageSHA, (8...512).contains(note.utf8.count) else { throw Rejected() }
+              imageSHA == expectedImageSHA, (8...512).contains(note.utf8.count) else { throw Rejected() }
         state = .associated
     }
 

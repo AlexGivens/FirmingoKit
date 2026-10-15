@@ -17,7 +17,7 @@ import AppKit
     /// Optional actual GPIO observation, separate from installation evidence and startup status.
     @Published var observation = ""
     /// One of the two fixed compiled test sketches; no arbitrary artifact loading.
-    @Published var sketch = "gpio"
+    @Published var sketch = NanoCandidate.pins[0].0
     /// Bounded readable result; transaction success and observed behavior stay separate.
     @Published var status = "Prepare offline sketches first. No board is contacted at launch."
     /// Serializes all host commands and freezes inputs while an async operation runs.
@@ -26,7 +26,7 @@ import AppKit
     let permissionCheckOnly = Bundle.main.bundleIdentifier == "com.firmingokit.nanopermission"
         || ProcessInfo.processInfo.arguments.contains("--nano-permission-check")
     /// Observable local one-shot policy, independent of firmware state.
-    @Published private(set) var gate = NanoGate()
+    @Published private(set) var gate = NanoGate(imageSHA: NanoCandidate.imageSHA)
     /// Current run journal, available for explicit Share results.
     @Published private(set) var journal: URL?
     /// Verified offline results, never reconstructed from a saved filename or fake device ID.
@@ -61,7 +61,7 @@ import AppKit
         guard events.count < 128, let journal else { throw CocoaError(.fileWriteUnknown) }
         events.append(["stage": stage, "detail": String(detail.prefix(1024))])
         let value: [String: Any] = ["schema": 1, "kind": "nano-sdk-hardware-qualification", "runID": runID, "events": events,
-            "firmwareBuildID": NanoGate.buildID, "context": context, "operatingSystem": ProcessInfo.processInfo.operatingSystemVersionString,
+            "firmwareBuildID": NanoCandidate.buildID, "context": context, "operatingSystem": ProcessInfo.processInfo.operatingSystemVersionString,
             "hardwareQualified": false, "operationMode": permissionCheckOnly ? "read-only-permission-check" : "normal",
             "note": "Individual observations only; installation/startup/behavior and host platforms require separate review"]
         try JSONSerialization.data(withJSONObject: value, options: [.sortedKeys, .prettyPrinted]).write(to: journal, options: .atomic)
@@ -116,17 +116,21 @@ import AppKit
             self.pendingURL = documents.appendingPathComponent("nano-pending-upload.json")
             guard let contextURL = Bundle.main.url(forResource: "qualification-context", withExtension: "json") else { throw NanoGate.Rejected() }
             self.context = try JSONDecoder().decode([String: String].self, from: Data(contentsOf: contextURL))
-            guard self.context["consumerManifestSHA256"] == "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c" else { throw NanoGate.Rejected() }
+            guard self.context["consumerManifestSHA256"] == NanoCandidate.consumerSHA else { throw NanoGate.Rejected() }
             try self.log("offline-start", "No device operation")
-            let catalogue = try await ManagedCompilerCatalogue.loadBundled()
-            guard catalogue.manifestSHA256 == "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
-                  try catalogue.build(id: NanoGate.buildID).firmwareImageSHA256 == NanoGate.imageSHA else { throw NanoGate.Rejected() }
+            let catalogue: ManagedCompilerCatalogue
+            if NanoCandidate.stateful {
+                guard let url = Bundle.main.url(forResource: "fms2-catalogue", withExtension: "json") else { throw NanoGate.Rejected() }
+                catalogue = try await ManagedCompilerCatalogue.load(manifestJSON: Data(contentsOf: url), expectedSHA256: NanoCandidate.catalogueSHA)
+            } else { catalogue = try await ManagedCompilerCatalogue.loadBundled() }
+            guard catalogue.manifestSHA256 == NanoCandidate.catalogueSHA,
+                  try catalogue.build(id: NanoCandidate.buildID).firmwareImageSHA256 == NanoCandidate.imageSHA else { throw NanoGate.Rejected() }
             let compiler = ManagedSketchCompiler()
-            for (name, source, digest) in [("gpio", "void setup() { pinMode(6, 1); }\nvoid loop() { digitalWrite(6, 1); delay(10); }\n", "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"),
-                ("console", "void setup() { Serial.println(\"ready\"); }\nvoid loop() { int c = Serial.read(); if (c >= 0) Serial.write(uint8_t(c)); }\n", "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0")] {
+            for (name, _, _, digest) in NanoCandidate.pins {
+                let source = try NanoCandidate.source(name)
                 self.status = "Compiling " + name
                 let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: 1, filename: name + ".ino", source: source)
-                let request = try ManagedOfflineBuildRequest(snapshot: snapshot, catalogue: catalogue, firmwareBuildID: NanoGate.buildID)
+                let request = try ManagedOfflineBuildRequest(snapshot: snapshot, catalogue: catalogue, firmwareBuildID: NanoCandidate.buildID)
                 let result = try await compiler.build(request)
                 guard result.artifact.sha256 == digest, result.artifact.compilerReceiptJSON != nil else { throw NanoGate.Rejected() }
                 try result.artifact.bytes.write(to: directory.appendingPathComponent(name + ".fms"), options: .withoutOverwriting)
@@ -153,8 +157,8 @@ import AppKit
         let connection = try await FirmingoSession.connect(to: endpoint, expectedBoard: .nanoRP2040Connect,
             expectedBackend: .application, expectedDeviceID: id)
         let device = connection.device
-        guard device.firmwareVersion == "0.1.0-m9exp1", device.targets.count == 1,
-              let target = device.targets.first, target.id == 1, target.format == "nano-managed-v1",
+        guard device.firmwareVersion == NanoCandidate.version, device.targets.count == 1,
+              let target = device.targets.first, target.id == NanoCandidate.targetID, target.format == NanoCandidate.format,
               target.maximumSize == 4096, target.maximumChunk == 1024, target.authorization == "physical-d2-gnd" else {
             await connection.disconnect(); throw NanoGate.Rejected()
         }
@@ -220,7 +224,7 @@ import AppKit
             guard self.gate.state == .associated, let artifact = self.artifacts[self.sketch] else { throw NanoGate.Rejected() }
             let connection = try await self.connect(id: self.deviceID); self.session = connection
             try self.gate.requireStage(address: self.address, deviceID: connection.device.deviceID, bootID: connection.device.bootID)
-            let association = try ManagedDeviceAssociation(deviceID: self.deviceID, firmwareBuildID: NanoGate.buildID, evidence: .hostConfirmedExistingFirmware)
+            let association = try ManagedDeviceAssociation(deviceID: self.deviceID, firmwareBuildID: NanoCandidate.buildID, evidence: .hostConfirmedExistingFirmware)
             let capsule = try artifact.bind(to: association)
             try self.log("stage-requested", capsule.sha256)
             let record = try await connection.stageManagedUpload(capsule)
@@ -276,12 +280,12 @@ import AppKit
     func echo() {
         perform {
             guard self.gate.state == .confirmed, let record = self.record,
-                  record.sha256 == self.artifacts["console"]?.sha256 else { throw NanoGate.Rejected() }
+                  (NanoCandidate.stateful ? self.artifacts.values.contains(where: { $0.sha256 == record.sha256 }) : record.sha256 == self.artifacts["console"]?.sha256) else { throw NanoGate.Rejected() }
             let connection = try await self.connect(id: record.deviceID)
             do {
                 guard connection.device.bootID == record.bootID else { throw NanoGate.Rejected() }
                 try await connection.openConsole()
-                let expected = Data((0...255).map { UInt8($0) }); try await connection.sendSerial(expected)
+                let expected = Data((0...255).map { UInt8($0) }); try await connection.sendSerial(NanoCandidate.stateful ? Data([2]) + expected : expected)
                 let received = try await withThrowingTaskGroup(of: Data.self) { group in
                     group.addTask {
                         var bytes = Data()
@@ -307,11 +311,53 @@ import AppKit
         }
     }
 
+    /// Checks startup data/BSS and advancing state; reboot mode requires a manually changed boot ID.
+    func checkState(afterReboot: Bool = false) {
+        perform {
+            guard NanoCandidate.stateful, self.gate.state == .confirmed, let record = self.record,
+                  let name = self.artifacts.first(where: { $0.value.sha256 == record.sha256 })?.key else { throw NanoGate.Rejected() }
+            let connection = try await self.connect(id: record.deviceID)
+            do {
+                guard afterReboot ? connection.device.bootID != record.bootID : connection.device.bootID == record.bootID else { throw NanoGate.Rejected() }
+                try await connection.openConsole()
+                let first = try await self.stateSample(connection, name: name, nonce: 49)
+                try await Task.sleep(for: .milliseconds(50))
+                let second = try await self.stateSample(connection, name: name, nonce: 115)
+                try NanoStateProbe.advancing(first, second)
+                try await connection.closeConsole(); await connection.disconnect()
+                try self.log(afterReboot ? "state-after-manual-reset" : "state-initialized-and-advancing",
+                    "sketch=" + name + " boot=" + connection.device.bootID + " recordBoot=" + record.bootID +
+                    " first=" + first.bytes.base64EncodedString() + " second=" + second.bytes.base64EncodedString())
+                self.status = afterReboot ? "State reset after manual reboot and advancing counters passed." : "Initialized data, zero BSS and advancing counters passed."
+            } catch { await connection.disconnect(); throw error }
+        }
+    }
+
+    /// Reads one bounded nonce-correlated reply; never resends a probe after a failure.
+    private func stateSample(_ connection: FirmingoSession, name: String, nonce: UInt8) async throws -> NanoStateProbe.Sample {
+        try await connection.sendSerial(Data([1, nonce]))
+        let bytes = try await withThrowingTaskGroup(of: Data.self) { group in
+            group.addTask {
+                var bytes = Data()
+                for try await chunk in connection.serialBytes {
+                    bytes.append(chunk)
+                    guard bytes.count <= 24 else { throw NanoGate.Rejected() }
+                    if bytes.count == 24 { return bytes }
+                }
+                throw NanoGate.Rejected()
+            }
+            group.addTask { try await Task.sleep(for: .seconds(5)); throw FirmingoError.timedOut }
+            defer { group.cancelAll() }
+            guard let first = try await group.next() else { throw NanoGate.Rejected() }; return first
+        }
+        return try NanoStateProbe.parse(bytes, sketch: name, nonce: nonce)
+    }
+
     /// Records only an operator's observed GPIO6 result, without promoting startup to automatic behavior proof.
     func recordGPIO() {
         perform {
             guard self.gate.state == .confirmed, let record = self.record,
-                  record.sha256 == self.artifacts["gpio"]?.sha256, (8...512).contains(self.observation.utf8.count) else { throw NanoGate.Rejected() }
+                  (NanoCandidate.stateful ? self.artifacts.values.contains(where: { $0.sha256 == record.sha256 }) : record.sha256 == self.artifacts["gpio"]?.sha256), (8...512).contains(self.observation.utf8.count) else { throw NanoGate.Rejected() }
             try self.log("manual-gpio-observation", self.observation)
             self.status = "Manual observation recorded; no automatic GPIO measurement is claimed."
         }

@@ -1,5 +1,9 @@
 # Nano SDK hardware qualification
 
+The separate [FMS2 qualification procedure](nano-fms2-qualification.md) uses
+NanoStateful and an explicit version-2 catalogue. Historical ABI-one evidence
+below retains its original scope.
+
 `Validation/NanoHost` is a separate minimal SDK test app for the constrained Nano
 managed resident. The compiler-only app keeps its no-device behavior. This host
 exposes explicit offline preparation, hello inspection, operator association,
@@ -16,13 +20,13 @@ python3 -I -S -B Tools/Hardware/make-nano-host.py \
 ```
 
 The first tool verifies the entire independently anchored consumer package
-`d042dc7d…`, then copies only its twelve firmware evidence roles, catalogue and
+`1bbc0cc1…`, then copies only its twelve firmware evidence roles, catalogue and
 original consumer manifest. It writes the new test-plan digest last. No compiler,
 firmware build, board, network or flash operation is invoked. The second tool
 verifies the caller's plan anchor, all copied evidence against the original
 consumer anchor, and the prepared SDK through the existing compiler-host verifier.
 It creates a distinct `NanoQualification` project/bundle identifier, with the
-three host Swift files and generated SDK context. Firmware files remain outside
+shared host Swift files and generated SDK context. Firmware files remain outside
 the app's Sources/resources in `TestInputs`; the prepared SDK supplies compiler
 resources and accompanying source/notices. Binaries remain outside Git.
 
@@ -115,8 +119,8 @@ python3 -I -S -B Tools/Hardware/check-nano-host.py
 python3 -I -S -B Tools/Hardware/check-nano-host.py --ios-products BUILT_IOS_PRODUCTS
 ```
 
-Four fixture-only input/generator/export cases and the actual production admission
-policy executable cover anchors, unsafe/replaced inputs, project isolation,
+Eight fixture-only input/generator/export cases and the production admission/
+state-observation executables cover anchors, unsafe/replaced inputs, project isolation,
 stale endpoint/device/boot, evidence, one-shot intent, restoration, terminal
 advancement and rejected offline results. These are included in the ordinary SDK
 validation entry point; optimized iOS source checks also run in Apple CI. Complete

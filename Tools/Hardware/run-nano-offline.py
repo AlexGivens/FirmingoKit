@@ -14,25 +14,30 @@ runner = importlib.util.module_from_spec(spec); spec.loader.exec_module(runner)
 PINS = {'gpio': (316, '958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d'),
         'console': (392, 'b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0')}
 
+STATEFUL_PINS = {'state-a': (544, '537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89'),
+                 'state-b': (548, '505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0')}
 
-def decode(data, expected_context, run_id):
-    """Reject incomplete/failed/non-offline journals and independently check the actual exported capsule bytes."""
+
+def decode(data, expected_context, run_id, stateful=False):
+    """Reject incomplete/offline-mismatched journals and independently check actual exported capsule bytes."""
+    pins = STATEFUL_PINS if stateful else PINS
+    build = "dacbf259b96de0e050514764253403f3ef1ef51d0f9efaf1f43a10d8654c0e18" if stateful else "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f"
     if len(data) > 1024**2: raise ValueError('Excessive offline output')
     prefix = b'FIRMINGO_NANO_OFFLINE:'
     envelopes = [line[len(prefix):] for line in data.splitlines() if line.startswith(prefix)]
     if len(envelopes) != 1: raise ValueError('Missing or ambiguous offline export')
     value = json.loads(base64.b64decode(envelopes[0], validate=True))
-    if set(value) != {'report', 'capsules'} or set(value['capsules']) != set(PINS): raise ValueError('Unexpected offline export')
+    if set(value) != {'report', 'capsules'} or set(value['capsules']) != set(pins): raise ValueError('Unexpected offline export')
     raw = base64.b64decode(value['report'], validate=True)
     if len(raw) > 65536: raise ValueError('Excessive journal')
     report = json.loads(raw)
     if (type(report['schema']) is not int or report['schema'] != 1 or report['kind'] != 'nano-sdk-hardware-qualification' or report['runID'] != run_id
-            or report['firmwareBuildID'] != 'c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f'
+            or report['firmwareBuildID'] != build
             or report['hardwareQualified'] is not False or report['context'] != expected_context
-            or [e['stage'] for e in report['events']] != ['offline-start', 'compiled-gpio', 'compiled-console', 'offline-ready']):
+            or [e['stage'] for e in report['events']] != ['offline-start', *['compiled-' + name for name in pins], 'offline-ready']):
         raise ValueError('Failed, incomplete, stale or non-offline journal')
     artifacts = {}
-    for name, (size, digest) in PINS.items():
+    for name, (size, digest) in pins.items():
         contents = base64.b64decode(value['capsules'][name], validate=True)
         if len(contents) != size or hashlib.sha256(contents).hexdigest() != digest: raise ValueError('Wrong offline capsule bytes')
         artifacts[name + '.fms'] = contents
@@ -43,8 +48,9 @@ def main():
     """Require exact explicit app/team/generated inputs and new results; no device command is accepted."""
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('app', type=Path); p.add_argument('team'); p.add_argument('generated_host', type=Path); p.add_argument('output', type=Path)
+    p.add_argument("--stateful-contract", action="store_true", help="verify only the separate NanoStateful bundle and exact FMS2 outputs")
     a = p.parse_args(); app = a.app.absolute(); output = a.output.absolute()
-    details, entitlements = runner.signature(app, a.team, identifier='com.firmingokit.nanoqualification')
+    details, entitlements = runner.signature(app, a.team, identifier='com.firmingokit.nanostateful' if a.stateful_contract else 'com.firmingokit.nanoqualification')
     with (a.generated_host / 'Sources/qualification-context.json').open('rb') as source: context = source.read(4097)
     if len(context) > 4096: raise ValueError('Excessive generated context')
     expected = json.loads(context); run_id = str(uuid.uuid4()).upper(); output.mkdir()
@@ -59,7 +65,7 @@ def main():
                 if process.poll() is None: process.kill()
                 process.wait(timeout=10); raise
         if code: raise ValueError('Offline app failed')
-        with (output / 'stdout.log').open('rb') as source: raw, artifacts = decode(source.read(1024**2 + 1), expected, run_id)
+        with (output / 'stdout.log').open('rb') as source: raw, artifacts = decode(source.read(1024**2 + 1), expected, run_id, a.stateful_contract)
         (output / 'report.json').write_bytes(raw)
         records = []
         for name, contents in artifacts.items():

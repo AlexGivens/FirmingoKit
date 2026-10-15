@@ -35,6 +35,11 @@ import Foundation
         try gate.associate(address: "192.168.77.1", deviceID: "actual", imageSHA: NanoGate.imageSHA, note: "new reviewed evidence")
         try gate.inspected(address: "192.168.77.1", deviceID: "actual", bootID: "boot-three")
         try rejected { try gate.requireStage(address: "192.168.77.1", deviceID: "actual", bootID: "boot-three") }
+        var stateful = NanoGate(imageSHA: "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f")
+        try stateful.prepared(); try stateful.inspected(address: "192.168.77.1", deviceID: "actual", bootID: "boot-one")
+        try rejected { try stateful.associate(address: "192.168.77.1", deviceID: "actual", imageSHA: NanoGate.imageSHA, note: "legacy evidence") }
+        try stateful.associate(address: "192.168.77.1", deviceID: "actual", imageSHA: "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f", note: "new reviewed evidence")
+        try stateful.requireStage(address: "192.168.77.1", deviceID: "actual", bootID: "boot-one")
         print("Nano production gate checks passed: stale endpoint/device/boot, evidence, one-shot commit, restoration and explicit terminal advancement; no device access")
     }
 }

@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "signed macOS offline and physical iPad compiler/inspection passed; managed uploads pending",
+  "context": {
+    "preparedManifestSHA256": "f615b1a7b7279d197b4212cf1dd26ebeae5a7279d227b11710b55aadf4ccd361",
+    "sdkCommit": "e0bed3602b515c71f171971ab7f8a8f5ae3bea1f",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "testPlanSHA256": "2611f2f9c03954f2aa882c1a5f78a96286bf52f4a0a1381dfc49abdd145f1199",
+    "exportManifestSHA256": "90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65",
+    "catalogueSHA256": "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd"
+  },
+  "generatedHostInputsSHA256": "47a2dda0bd91d5c854d2ddf5b87d60d16c3a9dc47da1626da088a7667b26a59c",
+  "hostSources": [
+    {
+      "path": "Sources/NanoApp.swift",
+      "bytes": 6285,
+      "sha256": "36233fae58d60ba29919ffb77c2f111ee8b691f62315508e4242aa38bbe36399"
+    },
+    {
+      "path": "Sources/NanoCandidate.swift",
+      "bytes": 3813,
+      "sha256": "9171ceaedb2dc539a9f5d99f24b2407c8ba2970627a284d3e6c9404437332b03"
+    },
+    {
+      "path": "Sources/NanoGate.swift",
+      "bytes": 4634,
+      "sha256": "f6d81d3e5884092821cdc8d524ac55384b78a5c64cd8859229205df71622ede6"
+    },
+    {
+      "path": "Sources/NanoModel.swift",
+      "bytes": 25974,
+      "sha256": "75346fcaba181a32578e6483e2c602bcde8285a813ed96f3710a4d50c8381e75"
+    },
+    {
+      "path": "Sources/NanoStateProbe.swift",
+      "bytes": 1979,
+      "sha256": "d8827c037f0ddf08f17252c0dddc8188c1dc8cb44fe9eb0ef2afdfccab6f16bf"
+    },
+    {
+      "path": "Sources/fms2-catalogue.json",
+      "bytes": 1069,
+      "sha256": "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd"
+    },
+    {
+      "path": "Sources/qualification-context.json",
+      "bytes": 525,
+      "sha256": "91b97aea09e8defeca96167fa57c67b5cdc5d5e3b514238ea9f532f980898273"
+    },
+    {
+      "path": "Sources/state-a.ino",
+      "bytes": 1099,
+      "sha256": "d29fd4a8d813140b89a801e244bf87cd40b4e17ba7a795a70dc64fec3084e0e3"
+    },
+    {
+      "path": "Sources/state-b.ino",
+      "bytes": 1100,
+      "sha256": "9576804970569a7df57e40a071d4c26fce0907fbe3f312af81ecf146466971f0"
+    }
+  ],
+  "hostSourceNote": "New qualification harness captured by exact generated-source hashes; production prepared SDK remains pinned to context.sdkCommit.",
+  "macOS": {
+    "operatingSystem": "macOS 27.0 (26A428)",
+    "runID": "7B85B29C-1C0D-4FCF-A43D-F983E75ACDE7",
+    "reportSHA256": "4f956867ea32a295c6b8f03b5830db79a1a02b0e9d66553375127bf0c6ae123c",
+    "artifacts": [
+      {
+        "path": "state-a.fms",
+        "bytes": 544,
+        "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89"
+      },
+      {
+        "path": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      }
+    ],
+    "entitlements": {
+      "com.apple.security.app-sandbox": true,
+      "com.apple.security.network.client": true
+    },
+    "hardenedRuntime": true,
+    "strictSignatureVerified": true,
+    "deviceOperations": false,
+    "initialSignatureGate": "Xcode development debug entitlement rejected before execution; app re-signed with exact two sandbox/network entitlements before the passing run"
+  },
+  "iosApp": {
+    "bundleIdentifier": "com.firmingokit.nanostateful",
+    "displayName": "NanoStateful",
+    "build": "1",
+    "executableSHA256": "559f87f5f0d87be4e45afdfd8204c8c78ab4bed1a4e2d71a9a5d87cfe04b81d3",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.nanostateful",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "strictDeepSignatureVerified": true,
+    "firmwareResources": 0,
+    "installedOverPairedLocalNetwork": true,
+    "initialRemoteLaunch": "denied because iPad locked; user subsequently unlocked and opened app"
+  },
+  "iPad": {
+    "model": "iPad Pro 11-inch (3rd generation)",
+    "productType": "iPad13,4",
+    "operatingSystem": "Version 27.0.1 (Build 24A446)",
+    "runID": "55F5042E-5038-47A4-A233-CFC4D20B78FD",
+    "inspectionReportSHA256": "17340f6d4fd39634708759f7df1f4f2dad499355183102366171030cac126da6",
+    "inspectionEventCount": 7,
+    "inspectionDurationSeconds": 1.72324575,
+    "selectedIdentityChecked": true,
+    "capsules": [
+      {
+        "name": "state-a",
+        "bytes": 544,
+        "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+        "buildReportSHA256": "07bc08e82f9b7cc7b1cf1a501640a2c69c7420bb81c6534279b51d6cdca20431",
+        "productionNativeValidatorPassed": true
+      },
+      {
+        "name": "state-b",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+        "buildReportSHA256": "70059631076dd3beaddc5d7fdf3acdb300526cec21436488ec9e909d5b6727bb",
+        "productionNativeValidatorPassed": true
+      }
+    ],
+    "userObservation": "D13 off; checked hello/target status",
+    "localNetworkPromptTiming": "not independently measured",
+    "rawIdentityPublished": false
+  },
+  "localChecks": {
+    "sdkTests": 166,
+    "nanoFixtureCases": 8,
+    "gateAndStateExecutablesPassed": true,
+    "macOSHostVariants": [
+      "abi-one",
+      "fms2"
+    ],
+    "optimizedIOSHostVariants": [
+      "abi-one",
+      "fms2"
+    ],
+    "workflowYAMLAndBashSyntaxPassed": true,
+    "remoteSDKCI": "unprovisioned/unrun"
+  },
+  "firmwareInitialEvidence": "https://github.com/AlexGivens/Firmingo/blob/main/docs/evidence/nano-fms2-initial.json",
+  "limits": [
+    "managed upload/startup/state replacement/reboot still pending",
+    "no default catalogue promotion",
+    "no iPhone/minimum-OS claim",
+    "no Internet/cold-attachment/power-loss/rollback qualification",
+    "no visual or accessibility inspection"
+  ]
+}
