@@ -2,7 +2,7 @@ import Foundation
 
 /// Native trust-boundary validation of the portable compiler's bytes, correlation and execution receipt.
 struct ManagedPortableOutput: Sendable {
-    /// FMS1 produced and independently validated by the compiler; Swift never repackages it here.
+    /// FMS1/FMS2 produced and independently validated by the compiler; Swift never repackages it here.
     let bytes: Data
     /// Complete portable report before SDK provenance translation.
     let reportJSON: Data
@@ -66,7 +66,7 @@ struct ManagedPortableOutput: Sendable {
         guard try integer(event.required("sequence"), minimum: 1, maximum: 136) == 8 + diagnostics.count else { throw WireJSON.invalid }
         let artifact = try event.required("artifact")
         try fields(artifact, ["format", "filename", "bytes", "sha256", "reportJSON", "receipt"])
-        guard try artifact.required("format").string() == "nano-managed-v1",
+        guard try artifact.required("format").string() == request.profile.rawValue,
               try artifact.required("filename").string() == String(request.snapshot.filename.dropLast(4)) + ".fms" else { throw WireJSON.invalid }
         let bytes = try binary(artifact.required("bytes"), minimum: 260, maximum: 4096)
         let receipt = try artifact.required("receipt")
@@ -84,7 +84,7 @@ struct ManagedPortableOutput: Sendable {
               try receipt.required("requestSHA256").string() == request.requestSHA256,
               try receipt.required(request.targetIdentityKey).string() == request.targetIdentity,
               try receipt.required("board").string() == "nano_rp2040_connect",
-              try receipt.required("profile").string() == "nano-managed-v1" else { throw WireJSON.invalid }
+              try receipt.required("profile").string() == request.profile.rawValue else { throw WireJSON.invalid }
         let service = try receipt.required("service")
         try fields(service, ["bytes", "sha256", "serviceABI", "compiler", "maximumMemoryBytes"])
         guard try service.required("bytes").uint32() == VerifiedManagedToolchain.serviceBytes,
@@ -100,11 +100,15 @@ struct ManagedPortableOutput: Sendable {
               try shim.required("receiptSHA256").string() == "1ad1971d3617837d1bc858a31c488d112b20ec6f8df9eecfccb361af2303087d" else { throw WireJSON.invalid }
         let provenance = try receipt.required("provenance"); try fields(provenance, ["compiler", "recipeIdentifier", "recipeSHA256", "toolchainSHA256"])
         guard try provenance.required("compiler").string() == service.required("compiler").string(),
-              try provenance.required("recipeIdentifier").string() == ManagedCompilerResourceInventory.recipeIdentifier,
-              try provenance.required("recipeSHA256").string() == ManagedCompilerResourceInventory.recipeSHA256,
+              try provenance.required("recipeIdentifier").string() == request.profile.recipeIdentifier,
+              try provenance.required("recipeSHA256").string() == request.profile.recipeSHA256,
               try provenance.required("toolchainSHA256").string() == NanoManagedContract.digest(ManagedPortableRequest.canonical(dictionary(toolchain))) else { throw WireJSON.invalid }
         let assets = try receipt.required("recipeAssets").array()
-        let expectedAssets: [(String, UInt32, String)] = [
+        let expectedAssets: [(String, UInt32, String)] = request.profile == .nanoManagedV2 ? [
+            ("Recipe/Arduino.h", 5396, "95123ec4bb7bc5ba023e84fb420f84d8805da3927d4f8be7857f082a21d0e039"),
+            ("Recipe/Entry.cpp", 572, "80e5f48e6512d61f247d61e6637c40abeb25a2b9c84093e81390ee8aeed6d88d"),
+            ("Recipe/Module.ld", 1333, "1d4cf45f05a0eed3242f475e6e11facae8c131182e980e73fd5551532c64829c"),
+            ("Sources/ManagedRecipe.js", 4011, "5984a4c859d2104841aaab2e199362c8049d13148a8b8ae351beb25daf1f9e0d")] : [
             ("Recipe/Arduino.h", 5022, "46e2ecc7ac653b12c6f63ab616e4a49c347c6ece360e203011337733987d60da"),
             ("Recipe/Entry.cpp", 572, "80e5f48e6512d61f247d61e6637c40abeb25a2b9c84093e81390ee8aeed6d88d"),
             ("Recipe/Module.ld", 1078, "a8ded6a674337881bd650ed38b39cdba1299cd469f5e238317989e1e96de0da8"),
@@ -138,7 +142,7 @@ struct ManagedPortableOutput: Sendable {
         guard try reportValue.required("linked_elf_sha256").string() == linkedHash,
               try reportValue.required("source_sha256").required("sketch/" + request.snapshot.filename).string() == sourceSHA256,
               try reportValue.required("source_sha256").required("generated/Sketch.cpp").string() == unitSHA256 else { throw WireJSON.invalid }
-        _ = try ManagedCapsulePayload(bytes: bytes, reportJSON: report, apiAddress: request.apiAddress, residentELFSHA256: request.residentELFSHA256)
+        _ = try ManagedCapsulePayload(bytes: bytes, reportJSON: report, apiAddress: request.apiAddress, residentELFSHA256: request.residentELFSHA256, state: request.state)
         // Recompute receipt identity from parsed closed data rather than trusting its declared digest.
         var receiptObject = try dictionary(receipt)
         for key in ["buildInputSHA256", "linkedELFSHA256", "capsuleSHA256", "capsuleBytes"] { receiptObject.removeValue(forKey: key) }

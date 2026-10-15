@@ -56,7 +56,7 @@ public struct ManagedSketchArtifact: Sendable {
         public let provenance: ManagedELFProvenance
         /// Digest of the complete linked ELF including nonloaded metadata.
         public let linkedELFSHA256: String
-        /// Complete FMS1 digest, distinct from ELF and code digests.
+        /// Complete FMS1/FMS2 digest, distinct from ELF and code digests.
         public let capsuleSHA256: String
 
         /// Issues a receipt only for an already validated package.

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "qualification": "Real WASM compile/link and independent firmware host validation only; ARM not executed; never deploy fixtures implicitly",
+  "firmwareCommit": "97be7bbbe29ef1d18ec886ae6eea1a2d41905869",
+  "exportManifestSHA256": "90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65",
+  "independentCheck": "managed_stateful_check: code=120 data=4 bss=4; guarded initialization, generation replacement, host boot dispatch passed",
+  "files": {
+    "request.json": "8bf4e0907b062925379cc0eaada46c6370f848803ef709cd4e24ea60dd17ad2c",
+    "counter.fms.hex": "305e9e9c514cc136a2a4c768010df50f30c7de3000fead7a5334441b8024fe23",
+    "report.json": "9b777d945dbc48de87437a11dc0759439ab565b82b3e566f1bb16879d0163ef6",
+    "counter.elf.hex": "59cc7b75664eafba436580f71131f9602c51e027cc34c6f874152c00fbee880c",
+    "descriptor.json": "39c8f250c471369323e5e15c6b32031c03ee4001e2d0ab9dcd4141720d6fb468",
+    "receipt.json": "16db6bc88f3e581dbaf11054b8c887f3c231acf04ac3bb5dd977d99fa74bf45c"
+  }
+}

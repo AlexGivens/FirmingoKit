@@ -33,17 +33,17 @@ jobs:
         run: echo 'The same local entry point runs five Nano test-input/generator/export fixtures, the production admission-policy executable and source-only Nano app type-checking. Complete Nano app builds/offline compilation need explicit prepared assets and signing. Inspect, associate, stage, commit, reconcile and behavior checks require an explicitly selected board and reviewed installed resident; no hardware operation runs in CI.' >> "$GITHUB_STEP_SUMMARY"
       - name: Explain initial-connection waiting coverage
         run: |
-          echo 'Swift Testing exercises the production TCP actor through injected platform callbacks: initial waiting/ready, original deadline, cancellation, terminal failure and established path loss. No socket, OS permission reset or automatic reconnect is used; fresh physical permission prompts remain separate qualification.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Swift Testing exercises the FMS2 golden staging/one-shot commit/reconciliation and production TCP actor through injected platform callbacks: initial waiting/ready, original deadline, cancellation, terminal failure and established path loss. No socket, OS permission reset or automatic reconnect is used; fresh physical permission prompts remain separate qualification.' >> "$GITHUB_STEP_SUMMARY"
       - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
         run: |
           mkdir -p .build/owned-service-webkit
           xcrun swiftc -swift-version 6 -enable-upcoming-feature ApproachableConcurrency -warnings-as-errors -parse-as-library -module-cache-path .build/owned-service-webkit/cache -target arm64-apple-macos14.0 Tools/ManagedWASM/VerifyBuiltServiceWebKit.swift -o .build/owned-service-webkit/VerifyBuiltServiceWebKit 2>&1 | tee .build/adapter-ci/built-host-compile.log
           .build/owned-service-webkit/VerifyBuiltServiceWebKit --check-inputs 2>&1 | tee .build/adapter-ci/built-host-inputs.log
           echo 'Owned development WASM qualification requires an explicit reviewed asset and compiler-maintenance harness; absent assets never count as execution.' >> "$GITHUB_STEP_SUMMARY"
-      - name: Observe real-runtime availability separately
+      - name: Observe ABI-one and FMS2 real-runtime availability separately
         run: |
           env -u FIRMINGOKIT_WASM_MODULE swift test --disable-xctest --enable-swift-testing --filter ManagedWebKitCompilerTests 2>&1 | tee .build/adapter-ci/runtime.log
-          echo 'Actual WASM tests skip without the exact reviewed source-built service. Source/notice review is pinned, but no binary is bundled, fetched or published by this workflow.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Actual ABI-one/FMS2 WASM tests skip without the exact reviewed source-built service. Source/notice review is pinned, but no binary is bundled, fetched or published by this workflow.' >> "$GITHUB_STEP_SUMMARY"
       - name: Separate consumer discovers packaged resources
         run: |
           python3 Tools/ManagedWASM/make-resource-consumer.py

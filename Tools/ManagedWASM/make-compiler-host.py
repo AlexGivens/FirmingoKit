@@ -45,7 +45,7 @@ def prepared_sdk(root, expected):
     value = json.loads(data)
     if (value["schema"] != 1 or value["operation"] != "prepared_experimental_sdk_package"
             or value["qualification"] != "experimental-unqualified" or value["published"] is not False
-            or value["consumerManifestSHA256"] != "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+            or value["consumerManifestSHA256"] != "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a"
             or not re.fullmatch(r"[0-9a-f]{40}", value["sdkCommit"]) or not 1 <= len(value["files"]) <= 1024):
         raise ValueError("unsupported prepared SDK snapshot")
     names = set(); total = 0
@@ -66,7 +66,7 @@ def prepared_sdk(root, expected):
     records = {record["path"]: record for record in value["files"]}
     resource = "Sources/FirmingoKit/Resources/ManagedCompiler/"
     for name, pin in ((resource + "compiler.wasm", "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"),
-                      (resource + "inventory.json", "e3c6080b78d2014cf82ca54f4605647f5e3b3967a8acb23c0daff2812475acf2"),
+                      (resource + "inventory.json", "bed0aecb48fdfa7734be8785f1619f0cc397488b03ff35758f6629c621b8bd14"),
                       (resource + "consumer-package.json", value["consumerManifestSHA256"]),
                       ("CompilerDelivery/compiler-source.tar.gz", "dcdbe2d1fc2135dc726f06aa7b4fa4be9d81ac61f5fba2969d464f21b86089ef")):
         if records.get(name, {}).get("sha256") != pin: raise ValueError("prepared SDK omits reviewed compiler/source roles")

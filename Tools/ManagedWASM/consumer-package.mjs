@@ -3,7 +3,7 @@ import { join, resolve } from "node:path";
 import { createHash } from "node:crypto";
 
 // SDK maintenance capability: only this deliberately reviewed complete package may be staged.
-export const CONSUMER_SHA256 = "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c";
+export const CONSUMER_SHA256 = "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a";
 const MAXIMUM = 400 * 1024 * 1024;
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
 
@@ -35,7 +35,7 @@ export function verifyConsumerPackage(input, expected) {
   const bytes = readFileSync(join(root, "manifest.json"));
   if (hash(bytes) !== expected) throw new Error("Consumer manifest changed before parsing");
   const manifest = JSON.parse(bytes);
-  if (manifest.schema !== 1 || manifest.package !== "firmingo-compiler-consumer" || manifest.version !== "0.1.0-nano-managed-experimental.1"
+  if (manifest.schema !== 1 || manifest.package !== "firmingo-compiler-consumer" || manifest.version !== "0.1.0-nano-managed-experimental.2"
       || manifest.qualification !== "experimental-unqualified" || manifest.files.length !== 33
       || manifest.review.firmwareBuildID !== "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f") throw new Error("Incompatible reviewed consumer package");
   const expectedPaths = new Set(["manifest.json"]); let total = 0;

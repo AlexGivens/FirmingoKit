@@ -45,7 +45,7 @@ import Testing
         try bytes.write(to: root.appendingPathComponent("inventory.json"))
         let resources = try await VerifiedManagedResources.load(root: root, expectedSHA256: NanoManagedContract.digest(bytes))
         let toolchain = try await resources.toolchain()
-        #expect(toolchain.toolchainSHA256 == "3eda5778fdc515f974d683570a6d6d8e1891ec9a64d0285e473401ebae14dd86")
+        #expect(toolchain.toolchainSHA256 == "a44afa84e76ae7b1742fd5ecfeec205565643b94948e34d8c57029ae3cada9fd")
         #expect(toolchain.recipeSHA256 == ManagedCompilerResourceInventory.recipeSHA256)
         let selected = try await OfflineCompilerFixtures.request(source: blink, revision: 1, filename: "Blink.ino")
         let portable = try ManagedPortableRequest(selected)
@@ -258,6 +258,31 @@ import Testing
         } catch ManagedCompilerError.timedOut { /* Expected bounded host failure. */ }
         let fresh = try await ManagedSketchCompiler(serviceURL:url).build(selected)
         #expect(fresh.artifact.capsule.sha256 == "018c94a4a49b71880d6f04aecbe08e809c8ecf49e4278261c45dad3ead205720")
+    }
+    /// Actual public ABI-two compilation and service-free ELF conversion agree with the independent firmware-checked fixture.
+    @Test func statefulCompilerAndPackaging() async throws {
+        let input = try WireJSON.parse(ManagedStatefulTests.file("request.json"))
+        let source = try input.required("source").required("text").string()
+        let descriptor = try ManagedFirmwareBuildDescriptor(recordJSON: ManagedStatefulTests.file("descriptor.json"))
+        let association = try ManagedDeviceAssociation(deviceID: "0102030405060708", firmwareBuildID: descriptor.id, evidence: .hostConfirmedExistingFirmware)
+        let resident = try ManagedResidentBinding(association: association, firmwareBuild: descriptor)
+        let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: 1, filename: "Counter.ino", source: source)
+        let selected = try ManagedSketchBuildRequest(snapshot: snapshot, board: .nanoRP2040Connect, profile: .nanoManagedV2, resident: resident)
+        let result = try await ManagedSketchCompiler(serviceURL: serviceURL()).build(selected)
+        #expect(result.artifact.capsule.sha256 == "e349a77d85958db1c4eba4f5c10f27e23dc9dd2ce03eb675c108d07bbfd93abb")
+        let descriptorObject = try #require(JSONSerialization.jsonObject(with: ManagedStatefulTests.file("descriptor.json")) as? [String: Any])
+        let catalogueBytes = try JSONSerialization.data(withJSONObject: ["schema": 1, "firmwareBuilds": [descriptorObject]])
+        let catalogue = try await ManagedCompilerCatalogue.load(manifestJSON: catalogueBytes, expectedSHA256: NanoManagedContract.digest(catalogueBytes))
+        let offline = try ManagedOfflineBuildRequest(snapshot: snapshot, catalogue: catalogue, firmwareBuildID: descriptor.id)
+        let offlineResult = try await ManagedSketchCompiler(serviceURL: serviceURL()).build(offline)
+        #expect(try offlineResult.artifact.bind(to: association).bytes == result.artifact.capsule.bytes)
+        let prepared = try await ManagedSketchPreprocessor.prepare(selected)
+        let text = String(decoding: try ManagedStatefulTests.file("counter.elf.hex"), as: UTF8.self)
+        let elf = Data(try text.split(whereSeparator: \.isWhitespace).map { try #require(UInt8($0, radix: 16)) })
+        let provenance = try ManagedELFProvenance(compiler: "independently supplied WASM ELF fixture", recipeIdentifier: descriptor.recipeIdentifier,
+            recipeSHA256: descriptor.recipeSHA256, toolchainSHA256: String(repeating: "1", count: 64))
+        let supplied = try await ManagedELFConverter.convert(elf, prepared: prepared, provenance: provenance)
+        #expect(supplied.capsule.bytes == result.artifact.capsule.bytes)
     }
     /// Main-actor handoff avoids unsafe shared captures when a worker progress callback requests cancellation.
     @MainActor private final class CancellationProbe {

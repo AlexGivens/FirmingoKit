@@ -20,6 +20,10 @@ def verify_files(root, manifest, fixture_root):
                 raise ValueError(f"Synthetic UF2 integrity mismatch: {entry['path']}")
             if not image or len(image) % 512 or image[:4] != b"UF2\n":
                 raise ValueError(f"Invalid synthetic UF2 structure: {entry['path']}")
+        elif "compiler-stateful" in path.parts and path.suffix == ".hex":
+            image = bytes.fromhex(data.decode("ascii"))
+            if not image or image[:4] not in (b"\x7fELF", b"FMS2"):
+                raise ValueError("Invalid compiler stateful fixture")
         elif path.name.endswith(".elf.hex"):
             image = bytes.fromhex(data.decode("ascii"))
             if len(image) != manifest["synthetic_decoded_bytes"] or hashlib.sha256(image).hexdigest() != manifest["synthetic_decoded_sha256"]:
@@ -38,7 +42,7 @@ def main():
     """Verify SDK-local provenance sets without reading a reference checkout."""
     root = Path(__file__).resolve().parents[1]
     fixture_root = (root / "Tests/FirmingoKitTests/Fixtures").resolve()
-    for name in ["provenance.json", "lifecycle/provenance.json", "compiler/provenance.json", "compiler-catalogue/provenance.json", "compiler-offline/provenance.json"]:
+    for name in ["provenance.json", "lifecycle/provenance.json", "compiler/provenance.json", "compiler-catalogue/provenance.json", "compiler-offline/provenance.json", "compiler-stateful/sdk-provenance.json"]:
         manifest = json.loads((fixture_root / name).read_text())
         verify_files(root, manifest, fixture_root)
         if name == "compiler-catalogue/provenance.json":

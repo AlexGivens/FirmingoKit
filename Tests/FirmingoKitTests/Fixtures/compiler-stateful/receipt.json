@@ -1,0 +1,69 @@
+{
+  "receiptSchema": "firmingo-compiler-build-v1",
+  "operation": "wasm_compile_link_package",
+  "provenanceStatus": "pinned_assets_executed",
+  "requestSHA256": "5b1a319f306622834ac6e0aceeb3d207a08e53491c8bf3b85b89aed128b48245",
+  "buildID": "fms2-counter",
+  "sourceRevision": "counter:1",
+  "sourceFilename": "Counter.ino",
+  "sourceSHA256": "75c2d7ec4dbe121ebc9e1820838c6e0248f5a68344cda5665b4c64aa52b3c918",
+  "translationUnitSHA256": "302cd9ffb5be10f546046486aee68a42d5818b043c5a5374a39d166431879c25",
+  "firmwareBuildID": "dacbf259b96de0e050514764253403f3ef1ef51d0f9efaf1f43a10d8654c0e18",
+  "board": "nano_rp2040_connect",
+  "profile": "nano-managed-v2",
+  "provenance": {
+    "compiler": "Clang/LLD 22.1.8 ABI-two WASI service",
+    "recipeIdentifier": "nano-stateful-clang-22.1.8-v1-experimental",
+    "recipeSHA256": "25def36c701dd5e527ba128215deb3f87c158e1c6eb6eb2fa7fd106b5f543868",
+    "toolchainSHA256": "fab1c0ab993c6f3a43387932d06e25258b48f400d6c117b61ad51ff60d154a83"
+  },
+  "interfaceVersion": 1,
+  "service": {
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493",
+    "serviceABI": 2,
+    "compiler": "Clang/LLD 22.1.8 ABI-two WASI service",
+    "maximumMemoryBytes": 268435456
+  },
+  "wasiShim": {
+    "package": "@bjorn3/browser_wasi_shim",
+    "version": "0.4.2",
+    "receiptSHA256": "1ad1971d3617837d1bc858a31c488d112b20ec6f8df9eecfccb361af2303087d"
+  },
+  "toolchainManifest": {
+    "schema": 1,
+    "service": {
+      "bytes": 101194565,
+      "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493",
+      "serviceABI": 2,
+      "compiler": "Clang/LLD 22.1.8 ABI-two WASI service",
+      "maximumMemoryBytes": 268435456
+    }
+  },
+  "recipeAssets": [
+    {
+      "path": "Recipe/Arduino.h",
+      "bytes": 5396,
+      "sha256": "95123ec4bb7bc5ba023e84fb420f84d8805da3927d4f8be7857f082a21d0e039"
+    },
+    {
+      "path": "Recipe/Entry.cpp",
+      "bytes": 572,
+      "sha256": "80e5f48e6512d61f247d61e6637c40abeb25a2b9c84093e81390ee8aeed6d88d"
+    },
+    {
+      "path": "Recipe/Module.ld",
+      "bytes": 1333,
+      "sha256": "1d4cf45f05a0eed3242f475e6e11facae8c131182e980e73fd5551532c64829c"
+    },
+    {
+      "path": "Sources/ManagedRecipe.js",
+      "bytes": 4011,
+      "sha256": "5984a4c859d2104841aaab2e199362c8049d13148a8b8ae351beb25daf1f9e0d"
+    }
+  ],
+  "buildInputSHA256": "f13ba3ed22533f11bdabb0d2bf07c0ce74173c649155b246f86aca81476289d4",
+  "linkedELFSHA256": "acea5aa3dd56252b62120f4cc2409ba37ff781c98629d9924582976f68a091d7",
+  "capsuleSHA256": "e349a77d85958db1c4eba4f5c10f27e23dc9dd2ce03eb675c108d07bbfd93abb",
+  "capsuleBytes": 380
+}

@@ -1,5 +1,7 @@
 # Local compiler implementation status
 
+Current explicit FMS2 compiler/upload support and refreshed package identities: [stateful adoption](stateful-adoption.md). Older records below retain their original qualification scope.
+
 Current supplied-ELF conversion and package identities: [shared ELF packaging](elf-packaging.md). Earlier implementation records below remain historical evidence.
 
 Current public preparation integration and updated package identities: [service-free preparation](service-free-preparation.md). Earlier records remain historical evidence.

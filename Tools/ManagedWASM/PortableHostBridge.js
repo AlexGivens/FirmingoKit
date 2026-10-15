@@ -23,7 +23,8 @@ function encodeBytes(bytes) {
 async function execute(inputJSON) {
   const request = FirmingoCompiler.parseBuildRequest(inputJSON);
   let terminal;
-  const assets = { recipeManifest: new Uint8Array(recipeResources.recipeManifest), recipeAssets: Object.fromEntries(Object.entries(recipeResources.recipeAssets)
+  const selected = request.target.profile === "nano-managed-v2" ? recipeResources.profiles["nano-managed-v2"] : recipeResources;
+  const assets = { recipeManifest: new Uint8Array(selected.recipeManifest), recipeAssets: Object.fromEntries(Object.entries(selected.recipeAssets)
     .map(([name, bytes]) => [name, new Uint8Array(bytes)])) };
   try {
     const response = await fetch("firmingo-compiler://assets/compiler.wasm", { signal: cancellation.signal });

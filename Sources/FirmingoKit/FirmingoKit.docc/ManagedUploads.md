@@ -3,6 +3,14 @@
 Validate independently built FMS1 capsules, stage them in RAM, and reconcile an
 explicit installation request without replaying commit.
 
+ABI-two/FMS2 is also available through the explicit `.nanoManagedV2` profile and
+``ManagedResidentState`` attached to ``ManagedResidentBinding``. It selects target
+two, checks the exact RAM arena and both capsule digests, and preserves the same
+one-shot commit/uncertain-outcome rules. Data/BSS are initialized for each
+generation; hardware qualification for this new resident remains outstanding.
+ABI-one upload behavior is preserved. See the repository's stateful adoption
+guide for exact pinned assets and current evidence.
+
 ## Overview
 
 This API implements the pinned experimental Nano `nano-managed-v1` FMGO-one

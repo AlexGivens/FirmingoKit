@@ -38,7 +38,7 @@ class CompilerHostTests(unittest.TestCase):
         (self.sdk / "Fixture+Only.swift").write_bytes(b"non-executable fixture, NEVER DEPLOY")
         self.value = {"schema": 1, "operation": "prepared_experimental_sdk_package", "sdkCommit": "1" * 40,
                       "qualification": "experimental-unqualified", "published": False,
-                      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+                      "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
                       "files": [{"path": "Fixture+Only.swift", **host.identity(self.sdk / "Fixture+Only.swift")} ]}
 
     def tearDown(self):

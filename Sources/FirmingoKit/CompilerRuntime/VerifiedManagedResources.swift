@@ -3,7 +3,7 @@ import Foundation
 /// SDK-owned immutable verified runtime/catalogue capabilities, independent of device identity or deployment.
 struct VerifiedManagedResources: Sendable {
     /// Independently compiled-in anchor changed only with deliberate SDK resource review.
-    static let inventorySHA256 = "e3c6080b78d2014cf82ca54f4605647f5e3b3967a8acb23c0daff2812475acf2"
+    static let inventorySHA256 = "bed0aecb48fdfa7734be8785f1619f0cc397488b03ff35758f6629c621b8bd14"
     /// Local resource directory; no sibling lookup, network fetch or environment override.
     private let root: URL
     /// Closed metadata verified before resource path construction.
@@ -52,7 +52,7 @@ struct VerifiedManagedResources: Sendable {
 
     /// Loads only an approved, exact service from this verified resource directory; pending review fails before I/O.
     /// No external input or copied unapproved module can change the independently anchored review decision.
-    @concurrent func toolchain() async throws -> VerifiedManagedToolchain {
+    @concurrent func toolchain(profile: ManagedSketchBuildRequest.Profile = .nanoManagedV1) async throws -> VerifiedManagedToolchain {
         try Task.checkCancellation()
         guard inventory.serviceApproved else { throw ManagedCompilerResourceError.serviceApprovalPending }
         let service = try ManagedCompilerResourceReader.read(root.appendingPathComponent(ManagedCompilerResourceInventory.servicePath),
@@ -62,7 +62,7 @@ struct VerifiedManagedResources: Sendable {
             throw ManagedCompilerResourceError.resourceIntegrityMismatch(ManagedCompilerResourceInventory.servicePath)
         }
         try Task.checkCancellation()
-        return VerifiedManagedToolchain(page: page, service: service, recipeSHA256: ManagedCompilerResourceInventory.recipeSHA256,
+        return VerifiedManagedToolchain(page: page, service: service, recipeSHA256: profile.recipeSHA256,
             toolchainSHA256: NanoManagedContract.digest(Data((VerifiedManagedToolchain.manifestSHA256 + ":" + VerifiedManagedToolchain.serviceSHA256).utf8)))
     }
 }

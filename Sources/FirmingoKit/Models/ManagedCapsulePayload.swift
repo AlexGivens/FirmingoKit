@@ -1,7 +1,7 @@
 import CryptoKit
 import Foundation
 
-/// Shared bounded FMS1/report validation against exact firmware requirements, independent of physical devices.
+/// Shared bounded FMS1/FMS2 report validation against exact firmware requirements, independent of physical devices.
 /// Both offline packaging and legacy device-bound capsules use this gate; it does not prove executable behavior.
 struct ManagedCapsulePayload: Sendable {
     /// Complete capsule bytes, including the little-endian header and zero padding; never a UF2.
@@ -20,36 +20,38 @@ struct ManagedCapsulePayload: Sendable {
     let codeSHA256: String
 
     /// Validates exact report/header requirements without inventing a device association.
-    init(bytes: Data, reportJSON: Data, apiAddress: UInt32, residentELFSHA256: String) throws {
+    init(bytes: Data, reportJSON: Data, apiAddress: UInt32, residentELFSHA256: String, state: ManagedResidentState? = nil) throws {
         guard (257...NanoManagedContract.maximumSize).contains(bytes.count) else {
             throw ManagedUploadError.invalidArtifact("FMS1 capsules must contain 257 through 4096 bytes")
         }
         do {
             let report = try WireJSON.parse(reportJSON)
             let data = Array(bytes)
-            guard data.prefix(4).elementsEqual([0x46, 0x4d, 0x53, 0x31]),
-                  Self.u16(data, at: 4) == 1, Self.u16(data, at: 6) == 64,
-                  Self.u32(data, at: 8) == 0x4f4e414e,
-                  Self.u32(data, at: 12) == apiAddress,
+            let profile: ManagedSketchBuildRequest.Profile = state == nil ? .nanoManagedV1 : .nanoManagedV2
+            guard data.prefix(4).elementsEqual([0x46, 0x4d, 0x53, state == nil ? 0x31 : 0x32]),
+                  Self.u16(data, at: 4) == (state == nil ? 1 : 2), Self.u16(data, at: 6) == (state == nil ? 64 : 128),
+                  Self.u32(data, at: 8) == 0x4f4e414e, Self.u32(data, at: 12) == apiAddress,
                   Self.u32(data, at: 16) == NanoManagedContract.codeAddress,
-                  data[64..<256].allSatisfy({ $0 == 0 }) else {
-                throw ManagedUploadError.invalidArtifact("Invalid FMS1 header, padding, or resident API binding")
+                  data[(state == nil ? 64 : 128)..<256].allSatisfy({ $0 == 0 }) else {
+                throw ManagedUploadError.invalidArtifact("Invalid managed header, padding, or resident API binding")
             }
             let codeBytes = Self.u32(data, at: 20)
             let setup = Self.u32(data, at: 24)
             let loop = Self.u32(data, at: 28)
-            guard codeBytes == bytes.count - 256, codeBytes > 0,
-                  Self.validEntry(setup, bytes: codeBytes), Self.validEntry(loop, bytes: codeBytes) else {
+            guard (state != nil || codeBytes == bytes.count - 256), codeBytes > 0, codeBytes <= bytes.count - 256,
+                  Self.validEntry(setup, bytes: codeBytes), Self.validEntry(loop, bytes: codeBytes),
+                  state == nil || (codeBytes >= 4 && codeBytes % 4 == 0 && (setup & ~UInt32(1)) - NanoManagedContract.codeAddress <= codeBytes - 2 && (loop & ~UInt32(1)) - NanoManagedContract.codeAddress <= codeBytes - 2) else {
                 throw ManagedUploadError.invalidArtifact("Invalid FMS1 code length or Thumb entry point")
             }
-            let code = Data(data.dropFirst(256))
+            if let state { try Self.validateStateful(data, report: report, state: state) }
+            let code = Data(data[256..<256 + Int(codeBytes)])
             let rawDigest = Data(SHA256.hash(data: code))
             let codeHash = NanoManagedContract.digest(code)
             let wholeHash = NanoManagedContract.digest(bytes)
-            guard rawDigest.elementsEqual(data[32..<64]),
+            guard (state != nil || rawDigest.elementsEqual(data[32..<64])),
                   try report.required("board").string() == FirmingoBoard.nanoRP2040Connect.rawValue,
-                  try report.required("image_format").string() == NanoManagedContract.format,
-                  try report.required("target_id").uint32() == NanoManagedContract.targetID,
+                  try report.required("image_format").string() == profile.rawValue,
+                  try report.required("target_id").uint32() == profile.targetID,
                   try report.required("resident_elf_sha256").string() == residentELFSHA256,
                   try Self.address(report.required("api_address")) == apiAddress,
                   try Self.address(report.required("setup_address")) == setup,
@@ -91,6 +93,31 @@ struct ManagedCapsulePayload: Sendable {
             throw error
         } catch {
             throw ManagedUploadError.invalidArtifact("Malformed or incomplete managed build report")
+        }
+    }
+
+    /// Independently checks FMS2 header/payload digests, exact image span and resident-owned state extents.
+    private static func validateStateful(_ data: [UInt8], report: WireJSON.Value, state: ManagedResidentState) throws {
+        let code = u32(data, at: 20), initialized = u32(data, at: 36), bss = u32(data, at: 44)
+        guard code % 4 == 0, initialized % 4 == 0, bss % 4 == 0,
+              UInt64(initialized) + UInt64(bss) <= state.capacityBytes,
+              UInt64(code) + UInt64(initialized) + 256 == data.count,
+              u32(data, at: 32) == state.address, UInt64(u32(data, at: 40)) == UInt64(state.address) + UInt64(initialized),
+              UInt64(u32(data, at: 48)) == UInt64(code) + 256, u32(data, at: 52) == data.count,
+              u32(data, at: 56) == 0, u32(data, at: 60) == 0 else {
+            throw ManagedUploadError.invalidArtifact("FMS2 span or resident state binding mismatch")
+        }
+        let payload = Data(data[256...]), header = Data(data[..<96])
+        guard Data(SHA256.hash(data: payload)).elementsEqual(data[64..<96]),
+              Data(SHA256.hash(data: header)).elementsEqual(data[96..<128]),
+              try address(report.required("state_address")) == state.address,
+              try report.required("state_capacity_bytes").uint32() == state.capacityBytes,
+              try report.required("data_bytes").uint32() == initialized,
+              try report.required("bss_bytes").uint32() == bss,
+              try report.required("payload_sha256").string() == NanoManagedContract.digest(payload),
+              try report.required("header_sha256").string() == NanoManagedContract.digest(header),
+              try report.required("compiler_contract_sha256").string() == ManagedResidentState.compilerContractSHA256 else {
+            throw ManagedUploadError.invalidArtifact("FMS2 header, payload or report digest mismatch")
         }
     }
 

@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "commit": "97be7bbbe29ef1d18ec886ae6eea1a2d41905869",
+  "qualification": "Firmware parser frames plus real WASM fixture independently checked by firmware host validator; no board execution",
+  "files": [
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-stateful/counter.elf.hex",
+      "bytes": 3048,
+      "sha256": "59cc7b75664eafba436580f71131f9602c51e027cc34c6f874152c00fbee880c"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-stateful/counter.fms.hex",
+      "bytes": 1140,
+      "sha256": "305e9e9c514cc136a2a4c768010df50f30c7de3000fead7a5334441b8024fe23"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-stateful/descriptor.json",
+      "bytes": 940,
+      "sha256": "39c8f250c471369323e5e15c6b32031c03ee4001e2d0ab9dcd4141720d6fb468"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-stateful/parser-report.json",
+      "bytes": 1061,
+      "sha256": "7ee3dd2fadbfff5eb5a731c98e2e5b64c2356951ec33136fff6e3aa8ee23816c"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-stateful/receipt.json",
+      "bytes": 2658,
+      "sha256": "16db6bc88f3e581dbaf11054b8c887f3c231acf04ac3bb5dd977d99fa74bf45c"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-stateful/report.json",
+      "bytes": 1509,
+      "sha256": "9b777d945dbc48de87437a11dc0759439ab565b82b3e566f1bb16879d0163ef6"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/compiler-stateful/request.json",
+      "bytes": 1611,
+      "sha256": "8bf4e0907b062925379cc0eaada46c6370f848803ef709cd4e24ea60dd17ad2c"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/README.md",
+      "bytes": 1174,
+      "sha256": "d38b88f176e0f43f565afd5e0b2153a075f94d60b22a558da8475a5645f3b95b"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/abort-request.hex",
+      "bytes": 192,
+      "sha256": "212cef02491cefd80c8c22ab06e5412f7dea3bebe044c46007f2ff44b7e2ee6a"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/aborted-response.hex",
+      "bytes": 624,
+      "sha256": "be85c11f2bca102ac2725e7c57692cd2cd5f1fe7e745ca07af3d341bf36fa7c5"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/accepted-response.hex",
+      "bytes": 621,
+      "sha256": "4665f42eeb6be8091a0c723ce5287a6739c4d3f2879e0ef20e013df0ebe8c352"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/begin-request.hex",
+      "bytes": 591,
+      "sha256": "be2f4a5bce2ff929de2fb7506f40496f122740646631a6dd0fd6c2d0dd255ef4"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/boot-confirmed-response.hex",
+      "bytes": 642,
+      "sha256": "147db4527788d2c3f15dda8e1368c7e0b1e80a671715dd64289ffdd97c24d131"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/chunk-response.hex",
+      "bytes": 627,
+      "sha256": "ea38116959bba8a81c720e2b7155b11821cb030cc6c89b2293745927bde79e00"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/chunk.hex",
+      "bytes": 888,
+      "sha256": "b15e4b5297c094437c168960f31e7862f9d35e98b078fdaba8fa9db468747b76"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/commit-request.hex",
+      "bytes": 195,
+      "sha256": "7213112d1f0d9380277addeb3db8079a449fa3be2757c443db08aa686e3363ee"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/committing-response.hex",
+      "bytes": 633,
+      "sha256": "1b558b5bd9e0e17806c32ea9cbe742d3e78496e19b5d6c9b3664bc0d29843be1"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/disconnected-response.hex",
+      "bytes": 648,
+      "sha256": "b504142b0decd74e02b2369a9d98eaf3d0ba28412f52acb207bc911ce4c8bb36"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/finish-request.hex",
+      "bytes": 195,
+      "sha256": "1f2de286dc3e933cd7dab9120d332ceae2090ff823b49c6f56125cda6bd62272"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/hello-request.hex",
+      "bytes": 90,
+      "sha256": "3ad3a44ce98bf9b9ca6529d303cc20fab72621484af3986b76d0f068ced05b99"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/hello-response.hex",
+      "bytes": 1398,
+      "sha256": "a60b8690a435af84c34e95cd2a6bbac3c1119f30a8caf0182d3d774f1e6b333c"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/install-failed-response.hex",
+      "bytes": 648,
+      "sha256": "7b18de88b1dde848d40c99cd78d155ca5cfc5736573bf0b4082bc18dd0d58e30"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/installed-response.hex",
+      "bytes": 627,
+      "sha256": "5c7b3b19c12858a75e3ed40fe1fc081d11b75d50a3afa17b4db99e2460819421"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/old-target-request.hex",
+      "bytes": 591,
+      "sha256": "8b379b142b1e4a5e453f793a94309ac5cdf46734625ec277b8bf5cbb0e200aac"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/status-request.hex",
+      "bytes": 195,
+      "sha256": "442b3d1caab9907211a9f7a5687e1660369122a01124135c0d3c39a6222aeada"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/unauthorized-response.hex",
+      "bytes": 255,
+      "sha256": "19be09548cf8aeb0ce9976edc88ceefaa1f382ab6d337db687def75836b74861"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/verified-response.hex",
+      "bytes": 627,
+      "sha256": "9092bc830565e6a139d1be96b220f557ff564c25880fd406538e679338b5023a"
+    },
+    {
+      "path": "Tests/FirmingoKitTests/Fixtures/protocol-v1/managed-upload-v2/wrong-target-response.hex",
+      "bytes": 255,
+      "sha256": "93b95d9e1369471860d51c863f961190c45a250ecaf98bca5407df45f4b27ac2"
+    }
+  ]
+}

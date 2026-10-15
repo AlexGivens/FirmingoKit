@@ -37,6 +37,16 @@ remain dependencies, not reasons to weaken deployment checks.
 
 Mark implementation tasks complete only with relevant checks and evidence. Record blocked tasks with their dependency and next action; do not mark an unavailable feature as implemented because it returns an unsupported error. Keep support status separate for each board, firmware profile, host platform, and operation.
 
+## FMS2 adoption — 2026-10-15
+
+- [x] Consume explicit ABI-two schema-two descriptors and reviewed state bindings without changing the ABI-one catalogue.
+- [x] Carry the profile through actual WebKit builds, preparation/conversion and independent FMS2/report validation.
+- [x] Select target two in staging, one-shot commit, saved records and fresh-session reconciliation; import golden firmware vectors and test lost replies/old-target rejection.
+- [x] Refresh the pinned source/consumer package and verify actual SDK execution, Apple builds and documentation.
+- [ ] Qualify the new exact package on signed macOS/physical iPad/iPhone and a selected FMS2 resident before default-catalogue promotion or production claims.
+
+Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
+
 ## 1. Establish contracts, scope, and acceptance criteria
 
 - [ ] Select consistent Firmingo and Firmingo-Compiler inputs for each implementation increment; record full commits/local differences or checksummed bundles. ArduinoKit remains read-only. The initial split inventory is recorded in section 7.2 without selecting a new protocol compatibility baseline.

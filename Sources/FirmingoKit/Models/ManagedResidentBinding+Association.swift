@@ -5,6 +5,6 @@ extension ManagedResidentBinding {
     public init(association: ManagedDeviceAssociation, firmwareBuild: ManagedFirmwareBuildDescriptor) throws {
         guard association.firmwareBuildID == firmwareBuild.id else { throw ManagedCatalogueError.associationMismatch }
         try self.init(deviceID: association.deviceID, residentELFSHA256: firmwareBuild.residentELFSHA256,
-                      firmwareImageSHA256: firmwareBuild.firmwareImageSHA256, apiAddress: firmwareBuild.apiAddress)
+                      firmwareImageSHA256: firmwareBuild.firmwareImageSHA256, apiAddress: firmwareBuild.apiAddress, state: firmwareBuild.state)
     }
 }

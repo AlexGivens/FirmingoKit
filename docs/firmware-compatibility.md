@@ -1,5 +1,7 @@
 # Firmware compatibility
 
+Current explicit FMS2 compiler/upload support and refreshed package identities: [stateful adoption](stateful-adoption.md). Older records below retain their original qualification scope.
+
 ## Selected contract
 
 FirmingoKit pins Firmingo commit `f17fdf0301256ba48270230cbf213126e70aa8d0` (FMGO major 1).

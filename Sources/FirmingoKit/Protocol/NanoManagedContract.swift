@@ -3,7 +3,7 @@ import Foundation
 
 /// Constants and lexical validation for the pinned experimental Nano resident contract.
 enum NanoManagedContract {
-    /// The only reviewed upload target; a different advertisement requires a recipe/contract review.
+    /// The legacy upload target, preserved as the ABI-one compatibility default.
     static let targetID: UInt32 = 1
     /// Complete FMS1 capsule format, distinct from UF2 firmware images.
     static let format = "nano-managed-v1"
@@ -21,12 +21,12 @@ enum NanoManagedContract {
     static func digest(_ bytes: Data) -> String {
         SHA256.hash(data: bytes).map { String(format: "%02x", $0) }.joined()
     }
-    /// Checks the exact reviewed target and its physical authorization policy.
-    static func target(in device: FirmingoDevice) throws -> FirmingoDevice.UploadTarget {
+    /// Checks the selected versioned target and its exact physical authorization policy.
+    static func target(in device: FirmingoDevice, profile: ManagedSketchBuildRequest.Profile = .nanoManagedV1) throws -> FirmingoDevice.UploadTarget {
         guard device.boardID == FirmingoBoard.nanoRP2040Connect.rawValue,
               device.channels.first?.backend == .application,
-              let target = device.targets.first(where: { $0.id == targetID }),
-              target.format == format, target.maximumSize == maximumSize,
+              let target = device.targets.first(where: { $0.id == profile.targetID }),
+              target.format == profile.rawValue, target.maximumSize == maximumSize,
               target.maximumChunk == 1024, target.authorization == "physical-d2-gnd" else {
             throw ManagedUploadError.unsupportedTarget
         }

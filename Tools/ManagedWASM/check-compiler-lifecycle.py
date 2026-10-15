@@ -29,7 +29,7 @@ def check(data, run_id, process_id, expected_context):
         raise ValueError("lifecycle journal is failed, incomplete, stale or mismatched")
     context = r["context"]
     if (context != expected_context
-            or context["consumerManifestSHA256"] != "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+            or context["consumerManifestSHA256"] != "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a"
             or not re.fullmatch(r"[0-9a-f]{40}", context["sdkCommit"])
             or not re.fullmatch(r"[0-9a-f]{64}", context["preparedManifestSHA256"])):
         raise ValueError("lifecycle compiler context differs from the selected host")

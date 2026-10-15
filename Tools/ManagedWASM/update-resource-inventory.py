@@ -18,7 +18,7 @@ def main():
     if any(p.name not in allowed or p.is_symlink() or not p.is_file() for p in root.iterdir()):
         raise SystemExit("Unexpected or unsafe staged compiler resource")
     consumer_bytes = (root / "consumer-package.json").read_bytes()
-    if hashlib.sha256(consumer_bytes).hexdigest() != "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c":
+    if hashlib.sha256(consumer_bytes).hexdigest() != "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a":
         raise SystemExit("Consumer package differs from independently reviewed anchor")
     consumer = json.loads(consumer_bytes)
     catalogue = (root / "catalogue.json").read_bytes()

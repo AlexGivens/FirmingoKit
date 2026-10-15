@@ -16,11 +16,11 @@ struct VerifiedManagedToolchain: Sendable {
     /// Exact approved module size, checked before reading or instantiating bytes.
     static let serviceBytes = 101_194_565
     /// Runtime manifest anchor, refreshed only by deliberate reviewed SDK-local staging.
-    static let manifestSHA256 = "9fbf7807c22468083fd38fcf7870bd3c71b1b6d002b849631aa7a5cb31572c47"
+    static let manifestSHA256 = "b4c51684947f7f0fdfd6c86496b964cd9cd23af76b9ad8f482f78697420fe566"
 
     /// Loads packaged independent resources and a host-selected service, hashing off the main actor.
     /// There is no default sibling path, download, compiler subprocess or board side effect.
-    @concurrent static func load(serviceURL: URL) async throws -> Self {
+    @concurrent static func load(serviceURL: URL, profile: ManagedSketchBuildRequest.Profile = .nanoManagedV1) async throws -> Self {
         try Task.checkCancellation()
         guard serviceURL.isFileURL, let root = ManagedCompilerBundle.root() else {
             throw ManagedCompilerError.unavailable("select a local approved WASM service and include the SDK runtime bundle")
@@ -33,7 +33,7 @@ struct VerifiedManagedToolchain: Sendable {
         guard manifest.schema == 1, manifest.serviceABI == 2,
               manifest.recipe == "nano-stateless-clang-22.1.8-v1-experimental",
               manifest.recipeSHA256 == "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
-              manifest.compilerPackageSHA256 == "4cbdf856304063dbac59a27ea8703f74ffedbc534521b0d40d13013913d4dba5",
+              manifest.compilerPackageSHA256 == "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639",
               manifest.files.count == 6, Set(manifest.files.map(\.path)) == ["host.html", "LICENSE-MIT", "LICENSE-APACHE", "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"] else {
             throw ManagedCompilerError.unavailable("incompatible runtime recipe")
         }
@@ -50,7 +50,7 @@ struct VerifiedManagedToolchain: Sendable {
             throw ManagedCompilerError.unavailable("select the reviewed memory-bounded ABI-two service")
         }
         try Task.checkCancellation()
-        return Self(page: page, service: service, recipeSHA256: manifest.recipeSHA256,
+        return Self(page: page, service: service, recipeSHA256: profile.recipeSHA256,
                     toolchainSHA256: digest(Data((manifestSHA256 + ":" + serviceSHA256).utf8)))
     }
 

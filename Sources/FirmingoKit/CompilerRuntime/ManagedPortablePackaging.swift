@@ -42,7 +42,7 @@ struct ManagedPortablePackaging: Sendable {
         }
         try fields(root, ["schema", "operation", "buildID", "requestSHA256", "outcome", "artifact"])
         let artifact = try root.required("artifact"); try fields(artifact, ["format", "filename", "bytes", "sha256", "reportJSON", "receipt"])
-        guard try artifact.required("format").string() == "nano-managed-v1",
+        guard try artifact.required("format").string() == request.profile.rawValue,
               try artifact.required("filename").string() == String(request.snapshot.filename.dropLast(4)) + ".fms" else { throw WireJSON.invalid }
         let encoded = try artifact.required("bytes").string()
         guard encoded.utf8.count <= 5464, let bytes = Data(base64Encoded: encoded),
@@ -67,7 +67,7 @@ struct ManagedPortablePackaging: Sendable {
               try receipt.required("translationUnitSHA256").string() == translationUnitSHA256,
               try receipt.required(request.targetIdentityKey).string() == request.targetIdentity,
               try receipt.required("board").string() == "nano_rp2040_connect",
-              try receipt.required("profile").string() == "nano-managed-v1",
+              try receipt.required("profile").string() == request.profile.rawValue,
               try receipt.required("linkedELFSHA256").string() == linkedHash,
               try receipt.required("capsuleSHA256").string() == capsuleHash,
               try artifact.required("sha256").string() == capsuleHash,
@@ -81,10 +81,10 @@ struct ManagedPortablePackaging: Sendable {
         for key in ["buildInputSHA256", "linkedELFSHA256", "capsuleSHA256", "capsuleBytes"] { inputs.removeValue(forKey: key) }
         guard try receipt.required("buildInputSHA256").string() == NanoManagedContract.digest(ManagedPortableRequest.canonical(inputs)) else { throw WireJSON.invalid }
         let payload = try ManagedCapsulePayload(bytes: bytes, reportJSON: reportJSON, apiAddress: request.apiAddress,
-            residentELFSHA256: request.residentELFSHA256)
+            residentELFSHA256: request.residentELFSHA256, state: request.state)
         let parsedReport = try WireJSON.parse(reportJSON, maximumBytes: 16_384, maximumTokens: 1024)
         try fields(parsedReport, ["status", "board", "image_format", "target_id", "max_install_bytes", "api_address", "resident_elf_sha256",
-            "setup_address", "loop_address", "code_bytes", "code_sha256", "capsule_bytes", "capsule_sha256", "source_sha256", "compiler", "recipe_id", "linked_elf_sha256"])
+            "setup_address", "loop_address", "code_bytes", "code_sha256", "capsule_bytes", "capsule_sha256", "source_sha256", "compiler", "recipe_id", "linked_elf_sha256"] + (request.state == nil ? [] : ["state_address", "state_capacity_bytes", "data_bytes", "bss_bytes", "payload_sha256", "header_sha256", "compiler_contract_sha256"]))
         guard payload.compiler == provenance.compiler,
               payload.sourceSHA256 == ["sketch/\(request.snapshot.filename)": sourceSHA256, "generated/Sketch.cpp": translationUnitSHA256,
                 "recipe/manifest.json": provenance.recipeSHA256, "toolchain/manifest.json": provenance.toolchainSHA256],

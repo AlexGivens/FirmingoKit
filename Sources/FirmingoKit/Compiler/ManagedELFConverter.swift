@@ -1,12 +1,12 @@
 import Foundation
 
-/// Packages independently linked Nano stateless ELF code as FMS1; it never compiles, connects or uploads.
+/// Packages independently linked Nano ELF code as the explicitly selected FMS1 or FMS2 profile; it never compiles, connects or uploads.
 /// Hosts must establish that the ELF was built from this prepared revision, recipe and resident API address.
 /// ELF metadata and a self-supplied receipt cannot prove that association or instruction/ABI compatibility.
 public enum ManagedELFConverter {
-    /// Validates the pinned module.ld layout and defined Thumb wrappers, serializes FMS1, and checks its
+    /// Validates the pinned module.ld layout and defined Thumb wrappers, serializes the selected capsule format, and checks its
     /// report through the independent capsule validator. Rejects conventional UF2/full-firmware ELF,
-    /// globals/runtime initialization, unresolved symbols, relocations and unsupported layout.
+    /// mutable storage for ABI one, constructors, unresolved symbols, relocations and unsupported layout.
     /// Input ELF is limited to 2 MiB; code is 4–3840 bytes. Work runs off the main actor with cancellation
     /// checks. A result establishes structural packaging only; trusted code/hardware qualification is separate.
     /// Parsing/packaging runs in the verified shared compiler's private WebKit worker with no WASM service.

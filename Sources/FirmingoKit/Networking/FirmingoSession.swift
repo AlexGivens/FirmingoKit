@@ -241,7 +241,7 @@ public actor FirmingoSession {
         try requireActive()
         guard !managedOperation, managedRecord == nil, pendingID == nil, !sending,
               !openingConsole, !closingConsole else { throw FirmingoError.busy }
-        let target = try NanoManagedContract.target(in: device)
+        let target = try NanoManagedContract.target(in: device, profile: capsule.resident.profile)
         guard device.deviceID == capsule.resident.deviceID else { throw FirmingoError.identityMismatch }
         guard capsule.bytes.count <= target.maximumSize else {
             throw ManagedUploadError.invalidArtifact("The capsule exceeds the advertised upload size")
@@ -251,7 +251,7 @@ public actor FirmingoSession {
         do {
             try Task.checkCancellation()
             if consoleOpen { try await closeConsole() }
-            let begin = #"{"op":"flash.begin","target_id":1,"board_id":"nano_rp2040_connect","format":"nano-managed-v1","size":\#(capsule.bytes.count),"sha256":"\#(capsule.sha256)"}"#
+            let begin = #"{"op":"flash.begin","target_id":\#(target.id),"board_id":"nano_rp2040_connect","format":"\#(target.format)","size":\#(capsule.bytes.count),"sha256":"\#(capsule.sha256)"}"#
             let accepted = try ManagedUploadSnapshot.parse(await request(begin))
             let record = try ManagedUploadRecord(device: device, uploadID: accepted.uploadID, capsule: capsule)
             try checkStagedSnapshot(accepted, record: record, state: .accepted, received: 0)
@@ -351,7 +351,10 @@ public actor FirmingoSession {
               !closingConsole, pendingID == nil, !sending else { throw FirmingoError.invalidState }
         guard device.deviceID == record.deviceID, device.boardID == record.boardID else { return .unknown(.deviceChanged) }
         guard device.bootID == record.bootID else { return .unknown(.bootChanged) }
-        do { _ = try NanoManagedContract.target(in: device) }
+        do {
+            guard let profile = ManagedSketchBuildRequest.Profile(rawValue: record.format), profile.targetID == record.targetID else { return .unknown(.targetUnavailable) }
+            _ = try NanoManagedContract.target(in: device, profile: profile)
+        }
         catch ManagedUploadError.unsupportedTarget { return .unknown(.targetUnavailable) }
         managedOperation = true
         defer { managedOperation = false }
@@ -369,7 +372,7 @@ public actor FirmingoSession {
 
     /// Builds the selected contract's exact JSON schema from validated constants/nonzero record IDs.
     private func uploadCommand(_ operation: String, record: ManagedUploadRecord) -> String {
-        #"{"op":"\#(operation)","target_id":1,"upload_id":\#(record.uploadID)}"#
+        #"{"op":"\#(operation)","target_id":\#(record.targetID),"upload_id":\#(record.uploadID)}"#
     }
     /// Rejects failed, mismatched, or out-of-order acknowledgements before sending another chunk/finish.
     private func checkStagedSnapshot(_ snapshot: ManagedUploadSnapshot, record: ManagedUploadRecord,

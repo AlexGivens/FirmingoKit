@@ -1,5 +1,7 @@
 # Prepare a self-contained experimental SDK package
 
+Current explicit FMS2 compiler/upload support and refreshed package identities: [stateful adoption](stateful-adoption.md). Older records below retain their original qualification scope.
+
 The SDK now includes one experimental Nano descriptor from a checked schema-2
 Firmware CI export at `e0a79d1…`: build `c44d25ef…`, API `0x10022c9c`, catalogue
 SHA-256 `e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e`.

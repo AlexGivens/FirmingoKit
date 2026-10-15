@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "package": "firmingo-compiler-consumer",
-  "version": "0.1.0-nano-managed-experimental.1",
+  "version": "0.1.0-nano-managed-experimental.2",
   "interfaceVersion": 1,
   "serviceABI": 2,
   "qualification": "experimental-unqualified",
@@ -14,8 +14,8 @@
   },
   "review": {
     "schema": 1,
-    "version": "0.1.0-nano-managed-experimental.1",
-    "webManifestSHA256": "4cbdf856304063dbac59a27ea8703f74ffedbc534521b0d40d13013913d4dba5",
+    "version": "0.1.0-nano-managed-experimental.2",
+    "webManifestSHA256": "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639",
     "deliveryManifestSHA256": "261dcdfd80b39c11d522289d8ac411b0882cdc36ec91f370b0f92f11f2957d39",
     "firmwareManifestSHA256": "9246a7da31b3b4237d1783feb195a7e7719d65c6f4165f440d05de5daea876e4",
     "firmwareCommit": "e0a79d1e47aa90d5dda02ccd284d40b9c2922c12",
@@ -162,33 +162,33 @@
     },
     {
       "path": "web/compiler.js",
-      "bytes": 171537,
-      "sha256": "785cd9766ece97d8fb7a3e271384f613be3c29e2e6a9ebc1b14acce80aaac6cc"
+      "bytes": 187507,
+      "sha256": "9a66e068953e6b6f78bb878c0b1463d64c4b9a1b249270c41767f0103a8d48b8"
     },
     {
       "path": "web/manifest.json",
-      "bytes": 9822,
-      "sha256": "4cbdf856304063dbac59a27ea8703f74ffedbc534521b0d40d13013913d4dba5"
+      "bytes": 10896,
+      "sha256": "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639"
     },
     {
       "path": "web/preparation-worker.js",
-      "bytes": 49211,
-      "sha256": "9594c70735c60cea882f2c22ddcfc0acdcd4e0f29c1e40bfbbb0939557904333"
+      "bytes": 59046,
+      "sha256": "df8299a8b83905d04b20e9731e5459fdf7827a4dcae549ce75514ed18f3f55de"
     },
     {
       "path": "web/resources.json",
-      "bytes": 40674,
-      "sha256": "57709441c4dccb02224e268eefb83e6da78f31b5276c19d993f1f43b4cc30938"
+      "bytes": 85331,
+      "sha256": "4514ec4ddea39cb4feccf4e487d99799e1e4251b0bdd8319dbc1c8676411624a"
     },
     {
       "path": "web/sources.json",
-      "bytes": 236986,
-      "sha256": "f4370f75d7cf6b643be05bf4e25040ed93143077a62235fbe06240c0095ebde8"
+      "bytes": 262643,
+      "sha256": "c517aeee62c380cf57d38c80a360cb239f74c3f350a7b9b0606cf972758caf9d"
     },
     {
       "path": "web/worker.js",
-      "bytes": 143295,
-      "sha256": "2358c460797f46d204a7342f13839d0293e9c89ca5e0e0a273c9b236a3d758de"
+      "bytes": 159175,
+      "sha256": "864be9f68255fb5daef075d24e2c392df414095a3ebfeb4f170fb121b16c352e"
     }
   ],
   "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"

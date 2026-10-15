@@ -12,9 +12,9 @@ public struct ManagedUploadRecord: Codable, Equatable, Sendable {
     public let bootID: String
     /// Exact board identifier, currently the experimental Nano contract only.
     public let boardID: String
-    /// Advertised target identity, currently one.
+    /// Advertised target identity: one for FMS1 or two for FMS2.
     public let targetID: UInt32
-    /// The independently reviewed FMS1 format name.
+    /// The independently reviewed versioned capsule format name.
     public let format: String
     /// Nonzero firmware transaction ID scoped to device and boot.
     public let uploadID: UInt32
@@ -36,8 +36,8 @@ public struct ManagedUploadRecord: Codable, Equatable, Sendable {
     /// Creates a record only from a validated begin response and artifact.
     init(device: FirmingoDevice, uploadID: UInt32, capsule: ManagedCapsule) throws {
         try self.init(version: 1, deviceID: device.deviceID, bootID: device.bootID,
-                      boardID: device.boardID, targetID: NanoManagedContract.targetID,
-                      format: NanoManagedContract.format, uploadID: uploadID,
+                      boardID: device.boardID, targetID: capsule.resident.profile.targetID,
+                      format: capsule.resident.profile.rawValue, uploadID: uploadID,
                       size: UInt32(capsule.bytes.count), sha256: capsule.sha256,
                       residentELFSHA256: capsule.resident.residentELFSHA256,
                       firmwareImageSHA256: capsule.resident.firmwareImageSHA256)
@@ -64,7 +64,7 @@ public struct ManagedUploadRecord: Codable, Equatable, Sendable {
         guard version == 1, NanoManagedContract.isHex(deviceID, bytes: 8),
               NanoManagedContract.isHex(bootID, bytes: 8),
               boardID == FirmingoBoard.nanoRP2040Connect.rawValue,
-              targetID == NanoManagedContract.targetID, format == NanoManagedContract.format,
+              ((targetID == 1 && format == "nano-managed-v1") || (targetID == 2 && format == "nano-managed-v2")),
               uploadID > 0, (257...4096).contains(size),
               NanoManagedContract.isHex(sha256, bytes: 32),
               NanoManagedContract.isHex(residentELFSHA256, bytes: 32),

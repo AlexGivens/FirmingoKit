@@ -54,9 +54,34 @@
       "sha256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9"
     },
     {
+      "path": "recipes/nano_rp2040_connect_v2/Recipe/Arduino.h",
+      "bytes": 5396,
+      "sha256": "95123ec4bb7bc5ba023e84fb420f84d8805da3927d4f8be7857f082a21d0e039"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect_v2/Recipe/Entry.cpp",
+      "bytes": 572,
+      "sha256": "80e5f48e6512d61f247d61e6637c40abeb25a2b9c84093e81390ee8aeed6d88d"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect_v2/Recipe/Module.ld",
+      "bytes": 1333,
+      "sha256": "1d4cf45f05a0eed3242f475e6e11facae8c131182e980e73fd5551532c64829c"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect_v2/Sources/ManagedRecipe.js",
+      "bytes": 4011,
+      "sha256": "5984a4c859d2104841aaab2e199362c8049d13148a8b8ae351beb25daf1f9e0d"
+    },
+    {
+      "path": "recipes/nano_rp2040_connect_v2/manifest.json",
+      "bytes": 1263,
+      "sha256": "25def36c701dd5e527ba128215deb3f87c158e1c6eb6eb2fa7fd106b5f543868"
+    },
+    {
       "path": "runtime/ManagedService.js",
-      "bytes": 10850,
-      "sha256": "151491dbbb3267e5e86d59ba7e794d4a48ab24b5294c1a5d56a44eb67cb802ea"
+      "bytes": 11016,
+      "sha256": "e0883d6595e2aa3722ff440203a844ae1443ec0a96ed9ed27a9612511165b09a"
     },
     {
       "path": "runtime/ModuleMemory.js",
@@ -75,8 +100,8 @@
     },
     {
       "path": "runtime/build.js",
-      "bytes": 7531,
-      "sha256": "c3057f9e002bb62d506b665e80fb786eb3fe80f9891196932567161a81840aae"
+      "bytes": 8005,
+      "sha256": "e0cfc55d86c90069c4e9c3a16cada416044b192939087ba763797a8a188226f8"
     },
     {
       "path": "runtime/controller.js",
@@ -85,8 +110,8 @@
     },
     {
       "path": "runtime/messages.js",
-      "bytes": 6008,
-      "sha256": "1dc1dae67c0dd26f593b9909478e7e01e13ea240f5f1f6cf7a4b7608e250cdd3"
+      "bytes": 6036,
+      "sha256": "a47bd3548845e8ff2e3a03bdb6c1bc51c1277ecdc65c3311654442a5dc5e52e2"
     },
     {
       "path": "runtime/packaging-controller.js",
@@ -95,8 +120,8 @@
     },
     {
       "path": "runtime/pins.js",
-      "bytes": 1072,
-      "sha256": "5d6952538522aa116f27b584184b7930ddaf7faa7d9a86c35965ce065a354ce2"
+      "bytes": 1711,
+      "sha256": "59d8c8b93523b077ec1bacf7359cbf26d3fba8417a38e8a38257b4854b7d0b35"
     },
     {
       "path": "runtime/portable-sha256.js",
@@ -130,18 +155,18 @@
     },
     {
       "path": "src/capsule.js",
-      "bytes": 7816,
-      "sha256": "f7cbbb12aa27ccb4157b22e64a15f412343ffc24ad32a256fc6ecbd18cc57809"
+      "bytes": 8526,
+      "sha256": "1d0a5e8f2e2235fcccb1ac137233418d0a96e28411680fddaa1cacc45320e867"
     },
     {
       "path": "src/contract.js",
-      "bytes": 11500,
-      "sha256": "3ef93442dc16db1fe147fa93c70f95915541796e21e40ef67c94f12e75f91cf2"
+      "bytes": 13478,
+      "sha256": "e6287a4fa1b9dc03fe22e730d4493c4aa5d3b6c7afcd9075e1d9f2718bd03e37"
     },
     {
       "path": "src/elf.js",
-      "bytes": 8705,
-      "sha256": "39b9d8504e74a24dc80f1e47608695b4c070ab57d04cbb5425728df48e1fe0ef"
+      "bytes": 11625,
+      "sha256": "2f6fc85c0fcf63784fddee4c8a2aac2cd64840b990cecab398e8a10970b620cf"
     },
     {
       "path": "src/errors.js",
@@ -155,8 +180,8 @@
     },
     {
       "path": "src/index.js",
-      "bytes": 1266,
-      "sha256": "b60e62c6c307c23257322209316f6c0f1c1107ea64201176159090b5716fd7c0"
+      "bytes": 1281,
+      "sha256": "64f2c679ecc274d6646f120fb5fbba1b935a19119d7de43befa4c6c94e99ff59"
     },
     {
       "path": "src/json.js",
@@ -165,13 +190,13 @@
     },
     {
       "path": "src/limits.js",
-      "bytes": 708,
-      "sha256": "2f4a7a20fb44b79c17d02c1fcd6ad7e4e392320a4a4815f7b111ac38cda80cac"
+      "bytes": 1228,
+      "sha256": "a5cdb3f2d9cb40eb4847ec1dca43f4fecb20e5797c562f344733e7bd4481086d"
     },
     {
       "path": "src/nano-recipe.js",
-      "bytes": 3249,
-      "sha256": "02805060974b704831cf10c491e6b56e77088d33a97fed05777eefdcf206b8b1"
+      "bytes": 3756,
+      "sha256": "9252e1a653589a1eb1478ad83a01a591404f4fb22e49aa260c60ddd6a24bb889"
     },
     {
       "path": "src/pipeline-error.js",
@@ -182,6 +207,11 @@
       "path": "src/preprocess.js",
       "bytes": 7023,
       "sha256": "f6f466d7f2792cf3b8be0a37b80ea46cf2e2421338111294ba64033d5575607c"
+    },
+    {
+      "path": "src/stateful-capsule.js",
+      "bytes": 3436,
+      "sha256": "8c001f222076cfb76b9f03a5eb46dd951b0569b90f492ef714baa3bf1a8ab365"
     },
     {
       "path": "third_party/browser_wasi_shim/LICENSE-APACHE",
@@ -250,13 +280,13 @@
     },
     {
       "path": "tools/export-web.mjs",
-      "bytes": 3585,
-      "sha256": "db9d9749ac308937c45838696632405c47147d7bac7e98ced6a140d884b0968a"
+      "bytes": 4056,
+      "sha256": "1193dd8d0f703f218a1c1b2688fd38e8fadf808b7281d0ea40807523553ca17f"
     },
     {
       "path": "tools/verify-recipe.mjs",
-      "bytes": 694,
-      "sha256": "22968b3a8d468aaf37f63e340afc9b31bd9256c669e10021e2a91124baaa09ee"
+      "bytes": 785,
+      "sha256": "5468381975776aeff7d33b147e7bece82f8b1006cab8b6a525f08648c5a41f47"
     },
     {
       "path": "tools/verify-vendor.mjs",
@@ -267,23 +297,23 @@
   "files": [
     {
       "path": "compiler.js",
-      "bytes": 171537,
-      "sha256": "785cd9766ece97d8fb7a3e271384f613be3c29e2e6a9ebc1b14acce80aaac6cc"
+      "bytes": 187507,
+      "sha256": "9a66e068953e6b6f78bb878c0b1463d64c4b9a1b249270c41767f0103a8d48b8"
     },
     {
       "path": "worker.js",
-      "bytes": 143295,
-      "sha256": "2358c460797f46d204a7342f13839d0293e9c89ca5e0e0a273c9b236a3d758de"
+      "bytes": 159175,
+      "sha256": "864be9f68255fb5daef075d24e2c392df414095a3ebfeb4f170fb121b16c352e"
     },
     {
       "path": "preparation-worker.js",
-      "bytes": 49211,
-      "sha256": "9594c70735c60cea882f2c22ddcfc0acdcd4e0f29c1e40bfbbb0939557904333"
+      "bytes": 59046,
+      "sha256": "df8299a8b83905d04b20e9731e5459fdf7827a4dcae549ce75514ed18f3f55de"
     },
     {
       "path": "resources.json",
-      "bytes": 40674,
-      "sha256": "57709441c4dccb02224e268eefb83e6da78f31b5276c19d993f1f43b4cc30938"
+      "bytes": 85331,
+      "sha256": "4514ec4ddea39cb4feccf4e487d99799e1e4251b0bdd8319dbc1c8676411624a"
     },
     {
       "path": "LICENSE-MIT",
@@ -302,8 +332,8 @@
     },
     {
       "path": "sources.json",
-      "bytes": 236986,
-      "sha256": "f4370f75d7cf6b643be05bf4e25040ed93143077a62235fbe06240c0095ebde8"
+      "bytes": 262643,
+      "sha256": "c517aeee62c380cf57d38c80a360cb239f74c3f350a7b9b0606cf972758caf9d"
     }
   ]
 }

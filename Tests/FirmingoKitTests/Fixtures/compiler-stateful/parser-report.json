@@ -1,0 +1,24 @@
+{
+  "board": "nano_rp2040_connect",
+  "image_format": "nano-managed-v2",
+  "target_id": 2,
+  "api_address": "0x10000100",
+  "resident_elf_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+  "setup_address": "0x10200101",
+  "loop_address": "0x10200105",
+  "code_bytes": 8,
+  "code_sha256": "e9e9b619eeb5030bc9c1427d92a9d9ed436c2bfd4ea6194cbc24d12f442436e2",
+  "capsule_bytes": 272,
+  "capsule_sha256": "1c955e832d351a9b91a3bd5e5e4463a2f6732e4e87cd1de0d783c769f01ae867",
+  "state_address": "0x20030000",
+  "state_capacity_bytes": 32,
+  "data_bytes": 8,
+  "bss_bytes": 8,
+  "payload_sha256": "31c4f05aec9e2a7f8626c69a2fe0370bbc13f2fba614f5afb3f09a2e971ab42f",
+  "header_sha256": "463ef2a1f8393c31403a4e53e32c88e5e7cfd4cd02d13aef54fb8ebe8f65b81f",
+  "compiler_contract_sha256": "bd57a4db74bcdc5d592d3217957a7975124c6fe84481a5afbd38509c1e20c082",
+  "source_sha256": {
+    "fixtures/parser-only.bin": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "compiler": "independent firmware parser vector; never deploy"
+}

@@ -8,6 +8,6 @@ public enum ManagedCompilationPhase: String, Sendable {
     case compiling
     /// Linking against the selected exact resident API address.
     case linking
-    /// Validating the ARM ELF and creating its FMS1 capsule/receipt.
+    /// Validating the ARM ELF and creating its selected capsule/receipt.
     case packaging
 }

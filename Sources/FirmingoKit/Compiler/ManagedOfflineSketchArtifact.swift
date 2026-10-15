@@ -1,9 +1,9 @@
 import Foundation
 
-/// Device-independent structurally validated FMS1 packaging and immutable source/build evidence.
+/// Device-independent structurally validated FMS1/FMS2 packaging and immutable source/build evidence.
 /// Binding to a reviewed device association is explicit and does not authorize upload or attest installed bytes.
 public struct ManagedOfflineSketchArtifact: Sendable {
-    /// Complete FMS1 bytes; these are not a conventional UF2 or complete resident image.
+    /// Complete FMS1/FMS2 bytes; these are not a conventional UF2 or complete resident image.
     public let bytes: Data
     /// Exact whole-capsule digest, independent of document revision and physical-device selection.
     public let sha256: String
@@ -66,7 +66,7 @@ public struct ManagedOfflineSketchArtifact: Sendable {
         public let buildInputSHA256: String
         /// Complete linked ELF digest, including nonloaded metadata.
         public let linkedELFSHA256: String
-        /// Complete FMS1 digest, distinct from linked ELF and code digests.
+        /// Complete FMS1/FMS2 digest, distinct from linked ELF and code digests.
         public let capsuleSHA256: String
 
         /// Records exact validated input/output fields, without inserting a device placeholder.

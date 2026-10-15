@@ -10,7 +10,7 @@ import shutil
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location('compiler_host', ROOT / 'Tools/ManagedWASM/make-compiler-host.py')
 host = importlib.util.module_from_spec(spec); spec.loader.exec_module(host)
-CONSUMER = 'd042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c'
+CONSUMER = '1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a'
 BUILD = 'c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f'
 
 

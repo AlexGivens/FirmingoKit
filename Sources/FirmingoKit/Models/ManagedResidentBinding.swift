@@ -13,9 +13,14 @@ public struct ManagedResidentBinding: Equatable, Sendable {
     /// Four-byte-aligned API table address from that exact resident ELF.
     public let apiAddress: UInt32
 
-    /// Validates metadata syntax/ranges for the Nano ABI-one resident without claiming remote attestation.
+    /// Present only for ABI-two/FMS2; nil preserves the ABI-one stateless contract.
+    public let state: ManagedResidentState?
+    /// Explicit artifact profile derived from the reviewed resident contract, never guessed from capsule bytes.
+    public var profile: ManagedSketchBuildRequest.Profile { state == nil ? .nanoManagedV1 : .nanoManagedV2 }
+
+    /// Validates metadata syntax/ranges for the Nano resident selected by the optional state contract without claiming remote attestation.
     public init(deviceID: String, residentELFSHA256: String, firmwareImageSHA256: String,
-                apiAddress: UInt32) throws {
+                apiAddress: UInt32, state: ManagedResidentState? = nil) throws {
         guard NanoManagedContract.isHex(deviceID, bytes: 8),
               NanoManagedContract.isHex(residentELFSHA256, bytes: 32),
               NanoManagedContract.isHex(firmwareImageSHA256, bytes: 32),
@@ -25,6 +30,6 @@ public struct ManagedResidentBinding: Equatable, Sendable {
         self.deviceID = deviceID
         self.residentELFSHA256 = residentELFSHA256
         self.firmwareImageSHA256 = firmwareImageSHA256
-        self.apiAddress = apiAddress
+        self.apiAddress = apiAddress; self.state = state
     }
 }

@@ -1,7 +1,7 @@
 import CryptoKit
 import Foundation
 
-/// A locally validated experimental Nano FMS1 capsule and matching independent build report.
+/// A locally validated experimental Nano FMS1/FMS2 capsule and matching independent build report.
 /// Validation checks packaging, digests, entry ranges, and resident binding, not executable behavior
 /// or publisher authenticity. Only trusted, independently qualified code belongs on a physical board.
 public struct ManagedCapsule: Sendable {
@@ -30,7 +30,7 @@ public struct ManagedCapsule: Sendable {
     /// callers retain the original report when additional provenance is needed.
     public init(bytes: Data, reportJSON: Data, resident: ManagedResidentBinding) throws {
         let payload = try ManagedCapsulePayload(bytes: bytes, reportJSON: reportJSON,
-            apiAddress: resident.apiAddress, residentELFSHA256: resident.residentELFSHA256)
+            apiAddress: resident.apiAddress, residentELFSHA256: resident.residentELFSHA256, state: resident.state)
         self.bytes = payload.bytes; sha256 = payload.sha256; self.resident = resident
         sourceSHA256 = payload.sourceSHA256; compiler = payload.compiler
         setupAddress = payload.setupAddress; loopAddress = payload.loopAddress; codeSHA256 = payload.codeSHA256

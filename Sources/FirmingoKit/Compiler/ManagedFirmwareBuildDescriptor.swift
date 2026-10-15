@@ -26,11 +26,13 @@ public struct ManagedFirmwareBuildDescriptor: Equatable, Sendable, Identifiable 
     public let recipeIdentifier: String
     /// Compatible recipe manifest digest, covering facade, arguments and linker policy.
     public let recipeSHA256: String
+    /// Exact ABI-two volatile state contract; nil for the unchanged ABI-one descriptor schema.
+    public let state: ManagedResidentState?
     /// Experimental status; catalogue input cannot promote this SDK recipe to hardware-qualified support.
     public let qualification = "experimental"
 
-    /// Validates one closed schema-one descriptor of at most 4096 bytes. Required fields are documented in
-    /// the catalogue guide. Only the current Nano ABI-one/application target and pinned Clang recipe pass;
+    /// Validates a closed schema-one (ABI one) or schema-two (ABI two) descriptor of at most 4096 bytes. Fields are documented in
+    /// the catalogue guide. Only reviewed Nano application targets and their exact pinned Clang recipes pass;
     /// no metadata constructor authenticates a publisher, reads an ELF or attests installed firmware.
     public init(recordJSON: Data) throws {
         do { try self.init(value: WireJSON.parse(recordJSON, maximumBytes: 4096)) }
@@ -39,16 +41,19 @@ public struct ManagedFirmwareBuildDescriptor: Equatable, Sendable, Identifiable 
 
     /// Applies the same exact schema when a descriptor is nested in a verified catalogue.
     init(value: WireJSON.Value) throws {
-        let names = ["schema", "board", "profile", "backend", "firmwareVersion", "firmwareCommit", "residentELFSHA256",
+        var names = ["schema", "board", "profile", "backend", "firmwareVersion", "firmwareCommit", "residentELFSHA256",
                      "firmwareImageSHA256", "buildReportSHA256", "apiAddress", "residentABI", "targetID", "maximumCapsuleBytes",
                      "recipeIdentifier", "recipeSHA256", "qualification"]
+        guard let selectedProfile = ManagedSketchBuildRequest.Profile(rawValue: try value.required("profile").string()) else { throw ManagedCatalogueError.invalidDescriptor }
+        let stateful = selectedProfile == .nanoManagedV2
+        if stateful { names += ["stateAddress", "stateCapacityBytes", "compilerContractSHA256"] }
         guard Set(try value.object().keys) == Set(names.map { Data($0.utf8) }),
-              try value.required("schema").uint32() == 1,
+              try value.required("schema").uint32() == (stateful ? 2 : 1),
               try value.required("board").string() == FirmingoBoard.nanoRP2040Connect.rawValue,
-              try value.required("profile").string() == ManagedSketchBuildRequest.Profile.nanoManagedV1.rawValue,
+              try value.required("profile").string() == selectedProfile.rawValue,
               try value.required("backend").string() == "application",
-              try value.required("residentABI").uint32() == 1,
-              try value.required("targetID").uint32() == NanoManagedContract.targetID,
+              try value.required("residentABI").uint32() == (stateful ? 2 : 1),
+              try value.required("targetID").uint32() == selectedProfile.targetID,
               try value.required("maximumCapsuleBytes").uint32() == NanoManagedContract.maximumSize,
               try value.required("qualification").string() == "experimental" else {
             throw ManagedCatalogueError.invalidDescriptor
@@ -66,20 +71,28 @@ public struct ManagedFirmwareBuildDescriptor: Equatable, Sendable, Identifiable 
               NanoManagedContract.isHex(commit, bytes: 20), NanoManagedContract.isHex(elf, bytes: 32),
               NanoManagedContract.isHex(image, bytes: 32), NanoManagedContract.isHex(report, bytes: 32),
               (0x10000000..<0x10200000).contains(address), address % 4 == 0,
-              recipe == "nano-stateless-clang-22.1.8-v1-experimental",
-              recipeHash == "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9" else {
+              recipe == (stateful ? "nano-stateful-clang-22.1.8-v1-experimental" : "nano-stateless-clang-22.1.8-v1-experimental"),
+              recipeHash == (stateful ? "25def36c701dd5e527ba128215deb3f87c158e1c6eb6eb2fa7fd106b5f543868" : "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9") else {
             throw ManagedCatalogueError.invalidDescriptor
         }
-        board = .nanoRP2040Connect; profile = .nanoManagedV1
+        if stateful {
+            guard try value.required("compilerContractSHA256").string() == ManagedResidentState.compilerContractSHA256 else { throw ManagedCatalogueError.invalidDescriptor }
+            state = try ManagedResidentState(address: value.required("stateAddress").uint32(), capacityBytes: value.required("stateCapacityBytes").uint32())
+        } else { state = nil }
+        board = .nanoRP2040Connect; profile = selectedProfile
         firmwareVersion = version; firmwareCommit = commit; residentELFSHA256 = elf
         firmwareImageSHA256 = image; buildReportSHA256 = report; apiAddress = address
         recipeIdentifier = recipe; recipeSHA256 = recipeHash
-        let fields: [String: Any] = ["schema": 1, "board": board.rawValue, "profile": profile.rawValue,
+        var fields: [String: Any] = ["schema": stateful ? 2 : 1, "board": board.rawValue, "profile": profile.rawValue,
             "backend": "application", "firmwareVersion": version, "firmwareCommit": commit,
             "residentELFSHA256": elf, "firmwareImageSHA256": image, "buildReportSHA256": report,
-            "apiAddress": address, "residentABI": 1, "targetID": NanoManagedContract.targetID,
+            "apiAddress": address, "residentABI": stateful ? 2 : 1, "targetID": selectedProfile.targetID,
             "maximumCapsuleBytes": NanoManagedContract.maximumSize, "recipeIdentifier": recipe,
             "recipeSHA256": recipeHash, "qualification": qualification]
+        if let state {
+            fields["stateAddress"] = state.address; fields["stateCapacityBytes"] = state.capacityBytes
+            fields["compilerContractSHA256"] = ManagedResidentState.compilerContractSHA256
+        }
         id = NanoManagedContract.digest(try JSONSerialization.data(withJSONObject: fields, options: [.sortedKeys, .withoutEscapingSlashes]))
     }
 }
