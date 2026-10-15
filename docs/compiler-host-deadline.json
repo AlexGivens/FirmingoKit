@@ -1,0 +1,488 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "context": {
+    "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+    "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+  },
+  "toolchain": {
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4",
+    "iOSSDK": "27.0",
+    "configuration": "Release",
+    "deploymentMinimum": "17.0",
+    "buildOverrides": {
+      "CURRENT_PROJECT_VERSION": 8,
+      "ENABLE_DEBUG_DYLIB": "NO",
+      "CODE_SIGN_STYLE": "Automatic"
+    }
+  },
+  "compilerWASM": {
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"
+  },
+  "status": "passed_production_deadline_on_recorded_physical_devices",
+  "scope": "Unchanged public 60-second runtime deadline during first observed source compilation; same-instance fresh foreground build; no board operation",
+  "hostSourceCommit": "3edef078d6ba5d1ff8e22e3d3e3af0ed5db4ce00",
+  "hostInputsSHA256": "81b9318c5fce77f56245de1c06df1dfb617cd8f49c2f67b1c1f5877f191d9533",
+  "hostSourceFiles": [
+    {
+      "path": "Sources/QualificationActiveLifecycle.swift",
+      "bytes": 19100,
+      "sha256": "a23a707b387390852d9e8a988bff5695646a9d1ff420eb7b55df66b7a5b2a42e"
+    },
+    {
+      "path": "Sources/QualificationApp.swift",
+      "bytes": 8135,
+      "sha256": "368699d02d37861d041d9743b6ced74cf52065320c89651e712560280d080d4e"
+    },
+    {
+      "path": "Sources/QualificationChecks.swift",
+      "bytes": 12043,
+      "sha256": "fe3ee97cca92b3e8e352b05dd4d023271bfe445cc8745d570b912a18b2b17172"
+    },
+    {
+      "path": "Sources/QualificationDeadline.swift",
+      "bytes": 12789,
+      "sha256": "d0b6480872f23815629a0aa374b1502ec91a5f26aa0ca898efc93863c09ab172"
+    },
+    {
+      "path": "Sources/QualificationLifecycle.swift",
+      "bytes": 9637,
+      "sha256": "54915985057314d4240afa6f5b8b80c2862c06861717a0951803225a783a8482"
+    },
+    {
+      "path": "Sources/QualificationStress.swift",
+      "bytes": 11163,
+      "sha256": "3a19418a84f9db7bc4e6d2346c4d0f8f47f873f688ed5e25e57b9c15c9346069"
+    },
+    {
+      "path": "Sources/worker-compile-workload.txt",
+      "bytes": 227505,
+      "sha256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"
+    }
+  ],
+  "signature": {
+    "strictDeepVerification": true,
+    "teamIdentifier": "WGR9T9JH4L",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.compilerqualification",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "executableSHA256": "029ff5ca5cbbe8628d9bcfdf07c981f8a12fcdb234951d8edb88db8ca10b20b8",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "buildVersion": "8",
+    "bothDevicesIncluded": true,
+    "backgroundModes": [],
+    "bundledWorkloadSHA256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"
+  },
+  "workload": {
+    "parentFixtureBytes": 227505,
+    "parentFixtureSHA256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f",
+    "bytes": 227646,
+    "sha256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb",
+    "seedCount": 4096,
+    "iterationsPerSeedPerRepetition": 1024,
+    "repetitionsPerSeed": 16,
+    "sourceCapBytes": 262144,
+    "purpose": "Repeat each constexpr mix with seed reset, preserving all expected constants and GPIO runtime source; never deployed"
+  },
+  "deadlinePolicy": {
+    "publicRuntimeSeconds": 60,
+    "injectedTimer": false,
+    "eligibilityPublicCallSeconds": [
+      60,
+      75
+    ],
+    "testObservationLimitSeconds": 180,
+    "foregroundRequired": true,
+    "iOSIdlePolicy": "Disable only during explicit test, restore prior app policy afterward; no background mode"
+  },
+  "macOSMaintenanceProbes": {
+    "scope": "Actual explicit-service ARM64 macOS 27.0 WebKit CLI; separate from signed app/physical qualification; no scene or aggregate memory claim",
+    "fullDeadline": {
+      "observations": {
+        "artifactReturned": false,
+        "freshBytes": 392,
+        "freshSeconds": 0.811321625020355,
+        "freshSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "freshWASMLinearMemoryBytes": 28049408,
+        "outcome": "timedOut",
+        "phases": [
+          {
+            "phase": "verifying",
+            "seconds": 0.0048245834186673164
+          },
+          {
+            "phase": "verifying",
+            "seconds": 0.8438820415176451
+          },
+          {
+            "phase": "preparing",
+            "seconds": 1.1057635000906885
+          },
+          {
+            "phase": "compiling",
+            "seconds": 1.1332952082157135
+          }
+        ],
+        "seconds": 60.948562333360314,
+        "sourceBytes": 227646,
+        "sourceSHA256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb"
+      },
+      "reportSHA256": "55628a12127b16637d6505284796ddd92a184517f521d41cd04f717fe167a96a",
+      "exportedCapsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "probeSourceSHA256": "0f0f3d3c829fe023de0689eb4653b09c5fa014cc48f83b1b93944c238574f18c"
+    },
+    "smallSubset": {
+      "assertionCount": 128,
+      "observations": {
+        "capsuleBytes": 316,
+        "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "phases": [
+          {
+            "phase": "verifying",
+            "seconds": 0.0005487496964633465
+          },
+          {
+            "phase": "verifying",
+            "seconds": 1.1439042915590107
+          },
+          {
+            "phase": "preparing",
+            "seconds": 1.394629791378975
+          },
+          {
+            "phase": "compiling",
+            "seconds": 1.42029424989596
+          },
+          {
+            "phase": "compiling",
+            "seconds": 6.863059499766678
+          },
+          {
+            "phase": "linking",
+            "seconds": 6.895474458113313
+          },
+          {
+            "phase": "packaging",
+            "seconds": 6.901692916639149
+          }
+        ],
+        "seconds": 6.930741916410625,
+        "sourceBytes": 7323,
+        "sourceSHA256": "df2f88cc4664b20005b432402619e10de6221223e0a6375256a0814a253453af",
+        "wasmLinearMemoryBytes": 27983872
+      },
+      "reportSHA256": "75d3116d337660bec69102fcb30ed30b92c795b37f7259b508beb00e2dc6a8bf",
+      "exportedCapsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "probeSourceSHA256": "006235911fd0d3f12946907de254786ef1ee42d701aca3e410cd17492a34910e"
+    }
+  },
+  "validation": {
+    "hostToolFixtures": 11,
+    "macOSHostSourceTypecheck": "passed, warnings as errors",
+    "iOSOptimizedHostObject": "passed, warnings as errors, no app linking/signing/assets",
+    "signedReleaseBuild": "passed, no Swift warnings; standard AppIntents no-framework metadata note",
+    "workflowYAMLAndRunStepShellSyntax": "passed",
+    "remoteCI": "not run; configured self-hosted runner remains unprovisioned",
+    "SDKRuntime": "Unchanged prepared SDK 4edc6aa; previous 154-function SDK and real-service results retained, no repeated full SDK run for host-only changes",
+    "eligibilityRegression": "Reject injected/short duration, stale context/PID, wrong workload/phase, foreground interruption, returned artifact, incomplete reports and early fresh admission",
+    "physicalReports": "Both schema-6 reports validated against independently launched PID/run/context and unchanged pinned compiler target; all four capsules independently size/hash checked; all twelve generated inputs and seven committed source/fixture inputs rehashed",
+    "originalModeRegressions": "Both updated build-8 apps pass all six original checks; four additional exported capsule files size/hash verified; reports/context verified independently"
+  },
+  "hosts": [
+    {
+      "model": "iPad Pro (11-inch) (3rd generation)",
+      "productType": "iPad13,4",
+      "osVersion": "27.0.1",
+      "osBuild": "24A446",
+      "transport": "localNetwork",
+      "productionDeadline": "passed",
+      "run": {
+        "status": "passed_production_deadline_checks",
+        "runID": "972165ED-35A0-4D72-A69B-C72CFF476159",
+        "hostProcessID": 7812,
+        "reportSHA256": "bc81706ed7f43ce22d899c6564ebf4aba36c27b8a373352429b3f83bbd363da5",
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+        },
+        "runtimeDeadlineSeconds": 60,
+        "deadlineElapsedSeconds": 60.20135945834045,
+        "deadlineStartedSeconds": 0.8277224999910686,
+        "deadlineSettledSeconds": 61.02908195833152,
+        "freshStartedSeconds": 61.030082374985795,
+        "outcome": "timedOut",
+        "artifactReturned": false,
+        "progress": [
+          {
+            "phase": "verifying",
+            "seconds": 0.8291431666584685
+          },
+          {
+            "phase": "verifying",
+            "seconds": 1.0446126666647615
+          },
+          {
+            "phase": "preparing",
+            "seconds": 1.2293229583301581
+          },
+          {
+            "phase": "compiling",
+            "seconds": 1.2485325833258685
+          }
+        ],
+        "events": [
+          {
+            "phase": "inactive",
+            "seconds": 0.012657083323574625,
+            "stage": "waiting-for-active"
+          },
+          {
+            "phase": "active",
+            "seconds": 0.048571083330898546,
+            "stage": "waiting-for-active"
+          }
+        ],
+        "steps": [
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "before-deadline-gpio",
+            "seconds": 0.7023698749981122,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "fresh-after-deadline-console",
+            "seconds": 0.6937255833327072,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "workloadSHA256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb",
+        "workloadBytes": 227646,
+        "scope": "Actual public 60-second runtime deadline and same-instance foreground recovery; no injected timer, OS suspension, aggregate memory or board claim",
+        "artifacts": [
+          {
+            "path": "before-deadline-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "fresh-after-deadline-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      },
+      "wirelessConnectionBeforeAndAfter": "connected/localNetwork",
+      "priorSnapshot": "Pending source-compilation snapshot preserved; terminal same-run export validates without relaunch",
+      "originalModeRegression": {
+        "status": "passed_original_six_checks",
+        "runID": "E330E5F7-2C7B-48E0-AB3E-32F4ACBC1ABF",
+        "reportSHA256": "6db58f9f50eabb1ef48173a328bc4eacbce51f08bc4b5c31157704e0bf9268fd",
+        "context": {
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+        },
+        "steps": [
+          {
+            "name": "resources",
+            "seconds": 0.06819175000418909
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "cold-gpio",
+            "seconds": 0.6457005833362928,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "warm-console",
+            "seconds": 0.676075250012218,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "name": "frontend-error",
+            "seconds": 0.4626413749938365
+          },
+          {
+            "name": "busy-cancellation",
+            "seconds": 0.3941940000077011
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "fresh-after-cancellation",
+            "seconds": 0.5928693333262345,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "artifacts": [
+          {
+            "path": "cold-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "warm-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      }
+    },
+    {
+      "model": "iPhone 15 Pro Max",
+      "productType": "iPhone16,2",
+      "osVersion": "27.0",
+      "osBuild": "24A437",
+      "transport": "localNetwork",
+      "productionDeadline": "passed",
+      "run": {
+        "status": "passed_production_deadline_checks",
+        "runID": "42E0641B-ABE6-472A-A0F1-A3815D75536E",
+        "hostProcessID": 10555,
+        "reportSHA256": "06bf82c25d631251a5cae9ec32d935dfe88aeca6b19d6518c7a311bb96b936c1",
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+        },
+        "runtimeDeadlineSeconds": 60,
+        "deadlineElapsedSeconds": 60.154769458342344,
+        "deadlineStartedSeconds": 1.036836666666204,
+        "deadlineSettledSeconds": 61.19160612500855,
+        "freshStartedSeconds": 61.192457625002135,
+        "outcome": "timedOut",
+        "artifactReturned": false,
+        "progress": [
+          {
+            "phase": "verifying",
+            "seconds": 1.0467106249998324
+          },
+          {
+            "phase": "verifying",
+            "seconds": 1.203946708352305
+          },
+          {
+            "phase": "preparing",
+            "seconds": 1.4022665000229608
+          },
+          {
+            "phase": "compiling",
+            "seconds": 1.4194083750189748
+          }
+        ],
+        "events": [
+          {
+            "phase": "inactive",
+            "seconds": 0.007848458335502073,
+            "stage": "waiting-for-active"
+          },
+          {
+            "phase": "active",
+            "seconds": 0.14269345832872204,
+            "stage": "waiting-for-active"
+          }
+        ],
+        "steps": [
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "before-deadline-gpio",
+            "seconds": 0.8035074583604,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "fresh-after-deadline-console",
+            "seconds": 0.6809477916685864,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "workloadSHA256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb",
+        "workloadBytes": 227646,
+        "scope": "Actual public 60-second runtime deadline and same-instance foreground recovery; no injected timer, OS suspension, aggregate memory or board claim",
+        "artifacts": [
+          {
+            "path": "before-deadline-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "fresh-after-deadline-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      },
+      "wirelessConnectionBeforeAndAfter": "connected/localNetwork",
+      "priorSnapshot": "Pending source-compilation snapshot preserved; terminal same-run export validates without relaunch",
+      "originalModeRegression": {
+        "status": "passed_original_six_checks",
+        "runID": "4063DBEF-CA13-4E16-BF0A-59247A0BD691",
+        "reportSHA256": "013fa3109cc6330dfdaeec1191c59529391c36d5f148bd5c6ae25e0167712298",
+        "context": {
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+        },
+        "steps": [
+          {
+            "name": "resources",
+            "seconds": 0.06272704165894538
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "cold-gpio",
+            "seconds": 0.6155481666792184,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "warm-console",
+            "seconds": 0.6175772083224729,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "name": "frontend-error",
+            "seconds": 0.4140439166803844
+          },
+          {
+            "name": "busy-cancellation",
+            "seconds": 0.3662953749881126
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "fresh-after-cancellation",
+            "seconds": 0.5407348333392292,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "artifacts": [
+          {
+            "path": "cold-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "warm-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Public SDK/default timers are unchanged; typed timeout and fresh build do not identify which native/portable deadline timer wins",
+    "Callbacks/phase ordinals identify observed first source-compilation interval, not an instruction pointer; no linking/entry-wrapper interruption claim",
+    "No real memory pressure, aggregate app/WebKit footprint, forced child termination, OS suspension or background computation claim",
+    "Minimum OS, other host combinations, UI/accessibility, Nano USB/Wi-Fi coexistence and device deployment remain unqualified",
+    "Raw device/profile data remain local under .build; public fields omit personal device identifiers",
+    "Compiler assets/recipes/catalogue and SDK implementation unchanged; no binary publication, firmware change or board contact"
+  ]
+}

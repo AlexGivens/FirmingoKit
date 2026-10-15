@@ -47,7 +47,7 @@ times are approximately 1.02/0.76 seconds. Both reproduce independent capsule
 vectors `958b861b…` and `b372c00e…`. Observed WASM linear bytes are 27,983,872;
 this is not total app/WebKit peak memory. [The machine-readable record](compiler-host-macos.json)
 contains the second run's exact times, code-directory hash, journal and provenance.
-The production 60-second SDK deadline remains; this app does not force its expiry.
+The production 60-second SDK deadline remains; the original six-check mode does not force its expiry.
 
 Restricted signature inspection initially reported unavailable trust/entitlements;
 normal Security access verifies the real certificate chain and entitlement data.
@@ -578,7 +578,8 @@ Independently verify `before-deadline-gpio.fms` (316 bytes) and
 Eleven tool/report fixtures exercise rejected injected durations, stale identity,
 wrong workload/phase, interrupted foreground, returned artifacts and early fresh
 admission. Source CI compiles this host without executing the long workload.
-Actual production-deadline/physical results remain pending explicit execution.
+Actual app execution and independent report/capsule collection remain separate
+from these source/report fixtures.
 
 An actual local ARM64 macOS 27.0 SDK/WebKit probe of the full derived source now
 returns `ManagedCompilerError.timedOut` after 60.949 seconds with no artifact and
@@ -587,10 +588,42 @@ the known 392-byte console capsule in 0.811 seconds, reporting 28,049,408 linear
 bytes. A 128-assertion subset completes in 6.931 seconds with the known GPIO
 capsule, checking the repeated constexpr computation without a shortened timer.
 These explicit-service CLI maintenance probes are separate from signed-app and
-physical-device qualification; the host mode still needs its own actual runs.
+physical-device qualification.
 
-Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
+Development-signed Release build 8 from host commit `3edef07…` now passes the
+actual deadline mode on both physical devices. The [deadline record](compiler-host-deadline.json)
+preserves exact committed/generated source, signature/profile, unchanged prepared
+SDK, workload, independent launch PID/context, bounded progress/scene events,
+report digests and independently checked exported capsules.
+
+| Host | Baseline GPIO | Public call to typed timeout | Fresh console after settlement |
+| --- | ---: | ---: | ---: |
+| iPad Pro, iPadOS 27.0.1 | 0.702 s | 60.201 s | 0.694 s |
+| iPhone 15 Pro Max, iOS 27.0 | 0.804 s | 60.155 s | 0.681 s |
+
+Both runs observe exactly one source-compiling notification, return no artifact
+and remain foreground after actual active admission. The SDK reports
+`ManagedCompilerError.timedOut` after its cleanup path; the same compiler instance
+then produces the known console bytes. The four exported capsules match the
+316-byte GPIO/392-byte console vectors and report 27,983,872 worker linear bytes.
+CoreDevice reports connected `localNetwork` before/after. Earlier pending snapshots
+remain preserved; completed snapshots validate the same run/process without
+relaunch. The native/portable deadlines are unchanged; these observations do not
+identify which deadline timer wins.
+Both updated build-8 apps also pass all six original checks in fresh launches,
+with four additional independently checked exported capsules and exact context.
+
+Eleven tool/report fixtures, warnings-as-errors macOS type-checking and optimized
+iOS host-object compilation, signed Release building and workflow YAML/shell
+syntax checks pass. The build has no Swift warnings, only the standard AppIntents
+no-framework note. All twelve generated inputs and seven committed source/fixture
+inputs match. SDK implementation/assets are unchanged; its full suite was not
+repeated for this host-only change, and remote CI remains unprovisioned/unrun.
+
+Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
+Signed macOS deadline execution and entry-wrapper/link-stage interruption also
+remain separate from these physical first-source deadline checks.
 Pico managed compilation is unavailable. Hardware follows host checks with an
 exact selected recoverable Nano resident and separately authorized SDK workflow.
 No binary publication or board operation occurred. The development qualification

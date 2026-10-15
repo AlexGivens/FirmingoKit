@@ -54,7 +54,7 @@ directories; `docs/compiler-host-ipad.json` records reports and independently
 validated capsule bytes. The identical signed app also passes two physical iPhone
 15 Pro Max launches on iOS 27.0; `docs/compiler-host-iphone.json` records its exact
 reports and validated exported capsules. Minimum OS, other model/OS combinations,
-total memory, forced deadline/termination and device deployment remain unqualified.
+total memory, forced child termination and device deployment remain unqualified.
 Both USB-disconnected devices also pass wireless reinstall/launch/test/report
 collection using the identical signed app, with CoreDevice `localNetwork` before
 and after. See `docs/compiler-host-wireless.json`; ordinary device-ID CLI commands
@@ -107,7 +107,14 @@ source-compiling progress without a returned artifact, and builds fresh through
 the same compiler. Real scene inactivity invalidates this foreground-only test;
 iOS idle prevention applies only during this mode and restores the prior policy.
 Source CI runs eleven report/tool fixtures and both Apple host-source checks.
-Actual deadline expiry and physical recovery remain pending separate execution.
+Signed build 8 now passes actual deadline expiry on both physical devices:
+60.201/60.155 seconds from public admission to typed timeout, no returned artifact,
+first-source-compiling progress and known fresh console bytes in 0.694/0.681
+seconds through the same compiler instance. Both remain foreground and connected
+over `localNetwork`; `docs/compiler-host-deadline.json` records exact provenance,
+scene events, reports and exported capsule bytes. This changes no SDK timer,
+compiler input, board claim or background policy. Both updated apps also retain
+the original six-check pass with known exported capsules.
 
 Snapshot verified on 2026-09-30:
 
