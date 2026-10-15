@@ -23,11 +23,13 @@ if (args.length === 1 && args[0] === "--help") {
   if (args.length > 1 || args[0] === "" || args[0]?.startsWith("-")) throw new Error("Select at most one explicit local service; use --help");
   run("python3", ["Tools/verify-fixtures.py"]);
   run(process.execPath, ["--test", "Tools/ManagedWASM/test-consumer-package.mjs"]);
+  run("python3", ["-I", "-S", "-B", "Tools/ManagedWASM/test-compiler-host.py"]);
   run("python3", ["Tools/ManagedWASM/update-resource-inventory.py", "--check"]);
   const env = { ...process.env };
   delete env.FIRMINGOKIT_WASM_MODULE;
   if (args[0]) env.FIRMINGOKIT_WASM_MODULE = resolve(args[0]);
   run("swift", ["test"], env);
+  run("python3", ["-I", "-S", "-B", "Tools/ManagedWASM/check-compiler-host.py"]);
   console.log(JSON.stringify({ status: "sdk_adapter_checks_completed", actualRuntimeRequested: Boolean(args[0]),
     qualification: "local SDK tests only; absent-service runtime cases skip; no hardware qualification" }));
 }

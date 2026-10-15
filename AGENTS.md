@@ -41,6 +41,14 @@ committed or auto-downloaded. Source-checkout compilation still reports absent
 availability does not attest installed firmware or qualify hardware. See
 `docs/compiler-package-provisioning.md` for the maintenance/consumer workflow.
 
+`Validation/CompilerHost` and explicit generator/runner tools now exercise the
+prepared SDK in a development-signed ARM64 macOS 27.0 Release app, sandbox and
+hardened runtime verified. Six actual checks pass. Source CI runs six tiny tool
+fixtures and warnings-as-errors type-checking without app execution or binaries.
+The app exports its own journal; do not request private-container/FDA or visual
+inspection to collect it. See `docs/compiler-host-qualification.md`. Physical
+iPad/iPhone, minimum OS, total memory and device deployment remain unqualified.
+
 Snapshot verified on 2026-09-30:
 
 Ownership update on 2026-10-12: the snapshot below describes the existing implementation, not its future owner. The portable preparation/ELF/capsule and actual isolated Node/WASI path now exists in Firmingo-Compiler, with event/receipt contracts, an explicit-service CLI and local compile/link/disposal evidence. The default standard module-worker path now also passes nine headless Chrome 154.0.8037.93/macOS arm64/HTTP-loopback checks. The pinned source-only compiler package now passes nine actual macOS WebKit cases and a separate SwiftPM consumer; see `docs/compiler-adapter.md`. Signed/minimum-OS and physical iOS/iPadOS execution, other browsers and hardware remain unqualified. FirmingoKit retains its working APIs/resources until the migration gates pass; compiler-owned code/tests/assets move to Firmingo-Compiler, while Swift hosting and device safeguards stay here.

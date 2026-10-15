@@ -236,6 +236,13 @@ Artifact validation and upload can start with independently built, validated exe
 
 ## 10. Qualify real hosts, boards, and failure recovery
 
+Local host increment: a development-signed ARM64 macOS 27.0 Release app passes
+six actual compiler checks with verified app sandbox/hardened runtime. Generator,
+runner, measured journal and iPad handoff are in [host qualification](docs/compiler-host-qualification.md).
+Source CI covers tool fixtures/type-checking; complete app CI awaits prepared assets
+and signing/runner provisioning. Physical hosts, minimum OS and board gates below
+remain open. No board is needed for the next compiler-only iPad run.
+
 - [ ] Maintain opt-in hardware procedures and evidence separate from deterministic tests; execute device-changing tests only within an authorized hardware workflow.
 - [ ] Record board model/revision, firmware artifact hash/profile, resident metadata, SDK revision, compiler/recipe/assets, host OS/toolchain, procedure, observations, and unresolved limitations for each run.
 - [ ] For every claimed board/platform installation pair, use an actual SDK host to install supported Firmingo on a board not running Firmingo, reconnect, and exchange exact bytes.

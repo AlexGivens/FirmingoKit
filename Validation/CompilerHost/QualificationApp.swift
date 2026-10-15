@@ -1,0 +1,67 @@
+import SwiftUI
+import Foundation
+
+/// Small native platform host for explicit compiler checks; it contains no board, installation or upload workflow.
+@main @MainActor struct CompilerQualificationApp: App {
+    /// Window-owned test state; no saved selection or device capability is restored.
+    @StateObject private var model = QualificationModel()
+
+    /// Uses native controls on macOS/iPad/iPhone with a shareable results journal.
+    var body: some Scene {
+        WindowGroup {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("Firmingo compiler checks").font(.title)
+                Text("Compile bundled test sketches and check diagnostics, cancellation and recovery. No board is needed.")
+                Text(model.status).accessibilityLabel("Compiler check status: " + model.status)
+                Button("Run compiler checks") { model.start() }.disabled(model.running)
+                if let report = model.report { ShareLink("Share results", item: report) }
+            }
+            .padding().frame(minWidth: 280, minHeight: 220)
+            .task { model.startIfRequested() }
+        }
+    }
+}
+
+/// Main-actor presentation state for one finite check sequence; repeated starts cannot overlap.
+@MainActor final class QualificationModel: ObservableObject {
+    /// Bounded human-readable current phase or terminal outcome.
+    @Published var status = "Ready"
+    /// Disable duplicate commands while SDK work is active.
+    @Published var running = false
+    /// Last complete/failed journal available for explicit export.
+    @Published var report: URL?
+    /// Consume launch automation only once per host process.
+    private var launchConsumed = false
+
+    /// Allows a source-driven launcher to request one exact UUID without inspecting native UI.
+    func startIfRequested() {
+        guard !launchConsumed else { return }; launchConsumed = true
+        let arguments = ProcessInfo.processInfo.arguments
+        if let index = arguments.firstIndex(of: "--qualification-run"), index + 1 < arguments.count,
+           let id = UUID(uuidString: arguments[index + 1]) { start(id: id) }
+    }
+
+    /// Runs the public SDK asynchronously; results stay in this app's own Documents container.
+    func start(id: UUID = UUID()) {
+        guard !running else { return }; running = true; report = nil
+        Task { @MainActor in
+            do {
+                report = try await QualificationChecks.run(id: id) { status = $0 }
+            } catch { status = "Could not record compiler checks: " + String(error.localizedDescription.prefix(2048)) }
+            running = false
+            #if os(macOS)
+            if ProcessInfo.processInfo.arguments.contains("--qualification-quit") {
+                // Export our own test journal through the launcher's inherited pipe. macOS protects
+                // app containers from external readers; no extra container/FDA access is needed.
+                do {
+                    if let report {
+                        let data = try Data(contentsOf: report)
+                        try FileHandle.standardOutput.write(contentsOf: Data(("FIRMINGO_COMPILER_REPORT:" + data.base64EncodedString() + "\n").utf8))
+                    }
+                } catch { status = "Could not export compiler results: " + error.localizedDescription }
+                NSApplication.shared.terminate(nil)
+            }
+            #endif
+        }
+    }
+}

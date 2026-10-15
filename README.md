@@ -8,6 +8,10 @@ hardware-qualified release.
 the reviewed compiler to one exact experimental Nano catalogue entry. Prepared
 packages support default API use; Git source retains explicit missing-binary behavior.
 
+The [compiler qualification host](docs/compiler-host-qualification.md) passes
+actual development-signed macOS sandbox checks with prepared resources. Physical
+iPad/iPhone and board deployment remain separate qualification work.
+
 The agreed repository split assigns preprocessing, WASM execution, board recipes,
 ELF/capsule packaging, compiler diagnostics, and static build metadata to
 **Firmingo-Compiler**. FirmingoKit owns the Swift compiler facade/web host, device

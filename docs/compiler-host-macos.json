@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "scope": "Development-signed macOS ARM64 Release app; exact prepared SDK; no physical Apple device or board operation",
+  "host": {
+    "os": "macOS 27.0 (26A428)",
+    "architecture": "arm64",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4",
+    "minimumOSRuntimeTested": false
+  },
+  "signature": {
+    "kind": "Apple Development",
+    "teamIdentifier": "WGR9T9JH4L",
+    "codeDirectoryHash": "6af3be550690ff74d6b1f3e68cbefd4436c9491f",
+    "strictDeepVerification": true,
+    "hardenedRuntime": true,
+    "entitlements": {
+      "com.apple.security.app-sandbox": true,
+      "com.apple.security.network.client": true
+    }
+  },
+  "hostInputsSHA256": "c2b936071a666dd874bff566f7b144fae731affc897c833e5ead633f7fece2a8",
+  "reportSHA256": "18e40d48c6d0d6b7bce8de70e8ad2f428b156c7d87c05df0ae08bb0d5457db98",
+  "report": {
+    "context": {
+      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+      "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+      "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+    },
+    "deadlineScope": "60-second production deadline retained; deadline expiry not forced by this host",
+    "deviceOperations": false,
+    "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+    "memoryScope": "WASM linear bytes after build; no total app/WebKit peak claim",
+    "operatingSystem": "Version 27.0 (Build 26A428)",
+    "runID": "99CA19FE-AA71-4059-A259-CBF789D5F31A",
+    "schema": 1,
+    "stage": "complete",
+    "status": "passed",
+    "steps": [
+      {
+        "name": "resources",
+        "seconds": 0.12378695816732943
+      },
+      {
+        "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "name": "cold-gpio",
+        "seconds": 0.8305942916776985,
+        "wasmLinearMemoryBytes": 27983872
+      },
+      {
+        "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "name": "warm-console",
+        "seconds": 0.7366779167205095,
+        "wasmLinearMemoryBytes": 27983872
+      },
+      {
+        "name": "frontend-error",
+        "seconds": 0.5122782501857728
+      },
+      {
+        "name": "busy-cancellation",
+        "seconds": 0.44662387506105006
+      },
+      {
+        "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "name": "fresh-after-cancellation",
+        "seconds": 0.6552697918377817,
+        "wasmLinearMemoryBytes": 27983872
+      }
+    ]
+  },
+  "checks": {
+    "SDKReportedTestFunctions": 152,
+    "SDKUnavailableServiceSkips": 9,
+    "hostMaintenanceFixtures": 6,
+    "sourceHostTypecheck": "passed with warnings as errors",
+    "iOSDeviceTargetBuild": "passed, signing disabled",
+    "physicalIPad": "not run; connection facilitation requested",
+    "compilerCIProvisioning": "unchanged; actual-compiler CI remains unavailable without published/provisioned bytes"
+  },
+  "limitations": [
+    "Worker linear bytes are not total app/WebKit process peaks",
+    "Production 60-second deadline retained; expiry not forced",
+    "UI/accessibility not inspected",
+    "No installed-image attestation, Nano deployment or Pico managed support"
+  ]
+}
