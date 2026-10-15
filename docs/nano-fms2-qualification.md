@@ -47,7 +47,9 @@ console output. The exact capsule pins are:
 Both contain four initialized data bytes and 20 BSS bytes. Each state check
 requires the selected variant, separate nonces 49/115, initial value 7/23,
 initial BSS zero, consistent advancing counters and two exact 24-byte replies.
-There is no loop-rate or electrical GPIO measurement claim.
+The hardware snapshots observe the initialized counter and the startup BSS loop
+counter; the native validator separately checks the full arena. There is no
+exhaustive hardware RAM scan, loop-rate or electrical GPIO measurement claim.
 
 ## Selected-board procedure
 
@@ -108,3 +110,16 @@ changes the boot identity and again yields State A's initial values plus
 advancing state. D2 was removed after completion. This is a scoped pass for the
 recorded experimental Nano/iPad combination; it supplies none of the separate
 production or broader host gates above.
+
+The identical signed app also passes the same sequence on iPhone 15 Pro Max,
+iOS 27.0 (24A437). Its [separate physical record](nano-fms2-iphone.json) pins the
+31-event journal, both actual capsules/build reports and transaction records.
+Both uploads share one boot; State B/State A report initial data 23/7, zero
+startup BSS and advancing counters, with two exact echoes and manual D13 on/off
+observations. A later manual RESET changes boot identity and passes State A's
+state check again. D2 is removed. Own-report retrieval still uses paired Wi-Fi.
+The first inspection succeeds in 1.963 seconds with an inactive-overlay event;
+the prompt cause/approval time is not independently established. One premature
+local file-read validation before report copying completed is rejected; the
+completed copy passes validation. It is not a compiler/hardware failure. No
+installation replay, SDK change or compiler-asset change is needed.

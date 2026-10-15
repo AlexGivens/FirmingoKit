@@ -45,7 +45,8 @@ Mark implementation tasks complete only with relevant checks and evidence. Recor
 - [x] Refresh the pinned source/consumer package and verify actual SDK execution, Apple builds and documentation.
 - [x] Add a separate anchored NanoStateful host, two real-WASM state/echo sketches, independent observation checks and signed macOS offline execution; install its signed app on iPad over Wi-Fi. See [qualification procedure](docs/nano-fms2-qualification.md).
 - [x] Qualify both physical iPad target-2 uploads in the same boot, initialized data/zero BSS/advancing counters, two exact binary echoes and state initialization after manual RESET. [Exact scoped record](docs/nano-fms2-ipad.json); production and other host gates remain separate.
-- [ ] Qualify the new exact package on signed macOS/physical iPad/iPhone and a selected FMS2 resident before default-catalogue promotion or production claims.
+- [x] Repeat the two-sketch same-boot upload/state/echo and manual-reboot checks on iPhone using the identical signed app. [Exact scoped record](docs/nano-fms2-iphone.json); the upload arm is removed after both device runs.
+- [ ] Complete remaining FMS2 production-package/catalogue, minimum-OS, interruption/recovery and broader host/device gates before promotion. Scoped macOS offline and iPad/iPhone results do not close these gates.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 

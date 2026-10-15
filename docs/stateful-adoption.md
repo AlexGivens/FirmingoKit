@@ -1,9 +1,11 @@
 # Experimental FMS2 compiler and upload adoption
 
 FirmingoKit now accepts explicit `nano-managed-v2`/ABI-two selections alongside
-the unchanged ABI-one contract. This increment has local SDK/WebKit execution and
-fake-peer deployment evidence. **FMS2 hardware execution remains unqualified.**
-No board was contacted, reset or programmed during this work.
+the unchanged ABI-one contract. The adoption increment below recorded local
+SDK/WebKit execution and fake-peer deployment evidence without contacting a
+board. Subsequent [exact-candidate qualification](nano-fms2-qualification.md)
+now records signed macOS offline builds and physical Nano/iPad/iPhone
+upload/state/echo/manual-reset passes; production gates remain separate.
 
 ## Pinned inputs
 
@@ -97,8 +99,9 @@ as success. `installed`, `boot_confirmed` and useful behavior remain distinct.
   macOS `docbuild` passed. These are build/documentation checks, not device runs.
 
 The manual self-hosted workflow now names both profiles and uses the same suite.
-No remote SDK CI success is claimed without a provisioned runner/run. Next gates
-are signed normal-package execution, physical iPad/iPhone qualification, and a
-separately selected recoverable Nano running this exact new resident for stateful
-replacement/reboot, binary console/GPIO, interruption and recovery checks. The
-previously qualified ABI-one Nano must not be silently replaced.
+No remote SDK CI success is claimed without a provisioned runner/run. The later
+NanoStateful qualification explicitly replaces the selected recoverable Nano's
+resident with user authorization and full ROM readback, then records both
+physical hosts separately. Default catalogue/production delivery, minimum OS,
+broader host coverage, interruption and recovery remain open. Historical ABI-one
+results retain their original scope.

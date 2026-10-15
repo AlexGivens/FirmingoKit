@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "scoped physical iPhone FMS2 two-sketch upload/state/echo and manual-reboot checks passed",
+  "productionQualified": false,
+  "hostSourceCommit": "84acce66b2f2b2dc1f9aeeeab148b24109dde328",
+  "preparedSDKCommit": "e0bed3602b515c71f171971ab7f8a8f5ae3bea1f",
+  "context": {
+    "catalogueSHA256": "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "exportManifestSHA256": "90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65",
+    "preparedManifestSHA256": "f615b1a7b7279d197b4212cf1dd26ebeae5a7279d227b11710b55aadf4ccd361",
+    "sdkCommit": "e0bed3602b515c71f171971ab7f8a8f5ae3bea1f",
+    "testPlanSHA256": "2611f2f9c03954f2aa882c1a5f78a96286bf52f4a0a1381dfc49abdd145f1199"
+  },
+  "preparationEvidence": "nano-fms2-preparation.json",
+  "procedure": "nano-fms2-qualification.md",
+  "iosApp": {
+    "bundleIdentifier": "com.firmingokit.nanostateful",
+    "displayName": "NanoStateful",
+    "build": "1",
+    "executableSHA256": "559f87f5f0d87be4e45afdfd8204c8c78ab4bed1a4e2d71a9a5d87cfe04b81d3",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.nanostateful",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "strictDeepSignatureVerified": true,
+    "firmwareResources": 0,
+    "installedOverPairedLocalNetwork": true
+  },
+  "runID": "45CCFF62-FE3C-4F60-BCFA-63D55B2B0458",
+  "finalReportSHA256": "5f7e5c106dbf73f9b0904785d00769cef9485ab7b55bb93762f9abb27dc64d81",
+  "eventCount": 31,
+  "captures": [
+    {
+      "phase": "inspection",
+      "events": 8,
+      "reportSHA256": "5a7a29ce28f811bc8752e2788845a4521af1e09100b86976b955550d6dedd78e"
+    },
+    {
+      "phase": "state-b-startup",
+      "events": 15,
+      "reportSHA256": "bb39dde3d1a2146e97cef6c539b77126537eb1c171e49d1846f97099b8680363"
+    },
+    {
+      "phase": "state-b-complete",
+      "events": 21,
+      "reportSHA256": "508d6c42599e39f1da026e622b19ee0cd7d57f19f86543110b832d7c44ce281a"
+    },
+    {
+      "phase": "state-a-startup",
+      "events": 29,
+      "reportSHA256": "53e11a077322a4e8f3fbc41af08fd16efad3f6b7299b028f943a0dfbbe26f6ef"
+    },
+    {
+      "phase": "state-a-observation",
+      "events": 31,
+      "reportSHA256": "5f7e5c106dbf73f9b0904785d00769cef9485ab7b55bb93762f9abb27dc64d81"
+    },
+    {
+      "phase": "final",
+      "events": 31,
+      "reportSHA256": "5f7e5c106dbf73f9b0904785d00769cef9485ab7b55bb93762f9abb27dc64d81"
+    }
+  ],
+  "capsules": [
+    {
+      "name": "state-a",
+      "bytes": 544,
+      "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+      "buildReportSHA256": "07bc08e82f9b7cc7b1cf1a501640a2c69c7420bb81c6534279b51d6cdca20431",
+      "productionNativeValidatorPassed": true
+    },
+    {
+      "name": "state-b",
+      "bytes": 548,
+      "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+      "buildReportSHA256": "70059631076dd3beaddc5d7fdf3acdb300526cec21436488ec9e909d5b6727bb",
+      "productionNativeValidatorPassed": true
+    }
+  ],
+  "transactions": [
+    {
+      "sketch": "state-b",
+      "recordSHA256": "a8afc6b1ab116df4f95fe67bdfbf0a7dc84b24496532f20c12cd042b023ebf99",
+      "uploadID": 1,
+      "targetID": 2,
+      "capsuleSHA256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+      "bytes": 548,
+      "hostCommitAttempts": 1,
+      "commitReply": "committing",
+      "freshStatus": "boot_confirmed",
+      "error": "none",
+      "slotTouched": true
+    },
+    {
+      "sketch": "state-a",
+      "recordSHA256": "a62bc7d928a89aa2a69977379de1174d081f883fec7d0b143d64135bff8d8900",
+      "uploadID": 2,
+      "targetID": 2,
+      "capsuleSHA256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+      "bytes": 544,
+      "hostCommitAttempts": 1,
+      "commitReply": "committing",
+      "freshStatus": "boot_confirmed",
+      "error": "none",
+      "slotTouched": true
+    }
+  ],
+  "stateObservations": [
+    {
+      "sketch": "state-b",
+      "afterManualReset": false,
+      "bootMatchedTransaction": true,
+      "bootChangedFromTransaction": false,
+      "samples": [
+        {
+          "bytesBase64": "RlEyQjEAAAAXAAAAAAAAABjaAAAB2gAA",
+          "nonce": 49,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 55832,
+          "loops": 55809
+        },
+        {
+          "bytesBase64": "RlEyQnMAAAAXAAAAAAAAAFTaAAA92gAA",
+          "nonce": 115,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 55892,
+          "loops": 55869
+        }
+      ],
+      "forwardLoopDelta": 60
+    },
+    {
+      "sketch": "state-a",
+      "afterManualReset": false,
+      "bootMatchedTransaction": true,
+      "bootChangedFromTransaction": false,
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAABpzAAATcwAA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 29466,
+          "loops": 29459
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAFVzAABOcwAA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 29525,
+          "loops": 29518
+        }
+      ],
+      "forwardLoopDelta": 59
+    },
+    {
+      "sketch": "state-a",
+      "afterManualReset": true,
+      "bootMatchedTransaction": false,
+      "bootChangedFromTransaction": true,
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAAPIrAADrKwAA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 11250,
+          "loops": 11243
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAADwsAAA1LAAA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 11324,
+          "loops": 11317
+        }
+      ],
+      "forwardLoopDelta": 74
+    }
+  ],
+  "sameBootForBothUploads": true,
+  "selectedPhysicalIdentityMatched": true,
+  "rawDeviceAndBootIdentitiesPublished": false,
+  "exactBinaryEcho": {
+    "passes": 2,
+    "bytesPerPass": 256,
+    "includesAllByteValues": true,
+    "throughputOrSoakClaim": false
+  },
+  "manualGPIO": {
+    "initialStateA": "D13 off",
+    "afterStateB": "D13 on",
+    "afterStateA": "D13 off",
+    "afterManualReset": "D13 off",
+    "electricalMeasurement": false
+  },
+  "notes": [
+    "Both target-2 uploads were in the same boot; manual RESET was a later separate action.",
+    "Initial inspection succeeded in 1.963253708 seconds with one inactive-overlay event; prompt cause/approval timing was not independently measured.",
+    "One pre-validation read was started before own-report copying finished and rejected; validation passed after completed copying. This was not a compiler or hardware failure.",
+    "Raw identities remain in local journals; immutable captures are checked as prefixes of the final journal."
+  ],
+  "uploadArmRemoved": true,
+  "armRemovalNote": "User confirmed D2-to-GND removed and REC disconnected after completion; Nano remains on iPhone for final own-report retrieval.",
+  "limits": [
+    "exact experimental package/resident/board and recorded iPhone only",
+    "no default catalogue promotion or general Arduino support",
+    "no minimum-OS claim",
+    "no complete SDK initial-installation backend qualification",
+    "no cold-attachment/Internet/aggregate WebKit memory/power-loss/rollback qualification",
+    "no visual or accessibility inspection"
+  ],
+  "stateObservationScope": "Hardware replies observe the initialized data counter and startup BSS loop counter plus their later progress; full-arena initialization is separately native-tested, not exhaustively scanned on hardware.",
+  "iPhone": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "operatingSystem": "Version 27.0 (Build 24A437)",
+    "pairedTransport": "localNetwork",
+    "wirelessInstallLaunchAndOwnReportRetrievalPassed": true
+  }
+}

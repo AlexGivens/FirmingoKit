@@ -228,5 +228,6 @@
     "no complete SDK initial-installation backend qualification",
     "no cold-attachment/Internet/aggregate WebKit memory/power-loss/rollback qualification",
     "no visual or accessibility inspection"
-  ]
+  ],
+  "stateObservationScope": "Hardware replies observe the initialized data counter and startup BSS loop counter plus their later progress; full-arena initialization is separately native-tested, not exhaustively scanned on hardware."
 }
