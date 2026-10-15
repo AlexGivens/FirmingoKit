@@ -369,8 +369,21 @@ The [lifecycle record](compiler-host-lifecycle.json) pins host source `7b1cb39â€
 the unchanged prepared SDK, generated inputs and development-signed Release build
 4. Both device installations succeeded over Wi-Fi. The updated iPhone app passes
 the original six-check mode and both exported capsule files match the known
-vectors. The iPad idle run reached `waiting-for-background`; the physical manual
-transition is pending and is not reported as a pass. Eight tool fixtures,
+vectors. Both physical manual idle transitions now pass:
+
+| Host | Background-to-active observations | Before GPIO build | After console build |
+| --- | ---: | ---: | ---: |
+| iPad Pro (11-inch, 3rd generation), iPadOS 27.0.1 | 10.235 s | 0.722 s | 0.727 s |
+| iPhone 15 Pro Max, iOS 27.0 | 20.166 s | 0.597 s | 0.710 s |
+
+Each report matches its independently saved launch PID, UUID and prepared context.
+All four exported files match the known 316-byte GPIO/392-byte console vectors;
+worker linear memory remains 27,983,872 bytes. CoreDevice reports connected
+`localNetwork` before and after both runs. The first post-return iPhone copy caught the final
+build still running and was correctly rejected; its completed snapshot passes
+without relaunching or changing the process. Both snapshots remain local and
+their hashes/status are recorded. No OS suspension or background execution is
+inferred from scene timestamps. Eight tool fixtures,
 macOS/optimized iOS source checks, the Release app build, workflow YAML and shell
 syntax checks pass. No remote CI run or additional full SDK test run is claimed
 for this host-only change.

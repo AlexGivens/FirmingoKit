@@ -71,14 +71,16 @@ reduce the highest observed host samples to 214 MiB on iPad and 209 MiB on iPhon
 all 80 builds and both original six-check regressions pass with unchanged capsules.
 See `docs/compiler-resource-memory.json`. These are host samples, not aggregate
 app/WebKit memory or a leak-free/budget claim. App-scoped `xctrace` attachment failed;
-aggregate memory and real pressure/lifecycle qualification remain open.
+aggregate memory and real pressure/active-build lifecycle qualification remain open.
 The original six-check mode remains. An opt-in `--qualification-idle-lifecycle`
 host mode now records actual SwiftUI scene phases, builds known capsules before
 and after an idle background/return transition and requires the same PID/context.
-The signed build-4 iPad run is awaiting the manual transition; the identical
-iPhone app retains the original six-check pass. See `docs/compiler-host-lifecycle.json`.
-Physical transition qualification is pending; it adds no SDK lifecycle policy
-or background execution grant. Source CI now runs eight tool fixtures,
+The signed build-4 app now passes a manual idle transition on each physical device:
+10.2 seconds between background/active observations on iPad and 20.2 on iPhone,
+same PID/context and known exported capsules before/after. The identical iPhone
+app retains the original six-check pass. See `docs/compiler-host-lifecycle.json`.
+This adds no SDK lifecycle policy/background grant or suspension/active-build
+interruption/pressure claim. Source CI now runs eight tool fixtures,
 macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.
 

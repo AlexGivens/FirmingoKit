@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-14",
-  "status": "awaiting_manual_idle_transition",
+  "status": "passed_idle_transitions_on_recorded_devices",
   "scope": "Development-signed Release build 4, opt-in idle scene transition only; no SDK implementation change or board operation",
   "hostSourceCommit": "7b1cb399aa54ef46d0b7d0ccca786c7de4d5d872",
   "context": {
@@ -69,10 +69,89 @@
   },
   "hosts": [
     {
+      "model": "iPad Pro (11-inch) (3rd generation)",
+      "productType": "iPad13,4",
+      "osVersion": "27.0.1",
+      "osBuild": "24A446",
+      "transport": "localNetwork",
+      "idleTransition": "passed",
+      "run": {
+        "status": "passed_idle_background_return_checks",
+        "runID": "99813873-F1E5-4621-88DC-1C969DFEA197",
+        "hostProcessID": 7744,
+        "reportSHA256": "baffdfe7638f16451beafcf98df020a76a86bbc2b40a492262ffd0c468f3c3d2",
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+        },
+        "backgroundToActiveSeconds": 10.234631791667198,
+        "events": [
+          {
+            "phase": "inactive",
+            "seconds": 0.002261499990709126,
+            "stage": "waiting-for-active"
+          },
+          {
+            "phase": "active",
+            "seconds": 0.013978916656924412,
+            "stage": "waiting-for-active"
+          },
+          {
+            "phase": "inactive",
+            "seconds": 231.749364708332,
+            "stage": "waiting-for-background"
+          },
+          {
+            "phase": "background",
+            "seconds": 232.60506487499515,
+            "stage": "waiting-for-background"
+          },
+          {
+            "phase": "inactive",
+            "seconds": 242.6243865416618,
+            "stage": "waiting-for-background"
+          },
+          {
+            "phase": "active",
+            "seconds": 242.83969666666235,
+            "stage": "waiting-for-background"
+          }
+        ],
+        "steps": [
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "before-background-gpio",
+            "seconds": 0.7220647083304357,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "after-foreground-console",
+            "seconds": 0.7272844999970403,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "scope": "Idle scene transition in one process; no suspension, active-build interruption or memory-pressure claim",
+        "artifacts": [
+          {
+            "path": "before-background-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "after-foreground-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      }
+    },
+    {
       "model": "iPhone 15 Pro Max",
       "productType": "iPhone16,2",
       "transport": "localNetwork",
-      "idleTransition": "not_run",
+      "idleTransition": "passed",
       "originalModeRegression": {
         "status": "passed_original_six_checks",
         "runID": "AD37DC7D-125E-48BC-AE28-D56E3710E6B2",
@@ -127,54 +206,85 @@
           }
         ]
       },
-      "osVersion": {
-        "components": [
-          27,
-          0,
-          0,
-          0,
-          0
-        ],
-        "originalComponentsCount": 2,
-        "stringValue": "27.0"
-      },
-      "osBuildVersions": {
-        "buildVersion": {
-          "majorLetterComponent": "A",
-          "majorNumberComponent": 24,
-          "name": "24A437",
-          "revisionVersion": {
-            "components": [
-              24,
-              1,
-              437,
-              0,
-              0
-            ],
-            "originalComponentsCount": 5,
-            "stringValue": "24.1.437.0.0"
-          },
-          "trainProgram": "iOS",
-          "updateNumberComponent": 437
+      "osVersion": "27.0",
+      "osBuild": "24A437",
+      "run": {
+        "status": "passed_idle_background_return_checks",
+        "runID": "EFF5FAE4-DCE1-4B66-8A1C-19CC44079E24",
+        "hostProcessID": 10435,
+        "reportSHA256": "14947e232dec346641a41d32764f2d1d06740a1dadbc6406902e276988689a73",
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
         },
-        "supplementalBuildVersion": {
-          "majorLetterComponent": "A",
-          "majorNumberComponent": 24,
-          "name": "24A437",
-          "revisionVersion": {
-            "components": [
-              24,
-              1,
-              437,
-              0,
-              0
-            ],
-            "originalComponentsCount": 5,
-            "stringValue": "24.1.437.0.0"
+        "backgroundToActiveSeconds": 20.16626162501052,
+        "events": [
+          {
+            "phase": "inactive",
+            "seconds": 0.0013163333351258188,
+            "stage": "waiting-for-active"
           },
-          "trainProgram": "iOS",
-          "updateNumberComponent": 437
-        }
+          {
+            "phase": "active",
+            "seconds": 0.4100557083147578,
+            "stage": "waiting-for-active"
+          },
+          {
+            "phase": "inactive",
+            "seconds": 15.874723374989117,
+            "stage": "waiting-for-background"
+          },
+          {
+            "phase": "background",
+            "seconds": 16.57310520831379,
+            "stage": "waiting-for-background"
+          },
+          {
+            "phase": "inactive",
+            "seconds": 36.51110062497901,
+            "stage": "waiting-for-background"
+          },
+          {
+            "phase": "active",
+            "seconds": 36.73936683332431,
+            "stage": "waiting-for-background"
+          }
+        ],
+        "steps": [
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "before-background-gpio",
+            "seconds": 0.5966708333289716,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "after-foreground-console",
+            "seconds": 0.7097526666766498,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "scope": "Idle scene transition in one process; no suspension, active-build interruption or memory-pressure claim",
+        "artifacts": [
+          {
+            "path": "before-background-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "after-foreground-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      },
+      "incompleteSnapshot": {
+        "status": "running",
+        "stage": "after-foreground-console",
+        "reportSHA256": "286d6040e773f6533be98301da7d2daae301036e537742197dcf5d1742ba05b9",
+        "checkerRejected": true,
+        "completedWithSameLaunchAndProcess": true
       }
     }
   ],
@@ -186,12 +296,5 @@
     "Raw device/signing/journal data remain local under .build; public fields omit personal identifiers",
     "No compiler binary/recipe/catalogue change, publication or board contact"
   ],
-  "pendingPhysicalRuns": [
-    {
-      "model": "iPad Pro (11-inch) (3rd generation)",
-      "runID": "99813873-F1E5-4621-88DC-1C969DFEA197",
-      "stateAtInspection": "waiting-for-background",
-      "result": "pending; no transition pass claimed"
-    }
-  ]
+  "pendingPhysicalRuns": []
 }
