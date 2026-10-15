@@ -119,7 +119,13 @@ The macOS runner now has an explicit deadline mode with independently recorded
 launch PID/context and two bounded run-bound capsule exports through stdout.
 Only fixed known test filenames/bytes are accepted; no private-container or UI
 inspection permission is used. Twelve tool fixtures and Apple source checks
-cover the runner/export path. Signed macOS deadline execution remains pending.
+cover the runner/export path. Signed ARM64 Release build 9 from `33bd1c4…` now
+passes on macOS 27.0: actual typed timeout at 60.344 seconds with no artifact,
+first-source progress, real foreground observation, matching independent launch
+PID/context and a same-instance known console build in 1.018 seconds. Both
+bounded stdout capsule exports match the known vectors. See
+`docs/compiler-host-deadline-macos.json`; no SDK timer, compiler asset or
+entitlement changed. Existing physical build-8 evidence remains separate.
 
 Snapshot verified on 2026-09-30:
 

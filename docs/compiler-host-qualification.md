@@ -641,10 +641,42 @@ no-framework note. All twelve generated inputs and seven committed source/fixtur
 inputs match. SDK implementation/assets are unchanged; its full suite was not
 repeated for this host-only change, and remote CI remains unprovisioned/unrun.
 
+## Signed macOS production-deadline result
+
+ARM64 Release build 9 from host commit `33bd1c4…` now passes the same public
+deadline workload on macOS 27.0 (26A428), using the unchanged prepared SDK
+`4edc6aa…`/`f2ed2b6a…`. The [signed macOS deadline record](compiler-host-deadline-macos.json)
+preserves generated/committed source, runner/checker identities, signature,
+OS/toolchain/WebKit framework version, exact launch PID/context, bounded real
+progress/scene events and the independently checked exported bytes.
+
+The original GPIO build takes 1.015 seconds. The deadline request returns typed
+`ManagedCompilerError.timedOut` after 60.344 seconds from public admission,
+without an artifact and with exactly one source-compiling notification. The same
+compiler instance produces the known console capsule in 1.018 seconds after
+settlement. A real active scene observation is recorded, with no subsequent
+foreground loss during the test. These callback observations do not identify the
+worker instruction pointer or which native/portable deadline timer wins.
+
+Strict deep verification confirms the existing Apple Development certificate/team,
+hardened runtime and exactly the original sandbox/network-client entitlements.
+No JIT, broad filesystem or container privacy permission is added. The runner's
+independent PID matches the report; both fixed run-bound stdout capsule exports
+match the 316-byte GPIO/392-byte console vectors. Both completed builds report
+27,983,872 linear bytes, separate from aggregate process memory. Twelve tooling
+fixtures, warnings-as-errors macOS and optimized iOS host-source checks, signed
+Release building and workflow YAML/shell checks pass. SDK implementation, assets,
+recipes and timers are unchanged; no full SDK repeat or remote CI pass is claimed.
+Existing physical build-8 records remain unchanged and are not assigned to this
+macOS app revision.
+The identical signed build also passes all six original checks in a fresh launch;
+its separate run ID, report digest, context and measured steps are retained in
+the same record. Default six-check mode still exports its journal only.
+
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
-Signed macOS deadline execution and entry-wrapper/link-stage interruption also
-remain separate from these physical first-source deadline checks.
+Entry-wrapper/link-stage interruption remains separate from these first-source
+deadline checks.
 Pico managed compilation is unavailable. Hardware follows host checks with an
 exact selected recoverable Nano resident and separately authorized SDK workflow.
 No binary publication or board operation occurred. The development qualification

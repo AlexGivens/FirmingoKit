@@ -1,0 +1,365 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "status": "passed_signed_sandbox_macos_production_deadline",
+  "scope": "Development-signed ARM64 Release macOS app, actual public 60-second first-source deadline and same-instance foreground recovery; no physical Apple device or board operation",
+  "host": {
+    "osVersion": "27.0",
+    "osBuild": "26A428",
+    "xcode": "Xcode 27.0\nBuild version 27A266a",
+    "swift": "Apple Swift version 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)\nTarget: arm64-apple-macosx27.0.0",
+    "WebKitFrameworkVersion": "22625",
+    "WebKitFrameworkBuild": "22625.1.29.11.27"
+  },
+  "signature": {
+    "strictDeepVerification": true,
+    "kind": "Apple Development",
+    "teamIdentifier": "WGR9T9JH4L",
+    "codeDirectoryHash": "0eb574c8e01bf8f112cdae49fb50a6cd395984e3",
+    "hardenedRuntime": true,
+    "entitlements": {
+      "com.apple.security.app-sandbox": true,
+      "com.apple.security.network.client": true
+    },
+    "executableSHA256": "00161180d184f9baa1c8dfc41fceae8a9bd5b190448643db98c0daae5cec1310",
+    "buildVersion": "9",
+    "architecture": "arm64",
+    "sameCertificateAsQualifiedBuild8": true
+  },
+  "hostSourceCommit": "33bd1c495d2d83520864ee7dd1ceab74fec0bd32",
+  "hostInputsSHA256": "8aa2b7c79bd1fb9b46f70bc26be9a880af84746e3420c0b9dedb4cfd48fab106",
+  "hostSourceFiles": [
+    {
+      "path": "Sources/QualificationActiveLifecycle.swift",
+      "bytes": 19100,
+      "sha256": "a23a707b387390852d9e8a988bff5695646a9d1ff420eb7b55df66b7a5b2a42e"
+    },
+    {
+      "path": "Sources/QualificationApp.swift",
+      "bytes": 9466,
+      "sha256": "7c127ac6006e2fd81f983944936699b8594db9852de3aec84e5e501f79ddc05e"
+    },
+    {
+      "path": "Sources/QualificationChecks.swift",
+      "bytes": 12043,
+      "sha256": "fe3ee97cca92b3e8e352b05dd4d023271bfe445cc8745d570b912a18b2b17172"
+    },
+    {
+      "path": "Sources/QualificationDeadline.swift",
+      "bytes": 12789,
+      "sha256": "d0b6480872f23815629a0aa374b1502ec91a5f26aa0ca898efc93863c09ab172"
+    },
+    {
+      "path": "Sources/QualificationLifecycle.swift",
+      "bytes": 9637,
+      "sha256": "54915985057314d4240afa6f5b8b80c2862c06861717a0951803225a783a8482"
+    },
+    {
+      "path": "Sources/QualificationStress.swift",
+      "bytes": 11163,
+      "sha256": "3a19418a84f9db7bc4e6d2346c4d0f8f47f873f688ed5e25e57b9c15c9346069"
+    },
+    {
+      "path": "Sources/worker-compile-workload.txt",
+      "bytes": 227505,
+      "sha256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"
+    }
+  ],
+  "context": {
+    "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+    "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+  },
+  "compilerWASM": {
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"
+  },
+  "workload": {
+    "parentFixtureBytes": 227505,
+    "parentFixtureSHA256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f",
+    "bytes": 227646,
+    "sha256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb",
+    "seedCount": 4096,
+    "iterationsPerSeedPerRepetition": 1024,
+    "repetitionsPerSeed": 16,
+    "sourceCapBytes": 262144,
+    "purpose": "Repeat each constexpr mix with seed reset, preserving all expected constants and GPIO runtime source; never deployed"
+  },
+  "deadlinePolicy": {
+    "publicRuntimeSeconds": 60,
+    "injectedTimer": false,
+    "eligibilityPublicCallSeconds": [
+      60,
+      75
+    ],
+    "testObservationLimitSeconds": 180,
+    "foregroundRequired": true,
+    "iOSIdlePolicy": "Not used by this macOS run; physical build-8 policy recorded separately"
+  },
+  "toolingFiles": [
+    {
+      "path": "Tools/ManagedWASM/run-compiler-host.py",
+      "bytes": 10284,
+      "sha256": "e3268f829caca6265f2365a98c69920d910ed3362c2a7a2233e91383726fad52"
+    },
+    {
+      "path": "Tools/ManagedWASM/check-compiler-deadline.py",
+      "bytes": 6405,
+      "sha256": "0864074b273141ab1321fd27adda2ba628094e6176a2a6a2159722125647295e"
+    }
+  ],
+  "validation": {
+    "hostToolFixtures": 12,
+    "macOSHostSourceTypecheck": "passed, warnings as errors",
+    "iOSOptimizedHostObject": "passed, warnings as errors; source build only, no new physical iOS execution",
+    "signedReleaseBuild": "passed, no Swift warnings; standard AppIntents no-framework metadata note",
+    "workflowYAMLAndRunStepShellSyntax": "passed",
+    "SDKRuntime": "Unchanged prepared SDK 4edc6aa, compiler assets/recipes/catalogue and timers; prior 154-function SDK/real-service results retained, no full SDK repeat for this host-only change",
+    "remoteCI": "not run; configured self-hosted runner remains unprovisioned",
+    "actualSignedRun": "Strict signature/entitlement and shared schema-6 checks pass; independent launch PID/UUID/context and actual exported capsule sizes/hashes match",
+    "originalModeRegression": "Identical signed app passes all six checks in a fresh launch; independent run/launch, context and report hash verified; original mode exports its journal only",
+    "provenance": "All twelve generated inputs, seven committed source/fixture inputs and two runner/checker files match recorded hashes; actual sealed-app WASM/fixture match exact reviewed pins; deadline/regression operation records rechecked"
+  },
+  "limitations": [
+    "First-source deadline callback observations are not a worker instruction pointer or evidence identifying which native/portable timer wins",
+    "Minimum OS, other model/OS combinations, aggregate app/WebKit memory, real pressure, OS suspension and forced child termination remain unqualified",
+    "The updated host source compiles for iOS; existing build-8 physical results remain unchanged and are not reassigned to this macOS app",
+    "No UI/accessibility inspection, private-container read or new entitlement/account/certificate permission",
+    "No compiler asset/binary publication, firmware change, device association, installation, upload or Nano board operation"
+  ],
+  "operation": {
+    "schema": 1,
+    "status": "passed_signed_sandbox_deadline_host",
+    "runID": "56E74343-434C-4BB9-87D3-DF53345A8FB3",
+    "teamIdentifier": "WGR9T9JH4L",
+    "entitlements": {
+      "com.apple.security.app-sandbox": true,
+      "com.apple.security.network.client": true
+    },
+    "hardenedRuntime": true,
+    "seconds": 64.44986787484959,
+    "reportSHA256": "353270a62a39a8909183e3a71d4d738ac0efb522117305211b8135087b580115",
+    "context": {
+      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+      "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+      "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+    },
+    "deviceOperations": false,
+    "hostInputsSHA256": "8aa2b7c79bd1fb9b46f70bc26be9a880af84746e3420c0b9dedb4cfd48fab106",
+    "deadline": {
+      "status": "passed_production_deadline_checks",
+      "runID": "56E74343-434C-4BB9-87D3-DF53345A8FB3",
+      "hostProcessID": 65121,
+      "reportSHA256": "353270a62a39a8909183e3a71d4d738ac0efb522117305211b8135087b580115",
+      "context": {
+        "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+        "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+        "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+      },
+      "runtimeDeadlineSeconds": 60,
+      "deadlineElapsedSeconds": 60.34389154147357,
+      "deadlineStartedSeconds": 1.0316757918335497,
+      "deadlineSettledSeconds": 61.37556733330712,
+      "freshStartedSeconds": 61.37887124996632,
+      "outcome": "timedOut",
+      "artifactReturned": false,
+      "progress": [
+        {
+          "phase": "verifying",
+          "seconds": 1.0355712501332164
+        },
+        {
+          "phase": "verifying",
+          "seconds": 1.266858458518982
+        },
+        {
+          "phase": "preparing",
+          "seconds": 1.4548672502860427
+        },
+        {
+          "phase": "compiling",
+          "seconds": 1.475584541913122
+        }
+      ],
+      "events": [
+        {
+          "phase": "active",
+          "seconds": 0.009847583249211311,
+          "stage": "waiting-for-active"
+        }
+      ],
+      "steps": [
+        {
+          "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "name": "before-deadline-gpio",
+          "seconds": 1.0151914586313069,
+          "wasmLinearMemoryBytes": 27983872
+        },
+        {
+          "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "name": "fresh-after-deadline-console",
+          "seconds": 1.018478958401829,
+          "wasmLinearMemoryBytes": 27983872
+        }
+      ],
+      "workloadSHA256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb",
+      "workloadBytes": 227646,
+      "scope": "Actual public 60-second runtime deadline and same-instance foreground recovery; no injected timer, OS suspension, aggregate memory or board claim"
+    },
+    "artifacts": [
+      {
+        "path": "before-deadline-gpio.fms",
+        "bytes": 316,
+        "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+      },
+      {
+        "path": "fresh-after-deadline-console.fms",
+        "bytes": 392,
+        "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+      }
+    ]
+  },
+  "launch": {
+    "runID": "56E74343-434C-4BB9-87D3-DF53345A8FB3",
+    "processID": 65121,
+    "mode": "deadline"
+  },
+  "report": {
+    "artifactReturned": false,
+    "context": {
+      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+      "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+      "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+    },
+    "deadlineSettledSeconds": 61.37556733330712,
+    "deadlineStartedSeconds": 1.0316757918335497,
+    "deviceOperations": false,
+    "events": [
+      {
+        "phase": "active",
+        "seconds": 0.009847583249211311,
+        "stage": "waiting-for-active"
+      }
+    ],
+    "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+    "freshStartedSeconds": 61.37887124996632,
+    "hostProcessID": 65121,
+    "kind": "production-deadline-fresh-recovery",
+    "observationLimitSeconds": 180,
+    "operatingSystem": "Version 27.0 (Build 26A428)",
+    "outcome": "timedOut",
+    "progress": [
+      {
+        "phase": "verifying",
+        "seconds": 1.0355712501332164
+      },
+      {
+        "phase": "verifying",
+        "seconds": 1.266858458518982
+      },
+      {
+        "phase": "preparing",
+        "seconds": 1.4548672502860427
+      },
+      {
+        "phase": "compiling",
+        "seconds": 1.475584541913122
+      }
+    ],
+    "runID": "56E74343-434C-4BB9-87D3-DF53345A8FB3",
+    "runtimeDeadlineSeconds": 60,
+    "schema": 6,
+    "stage": "complete",
+    "status": "passed",
+    "steps": [
+      {
+        "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "name": "before-deadline-gpio",
+        "seconds": 1.0151914586313069,
+        "wasmLinearMemoryBytes": 27983872
+      },
+      {
+        "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "name": "fresh-after-deadline-console",
+        "seconds": 1.018478958401829,
+        "wasmLinearMemoryBytes": 27983872
+      }
+    ],
+    "workloadBytes": 227646,
+    "workloadSHA256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb"
+  },
+  "originalModeRegression": {
+    "operation": {
+      "schema": 1,
+      "status": "passed_signed_sandbox_compiler_host",
+      "runID": "FDE750AB-C99A-46B1-9AB7-9F979A20B276",
+      "teamIdentifier": "WGR9T9JH4L",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.network.client": true
+      },
+      "hardenedRuntime": true,
+      "seconds": 4.034491708967835,
+      "reportSHA256": "b121273e81dfc0cbedc85877dd4f9e51ba188e6fc545c08640d2c77d35aada64",
+      "context": {
+        "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+        "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+        "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+      },
+      "deviceOperations": false
+    },
+    "launch": {
+      "runID": "FDE750AB-C99A-46B1-9AB7-9F979A20B276",
+      "processID": 65188,
+      "mode": "original-six"
+    },
+    "report": {
+      "context": {
+        "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+        "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+        "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+      },
+      "deadlineScope": "60-second production deadline retained; deadline expiry not forced by this host",
+      "deviceOperations": false,
+      "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+      "memoryScope": "WASM linear bytes after build; no total app/WebKit peak claim",
+      "operatingSystem": "Version 27.0 (Build 26A428)",
+      "runID": "FDE750AB-C99A-46B1-9AB7-9F979A20B276",
+      "schema": 1,
+      "stage": "complete",
+      "status": "passed",
+      "steps": [
+        {
+          "name": "resources",
+          "seconds": 0.08656920865178108
+        },
+        {
+          "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "name": "cold-gpio",
+          "seconds": 0.9865042082965374,
+          "wasmLinearMemoryBytes": 27983872
+        },
+        {
+          "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "name": "warm-console",
+          "seconds": 0.7287435415200889,
+          "wasmLinearMemoryBytes": 27983872
+        },
+        {
+          "name": "frontend-error",
+          "seconds": 0.49132499983534217
+        },
+        {
+          "name": "busy-cancellation",
+          "seconds": 0.42069291695952415
+        },
+        {
+          "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "name": "fresh-after-cancellation",
+          "seconds": 0.6410813750699162,
+          "wasmLinearMemoryBytes": 27983872
+        }
+      ]
+    }
+  }
+}
