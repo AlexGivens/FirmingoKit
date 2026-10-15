@@ -4,6 +4,15 @@ Implementation and qualification roadmap based on [AGENTS.md](AGENTS.md). That f
 
 ## Current position — compiler split, 2026-10-12
 
+Production direction accepted on 2026-10-15: follow the shared
+[Nano-first 1.0 gates](https://github.com/AlexGivens/Firmingo/blob/main/docs/integration/production-v1.md).
+Consume the new stateful/source-bundle contracts only after versioned firmware
+and compiler fixtures exist. Prioritize normal packaged resources and verified
+installation-derived associations, Mac-assisted first installation where needed,
+supported update/recovery, human-paced first-permission onboarding, exact-candidate
+hardware tests, aggregate memory and an honestly tested OS matrix. Current
+experimental pins and historical results remain unchanged by this planning step.
+
 Ownership guidance, integration documents, and the [migration inventory](docs/compiler-migration.md) are refocused. Both SDK build APIs now delegate to the pinned shared compiler package; public preparation/conversion compatibility APIs remain. Fixture manifests and stored records are retained. Completed compiler entries below record earlier SDK implementation, not completion in Firmingo-Compiler. Compiler-only backlog now belongs to that repository's M1–M7/M9 milestones; SDK hosting, package consumption, public API/persistence, associations, installation, and upload checks remain here.
 
 Firmingo-Compiler now has a pinned Nano baseline, portable request/preprocessing/
