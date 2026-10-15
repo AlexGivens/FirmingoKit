@@ -56,7 +56,7 @@ def test_inputs(root, expected):
     return plan
 
 
-def generate(sdk, sdk_anchor, test_root, plan_anchor, output):
+def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=False):
     """Reuse the compiler host's anchored SDK verifier, then create a separate explicit device-capable app."""
     plan = test_inputs(test_root, plan_anchor)
     host.generate(sdk, sdk_anchor, output)
@@ -73,6 +73,10 @@ def generate(sdk, sdk_anchor, test_root, plan_anchor, output):
         (project / 'xcshareddata/xcschemes/CompilerQualification.xcscheme').rename(project / 'xcshareddata/xcschemes/NanoQualification.xcscheme')
         (output / 'CompilerQualification.entitlements').rename(output / 'NanoQualification.entitlements')
         info = plistlib.loads((output / 'Info.plist').read_bytes())
+        if permission_check:
+            file = project / 'project.pbxproj'
+            file.write_text(file.read_text().replace('com.firmingokit.nanoqualification', 'com.firmingokit.nanopermission'))
+            info['CFBundleDisplayName'] = 'NanoPermission'
         info['NSLocalNetworkUsageDescription'] = 'Connect to the explicitly selected Nano to qualify Firmingo communication and managed-sketch uploads.'
         (output / 'Info.plist').write_bytes(plistlib.dumps(info))
         evidence = output / 'TestInputs'; evidence.mkdir()
@@ -84,7 +88,8 @@ def generate(sdk, sdk_anchor, test_root, plan_anchor, output):
         files = [{'path': f.relative_to(output).as_posix(), **host.identity(f)} for f in sorted(output.rglob('*')) if f.is_file()]
         receipt = {'schema': 1, 'operation': 'generated_nano_sdk_qualification_host', 'files': files,
                    'preparedManifestSHA256': sdk_anchor, 'testPlanSHA256': plan_anchor, 'consumerManifestSHA256': CONSUMER,
-                   'firmwareBuildID': BUILD, 'signed': False, 'installed': False, 'deviceOperations': False}
+                   'firmwareBuildID': BUILD, 'permissionCheckBundle': permission_check,
+                   'signed': False, 'installed': False, 'deviceOperations': False}
         (output / 'host-inputs.json').write_text(json.dumps(receipt, indent=2) + '\n'); return receipt
     except BaseException: shutil.rmtree(output); raise
 
@@ -93,8 +98,10 @@ def main():
     """Require exact explicit anchors and new output; never install/launch an app or touch a device."""
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('sdk', type=Path); p.add_argument('sdk_sha256'); p.add_argument('test_inputs', type=Path)
-    p.add_argument('test_plan_sha256'); p.add_argument('output', type=Path); a = p.parse_args()
-    result = generate(a.sdk.absolute(), a.sdk_sha256, a.test_inputs.absolute(), a.test_plan_sha256, a.output.absolute())
+    p.add_argument('test_plan_sha256'); p.add_argument('output', type=Path)
+    p.add_argument('--permission-check-bundle', action='store_true', help='separate read-only NanoPermission identity/display name; no SDK product-name override')
+    a = p.parse_args()
+    result = generate(a.sdk.absolute(), a.sdk_sha256, a.test_inputs.absolute(), a.test_plan_sha256, a.output.absolute(), a.permission_check_bundle)
     print(json.dumps({'status': result['operation'], 'files': len(result['files']), 'deviceOperations': False}))
 
 

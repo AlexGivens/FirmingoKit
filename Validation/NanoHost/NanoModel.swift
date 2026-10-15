@@ -23,7 +23,8 @@ import AppKit
     /// Serializes all host commands and freezes inputs while an async operation runs.
     @Published var busy = false
     /// Explicit process mode for a fresh permission check; no association or device writes are available.
-    let permissionCheckOnly = ProcessInfo.processInfo.arguments.contains("--nano-permission-check")
+    let permissionCheckOnly = Bundle.main.bundleIdentifier == "com.firmingokit.nanopermission"
+        || ProcessInfo.processInfo.arguments.contains("--nano-permission-check")
     /// Observable local one-shot policy, independent of firmware state.
     @Published private(set) var gate = NanoGate()
     /// Current run journal, available for explicit Share results.

@@ -38,6 +38,12 @@ preparation, actual selected device identity and the Inspect action. Normal laun
 does nothing. A separately signed bundle identifier can exercise a fresh prompt
 without resetting privacy settings or changing the existing Nano test app.
 
+Generate that namespace with `make-nano-host.py --permission-check-bundle` and
+the same explicit SDK/test-plan arguments. This changes only app bundle identity
+and display name; its identity also enforces read-only mode when opened manually.
+Keep the target's normal product name and SwiftPM resource naming. A global
+`PRODUCT_NAME` override also renames SDK products and breaks resource lookup.
+
 Five deterministic Swift Testing cases inject finite platform callbacks into the
 **production TCP actor and hello exchange**: initial waiting-to-ready with one
 hello, deadline during waiting with no hello, cancellation with no hello, terminal

@@ -79,4 +79,25 @@ class NanoHostTests(unittest.TestCase):
             with self.assertRaises(ValueError):runner.decode(b'x'*(1024**2+1),context,'fixture')
             with self.assertRaises(ValueError):runner.decode(envelope(report,files)+b'\n'+envelope(report,files),context,'fixture')
 
+    def test_permission_bundle_changes_only_app_identity_and_display_name(self):
+        # Fixture-only SDK; no compiler, OS permission or device is involved.
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp); sdk=root/'sdk'; sdk.mkdir(); inputs=root/'inputs'; inputs.mkdir()
+            (inputs/'test-plan.json').write_text('{}'); output=root/'host'
+            context={'sdkCommit':'1'*40, 'consumerManifestSHA256':host.CONSUMER}
+            with patch.object(host,'test_inputs',return_value={'files':[]}), patch.object(host.host,'prepared_sdk',return_value=context):
+                result=host.generate(sdk,'a'*64,inputs,'b'*64,output,permission_check=True)
+            project=(output/'NanoQualification.xcodeproj/project.pbxproj').read_text()
+            self.assertIn('com.firmingokit.nanopermission',project)
+            self.assertNotIn('com.firmingokit.nanoqualification',project)
+            self.assertIn('PRODUCT_NAME = "$(TARGET_NAME)";',project)
+            self.assertIn('productName = FirmingoKit;',project)
+            info=plistlib.loads((output/'Info.plist').read_bytes())
+            self.assertEqual(info['CFBundleDisplayName'],'NanoPermission')
+            self.assertEqual(info['CFBundleExecutable'],'$(EXECUTABLE_NAME)')
+            self.assertTrue(result['permissionCheckBundle'])
+            self.assertFalse(list(sdk.iterdir()))
+            for record in result['files']:
+                self.assertEqual(hashlib.sha256((output/record['path']).read_bytes()).hexdigest(),record['sha256'])
+
 if __name__ == '__main__': unittest.main()
