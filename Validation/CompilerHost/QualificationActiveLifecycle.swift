@@ -1,4 +1,5 @@
 import Foundation
+import CryptoKit
 import FirmingoKit
 
 /// Explicit host policy test: cancel a pending SDK call on inactivity, observe background/return, then build fresh.
@@ -11,6 +12,10 @@ import FirmingoKit
         let requestedSeconds: Double
         /// Most recent accepted SDK progress, or admitted before the first callback.
         let lastProgress: String
+        /// Worker mode requires the first source-compilation notification, before entry-wrapper compilation.
+        var compilingNotificationCount: Int?
+        /// Native observation time for that attempt's first compiling notification.
+        var compilePhaseBeganSeconds: Double?
         /// Pending until the task actually throws CancellationError after its cleanup path.
         var outcome = "pending"
         /// Observation time when the pending SDK task settled.
@@ -22,9 +27,9 @@ import FirmingoKit
     /// Distinct bounded evidence contract; idle and repeated-build schemas remain unchanged.
     struct Report: Encodable {
         /// Version of the active-call cancellation journal only.
-        let schema = 4
+        var schema = 4
         /// Cancellation belongs to this test host, not an automatic SDK lifecycle policy.
-        let kind = "inactive-cancel-background-return"
+        var kind = "inactive-cancel-background-return"
         /// Fresh explicitly selected uppercase UUID.
         let runID: String
         /// Exact verified SDK and consumer inputs.
@@ -51,6 +56,12 @@ import FirmingoKit
         var manuallyStartedSeconds: Double?
         /// Fresh build admission after both cancellation settlement and the real active return.
         var freshStartedSeconds: Double?
+        /// Exact optional qualification workload; absent in the original active-call mode.
+        var workerWorkloadSHA256: String?
+        /// Checked source byte count, below the unchanged compiler source cap.
+        var workerWorkloadBytes: Int?
+        /// Completed preflight interval between first and second compiling notifications.
+        var preflightCompilePhaseSeconds: Double?
         /// Manual action admission bound; OS suspension can delay observation.
         let observationLimitSeconds = 600
         /// Finite actual build series; exhaustion without cancellation fails.
@@ -81,9 +92,21 @@ import FirmingoKit
     private var pending: Task<ManagedOfflineCompilationResult, any Error>?
     /// Recording failures are surfaced by the async owner.
     private var recordingError: Error?
+    /// Selects stricter first-source-compile eligibility without changing the original mode.
+    private let workerCompilation: Bool
+    /// Verified fixed C++ workload, used only by the opt-in worker mode.
+    private var workerSource: String?
+    /// Current attempt's compiling notification ordinal.
+    private var compilingNotifications = 0
+    /// Current attempt's first compiling observation.
+    private var compilingBeganSeconds: Double?
+    /// Preflight first compiling observation, kept separate from active attempts.
+    private var preflightCompilingBegan: Double?
+    /// Bounds/identifies preflight source versus entry-wrapper compilation.
+    private var preflightCompilingNotifications = 0
 
     /// Creates a fresh journal with the same anchored context as other host modes.
-    init(id: UUID, phase: String) throws {
+    init(id: UUID, phase: String, workerCompilation: Bool = false) throws {
         guard let contextURL = Bundle.main.url(forResource: "qualification-context", withExtension: "json"),
               let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw CocoaError(.fileReadCorruptFile)
@@ -94,7 +117,25 @@ import FirmingoKit
         guard !FileManager.default.fileExists(atPath: directory.path) else { throw CocoaError(.fileWriteFileExists) }
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false)
         report = Report(runID: id.uuidString, context: context, firmwareBuildID: QualificationChecks.buildID)
+        self.workerCompilation = workerCompilation
+        if workerCompilation {
+            workerSource = try Self.loadWorkerSource()
+            report.schema = 5; report.kind = "worker-compile-inactive-cancel-return"
+            report.workerWorkloadBytes = 227505
+            report.workerWorkloadSHA256 = "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"
+        }
         try persist(); record(phase: phase)
+    }
+
+    /// Loads only the pinned test fixture; no asset/recipe modification or arbitrary source provider is introduced.
+    private static func loadWorkerSource() throws -> String {
+        guard let url = Bundle.main.url(forResource: "worker-compile-workload", withExtension: "txt"),
+              try url.resourceValues(forKeys: [.fileSizeKey]).fileSize == 227505 else { throw CocoaError(.fileReadCorruptFile) }
+        let bytes = try Data(contentsOf: url)
+        guard bytes.count == 227505,
+              SHA256.hash(data: bytes).map({ String(format: "%02x", $0) }).joined() == "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f",
+              let source = String(data: bytes, encoding: .utf8) else { throw CocoaError(.fileReadCorruptFile) }
+        return source
     }
 
     /// Called only by the explicit start button after preflight; no synthesized scene transition occurs.
@@ -115,6 +156,10 @@ import FirmingoKit
             report.events.append(QualificationLifecycle.Event(seconds: seconds, phase: phase, stage: report.stage))
             if phase == "inactive", report.stage == "active-builds", let pending, report.cancellation == nil {
                 report.cancellation = Cancellation(attempt: attempt, requestedSeconds: seconds, lastProgress: lastProgress)
+                if workerCompilation {
+                    report.cancellation?.compilingNotificationCount = compilingNotifications
+                    report.cancellation?.compilePhaseBeganSeconds = compilingBeganSeconds
+                }
                 report.stage = "awaiting-cancellation"
                 pending.cancel()
             }
@@ -126,6 +171,20 @@ import FirmingoKit
     private func progress(_ value: ManagedCompilationPhase, attempt: Int) {
         guard self.attempt == attempt, pending != nil, report.cancellation == nil else { return }
         lastProgress = value.rawValue
+        if value == .compiling {
+            compilingNotifications += 1
+            if compilingNotifications == 1 { compilingBeganSeconds = ProcessInfo.processInfo.systemUptime - start }
+        }
+    }
+
+    /// Measures a genuine complete source compile before asking the user to interrupt another one.
+    private func preflightProgress(_ value: ManagedCompilationPhase) {
+        guard workerCompilation, report.stage == "before-active-gpio", value == .compiling else { return }
+        preflightCompilingNotifications += 1
+        if preflightCompilingNotifications == 1 { preflightCompilingBegan = ProcessInfo.processInfo.systemUptime - start }
+        if preflightCompilingNotifications == 2, let preflightCompilingBegan {
+            report.preflightCompilePhaseSeconds = ProcessInfo.processInfo.systemUptime - start - preflightCompilingBegan
+        }
     }
 
     /// Writes complete evidence without a background task grant or extension.
@@ -170,14 +229,20 @@ import FirmingoKit
             let compiler = ManagedSketchCompiler(); try await compiler.verifyResources()
             try await build(compiler, catalogue: catalogue, before: true)
             guard phase == "active" else { throw CocoaError(.fileReadCorruptFile) }
+            if workerCompilation {
+                guard let seconds = report.preflightCompilePhaseSeconds, (4...55).contains(seconds) else {
+                    throw CocoaError(.fileReadCorruptFile)
+                }
+            }
             report.stage = "waiting-for-start"; try persist(); ready(true)
             status("Ready. Start the active check, wait one second, then go Home for five seconds and return.")
             while report.manuallyStartedSeconds == nil { try check(); try await Task.sleep(for: .milliseconds(100)) }
             ready(false)
             for index in 1...40 {
                 try check(); guard phase == "active" else { throw CocoaError(.fileReadCorruptFile) }
-                attempt = index; lastProgress = "admitted"; report.stage = "active-builds"; try persist()
-                let request = try QualificationChecks.request(QualificationChecks.gpio, name: "active-\(index)-gpio", revision: UInt64(index + 1), catalogue: catalogue)
+                attempt = index; lastProgress = "admitted"; compilingNotifications = 0; compilingBeganSeconds = nil
+                report.stage = "active-builds"; try persist()
+                let request = try QualificationChecks.request(workerSource ?? QualificationChecks.gpio, name: "active-\(index)-gpio", revision: UInt64(index + 1), catalogue: catalogue)
                 let began = ProcessInfo.processInfo.systemUptime
                 let task = Task { [weak self] in
                     try await compiler.build(request) { [weak self] value in
@@ -210,6 +275,10 @@ import FirmingoKit
             guard report.cancellation?.outcome == "cancelled", report.cancellation?.lastProgress != "admitted" else {
                 throw CocoaError(.fileReadCorruptFile)
             }
+            if workerCompilation {
+                guard report.cancellation?.lastProgress == "compiling", report.cancellation?.compilingNotificationCount == 1,
+                      report.cancellation?.compilePhaseBeganSeconds != nil else { throw CocoaError(.fileReadCorruptFile) }
+            }
             status("Build cancellation settled. Return to this app after five seconds on Home.")
             try await waitForReturn()
             try await build(compiler, catalogue: catalogue, before: false)
@@ -229,9 +298,11 @@ import FirmingoKit
         if !before { report.freshStartedSeconds = ProcessInfo.processInfo.systemUptime - start }
         report.stage = name; try persist()
         let began = ProcessInfo.processInfo.systemUptime
-        let request = try QualificationChecks.request(before ? QualificationChecks.gpio : QualificationChecks.console,
+        let request = try QualificationChecks.request(before ? (workerSource ?? QualificationChecks.gpio) : QualificationChecks.console,
             name: name, revision: before ? 1 : 100, catalogue: catalogue)
-        let result = try await compiler.build(request)
+        let result = try await compiler.build(request) { [weak self] value in
+            if before { Task { @MainActor in self?.preflightProgress(value) } }
+        }
         guard result.artifact.sha256 == (before ? QualificationChecks.gpioSHA : QualificationChecks.consoleSHA),
               result.artifact.receipt.firmwareBuildID == QualificationChecks.buildID,
               result.artifact.receipt.catalogueSHA256 == catalogue.manifestSHA256,

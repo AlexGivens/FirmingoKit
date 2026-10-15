@@ -464,6 +464,53 @@ workflow YAML/shell syntax checks pass. The build has no Swift warnings and only
 the standard AppIntents no-framework note. The full unchanged SDK suite was not
 repeated for this host-only change, and remote CI remains unprovisioned/unrun.
 
+## Opt-in first source-compilation interruption
+
+`--qualification-worker-lifecycle` selects schema 5, using the existing explicit
+start button and inactivity policy. Its qualification-only source fixture is
+`Validation/CompilerHost/worker-compile-workload.txt`: 227,505 bytes, SHA-256
+`9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f`.
+It contains 4,096 `static_assert` calls for seeds 0–4095. Each evaluates 1,024
+iterations of the file's unsigned 32-bit mixing function, with expected values
+calculated using modulo-2^32 arithmetic, then the original GPIO sketch. This
+adds actual C++ frontend work; it does not modify the compiler, recipe, runtime
+limits or resulting GPIO behavior. The source stays below the 256-KiB cap.
+
+A local actual SDK/WebKit probe compiles the entire fixture with the reviewed
+service. The first-to-second compiling-notification interval is 9.880 seconds;
+total SDK time is 10.723 seconds. It emits the same known 316-byte GPIO capsule
+and reports 28,049,408 worker linear bytes. Smaller exploratory inputs also pass;
+these are maintenance measurements, not physical qualification or general Arduino
+library support.
+
+Before asking for a manual start, this mode compiles the whole pinned fixture on
+the selected device and verifies the known capsule. The measured first source
+compile must take 4–55 seconds; otherwise the run fails before becoming ready.
+After the start button, cancellation must observe `compiling` with exactly one
+compiling notification received for that attempt. The second notification starts
+entry-wrapper compilation, so it cannot qualify. The first observation time and
+notification count are preserved with the cancellation request. Verification,
+linking, packaging, entry-wrapper compilation, changed fixtures and short
+calibration windows cannot pass. No automatic retry substitutes another phase.
+
+Go Home one second after pressing the start button, wait five seconds, then
+return. Fresh console compilation, exact launch PID/context, typed cancellation
+with no artifact and actual scene transitions remain mandatory. Collect the
+UUID run directory and explicitly select worker validation:
+
+```sh
+python3 -I -S -B Tools/ManagedWASM/check-active-compiler-lifecycle.py --worker \
+  REPORT_JSON "$RUN_ID" "$QUALIFICATION_PID" GENERATED_HOST/host-inputs.json
+```
+
+The original schema-4 mode remains separate and its historical verification-phase
+reports remain valid only for that mode. Ten source-tool fixtures cover workload
+identity, calibration and phase eligibility. Source-only CI copies/checks the
+fixture and compiles the observer, without executing this workload. Actual app
+and device checks remain explicit. Callback timestamps/ordinals identify the
+observed source-compilation interval; they are not an instruction-pointer trace
+or evidence of OS suspension, memory pressure or background computation.
+
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an

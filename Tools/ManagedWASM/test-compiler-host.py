@@ -87,6 +87,8 @@ class CompilerHostTests(unittest.TestCase):
         self.assertNotIn("com.apple.security.cs.allow-jit", entitlements)
         self.assertTrue((output / "Sources/QualificationLifecycle.swift").is_file())
         self.assertTrue((output / "Sources/QualificationActiveLifecycle.swift").is_file())
+        self.assertEqual(host.identity(output / "Sources/worker-compile-workload.txt"),
+                         {"bytes": 227505, "sha256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"})
         self.assertNotIn("UIBackgroundModes", info)
 
     def test_existing_destination_is_preserved_and_partial_new_output_is_removed(self):
@@ -178,8 +180,8 @@ class CompilerHostTests(unittest.TestCase):
         with self.assertRaises(ValueError): lifecycle.check(encode(value), run, 125, context)
         with self.assertRaises(ValueError): lifecycle.check(b"x" * 65537, run, 123, context)
 
-    def test_active_lifecycle_requires_pending_call_cancellation_settlement_and_fresh_admission(self):
-        # Parser-only fixtures never establish real scene events, cancellation or compiler execution.
+    def active_fixture(self):
+        """Parser-only values never establish actual scene events or compiler execution."""
         run = "12345678-1234-4234-8234-123456789ABC"
         context = {"consumerManifestSHA256": self.value["consumerManifestSHA256"], "sdkCommit": "1" * 40, "preparedManifestSHA256": "a" * 64}
         gpio = "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
@@ -195,6 +197,10 @@ class CompilerHostTests(unittest.TestCase):
                             {"phase": "inactive", "stage": "active-builds", "seconds": 3},
                             {"phase": "background", "stage": "waiting-for-return", "seconds": 4},
                             {"phase": "active", "stage": "waiting-for-return", "seconds": 10}]}
+        return value, run, context
+
+    def test_active_lifecycle_requires_pending_call_cancellation_settlement_and_fresh_admission(self):
+        value, run, context = self.active_fixture()
         encode = lambda v: json.dumps(v).encode()
         self.assertEqual(active.check(encode(value), run, 123, context)["cancellation"]["outcome"], "cancelled")
         for change in (lambda v: v.update(status="running"), lambda v: v.update(hostProcessID=124),
@@ -212,6 +218,26 @@ class CompilerHostTests(unittest.TestCase):
             changed = copy.deepcopy(value); change(changed)
             with self.assertRaises(ValueError): active.check(encode(changed), run, 123, context)
         with self.assertRaises(ValueError): active.check(b"x" * 65537, run, 123, context)
+
+    def test_worker_lifecycle_rejects_verification_entry_wrapper_wrong_workload_and_short_calibration(self):
+        value, run, context = self.active_fixture()
+        value.update(schema=5, kind="worker-compile-inactive-cancel-return", workerWorkloadBytes=227505,
+                     workerWorkloadSHA256="9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f",
+                     preflightCompilePhaseSeconds=10)
+        value["cancellation"].update(compilingNotificationCount=1, compilePhaseBeganSeconds=2)
+        encode = lambda v: json.dumps(v).encode()
+        self.assertEqual(active.check(encode(value), run, 123, context, worker=True)["status"], "passed_worker_compile_lifecycle_checks")
+        with self.assertRaises(ValueError): active.check(encode(value), run, 123, context)
+        for change in (lambda v: v.update(schema=4, kind="inactive-cancel-background-return"),
+                       lambda v: v.update(workerWorkloadSHA256="0" * 64), lambda v: v.update(workerWorkloadBytes=True),
+                       lambda v: v.update(preflightCompilePhaseSeconds=3.99), lambda v: v.update(preflightCompilePhaseSeconds=float("nan")),
+                       lambda v: v["cancellation"].update(lastProgress="verifying"),
+                       lambda v: v["cancellation"].update(compilingNotificationCount=2),
+                       lambda v: v["cancellation"].update(compilingNotificationCount=True),
+                       lambda v: v["cancellation"].update(compilePhaseBeganSeconds=3.1),
+                       lambda v: v["cancellation"].update(compilePhaseBeganSeconds=0.9)):
+            changed = copy.deepcopy(value); change(changed)
+            with self.assertRaises(ValueError): active.check(encode(changed), run, 123, context, worker=True)
 
 
 if __name__ == "__main__":

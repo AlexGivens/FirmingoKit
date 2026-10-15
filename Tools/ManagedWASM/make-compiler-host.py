@@ -82,6 +82,10 @@ def generate(sdk, expected, output):
         sources = output / "Sources"; sources.mkdir()
         for name in ("QualificationApp.swift", "QualificationChecks.swift", "QualificationStress.swift", "QualificationLifecycle.swift", "QualificationActiveLifecycle.swift"):
             shutil.copyfile(source / name, sources / name)
+        workload = source / "worker-compile-workload.txt"
+        if identity(workload, 227505) != {"bytes": 227505, "sha256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"}:
+            raise ValueError("worker qualification fixture changed")
+        shutil.copyfile(workload, sources / workload.name)
         context = {"preparedManifestSHA256": expected, "sdkCommit": value["sdkCommit"], "consumerManifestSHA256": value["consumerManifestSHA256"]}
         (sources / "qualification-context.json").write_text(json.dumps(context, indent=2) + "\n")
         project = output / "CompilerQualification.xcodeproj"; project.mkdir()

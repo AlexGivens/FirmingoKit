@@ -88,7 +88,11 @@ attempts 3/5 with last progress `verifying`, no returned artifact and settlement
 in 11.3/4.6 ms. Known console builds pass after real background/return in the same
 process. See `docs/compiler-host-active-lifecycle.json`. This is test-host policy;
 worker compile/link interruption and real pressure remain unqualified.
-Source CI now runs nine tool fixtures,
+An opt-in `--qualification-worker-lifecycle` now uses a pinned 227,505-byte C++
+compile-time fixture that emits the unchanged GPIO capsule. It requires a real
+4–55-second preflight source-compile window, then first-source-compiling progress
+at inactivity; verification and entry-wrapper interruption cannot pass. Physical
+execution of this new mode is pending. Source CI now runs ten tool fixtures,
 macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.
 

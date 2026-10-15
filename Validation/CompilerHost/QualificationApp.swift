@@ -68,9 +68,11 @@ import Foundation
         let arguments = ProcessInfo.processInfo.arguments
         if let index = arguments.firstIndex(of: "--qualification-run"), index + 1 < arguments.count,
            let id = UUID(uuidString: arguments[index + 1]) {
-            let modes = ["--qualification-idle-lifecycle", "--qualification-active-lifecycle", "--qualification-stress-count"]
+            let modes = ["--qualification-idle-lifecycle", "--qualification-active-lifecycle", "--qualification-worker-lifecycle", "--qualification-stress-count"]
             guard modes.filter({ arguments.contains($0) }).count <= 1 else { status = "Select one compiler check mode"; return }
-            if arguments.contains("--qualification-active-lifecycle") {
+            if arguments.contains("--qualification-worker-lifecycle") {
+                start(id: id, activeLifecycle: true, workerCompilation: true)
+            } else if arguments.contains("--qualification-active-lifecycle") {
                 start(id: id, activeLifecycle: true)
             } else if arguments.contains("--qualification-idle-lifecycle") {
                 start(id: id, idleLifecycle: true)
@@ -84,12 +86,12 @@ import Foundation
     }
 
     /// Runs the public SDK asynchronously; results stay in this app's own Documents container.
-    func start(id: UUID = UUID(), iterations: Int? = nil, idleLifecycle: Bool = false, activeLifecycle: Bool = false) {
+    func start(id: UUID = UUID(), iterations: Int? = nil, idleLifecycle: Bool = false, activeLifecycle: Bool = false, workerCompilation: Bool = false) {
         guard !running else { return }; running = true; report = nil
         Task { @MainActor in
             do {
                 if activeLifecycle {
-                    let observer = try QualificationActiveLifecycle(id: id, phase: phase); self.activeLifecycle = observer
+                    let observer = try QualificationActiveLifecycle(id: id, phase: phase, workerCompilation: workerCompilation); self.activeLifecycle = observer
                     report = try await observer.run(status: { status = $0 }, ready: { activeLifecycleReady = $0 })
                     self.activeLifecycle = nil
                 } else if idleLifecycle {

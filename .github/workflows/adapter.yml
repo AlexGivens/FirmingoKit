@@ -28,7 +28,7 @@ jobs:
       - name: SDK, qualification-generator and stress/lifecycle-report fixtures, source-host type-check and deployment boundaries
         run: node Tools/ManagedWASM/run-validation.mjs 2>&1 | tee .build/adapter-ci/tests.log
       - name: Explain qualification app asset boundary
-        run: echo 'Host sources including bounded self-footprint, idle scene observation and explicit active-call lifecycle cancellation are type-checked with warnings as errors; generator/runner/stress/lifecycle-report fixtures run without a compiler. Complete app builds/execution, repeated builds, profiling, physical interruption and manual scene transitions need anchored prepared SDK bytes, signing and explicitly selected devices; these are deliberate CI exclusions until asset/runner provisioning. Local signed/physical evidence is separate.' >> "$GITHUB_STEP_SUMMARY"
+        run: echo 'Host sources including bounded self-footprint, idle scene observation and explicit active-call/worker-phase lifecycle cancellation are type-checked with warnings as errors; generator/runner/stress/lifecycle-report fixtures and the pinned workload inventory run without a compiler. Complete app builds/execution, workload calibration, repeated builds, profiling, physical interruption and manual scene transitions need anchored prepared SDK bytes, signing and explicitly selected devices; these are deliberate CI exclusions until asset/runner provisioning. Local signed/physical evidence is separate.' >> "$GITHUB_STEP_SUMMARY"
       - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
         run: |
           mkdir -p .build/owned-service-webkit

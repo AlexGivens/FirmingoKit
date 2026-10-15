@@ -20,12 +20,13 @@ def artifact(step, name, digest):
         raise ValueError("unexpected active lifecycle artifact or measurement")
 
 
-def check(data, run_id, process_id, expected_context):
+def check(data, run_id, process_id, expected_context, *, worker=False):
     """Require exact launch identity, typed no-artifact cancellation, real scene transitions and fresh known output."""
     if (len(data) > 65536 or str(uuid.UUID(run_id)).upper() != run_id or type(process_id) is not int or process_id <= 0):
         raise ValueError("select a bounded report and exact launch UUID/PID")
     r = json.loads(data)
-    if (type(r["schema"]) is not int or r["schema"] != 4 or r["kind"] != "inactive-cancel-background-return"
+    if (type(r["schema"]) is not int or r["schema"] != (5 if worker else 4)
+            or r["kind"] != ("worker-compile-inactive-cancel-return" if worker else "inactive-cancel-background-return")
             or r["runID"] != run_id or r["status"] != "passed" or r["stage"] != "complete" or r.get("error") is not None
             or type(r["hostProcessID"]) is not int or r["hostProcessID"] != process_id or r["deviceOperations"] is not False
             or r["firmwareBuildID"] != "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f"
@@ -72,23 +73,36 @@ def check(data, run_id, process_id, expected_context):
             or not number(r["freshStartedSeconds"], 600)
             or r["freshStartedSeconds"] < max(active["seconds"], c["settledSeconds"])):
         raise ValueError("missing ordered inactive cancellation, background/return and fresh admission")
-    return {"status": "passed_active_call_lifecycle_checks", "runID": run_id, "hostProcessID": process_id,
+    if worker:
+        if (r["workerWorkloadSHA256"] != "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"
+                or type(r["workerWorkloadBytes"]) is not int or r["workerWorkloadBytes"] != 227505
+                or not number(r["preflightCompilePhaseSeconds"], 55) or r["preflightCompilePhaseSeconds"] < 4
+                or c["lastProgress"] != "compiling" or type(c["compilingNotificationCount"]) is not int
+                or c["compilingNotificationCount"] != 1 or not number(c["compilePhaseBeganSeconds"], 600)
+                or not r["manuallyStartedSeconds"] <= c["compilePhaseBeganSeconds"] <= c["requestedSeconds"]):
+            raise ValueError("missing pinned calibrated workload or first source-compilation cancellation")
+    result = {"status": "passed_worker_compile_lifecycle_checks" if worker else "passed_active_call_lifecycle_checks", "runID": run_id, "hostProcessID": process_id,
             "reportSHA256": hashlib.sha256(data).hexdigest(), "context": context, "cancellation": c,
             "backgroundToActiveSeconds": active["seconds"] - events[background]["seconds"],
             "freshStartedSeconds": r["freshStartedSeconds"], "events": events, "steps": r["steps"],
             "completedAttempts": r["completedAttempts"],
             "scope": "Host requested cancellation on inactivity while SDK call pending; last progress is not an instruction pointer; no OS suspension or pressure claim"}
+    if worker:
+        result.update(workerWorkloadSHA256=r["workerWorkloadSHA256"], workerWorkloadBytes=r["workerWorkloadBytes"],
+                      preflightCompilePhaseSeconds=r["preflightCompilePhaseSeconds"])
+    return result
 
 
 def main():
     """Read only explicit bounded local evidence and independently selected generated context."""
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--worker", action="store_true", help="require schema 5, the pinned calibrated workload and first source-compilation cancellation")
     p.add_argument("report", type=Path); p.add_argument("run_id"); p.add_argument("process_id", type=int); p.add_argument("host_inputs", type=Path)
     a = p.parse_args()
     with a.report.open("rb") as source: data = source.read(65537)
     with a.host_inputs.open("rb") as source: inputs = source.read(262145)
     if len(inputs) > 262144: raise ValueError("excessive host inputs")
-    print(json.dumps(check(data, a.run_id, a.process_id, json.loads(inputs)["context"]), sort_keys=True))
+    print(json.dumps(check(data, a.run_id, a.process_id, json.loads(inputs)["context"], worker=a.worker), sort_keys=True))
 
 
 if __name__ == "__main__":
