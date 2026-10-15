@@ -59,6 +59,9 @@ import AppKit
             "firmwareBuildID": NanoGate.buildID, "context": context, "operatingSystem": ProcessInfo.processInfo.operatingSystemVersionString,
             "hardwareQualified": false, "note": "Individual observations only; installation/startup/behavior and host platforms require separate review"]
         try JSONSerialization.data(withJSONObject: value, options: [.sortedKeys, .prettyPrinted]).write(to: journal, options: .atomic)
+        if offlineOnly {
+            try FileHandle.standardError.write(contentsOf: Data(("FIRMINGO_NANO_STAGE:" + stage + "\n").utf8))
+        }
     }
 
     /// Owns finite work and reports errors without automatically retrying any network command.
@@ -69,6 +72,10 @@ import AppKit
             catch {
                 if let session { await session.disconnect(); self.session = nil }
                 status = String(error.localizedDescription.prefix(1024))
+                if offlineOnly {
+                    do { try FileHandle.standardError.write(contentsOf: Data(("FIRMINGO_NANO_FAILURE:" + status + "\n").utf8)) }
+                    catch { status += " Diagnostic export failed: " + error.localizedDescription }
+                }
                 if self.record != nil, self.gate.state == .staged || self.gate.state == .associated { self.gate.restore() }
                 if self.journal != nil {
                     do { try log("failed-or-uncertain", status) }

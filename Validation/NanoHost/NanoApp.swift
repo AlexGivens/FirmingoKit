@@ -4,9 +4,17 @@ import Foundation
 /// Separate explicit hardware-qualification host; compiler-only hosts retain their no-device behavior.
 @main @MainActor struct NanoQualificationApp: App {
     /// One owner for all device and compiler commands in this single-window test app.
-    @StateObject private var model = NanoModel()
+    @StateObject private var model: NanoModel
     /// Actual inactivity cancels owned work and invalidates any RAM-stage capability.
     @Environment(\.scenePhase) private var phase
+
+    /// Starts explicit offline automation from the app lifetime, independent of whether a view task appears.
+    init() {
+        let model = NanoModel(); _model = StateObject(wrappedValue: model)
+        if ProcessInfo.processInfo.arguments.contains("--nano-offline") {
+            Task { @MainActor in model.prepare() }
+        }
+    }
 
     /// Exposes distinct prepare, inspect, associate, stage, commit, status and behavior actions.
     var body: some Scene {
@@ -49,7 +57,7 @@ import Foundation
                     Button("Cancel active work") { model.inactive() }.disabled(!model.busy)
                     if let journal = model.journal { ShareLink("Share qualification journal", item: journal) }
                 }.padding().frame(minWidth: 300)
-            }.task { if ProcessInfo.processInfo.arguments.contains("--nano-offline") { model.prepare() } }
+            }.frame(minWidth: 300, minHeight: 220)
              .onChange(of: phase) { _, value in if value != .active { model.inactive() } }
         }
     }
