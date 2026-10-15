@@ -146,8 +146,13 @@ connection-disabled offline execution and independent 316/392-byte capsule
 checks. Both complete Release apps build; iOS signing/execution is not claimed.
 See `docs/nano-hardware-preparation.json`. The first view-task-driven offline run
 timed out without an export and remains rejected; app-lifetime startup and stage
-diagnostics are verified by the new signed run. All real board actions, selected
-initial ROM/slot/readback setup and physical iPad/iPhone FMGO testing remain open.
+diagnostics are verified by the new signed run. The selected Nano now has a
+Firmware-owned initial composite of this exact resident and known SDK GPIO
+capsule, fully ROM-verified before reboot with matching macOS hello. The signed
+Nano iOS build 2 is installed/launched on iPad over Wi-Fi using existing profile
+coverage. See `docs/nano-hardware-initial.json`. Initial setup is separate from
+SDK managed upload/startup/behavior and physical iPad/iPhone FMGO qualification,
+which remain open. No normal app launch contacts the board.
 
 Snapshot verified on 2026-09-30:
 

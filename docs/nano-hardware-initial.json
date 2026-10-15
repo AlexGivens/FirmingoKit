@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "signed_iPad_host_installed_and_launched_wirelessly_initial_Nano_setup_verified",
+  "hostSourceCommit": "24993ce998ecf44d0dc426409ebbd77e4f66158d",
+  "generatedHostInputsSHA256": "ee73f78239e8132196f490e929d49a9eb110245fdfe8a705b2ff070004c27043",
+  "offlinePreparationEvidence": "nano-hardware-preparation.json",
+  "firmwareInitialSetupEvidence": "../../Firmingo/docs/evidence/nano-sdk-initial.json",
+  "residentOnlyUF2SHA256": "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983",
+  "initialCompositeUF2SHA256": "4fb60a485492fc3e3e0f63cabd0cb8e9cd5b7a1f59dda4feb9b5dbee27b404f6",
+  "initialCapsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+  "iosApp": {
+    "bundleIdentifier": "com.firmingokit.nanoqualification",
+    "build": "2",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.nanoqualification",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "strictDeepSignatureVerified": true,
+    "bothSelectedDevicesCoveredByExistingProfile": true,
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "executableSHA256": "d7b89cf129b0efee989e1fadb4a9712f88be0540f4a012dd66f9712a8fbcc328",
+    "localNetworkUsageDescription": "Connect to the explicitly selected Nano to qualify Firmingo communication and managed-sketch uploads.",
+    "backgroundModes": [],
+    "bonjourServices": []
+  },
+  "ipad": {
+    "model": "iPad Pro 11-inch (3rd generation)",
+    "productType": "iPad13,4",
+    "os": "27.0.1",
+    "pairedTransport": "localNetwork",
+    "installCommandSucceeded": true,
+    "launchCommandSucceeded": true,
+    "normalLaunchPerformsDeviceOperation": false,
+    "boardConnectionInspected": false
+  },
+  "localEvidenceSHA256": {
+    "nano-host-ios-signed-r3.log": "3646d0d52e37cb92a1f5c76af04327035a15e41a2d94777fdf72f76e24bdc379",
+    "nano-ipad-install-r3.local.json": "087309dd7f6ed9dbb9f6976700a7d537ef46bde2f2f53fb572ce00d1fa05fc3a",
+    "nano-ipad-launch-r3.local.json": "743d9c9fc65600e82959cc24eabc59bbc9d0318601bf51ced1d36c375cc7d9ed"
+  },
+  "limits": [
+    "Wireless app installation/launch succeeds; Nano USB/Wi-Fi coexistence not yet measured",
+    "Normal app launch sends no board request",
+    "Initial ROM setup/readback occurred on Mac; it is not an SDK initial installation backend qualification",
+    "iPad local-network permission, managed upload/commit/startup/behavior and GPIO observation pending",
+    "iPhone Nano host not installed or run in this record",
+    "No automatic rollback or power-loss qualification",
+    "No UI screenshots or native UI inspection used"
+  ]
+}

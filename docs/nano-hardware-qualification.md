@@ -150,3 +150,21 @@ absent-service cases, the twelve compiler-host/four Nano tooling fixtures,
 production policy executable and both macOS host source checks. Optimized iOS
 source checks and workflow YAML/bash checks pass separately. Remote SDK CI
 remains unprovisioned/unrun. Neither failed invocation counts as a successful gate.
+
+## Selected initial setup and iPad handoff
+
+[Initial setup evidence](nano-hardware-initial.json) records the signed iOS build
+2, existing profile coverage for both selected devices and successful wireless
+iPad installation/launch. Normal launch performs no preparation or connection.
+No provisioning updates were requested; the exact development entitlements are
+recorded. UI/accessibility inspection was not used and is not qualified.
+
+Firmware's [separate initial setup](../../Firmingo/docs/evidence/nano-sdk-initial.md)
+records user-selected ROM identity, verified exported resident plus known SDK
+GPIO capsule, full composite readback before reboot and a matching macOS hello.
+The 314,368-byte composite `4fb60a48…` initializes the entire first managed sector;
+its resident payload retains the distinct `35678c95…` identity. This avoids unknown
+preserved sketch contents for this test. The initial ROM operation is a firmware
+maintenance workflow, not an SDK installation-backend pass. Physical iPad USB
+authorization/hello and subsequent managed stage/commit/startup/behavior remain
+pending. Move the Nano only after this setup; use the app's explicit controls.
