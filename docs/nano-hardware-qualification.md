@@ -123,3 +123,30 @@ validation entry point; optimized iOS source checks also run in Apple CI. Comple
 app execution and every real board operation remain explicitly selected checks.
 No GPIO, byte-integrity, upload, install, authorization or routing hardware pass
 follows from source checks or offline compilation.
+
+## Recorded offline preparation
+
+[Preparation evidence](nano-hardware-preparation.json) records the exact test-plan
+anchor `861e0089…`, fourteen copied evidence roles, generated app inputs, source
+commits, signature, local tests and actual offline output. The corrected signed
+ARM64 macOS app at `24993ce…` compiles both known capsules through prepared SDK
+`4edc6aa…` and exports their independently checked bytes with a fresh launch UUID.
+Both complete Release app builds pass, with no Swift warnings and only the
+standard AppIntents no-framework note. The iOS build has signing disabled and
+was not installed or run. No device connection, flash or upload occurred.
+
+The first view-task-driven signed run exported nothing and reached its outer
+180-second timeout; it remains a failure. Explicit offline startup now belongs
+to the app lifetime, independent of view appearance, with bounded stage diagnostics.
+The corrected signed run emits all four required offline stages and matching
+capsules. No private container or native UI was inspected to collect either result.
+
+The first full SDK entry-point invocation also failed overall: all 154 Swift
+Testing functions passed, but an empty XCTest bundle failed architecture loading.
+The package exclusively uses Swift Testing. The corrected entry point explicitly
+selects that runner and rejects new XCTest imports/classes until the selection is
+reviewed; the full command now succeeds with 154 functions and nine explicit
+absent-service cases, the twelve compiler-host/four Nano tooling fixtures,
+production policy executable and both macOS host source checks. Optimized iOS
+source checks and workflow YAML/bash checks pass separately. Remote SDK CI
+remains unprovisioned/unrun. Neither failed invocation counts as a successful gate.

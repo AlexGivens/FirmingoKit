@@ -141,7 +141,13 @@ It explicitly selects Swift Testing (all current tests) and rejects new XCTest
 sources pending runner review; an empty cached XCTest bundle previously returned
 an architecture-load failure despite all 154 Swift Testing functions passing.
 The corrected entry point passes; no failed command counts as a full pass.
-Signed Nano-app offline execution and all real board actions remain separate gates.
+The corrected Nano app (`24993ce…`, signed macOS build 2) now passes actual
+connection-disabled offline execution and independent 316/392-byte capsule
+checks. Both complete Release apps build; iOS signing/execution is not claimed.
+See `docs/nano-hardware-preparation.json`. The first view-task-driven offline run
+timed out without an export and remains rejected; app-lifetime startup and stage
+diagnostics are verified by the new signed run. All real board actions, selected
+initial ROM/slot/readback setup and physical iPad/iPhone FMGO testing remain open.
 
 Snapshot verified on 2026-09-30:
 

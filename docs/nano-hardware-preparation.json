@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "prepared_and_signed_offline_checked_no_hardware",
+  "scope": "Pinned resident test inputs and separate SDK qualification app; actual signed macOS offline compilation only; no board connection/flash/upload or physical iOS run",
+  "hostSourceCommit": "24993ce998ecf44d0dc426409ebbd77e4f66158d",
+  "implementationCommit": "9cf9b1738876d43be575c1fb463f2d9de62bd501",
+  "hostInputsSHA256": "ee73f78239e8132196f490e929d49a9eb110245fdfe8a705b2ff070004c27043",
+  "context": {
+    "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+    "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+  },
+  "testPlanSHA256": "861e008953cc9b57d752fe2a4765984deba17b45d8fc62530650c480611f4ca6",
+  "testPlan": {
+    "schema": 1,
+    "kind": "nano-sdk-hardware-qualification-inputs",
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+    "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+    "firmwareCommit": "e0a79d1e47aa90d5dda02ccd284d40b9c2922c12",
+    "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+    "board": "nano_rp2040_connect",
+    "profile": "nano-managed-v1",
+    "residentUF2": {
+      "path": "firmware/resident.uf2",
+      "bytes": 306176,
+      "sha256": "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983"
+    },
+    "residentELF": {
+      "path": "firmware/resident.elf",
+      "bytes": 2855072,
+      "sha256": "5b3116cdcde28f84b86f78cfffb258591455406a1f276b35bb5fd63a6f857304"
+    },
+    "apiAddress": "0x10022c9c",
+    "firmwareVersion": "0.1.0-m9exp1",
+    "defaultTestEndpoint": {
+      "address": "192.168.77.1",
+      "port": 7420
+    },
+    "imageEffect": "Resident-only UF2; existing managed slot is preserved. Review/read back or initialize the slot during separately selected ROM setup before booting an unknown prior sketch.",
+    "recovery": "Board-correct Nano REC/GND ROM procedure; D2/GPIO25-to-GND is separate managed-upload authorization.",
+    "association": "Explicit operator evidence of exact installed resident required; hello/version/API matching is not installed-image attestation.",
+    "files": [
+      {
+        "path": "catalogue.json",
+        "bytes": 890,
+        "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      },
+      {
+        "path": "firmware/build-report.json",
+        "bytes": 6101,
+        "sha256": "db7e505a80589291481970c274e8158e32b685655dc0c246f131341c7d45bc1a"
+      },
+      {
+        "path": "firmware/contract.json",
+        "bytes": 2317,
+        "sha256": "fb7b09eab3020b738538451ca88db48e6aaba8f09686d11e929f0054cdd925b8"
+      },
+      {
+        "path": "firmware/contract/LICENSE",
+        "bytes": 35149,
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+      },
+      {
+        "path": "firmware/contract/abi.h",
+        "bytes": 814,
+        "sha256": "941fd824a765e1dc9efaa5c9bdd670d77bdb26fedef98c47d9c7969d5bb6ad2a"
+      },
+      {
+        "path": "firmware/contract/facade/Arduino.h",
+        "bytes": 2236,
+        "sha256": "b35175c2569f4203dac411dadff9e340e562cd5a09f89f82e119e78ed4bca6b3"
+      },
+      {
+        "path": "firmware/contract/image.h",
+        "bytes": 1399,
+        "sha256": "658ceac8716a6a6709714f2b51e2e01684a06ba87db999ee0d75cff0b9e6ffd9"
+      },
+      {
+        "path": "firmware/contract/module.ld",
+        "bytes": 596,
+        "sha256": "3fd5e2ba42dec5f10bfb15bc70e35faefc1b44a7de3cd68de0573ed7d6428110"
+      },
+      {
+        "path": "firmware/contract/module_entry.cpp",
+        "bytes": 248,
+        "sha256": "cf7458999069224ada262c13f40792c5cef3b6ed3e3760e11fa8062c3c9306df"
+      },
+      {
+        "path": "firmware/manifest.json",
+        "bytes": 2006,
+        "sha256": "9246a7da31b3b4237d1783feb195a7e7719d65c6f4165f440d05de5daea876e4"
+      },
+      {
+        "path": "firmware/resident-facts.json",
+        "bytes": 6741,
+        "sha256": "4a1bcf95e7b9cbadd24b327b6e1556db917cec7abf241778ccb48d06e2708b48"
+      },
+      {
+        "path": "firmware/resident.elf",
+        "bytes": 2855072,
+        "sha256": "5b3116cdcde28f84b86f78cfffb258591455406a1f276b35bb5fd63a6f857304"
+      },
+      {
+        "path": "firmware/resident.uf2",
+        "bytes": 306176,
+        "sha256": "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983"
+      },
+      {
+        "path": "consumer-manifest.json",
+        "bytes": 6670,
+        "sha256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+      }
+    ],
+    "deviceOperations": false,
+    "installed": false,
+    "hardwareQualified": false
+  },
+  "hostSourceFiles": [
+    {
+      "path": "Sources/NanoApp.swift",
+      "bytes": 4697,
+      "sha256": "ce46844853551d548639a9589e460848bf54365798bb698eec3c6a681cbc2d2b"
+    },
+    {
+      "path": "Sources/NanoGate.swift",
+      "bytes": 4328,
+      "sha256": "24c8dfd1fa0089b5896beed9b59f959561e4717c935edb7f266a0e947efb27da"
+    },
+    {
+      "path": "Sources/NanoModel.swift",
+      "bytes": 20708,
+      "sha256": "95ae82eb360e866e048fc8209b859184d0ec1ca377ab4ca590c0c1c436dd392d"
+    }
+  ],
+  "signature": {
+    "strictDeepVerification": true,
+    "kind": "Apple Development",
+    "teamIdentifier": "WGR9T9JH4L",
+    "hardenedRuntime": true,
+    "entitlements": {
+      "com.apple.security.app-sandbox": true,
+      "com.apple.security.network.client": true
+    },
+    "codeDirectoryHash": "2262b525ade9711f38c8c682d574b61c35d4831a",
+    "executableSHA256": "4fa61031c5de5bf8073b5f64b8c6b39fe8829650aa53901a947bd7bf3cf6fc8a",
+    "buildVersion": "2",
+    "sameExistingCertificateAsCompilerHost": true
+  },
+  "host": {
+    "osVersion": "27.0",
+    "osBuild": "26A428",
+    "architecture": "arm64",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4"
+  },
+  "offlineOperation": {
+    "status": "passed_signed_nano_offline_preparation",
+    "context": {
+      "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+      "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+    },
+    "runID": "85500D9D-9993-4728-8C7F-5439B21ED077",
+    "reportSHA256": "4b96c5585c8aae38ed0779f507835659c627230e49d92a1d7eb416e5013aed30",
+    "artifacts": [
+      {
+        "path": "gpio.fms",
+        "bytes": 316,
+        "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+      },
+      {
+        "path": "console.fms",
+        "bytes": 392,
+        "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+      }
+    ],
+    "teamIdentifier": "WGR9T9JH4L",
+    "entitlements": {
+      "com.apple.security.app-sandbox": true,
+      "com.apple.security.network.client": true
+    },
+    "hardenedRuntime": true,
+    "deviceOperations": false,
+    "hardwareQualified": false
+  },
+  "offlineReport": {
+    "context": {
+      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+      "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+      "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+    },
+    "events": [
+      {
+        "detail": "No device operation",
+        "stage": "offline-start"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "compiled-gpio"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "compiled-console"
+      },
+      {
+        "detail": "Both known capsules verified; no device association or operation performed",
+        "stage": "offline-ready"
+      }
+    ],
+    "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+    "hardwareQualified": false,
+    "kind": "nano-sdk-hardware-qualification",
+    "note": "Individual observations only; installation/startup/behavior and host platforms require separate review",
+    "operatingSystem": "Version 27.0 (Build 26A428)",
+    "runID": "85500D9D-9993-4728-8C7F-5439B21ED077",
+    "schema": 1
+  },
+  "launch": {
+    "processID": 67780,
+    "runID": "85500D9D-9993-4728-8C7F-5439B21ED077",
+    "mode": "offline-only"
+  },
+  "checks": {
+    "ordinarySDKEntryPoint": "passed with explicit Swift Testing runner; 154 functions, nine absent-service cases explicitly skipped; no real-service full suite in source checkout",
+    "compilerHostFixtures": 12,
+    "nanoToolFixtures": 4,
+    "productionAdmissionGateExecutable": "passed stale endpoint/device/boot, required evidence, one-shot commit, restored query-only records and terminal advancement",
+    "macOSHostSourceTypecheck": "passed, warnings as errors",
+    "optimizedIOSHostObjects": "passed, warnings as errors",
+    "macOSReleaseApp": "passed and development-signed sandbox/hardened offline execution",
+    "iOSReleaseApp": "passed, signing disabled, not installed or executed",
+    "workflowYAMLAndBashSyntax": "passed",
+    "remoteCI": "not run; configured SDK self-hosted runner unprovisioned",
+    "generatedInputs": "all 23 records checked against captured bytes; three Swift sources match committed host source; firmware inputs remain outside app Sources/resources"
+  },
+  "rejectedOrFailedRuns": [
+    {
+      "kind": "ordinary SDK entry point before explicit runner selection",
+      "observation": "All 154 Swift Testing functions passed, but the empty XCTest bundle architecture-load error made the command fail; not counted as a full pass",
+      "logSHA256": "6f92228e43ca2151db817fcbce2112dfbb8f4e15079317cbeb7d2aaf97a233ed"
+    },
+    {
+      "kind": "first Nano view-task offline startup",
+      "hostSourceCommit": "9cf9b1738876d43be575c1fb463f2d9de62bd501",
+      "runID": "1F8CC5CC-0F29-4C2E-96C8-93BB606065B9",
+      "observation": "No stdout/stderr export; outer 180-second timeout killed only its own child; failure retained, no success inferred or private-container inspection",
+      "failureSHA256": "09b5b34bc65c9c65eedf84859fe22c53d6de66b0802694218694a8e999cec708"
+    }
+  ],
+  "limitations": [
+    "Normal launch performs no device action; explicit connection-disabled offline mode supplies this execution evidence",
+    "Resident-only UF2 preserves the managed slot; exact selected board and initial ROM/slot/readback plan still required before flashing",
+    "Operator association is reviewed host evidence, not hello/firmware-hash attestation",
+    "Native gate/parser/source tests do not qualify actual upload, installation, startup, GPIO, binary echo, authorization, routing or Nano USB/Wi-Fi coexistence",
+    "No physical iOS execution, UI/accessibility inspection, firmware change, compiler asset/recipe/timer change or binary publication",
+    "Raw outputs and signing details remain local; future board IDs and operator notes require separate publication review"
+  ]
+}
