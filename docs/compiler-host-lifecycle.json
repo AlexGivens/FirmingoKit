@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "status": "awaiting_manual_idle_transition",
+  "scope": "Development-signed Release build 4, opt-in idle scene transition only; no SDK implementation change or board operation",
+  "hostSourceCommit": "7b1cb399aa54ef46d0b7d0ccca786c7de4d5d872",
+  "context": {
+    "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+    "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+  },
+  "hostInputsSHA256": "091c076cfdf0532f147d1aa40a87e63c840c7058088f59f79d7ea3171b138b51",
+  "hostSourceFiles": [
+    {
+      "path": "Sources/QualificationApp.swift",
+      "bytes": 5475,
+      "sha256": "1a0c30ada2192837bdeeb230c8c7550346b273dbd910fef59a23909bf91c4df6"
+    },
+    {
+      "path": "Sources/QualificationChecks.swift",
+      "bytes": 12043,
+      "sha256": "fe3ee97cca92b3e8e352b05dd4d023271bfe445cc8745d570b912a18b2b17172"
+    },
+    {
+      "path": "Sources/QualificationLifecycle.swift",
+      "bytes": 9637,
+      "sha256": "54915985057314d4240afa6f5b8b80c2862c06861717a0951803225a783a8482"
+    },
+    {
+      "path": "Sources/QualificationStress.swift",
+      "bytes": 11163,
+      "sha256": "3a19418a84f9db7bc4e6d2346c4d0f8f47f873f688ed5e25e57b9c15c9346069"
+    }
+  ],
+  "signature": {
+    "strictDeepVerification": true,
+    "teamIdentifier": "WGR9T9JH4L",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.compilerqualification",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "executableSHA256": "20ff864ada64d58025ea57b0383e039100079b5b24297743bc64c92dc56ebf25",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "buildVersion": "4",
+    "bothDevicesIncluded": true,
+    "backgroundModes": []
+  },
+  "toolchain": {
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4",
+    "iOSSDK": "27.0",
+    "configuration": "Release",
+    "deploymentMinimum": "17.0",
+    "buildOverrides": {
+      "CURRENT_PROJECT_VERSION": 4,
+      "ENABLE_DEBUG_DYLIB": "NO",
+      "CODE_SIGN_STYLE": "Automatic"
+    }
+  },
+  "validation": {
+    "hostToolFixtures": 8,
+    "macOSHostSourceTypecheck": "passed, warnings as errors",
+    "iOSOptimizedHostObject": "passed, warnings as errors, no app linking/signing/assets",
+    "physicalReleaseBuild": "passed, no Swift warnings; standard AppIntents no-framework metadata note",
+    "workflowYAMLAndRunStepShellSyntax": "passed",
+    "remoteCI": "not run; configured self-hosted runner remains unprovisioned",
+    "SDKRuntime": "unchanged from 4edc6aa; previous 154-function SDK and actual-service evidence retained, no repeated full SDK run for host-only change"
+  },
+  "hosts": [
+    {
+      "model": "iPhone 15 Pro Max",
+      "productType": "iPhone16,2",
+      "transport": "localNetwork",
+      "idleTransition": "not_run",
+      "originalModeRegression": {
+        "status": "passed_original_six_checks",
+        "runID": "AD37DC7D-125E-48BC-AE28-D56E3710E6B2",
+        "reportSHA256": "b7422b27741fe7d889ddcc41819d9a54e6afc6edeed6bc3036e86b881c202742",
+        "context": {
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+        },
+        "steps": [
+          {
+            "name": "resources",
+            "seconds": 0.10409395833266899
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "cold-gpio",
+            "seconds": 0.7459157916600816,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "warm-console",
+            "seconds": 0.6196277500130236,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "name": "frontend-error",
+            "seconds": 0.41971666665631346
+          },
+          {
+            "name": "busy-cancellation",
+            "seconds": 0.36654749998706393
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "fresh-after-cancellation",
+            "seconds": 0.5454267916793469,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "artifacts": [
+          {
+            "path": "cold-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "warm-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      },
+      "osVersion": {
+        "components": [
+          27,
+          0,
+          0,
+          0,
+          0
+        ],
+        "originalComponentsCount": 2,
+        "stringValue": "27.0"
+      },
+      "osBuildVersions": {
+        "buildVersion": {
+          "majorLetterComponent": "A",
+          "majorNumberComponent": 24,
+          "name": "24A437",
+          "revisionVersion": {
+            "components": [
+              24,
+              1,
+              437,
+              0,
+              0
+            ],
+            "originalComponentsCount": 5,
+            "stringValue": "24.1.437.0.0"
+          },
+          "trainProgram": "iOS",
+          "updateNumberComponent": 437
+        },
+        "supplementalBuildVersion": {
+          "majorLetterComponent": "A",
+          "majorNumberComponent": 24,
+          "name": "24A437",
+          "revisionVersion": {
+            "components": [
+              24,
+              1,
+              437,
+              0,
+              0
+            ],
+            "originalComponentsCount": 5,
+            "stringValue": "24.1.437.0.0"
+          },
+          "trainProgram": "iOS",
+          "updateNumberComponent": 437
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Scene events establish only an idle background/return transition; OS suspension, active compilation interruption and memory pressure remain untested",
+    "No background execution mode/extension is added; production compiler deadlines remain unchanged",
+    "Exact launch UUID/PID and prepared context must match the journal; incomplete or relaunched runs cannot pass",
+    "UI/accessibility, minimum OS, other host combinations, aggregate app/WebKit memory and Nano deployment remain unqualified",
+    "Raw device/signing/journal data remain local under .build; public fields omit personal identifiers",
+    "No compiler binary/recipe/catalogue change, publication or board contact"
+  ],
+  "pendingPhysicalRuns": [
+    {
+      "model": "iPad Pro (11-inch) (3rd generation)",
+      "runID": "99813873-F1E5-4621-88DC-1C969DFEA197",
+      "stateAtInspection": "waiting-for-background",
+      "result": "pending; no transition pass claimed"
+    }
+  ]
+}

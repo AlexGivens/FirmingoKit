@@ -75,7 +75,9 @@ aggregate memory and real pressure/lifecycle qualification remain open.
 The original six-check mode remains. An opt-in `--qualification-idle-lifecycle`
 host mode now records actual SwiftUI scene phases, builds known capsules before
 and after an idle background/return transition and requires the same PID/context.
-Physical execution of this new mode is pending; it adds no SDK lifecycle policy
+The signed build-4 iPad run is awaiting the manual transition; the identical
+iPhone app retains the original six-check pass. See `docs/compiler-host-lifecycle.json`.
+Physical transition qualification is pending; it adds no SDK lifecycle policy
 or background execution grant. Source CI now runs eight tool fixtures,
 macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.

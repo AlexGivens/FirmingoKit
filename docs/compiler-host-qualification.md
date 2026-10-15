@@ -365,6 +365,16 @@ This checks an **idle scene transition**, not compilation while backgrounded,
 OS suspension, memory pressure or interruption of an active build. Those remain
 separate qualification gates. No SDK lifecycle policy or board operation is added.
 
+The [lifecycle record](compiler-host-lifecycle.json) pins host source `7b1cb39…`,
+the unchanged prepared SDK, generated inputs and development-signed Release build
+4. Both device installations succeeded over Wi-Fi. The updated iPhone app passes
+the original six-check mode and both exported capsule files match the known
+vectors. The iPad idle run reached `waiting-for-background`; the physical manual
+transition is pending and is not reported as a pass. Eight tool fixtures,
+macOS/optimized iOS source checks, the Release app build, workflow YAML and shell
+syntax checks pass. No remote CI run or additional full SDK test run is claimed
+for this host-only change.
+
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an
