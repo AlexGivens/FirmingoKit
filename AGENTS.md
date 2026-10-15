@@ -72,7 +72,11 @@ all 80 builds and both original six-check regressions pass with unchanged capsul
 See `docs/compiler-resource-memory.json`. These are host samples, not aggregate
 app/WebKit memory or a leak-free/budget claim. App-scoped `xctrace` attachment failed;
 aggregate memory and real pressure/lifecycle qualification remain open.
-The original six-check mode remains. Source CI now runs seven tool fixtures,
+The original six-check mode remains. An opt-in `--qualification-idle-lifecycle`
+host mode now records actual SwiftUI scene phases, builds known capsules before
+and after an idle background/return transition and requires the same PID/context.
+Physical execution of this new mode is pending; it adds no SDK lifecycle policy
+or background execution grant. Source CI now runs eight tool fixtures,
 macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.
 

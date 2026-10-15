@@ -19,6 +19,9 @@ runner_spec.loader.exec_module(runner)
 stress_spec = importlib.util.spec_from_file_location("compiler_stress_checker", Path(__file__).with_name("check-compiler-stress.py"))
 stress = importlib.util.module_from_spec(stress_spec)
 stress_spec.loader.exec_module(stress)
+lifecycle_spec = importlib.util.spec_from_file_location("compiler_lifecycle_checker", Path(__file__).with_name("check-compiler-lifecycle.py"))
+lifecycle = importlib.util.module_from_spec(lifecycle_spec)
+lifecycle_spec.loader.exec_module(lifecycle)
 
 
 class CompilerHostTests(unittest.TestCase):
@@ -79,6 +82,8 @@ class CompilerHostTests(unittest.TestCase):
         entitlements = plistlib.loads((output / "CompilerQualification.entitlements").read_bytes())
         self.assertEqual(entitlements, {"com.apple.security.app-sandbox": True, "com.apple.security.network.client": True})
         self.assertNotIn("com.apple.security.cs.allow-jit", entitlements)
+        self.assertTrue((output / "Sources/QualificationLifecycle.swift").is_file())
+        self.assertNotIn("UIBackgroundModes", info)
 
     def test_existing_destination_is_preserved_and_partial_new_output_is_removed(self):
         output = self.root / "existing"; output.mkdir(); (output / "keep").write_bytes(b"preserve")
@@ -136,6 +141,38 @@ class CompilerHostTests(unittest.TestCase):
             with self.assertRaises(ValueError): stress.check(encode(changed), "fixture", 2)
         with self.assertRaises(ValueError): stress.check(b"x" * (2 * 1024**2 + 1), "fixture", 2)
         with self.assertRaises(ValueError): stress.check(encode(value), "fixture", 41)
+
+    def test_idle_lifecycle_requires_exact_launch_context_artifacts_and_real_transition_sequence(self):
+        # Parser-only events; fixture acceptance is not physical lifecycle evidence.
+        run = "12345678-1234-4234-8234-123456789ABC"
+        context = {"consumerManifestSHA256": self.value["consumerManifestSHA256"], "sdkCommit": "1" * 40, "preparedManifestSHA256": "a" * 64}
+        value = {"schema": 3, "kind": "idle-background-return", "runID": run, "status": "passed", "stage": "complete",
+                 "context": context, "hostProcessID": 123, "deviceOperations": False, "observationLimitSeconds": 600, "minimumBackgroundSeconds": 3,
+                 "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+                 "steps": [{"name": "before-background-gpio", "seconds": 0.1, "wasmLinearMemoryBytes": 27983872,
+                            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"},
+                           {"name": "after-foreground-console", "seconds": 0.1, "wasmLinearMemoryBytes": 27983872,
+                            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"}],
+                 "events": [{"phase": "active", "stage": "waiting-for-active", "seconds": 0},
+                            {"phase": "background", "stage": "waiting-for-background", "seconds": 1},
+                            {"phase": "active", "stage": "waiting-for-background", "seconds": 6}]}
+        encode = lambda value: json.dumps(value).encode()
+        self.assertEqual(lifecycle.check(encode(value), run, 123, context)["backgroundToActiveSeconds"], 5)
+        for change in (lambda v: v.update(status="running"), lambda v: v.update(stage="waiting-for-background"),
+                       lambda v: v.update(hostProcessID=124), lambda v: v.update(hostProcessID=True),
+                       lambda v: v.update(error="failed"), lambda v: v.update(runID="old"),
+                       lambda v: v["context"].update(preparedManifestSHA256="b" * 64),
+                       lambda v: v["steps"].pop(), lambda v: v["steps"][1].update(capsuleSHA256="0" * 64),
+                       lambda v: v["steps"][0].update(wasmLinearMemoryBytes=True),
+                       lambda v: v["events"][1].update(phase="inactive"),
+                       lambda v: v["events"][1].update(stage="before-background-gpio"),
+                       lambda v: v["events"][2].update(seconds=2), lambda v: v["events"][2].update(seconds=601),
+                       lambda v: v["events"][0].update(seconds=True), lambda v: v["events"][2].update(seconds=float("nan")),
+                       lambda v: v["events"].reverse(), lambda v: v["events"].extend(v["events"] * 32)):
+            changed = copy.deepcopy(value); change(changed)
+            with self.assertRaises(ValueError): lifecycle.check(encode(changed), run, 123, context)
+        with self.assertRaises(ValueError): lifecycle.check(encode(value), run, 125, context)
+        with self.assertRaises(ValueError): lifecycle.check(b"x" * 65537, run, 123, context)
 
 
 if __name__ == "__main__":

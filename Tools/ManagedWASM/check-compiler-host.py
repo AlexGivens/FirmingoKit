@@ -27,7 +27,8 @@ def main():
                "-enable-upcoming-feature", "ApproachableConcurrency", "-target", target,
                "-module-cache-path", str(cache), "-I", str(path), "-I", str(path / "Modules"),
                str(root / "Validation/CompilerHost/QualificationChecks.swift"), str(root / "Validation/CompilerHost/QualificationApp.swift"),
-               str(root / "Validation/CompilerHost/QualificationStress.swift")]
+               str(root / "Validation/CompilerHost/QualificationStress.swift"),
+               str(root / "Validation/CompilerHost/QualificationLifecycle.swift")]
     if args.ios_products:
         sdk = subprocess.run(["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], check=True, capture_output=True, text=True, timeout=15)
         command.extend(["-sdk", sdk.stdout.strip(), "-o", str(cache / "qualification-host.o")])

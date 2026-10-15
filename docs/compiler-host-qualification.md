@@ -321,6 +321,50 @@ and exported capsule hashes. Raw journals remain local under `.build/`. The
 earlier reliability record is unchanged. Aggregate memory, a memory-budget pass,
 long-term stability and real lifecycle/pressure scenarios remain open.
 
+## Opt-in idle background/return check
+
+`--qualification-idle-lifecycle` selects a separate schema-3 journal. The harness
+uses real [SwiftUI scene phases](https://developer.apple.com/documentation/swiftui/scenephase),
+compiles/exports the known GPIO capsule, then waits while idle. Go Home, wait five
+seconds and return to this app. It requires at least three seconds between an
+observed background phase and a later active phase, then compiles/exports the
+known console capsule using the same public compiler instance. No background
+execution entitlement or task extension is added. The original six-check mode
+remains the default; stress and lifecycle launch flags cannot be combined.
+
+Generate/sign/install the host as above with the added lifecycle source. Launch
+with a fresh UUID and save the CLI's JSON so its process ID is independently
+available. All `devicectl` options precede the bundle identifier/app arguments:
+
+```sh
+xcrun devicectl device process launch --device "$DEVICE_ID" --terminate-existing --timeout 30 \
+  --json-output LAUNCH_JSON com.firmingokit.compilerqualification \
+  --qualification-run "$RUN_ID" --qualification-idle-lifecycle
+```
+
+Wait for the exported journal's `waiting-for-background` stage before performing
+the manual transition. The journal is atomically updated at each observed scene
+change; inactive alone cannot pass. The manual observation window is ten minutes,
+with the public compiler's existing build deadline unchanged. After returning,
+copy this app's `Documents/CompilerQualification-RUN_ID` directory and require a
+completed report with the same UUID, PID and generated context:
+
+```sh
+python3 -I -S -B Tools/ManagedWASM/check-compiler-lifecycle.py \
+  REPORT_JSON "$RUN_ID" "$QUALIFICATION_PID" GENERATED_HOST/host-inputs.json
+```
+
+Also hash both exported `.fms` files against the known GPIO/console vectors.
+A killed/relaunched process, missing/brief transition, running/failed journal,
+wrong context or changed artifact is not a pass. The eight source-tool fixtures
+cover these report boundaries; macOS type-checking and optimized iOS object
+compilation include the new observer without executing an app. Physical evidence
+must be recorded separately after actually performing the transition.
+
+This checks an **idle scene transition**, not compilation while backgrounded,
+OS suspension, memory pressure or interruption of an active build. Those remain
+separate qualification gates. No SDK lifecycle policy or board operation is added.
+
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an

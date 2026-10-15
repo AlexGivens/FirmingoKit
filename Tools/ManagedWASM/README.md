@@ -35,7 +35,7 @@ compilation, sibling checkout lookup, downloads or device operations. Subcommand
 failure, signal or timeout produces a failing exit status. The SDK CI package job
 uses this same entry point; Apple build/DocC jobs remain separate.
 
-The entry point also runs seven qualification generator/runner/stress-report
+The entry point also runs eight qualification generator/runner/stress/lifecycle-report
 fixtures and macOS host source type-checking, without compiler assets or an app
 launch. The iOS CI build compiles optimized qualification-host objects against
 the built SDK using `check-compiler-host.py --ios-products BUILT_IOS_PRODUCTS`.
@@ -43,6 +43,9 @@ No app linking, signing or physical execution occurs in that source check.
 For explicit signed physical repeated-build and interrupted-run procedures, see
 [host qualification](../../docs/compiler-host-qualification.md). The standalone
 report checker is `python3 -I -S -B Tools/ManagedWASM/check-compiler-stress.py --help`.
+The opt-in idle scene-transition checker is `check-compiler-lifecycle.py --help`;
+it requires the exact launch PID and generated host context. Parser fixtures do
+not establish physical background/foreground behavior.
 
 Compiler-side commands are `tools/dev.mjs test`, `test-runtime <explicit-service>`,
 `build <request> <explicit-service> <new-output-directory>`, and

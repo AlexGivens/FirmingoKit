@@ -80,7 +80,7 @@ def generate(sdk, expected, output):
     output.mkdir()
     try:
         sources = output / "Sources"; sources.mkdir()
-        for name in ("QualificationApp.swift", "QualificationChecks.swift", "QualificationStress.swift"):
+        for name in ("QualificationApp.swift", "QualificationChecks.swift", "QualificationStress.swift", "QualificationLifecycle.swift"):
             shutil.copyfile(source / name, sources / name)
         context = {"preparedManifestSHA256": expected, "sdkCommit": value["sdkCommit"], "consumerManifestSHA256": value["consumerManifestSHA256"]}
         (sources / "qualification-context.json").write_text(json.dumps(context, indent=2) + "\n")
