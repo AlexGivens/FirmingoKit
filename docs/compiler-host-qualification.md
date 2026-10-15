@@ -388,6 +388,51 @@ macOS/optimized iOS source checks, the Release app build, workflow YAML and shel
 syntax checks pass. No remote CI run or additional full SDK test run is claimed
 for this host-only change.
 
+## Opt-in active-call cancellation on inactivity
+
+`--qualification-active-lifecycle` selects a separate schema-4 journal and an
+explicit **test-host** policy: cancel the pending public SDK build task when the
+scene first becomes inactive. This gives the normal SDK cleanup path a chance
+to settle before backgrounding. It does not add automatic lifecycle cancellation
+to the SDK or request a background task grant. Idle/stress/active launch modes
+are mutually exclusive; the original six-check mode remains the default.
+
+After resource verification and a known GPIO preflight build, the app waits for
+the user to tap **Start active compiler check**. Tap it, wait one second, go
+Home, wait five seconds and reopen the app. Manual start has a ten-minute
+admission bound; the actual series has at most forty known GPIO builds with
+the unchanged production deadlines. If all finish without an eligible event,
+the run fails rather than silently substituting an idle check.
+
+The inactive event must find a pending SDK call. Its exact attempt number and
+last reported progress are recorded before cancellation; late progress cannot
+change that evidence. The task must actually throw `CancellationError` through
+the SDK cleanup path. A returned artifact or cleanup/runtime failure fails the
+check. After real background/active events separated by at least three seconds,
+the same compiler instance must accept a new console request and export its
+known bytes. Fresh admission is timestamped after cancellation settlement and
+foreground return. Canceled attempts are never exported or uploaded.
+
+Use the launch command above with `--qualification-active-lifecycle`, collect
+only this app's UUID run directory, then check the exact launch PID and context:
+
+```sh
+python3 -I -S -B Tools/ManagedWASM/check-active-compiler-lifecycle.py \
+  REPORT_JSON "$RUN_ID" "$QUALIFICATION_PID" GENERATED_HOST/host-inputs.json
+```
+
+Also verify `before-active-gpio.fms` (316 bytes) and
+`fresh-after-active-cancel-console.fms` (392 bytes) against the existing capsule
+hashes. The checker rejects missing/manual-start evidence, inconsistent attempt
+counts, non-typed/pending cancellation, returned artifacts, early fresh admission,
+stale identity/context, missing scene transitions and changed output bytes.
+Nine source-tool fixtures and both maintained source-host checks cover the new
+mode without executing it. Physical results must be recorded separately.
+
+This observes an active public SDK call and the last accepted progress callback;
+it does not identify an instruction-level interruption point in WASM, prove OS
+suspension, background compilation or recovery from actual memory pressure.
+
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an

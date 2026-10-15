@@ -15,6 +15,9 @@ import Foundation
                 Text("Firmingo compiler checks").font(.title)
                 Text("Compile bundled test sketches and check diagnostics, cancellation and recovery. No board is needed.")
                 Text(model.status).accessibilityLabel("Compiler check status: " + model.status)
+                if model.activeLifecycleReady {
+                    Button("Start active compiler check") { model.beginActiveLifecycle() }
+                }
                 Button("Run compiler checks") { model.start() }.disabled(model.running)
                 if let report = model.report { ShareLink("Share results", item: report) }
             }
@@ -33,12 +36,19 @@ import Foundation
     @Published var running = false
     /// Last complete/failed journal available for explicit export.
     @Published var report: URL?
+    /// Shows the explicit start button only after active-call preflight completes.
+    @Published var activeLifecycleReady = false
     /// Consume launch automation only once per host process.
     private var launchConsumed = false
     /// Current view-delivered scene phase, independent of whether a lifecycle run is active.
     private var phase = "unknown"
     /// Owned only during an explicitly selected idle lifecycle check.
     private var lifecycle: QualificationLifecycle?
+    /// Sole opt-in active-call lifecycle observer; it never changes SDK-wide policy.
+    private var activeLifecycle: QualificationActiveLifecycle?
+
+    /// User action starts the bounded series immediately before the requested Home transition.
+    func beginActiveLifecycle() { activeLifecycle?.begin() }
 
     /// Forwards actual scene observations without introducing lifecycle policy into the SDK.
     func sceneChanged(_ value: ScenePhase) {
@@ -49,6 +59,7 @@ import Foundation
         @unknown default: phase = "unknown"
         }
         lifecycle?.record(phase: phase)
+        activeLifecycle?.record(phase: phase)
     }
 
     /// Allows a source-driven launcher to request one exact UUID without inspecting native UI.
@@ -57,8 +68,11 @@ import Foundation
         let arguments = ProcessInfo.processInfo.arguments
         if let index = arguments.firstIndex(of: "--qualification-run"), index + 1 < arguments.count,
            let id = UUID(uuidString: arguments[index + 1]) {
-            if arguments.contains("--qualification-idle-lifecycle") {
-                guard !arguments.contains("--qualification-stress-count") else { status = "Select one compiler check mode"; return }
+            let modes = ["--qualification-idle-lifecycle", "--qualification-active-lifecycle", "--qualification-stress-count"]
+            guard modes.filter({ arguments.contains($0) }).count <= 1 else { status = "Select one compiler check mode"; return }
+            if arguments.contains("--qualification-active-lifecycle") {
+                start(id: id, activeLifecycle: true)
+            } else if arguments.contains("--qualification-idle-lifecycle") {
                 start(id: id, idleLifecycle: true)
             } else if let repeatIndex = arguments.firstIndex(of: "--qualification-stress-count") {
                 guard repeatIndex + 1 < arguments.count, let count = Int(arguments[repeatIndex + 1]), (2...40).contains(count) else {
@@ -70,11 +84,15 @@ import Foundation
     }
 
     /// Runs the public SDK asynchronously; results stay in this app's own Documents container.
-    func start(id: UUID = UUID(), iterations: Int? = nil, idleLifecycle: Bool = false) {
+    func start(id: UUID = UUID(), iterations: Int? = nil, idleLifecycle: Bool = false, activeLifecycle: Bool = false) {
         guard !running else { return }; running = true; report = nil
         Task { @MainActor in
             do {
-                if idleLifecycle {
+                if activeLifecycle {
+                    let observer = try QualificationActiveLifecycle(id: id, phase: phase); self.activeLifecycle = observer
+                    report = try await observer.run(status: { status = $0 }, ready: { activeLifecycleReady = $0 })
+                    self.activeLifecycle = nil
+                } else if idleLifecycle {
                     let observer = try QualificationLifecycle(id: id, phase: phase); lifecycle = observer
                     report = try await observer.run { status = $0 }; lifecycle = nil
                 } else if let iterations {
@@ -82,6 +100,7 @@ import Foundation
                 } else { report = try await QualificationChecks.run(id: id) { status = $0 } }
             } catch {
                 lifecycle = nil
+                self.activeLifecycle = nil; activeLifecycleReady = false
                 status = "Could not record compiler checks: " + String(error.localizedDescription.prefix(2048))
             }
             running = false

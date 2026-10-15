@@ -80,7 +80,11 @@ The signed build-4 app now passes a manual idle transition on each physical devi
 same PID/context and known exported capsules before/after. The identical iPhone
 app retains the original six-check pass. See `docs/compiler-host-lifecycle.json`.
 This adds no SDK lifecycle policy/background grant or suspension/active-build
-interruption/pressure claim. Source CI now runs eight tool fixtures,
+interruption/pressure claim. An additional opt-in `--qualification-active-lifecycle`
+mode now arms a manual start, cancels only its pending SDK call when the scene
+becomes inactive, and requires typed cancellation plus real background/return
+before a fresh build. This is test-host policy; physical execution is pending.
+Source CI now runs nine tool fixtures,
 macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.
 
