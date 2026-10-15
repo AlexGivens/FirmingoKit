@@ -194,3 +194,30 @@ tool fixtures, the complete signed iOS build and signature/generated-source
 verification pass; the app was updated and reopened over Wi-Fi after preserving
 the original run. It makes no SDK/compiler/protocol or admission-policy change.
 Source/build checks do not establish visual or accessibility qualification.
+
+The build-3 run `093CBE25…` now records a successful first managed console
+upload: reviewed resident association, verified RAM stage, one host commit
+attempt, `committing` reply, fresh `boot_confirmed` status with `error=none` and
+`slotTouched=true`, then exact 256-byte console echo. Actual capsule bytes and
+the saved transaction bind the same selected physical device/boot, resident
+and 392-byte console digest. The firmware validator accepts those exported bytes.
+The journal also retains one local prerequisite rejection before the successful
+association; its cause is not established and it did not precede a stage/commit.
+No intermediate `installed` status was separately sampled. There is no packet
+trace counting wire commit requests or throughput/soak/trailing-frame interval
+claim.
+
+The same build-3 run now also completes the second managed GPIO upload. After
+the first transaction was known boot-confirmed, the user explicitly started the
+next operation and pressed RESET. A fresh hello observed the new boot and the
+user reported D13 off. A fresh reviewed association and the known 316-byte GPIO
+capsule then passed RAM verification, one host commit attempt and a fresh
+boot-confirmed query. The user observed D13 on and saved that manual observation.
+Both per-boot transaction records and the complete 23-event journal were retrieved
+and checked against the prior console snapshot, exact resident/capsule identities
+and new boot. The same production firmware validator accepts the actual exported
+GPIO bytes. The second operation includes two explicit hello inspections; neither
+implicitly associated or uploaded. This is a scoped iPad two-sketch workflow pass,
+with a manual LED transition and exact console bytes, not general Arduino support,
+minimum-OS, clean cold-attachment, Internet routing, soak or power-loss evidence.
+The physical iPhone managed workflow remains open.

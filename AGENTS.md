@@ -160,7 +160,15 @@ still uses `localNetwork`; this does not certify Internet routing or clean cold
 attachment. `docs/nano-hardware-ipad.json` retains that partial evidence. User
 feedback prompted persistent Status/input labels in signed iOS build 3 at
 `796c776…`, source/build checked and updated wirelessly. Association and SDK
-managed stage/commit/startup/behavior remain pending for the recorded run.
+managed stage/commit/startup/behavior were pending for that first run. Build 3
+now passes the scoped iPad console and GPIO workflows: known capsule bytes,
+reviewed association, RAM verification, one host commit attempt per operation,
+fresh boot-confirmed status, exact 256-byte console echo and a user-observed
+D13 off-to-on transition after a separate RESET baseline. The final own-run
+journal and per-boot transaction records are pinned in the same evidence file.
+Earlier network/prerequisite failures remain recorded. This qualifies this exact
+experimental iPad combination, not minimum OS, general Arduino, first-authorization
+or cold-attachment matrices, electrical GPIO timing, Internet routing or power loss.
 
 Snapshot verified on 2026-09-30:
 

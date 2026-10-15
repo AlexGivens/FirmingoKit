@@ -1,10 +1,7 @@
 {
-  "schema": 1,
+  "schema": 2,
   "date": "2026-10-15",
-  "status": "passed_iPad_offline_capsules_and_SDK_hello_after_prior_network_failure",
-  "hostSourceCommit": "24993ce998ecf44d0dc426409ebbd77e4f66158d",
-  "appBuild": "2",
-  "signatureAndInstallationEvidence": "nano-hardware-initial.json",
+  "status": "passed_scoped_iPad_two_SDK_capsule_uploads_startup_console_bytes_and_manual_GPIO_transition",
   "device": {
     "model": "iPad Pro 11-inch (3rd generation)",
     "productType": "iPad13,4",
@@ -15,70 +12,76 @@
     "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
     "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
   },
-  "runID": "0D622BC5-3399-4BE0-ADF0-7B3526E32D16",
-  "reportSHA256": "4ee682015087fe766d527db9912f60a8993d889e876be5e690aabc0bbbf5fd62",
-  "artifacts": [
-    {
-      "sketch": "gpio",
-      "bytes": 316,
-      "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
-      "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
-      "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected"
+  "initialSetupEvidence": "nano-hardware-initial.json",
+  "firstInspection": {
+    "hostSourceCommit": "24993ce998ecf44d0dc426409ebbd77e4f66158d",
+    "appBuild": "2",
+    "signatureAndInstallationEvidence": "nano-hardware-initial.json",
+    "runID": "0D622BC5-3399-4BE0-ADF0-7B3526E32D16",
+    "reportSHA256": "4ee682015087fe766d527db9912f60a8993d889e876be5e690aabc0bbbf5fd62",
+    "artifacts": [
+      {
+        "sketch": "gpio",
+        "bytes": 316,
+        "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+        "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected"
+      },
+      {
+        "sketch": "console",
+        "bytes": 392,
+        "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "buildReportSHA256": "7cb97e467e61cddd8e0c5eab0b9d908df50e4cf61e427d91193ecab933b2bba0",
+        "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected"
+      }
+    ],
+    "eventsWithDeviceIdentifiersOmitted": [
+      {
+        "detail": "No device operation",
+        "stage": "offline-start"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "compiled-gpio"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "compiled-console"
+      },
+      {
+        "detail": "Both known capsules verified; no device association or operation performed",
+        "stage": "offline-ready"
+      },
+      {
+        "detail": "The connection failed: The operation couldn\u2019t be completed. (Network.NWError error 50 - Network is down)",
+        "stage": "failed-or-uncertain"
+      },
+      {
+        "detail": "Selected ROM device ID matched; fresh boot ID retained only in ignored local report",
+        "stage": "inspected"
+      }
+    ],
+    "userObservation": {
+      "source": "user reply in this chat",
+      "displayedStatus": "Hello/target checked. Review exact installed resident evidence separately",
+      "D13LED": "lit",
+      "scope": "Observation during initial ROM-installed GPIO sketch; not an SDK-upload or electrical pin measurement"
     },
-    {
-      "sketch": "console",
-      "bytes": 392,
-      "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
-      "buildReportSHA256": "7cb97e467e61cddd8e0c5eab0b9d908df50e4cf61e427d91193ecab933b2bba0",
-      "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected"
+    "localCopySHA256": "ec848734adedc414d5ea1021a4964cb9ad0e50242ce102b12f64ffb4ab22d908",
+    "limits": [
+      "The first recorded inspection attempt failed with Network is down; a later explicit inspection succeeded; cause and exact cold-attachment timing not established",
+      "No installed-resident association, staging, managed commit, startup reconciliation or console echo in this run",
+      "Hello and matching device ID are self-reported identity, not installed-image attestation",
+      "No actual GPIO electrical measurement or timing-loop proof",
+      "No first-authorization prompt history or denial/locked attachment/cold cycle matrix established",
+      "Wireless journal retrieval while Nano is connected does not establish uncached Internet routing",
+      "Physical iPhone Nano workflow not run"
+    ],
+    "wirelessDevelopment": {
+      "afterJournalRetrievalTransport": "localNetwork",
+      "paired": true,
+      "rawStatusSHA256": "6106182840d8a06895fb6402394cbf97a5bbfe23c8f90edac4999bd1a246950b"
     }
-  ],
-  "eventsWithDeviceIdentifiersOmitted": [
-    {
-      "detail": "No device operation",
-      "stage": "offline-start"
-    },
-    {
-      "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
-      "stage": "compiled-gpio"
-    },
-    {
-      "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
-      "stage": "compiled-console"
-    },
-    {
-      "detail": "Both known capsules verified; no device association or operation performed",
-      "stage": "offline-ready"
-    },
-    {
-      "detail": "The connection failed: The operation couldn\u2019t be completed. (Network.NWError error 50 - Network is down)",
-      "stage": "failed-or-uncertain"
-    },
-    {
-      "detail": "Selected ROM device ID matched; fresh boot ID retained only in ignored local report",
-      "stage": "inspected"
-    }
-  ],
-  "userObservation": {
-    "source": "user reply in this chat",
-    "displayedStatus": "Hello/target checked. Review exact installed resident evidence separately",
-    "D13LED": "lit",
-    "scope": "Observation during initial ROM-installed GPIO sketch; not an SDK-upload or electrical pin measurement"
-  },
-  "localCopySHA256": "ec848734adedc414d5ea1021a4964cb9ad0e50242ce102b12f64ffb4ab22d908",
-  "limits": [
-    "The first recorded inspection attempt failed with Network is down; a later explicit inspection succeeded; cause and exact cold-attachment timing not established",
-    "No installed-resident association, staging, managed commit, startup reconciliation or console echo in this run",
-    "Hello and matching device ID are self-reported identity, not installed-image attestation",
-    "No actual GPIO electrical measurement or timing-loop proof",
-    "No first-authorization prompt history or denial/locked attachment/cold cycle matrix established",
-    "Wireless journal retrieval while Nano is connected does not establish uncached Internet routing",
-    "Physical iPhone Nano workflow not run"
-  ],
-  "wirelessDevelopment": {
-    "afterJournalRetrievalTransport": "localNetwork",
-    "paired": true,
-    "rawStatusSHA256": "6106182840d8a06895fb6402394cbf97a5bbfe23c8f90edac4999bd1a246950b"
   },
   "labelUpdate": {
     "sourceCommit": "796c7769176a62c6270c7b4d2f2cd617e1a76ad8",
@@ -103,5 +106,188 @@
       "nano-ipad-install-r4.local.json": "2858c4671a225adf39f93be274d1c8a1c04771e515ebc362a5525a8f748a4e88",
       "nano-ipad-launch-r4.local.json": "cfbb8308646bfc8d23e437afa9c5044d5685edd0ae74a5d04a6154c206b390cb"
     }
+  },
+  "consoleUpload": {
+    "status": "passed_RAM_verification_one_commit_boot_confirmation_and_exact_256_byte_echo",
+    "runID": "093CBE25-4F25-4C70-84E6-249CD8881442",
+    "appBuild": "3",
+    "sourceCommit": "796c7769176a62c6270c7b4d2f2cd617e1a76ad8",
+    "reportSHA256": "928162f4a620b18daa383501ad284b237255fdef98f8abbec082c6ff58ffeaad",
+    "transactionRecordSHA256": "c7db55eed2a56d75453a6592e0f41509ff56007c2f591c14b1d15c0dd76d1d80",
+    "transactionWithDeviceAndBootOmitted": {
+      "boardID": "nano_rp2040_connect",
+      "firmwareImageSHA256": "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983",
+      "format": "nano-managed-v1",
+      "residentELFSHA256": "5b3116cdcde28f84b86f78cfffb258591455406a1f276b35bb5fd63a6f857304",
+      "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "size": 392,
+      "targetID": 1,
+      "uploadID": 1,
+      "version": 1
+    },
+    "eventsWithDeviceIdentifiersOmitted": [
+      {
+        "detail": "No device operation",
+        "stage": "offline-start"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "compiled-gpio"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "compiled-console"
+      },
+      {
+        "detail": "Both known capsules verified; no device association or operation performed",
+        "stage": "offline-ready"
+      },
+      {
+        "detail": "Selected physical device and boot match saved transaction record; raw identifiers remain local",
+        "stage": "inspected"
+      },
+      {
+        "detail": "Qualification prerequisites are missing or changed. Reinspect the selected Nano and review its exact resident evidence.",
+        "stage": "failed-or-uncertain"
+      },
+      {
+        "detail": "Full ROM readback verified on Mac before reboot",
+        "stage": "operator-associated"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "stage-requested"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "ram-verified"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "commit-attempted-once"
+      },
+      {
+        "detail": "none",
+        "stage": "commit-reply-committing"
+      },
+      {
+        "detail": "error=none slotTouched=true",
+        "stage": "status-boot_confirmed"
+      },
+      {
+        "detail": "256/256 bytes match, including NUL/CR/LF/0xff; no throughput or soak claim",
+        "stage": "binary-echo-observed"
+      }
+    ],
+    "artifacts": [
+      {
+        "sketch": "gpio",
+        "bytes": 316,
+        "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+        "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected",
+        "capsuleBytesIndependentlyMatched": true
+      },
+      {
+        "sketch": "console",
+        "bytes": 392,
+        "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "buildReportSHA256": "7cb97e467e61cddd8e0c5eab0b9d908df50e4cf61e427d91193ecab933b2bba0",
+        "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected",
+        "capsuleBytesIndependentlyMatched": true
+      }
+    ],
+    "localCopySHA256": "bd713f7d168dac673a88e55f5c007e9da49b347dbb5f7d2ed4298718ab3e3eab",
+    "priorFailure": "One local qualification-prerequisite rejection occurred before the successful operator association; its cause is not established; no stage/commit event preceded the accepted association",
+    "limits": [
+      "One host commit attempt is journaled; no packet trace counts wire requests",
+      "Commit reply was committing; a fresh reconciliation later observed boot_confirmed with error none and slotTouched true; intermediate installed status was not separately sampled",
+      "256 bytes are checked in order including all values; no throughput, soak or second trailing-frame observation interval",
+      "No reboot/power-loss/rollback or first-authorization matrix qualification",
+      "GPIO second SDK upload remains pending"
+    ]
+  },
+  "limits": [
+    "Scoped one Nano, exact iPadOS 27.0.1/build-3 app/prepared SDK/resident/recipe combination",
+    "Earlier network and local prerequisite failures remain in their original run records",
+    "Console and GPIO each have one verified RAM stage, one host commit attempt and fresh boot-confirmed reconciliation; GPIO follows a user RESET and fresh association",
+    "GPIO off-to-on observation is manual; all 256 console bytes matched; no throughput/soak or electrical measurement",
+    "No general Arduino, production firmware, minimum-OS, physical iPhone, Internet-routing, cold-attachment matrix, power-loss or rollback qualification"
+  ],
+  "gpioUpload": {
+    "status": "passed_second_iPad_SDK_RAM_stage_one_commit_boot_confirmation_and_manual_GPIO_transition",
+    "runID": "093CBE25-4F25-4C70-84E6-249CD8881442",
+    "appBuild": "3",
+    "hostSourceCommit": "796c7769176a62c6270c7b4d2f2cd617e1a76ad8",
+    "finalReportSHA256": "d53bc30857a3519bcda857c0fa7a1c8f1f84d9ad58958f7e4f8e18fe0e782f0a",
+    "transactionRecordSHA256": "9326872472e6cf62d46c5655176eb66741a171c4478a68951608d4a34cba0715",
+    "transactionWithDeviceAndBootOmitted": {
+      "boardID": "nano_rp2040_connect",
+      "firmwareImageSHA256": "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983",
+      "format": "nano-managed-v1",
+      "residentELFSHA256": "5b3116cdcde28f84b86f78cfffb258591455406a1f276b35bb5fd63a6f857304",
+      "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "size": 316,
+      "targetID": 1,
+      "uploadID": 1,
+      "version": 1
+    },
+    "eventsWithDeviceIdentifiersOmitted": [
+      {
+        "detail": "Fresh inspection and association required",
+        "stage": "next-explicit-operation"
+      },
+      {
+        "detail": "Same selected physical device, new post-RESET boot; identifiers retained locally",
+        "stage": "inspected"
+      },
+      {
+        "detail": "Same selected physical device, new post-RESET boot; identifiers retained locally",
+        "stage": "inspected"
+      },
+      {
+        "detail": "Full ROM readback verified on Mac before reboot",
+        "stage": "operator-associated"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "stage-requested"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "ram-verified"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "commit-attempted-once"
+      },
+      {
+        "detail": "none",
+        "stage": "commit-reply-committing"
+      },
+      {
+        "detail": "error=none slotTouched=true",
+        "stage": "status-boot_confirmed"
+      },
+      {
+        "detail": "LED is on",
+        "stage": "manual-gpio-observation"
+      }
+    ],
+    "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+    "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+    "sameDeviceNewBootMatched": true,
+    "userObservations": {
+      "beforeUpload": "After explicit RESET of the installed console sketch, fresh SDK hello passed and user reported D13 off",
+      "afterUpload": "After GPIO boot confirmation, user reported D13 on; journal records LED is on",
+      "measurement": "Manual visual LED observation; no electrical or timing measurement"
+    },
+    "localCopySHA256": "135f67578ffb65d90e06ff029b72e9f17bed032ea28304358739e3357ca5d0a6",
+    "limits": [
+      "Two explicit hello inspections occurred after RESET; neither automatically associated or uploaded",
+      "Intermediate installed state was not separately sampled; boot_confirmed reports error none and slotTouched true",
+      "RESET followed a known terminal console transaction and explicit next-operation action; no uncertain commit replay occurred",
+      "No automatic GPIO measurement, soak, cold-attachment matrix, Internet routing or power-loss claim"
+    ]
   }
 }
