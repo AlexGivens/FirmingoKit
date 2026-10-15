@@ -168,3 +168,29 @@ preserved sketch contents for this test. The initial ROM operation is a firmware
 maintenance workflow, not an SDK installation-backend pass. Physical iPad USB
 authorization/hello and subsequent managed stage/commit/startup/behavior remain
 pending. Move the Nano only after this setup; use the app's explicit controls.
+
+## First physical iPad inspection and label correction
+
+[The iPad record](nano-hardware-ipad.json) retains build-2 run `0D622BC5…`:
+both actual compiled capsule files match the known 316/392-byte vectors and pass
+Firmingo's production validator, including wrong-API/corrupt-code rejection.
+The first recorded inspection failed with `Network is down`; a subsequent
+explicit inspection succeeded against the selected device and fresh boot.
+Neither its cause nor a clean cold-attachment/authorization pass is established.
+The user reported the checked-hello status and a lit D13 LED while the initial
+ROM-installed GPIO sketch was selected. This is a manual LED observation, not
+an electrical measurement, loop timing proof or SDK managed-install result.
+
+The own-run journal/capsules were retrieved while CoreDevice still reported
+`localNetwork` and the Nano occupied the iPad port. This establishes the scoped
+SDK hello plus wireless development/report retrieval, not uncached Internet
+coexistence or the wider USB authorization matrix. No association, RAM stage,
+managed commit/startup or console behavior occurs in that recorded run.
+
+The user also found that status and filled input fields were difficult to
+identify. Build 3 (`796c776…`) adds a persistent Status heading, visible field
+labels and rounded input borders. Source checks on both Apple platforms, four
+tool fixtures, the complete signed iOS build and signature/generated-source
+verification pass; the app was updated and reopened over Wi-Fi after preserving
+the original run. It makes no SDK/compiler/protocol or admission-policy change.
+Source/build checks do not establish visual or accessibility qualification.

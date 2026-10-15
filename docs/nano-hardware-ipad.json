@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "passed_iPad_offline_capsules_and_SDK_hello_after_prior_network_failure",
+  "hostSourceCommit": "24993ce998ecf44d0dc426409ebbd77e4f66158d",
+  "appBuild": "2",
+  "signatureAndInstallationEvidence": "nano-hardware-initial.json",
+  "device": {
+    "model": "iPad Pro 11-inch (3rd generation)",
+    "productType": "iPad13,4",
+    "os": "Version 27.0.1 (Build 24A446)"
+  },
+  "context": {
+    "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+    "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+  },
+  "runID": "0D622BC5-3399-4BE0-ADF0-7B3526E32D16",
+  "reportSHA256": "4ee682015087fe766d527db9912f60a8993d889e876be5e690aabc0bbbf5fd62",
+  "artifacts": [
+    {
+      "sketch": "gpio",
+      "bytes": 316,
+      "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+      "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected"
+    },
+    {
+      "sketch": "console",
+      "bytes": 392,
+      "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "buildReportSHA256": "7cb97e467e61cddd8e0c5eab0b9d908df50e4cf61e427d91193ecab933b2bba0",
+      "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected"
+    }
+  ],
+  "eventsWithDeviceIdentifiersOmitted": [
+    {
+      "detail": "No device operation",
+      "stage": "offline-start"
+    },
+    {
+      "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "stage": "compiled-gpio"
+    },
+    {
+      "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "stage": "compiled-console"
+    },
+    {
+      "detail": "Both known capsules verified; no device association or operation performed",
+      "stage": "offline-ready"
+    },
+    {
+      "detail": "The connection failed: The operation couldn\u2019t be completed. (Network.NWError error 50 - Network is down)",
+      "stage": "failed-or-uncertain"
+    },
+    {
+      "detail": "Selected ROM device ID matched; fresh boot ID retained only in ignored local report",
+      "stage": "inspected"
+    }
+  ],
+  "userObservation": {
+    "source": "user reply in this chat",
+    "displayedStatus": "Hello/target checked. Review exact installed resident evidence separately",
+    "D13LED": "lit",
+    "scope": "Observation during initial ROM-installed GPIO sketch; not an SDK-upload or electrical pin measurement"
+  },
+  "localCopySHA256": "ec848734adedc414d5ea1021a4964cb9ad0e50242ce102b12f64ffb4ab22d908",
+  "limits": [
+    "The first recorded inspection attempt failed with Network is down; a later explicit inspection succeeded; cause and exact cold-attachment timing not established",
+    "No installed-resident association, staging, managed commit, startup reconciliation or console echo in this run",
+    "Hello and matching device ID are self-reported identity, not installed-image attestation",
+    "No actual GPIO electrical measurement or timing-loop proof",
+    "No first-authorization prompt history or denial/locked attachment/cold cycle matrix established",
+    "Wireless journal retrieval while Nano is connected does not establish uncached Internet routing",
+    "Physical iPhone Nano workflow not run"
+  ],
+  "wirelessDevelopment": {
+    "afterJournalRetrievalTransport": "localNetwork",
+    "paired": true,
+    "rawStatusSHA256": "6106182840d8a06895fb6402394cbf97a5bbfe23c8f90edac4999bd1a246950b"
+  },
+  "labelUpdate": {
+    "sourceCommit": "796c7769176a62c6270c7b4d2f2cd617e1a76ad8",
+    "appBuild": "3",
+    "changes": "Persistent Status heading, address/device ID/resident digest/evidence/sketch/GPIO labels and rounded input borders",
+    "checks": [
+      "four existing Nano tool fixtures pass",
+      "warnings-as-errors macOS source check passes",
+      "optimized iOS source compilation passes",
+      "signed iOS Release build passes",
+      "strict signature and profile coverage verified",
+      "23 generated host records/source snapshots verified",
+      "wireless iPad installation and fresh launch succeed"
+    ],
+    "transactionEffect": "Prior run had no association or staged transaction; its complete journal retained before update",
+    "visualAndAccessibilityQualification": "No screenshot or native UI inspection; awaiting user feedback on actual layout",
+    "generatedHostInputsSHA256": "2fbc8e33d9632cbe0ee43f4a5d5d349530db51441ad8c25654db0825ada161fa",
+    "localEvidenceSHA256": {
+      "nano-labels-macos-check.log": "51b9182eaea7762186ceaf1456a96efbb7303f6af378ebb5fccb3cf3f68e8836",
+      "nano-labels-ios-check.log": "846bf3dcb611f6c0d024aae4ede5b2cefe328321ad4a1e5f1e6fe97f89ef3349",
+      "nano-host-ios-signed-r4.log": "6423bb5d41108b2228f0a6009cd5c8637e4582cb4d4e045817047d840706328b",
+      "nano-ipad-install-r4.local.json": "2858c4671a225adf39f93be274d1c8a1c04771e515ebc362a5525a8f748a4e88",
+      "nano-ipad-launch-r4.local.json": "cfbb8308646bfc8d23e437afa9c5044d5685edd0ae74a5d04a6154c206b390cb"
+    }
+  }
+}

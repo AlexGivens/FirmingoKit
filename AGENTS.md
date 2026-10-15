@@ -153,6 +153,14 @@ Nano iOS build 2 is installed/launched on iPad over Wi-Fi using existing profile
 coverage. See `docs/nano-hardware-initial.json`. Initial setup is separate from
 SDK managed upload/startup/behavior and physical iPad/iPhone FMGO qualification,
 which remain open. No normal app launch contacts the board.
+The first physical iPad run now records both known capsule files and a successful
+SDK hello after an earlier Network-is-down attempt, plus the user's lit D13 LED
+observation during the initial ROM-installed GPIO sketch. Own-run report retrieval
+still uses `localNetwork`; this does not certify Internet routing or clean cold
+attachment. `docs/nano-hardware-ipad.json` retains that partial evidence. User
+feedback prompted persistent Status/input labels in signed iOS build 3 at
+`796c776…`, source/build checked and updated wirelessly. Association and SDK
+managed stage/commit/startup/behavior remain pending for the recorded run.
 
 Snapshot verified on 2026-09-30:
 
