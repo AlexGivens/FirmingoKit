@@ -115,6 +115,11 @@ over `localNetwork`; `docs/compiler-host-deadline.json` records exact provenance
 scene events, reports and exported capsule bytes. This changes no SDK timer,
 compiler input, board claim or background policy. Both updated apps also retain
 the original six-check pass with known exported capsules.
+The macOS runner now has an explicit deadline mode with independently recorded
+launch PID/context and two bounded run-bound capsule exports through stdout.
+Only fixed known test filenames/bytes are accepted; no private-container or UI
+inspection permission is used. Twelve tool fixtures and Apple source checks
+cover the runner/export path. Signed macOS deadline execution remains pending.
 
 Snapshot verified on 2026-09-30:
 

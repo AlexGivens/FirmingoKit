@@ -152,6 +152,26 @@ class CompilerHostTests(unittest.TestCase):
         with self.assertRaises(ValueError): stress.check(b"x" * (2 * 1024**2 + 1), "fixture", 2)
         with self.assertRaises(ValueError): stress.check(encode(value), "fixture", 41)
 
+    def test_capsule_stdout_exports_require_closed_paths_exact_run_unique_envelopes_and_actual_bytes(self):
+        import base64
+        # Parser-only non-executable data and an explicit test manifest; production run uses fixed real-vector pins.
+        files = {"before-deadline-gpio.fms": b"non-executable parser GPIO fixture",
+                 "fresh-after-deadline-console.fms": b"non-executable parser console fixture"}
+        expected = {name: (len(data), hashlib.sha256(data).hexdigest()) for name, data in files.items()}
+        values = [{"runID": "fixture", "path": name, "base64": base64.b64encode(data).decode()} for name, data in files.items()]
+        envelope = lambda values: b"\n".join(b"FIRMINGO_COMPILER_ARTIFACT:" + base64.b64encode(json.dumps(value).encode()) for value in values)
+        self.assertEqual(runner.decode_artifacts(envelope(values), "fixture", expected), files)
+        for change in (lambda v: v.pop(), lambda v: v.append(v[0]), lambda v: v.__setitem__(1, v[0]),
+                       lambda v: v[0].update(runID="stale"), lambda v: v[0].update(path="../outside"),
+                       lambda v: v[0].update(path=True), lambda v: v[0].update(extra="unreviewed"),
+                       lambda v: v[0].update(base64="!invalid"), lambda v: v[0].update(base64=True),
+                       lambda v: v[0].update(base64=base64.b64encode(b"wrong bytes").decode())):
+            changed = copy.deepcopy(values); change(changed)
+            with self.assertRaises(ValueError): runner.decode_artifacts(envelope(changed), "fixture", expected)
+        for bad in (b"x" * (1024**2 + 1), envelope(values).replace(b"FIRMINGO_COMPILER_ARTIFACT:", b"FIRMINGO_COMPILER_ARTIFACT:!", 1),
+                    b"FIRMINGO_COMPILER_ARTIFACT:" + b"a" * 4097 + b"\n" + envelope(values[1:])):
+            with self.assertRaises(ValueError): runner.decode_artifacts(bad, "fixture", expected)
+
     def test_idle_lifecycle_requires_exact_launch_context_artifacts_and_real_transition_sequence(self):
         # Parser-only events; fixture acceptance is not physical lifecycle evidence.
         run = "12345678-1234-4234-8234-123456789ABC"

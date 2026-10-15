@@ -33,6 +33,27 @@ writes completion last. Mac reports export through inherited stdout; neither
 private app containers nor native UI are inspected. Failed output retains raw
 stdout/stderr/signature and a failure record in its own new directory.
 
+The opt-in macOS deadline run uses the same signature/entitlement gates and the
+schema-6 checker used for physical reports:
+
+```sh
+python3 -I -S -B Tools/ManagedWASM/run-compiler-host.py \
+  --deadline --host-inputs GENERATED_HOST/host-inputs.json \
+  APP_PATH EXPECTED_TEAM_ID NEW_RESULTS_DIRECTORY
+```
+
+It independently records the launched PID and UUID and requires exact prepared
+context, typed timeout, foreground scene observations and known fresh output.
+Only this mode requests actual macOS foreground activation; scene events still
+determine eligibility. Keep the app foreground for the minute-long test. The app
+exports its two fixed capsule files through bounded run-bound stdout envelopes;
+the runner rejects missing, duplicate, stale, unexpected-path, oversized or
+corrupt exports before writing them in its new results directory. It compares
+actual bytes with the independent 316-byte GPIO and 392-byte console vectors.
+No container privacy permission or additional entitlement is needed. The original
+six-check mode and its report schema remain unchanged. An outer timeout kills
+only the exact child app launched by this runner and records failure.
+
 ## Actual macOS result — 2026-10-14
 
 The ARM64 Release app passes on macOS 27.0 (26A428), Xcode 27.0 (27A266a), Swift

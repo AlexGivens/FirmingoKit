@@ -99,6 +99,10 @@ import UIKit
         Task { @MainActor in
             do {
                 if deadlineCheck {
+                    #if os(macOS)
+                    // Request real foreground activation; scene events still determine test eligibility.
+                    NSApplication.shared.activate()
+                    #endif
                     #if os(iOS)
                     // Keep only this explicit foreground test awake; restore the host's prior policy afterward.
                     let idleTimerWasDisabled = UIApplication.shared.isIdleTimerDisabled
@@ -132,6 +136,7 @@ import UIKit
                     if let report {
                         let data = try Data(contentsOf: report)
                         try FileHandle.standardOutput.write(contentsOf: Data(("FIRMINGO_COMPILER_REPORT:" + data.base64EncodedString() + "\n").utf8))
+                        if deadlineCheck { try Self.exportDeadlineArtifacts(report: report, id: id) }
                     }
                 } catch { status = "Could not export compiler results: " + error.localizedDescription }
                 NSApplication.shared.terminate(nil)
@@ -139,4 +144,20 @@ import UIKit
             #endif
         }
     }
+
+    #if os(macOS)
+    /// Exports only the two fixed bounded test files through stdout; never grants external container access.
+    private static func exportDeadlineArtifacts(report: URL, id: UUID) throws {
+        for (name, expectedBytes) in [("before-deadline-gpio.fms", 316), ("fresh-after-deadline-console.fms", 392)] {
+            let url = report.deletingLastPathComponent().appendingPathComponent(name)
+            let file = try FileHandle(forReadingFrom: url)
+            let bytes = try file.read(upToCount: expectedBytes + 1) ?? Data()
+            try file.close()
+            guard bytes.count == expectedBytes else { throw CocoaError(.fileReadCorruptFile) }
+            let envelope = ["runID": id.uuidString, "path": name, "base64": bytes.base64EncodedString()]
+            let encoded = try JSONEncoder().encode(envelope)
+            try FileHandle.standardOutput.write(contentsOf: Data(("FIRMINGO_COMPILER_ARTIFACT:" + encoded.base64EncodedString() + "\n").utf8))
+        }
+    }
+    #endif
 }
