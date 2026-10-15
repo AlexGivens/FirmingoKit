@@ -185,7 +185,15 @@ Nano read-only inspection may await an inactive permission overlay; actual
 background/Cancel and other operations retain cancellation. An explicit
 `--nano-permission-check` mode hides and guards association/staging/commit for a
 fresh signed bundle without resetting privacy settings. See
-`docs/connection-readiness.md`; fresh physical prompt qualification remains separate.
+`docs/connection-readiness.md`. The separately identified, signed NanoPermission
+build 4 now records a fresh iPhone prompt followed by first-attempt hello in
+2.580 seconds. The iPad retains an initial five-second timeout and a separately
+requested successful inspection with permission already approved; exact approval
+timing is unmeasured, so its first-prompt success remains open. See
+`docs/connection-readiness-qualification.json`. These updated-SDK results are
+read-only, with known offline capsule bytes independently checked; earlier
+build-3 uploads retain their separate provenance. Broader authorization,
+cold-attachment and Internet checks follow `docs/nano-usb-readonly-checks.md`.
 
 Snapshot verified on 2026-09-30:
 

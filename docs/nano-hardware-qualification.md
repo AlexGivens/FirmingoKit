@@ -146,7 +146,7 @@ Testing functions passed, but an empty XCTest bundle failed architecture loading
 The package exclusively uses Swift Testing. The corrected entry point explicitly
 selects that runner and rejects new XCTest imports/classes until the selection is
 reviewed; the full command now succeeds with 154 functions and nine explicit
-absent-service cases, the twelve compiler-host/four Nano tooling fixtures,
+absent-service cases, the twelve compiler-host/four then-current Nano tooling fixtures,
 production policy executable and both macOS host source checks. Optimized iOS
 source checks and workflow YAML/bash checks pass separately. Remote SDK CI
 remains unprovisioned/unrun. Neither failed invocation counts as a successful gate.
@@ -258,5 +258,12 @@ now stays within the original five-second deadline, while established path loss
 still closes. The host lets only pending read-only inspection await an inactive
 permission overlay; background/Cancel still cancels. This change does not rewrite
 the build-3 first-attempt failures or promote the earlier records to clean cold
-attachment passes. New source/build checks are separate from physical fresh-prompt
-qualification, and Nano staging/commit remain guarded by their existing policies.
+attachment passes. Subsequent signed NanoPermission build 4 records first-attempt
+prompt approval/hello on iPhone, and an original-deadline timeout followed by a
+separately requested successful inspection on iPad. The iPad approval time was
+not measured; it is not a first-prompt pass. Exact evidence is in
+[connection-readiness-qualification.json](connection-readiness-qualification.json).
+These are read-only results with the updated SDK, separate from earlier build-3
+uploads. Nano staging/commit retain their existing policies. Follow
+[the read-only USB/routing procedure](nano-usb-readonly-checks.md) for separately
+selected authorization, cold-attachment and Internet checks.

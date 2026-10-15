@@ -50,4 +50,34 @@ hello, deadline during waiting with no hello, cancellation with no hello, termin
 failure, and established path loss without reconnect. No sockets or OS permission
 changes are involved. They are included in the ordinary SDK entry point and CI;
 the suite has a one-minute failure bound. Source tests and builds do not establish
-physical first-prompt recovery; that requires separate signed-device evidence.
+physical first-prompt recovery; signed-device results are recorded separately below.
+
+## Physical results on 2026-10-15
+
+The separately identified, development-signed NanoPermission build 4 uses SDK/host
+`14f7e0c…` and the unchanged experimental compiler/resident inputs. Both devices
+compile the known 316/392-byte capsules offline, then perform only explicit
+read-only inspection with D2 and REC disconnected. Installation and own-run
+retrieval use the paired network while the Nano occupies the Apple device's USB
+port. [The evidence record](connection-readiness-qualification.json) pins the exact
+package, generated host, signature, launches, reports and capsule bytes.
+
+| Host | Observed result |
+| --- | --- |
+| iPhone 15 Pro Max, iOS 27.0 (24A437) | User approved the fresh local-network prompt; the first inspection completed in 2.580 seconds. The journal records an inactive overlay and one successful hello |
+| 11-inch iPad Pro (3rd generation), iPadOS 27.0.1 (24A446) | First inspection reported the original five-second timeout during prompt handling. Its journal was saved before requesting a retry. With permission already approved, a separately requested second inspection succeeded in 15.4 ms |
+
+The iPad's exact approval time relative to timeout was not measured. Its first
+attempt remains a timeout, not a successful first-prompt qualification. Neither
+journal exposes private Network.framework path states or establishes the exact
+cause of the older Network-is-down failures. Earlier build-3 upload evidence
+retains its own SDK/app provenance; this updated app exercises only inspection.
+
+The first complete app-build attempt failed because of a global product-name
+override. It was not deployed. The corrected generator changes only app identity
+and display name; the complete signed build and its normal SDK resource bundle
+were checked before either physical run.
+
+Broader permission denial, locked attachment, repeated cold connections and
+Internet coexistence remain open. [The read-only follow-up procedure](nano-usb-readonly-checks.md)
+keeps their actual counts and observations separate from these scoped results.

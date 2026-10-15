@@ -1,0 +1,350 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "scoped_read_only_iPhone_first_prompt_success_and_iPad_original_deadline_timeout_with_separate_explicit_recovery",
+  "scope": "Initial connection/hello only; no association, RAM staging, commit, reset or flash operation in this increment",
+  "source": {
+    "sdkAndHostCommit": "14f7e0c369ac1bb122da3564df218443c1a0b7b1",
+    "transportImplementationCommit": "4d7bcf69619272f11975d6dff23870b52895caed",
+    "preparedManifestSHA256": "f3f06dba3083b020b898d026809fc00fcc60f2d509996821d7a65efd7b0e69e7",
+    "preparedFilesRehashed": 309,
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+    "generatedHostInputsSHA256": "242ff424bc6f9454fb9225c049b52f7f4dca82976eaf0760e35183192d8fa9eb",
+    "generatedHostFilesRehashed": 23,
+    "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+    "firmwareAndCompilerAssetsChanged": false
+  },
+  "app": {
+    "bundleIdentifier": "com.firmingokit.nanopermission",
+    "displayName": "NanoPermission",
+    "build": "4",
+    "configuration": "Release",
+    "sameSignedAppBothDevices": true,
+    "executableSHA256": "e4db55bcdbd7bec8bac63eb241821dbbee2a7b20850e6b43bcde6a371d9accbc",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "strictDeepSignatureVerification": "passed",
+    "existingProfileCoversBothDevices": true,
+    "privacySettingsReset": false,
+    "readOnlyEnforcedByBundleIdentityAndExplicitFlag": true,
+    "normalProductAndSDKResourceBundlePreserved": true,
+    "signatureVerificationLogSHA256": "c5ceb85d2f12b84b9334f8135ce71e69f66a7b1684cfbb388c72098da2abe352",
+    "signatureVerificationContext": "Passed with host signing-trust access; sandboxed recheck returned CSSMERR_TP_NOT_TRUSTED and is not counted as a pass",
+    "sandboxedTrustCheckLogSHA256": "f249ef2efa5531d61bc3829d153cc75dd5bbfa188f387ce6e8e3b1cb974c9fc4"
+  },
+  "board": {
+    "model": "Arduino Nano RP2040 Connect",
+    "selectedDeviceIdentityVerified": true,
+    "rawDeviceAndBootIdentifiers": "retained locally; omitted from this record",
+    "endpoint": "192.168.77.1:7420",
+    "D2AndREC": "disconnected throughout these read-only checks",
+    "residentOnlyUF2SHA256": "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983",
+    "installedResidentEvidence": "Separate prior full ROM readback; hello is not installed-image attestation",
+    "previousInstallationRecord": "nano-hardware-initial.json"
+  },
+  "toolchain": {
+    "xcode": "27.0 (27A266a)",
+    "swift": "Apple Swift 6.4 (swiftlang-6.4.0.34.1 clang-2100.3.34.1)",
+    "host": "arm64 macOS 27.0"
+  },
+  "installationAndLaunchRecords": {
+    "iphone": {
+      "installSHA256": "f2985534ad7f4b84b8063e8b7a64b1506e18be4c6cab7c9982c435dcf92c2106",
+      "launchSHA256": "cac3c483ab49fbc3cc6f08ddb4ea4451628bdb2b6d32e7d39e76cfc81263f3db",
+      "independentLaunchContextSHA256": "031fed7515053ce17edc9a9a7067d77c29aa4d36725d0889f43ddc2c4096900b",
+      "firstReportCopySHA256": "9638ce813dfbbabdf87463bc73bf05a45b785f7ff24bcb77cdd19309ae158943"
+    },
+    "ipad": {
+      "installSHA256": "2db71c8f9a0f2196991dfeb8d036287842f86f08375537b8d008e68e7b5f7c70",
+      "launchSHA256": "b8ac9ef31cad2c67dbb4a5a35232c799b4fa019e349fa331e15f0c4a13593c31",
+      "independentLaunchContextSHA256": "0d9134f8f7d997b26ad61f6e0e30e1b47d080b50e459332252d053b66a613b3f",
+      "firstReportCopySHA256": "dd0ad156306f1520fe8b8bf033cd4351e36bfbcbc475be8fea7445244fa616a1",
+      "retryReportCopySHA256": "03297cb9bdedd699ce62d6da42ee2bee93262e83efdac2b482b5df464cb42e71"
+    }
+  },
+  "iPhone": {
+    "runID": "2DEE2332-74CA-482E-B01E-62B3B7729DC8",
+    "context": {
+      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+      "preparedManifestSHA256": "f3f06dba3083b020b898d026809fc00fcc60f2d509996821d7a65efd7b0e69e7",
+      "sdkCommit": "14f7e0c369ac1bb122da3564df218443c1a0b7b1"
+    },
+    "operationMode": "read-only-permission-check",
+    "reportSHA256": "3f44514671e9d2d64587332db6d86809906fe83dc1ae9fc5283392cffc919e6f",
+    "operatingSystem": "Version 27.0 (Build 24A437)",
+    "eventsWithDeviceIdentifiersOmitted": [
+      {
+        "detail": "No device operation",
+        "stage": "offline-start"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "compiled-gpio"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "compiled-console"
+      },
+      {
+        "detail": "Both known capsules verified; no device association or operation performed",
+        "stage": "offline-ready"
+      },
+      {
+        "detail": "Read-only connection/hello; original five-second SDK deadline",
+        "stage": "inspection-start"
+      },
+      {
+        "detail": "Read-only attempt may await permission within its original deadline",
+        "stage": "inspection-inactive"
+      },
+      {
+        "detail": "2.580199584",
+        "stage": "inspection-duration"
+      },
+      {
+        "detail": "Selected Nano identity and current boot checked; raw identifiers retained locally",
+        "stage": "inspected"
+      }
+    ],
+    "artifacts": [
+      {
+        "sketch": "gpio",
+        "bytes": 316,
+        "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+        "firmwareProductionValidator": "accepted exact capsule; wrong API and corrupt code rejected"
+      },
+      {
+        "sketch": "console",
+        "bytes": 392,
+        "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "buildReportSHA256": "7cb97e467e61cddd8e0c5eab0b9d908df50e4cf61e427d91193ecab933b2bba0",
+        "firmwareProductionValidator": "accepted exact capsule; wrong API and corrupt code rejected"
+      }
+    ],
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "firstInspectionOutcome": "passed after user approved fresh local-network prompt",
+    "successfulInspectionSeconds": 2.580199584,
+    "explicitInspectionAttempts": 1,
+    "userObservation": "Prompt approved; Status immediately changed to Hello/target checked. Review exact installed resident evidence separately."
+  },
+  "iPadFirstAttempt": {
+    "runID": "5DA23C6D-451E-4776-A867-BF6A7989A9D5",
+    "context": {
+      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+      "preparedManifestSHA256": "f3f06dba3083b020b898d026809fc00fcc60f2d509996821d7a65efd7b0e69e7",
+      "sdkCommit": "14f7e0c369ac1bb122da3564df218443c1a0b7b1"
+    },
+    "operationMode": "read-only-permission-check",
+    "reportSHA256": "f3a02376cce90a6b64e77645f95764b812447761c7b140c41b86046027fe7151",
+    "operatingSystem": "Version 27.0.1 (Build 24A446)",
+    "eventsWithDeviceIdentifiersOmitted": [
+      {
+        "detail": "No device operation",
+        "stage": "offline-start"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "compiled-gpio"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "compiled-console"
+      },
+      {
+        "detail": "Both known capsules verified; no device association or operation performed",
+        "stage": "offline-ready"
+      },
+      {
+        "detail": "Read-only connection/hello; original five-second SDK deadline",
+        "stage": "inspection-start"
+      },
+      {
+        "detail": "Read-only attempt may await permission within its original deadline",
+        "stage": "inspection-inactive"
+      },
+      {
+        "detail": "Inspection exceeded five seconds. Check the Nano connection and local-network permission, then explicitly choose Inspect again.",
+        "stage": "failed-or-uncertain"
+      }
+    ],
+    "artifacts": [
+      {
+        "sketch": "gpio",
+        "bytes": 316,
+        "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+        "firmwareProductionValidator": "accepted exact capsule; wrong API and corrupt code rejected"
+      },
+      {
+        "sketch": "console",
+        "bytes": 392,
+        "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "buildReportSHA256": "7cb97e467e61cddd8e0c5eab0b9d908df50e4cf61e427d91193ecab933b2bba0",
+        "firmwareProductionValidator": "accepted exact capsule; wrong API and corrupt code rejected"
+      }
+    ],
+    "model": "11-inch iPad Pro (3rd generation)",
+    "productType": "iPad13,4",
+    "firstInspectionOutcome": "timed out during reported prompt handling; approval timing relative to timeout unmeasured",
+    "successfulFirstPromptQualification": false,
+    "timeoutDurationMeasured": false,
+    "userObservation": "User reported missing the prompt deadline and the explicit five-second timeout guidance. On retry, user clarified permission was already approved and the UI fully accessible; exact approval time relative to timeout was not measured. Original journal retrieved before asking for a retry.",
+    "explicitRetry": {
+      "runID": "5DA23C6D-451E-4776-A867-BF6A7989A9D5",
+      "context": {
+        "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+        "preparedManifestSHA256": "f3f06dba3083b020b898d026809fc00fcc60f2d509996821d7a65efd7b0e69e7",
+        "sdkCommit": "14f7e0c369ac1bb122da3564df218443c1a0b7b1"
+      },
+      "operationMode": "read-only-permission-check",
+      "reportSHA256": "d3d75c5392570bcf1320086cbb849b3cb01e5493fa4b3e74527e0cd4f2d97269",
+      "operatingSystem": "Version 27.0.1 (Build 24A446)",
+      "eventsWithDeviceIdentifiersOmitted": [
+        {
+          "detail": "No device operation",
+          "stage": "offline-start"
+        },
+        {
+          "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "stage": "compiled-gpio"
+        },
+        {
+          "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "stage": "compiled-console"
+        },
+        {
+          "detail": "Both known capsules verified; no device association or operation performed",
+          "stage": "offline-ready"
+        },
+        {
+          "detail": "Read-only connection/hello; original five-second SDK deadline",
+          "stage": "inspection-start"
+        },
+        {
+          "detail": "Read-only attempt may await permission within its original deadline",
+          "stage": "inspection-inactive"
+        },
+        {
+          "detail": "Inspection exceeded five seconds. Check the Nano connection and local-network permission, then explicitly choose Inspect again.",
+          "stage": "failed-or-uncertain"
+        },
+        {
+          "detail": "Read-only connection/hello; original five-second SDK deadline",
+          "stage": "inspection-start"
+        },
+        {
+          "detail": "0.015418583",
+          "stage": "inspection-duration"
+        },
+        {
+          "detail": "Selected Nano identity and current boot checked; raw identifiers retained locally",
+          "stage": "inspected"
+        }
+      ],
+      "artifacts": [
+        {
+          "sketch": "gpio",
+          "bytes": 316,
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+          "firmwareProductionValidator": "accepted exact capsule; wrong API and corrupt code rejected"
+        },
+        {
+          "sketch": "console",
+          "bytes": 392,
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "buildReportSHA256": "7cb97e467e61cddd8e0c5eab0b9d908df50e4cf61e427d91193ecab933b2bba0",
+          "firmwareProductionValidator": "accepted exact capsule; wrong API and corrupt code rejected"
+        }
+      ],
+      "outcome": "passed on second, separately requested explicit inspection",
+      "explicitInspectionAttempts": 2,
+      "successfulInspectionSeconds": 0.015418583,
+      "noAutomaticRetryObserved": true,
+      "firstAttemptStillTimeout": true,
+      "userObservation": "Permission already approved and UI accessible; user tapped Inspect once more and received Hello/target checked. Review exact installed resident evidence separately."
+    }
+  },
+  "checks": [
+    {
+      "command": "swift test --disable-xctest --enable-swift-testing --filter TCPInspectionTransportTests",
+      "result": "passed five production-actor callback tests",
+      "log": ".build/tcp-waiting-focused-r1.log",
+      "logSHA256": "b10d3d3de544bf9f8de909287c8f0b2ccc517eb231d0e7498d508dc4b1f53cc1"
+    },
+    {
+      "command": "node Tools/ManagedWASM/run-validation.mjs",
+      "result": "passed 159-function Swift Testing entry point with nine absent-service cases skipped, twelve compiler-host fixtures, then-four Nano tooling fixtures, three Node consumer checks and Nano admission checks",
+      "log": ".build/tcp-waiting-sdk-validation-r2.log",
+      "logSHA256": "93dbe59412862f3116db918d6dfe4cf2137b510757604af61bf16f446080f77d"
+    },
+    {
+      "command": "python3 -I -S -B Tools/Hardware/test-nano-host.py",
+      "result": "passed all five final Nano tooling fixtures",
+      "log": ".build/nano-permission-generator-fixtures-r3.log",
+      "logSHA256": "173723c51405459d7776f373751eefb956edf91c4da71db14fd901bfc7e979b3"
+    },
+    {
+      "command": "python3 -I -S -B Tools/Hardware/check-nano-host.py",
+      "result": "passed source-only macOS type-check",
+      "log": ".build/nano-permission-generator-macos-r2.log",
+      "logSHA256": "51b9182eaea7762186ceaf1456a96efbb7303f6af378ebb5fccb3cf3f68e8836"
+    },
+    {
+      "command": "python3 -I -S -B Tools/Hardware/check-nano-host.py --ios-products .build/tcp-waiting-ios/Build/Products/Debug-iphoneos",
+      "result": "passed optimized source-only iOS compilation",
+      "log": ".build/nano-permission-generator-ios-r2.log",
+      "logSHA256": "846bf3dcb611f6c0d024aae4ede5b2cefe328321ad4a1e5f1e6fe97f89ef3349"
+    },
+    {
+      "command": "xcodebuild build -workspace Validation/FirmingoKit.xcworkspace -scheme FirmingoKit -destination \"generic/platform=iOS\" -derivedDataPath .build/tcp-waiting-ios CODE_SIGNING_ALLOWED=NO",
+      "result": "passed",
+      "log": ".build/tcp-waiting-ios.log",
+      "logSHA256": "196389a34d0b32781e247bc9f1a798ecc8d72836b431e8e9e6f630e6c48c495a"
+    },
+    {
+      "command": "xcodebuild build -workspace Validation/FirmingoKit.xcworkspace -scheme FirmingoKit -destination \"generic/platform=iOS Simulator\" -derivedDataPath .build/tcp-waiting-simulator CODE_SIGNING_ALLOWED=NO",
+      "result": "passed",
+      "log": ".build/tcp-waiting-simulator.log",
+      "logSHA256": "7b3b41803d1b6cfdce1036f0bcceec61a224101314b0cbd5db326de312886c04"
+    },
+    {
+      "command": "xcodebuild docbuild -workspace Validation/FirmingoKit.xcworkspace -scheme FirmingoKit -destination \"generic/platform=macOS\" -derivedDataPath .build/tcp-waiting-docc CODE_SIGNING_ALLOWED=NO",
+      "result": "passed",
+      "log": ".build/tcp-waiting-docc.log",
+      "logSHA256": "827c35cd9067fd8fd048d4c2661b2a7c8bc95e9f6822c5ffa50e66fc80a5a490"
+    },
+    {
+      "command": "xcodebuild build -configuration Release -project .build/nano-permission-host-r2/NanoQualification.xcodeproj -scheme NanoQualification -destination \"generic/platform=iOS\" -derivedDataPath .build/nano-permission-ios-r2 ENABLE_DEBUG_DYLIB=NO DEVELOPMENT_TEAM=WGR9T9JH4L CODE_SIGN_STYLE=Automatic CURRENT_PROJECT_VERSION=4",
+      "result": "passed complete development-signed Release app build; standard no-AppIntents metadata warning only",
+      "log": ".build/nano-permission-ios-r2.log",
+      "logSHA256": "b3500e2b4026456230aff2f78d9d0459a749edda2b07b55ad205f09d4bc0850d"
+    }
+  ],
+  "rejectedBuild": {
+    "log": ".build/nano-permission-ios-r1.log",
+    "logSHA256": "190eba5d5705d6280dd988310a1a173c2e164935b3252773553214d105597365",
+    "exitCode": 65,
+    "reason": "Global PRODUCT_NAME override renamed SDK products and broke FirmingoKit_FirmingoKit.bundle lookup",
+    "deployed": false,
+    "correction": "Generator changes only app bundle identifier/display name; SDK product/resource naming remains intact"
+  },
+  "remainingLimitations": [
+    "The iPad first attempt timed out; exact approval timing is unmeasured and first-prompt success remains unqualified.",
+    "Journals record host scene inactivity and successful hello or typed timeout guidance; they do not expose private Network.framework path states or prove the exact cause of earlier ENETDOWN failures.",
+    "No automatic retry/reconnect or timer extension is introduced; post-ready path loss remains terminal.",
+    "This updated app performs only read-only inspection; earlier build-3 managed uploads retain their separate exact SDK/app provenance.",
+    "No denial, locked attachment, twenty-cycle cold connection matrix, uncached Internet coexistence, minimum-OS, electrical timing, throughput/soak, power-loss or complete firmware-install qualification.",
+    "PCB revision and cable/hub model were not recorded.",
+    "Paired-network app installation/report retrieval does not certify Internet routing.",
+    "No screenshots/UI inspection performed; visual/accessibility layout remains unqualified.",
+    "Remote CI runner availability and a verified GitHub run remain open."
+  ],
+  "independentCapsuleValidation": {
+    "logSHA256": "6b9661674b8fd457ae20af9b2443e887e63dfea7f3311a94526ae3b76c5b4a2c",
+    "validatorExecutableSHA256": "64bcfdc1771b0bef49d9dad5a76ffe07d379ab0e33c810281e8fd96ef4875987",
+    "result": "All four exported capsules from the successful iPhone and iPad inspections accepted; wrong API and corrupted code rejected for each",
+    "validationOwner": "Firmingo production managed-sketch validator; exact bytes also match pinned vectors"
+  }
+}

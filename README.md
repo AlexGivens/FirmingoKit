@@ -18,6 +18,10 @@ USB/Internet/power-loss qualification remain separate work.
 [Initial connection readiness](docs/connection-readiness.md) explains bounded
 local-network permission/path waiting and explicit retry after timeout, without
 reconnecting an established session or replaying a command.
+[Signed read-only results](docs/connection-readiness-qualification.json) record
+iPhone first-prompt success and an iPad timeout followed by a successful explicit
+retry. [Further USB/routing checks](docs/nano-usb-readonly-checks.md) remain
+separately selected and counted.
 
 The agreed repository split assigns preprocessing, WASM execution, board recipes,
 ELF/capsule packaging, compiler diagnostics, and static build metadata to
