@@ -44,7 +44,7 @@ def check(data, run_id, process_id, expected_context):
             or c["outcome"] != "cancelled" or c["artifactReturned"] is not False
             or not number(c["requestedSeconds"], 600) or not number(c["settledSeconds"])
             or c["settledSeconds"] < c["requestedSeconds"]
-            or c["lastProgress"] not in ("admitted", "verifying", "preparing", "compiling", "linking", "packaging")
+            or c["lastProgress"] not in ("verifying", "preparing", "compiling", "linking", "packaging")
             or not number(r["manuallyStartedSeconds"], 600) or r["manuallyStartedSeconds"] > c["requestedSeconds"]):
         raise ValueError("missing exact active-call cancellation and typed settlement")
     gpio = "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"

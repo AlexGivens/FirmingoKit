@@ -202,6 +202,7 @@ class CompilerHostTests(unittest.TestCase):
                        lambda v: v["cancellation"].update(artifactReturned=True), lambda v: v["cancellation"].update(outcome="pending"),
                        lambda v: v["cancellation"].update(attempt=True), lambda v: v["cancellation"].update(attempt=41),
                        lambda v: v["cancellation"].update(settledSeconds=2), lambda v: v["cancellation"].update(lastProgress="invented"),
+                       lambda v: v["cancellation"].update(lastProgress="admitted"),
                        lambda v: v["completedAttempts"].clear(), lambda v: v["completedAttempts"][0].update(name="active-2-gpio"),
                        lambda v: v["events"][1].update(stage="waiting-for-start"), lambda v: v["events"][1].update(seconds=3.1),
                        lambda v: v["events"][2].update(phase="inactive"), lambda v: v["events"][3].update(seconds=5),

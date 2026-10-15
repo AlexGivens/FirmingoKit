@@ -207,7 +207,9 @@ import FirmingoKit
                     break
                 }
             }
-            guard report.cancellation?.outcome == "cancelled" else { throw CocoaError(.fileReadCorruptFile) }
+            guard report.cancellation?.outcome == "cancelled", report.cancellation?.lastProgress != "admitted" else {
+                throw CocoaError(.fileReadCorruptFile)
+            }
             status("Build cancellation settled. Return to this app after five seconds on Home.")
             try await waitForReturn()
             try await build(compiler, catalogue: catalogue, before: false)

@@ -406,7 +406,9 @@ the run fails rather than silently substituting an idle check.
 
 The inactive event must find a pending SDK call. Its exact attempt number and
 last reported progress are recorded before cancellation; late progress cannot
-change that evidence. The task must actually throw `CancellationError` through
+change that evidence. At least one actual SDK progress callback must precede
+cancellation; canceling a task before the SDK starts is ineligible. The task must
+actually throw `CancellationError` through
 the SDK cleanup path. A returned artifact or cleanup/runtime failure fails the
 check. After real background/active events separated by at least three seconds,
 the same compiler instance must accept a new console request and export its
