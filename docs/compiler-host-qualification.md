@@ -96,7 +96,7 @@ executing Thumb code. [The machine-readable iPad record](compiler-host-ipad.json
 preserves both reports, signature/profile/source identities and validator results.
 No visual inspection was performed or UI/accessibility result inferred.
 
-To reproduce with a generated host and a separately selected connected device,
+To reproduce on iPad or iPhone with a generated host and a separately selected connected device,
 use a new derived-data directory and an existing development team/profile:
 
 ```sh
@@ -120,9 +120,33 @@ The app also offers Share results. Keep raw device/profile metadata local; recor
 model/OS and selected identities without publishing device names, UDIDs or serials.
 The macOS runner does not launch iOS apps.
 
+## Actual physical iPhone result — 2026-10-14
+
+The same signed ARM64 Release app was installed on an iPhone 15 Pro Max,
+iPhone16,2, running iOS 27.0 (24A437). CoreDevice confirmed its paired wired
+connection and enabled Developer Mode. Strict deep signature, exact application
+identifier and this phone's membership in the existing profile were checked.
+The executable, profile, compiler and generated host inputs match the iPad test;
+no rebuild, provisioning update or account change was needed.
+
+Both fresh app launches pass resources, GPIO/console builds, frontend diagnostics,
+busy/cancellation and post-cancellation compilation. First-launch GPIO/console
+times are 0.858/0.663 seconds; the second launch records 0.627/0.635 seconds.
+OS caches were not cleared. All completed builds report 27,983,872 WASM linear
+bytes; total app/WebKit peaks remain unmeasured.
+
+Reports and capsule bytes were copied only from this app's two run directories.
+UUIDs, complete steps, exact source/package context, durations, worker memory
+bounds and hashes were verified. Both exported capsules match iPad/macOS output,
+pass the independent firmware validator at `0x10022c9c` and are rejected at the
+historical `0x10022ca0` address. [The machine-readable iPhone record](compiler-host-iphone.json)
+preserves both reports and the same signing/provenance/validator identities.
+These results cover this model/OS and constrained compiler fixtures; they do not
+qualify arbitrary sketches, the demo or board deployment.
+
 Minimum-OS runtime, total app/child memory peaks, forced termination/deadline,
-physical iPhone, installed-image evidence and Nano deployment remain open.
+other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an
 exact selected recoverable Nano resident and separately authorized SDK workflow.
 No binary publication or board operation occurred. The development qualification
-app remains installed on the selected iPad.
+app remains installed on the selected iPad and iPhone.

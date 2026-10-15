@@ -34,9 +34,10 @@ advertises `nano-managed-v1`, 4096-byte capsules, 1024-byte chunk data, and
 `physical-d2-gnd` authorization. The SDK implements local FMS1/report validation,
 staging, explicit one-shot commit, abort, and fresh-session saved-record
 reconciliation for that exact target. Offline source preparation and strict stateless
-ELF-to-FMS1 packaging and experimental SDK WebKit/WASI compilation with an external
-reviewed service are implemented; packaged-service distribution and qualification
-remain pending. Synthetic fixture capsules are
+ELF-to-FMS1 packaging and experimental SDK WebKit/WASI compilation through the
+shared Compiler package are implemented. An explicitly prepared SDK supplies the
+reviewed service and exact experimental Nano catalogue; the source checkout has
+no compiler binary. Hosted binary distribution remains pending. Synthetic fixture capsules are
 non-executable parser inputs and must never be uploaded. There is no Pico managed
 target. Application baud controls and device reset are unsupported by firmware.
 
@@ -57,6 +58,17 @@ and exact resident-association checks. Implementation and evidence remain open.
 
 ## SDK support and qualification
 
+Compiler-only host evidence was updated on 2026-10-14: a development-signed
+macOS 27.0 sandbox host and a signed iOS app on iPad Pro (11-inch,
+3rd generation), iPadOS 27.0.1, and iPhone 15 Pro Max, iOS 27.0, each pass six
+actual checks. Physical iPad/iPhone results use the identical signed app and cover
+two launches each. Both
+exported capsules match desktop vectors and independent firmware validation for
+experimental static build `c44d25ef…`; they are not associated with an installed
+board. [Host qualification](compiler-host-qualification.md) records exact inputs,
+signing, reports and measured limits. Earlier increment records below retain their
+historical scope.
+
 | Workflow | Nano/macOS | Nano/iOS+iPadOS | Pico/macOS | Pico/iOS+iPadOS |
 | --- | --- | --- | --- | --- |
 | Hello inspection | Implemented; Nano fixture/fake-peer tested | Implemented; Nano fixture tested in simulator | API builds; no Pico hello fixture tested | API builds; no Pico hello fixture tested |
@@ -64,13 +76,13 @@ and exact resident-association checks. Implementation and evidence remain open.
 | Complete-image artifact preflight | Implemented; local synthetic/observed-image validation | Implemented; simulator tests, no physical file-access qualification | Implemented; separate release mapping and observed-image validation | Implemented; simulator tests, no physical file-access qualification |
 | Firmingo first installation | Experimental macOS ROM executor; no hardware/sandbox qualification | Direct backend unavailable; guided computer route | Experimental macOS ROM executor; no hardware/sandbox qualification | Direct backend unavailable; guided computer route |
 | Firmingo updates / interruption recovery | Persisted records/new explicit reinstall implemented; physical recovery and updates unqualified | Context/hello APIs; computer required to transfer | Persisted records/new explicit reinstall implemented; physical recovery and updates unqualified | Context/hello APIs; computer required to transfer |
-| Local WASM managed compilation | Experimental SDK WebKit/WASI compile/link/packaging; external reviewed service, synthetic bindings, no hardware/sandbox qualification | API builds; physical runtime/resident ABI evidence pending | Blocked: no firmware managed target | Blocked: no firmware managed target |
+| Local WASM managed compilation | Six checks pass in a signed sandbox Release host on macOS 27.0, prepared reviewed service and exact experimental Nano descriptor; no board deployment | Six checks pass twice on physical iPad Pro/iPadOS 27.0.1 and iPhone 15 Pro Max/iOS 27.0 with the same signed Release app; no installed resident/execution evidence | Blocked: no firmware managed target | Blocked: no firmware managed target |
 | Managed upload | Experimental implementation; fixtures/fake peers, no hardware | Experimental API/fake-peer tests in simulator; no device qualification | Unsupported firmware combination | Unsupported firmware combination |
-| Hardware qualification of any SDK workflow | None | None | None | None |
+| Board hardware qualification of SDK workflows | None | None | None | None |
 
 Build settings target macOS 14 and iOS/iPadOS 17. Current-SDK builds and simulator
 tests do not qualify minimum-OS execution, networking permission behavior, USB
-access, firmware installation, sketch behavior, or physical devices. Historical
+access, firmware installation, sketch behavior, or other physical model/OS combinations. Historical
 firmware harness evidence is not FirmingoKit evidence.
 
 ## Acceptance for this increment

@@ -241,11 +241,13 @@ six actual compiler checks with verified app sandbox/hardened runtime. Generator
 runner and measured journals are in [host qualification](docs/compiler-host-qualification.md).
 Source CI covers tool fixtures/type-checking; complete app CI awaits prepared assets
 and signing/runner provisioning. The same Release host now passes all six checks
-in two physical iPad Pro (11-inch, 3rd generation) launches on iPadOS 27.0.1.
+in two physical iPad Pro (11-inch, 3rd generation) launches on iPadOS 27.0.1 and
+two iPhone 15 Pro Max launches on iOS 27.0, using the identical signed app.
 Exported capsule bytes match desktop vectors and independent firmware validation.
-Minimum OS, physical iPhone, total memory and board gates below remain open.
+Minimum OS, other models/OS versions, total memory and board gates below remain open.
 
 - [x] Execute the prepared default compiler in a development-signed minimal physical iPad host; record two launches, diagnostics, busy/cancellation, fresh reentry, capsule bytes, signing/provenance and first/subsequent compile times in `docs/compiler-host-ipad.json`. This does not qualify the demo, total memory, deadline expiry or device deployment.
+- [x] Repeat the same six checks in two fresh physical iPhone app launches with the identical signed app and existing profile; preserve exact reports, capsule bytes and independent firmware validation in `docs/compiler-host-iphone.json`. Minimum OS, memory/lifecycle and deployment remain separate gates.
 
 - [ ] Maintain opt-in hardware procedures and evidence separate from deterministic tests; execute device-changing tests only within an authorized hardware workflow.
 - [ ] Record board model/revision, firmware artifact hash/profile, resident metadata, SDK revision, compiler/recipe/assets, host OS/toolchain, procedure, observations, and unresolved limitations for each run.
