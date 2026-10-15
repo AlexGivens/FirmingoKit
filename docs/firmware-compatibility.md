@@ -16,6 +16,15 @@ vectors; no firmware implementation code was copied into the SDK.
 
 ## Implemented scope
 
+The separate [Nano qualification host](nano-hardware-qualification.md) now has
+scoped hardware evidence for exact Firmware `e0a79d1…`, descriptor `c44d25ef…`,
+prepared SDK `4edc6aa…` and signed host build 3 on iPadOS 27.0.1 and iOS 27.0.
+Console and GPIO each pass verified RAM stage, one host commit attempt and fresh
+boot-confirmed reconciliation; exact 256-byte console echo and manual D13
+off-to-on transitions are recorded independently. Earlier failed attempts remain
+visible. This does not qualify the complete-firmware installation backend,
+broader board/OS/USB matrices, Internet routing, timing, power loss or rollback.
+
 Short-lived TCP hello inspection and a persistent channel-one serial session,
 explicit board/optional device-ID matching, bounded terminal-error framing,
 strict response JSON and identity/capability validation. A live session additionally

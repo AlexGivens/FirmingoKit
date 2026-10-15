@@ -212,7 +212,9 @@
     "Earlier network and local prerequisite failures remain in their original run records",
     "Console and GPIO each have one verified RAM stage, one host commit attempt and fresh boot-confirmed reconciliation; GPIO follows a user RESET and fresh association",
     "GPIO off-to-on observation is manual; all 256 console bytes matched; no throughput/soak or electrical measurement",
-    "No general Arduino, production firmware, minimum-OS, physical iPhone, Internet-routing, cold-attachment matrix, power-loss or rollback qualification"
+    "No general Arduino, production firmware, minimum-OS, Internet-routing, cold-attachment matrix, power-loss or rollback qualification",
+    "PCB revision and cable/hub model not recorded; exact selected ROM/device identities retained only locally",
+    "Equivalent iPhone result is a separate record in nano-hardware-iphone.json"
   ],
   "gpioUpload": {
     "status": "passed_second_iPad_SDK_RAM_stage_one_commit_boot_confirmation_and_manual_GPIO_transition",

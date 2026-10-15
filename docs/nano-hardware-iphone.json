@@ -1,0 +1,201 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "passed_scoped_iPhone_two_SDK_capsule_uploads_startup_console_bytes_and_manual_GPIO_transition",
+  "device": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "os": "Version 27.0 (Build 24A437)"
+  },
+  "context": {
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+    "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+    "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+  },
+  "hostSourceCommit": "796c7769176a62c6270c7b4d2f2cd617e1a76ad8",
+  "appBuild": "3",
+  "sameSignedBuildAsIPad": true,
+  "generatedHostInputsSHA256": "2fbc8e33d9632cbe0ee43f4a5d5d349530db51441ad8c25654db0825ada161fa",
+  "appExecutableSHA256": "a029c41f925766855ad80314f39099f30d28196707d4588adcb5e07473919089",
+  "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+  "installationAndLaunchSHA256": {
+    "nano-iphone-install-r4.local.json": "5ffaafef88dcfaab4bcca671a8536ae8792032f230e65b9b2ced6df92e889802",
+    "nano-iphone-launch-r4.local.json": "0ea026cde304a26b4aca338134373a2198b096e4444e853b12755f5fdee0ca70"
+  },
+  "artifacts": [
+    {
+      "sketch": "gpio",
+      "bytes": 316,
+      "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+      "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected"
+    },
+    {
+      "sketch": "console",
+      "bytes": 392,
+      "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "buildReportSHA256": "7cb97e467e61cddd8e0c5eab0b9d908df50e4cf61e427d91193ecab933b2bba0",
+      "firmwareProductionValidator": "accepted; wrong API and corrupt code rejected"
+    }
+  ],
+  "consoleUpload": {
+    "runID": "C9F27315-2955-4D7D-88AC-DFA9E9A1627D",
+    "reportSHA256": "04d7894a2188c1d5ffdbcb21495773137b0b5acc6415c49612230a7885e60a7f",
+    "transactionRecordSHA256": "97b3c141ca20ee4ef4366bc0955643ac8bfbe8fc2312bdded07f4db05900589d",
+    "transactionWithDeviceAndBootOmitted": {
+      "boardID": "nano_rp2040_connect",
+      "firmwareImageSHA256": "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983",
+      "format": "nano-managed-v1",
+      "residentELFSHA256": "5b3116cdcde28f84b86f78cfffb258591455406a1f276b35bb5fd63a6f857304",
+      "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "size": 392,
+      "targetID": 1,
+      "uploadID": 1,
+      "version": 1
+    },
+    "eventsWithDeviceIdentifiersOmitted": [
+      {
+        "detail": "No device operation",
+        "stage": "offline-start"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "compiled-gpio"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "compiled-console"
+      },
+      {
+        "detail": "Both known capsules verified; no device association or operation performed",
+        "stage": "offline-ready"
+      },
+      {
+        "detail": "The connection failed: The operation couldn\u2019t be completed. (Network.NWError error 50 - Network is down)",
+        "stage": "failed-or-uncertain"
+      },
+      {
+        "detail": "Selected ROM device ID and current boot match saved transaction; raw identifiers retained locally",
+        "stage": "inspected"
+      },
+      {
+        "detail": "Full ROM readback verified on Mac before reboot",
+        "stage": "operator-associated"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "stage-requested"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "ram-verified"
+      },
+      {
+        "detail": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "stage": "commit-attempted-once"
+      },
+      {
+        "detail": "none",
+        "stage": "commit-reply-committing"
+      },
+      {
+        "detail": "error=none slotTouched=true",
+        "stage": "status-boot_confirmed"
+      },
+      {
+        "detail": "256/256 bytes match, including NUL/CR/LF/0xff; no throughput or soak claim",
+        "stage": "binary-echo-observed"
+      }
+    ],
+    "localCopySHA256": "abb259c02b4fda200bd04a41c2eb2682c44a7d403b576058486ea0effc6249b3"
+  },
+  "userObservations": {
+    "initialPermissionAttempt": "User reported a local-network/USB access prompt during first inspection, approved it, then saw Network is down; exact prompt type not independently identified",
+    "explicitReadOnlyRetry": "User reported checked hello and D13 on, without reset/reconnect before retry",
+    "consoleEcho": "User reported exact 256-byte echo passed; D13 remained on",
+    "measurement": "Manual user observations plus independent own-run journal/capsule checks"
+  },
+  "limits": [
+    "First permission-prompt inspection failed with Network is down; explicit read-only retry passed; exact prompt type/cause/cold-attachment timing not established",
+    "Console and GPIO each have one verified RAM stage, one host commit attempt and fresh boot-confirmed status; GPIO follows explicit RESET/new boot and fresh reviewed association",
+    "No packet trace counts wire commit requests; intermediate installed status not separately sampled",
+    "Manual D13 off-to-on observation and exact 256 console byte values; no electrical/timing/throughput/soak or trailing-frame observation interval",
+    "PCB revision and cable/hub model not recorded; exact selected ROM/device identities retained only locally",
+    "No general Arduino, production firmware, minimum-OS, Internet routing, full USB authorization/cold-attachment matrix, power loss or rollback qualification"
+  ],
+  "gpioUpload": {
+    "status": "passed_second_iPhone_SDK_RAM_stage_one_commit_boot_confirmation_and_manual_GPIO_transition",
+    "runID": "C9F27315-2955-4D7D-88AC-DFA9E9A1627D",
+    "finalReportSHA256": "6a15557e0159df38e224efc02db994d03f6cd59281c8a05d998929d0fbe42056",
+    "transactionRecordSHA256": "cfd9154e120170573cd21c2df1d12c975c284347b44f1c68f934217418317ac3",
+    "transactionWithDeviceAndBootOmitted": {
+      "boardID": "nano_rp2040_connect",
+      "firmwareImageSHA256": "35678c95c495c4e06227a992548be893305cc2375f7a6e561d0a7f66433e6983",
+      "format": "nano-managed-v1",
+      "residentELFSHA256": "5b3116cdcde28f84b86f78cfffb258591455406a1f276b35bb5fd63a6f857304",
+      "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "size": 316,
+      "targetID": 1,
+      "uploadID": 1,
+      "version": 1
+    },
+    "eventsWithDeviceIdentifiersOmitted": [
+      {
+        "detail": "Fresh inspection and association required",
+        "stage": "next-explicit-operation"
+      },
+      {
+        "detail": "Same selected physical device, new post-RESET boot; identifiers retained locally",
+        "stage": "inspected"
+      },
+      {
+        "detail": "Full ROM readback verified on Mac before reboot",
+        "stage": "operator-associated"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "stage-requested"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "ram-verified"
+      },
+      {
+        "detail": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "stage": "commit-attempted-once"
+      },
+      {
+        "detail": "none",
+        "stage": "commit-reply-committing"
+      },
+      {
+        "detail": "error=none slotTouched=true",
+        "stage": "status-boot_confirmed"
+      },
+      {
+        "detail": "D13 LED is on",
+        "stage": "manual-gpio-observation"
+      }
+    ],
+    "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+    "buildReportSHA256": "f7e4416d9ee6f2e82a32ed1ddb4891da9e8403ec9726dc96506583f5cf423a1c",
+    "sameDeviceNewBootMatched": true,
+    "localCopySHA256": "cbd58a0d4e08f03ee04952e56c21e38347b0b9f036f216d4618587ce02ea6e20",
+    "userObservations": {
+      "afterExplicitResetBeforeUpload": "Fresh hello checked; user reported D13 off",
+      "afterGPIOUpload": "Startup confirmed, user reported D13 on and app saved D13 LED is on",
+      "measurement": "Manual LED transition only; no electrical or timing measurement"
+    }
+  },
+  "wirelessDevelopment": {
+    "afterFinalOwnRunRetrievalTransport": "localNetwork",
+    "rawStatusSHA256": "3c7bf39260ba82043ebbdae8b0584c32bda8fd6e2c19f80d739dad80ab5873c6",
+    "scope": "Nano occupied iPhone USB port; development and own-run retrieval over paired network; no uncached Internet test"
+  },
+  "cleanup": {
+    "source": "user reply in this chat",
+    "uploadArmRemoved": true,
+    "RECDisconnected": true,
+    "noFurtherDeviceOperationPerformed": true
+  }
+}

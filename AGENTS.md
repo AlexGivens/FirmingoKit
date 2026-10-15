@@ -169,6 +169,14 @@ journal and per-boot transaction records are pinned in the same evidence file.
 Earlier network/prerequisite failures remain recorded. This qualifies this exact
 experimental iPad combination, not minimum OS, general Arduino, first-authorization
 or cold-attachment matrices, electrical GPIO timing, Internet routing or power loss.
+The identical signed build 3 also passes both managed workflows on iPhone 15 Pro
+Max/iOS 27.0; `docs/nano-hardware-iphone.json` pins its 22-event journal, actual
+capsules, two per-boot records, exact console bytes and manual off-to-on LED
+transition. The first inspection failed around the reported access prompt, and
+one explicit read-only retry succeeded; that failure remains visible. Both
+platforms retain paired-network development/report collection with Nano on USB.
+The user removed the D2 upload arm after completion. This adds no broader USB
+authorization/cold-attachment, Internet, timing, minimum-OS or power-loss claim.
 
 Snapshot verified on 2026-09-30:
 

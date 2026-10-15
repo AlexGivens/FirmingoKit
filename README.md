@@ -9,8 +9,11 @@ the reviewed compiler to one exact experimental Nano catalogue entry. Prepared
 packages support default API use; Git source retains explicit missing-binary behavior.
 
 The [compiler qualification host](docs/compiler-host-qualification.md) passes
-actual development-signed macOS sandbox checks with prepared resources. Physical
-iPad/iPhone and board deployment remain separate qualification work.
+actual development-signed macOS sandbox and recorded physical iPad/iPhone checks
+with prepared resources. The separate [Nano qualification host](docs/nano-hardware-qualification.md)
+now has scoped iPadOS 27.0.1 and iOS 27.0 two-sketch managed-deployment passes,
+including exact console bytes and manual GPIO transitions. Other boards, minimum OS and broader
+USB/Internet/power-loss qualification remain separate work.
 
 The agreed repository split assigns preprocessing, WASM execution, board recipes,
 ELF/capsule packaging, compiler diagnostics, and static build metadata to
@@ -32,8 +35,10 @@ commit, and supports saved-record reconciliation. Complete-firmware local acquis
 release/UF2 validation, and artifact preflight are also implemented. Experimental macOS ROM programming, one-shot execution, persistable records, and
 fresh-hello verification are implemented. Experimental local WASM compilation is implemented with an explicitly supplied
 reviewed service; its scoped paired-source distribution review is complete, while
-hosted delivery and qualified updates remain pending; no programming/sandbox pair is hardware-qualified. Upload has no hardware
-qualification; an advertisement alone is insufficient to start an upload.
+hosted delivery and qualified updates remain pending. No SDK complete-firmware
+programming/sandbox pair is hardware-qualified. The scoped Nano/iPad/iPhone managed-upload
+result is recorded separately above; an advertisement alone is insufficient to
+start an upload.
 
 Offline single-file source preparation and strict stateless Nano ELF-to-FMS1
 packaging are available, with source diagnostics and revision/build receipts.
@@ -41,12 +46,12 @@ The separate experimental `ManagedSketchCompiler` compiles through an internal
 WebKit/WASI worker and returns validated capsules for the exact source revision.
 Preparation/packaging alone do not establish source-to-code or hardware compatibility. See [compiler details](docs/compiler.md).
 
-The [managed WASM development workflow](Tools/ManagedWASM/README.md) now compiles
-and links two constrained sketches through the real WASI service and packages
-them through the SDK. Its compiler binary remains a local development input;
-the SDK now integrates its independent recipe/worker through WebKit and the demo
-invokes it from Build/Run. Approved service redistribution, signed-sandbox/physical
-iPad execution and hardware qualification remain pending.
+The [managed WASM development workflow](Tools/ManagedWASM/README.md) integrates
+Firmingo-Compiler's shared service/recipe/worker through the SDK WebKit adapter.
+An explicitly prepared SDK supplies reviewed compiler resources and paired
+source/notices; Git source has no binary. Signed/physical compiler hosting and
+the scoped Nano managed workflow have separate evidence linked above. The demo
+and complete-firmware programming remain separate qualification targets.
 
 The accepted next direction is a [bundled compiler and firmware catalogue](docs/compiler-catalogue.md)
 produced by Firmingo-Compiler from verified Firmingo exports and consumed through

@@ -220,4 +220,32 @@ GPIO bytes. The second operation includes two explicit hello inspections; neithe
 implicitly associated or uploaded. This is a scoped iPad two-sketch workflow pass,
 with a manual LED transition and exact console bytes, not general Arduino support,
 minimum-OS, clean cold-attachment, Internet routing, soak or power-loss evidence.
-The physical iPhone managed workflow remains open.
+The physical iPhone managed workflow is recorded separately below.
+
+## Physical iPhone console and GPIO result
+
+[The iPhone record](nano-hardware-iphone.json) pins the identical signed build-3
+app on iPhone 15 Pro Max/iOS 27.0 (24A437), its actual compiler outputs and
+22-event final journal. The first inspection failed with `Network is down`
+around the user's reported access prompt; one later explicit read-only attempt
+passed without reset/reconnect. Prompt type, cause and clean cold-attachment
+timing were not independently established. Both known capsule bytes pass the
+production firmware validator, including wrong-API/corrupt-code checks.
+
+The reviewed console association/RAM stage led to one host commit attempt,
+`committing` reply, fresh `boot_confirmed` status (`error=none`, `slotTouched=true`)
+and exact 256-byte echo. The user explicitly started the next operation, pressed
+RESET and observed D13 off after a fresh hello. A fresh reviewed association and
+GPIO upload then produced the same stage/commit/startup outcomes, followed by
+the user's D13-on observation. Both saved records match the selected device,
+their different boots and exact resident/capsule identities. Earlier failed
+attempts are retained. Intermediate installed status was not separately sampled.
+
+Final own-run retrieval still used paired `localNetwork` while Nano occupied
+the iPhone USB port. This is development/report connectivity, not uncached
+Internet routing. PCB revision and cable/hub model were not recorded. The user
+removed D2-to-GND and left REC disconnected at completion. No further Nano
+operation followed. These are scoped experimental two-sketch passes on the
+recorded Apple devices; general Arduino/other boards, minimum OS, electrical
+GPIO timing, throughput/soak, full authorization/cold-attachment matrices and
+interruption/power-loss/rollback remain unqualified.

@@ -2,7 +2,12 @@
 
 FirmingoKit implements the FMGO-one managed transfer/reconciliation contract pinned
 to Firmingo `f17fdf0301256ba48270230cbf213126e70aa8d0`. Deterministic tests use
-packaged protocol vectors and fake peers. No physical SDK upload is qualified.
+packaged protocol vectors and fake peers. The separately pinned experimental
+Firmware `e0a79d1…`/prepared SDK now has scoped iPadOS 27.0.1 and iOS 27.0
+two-sketch upload, startup, exact console and manual GPIO passes in
+[the Nano qualification record](nano-hardware-qualification.md). Earlier failed
+attempts remain recorded; this does not qualify other boards/OS versions,
+Internet routing, the full authorization/cold-attachment matrix or power loss.
 This operation replaces the managed sketch slot, not the complete resident
 firmware. Initial Firmingo installation, updates, and bootloader recovery remain
 separate work.
@@ -27,19 +32,20 @@ from hello. Do not derive the ELF hash/API address from the firmware version or
 hardcode a proof-build address. Constructing metadata is not proof that the
 resident is installed. A shared chip/family ID is insufficient.
 
-The current firmware proof uses constrained GCC-built modules and a tiny Arduino
-facade. Writable globals, arbitrary Arduino libraries, and arbitrary `.ino` builds
+The native firmware proof uses constrained GCC-built modules and a tiny Arduino
+facade. The shared Compiler's known console/GPIO WASM capsules now have the scoped
+SDK iPad/iPhone results above. Writable globals, arbitrary Arduino libraries, and arbitrary `.ino` builds
 are not established. Format validation cannot determine whether machine code is
 safe or executable. Only trusted independently built, qualified capsules belong
 on a physical board. Firmware parser fixtures have synthetic metadata and
 non-executable code; they are used only with fake transports in package tests.
 
-The accepted [catalogue design](compiler-catalogue.md) will separate bundled
-firmware-build descriptors from physical-device associations and allow offline
-builds without fabricated device IDs. That migration is not implemented. The
-current API and example below still require `ManagedResidentBinding`; future
-catalogue selection must preserve these exact binding, capability and one-commit
-checks before any upload.
+The implemented [catalogue design](compiler-catalogue.md) separates static
+firmware-build descriptors from physical-device associations and allows offline
+builds without fabricated device IDs. The Nano host builds offline, explicitly
+reviews a `ManagedDeviceAssociation`, then binds the artifact for upload. The
+legacy API/example below still accepts `ManagedResidentBinding`; both paths
+preserve exact binding, fresh capability checks and one-commit semantics.
 
 ## Staging and explicit installation
 
