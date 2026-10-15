@@ -435,6 +435,35 @@ This observes an active public SDK call and the last accepted progress callback;
 it does not identify an instruction-level interruption point in WASM, prove OS
 suspension, background compilation or recovery from actual memory pressure.
 
+Development-signed build 6 from host commit `19c92e4…` now passes on both recorded
+physical devices using the unchanged prepared SDK/service. The
+[active-call record](compiler-host-active-lifecycle.json) preserves source/signing,
+exact launch PID/context, actual scene events, cancellation and capsule identities.
+
+| Host | Canceled attempt / last progress | Cancellation settlement | Background-to-active observations | Fresh console build |
+| --- | --- | ---: | ---: | ---: |
+| iPad Pro, iPadOS 27.0.1 | 3 / verifying | 11.3 ms | 9.950 s | 0.733 s |
+| iPhone 15 Pro Max, iOS 27.0 | 5 / verifying | 4.6 ms | 7.587 s | 0.672 s |
+
+The two/four earlier GPIO attempts complete with known hashes. Both selected
+calls actually settle with `CancellationError` and no result, before the recorded
+background event. Fresh admission follows both settlement and active return;
+each exported console capsule matches the known 392-byte vector. The exported
+preflight GPIO capsules match the 316-byte vector. Every completed build reports
+27,983,872 worker linear bytes. CoreDevice reports connected `localNetwork`
+before/after both runs, and the updated iPhone app retains its original six-check
+pass. No compiler asset, SDK implementation or firmware behavior changed.
+
+Both observed cancellation phases are **verifying**. These passes establish
+active public SDK-call cancellation/reentry at that reported phase; they do not
+qualify background interruption of worker compilation/linking or prove which
+instruction/subcomponent was running. Real pressure, child-process termination,
+OS suspension and forced production-deadline scenarios remain open. Nine tool
+fixtures, macOS and optimized iOS source checks, signed Release building and
+workflow YAML/shell syntax checks pass. The build has no Swift warnings and only
+the standard AppIntents no-framework note. The full unchanged SDK suite was not
+repeated for this host-only change, and remote CI remains unprovisioned/unrun.
+
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an

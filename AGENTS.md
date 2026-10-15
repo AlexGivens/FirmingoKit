@@ -83,7 +83,11 @@ This adds no SDK lifecycle policy/background grant or suspension/active-build
 interruption/pressure claim. An additional opt-in `--qualification-active-lifecycle`
 mode now arms a manual start, cancels only its pending SDK call when the scene
 becomes inactive, and requires typed cancellation plus real background/return
-before a fresh build. This is test-host policy; physical execution is pending.
+before a fresh build. Signed build 6 now passes on both physical devices, canceling
+attempts 3/5 with last progress `verifying`, no returned artifact and settlement
+in 11.3/4.6 ms. Known console builds pass after real background/return in the same
+process. See `docs/compiler-host-active-lifecycle.json`. This is test-host policy;
+worker compile/link interruption and real pressure remain unqualified.
 Source CI now runs nine tool fixtures,
 macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.
