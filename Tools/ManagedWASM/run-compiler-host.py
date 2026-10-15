@@ -18,14 +18,14 @@ DEADLINE_ARTIFACTS = {
     "fresh-after-deadline-console.fms": (392, "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0")}
 
 
-def signature(app, team):
+def signature(app, team, *, identifier="com.firmingokit.compilerqualification"):
     """Require the expected signed identifier, team, hardened runtime and finite sandbox entitlements before launch."""
     if app.is_symlink() or not app.is_dir() or not re.fullmatch(r"[A-Z0-9]{10}", team):
         raise ValueError("select a real signed app and expected Apple development team")
     subprocess.run(["codesign", "--verify", "--deep", "--strict", str(app)], check=True, capture_output=True, timeout=30)
     result = subprocess.run(["codesign", "-dvvv", str(app)], check=True, capture_output=True, text=True, timeout=15)
     details = result.stderr
-    if ("Identifier=com.firmingokit.compilerqualification\n" not in details or "TeamIdentifier=" + team + "\n" not in details
+    if ("Identifier=" + identifier + "\n" not in details or "TeamIdentifier=" + team + "\n" not in details
             or "flags=0x10000(runtime)" not in details or "Authority=Apple Development:" not in details):
         raise ValueError("app signature does not match the selected development/sandbox host")
     result = subprocess.run(["codesign", "-d", "--entitlements", "-", "--xml", str(app)], check=True, capture_output=True, timeout=15)

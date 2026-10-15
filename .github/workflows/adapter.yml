@@ -29,6 +29,8 @@ jobs:
         run: node Tools/ManagedWASM/run-validation.mjs 2>&1 | tee .build/adapter-ci/tests.log
       - name: Explain qualification app asset boundary
         run: echo 'Host sources including bounded self-footprint, idle scene observation, explicit active-call/worker-phase lifecycle cancellation, production-deadline recovery and bounded macOS capsule export are type-checked with warnings as errors; twelve generator/runner/stress/lifecycle/deadline/export fixtures and the pinned workload inventory run without a compiler. Complete app builds/execution, workload calibration, actual 60-second deadline expiry, repeated builds, profiling, physical interruption and manual scene transitions need anchored prepared SDK bytes, signing and explicitly selected hosts/devices; these are deliberate CI exclusions until asset/runner provisioning. Local signed/physical evidence is separate.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Explain Nano hardware qualification boundary
+        run: echo 'The same local entry point runs four Nano test-input/generator/export fixtures, the production admission-policy executable and source-only Nano app type-checking. Complete Nano app builds/offline compilation need explicit prepared assets and signing. Inspect, associate, stage, commit, reconcile and behavior checks require an explicitly selected board and reviewed installed resident; no hardware operation runs in CI.' >> "$GITHUB_STEP_SUMMARY"
       - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
         run: |
           mkdir -p .build/owned-service-webkit
@@ -37,7 +39,7 @@ jobs:
           echo 'Owned development WASM qualification requires an explicit reviewed asset and compiler-maintenance harness; absent assets never count as execution.' >> "$GITHUB_STEP_SUMMARY"
       - name: Observe real-runtime availability separately
         run: |
-          env -u FIRMINGOKIT_WASM_MODULE swift test --filter ManagedWebKitCompilerTests 2>&1 | tee .build/adapter-ci/runtime.log
+          env -u FIRMINGOKIT_WASM_MODULE swift test --disable-xctest --enable-swift-testing --filter ManagedWebKitCompilerTests 2>&1 | tee .build/adapter-ci/runtime.log
           echo 'Actual WASM tests skip without the exact reviewed source-built service. Source/notice review is pinned, but no binary is bundled, fetched or published by this workflow.' >> "$GITHUB_STEP_SUMMARY"
       - name: Separate consumer discovers packaged resources
         run: |
@@ -79,7 +81,9 @@ jobs:
         run: xcodebuild '${{ matrix.operation }}' -workspace Validation/FirmingoKit.xcworkspace -scheme FirmingoKit -destination '${{ matrix.destination }}' -derivedDataPath '.build/adapter-ci-${{ matrix.name }}' CODE_SIGNING_ALLOWED=NO 2>&1 | tee '.build/adapter-ci/${{ matrix.name }}.log'
       - name: Compile optimized qualification-host sources against the iOS SDK without compiler assets or signing
         if: matrix.name == 'ios-device'
-        run: python3 -I -S -B Tools/ManagedWASM/check-compiler-host.py --ios-products .build/adapter-ci-ios-device/Build/Products/Debug-iphoneos 2>&1 | tee .build/adapter-ci/ios-host-typecheck.log
+        run: |
+          python3 -I -S -B Tools/ManagedWASM/check-compiler-host.py --ios-products .build/adapter-ci-ios-device/Build/Products/Debug-iphoneos 2>&1 | tee .build/adapter-ci/ios-host-typecheck.log
+          python3 -I -S -B Tools/Hardware/check-nano-host.py --ios-products .build/adapter-ci-ios-device/Build/Products/Debug-iphoneos 2>&1 | tee .build/adapter-ci/ios-nano-host-typecheck.log
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         if: always()
         with:

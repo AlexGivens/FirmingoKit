@@ -126,6 +126,22 @@ PID/context and a same-instance known console build in 1.018 seconds. Both
 bounded stdout capsule exports match the known vectors. See
 `docs/compiler-host-deadline-macos.json`; no SDK timer, compiler asset or
 entitlement changed. Existing physical build-8 evidence remains separate.
+`Validation/NanoHost` and `Tools/Hardware` now provide a separate explicit Nano
+qualification host and anchored resident-only test-input preparation. Device
+identity, reviewed installed-resident association, RAM staging, one-shot commit,
+fresh read-only reconciliation and exact binary/manual GPIO observations remain
+separate actions. Restored records cannot replay commit. Normal launch performs
+no device operation; `--nano-offline` refuses connections and compiles only the
+two known sources. Firmware inputs stay outside app resources. The resident-only
+UF2 preserves the managed slot, so selected initial setup/readback is a separate
+hardware prerequisite. See `docs/nano-hardware-qualification.md`.
+The ordinary SDK entry point now includes four Nano tooling fixtures, the actual
+production admission-policy executable and source-only macOS/iOS host checks.
+It explicitly selects Swift Testing (all current tests) and rejects new XCTest
+sources pending runner review; an empty cached XCTest bundle previously returned
+an architecture-load failure despite all 154 Swift Testing functions passing.
+The corrected entry point passes; no failed command counts as a full pass.
+Signed Nano-app offline execution and all real board actions remain separate gates.
 
 Snapshot verified on 2026-09-30:
 

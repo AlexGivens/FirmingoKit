@@ -34,6 +34,11 @@ local service. It performs no compiler-memory transformation, standalone Node
 compilation, sibling checkout lookup, downloads or device operations. Subcommand
 failure, signal or timeout produces a failing exit status. The SDK CI package job
 uses this same entry point; Apple build/DocC jobs remain separate.
+The package currently uses Swift Testing exclusively. This entry point selects
+`swift test --disable-xctest --enable-swift-testing` and refuses newly added
+XCTest imports/classes until that choice is reviewed. This avoids an observed
+empty-XCTest-bundle architecture load failure while retaining actual Swift
+Testing failures, signals and timeouts as command failures.
 
 The entry point also runs twelve qualification generator/runner/stress/lifecycle/deadline/export
 fixtures and macOS host source type-checking, without compiler assets or an app
@@ -65,6 +70,11 @@ It launches its own exact PID, applies the same schema-6 checker and independent
 checks both fixed capsule exports sent by the app through stdout. No private
 container access or extra entitlement is used; the original six-check invocation
 remains the default.
+The separate [Nano hardware qualification host](../../docs/nano-hardware-qualification.md)
+adds four fixture-only input/generator/export cases, a production admission-policy
+executable and macOS/iOS source checks to this entry point. It never runs hardware
+commands in CI. Asset preparation, signed offline execution and later explicitly
+selected board operations have separate documented commands.
 
 Compiler-side commands are `tools/dev.mjs test`, `test-runtime <explicit-service>`,
 `build <request> <explicit-service> <new-output-directory>`, and
