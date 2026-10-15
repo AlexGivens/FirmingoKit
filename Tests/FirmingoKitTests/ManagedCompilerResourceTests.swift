@@ -4,6 +4,51 @@ import Testing
 
 /// Actual SDK resource bytes and independently mutated inventories exercise fail-closed bundled loading.
 struct ManagedCompilerResourceTests {
+    /// Multiple full chunks and a partial tail retain exact bytes even when the original file is edited in place.
+    @Test func boundedChunkSnapshotSurvivesSourceMutation() throws {
+        let root = FileManager.default.temporaryDirectory.appendingPathComponent("FirmingoReader-" + UUID().uuidString)
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: false)
+        defer {
+            do { try FileManager.default.removeItem(at: root) }
+            catch { Issue.record(error, "Reader fixture cleanup failed") }
+        }
+        let file = root.appendingPathComponent("bytes.bin")
+        var expected = Data(repeating: 0xa7, count: 2 * 1024 * 1024 + 31)
+        expected[0] = 0; expected[1024 * 1024 - 1] = 0xff
+        expected[1024 * 1024] = 0x80; expected[expected.count - 1] = 0x42
+        try expected.write(to: file)
+        let snapshot = try ManagedCompilerResourceReader.read(file, maximum: expected.count, role: "fixture")
+        #expect(snapshot == expected)
+        #expect(throws: ManagedCompilerResourceError.invalidFile("fixture")) {
+            _ = try ManagedCompilerResourceReader.read(file, maximum: expected.count - 1, role: "fixture")
+        }
+        // Avoid atomic replacement: an in-place edit would be observable through a mutable file mapping.
+        let writer = try FileHandle(forWritingTo: file)
+        defer {
+            do { try writer.close() }
+            catch { Issue.record(error, "Reader fixture writer close failed") }
+        }
+        try writer.seek(toOffset: 0); try writer.write(contentsOf: Data([0xdd]))
+        #expect(try Data(contentsOf: file).first == 0xdd)
+        #expect(snapshot == expected)
+    }
+
+    /// A canceled chunk-read request throws before I/O and does not affect a separate fresh snapshot read.
+    @Test func canceledReaderAndFreshSnapshot() async throws {
+        let file = FileManager.default.temporaryDirectory.appendingPathComponent("FirmingoReader-" + UUID().uuidString)
+        try Data([0, 0x80, 0xff, 13, 10]).write(to: file)
+        defer {
+            do { try FileManager.default.removeItem(at: file) }
+            catch { Issue.record(error, "Canceled reader fixture cleanup failed") }
+        }
+        let canceled = Task {
+            withUnsafeCurrentTask { $0?.cancel() }
+            return try ManagedCompilerResourceReader.read(file, maximum: 5, role: "fixture")
+        }
+        await #expect(throws: CancellationError.self) { _ = try await canceled.value }
+        #expect(try ManagedCompilerResourceReader.read(file, maximum: 5, role: "fixture") == Data([0, 0x80, 0xff, 13, 10]))
+    }
+
     /// Distinguishes the service-free source checkout from an explicitly prepared SDK distribution.
     private static var serviceBundled: Bool {
         guard let root = ManagedCompilerBundle.root() else { return false }

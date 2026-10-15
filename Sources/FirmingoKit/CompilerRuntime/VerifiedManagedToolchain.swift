@@ -54,7 +54,7 @@ struct VerifiedManagedToolchain: Sendable {
                     toolchainSHA256: digest(Data((manifestSHA256 + ":" + serviceSHA256).utf8)))
     }
 
-    /// Reads regular nonsymlink files with a byte cap and cancellation between fixed-size chunks.
+    /// Preserves explicit-service error semantics while bounding chunk temporaries and reserving one owned snapshot.
     private static func boundedRead(_ url: URL, maximum: Int) throws -> Data {
         let values = try url.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey])
         guard values.isRegularFile == true, values.isSymbolicLink != true,
@@ -64,11 +64,20 @@ struct VerifiedManagedToolchain: Sendable {
         let handle = try FileHandle(forReadingFrom: url)
         do {
             var data = Data()
+            data.reserveCapacity(size)
             while true {
                 try Task.checkCancellation()
-                guard let chunk = try handle.read(upToCount: 1024 * 1024), !chunk.isEmpty else { break }
-                guard chunk.count <= maximum - data.count else { throw ManagedCompilerError.unavailable("resource grew beyond its bound") }
-                data.append(chunk)
+                let count = try autoreleasepool {
+                    guard let chunk = try handle.read(upToCount: min(1024 * 1024, maximum - data.count + 1)), !chunk.isEmpty else {
+                        return 0
+                    }
+                    guard chunk.count <= maximum - data.count else {
+                        throw ManagedCompilerError.unavailable("resource grew beyond its bound")
+                    }
+                    data.append(chunk)
+                    return chunk.count
+                }
+                if count == 0 { break }
             }
             try handle.close()
             return data
