@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "scope": "Physical iPad, development-signed ARM64 Release host, public default SDK compiler APIs; no board communication or deployment",
+  "host": {
+    "model": "iPad Pro (11-inch) (3rd generation)",
+    "productType": "iPad13,4",
+    "os": "iPadOS 27.0.1 (24A446)",
+    "connection": "USB wired, paired, Developer Mode enabled",
+    "architecture": "arm64",
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4",
+    "deploymentMinimum": "iOS/iPadOS 17",
+    "minimumOSRuntimeTested": false
+  },
+  "signature": {
+    "kind": "Apple Development",
+    "teamIdentifier": "WGR9T9JH4L",
+    "strictDeepVerification": true,
+    "profileName": "iOS Team Provisioning Profile: *",
+    "profileExpirationUTC": "2027-01-26T18:09:45Z",
+    "selectedDeviceIncluded": true,
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.compilerqualification",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "executableSHA256": "b5dc811406edf9de0464255296392eb0f91b5211dde130d45580debcec8e736c",
+    "provisioningUpdatesRequested": false
+  },
+  "hostInputsSHA256": "c2b936071a666dd874bff566f7b144fae731affc897c833e5ead633f7fece2a8",
+  "compilerWASM": {
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"
+  },
+  "appLogicalFileBytes": 104298119,
+  "appFileCount": 22,
+  "runs": [
+    {
+      "launch": 1,
+      "condition": "first launch after installation",
+      "reportSHA256": "be3336182c03fd14d225e8437f8b06e99118e9af9cd91a2e038c042548b88637",
+      "report": {
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+          "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+        },
+        "deadlineScope": "60-second production deadline retained; deadline expiry not forced by this host",
+        "deviceOperations": false,
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "memoryScope": "WASM linear bytes after build; no total app/WebKit peak claim",
+        "operatingSystem": "Version 27.0.1 (Build 24A446)",
+        "runID": "62BB8172-2C89-409C-87E5-24802AEB2910",
+        "schema": 1,
+        "stage": "complete",
+        "status": "passed",
+        "steps": [
+          {
+            "name": "resources",
+            "seconds": 0.10370008333120495
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "cold-gpio",
+            "seconds": 0.8263840833387803,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "warm-console",
+            "seconds": 0.7120575000008103,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "name": "frontend-error",
+            "seconds": 0.4753046666737646
+          },
+          {
+            "name": "busy-cancellation",
+            "seconds": 0.41448487500019837
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "fresh-after-cancellation",
+            "seconds": 0.6166145416646032,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ]
+      },
+      "independentFirmwareValidation": [
+        {
+          "file": "cold-gpio.fms",
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "apiAddress": "0x10022c9c",
+          "exitCode": 0,
+          "result": "validator=0 capsule_bytes=316 code_bytes=60"
+        },
+        {
+          "file": "cold-gpio.fms",
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "apiAddress": "0x10022ca0",
+          "exitCode": 1,
+          "result": "validator=6 capsule_bytes=316 code_bytes=0"
+        },
+        {
+          "file": "warm-console.fms",
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "apiAddress": "0x10022c9c",
+          "exitCode": 0,
+          "result": "validator=0 capsule_bytes=392 code_bytes=136"
+        },
+        {
+          "file": "warm-console.fms",
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "apiAddress": "0x10022ca0",
+          "exitCode": 1,
+          "result": "validator=6 capsule_bytes=392 code_bytes=0"
+        }
+      ]
+    },
+    {
+      "launch": 2,
+      "condition": "fresh app process, same installation; OS caches not cleared",
+      "reportSHA256": "37b02182598d93236cce0efb9967f558b60836a66d5ddd8f1288fce24729142e",
+      "report": {
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+          "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+        },
+        "deadlineScope": "60-second production deadline retained; deadline expiry not forced by this host",
+        "deviceOperations": false,
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "memoryScope": "WASM linear bytes after build; no total app/WebKit peak claim",
+        "operatingSystem": "Version 27.0.1 (Build 24A446)",
+        "runID": "C076D1E9-B7E7-41D4-BDE2-04430A3F1D62",
+        "schema": 1,
+        "stage": "complete",
+        "status": "passed",
+        "steps": [
+          {
+            "name": "resources",
+            "seconds": 0.0773122916725697
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "cold-gpio",
+            "seconds": 0.6550792083289707,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "warm-console",
+            "seconds": 0.693214833343518,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "name": "frontend-error",
+            "seconds": 0.4800107083283365
+          },
+          {
+            "name": "busy-cancellation",
+            "seconds": 0.42115187500894535
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "fresh-after-cancellation",
+            "seconds": 0.6177726250025444,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ]
+      },
+      "independentFirmwareValidation": [
+        {
+          "file": "cold-gpio.fms",
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "apiAddress": "0x10022c9c",
+          "exitCode": 0,
+          "result": "validator=0 capsule_bytes=316 code_bytes=60"
+        },
+        {
+          "file": "cold-gpio.fms",
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "apiAddress": "0x10022ca0",
+          "exitCode": 1,
+          "result": "validator=6 capsule_bytes=316 code_bytes=0"
+        },
+        {
+          "file": "warm-console.fms",
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "apiAddress": "0x10022c9c",
+          "exitCode": 0,
+          "result": "validator=0 capsule_bytes=392 code_bytes=136"
+        },
+        {
+          "file": "warm-console.fms",
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "apiAddress": "0x10022ca0",
+          "exitCode": 1,
+          "result": "validator=6 capsule_bytes=392 code_bytes=0"
+        }
+      ]
+    }
+  ],
+  "independentValidator": {
+    "executableSHA256": "c1aa955a6d3cb12f2b3a3d2a51c8132ebb1f4ead472aab7413acf208809b4ee8",
+    "scope": "Native firmware image validator, capsule structure and exact API binding only; no Thumb execution"
+  },
+  "collection": "CoreDevice install/launch and copy of only the qualification app run directories; report UUID/context/steps/times/memory and exported capsule hashes checked; no visual inspection",
+  "limitations": [
+    "One physical iPad/OS combination; iPhone and minimum OS untested",
+    "Within-app cold/warm labels are first/subsequent build measurements, not cleared OS caches",
+    "WASM linear memory after builds is not total app/WebKit peak memory",
+    "Production 60-second deadline retained; expiry, memory pressure and forced termination not exercised",
+    "UI/accessibility and source/selection changes during builds unqualified",
+    "No Nano/Pico operation, installed-image evidence, upload, startup or GPIO/stream behavior",
+    "Local execution does not establish remote SDK CI success or hosted binary distribution"
+  ]
+}

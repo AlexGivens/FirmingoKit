@@ -28,8 +28,9 @@ notice/provenance roles in the SDK's twelve-role inventory. No WASM binary or
 source archive is bundled, the production descriptor catalogue stays empty, and
 default builds report missing `compiler.wasm` instead of licensing-pending status.
 Public private-origin/fresh-consumer checks are recorded in
-`docs/compiler-delivery.md`; signing/minimum-OS/physical iOS/iPadOS and hardware
-remain unqualified. Older facts below are historical snapshots, not current pins.
+`docs/compiler-delivery.md`; scoped signed macOS and physical iPad results are
+recorded below. Minimum OS, iPhone and board deployment remain unqualified.
+Older facts below are historical snapshots, not current pins.
 
 The experimental consumer package now supplies exact Nano descriptor `c44d25ef…`
 from Firmware `e0a79d1…`, catalogue `e341bfc0…`. Thirteen verified metadata roles
@@ -45,9 +46,13 @@ availability does not attest installed firmware or qualify hardware. See
 prepared SDK in a development-signed ARM64 macOS 27.0 Release app, sandbox and
 hardened runtime verified. Six actual checks pass. Source CI runs six tiny tool
 fixtures and warnings-as-errors type-checking without app execution or binaries.
-The app exports its own journal; do not request private-container/FDA or visual
-inspection to collect it. See `docs/compiler-host-qualification.md`. Physical
-iPad/iPhone, minimum OS, total memory and device deployment remain unqualified.
+The macOS app exports its own journal; do not request private-container/FDA or
+visual inspection to collect it. See `docs/compiler-host-qualification.md`. Two
+development-signed Release launches now pass all six checks on a physical 11-inch
+iPad Pro (3rd generation), iPadOS 27.0.1. CoreDevice retrieves only this app's run
+directories; `docs/compiler-host-ipad.json` records reports and independently
+validated capsule bytes. Physical iPhone, minimum OS, total memory, forced
+deadline/termination and device deployment remain unqualified.
 
 Snapshot verified on 2026-09-30:
 

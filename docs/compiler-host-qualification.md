@@ -67,21 +67,62 @@ AppIntents emits its standard no-framework metadata note; final Swift sources
 have no warnings. Complete app CI is deliberately excluded until prepared assets
 and signing/runner provisioning exist. Local execution is separate evidence.
 
-## Physical iPad handoff
+## Actual physical iPad result — 2026-10-14
 
-Connect the selected iPad to this Mac by USB, unlock it and handle any ordinary
-Trust prompt. Xcode must see it before installing a development-signed app; a
-valid profile/account and Developer Mode may require operator action. The current
-inventory remembers a disconnected 11-inch iPad Pro (3rd generation), iPadOS
-27.0.1. Cached inventory is not a physical test result.
+The development-signed ARM64 Release app was installed and executed on an iPad
+Pro (11-inch, 3rd generation), iPad13,4, running iPadOS 27.0.1 (24A446). CoreDevice
+confirmed a paired wired connection and enabled Developer Mode. The existing
+Apple Development team/profile covered this device; strict deep signature,
+application identifier and profile membership were checked before installation.
+No provisioning updates or account changes were requested. iOS entitlements are
+application/team identifiers and development debugging permission; no JIT or
+unsigned executable-memory entitlement was added. The macOS hardened-runtime
+configuration is separate from this iOS signature.
 
-Keep the app foregrounded, run checks and share the JSON journal. Record actual
-model, OS/build, signing/profile, cold/repeated times, unexpected termination and
-reported identities. No Nano/Pico is needed yet. Agent visual inspection remains
-disabled; user observations and exported results are separate evidence.
+Both app launches pass all six checks. The first launch after installation takes
+0.826 seconds for GPIO and 0.712 seconds for console. A fresh app process repeats
+them in 0.655/0.693 seconds. These are first/subsequent builds within an app run;
+OS caches were not cleared. All builds reproduce the desktop capsule identities
+and report 27,983,872 WASM linear bytes. The sealed app contains the exact
+101,194,565-byte compiler; its 22 files total 104,298,119 logical bytes, distinct
+from an IPA download size, installed disk allocation or process memory.
+
+CoreDevice copied only each qualification run's report and two generated
+capsules. Fresh UUIDs, complete steps, exact prepared/package context, finite
+times, memory bounds and the capsule bytes were checked. The independent native
+firmware validator accepts both capsules at API `0x10022c9c` and rejects the
+historical `0x10022ca0` address. This validates capsule structure/binding, without
+executing Thumb code. [The machine-readable iPad record](compiler-host-ipad.json)
+preserves both reports, signature/profile/source identities and validator results.
+No visual inspection was performed or UI/accessibility result inferred.
+
+To reproduce with a generated host and a separately selected connected device,
+use a new derived-data directory and an existing development team/profile:
+
+```sh
+xcodebuild build -configuration Release \
+  -project HOST_DIRECTORY/CompilerQualification.xcodeproj -scheme CompilerQualification \
+  -destination "id=$DEVICE_UDID" -derivedDataPath NEW_IPAD_BUILD_DIRECTORY \
+  ENABLE_DEBUG_DYLIB=NO DEVELOPMENT_TEAM="$TEAM_ID" CODE_SIGN_STYLE=Automatic
+codesign --verify --deep --strict APP_PATH
+xcrun devicectl device install app --device "$DEVICE_ID" APP_PATH --timeout 60
+xcrun devicectl device process launch --device "$DEVICE_ID" --timeout 30 \
+  com.firmingokit.compilerqualification --qualification-run "$RUN_ID"
+xcrun devicectl device copy from --device "$DEVICE_ID" --timeout 30 \
+  --domain-type appDataContainer --domain-identifier com.firmingokit.compilerqualification \
+  --source "Documents/CompilerQualification-$RUN_ID" --destination NEW_RESULTS_DIRECTORY
+```
+
+`RUN_ID` must be a new uppercase UUID. Keep the app foregrounded until checks
+finish; a copied running/failed journal is not a pass. A deliberate repeat uses
+`--terminate-existing` on this app's launch and a new run ID/results directory.
+The app also offers Share results. Keep raw device/profile metadata local; record
+model/OS and selected identities without publishing device names, UDIDs or serials.
+The macOS runner does not launch iOS apps.
 
 Minimum-OS runtime, total app/child memory peaks, forced termination/deadline,
-physical iPad/iPhone, installed-image evidence and Nano deployment remain open.
+physical iPhone, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an
 exact selected recoverable Nano resident and separately authorized SDK workflow.
-No binary publication, physical-device installation or board operation occurred.
+No binary publication or board operation occurred. The development qualification
+app remains installed on the selected iPad.
