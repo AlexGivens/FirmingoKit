@@ -144,6 +144,32 @@ preserves both reports and the same signing/provenance/validator identities.
 These results cover this model/OS and constrained compiler fixtures; they do not
 qualify arbitrary sketches, the demo or board deployment.
 
+## Actual wireless deployment result — 2026-10-14
+
+After the user disconnected both devices from the Mac, CoreDevice established
+`connected`/`localNetwork` connections to the paired iPad and iPhone. The same
+development-signed Release app was reinstalled on each through the network,
+launched with a fresh UUID and its own report/capsules retrieved. Both devices
+still reported `connected`/`localNetwork` after collection. Existing profile
+membership, strict signature and exact entitlements were rechecked; no rebuild,
+pairing configuration or provisioning update was required.
+
+Each wireless run passes all six compiler checks and produces the exact wired
+capsule vectors. GPIO/console times are 0.737/0.713 seconds on iPad and
+0.760/0.639 seconds on iPhone. [The wireless record](compiler-host-wireless.json)
+preserves both reports, transport checks, installation/launch/copy outcomes and
+verified exported capsule hashes. The reinstall may reuse cached payloads; it is
+not a cold full-transfer or Wi-Fi throughput measurement. Debugger attachment and
+Instruments profiling were not exercised.
+
+The existing `devicectl` install/launch/copy commands above select the paired
+device; they need no separate Wi-Fi option when CoreDevice reaches it through
+`localNetwork`. For later board checks, keep the Mac and Apple device on their
+working local network and confirm that transport before launching. The Nano can
+occupy the device's USB-C port while app deployment uses the network, but actual
+simultaneous Nano USB Ethernet/Wi-Fi routing still needs a separate measured test.
+This wireless increment performs no board operation or network configuration.
+
 Minimum-OS runtime, total app/child memory peaks, forced termination/deadline,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an

@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "scope": "Wireless development redeployment, launch, compiler execution and own-report collection on two paired physical Apple devices; user confirmed both disconnected from Mac USB",
+  "toolchain": {
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4"
+  },
+  "signedApp": {
+    "kind": "Apple Development ARM64 Release",
+    "strictDeepVerification": true,
+    "teamIdentifier": "WGR9T9JH4L",
+    "executableSHA256": "b5dc811406edf9de0464255296392eb0f91b5211dde130d45580debcec8e736c",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "bothDevicesIncludedInExistingProfile": true,
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.compilerqualification",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "sameAppAsWiredChecks": true,
+    "rebuilt": false,
+    "provisioningUpdatesRequested": false,
+    "referenceRecord": "compiler-host-iphone.json",
+    "referenceRecordSHA256": "9dac22f0eca2902bb510e6ab3d000c4f3fd0cd79ddf3e60d9dd438f450216b15"
+  },
+  "hostInputsSHA256": "c2b936071a666dd874bff566f7b144fae731affc897c833e5ead633f7fece2a8",
+  "compilerWASM": {
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"
+  },
+  "runs": [
+    {
+      "host": {
+        "kind": "ipad",
+        "model": "iPad Pro (11-inch) (3rd generation)",
+        "productType": "iPad13,4",
+        "osVersion": "27.0.1",
+        "osBuild": "24A446"
+      },
+      "connectionBefore": {
+        "state": "connected",
+        "transport": "localNetwork",
+        "pairing": "paired"
+      },
+      "connectionAfter": {
+        "state": "connected",
+        "transport": "localNetwork",
+        "pairing": "paired"
+      },
+      "operations": {
+        "reinstall": "success",
+        "launch": "success",
+        "copyOwnRunDirectory": "success",
+        "reinstallSeconds": 5.257633958011866
+      },
+      "reportSHA256": "d229bed27857558bbbb89cc40d7078b01a18a4a29621470652b08e317263945d",
+      "report": {
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+          "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+        },
+        "deadlineScope": "60-second production deadline retained; deadline expiry not forced by this host",
+        "deviceOperations": false,
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "memoryScope": "WASM linear bytes after build; no total app/WebKit peak claim",
+        "operatingSystem": "Version 27.0.1 (Build 24A446)",
+        "runID": "39034889-0DF1-4A0D-A1A3-C83A0DA4B5E8",
+        "schema": 1,
+        "stage": "complete",
+        "status": "passed",
+        "steps": [
+          {
+            "name": "resources",
+            "seconds": 0.10821829167252872
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "cold-gpio",
+            "seconds": 0.737413666662178,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "warm-console",
+            "seconds": 0.7134204166650306,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "name": "frontend-error",
+            "seconds": 0.48237566667376086
+          },
+          {
+            "name": "busy-cancellation",
+            "seconds": 0.4133502916665748
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "fresh-after-cancellation",
+            "seconds": 0.6174031249975087,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ]
+      },
+      "exportedCapsules": [
+        {
+          "file": "cold-gpio.fms",
+          "bytes": 316,
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "matchesIndependentlyValidatedWiredVector": true
+        },
+        {
+          "file": "warm-console.fms",
+          "bytes": 392,
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "matchesIndependentlyValidatedWiredVector": true
+        }
+      ]
+    },
+    {
+      "host": {
+        "kind": "iphone",
+        "model": "iPhone 15 Pro Max",
+        "productType": "iPhone16,2",
+        "osVersion": "27.0",
+        "osBuild": "24A437"
+      },
+      "connectionBefore": {
+        "state": "connected",
+        "transport": "localNetwork",
+        "pairing": "paired"
+      },
+      "connectionAfter": {
+        "state": "connected",
+        "transport": "localNetwork",
+        "pairing": "paired"
+      },
+      "operations": {
+        "reinstall": "success",
+        "launch": "success",
+        "copyOwnRunDirectory": "success",
+        "reinstallSeconds": 3.633146540960297
+      },
+      "reportSHA256": "a2b44bf45087b379d50f5df666a345a1bb7dd43492c9a1d978fdfd37dba6c943",
+      "report": {
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+          "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a"
+        },
+        "deadlineScope": "60-second production deadline retained; deadline expiry not forced by this host",
+        "deviceOperations": false,
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "memoryScope": "WASM linear bytes after build; no total app/WebKit peak claim",
+        "operatingSystem": "Version 27.0 (Build 24A437)",
+        "runID": "51C6FA26-8B64-4326-862F-9396F22F4C47",
+        "schema": 1,
+        "stage": "complete",
+        "status": "passed",
+        "steps": [
+          {
+            "name": "resources",
+            "seconds": 0.11715783333056606
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "cold-gpio",
+            "seconds": 0.760132875002455,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "name": "warm-console",
+            "seconds": 0.6391622916853521,
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "name": "frontend-error",
+            "seconds": 0.4396487500052899
+          },
+          {
+            "name": "busy-cancellation",
+            "seconds": 0.38254287498421036
+          },
+          {
+            "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "name": "fresh-after-cancellation",
+            "seconds": 0.5626311249798164,
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ]
+      },
+      "exportedCapsules": [
+        {
+          "file": "cold-gpio.fms",
+          "bytes": 316,
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "matchesIndependentlyValidatedWiredVector": true
+        },
+        {
+          "file": "warm-console.fms",
+          "bytes": 392,
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "matchesIndependentlyValidatedWiredVector": true
+        }
+      ]
+    }
+  ],
+  "collection": "CoreDevice CLI install app, process launch and copy from only this app own UUID run directories; connected/localNetwork checked before and after; reports and exported capsule bytes verified without visual inspection",
+  "limitations": [
+    "Same signed app reinstalled; cached installation payloads may be reused; no cold full-transfer or Wi-Fi throughput claim",
+    "Wireless debugger attachment and Instruments memory profiling not exercised",
+    "Nano USB Ethernet was not attached; Wi-Fi/board routing coexistence remains untested",
+    "WASM linear memory is not total app/WebKit memory; minimum OS and lifecycle/deadline gates remain open",
+    "No board communication, reset, upload, firmware installation or hardware execution",
+    "Local wireless results do not establish remote CI success or binary publication"
+  ]
+}

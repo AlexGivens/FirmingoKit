@@ -248,6 +248,7 @@ Minimum OS, other models/OS versions, total memory and board gates below remain 
 
 - [x] Execute the prepared default compiler in a development-signed minimal physical iPad host; record two launches, diagnostics, busy/cancellation, fresh reentry, capsule bytes, signing/provenance and first/subsequent compile times in `docs/compiler-host-ipad.json`. This does not qualify the demo, total memory, deadline expiry or device deployment.
 - [x] Repeat the same six checks in two fresh physical iPhone app launches with the identical signed app and existing profile; preserve exact reports, capsule bytes and independent firmware validation in `docs/compiler-host-iphone.json`. Minimum OS, memory/lifecycle and deployment remain separate gates.
+- [x] Verify wireless development installation, launch and own-report/capsule collection on both USB-disconnected physical Apple devices. CoreDevice reports `localNetwork` before/after; each run passes all six compiler checks with wired capsule parity. Preserve `docs/compiler-host-wireless.json`; simultaneous Nano USB Ethernet/Wi-Fi coexistence remains untested.
 
 - [ ] Maintain opt-in hardware procedures and evidence separate from deterministic tests; execute device-changing tests only within an authorized hardware workflow.
 - [ ] Record board model/revision, firmware artifact hash/profile, resident metadata, SDK revision, compiler/recipe/assets, host OS/toolchain, procedure, observations, and unresolved limitations for each run.

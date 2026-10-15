@@ -55,6 +55,11 @@ validated capsule bytes. The identical signed app also passes two physical iPhon
 15 Pro Max launches on iOS 27.0; `docs/compiler-host-iphone.json` records its exact
 reports and validated exported capsules. Minimum OS, other model/OS combinations,
 total memory, forced deadline/termination and device deployment remain unqualified.
+Both USB-disconnected devices also pass wireless reinstall/launch/test/report
+collection using the identical signed app, with CoreDevice `localNetwork` before
+and after. See `docs/compiler-host-wireless.json`; ordinary device-ID CLI commands
+work over the paired network connection. Nano USB Ethernet/Wi-Fi coexistence,
+wireless debugger attachment and total-memory profiling remain untested.
 
 Snapshot verified on 2026-09-30:
 
