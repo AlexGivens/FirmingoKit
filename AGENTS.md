@@ -177,6 +177,15 @@ one explicit read-only retry succeeded; that failure remains visible. Both
 platforms retain paired-network development/report collection with Nano on USB.
 The user removed the D2 upload arm after completion. This adds no broader USB
 authorization/cold-attachment, Internet, timing, minimum-OS or power-loss claim.
+The SDK now retains initial Network.framework waiting until ready or the original
+five-second connection/hello deadline. Waiting after ready remains terminal; no
+new connection or command replay occurs. Five production-actor callback tests,
+the 159-test SDK entry point, device/simulator builds and DocC pass locally.
+Nano read-only inspection may await an inactive permission overlay; actual
+background/Cancel and other operations retain cancellation. An explicit
+`--nano-permission-check` mode hides and guards association/staging/commit for a
+fresh signed bundle without resetting privacy settings. See
+`docs/connection-readiness.md`; fresh physical prompt qualification remains separate.
 
 Snapshot verified on 2026-09-30:
 

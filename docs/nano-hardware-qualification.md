@@ -249,3 +249,14 @@ operation followed. These are scoped experimental two-sketch passes on the
 recorded Apple devices; general Arduino/other boards, minimum OS, electrical
 GPIO timing, throughput/soak, full authorization/cold-attachment matrices and
 interruption/power-loss/rollback remain unqualified.
+
+## Subsequent initial-permission handling
+
+[Connection readiness](connection-readiness.md) describes the subsequent SDK fix
+and read-only fresh-bundle qualification mode. Initial Network.framework waiting
+now stays within the original five-second deadline, while established path loss
+still closes. The host lets only pending read-only inspection await an inactive
+permission overlay; background/Cancel still cancels. This change does not rewrite
+the build-3 first-attempt failures or promote the earlier records to clean cold
+attachment passes. New source/build checks are separate from physical fresh-prompt
+qualification, and Nano staging/commit remain guarded by their existing policies.

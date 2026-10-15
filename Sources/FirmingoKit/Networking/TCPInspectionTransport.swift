@@ -5,7 +5,7 @@ import Network
 /// No input stream or output queue grows without a bound; callbacks return to this actor.
 actor TCPInspectionTransport: InspectionTransport {
     /// The single-use TCP connection, never restarted after close.
-    private let connection: NWConnection
+    private let connection: any TCPInspectionConnection
     /// A dedicated callback queue that keeps transport I/O off the main actor.
     private let queue = DispatchQueue(label: "FirmingoKit.inspection")
     /// Whether start has been invoked.
@@ -21,8 +21,12 @@ actor TCPInspectionTransport: InspectionTransport {
 
     /// Creates a connection without starting network activity.
     init(endpoint: FirmingoEndpoint) throws {
-        guard let port = NWEndpoint.Port(rawValue: endpoint.port) else { throw FirmingoError.invalidEndpoint }
-        connection = NWConnection(host: NWEndpoint.Host(endpoint.address), port: port, using: .tcp)
+        connection = try NetworkInspectionConnection(endpoint: endpoint)
+    }
+
+    /// Injects only platform callbacks; the production actor still owns all state and continuations.
+    init(connection: any TCPInspectionConnection) {
+        self.connection = connection
     }
 
     /// Starts once and waits for ready. The inspector owns the deadline and closes on cancellation.
@@ -32,10 +36,9 @@ actor TCPInspectionTransport: InspectionTransport {
         started = true
         try await withCheckedThrowingContinuation { continuation in
             opening = continuation
-            connection.stateUpdateHandler = { [weak self] state in
-                Task { await self?.changed(state) }
+            connection.start(queue: queue) { [weak self] state in
+                await self?.changed(state)
             }
-            connection.start(queue: queue)
         }
     }
 
@@ -48,9 +51,9 @@ actor TCPInspectionTransport: InspectionTransport {
         }
         try await withCheckedThrowingContinuation { continuation in
             writing = continuation
-            connection.send(content: bytes, completion: .contentProcessed { [weak self] error in
+            connection.send(bytes) { [weak self] error in
                 Task { await self?.sent(error) }
-            })
+            }
         }
         return bytes.count
     }
@@ -61,8 +64,7 @@ actor TCPInspectionTransport: InspectionTransport {
         guard started, !closed, opening == nil, reading == nil else { throw FirmingoError.disconnected }
         return try await withCheckedThrowingContinuation { continuation in
             reading = continuation
-            connection.receive(minimumIncompleteLength: 1,
-                               maximumLength: FMGOFrame.headerSize + FMGOFrame.maximumPayload) { [weak self] data, _, done, error in
+            connection.receive { [weak self] data, done, error in
                 Task { await self?.received(data, done: done, error: error) }
             }
         }
@@ -71,7 +73,8 @@ actor TCPInspectionTransport: InspectionTransport {
     /// Closes and resolves pending operations even if Network.framework callbacks arrive late.
     func close() { finish(FirmingoError.disconnected) }
 
-    /// Handles only terminal connection states and the first ready transition.
+    /// Initial waiting may resolve on the same connection within the caller's absolute deadline.
+    /// Waiting after ready remains terminal: no established session reconnect or command replay.
     private func changed(_ state: NWConnection.State) {
         guard !closed else { return }
         switch state {
@@ -79,7 +82,9 @@ actor TCPInspectionTransport: InspectionTransport {
             let continuation = opening
             opening = nil
             continuation?.resume()
-        case .failed(let error), .waiting(let error): finish(FirmingoError.transport(error))
+        case .waiting(let error):
+            if opening == nil { finish(FirmingoError.transport(error)) }
+        case .failed(let error): finish(FirmingoError.transport(error))
         case .cancelled: finish(FirmingoError.disconnected)
         default: break
         }
@@ -110,7 +115,6 @@ actor TCPInspectionTransport: InspectionTransport {
     private func finish(_ error: any Error) {
         guard !closed else { return }
         closed = true
-        connection.stateUpdateHandler = nil
         connection.cancel()
         let open = opening, read = reading, write = writing
         opening = nil

@@ -25,12 +25,15 @@ jobs:
           test "$(xcodebuild -version | head -1)" = 'Xcode 27.0'
           swift --version | grep -q 'Swift version 6.4'
           python3 Tools/ManagedWASM/update-resource-inventory.py --check 2>&1 | tee .build/adapter-ci/service-notices.log
-      - name: SDK, qualification-generator and stress/lifecycle-report fixtures, source-host type-check and deployment boundaries
+      - name: SDK transport/protocol, compiler adapter, qualification fixtures and source-host checks
         run: node Tools/ManagedWASM/run-validation.mjs 2>&1 | tee .build/adapter-ci/tests.log
       - name: Explain qualification app asset boundary
         run: echo 'Host sources including bounded self-footprint, idle scene observation, explicit active-call/worker-phase lifecycle cancellation, production-deadline recovery and bounded macOS capsule export are type-checked with warnings as errors; twelve generator/runner/stress/lifecycle/deadline/export fixtures and the pinned workload inventory run without a compiler. Complete app builds/execution, workload calibration, actual 60-second deadline expiry, repeated builds, profiling, physical interruption and manual scene transitions need anchored prepared SDK bytes, signing and explicitly selected hosts/devices; these are deliberate CI exclusions until asset/runner provisioning. Local signed/physical evidence is separate.' >> "$GITHUB_STEP_SUMMARY"
       - name: Explain Nano hardware qualification boundary
         run: echo 'The same local entry point runs four Nano test-input/generator/export fixtures, the production admission-policy executable and source-only Nano app type-checking. Complete Nano app builds/offline compilation need explicit prepared assets and signing. Inspect, associate, stage, commit, reconcile and behavior checks require an explicitly selected board and reviewed installed resident; no hardware operation runs in CI.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Explain initial-connection waiting coverage
+        run: |
+          echo 'Swift Testing exercises the production TCP actor through injected platform callbacks: initial waiting/ready, original deadline, cancellation, terminal failure and established path loss. No socket, OS permission reset or automatic reconnect is used; fresh physical permission prompts remain separate qualification.' >> "$GITHUB_STEP_SUMMARY"
       - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
         run: |
           mkdir -p .build/owned-service-webkit

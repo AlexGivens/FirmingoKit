@@ -22,6 +22,8 @@ import AppKit
     @Published var status = "Prepare offline sketches first. No board is contacted at launch."
     /// Serializes all host commands and freezes inputs while an async operation runs.
     @Published var busy = false
+    /// Explicit process mode for a fresh permission check; no association or device writes are available.
+    let permissionCheckOnly = ProcessInfo.processInfo.arguments.contains("--nano-permission-check")
     /// Observable local one-shot policy, independent of firmware state.
     @Published private(set) var gate = NanoGate()
     /// Current run journal, available for explicit Share results.
@@ -34,6 +36,8 @@ import AppKit
     private var record: ManagedUploadRecord?
     /// Sole owned host operation; cancellation propagates through the public SDK.
     private var task: Task<Void, Never>?
+    /// Only read-only initial inspection may await permission under an inactive overlay.
+    private var inspectionInProgress = false
     /// Bounded append-only-in-memory events, atomically saved after each state transition.
     private var events: [[String: String]] = []
     /// New run directory; prior runs are preserved.
@@ -57,7 +61,8 @@ import AppKit
         events.append(["stage": stage, "detail": String(detail.prefix(1024))])
         let value: [String: Any] = ["schema": 1, "kind": "nano-sdk-hardware-qualification", "runID": runID, "events": events,
             "firmwareBuildID": NanoGate.buildID, "context": context, "operatingSystem": ProcessInfo.processInfo.operatingSystemVersionString,
-            "hardwareQualified": false, "note": "Individual observations only; installation/startup/behavior and host platforms require separate review"]
+            "hardwareQualified": false, "operationMode": permissionCheckOnly ? "read-only-permission-check" : "normal",
+            "note": "Individual observations only; installation/startup/behavior and host platforms require separate review"]
         try JSONSerialization.data(withJSONObject: value, options: [.sortedKeys, .prettyPrinted]).write(to: journal, options: .atomic)
         if offlineOnly {
             try FileHandle.standardError.write(contentsOf: Data(("FIRMINGO_NANO_STAGE:" + stage + "\n").utf8))
@@ -159,8 +164,22 @@ import AppKit
     func inspect() {
         perform {
             guard self.deviceID.utf8.count == 16 else { throw NanoGate.Rejected() }
-            let connection = try await self.connect(id: self.deviceID); let device = connection.device
+            self.inspectionInProgress = true
+            defer { self.inspectionInProgress = false }
+            try self.log("inspection-start", "Read-only connection/hello; original five-second SDK deadline")
+            let started = ContinuousClock.now
+            self.status = "Inspecting. Approve a local-network prompt if shown; this attempt has a five-second deadline."
+            let connection: FirmingoSession
+            do { connection = try await self.connect(id: self.deviceID) }
+            catch FirmingoError.timedOut {
+                throw NSError(domain: "NanoInspection", code: 1, userInfo: [NSLocalizedDescriptionKey:
+                    "Inspection exceeded five seconds. Check the Nano connection and local-network permission, then explicitly choose Inspect again.",
+                    NSUnderlyingErrorKey: FirmingoError.timedOut])
+            }
+            let device = connection.device
             await connection.disconnect()
+            let elapsed = started.duration(to: .now).components
+            try self.log("inspection-duration", String(Double(elapsed.seconds) + Double(elapsed.attoseconds) / 1e18))
             try self.gate.inspected(address: self.address, deviceID: device.deviceID, bootID: device.bootID)
             try self.log("inspected", "device=" + device.deviceID + " boot=" + device.bootID)
             self.status = "Hello/target checked. Review exact installed resident evidence separately."
@@ -170,6 +189,7 @@ import AppKit
     /// Operator action records an assertion of existing installed firmware, explicitly without attestation.
     func associate() {
         perform {
+            guard !self.permissionCheckOnly else { throw NanoGate.Rejected() }
             var reviewed = self.gate
             try reviewed.associate(address: self.address, deviceID: self.deviceID, imageSHA: self.imageSHA, note: self.evidenceNote)
             try self.log("operator-associated", self.evidenceNote)
@@ -195,6 +215,7 @@ import AppKit
     /// Explicit RAM-only transfer rechecks device/boot/capabilities; no flash commit occurs here.
     func stage() {
         perform {
+            guard !self.permissionCheckOnly else { throw NanoGate.Rejected() }
             guard self.gate.state == .associated, let artifact = self.artifacts[self.sketch] else { throw NanoGate.Rejected() }
             let connection = try await self.connect(id: self.deviceID); self.session = connection
             try self.gate.requireStage(address: self.address, deviceID: connection.device.deviceID, bootID: connection.device.bootID)
@@ -210,6 +231,7 @@ import AppKit
     /// Explicit slot replacement; persists intent and consumes the capability before the only commit call.
     func commit() {
         perform {
+            guard !self.permissionCheckOnly else { throw NanoGate.Rejected() }
             guard let connection = self.session, let record = self.record else { throw NanoGate.Rejected() }
             try self.gate.requestCommit(); try self.save(record); try self.log("commit-attempted-once", record.sha256)
             self.status = "Commit requested. Any missing reply is uncertain; check status without replay."
@@ -304,9 +326,15 @@ import AppKit
         }
     }
 
-    /// Losing foreground cancels owned work; a staged capability becomes query-only, never replayable on return.
-    func inactive() {
+    /// Permission overlays may leave read-only inspection pending; background/cancel still ends it.
+    /// All other work retains cancellation on inactivity; staged capability becomes query-only.
+    func inactive(permitPendingInspection: Bool = false) {
         guard !offlineOnly else { return }
+        if permitPendingInspection && inspectionInProgress {
+            do { try log("inspection-inactive", "Read-only attempt may await permission within its original deadline") }
+            catch { status = "Inspection journal failed: " + error.localizedDescription; task?.cancel() }
+            return
+        }
         task?.cancel()
         if gate.state == .staged {
             gate.restore()

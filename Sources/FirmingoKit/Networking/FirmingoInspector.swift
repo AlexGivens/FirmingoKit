@@ -4,7 +4,8 @@ import Foundation
 /// It sends hello once, acquires no channel, performs no writes to firmware, and always closes.
 public enum FirmingoInspector {
     /// Opens TCP, validates hello against the host selection, and closes before returning its snapshot.
-    /// The absolute five-second SDK deadline includes connection establishment. Cancellation closes I/O
+    /// The absolute five-second SDK deadline includes initial path/permission waiting and hello.
+    /// Waiting uses the same connection and sends no hello before ready. Cancellation closes I/O
     /// and throws `CancellationError`. Identity is unauthenticated development identity, not attestation.
     /// - Parameters:
     ///   - endpoint: Explicit numeric address and port; no discovery or reconnect occurs.

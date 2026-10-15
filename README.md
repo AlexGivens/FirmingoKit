@@ -15,6 +15,10 @@ now has scoped iPadOS 27.0.1 and iOS 27.0 two-sketch managed-deployment passes,
 including exact console bytes and manual GPIO transitions. Other boards, minimum OS and broader
 USB/Internet/power-loss qualification remain separate work.
 
+[Initial connection readiness](docs/connection-readiness.md) explains bounded
+local-network permission/path waiting and explicit retry after timeout, without
+reconnecting an established session or replaying a command.
+
 The agreed repository split assigns preprocessing, WASM execution, board recipes,
 ELF/capsule packaging, compiler diagnostics, and static build metadata to
 **Firmingo-Compiler**. FirmingoKit owns the Swift compiler facade/web host, device

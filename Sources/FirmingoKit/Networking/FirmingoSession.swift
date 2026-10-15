@@ -75,7 +75,8 @@ public actor FirmingoSession {
 
     /// Opens a selected numeric endpoint, sends hello once, and checks the exact board, optional device ID,
     /// and expected application/UART backend before making channel operations available.
-    /// A five-second deadline covers TCP establishment and hello. No reconnect or replay occurs.
+    /// A five-second deadline covers initial path/permission waiting, TCP establishment and hello.
+    /// Waiting before ready retains the same connection; no reconnect or replay occurs.
     @concurrent
     public static func connect(to endpoint: FirmingoEndpoint, expectedBoard: FirmingoBoard,
                                expectedBackend: FirmingoDevice.Backend,
