@@ -128,7 +128,7 @@ import FirmingoKit
     }
 
     /// Loads only the pinned test fixture; no asset/recipe modification or arbitrary source provider is introduced.
-    private static func loadWorkerSource() throws -> String {
+    static func loadWorkerSource() throws -> String {
         guard let url = Bundle.main.url(forResource: "worker-compile-workload", withExtension: "txt"),
               try url.resourceValues(forKeys: [.fileSizeKey]).fileSize == 227505 else { throw CocoaError(.fileReadCorruptFile) }
         let bytes = try Data(contentsOf: url)

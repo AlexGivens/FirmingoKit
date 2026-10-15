@@ -25,6 +25,9 @@ lifecycle_spec.loader.exec_module(lifecycle)
 active_spec = importlib.util.spec_from_file_location("compiler_active_checker", Path(__file__).with_name("check-active-compiler-lifecycle.py"))
 active = importlib.util.module_from_spec(active_spec)
 active_spec.loader.exec_module(active)
+deadline_spec = importlib.util.spec_from_file_location("compiler_deadline_checker", Path(__file__).with_name("check-compiler-deadline.py"))
+deadline = importlib.util.module_from_spec(deadline_spec)
+deadline_spec.loader.exec_module(deadline)
 
 
 class CompilerHostTests(unittest.TestCase):
@@ -87,6 +90,7 @@ class CompilerHostTests(unittest.TestCase):
         self.assertNotIn("com.apple.security.cs.allow-jit", entitlements)
         self.assertTrue((output / "Sources/QualificationLifecycle.swift").is_file())
         self.assertTrue((output / "Sources/QualificationActiveLifecycle.swift").is_file())
+        self.assertTrue((output / "Sources/QualificationDeadline.swift").is_file())
         self.assertEqual(host.identity(output / "Sources/worker-compile-workload.txt"),
                          {"bytes": 227505, "sha256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"})
         self.assertNotIn("UIBackgroundModes", info)
@@ -238,6 +242,41 @@ class CompilerHostTests(unittest.TestCase):
                        lambda v: v["cancellation"].update(compilePhaseBeganSeconds=0.9)):
             changed = copy.deepcopy(value); change(changed)
             with self.assertRaises(ValueError): active.check(encode(changed), run, 123, context, worker=True)
+
+    def test_production_deadline_rejects_injected_timeouts_wrong_phases_interruptions_and_stale_results(self):
+        # Synthetic parser data: never evidence of physical expiry or cleanup.
+        prior, run, context = self.active_fixture()
+        value = {"schema": 6, "kind": "production-deadline-fresh-recovery", "runID": run, "context": context,
+                 "hostProcessID": 123, "firmwareBuildID": prior["firmwareBuildID"], "deviceOperations": False,
+                 "status": "passed", "stage": "complete", "runtimeDeadlineSeconds": 60, "observationLimitSeconds": 180,
+                 "workloadSHA256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb", "workloadBytes": 227646,
+                 "deadlineStartedSeconds": 2, "deadlineSettledSeconds": 62.5, "freshStartedSeconds": 62.6,
+                 "outcome": "timedOut", "artifactReturned": False,
+                 "progress": [{"phase": p, "seconds": 2 + i / 10} for i, p in enumerate(("verifying", "verifying", "preparing", "compiling"))],
+                 "events": [{"phase": "inactive", "stage": "waiting-for-active", "seconds": 0},
+                            {"phase": "active", "stage": "waiting-for-active", "seconds": 0.1}],
+                 "steps": copy.deepcopy(prior["steps"])}
+        value["steps"][0]["name"] = "before-deadline-gpio"; value["steps"][1]["name"] = "fresh-after-deadline-console"
+        encode = lambda v: json.dumps(v).encode()
+        self.assertEqual(deadline.check(encode(value), run, 123, context)["deadlineElapsedSeconds"], 60.5)
+        for change in (lambda v: v.update(schema=5), lambda v: v.update(status="running"),
+                       lambda v: v.update(hostProcessID=True), lambda v: v.update(error="cleanup failed"),
+                       lambda v: v["context"].update(sdkCommit="2" * 40), lambda v: v.update(workloadSHA256="0" * 64),
+                       lambda v: v.update(workloadBytes=True), lambda v: v.update(runtimeDeadlineSeconds=1),
+                       lambda v: v.update(runtimeDeadlineSeconds=True), lambda v: v.update(outcome="cancelled"),
+                       lambda v: v.update(artifactReturned=True), lambda v: v.update(deadlineSettledSeconds=61.99),
+                       lambda v: v.update(deadlineSettledSeconds=78), lambda v: v.update(freshStartedSeconds=62.4),
+                       lambda v: v["progress"].pop(), lambda v: v["progress"].append({"phase": "compiling", "seconds": 4}),
+                       lambda v: v["progress"][3].update(phase="linking"), lambda v: v["progress"][0].update(seconds=1.9),
+                       lambda v: v["progress"][3].update(seconds=63), lambda v: v["progress"][2].update(seconds=float("nan")),
+                       lambda v: v["events"].append({"phase": "inactive", "stage": "deadline", "seconds": 60}),
+                       lambda v: v["events"][1].update(phase="background"), lambda v: v["events"][1].update(seconds=63),
+                       lambda v: v["steps"].pop(), lambda v: v["steps"][0].update(wasmLinearMemoryBytes=True),
+                       lambda v: v["steps"][1].update(capsuleSHA256="0" * 64)):
+            changed = copy.deepcopy(value); change(changed)
+            with self.assertRaises(ValueError): deadline.check(encode(changed), run, 123, context)
+        with self.assertRaises(ValueError): deadline.check(encode(value), run, 124, context)
+        with self.assertRaises(ValueError): deadline.check(b"x" * 65537, run, 123, context)
 
 
 if __name__ == "__main__":

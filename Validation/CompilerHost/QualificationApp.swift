@@ -1,5 +1,8 @@
 import SwiftUI
 import Foundation
+#if os(iOS)
+import UIKit
+#endif
 
 /// Small native platform host for explicit compiler checks; it contains no board, installation or upload workflow.
 @main @MainActor struct CompilerQualificationApp: App {
@@ -46,6 +49,8 @@ import Foundation
     private var lifecycle: QualificationLifecycle?
     /// Sole opt-in active-call lifecycle observer; it never changes SDK-wide policy.
     private var activeLifecycle: QualificationActiveLifecycle?
+    /// Foreground-only real-deadline observer, selected explicitly by launch mode.
+    private var deadline: QualificationDeadline?
 
     /// User action starts the bounded series immediately before the requested Home transition.
     func beginActiveLifecycle() { activeLifecycle?.begin() }
@@ -60,6 +65,7 @@ import Foundation
         }
         lifecycle?.record(phase: phase)
         activeLifecycle?.record(phase: phase)
+        deadline?.record(phase: phase)
     }
 
     /// Allows a source-driven launcher to request one exact UUID without inspecting native UI.
@@ -68,9 +74,11 @@ import Foundation
         let arguments = ProcessInfo.processInfo.arguments
         if let index = arguments.firstIndex(of: "--qualification-run"), index + 1 < arguments.count,
            let id = UUID(uuidString: arguments[index + 1]) {
-            let modes = ["--qualification-idle-lifecycle", "--qualification-active-lifecycle", "--qualification-worker-lifecycle", "--qualification-stress-count"]
+            let modes = ["--qualification-idle-lifecycle", "--qualification-active-lifecycle", "--qualification-worker-lifecycle", "--qualification-deadline", "--qualification-stress-count"]
             guard modes.filter({ arguments.contains($0) }).count <= 1 else { status = "Select one compiler check mode"; return }
-            if arguments.contains("--qualification-worker-lifecycle") {
+            if arguments.contains("--qualification-deadline") {
+                start(id: id, deadlineCheck: true)
+            } else if arguments.contains("--qualification-worker-lifecycle") {
                 start(id: id, activeLifecycle: true, workerCompilation: true)
             } else if arguments.contains("--qualification-active-lifecycle") {
                 start(id: id, activeLifecycle: true)
@@ -86,11 +94,20 @@ import Foundation
     }
 
     /// Runs the public SDK asynchronously; results stay in this app's own Documents container.
-    func start(id: UUID = UUID(), iterations: Int? = nil, idleLifecycle: Bool = false, activeLifecycle: Bool = false, workerCompilation: Bool = false) {
+    func start(id: UUID = UUID(), iterations: Int? = nil, idleLifecycle: Bool = false, activeLifecycle: Bool = false, workerCompilation: Bool = false, deadlineCheck: Bool = false) {
         guard !running else { return }; running = true; report = nil
         Task { @MainActor in
             do {
-                if activeLifecycle {
+                if deadlineCheck {
+                    #if os(iOS)
+                    // Keep only this explicit foreground test awake; restore the host's prior policy afterward.
+                    let idleTimerWasDisabled = UIApplication.shared.isIdleTimerDisabled
+                    UIApplication.shared.isIdleTimerDisabled = true
+                    defer { UIApplication.shared.isIdleTimerDisabled = idleTimerWasDisabled }
+                    #endif
+                    let observer = try QualificationDeadline(id: id, phase: phase); deadline = observer
+                    report = try await observer.run { status = $0 }; deadline = nil
+                } else if activeLifecycle {
                     let observer = try QualificationActiveLifecycle(id: id, phase: phase, workerCompilation: workerCompilation); self.activeLifecycle = observer
                     report = try await observer.run(status: { status = $0 }, ready: { activeLifecycleReady = $0 })
                     self.activeLifecycle = nil
@@ -102,6 +119,7 @@ import Foundation
                 } else { report = try await QualificationChecks.run(id: id) { status = $0 } }
             } catch {
                 lifecycle = nil
+                deadline = nil
                 self.activeLifecycle = nil; activeLifecycleReady = false
                 status = "Could not record compiler checks: " + String(error.localizedDescription.prefix(2048))
             }

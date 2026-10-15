@@ -100,6 +100,14 @@ console capsules after actual background/return in the same process. See
 an instruction pointer, OS suspension or pressure recovery. Source CI now runs
 ten tool fixtures, macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.
+The separate opt-in `--qualification-deadline` host mode now derives a pinned
+227,646-byte workload by repeating each mix evaluation sixteen times. It uses
+the unchanged public 60-second deadline, requires typed timeout during first
+source-compiling progress without a returned artifact, and builds fresh through
+the same compiler. Real scene inactivity invalidates this foreground-only test;
+iOS idle prevention applies only during this mode and restores the prior policy.
+Source CI runs eleven report/tool fixtures and both Apple host-source checks.
+Actual deadline expiry and physical recovery remain pending separate execution.
 
 Snapshot verified on 2026-09-30:
 

@@ -29,7 +29,8 @@ def main():
                str(root / "Validation/CompilerHost/QualificationChecks.swift"), str(root / "Validation/CompilerHost/QualificationApp.swift"),
                str(root / "Validation/CompilerHost/QualificationStress.swift"),
                str(root / "Validation/CompilerHost/QualificationLifecycle.swift"),
-               str(root / "Validation/CompilerHost/QualificationActiveLifecycle.swift")]
+               str(root / "Validation/CompilerHost/QualificationActiveLifecycle.swift"),
+               str(root / "Validation/CompilerHost/QualificationDeadline.swift")]
     if args.ios_products:
         sdk = subprocess.run(["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], check=True, capture_output=True, text=True, timeout=15)
         command.extend(["-sdk", sdk.stdout.strip(), "-o", str(cache / "qualification-host.o")])

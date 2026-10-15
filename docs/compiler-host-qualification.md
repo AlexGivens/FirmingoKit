@@ -540,6 +540,55 @@ implementation/assets are unchanged; its full suite was not repeated for these
 host-only changes, and remote CI remains unprovisioned/unrun. Entry-wrapper/link
 interruption, OS suspension and real memory pressure remain separate gates.
 
+## Opt-in production-deadline expiry
+
+`--qualification-deadline` selects schema 6 and automatically runs a foreground
+GPIO baseline, an actual public-API deadline workload and a fresh console build
+through the same compiler instance. No shortened/injected timer, source-dependent
+timeout setting or compiler/service modification is used. The runtime retains
+its native and portable 60-second deadlines, including normal cleanup.
+
+The host derives source from the pinned worker fixture by repeating each seed's
+1,024-step mix sixteen times with the seed reset each repetition, returning the
+same expected value. All 4,096 assertions remain. The resulting 227,646 bytes have
+SHA-256 `bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb`,
+checked before admission and below the unchanged 256-KiB source cap. The repeated
+constexpr evaluation extends frontend work without changing runtime GPIO code.
+
+Keep the app foreground. This opt-in iOS mode prevents automatic idle locking
+only while the test runs and restores the prior app idle policy on exit. Actual
+inactivity/background invalidates the run and cancels any pending deadline call.
+It requires `ManagedCompilerError.timedOut`, no returned result, first-source
+compiling progress and 60–75 seconds between public admission/settlement. This
+range is test eligibility, not an end-to-end public timing promise: verification
+precedes the runtime timer and cleanup follows expiry. Navigation/worker failure,
+compiler diagnostics, cancellation and pre-compile timeout cannot pass. A known
+console capsule must then build through the same compiler after settlement.
+
+Collect the new UUID's own run directory, retain independent launch PID/context,
+and validate explicitly:
+
+```sh
+python3 -I -S -B Tools/ManagedWASM/check-compiler-deadline.py \
+  REPORT_JSON "$RUN_ID" "$QUALIFICATION_PID" GENERATED_HOST/host-inputs.json
+```
+
+Independently verify `before-deadline-gpio.fms` (316 bytes) and
+`fresh-after-deadline-console.fms` (392 bytes) against the existing known hashes.
+Eleven tool/report fixtures exercise rejected injected durations, stale identity,
+wrong workload/phase, interrupted foreground, returned artifacts and early fresh
+admission. Source CI compiles this host without executing the long workload.
+Actual production-deadline/physical results remain pending explicit execution.
+
+An actual local ARM64 macOS 27.0 SDK/WebKit probe of the full derived source now
+returns `ManagedCompilerError.timedOut` after 60.949 seconds with no artifact and
+exactly one source-compiling notification. The same compiler instance then emits
+the known 392-byte console capsule in 0.811 seconds, reporting 28,049,408 linear
+bytes. A 128-assertion subset completes in 6.931 seconds with the known GPIO
+capsule, checking the repeated constexpr computation without a shortened timer.
+These explicit-service CLI maintenance probes are separate from signed-app and
+physical-device qualification; the host mode still needs its own actual runs.
+
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.
 Pico managed compilation is unavailable. Hardware follows host checks with an

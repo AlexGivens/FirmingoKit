@@ -80,7 +80,7 @@ def generate(sdk, expected, output):
     output.mkdir()
     try:
         sources = output / "Sources"; sources.mkdir()
-        for name in ("QualificationApp.swift", "QualificationChecks.swift", "QualificationStress.swift", "QualificationLifecycle.swift", "QualificationActiveLifecycle.swift"):
+        for name in ("QualificationApp.swift", "QualificationChecks.swift", "QualificationStress.swift", "QualificationLifecycle.swift", "QualificationActiveLifecycle.swift", "QualificationDeadline.swift"):
             shutil.copyfile(source / name, sources / name)
         workload = source / "worker-compile-workload.txt"
         if identity(workload, 227505) != {"bytes": 227505, "sha256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"}:

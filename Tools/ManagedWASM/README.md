@@ -35,7 +35,7 @@ compilation, sibling checkout lookup, downloads or device operations. Subcommand
 failure, signal or timeout produces a failing exit status. The SDK CI package job
 uses this same entry point; Apple build/DocC jobs remain separate.
 
-The entry point also runs ten qualification generator/runner/stress/lifecycle-report
+The entry point also runs eleven qualification generator/runner/stress/lifecycle/deadline-report
 fixtures and macOS host source type-checking, without compiler assets or an app
 launch. The iOS CI build compiles optimized qualification-host objects against
 the built SDK using `check-compiler-host.py --ios-products BUILT_IOS_PRODUCTS`.
@@ -54,6 +54,12 @@ Add `--worker` to that checker only for `--qualification-worker-lifecycle` runs:
 schema 5 requires the pinned compile-time workload, measured preflight window and
 the first source-compilation notification. Verification and entry-wrapper
 cancellations cannot satisfy that mode.
+`check-compiler-deadline.py --help` validates the explicit `--qualification-deadline`
+mode: unchanged public 60-second deadline, pinned derived frontend workload,
+typed timeout without artifact, continuous foreground and a fresh known console
+build through the same compiler instance. It never shortens the SDK timer or
+counts cancellation/scene interruption as timeout evidence. Actual expiry needs
+explicit prepared assets and app execution; source CI checks report rejection only.
 
 Compiler-side commands are `tools/dev.mjs test`, `test-runtime <explicit-service>`,
 `build <request> <explicit-service> <new-output-directory>`, and
