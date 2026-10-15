@@ -4,7 +4,10 @@ Current signed/physical compiler host procedures, bounded repeated-build memory
 observations and whole-app interruption/recovery results are in
 [host qualification](compiler-host-qualification.md). The source CI path includes
 optimized iOS host-object compilation without compiler assets or signing; actual
-host runs remain explicit. The observed high host footprint is under investigation.
+host runs remain explicit. The SDK resource-reader fix and repeated physical
+comparison are recorded in [resource memory evidence](compiler-resource-memory.json):
+highest host samples fell from about 790 MiB to 214 MiB on iPad and 209 MiB on
+iPhone. Aggregate app/WebKit memory remains unmeasured.
 
 Current public preparation integration and updated package identities: [service-free preparation](service-free-preparation.md). Earlier records remain historical evidence.
 

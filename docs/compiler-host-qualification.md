@@ -231,10 +231,9 @@ explicitly selected qualification app and is separate from a normal completed ru
 | iPhone baseline | 789.7 MiB | 303.0 MiB |
 | iPhone fresh recovery | 789.5 MiB | 206.3 MiB |
 
-Every completed build reports 27,983,872 WASM linear bytes. The much higher host
-footprints warrant investigation of resource loading, temporary buffers and
-native/WebKit transfer ownership before broader qualification. Their cause is
-not established; neither a leak nor a memory-budget pass follows from these runs.
+Every completed build reports 27,983,872 WASM linear bytes. These historical host
+footprints prompted the resource-reader investigation below; neither a leak nor
+a memory-budget pass follows from these runs.
 The [reliability record](compiler-host-reliability.json) preserves checked summaries,
 timings, observed peak samples, raw report hashes and source/signature identities.
 Complete raw journals remain local under `.build/`.
@@ -257,6 +256,70 @@ The physical Release build has no Swift warnings, only the standard AppIntents
 no-framework metadata note. Runner provisioning/remote SDK CI remains open.
 Workflow YAML and run-step shell syntax checks pass; the logging pipeline retains
 the failing command's exit status. `actionlint` is not installed on this host.
+
+## Resource-reader memory comparison — 2026-10-14
+
+SDK commit `4edc6aa86040a86eb171c29eff9be0d82800c7b2` reduces resource-read
+allocation growth without changing compiler inputs or public APIs. Both default
+and explicit-service readers reserve the validated file size once and drain
+Foundation chunk temporaries in a synchronous `autoreleasepool` after each append.
+They retain owned byte snapshots, size limits, per-chunk cancellation, hashing and
+their existing cleanup/error behavior. No mutable file mapping is introduced.
+Apple documents [local autorelease pools](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html)
+for controlling temporary-object lifetimes; the measurements here test the
+combined capacity/pool change rather than assigning each an isolated contribution.
+
+A native optimized Mac probe calls the actual internal production reader six
+times, reading and SHA-checking the same 101,194,565-byte compiler on each call.
+With identical probe source/flags and no WebKit, observations while the returned
+bytes remain alive climb from 196 MiB to 1,164 MiB in the old reader; the candidate
+stays at 100.3–100.4 MiB. Those are end-of-read observations, not continuous peaks.
+The old native reader source is identical to the earlier physical baseline's.
+
+The new clean prepared SDK contains 277 files and has manifest anchor
+`f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4`.
+Generate the host using the existing command with that anchor; sign a Release
+iOS build with `CURRENT_PROJECT_VERSION=3` and `ENABLE_DEBUG_DYLIB=NO`. The three
+host Swift sources, compiler module, consumer manifest, recipes, catalogue and
+known capsules match the earlier baseline. The generated context now identifies
+the tested SDK commit. The existing development profile covers both devices.
+Install and launch through the paired `devicectl` network connection using the
+same commands above; create a fresh UUID/process for each 20-build run.
+
+| Host/run | Highest sampled host footprint | Last sampled host footprint |
+| --- | ---: | ---: |
+| iPad first | 213.7 MiB | 115.3 MiB |
+| iPad second | 213.3 MiB | 115.4 MiB |
+| iPhone first | 208.7 MiB | 110.1 MiB |
+| iPhone second | 209.1 MiB | 109.9 MiB |
+
+All 80 builds pass the existing strict journal/artifact checks: forty GPIO and
+forty console capsules retain their known hashes; worker linear memory stays
+27,983,872 bytes. No samples were dropped. Nominal sampling remains 50 ms; the
+largest observed gap is 94.2 ms on iPad and 60.0 ms on iPhone. Compared with the
+earlier maximum observations on each device, the new maxima are about 73% lower.
+These are sequential observations on the same models/OS, not a randomized
+benchmark. Host samples exclude WebKit children and missed peaks.
+
+The original six-check mode also passes in a fresh process on each updated app,
+including diagnostics, busy/cancellation and a successful subsequent build.
+Both exported GPIO/console files match the previously independently validated
+316/392-byte vectors. Device details show `localNetwork` before and after every
+run. No board was contacted. The updated development app remains installed.
+
+The full SDK validation passes with 154 reported test functions, all nine actual
+macOS WebKit cases and seven host-tool fixtures. The prepared SDK separately
+passes 154 reported test functions with one expected source-only absent-binary
+test skipped. The iOS SDK build and optimized host-object check pass. New tests
+cover multi-chunk/partial-tail exact bytes, excess-size rejection, independence
+from in-place source-file changes, pre-cancellation and a fresh read. Existing CI
+entry points cover these changes; remote CI remains unprovisioned/unrun.
+
+The [memory record](compiler-resource-memory.json) preserves source/signature
+identities, probe observations, checked device summaries, report hashes, timings
+and exported capsule hashes. Raw journals remain local under `.build/`. The
+earlier reliability record is unchanged. Aggregate memory, a memory-budget pass,
+long-term stability and real lifecycle/pressure scenarios remain open.
 
 Minimum-OS runtime, total app/child memory peaks, forced WebKit-child termination/deadline expiry,
 other physical model/OS combinations, installed-image evidence and Nano deployment remain open.

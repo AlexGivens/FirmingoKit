@@ -64,9 +64,14 @@ wireless debugger attachment and total-memory profiling remain untested.
 footprint samples in separate schema-2 journals. On both devices, 20 baseline and
 20 fresh post-SIGKILL builds pass; incomplete journals are rejected and remain
 unchanged after recovery. See `docs/compiler-host-reliability.json`. Sampled host
-footprints reach about 790 MiB despite 27,983,872 worker linear bytes; investigate
-resource/transfer ownership before broader qualification. This is not aggregate
-app/WebKit memory or a leak-free claim. App-scoped `xctrace` attachment failed.
+footprints originally reached about 790 MiB despite 27,983,872 worker linear bytes.
+SDK `4edc6aa…` now reserves bounded snapshot storage and drains Foundation chunk
+temporaries in both compiler-resource readers. Two fresh 20-build runs per device
+reduce the highest observed host samples to 214 MiB on iPad and 209 MiB on iPhone;
+all 80 builds and both original six-check regressions pass with unchanged capsules.
+See `docs/compiler-resource-memory.json`. These are host samples, not aggregate
+app/WebKit memory or a leak-free/budget claim. App-scoped `xctrace` attachment failed;
+aggregate memory and real pressure/lifecycle qualification remain open.
 The original six-check mode remains. Source CI now runs seven tool fixtures,
 macOS type-checking and optimized iOS host-object compilation without assets or
 signing; full host/device runs remain explicit and remote CI unprovisioned.

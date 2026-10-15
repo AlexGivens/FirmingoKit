@@ -1,0 +1,580 @@
+{
+  "schema": 1,
+  "date": "2026-10-14",
+  "scope": "Compiler resource snapshot ownership change; native production-reader comparison and development-signed Release build 3 on two paired physical devices over Wi-Fi; no board operation",
+  "change": {
+    "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+    "behavior": "Reserve the validated file size once and drain Foundation read-chunk temporaries after each append in both default and explicit-service readers; preserve byte bounds, owned snapshots, digest verification, cancellation and cleanup errors",
+    "publicAPIChange": false,
+    "compilerAssetsChanged": false
+  },
+  "context": {
+    "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+    "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+    "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+  },
+  "preparedSDKFiles": 277,
+  "hostInputsSHA256": "ab117eabefb69b9818ae40334d92feb27572a36a78d55d4589543da6b83f72e7",
+  "hostSourceFiles": [
+    {
+      "path": "Sources/QualificationApp.swift",
+      "bytes": 4004,
+      "sha256": "417f384b1712d6017d8e42faed34aa12d1f8f022a8ffcddccf8bd95da9f97abd"
+    },
+    {
+      "path": "Sources/QualificationChecks.swift",
+      "bytes": 12043,
+      "sha256": "fe3ee97cca92b3e8e352b05dd4d023271bfe445cc8745d570b912a18b2b17172"
+    },
+    {
+      "path": "Sources/QualificationStress.swift",
+      "bytes": 11163,
+      "sha256": "3a19418a84f9db7bc4e6d2346c4d0f8f47f873f688ed5e25e57b9c15c9346069"
+    }
+  ],
+  "toolchain": {
+    "xcode": "27.0 (27A266a)",
+    "swift": "6.4",
+    "iOSSDK": "27.0",
+    "deploymentMinimum": "17.0",
+    "configuration": "Release",
+    "buildOverrides": {
+      "CURRENT_PROJECT_VERSION": 3,
+      "ENABLE_DEBUG_DYLIB": "NO",
+      "CODE_SIGN_STYLE": "Automatic"
+    }
+  },
+  "signature": {
+    "strictDeepVerification": true,
+    "teamIdentifier": "WGR9T9JH4L",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.compilerqualification",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "executableSHA256": "e50748f4740576bfad190f8528beee34fd64d7ae2783cd7fe79e4f9a01f1ab6b",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "buildVersion": "3",
+    "bothDevicesIncluded": true
+  },
+  "compilerWASM": {
+    "bytes": 101194565,
+    "sha256": "a7648688ae9e349304c576804367b66b68b22185060a847a2e292675329ca493"
+  },
+  "comparison": {
+    "baselineRecord": "compiler-host-reliability.json",
+    "baselineRecordSHA256": "e05efffa9b0ef209324d9ebab3b89086c9a119db5fad35369948ddb1da68875a",
+    "baselinePreparedContext": {
+      "preparedManifestSHA256": "ba8d63b3742c8cc78022e56c364483ed030dca927c1d31c866b1bf31dfe5480e",
+      "sdkCommit": "3927416e726cdd78d8f54d64f57c88c522d9d85a",
+      "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c"
+    },
+    "sameCompilerInputsAndThreeHostSwiftSources": true,
+    "comparisonLimit": "Earlier baseline and later candidate observations on the same devices/OS; no randomized benchmark, aggregate memory measurement or true peak claim",
+    "baselinePhysicalAndNativeReaderSourcesIdentical": true
+  },
+  "nativeReaderProbe": {
+    "host": "ARM64 macOS 27.0 (26A428), Xcode 27.0 (27A266a), Swift 6.4",
+    "operation": "Six sequential calls to the actual SDK internal reader in one process, each reading the same 101194565-byte module and verifying its SHA-256; withExtendedLifetime samples while bytes remain live; no WebKit",
+    "configuration": "Optimized Swift 6 executable, whole-module optimization, macOS 14 target; links the Debug SwiftPM SDK library; same probe source and flags for both executables",
+    "sourceSHA256": "ba74b8dfdf50382b2a30da185e70953a229aabb68b076be4cb17f99f85447b6c",
+    "samplingScope": "End-of-read self-process phys_footprint and own malloc size_in_use observations, not continuous peak measurements",
+    "versions": [
+      {
+        "condition": "baseline",
+        "sdkCommit": "74ab0efdf22721572e6974eb8c2f2312a6a6eee0",
+        "readerSourceSHA256": "611d273999e0752bf01b57604677f60e639041972ed9ff9aab677e20fa3f9f20",
+        "probeExecutableSHA256": "68154e513467fc47093ef7c7710b366b881befed5ba3b73bd931f844340ade49",
+        "reportSHA256": "77b84970d535f0824e18125f32be989cabd07360d96affd53f1d2435e54f8d06",
+        "observations": {
+          "after": 1220511328,
+          "mode": "plain",
+          "samples": [
+            {
+              "before": 2097728,
+              "iteration": 1,
+              "mallocInUse": 223296224,
+              "withBytes": 205669144
+            },
+            {
+              "before": 205685528,
+              "iteration": 2,
+              "mallocInUse": 324503920,
+              "withBytes": 408667072
+            },
+            {
+              "before": 408667072,
+              "iteration": 3,
+              "mallocInUse": 425711312,
+              "withBytes": 611599464
+            },
+            {
+              "before": 611599464,
+              "iteration": 4,
+              "mallocInUse": 526918720,
+              "withBytes": 814564600
+            },
+            {
+              "before": 814564600,
+              "iteration": 5,
+              "mallocInUse": 628126112,
+              "withBytes": 1017529784
+            },
+            {
+              "before": 1017529784,
+              "iteration": 6,
+              "mallocInUse": 729337632,
+              "withBytes": 1220511328
+            }
+          ],
+          "scope": "self-process; identical production reader and immutable input; no WebKit"
+        }
+      },
+      {
+        "condition": "candidate",
+        "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2",
+        "readerSourceSHA256": "779ef2265446addcd65e13439124e6d28a5602a05d9090d614262def2b779102",
+        "probeExecutableSHA256": "3188122cd1b5160f0de1f5ae818629d8552febac7af05ef71b6445b9958e98bf",
+        "reportSHA256": "429ce479d04cefef2415f67c3fb96abac4f2e0778ac3ada771b08d9f260836e2",
+        "observations": {
+          "after": 105251560,
+          "mode": "plain",
+          "samples": [
+            {
+              "before": 2081344,
+              "iteration": 1,
+              "mallocInUse": 101396208,
+              "withBytes": 105136872
+            },
+            {
+              "before": 105169640,
+              "iteration": 2,
+              "mallocInUse": 101396832,
+              "withBytes": 105186024
+            },
+            {
+              "before": 105186024,
+              "iteration": 3,
+              "mallocInUse": 101397152,
+              "withBytes": 105186024
+            },
+            {
+              "before": 105186024,
+              "iteration": 4,
+              "mallocInUse": 101397488,
+              "withBytes": 105218792
+            },
+            {
+              "before": 105218792,
+              "iteration": 5,
+              "mallocInUse": 101397808,
+              "withBytes": 105235176
+            },
+            {
+              "before": 105235176,
+              "iteration": 6,
+              "mallocInUse": 101398160,
+              "withBytes": 105251560
+            }
+          ],
+          "scope": "self-process; identical production reader and immutable input; no WebKit"
+        }
+      }
+    ]
+  },
+  "hosts": [
+    {
+      "model": "iPad Pro (11-inch) (3rd generation)",
+      "productType": "iPad13,4",
+      "osVersion": "27.0.1",
+      "osBuild": "24A446",
+      "transport": "localNetwork",
+      "runs": [
+        {
+          "condition": "fresh app process first-r1",
+          "summary": {
+            "status": "passed_repeated_build_checks",
+            "runID": "E5167599-A9BD-4DDF-A914-BB3FE76BE2CC",
+            "iterations": 20,
+            "reportSHA256": "85d9c8c37c126c2e0cdc2166aeb97a8d4237f287b403b533d8af0253f7834267",
+            "context": {
+              "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+              "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+              "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+            },
+            "hostFootprintSampleCount": 287,
+            "hostFootprintFirstBytes": 13550216,
+            "hostFootprintLastBytes": 120882136,
+            "hostFootprintSampledPeakBytes": 224068568,
+            "droppedSamples": 0,
+            "memoryScope": "Host process samples only; excludes WebKit children and missed peaks; no leak-free claim"
+          },
+          "durationThroughLastSampleSeconds": 14.162290166670573,
+          "maximumSampleGapSeconds": 0.094193874989287,
+          "observedPeakSample": {
+            "bytes": 224068568,
+            "seconds": 0.5206355416739825,
+            "stage": "build-1-gpio"
+          },
+          "buildSeconds": [
+            0.9686832083243644,
+            0.6727841249958146,
+            0.5943871249910444,
+            0.6794633749959758,
+            0.597309041666449,
+            0.6708166250027716,
+            0.5965800416597631,
+            0.6573013333400013,
+            0.5940007083263481,
+            0.6587558333412744,
+            0.5955772083398188,
+            0.6705052916659042,
+            0.5990257083467441,
+            0.67056737501116,
+            0.5905172500060871,
+            0.670117666668375,
+            0.6064702083385782,
+            0.676153083331883,
+            0.5987900833279127,
+            0.6726445833337493
+          ],
+          "artifactCounts": {
+            "gpio": 10,
+            "console": 10
+          },
+          "linearMemoryBytes": [
+            27983872
+          ]
+        },
+        {
+          "condition": "fresh app process second-r1",
+          "summary": {
+            "status": "passed_repeated_build_checks",
+            "runID": "90B3E7FC-191F-4D3E-9FE5-4705AE7F3E1B",
+            "iterations": 20,
+            "reportSHA256": "c0f1f3b0f302deaa729ce8c2e9f66fa0220c0427b0bf49bb03144ebbd9352b9b",
+            "context": {
+              "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+              "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+              "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+            },
+            "hostFootprintSampleCount": 283,
+            "hostFootprintFirstBytes": 13599392,
+            "hostFootprintLastBytes": 120996848,
+            "hostFootprintSampledPeakBytes": 223658992,
+            "droppedSamples": 0,
+            "memoryScope": "Host process samples only; excludes WebKit children and missed peaks; no leak-free claim"
+          },
+          "durationThroughLastSampleSeconds": 13.894645874999696,
+          "maximumSampleGapSeconds": 0.07820116665971,
+          "observedPeakSample": {
+            "bytes": 223658992,
+            "seconds": 12.359028999999282,
+            "stage": "build-20-console"
+          },
+          "buildSeconds": [
+            0.6607210833317367,
+            0.6783525833307067,
+            0.5948152499913704,
+            0.6737491666572168,
+            0.5953327916649869,
+            0.6689244166627759,
+            0.5939230833319016,
+            0.6697625416709343,
+            0.602297625009669,
+            0.669697791658109,
+            0.5983405416627647,
+            0.6727913333452307,
+            0.5979843750101281,
+            0.6716628750000382,
+            0.5982380416680826,
+            0.6732397916639457,
+            0.6031568750040606,
+            0.6714892500021961,
+            0.5988935416680761,
+            0.6585603749990696
+          ],
+          "artifactCounts": {
+            "gpio": 10,
+            "console": 10
+          },
+          "linearMemoryBytes": [
+            27983872
+          ]
+        }
+      ],
+      "originalSixCheckRegression": {
+        "status": "passed_original_six_checks",
+        "runID": "BF177266-AAEF-4BB1-9A8B-E83CD35D10FA",
+        "reportSHA256": "a79ba389b67de2bb443acf80ebb1ecfd69e598f2b9e4c240de80b8e1ed001c9b",
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+        },
+        "artifacts": [
+          {
+            "path": "cold-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "warm-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      },
+      "originalSixCheckSteps": [
+        {
+          "name": "resources",
+          "seconds": 0.06951379166275728
+        },
+        {
+          "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "name": "cold-gpio",
+          "seconds": 0.6551524166716263,
+          "wasmLinearMemoryBytes": 27983872
+        },
+        {
+          "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "name": "warm-console",
+          "seconds": 0.6735700416757027,
+          "wasmLinearMemoryBytes": 27983872
+        },
+        {
+          "name": "frontend-error",
+          "seconds": 0.46067466666863766
+        },
+        {
+          "name": "busy-cancellation",
+          "seconds": 0.3962176666682353
+        },
+        {
+          "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "name": "fresh-after-cancellation",
+          "seconds": 0.594210249997559,
+          "wasmLinearMemoryBytes": 27983872
+        }
+      ],
+      "observedMaximumComparison": {
+        "earlierBytes": 828818992,
+        "candidateBytes": 224068568,
+        "reductionPercent": 72.96531930822357
+      }
+    },
+    {
+      "model": "iPhone 15 Pro Max",
+      "productType": "iPhone16,2",
+      "osVersion": "27.0",
+      "osBuild": "24A437",
+      "transport": "localNetwork",
+      "runs": [
+        {
+          "condition": "fresh app process first-r1",
+          "summary": {
+            "status": "passed_repeated_build_checks",
+            "runID": "9A46CA79-7BC5-4A32-BE63-C8FB19D04A9D",
+            "iterations": 20,
+            "reportSHA256": "5b7e6b5cc18de39a303664f32faf8c9741deebc7c3da31b47dadb63886476a21",
+            "context": {
+              "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+              "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+              "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+            },
+            "hostFootprintSampleCount": 266,
+            "hostFootprintFirstBytes": 10323640,
+            "hostFootprintLastBytes": 115459960,
+            "hostFootprintSampledPeakBytes": 218843000,
+            "droppedSamples": 0,
+            "memoryScope": "Host process samples only; excludes WebKit children and missed peaks; no leak-free claim"
+          },
+          "durationThroughLastSampleSeconds": 12.939593416638672,
+          "maximumSampleGapSeconds": 0.05816879167105071,
+          "observedPeakSample": {
+            "bytes": 218843000,
+            "seconds": 9.666930416657124,
+            "stage": "build-17-gpio"
+          },
+          "buildSeconds": [
+            0.7284873750177212,
+            0.6194902499846648,
+            0.5495524166908581,
+            0.6146246249845717,
+            0.5472160416829865,
+            0.6107553750043735,
+            0.5487684166582767,
+            0.6122838333249092,
+            0.5398313333280385,
+            0.6113636666559614,
+            0.5497331666701939,
+            0.6150786250072997,
+            0.5476439583289903,
+            0.6121801666740794,
+            0.550465083331801,
+            0.6101936666818801,
+            0.5540355000121053,
+            0.6114712083362974,
+            0.5773349583614618,
+            0.6172730416583363
+          ],
+          "artifactCounts": {
+            "gpio": 10,
+            "console": 10
+          },
+          "linearMemoryBytes": [
+            27983872
+          ]
+        },
+        {
+          "condition": "fresh app process second-r1",
+          "summary": {
+            "status": "passed_repeated_build_checks",
+            "runID": "731B2D67-E07F-4546-BEE1-900484CFB0F3",
+            "iterations": 20,
+            "reportSHA256": "32800668cc14411af603e48ed9e968ee978f27d39f1d16f8116ec477d83dcc20",
+            "context": {
+              "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+              "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+              "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+            },
+            "hostFootprintSampleCount": 265,
+            "hostFootprintFirstBytes": 10290872,
+            "hostFootprintLastBytes": 115279784,
+            "hostFootprintSampledPeakBytes": 219285416,
+            "droppedSamples": 0,
+            "memoryScope": "Host process samples only; excludes WebKit children and missed peaks; no leak-free claim"
+          },
+          "durationThroughLastSampleSeconds": 12.886434541665949,
+          "maximumSampleGapSeconds": 0.05998741666553542,
+          "observedPeakSample": {
+            "bytes": 219285416,
+            "seconds": 0.22130562501843087,
+            "stage": "build-1-gpio"
+          },
+          "buildSeconds": [
+            0.6022588750056457,
+            0.618330875004176,
+            0.5483337916666642,
+            0.6111482083215378,
+            0.5524657916685101,
+            0.6117920833348762,
+            0.5505320416705217,
+            0.6090888750040904,
+            0.5488968333520461,
+            0.6225329583394341,
+            0.5607423333276529,
+            0.6052548333245795,
+            0.5597677500045393,
+            0.6122241250122897,
+            0.5572769583377521,
+            0.6175071249890607,
+            0.5605290416569915,
+            0.6207799999974668,
+            0.56852258334402,
+            0.6165400000172667
+          ],
+          "artifactCounts": {
+            "gpio": 10,
+            "console": 10
+          },
+          "linearMemoryBytes": [
+            27983872
+          ]
+        }
+      ],
+      "originalSixCheckRegression": {
+        "status": "passed_original_six_checks",
+        "runID": "4558042A-14FE-4EAC-A6FA-9064118FC861",
+        "reportSHA256": "b6b9bd0aeb0a0c79a6509733b8b66de40df77a0efc08f55b024d8b57ee8f1572",
+        "context": {
+          "consumerManifestSHA256": "d042dc7d3869949d8e311fff28c5d66327ba090ba2ec8ff149e3a12019d8ea8c",
+          "preparedManifestSHA256": "f2ed2b6aed07e07c9fc4ffd43d4fd3e750f6e1f36d61dd405e6a38f5dab40fe4",
+          "sdkCommit": "4edc6aa86040a86eb171c29eff9be0d82800c7b2"
+        },
+        "artifacts": [
+          {
+            "path": "cold-gpio.fms",
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+          },
+          {
+            "path": "warm-console.fms",
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+          }
+        ]
+      },
+      "originalSixCheckSteps": [
+        {
+          "name": "resources",
+          "seconds": 0.062476999999489635
+        },
+        {
+          "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "name": "cold-gpio",
+          "seconds": 0.6037112083286047,
+          "wasmLinearMemoryBytes": 27983872
+        },
+        {
+          "capsuleSHA256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+          "name": "warm-console",
+          "seconds": 0.614551249978831,
+          "wasmLinearMemoryBytes": 27983872
+        },
+        {
+          "name": "frontend-error",
+          "seconds": 0.4202400000067428
+        },
+        {
+          "name": "busy-cancellation",
+          "seconds": 0.3759953333355952
+        },
+        {
+          "capsuleSHA256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+          "name": "fresh-after-cancellation",
+          "seconds": 0.5488646249868907,
+          "wasmLinearMemoryBytes": 27983872
+        }
+      ],
+      "observedMaximumComparison": {
+        "earlierBytes": 828033440,
+        "candidateBytes": 219285416,
+        "reductionPercent": 73.51732364818503
+      }
+    }
+  ],
+  "validation": {
+    "rootSDK": {
+      "reportedTestFunctions": 154,
+      "realWebKitCasesPassed": 9,
+      "serviceSkips": 0,
+      "entryPoint": "node Tools/ManagedWASM/run-validation.mjs .build/prepared-nano-sdk-r3/Sources/FirmingoKit/Resources/ManagedCompiler/compiler.wasm",
+      "logSHA256": "c8f572d6a3c6d042224d345f5692e9ee09fb7afe19f759f9f16005d362f027f2"
+    },
+    "cleanPreparedSDK": {
+      "reportedTestFunctions": 154,
+      "realWebKitCasesPassed": 9,
+      "expectedSourceOnlyAbsentBinaryTestSkips": 1,
+      "entryPoint": "FIRMINGOKIT_WASM_MODULE=<prepared-sdk>/Sources/FirmingoKit/Resources/ManagedCompiler/compiler.wasm swift test --package-path <prepared-sdk>",
+      "logSHA256": "60d0350c7a0c5d35ea31f583c6f9a1638935ffa7d5b518f934c43ec76315552c"
+    },
+    "hostToolFixtures": 7,
+    "macOSHostSourceTypecheck": "passed, warnings as errors",
+    "iOSSDKSourceBuild": "passed, signing disabled; no compiler binary",
+    "iOSHostOptimizedObjectCompilation": "passed, warnings as errors; no app linking/signing/assets",
+    "signedPhysicalReleaseBuild": "passed; no Swift warnings; standard AppIntents no-framework metadata note",
+    "remoteSDKCI": "not run; configured self-hosted runner remains unprovisioned",
+    "CIReview": "Existing production SDK test and Apple source-build entry points exercise the changed reader and new regressions; no workflow topology change"
+  },
+  "limitations": [
+    "Two fresh processes of twenty builds per device, not an unbounded soak or leak-free result",
+    "Physical samples are nominally every 50 ms plus event samples and include measurement overhead; WebKit children and missed peaks are excluded",
+    "Reserve-capacity and per-chunk autorelease changes were tested together; no isolated causal contribution is assigned to either",
+    "Native probe and physical self-process measurements have different workloads and are not interchangeable",
+    "Prior app-scoped xctrace attachment failed; no aggregate memory, real memory pressure, child termination, background/foreground or forced production-deadline result added",
+    "Minimum OS, other models/OS versions, UI/accessibility, Nano USB/Wi-Fi coexistence, installed-resident evidence and device deployment remain unqualified",
+    "Raw probe logs, app journals and signing/device details remain local under .build; published device fields omit personal identifiers",
+    "No firmware change, board contact, binary publication or runtime input promotion"
+  ]
+}
