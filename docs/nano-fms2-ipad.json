@@ -1,0 +1,232 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "scoped physical iPad FMS2 two-sketch upload/state/echo and manual-reboot checks passed",
+  "productionQualified": false,
+  "hostSourceCommit": "84acce66b2f2b2dc1f9aeeeab148b24109dde328",
+  "preparedSDKCommit": "e0bed3602b515c71f171971ab7f8a8f5ae3bea1f",
+  "context": {
+    "catalogueSHA256": "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "exportManifestSHA256": "90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65",
+    "preparedManifestSHA256": "f615b1a7b7279d197b4212cf1dd26ebeae5a7279d227b11710b55aadf4ccd361",
+    "sdkCommit": "e0bed3602b515c71f171971ab7f8a8f5ae3bea1f",
+    "testPlanSHA256": "2611f2f9c03954f2aa882c1a5f78a96286bf52f4a0a1381dfc49abdd145f1199"
+  },
+  "preparationEvidence": "nano-fms2-preparation.json",
+  "procedure": "nano-fms2-qualification.md",
+  "iosApp": {
+    "bundleIdentifier": "com.firmingokit.nanostateful",
+    "displayName": "NanoStateful",
+    "build": "1",
+    "executableSHA256": "559f87f5f0d87be4e45afdfd8204c8c78ab4bed1a4e2d71a9a5d87cfe04b81d3",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.nanostateful",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "strictDeepSignatureVerified": true,
+    "firmwareResources": 0,
+    "installedOverPairedLocalNetwork": true,
+    "initialRemoteLaunch": "denied because iPad locked; user subsequently unlocked and opened app"
+  },
+  "iPad": {
+    "model": "iPad Pro 11-inch (3rd generation)",
+    "productType": "iPad13,4",
+    "operatingSystem": "Version 27.0.1 (Build 24A446)",
+    "pairedTransportAfterNanoAttachment": "localNetwork"
+  },
+  "runID": "55F5042E-5038-47A4-A233-CFC4D20B78FD",
+  "finalReportSHA256": "ca3c447c28e2934e83ca19deee266b7145c3f0a527e733263982088c62233125",
+  "eventCount": 30,
+  "captures": [
+    {
+      "phase": "inspection",
+      "events": 7,
+      "reportSHA256": "17340f6d4fd39634708759f7df1f4f2dad499355183102366171030cac126da6"
+    },
+    {
+      "phase": "state-b-startup",
+      "events": 14,
+      "reportSHA256": "b4e0ca188e8281989e8636e6250410d584007f53c58471a485c3208d5c38b3d9"
+    },
+    {
+      "phase": "state-b-observation",
+      "events": 15,
+      "reportSHA256": "781f6a717564158aea220b5e643556c6deb374b8acb63a0352252cc8b9d7626e"
+    },
+    {
+      "phase": "state-b-complete",
+      "events": 20,
+      "reportSHA256": "48e0ed3d60d69f54ccac3067928d248e9a9456d391eb2722526301b19c6605eb"
+    },
+    {
+      "phase": "state-a-startup",
+      "events": 26,
+      "reportSHA256": "96165f22478fc516c030d1815692a162678fa918e006636ba918ee5c2fc29751"
+    },
+    {
+      "phase": "state-a-observation",
+      "events": 29,
+      "reportSHA256": "2eea0bb57e344766968b8da4c2864c74b37de95ea8ec5cd028d4c4ddf1a71524"
+    },
+    {
+      "phase": "final",
+      "events": 30,
+      "reportSHA256": "ca3c447c28e2934e83ca19deee266b7145c3f0a527e733263982088c62233125"
+    }
+  ],
+  "capsules": [
+    {
+      "name": "state-a",
+      "bytes": 544,
+      "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+      "buildReportSHA256": "07bc08e82f9b7cc7b1cf1a501640a2c69c7420bb81c6534279b51d6cdca20431",
+      "productionNativeValidatorPassed": true
+    },
+    {
+      "name": "state-b",
+      "bytes": 548,
+      "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+      "buildReportSHA256": "70059631076dd3beaddc5d7fdf3acdb300526cec21436488ec9e909d5b6727bb",
+      "productionNativeValidatorPassed": true
+    }
+  ],
+  "transactions": [
+    {
+      "sketch": "state-b",
+      "recordSHA256": "d4604bcbd1a804418332c5cd050b1f33b973f9bbef715698d7858729e321e4b8",
+      "uploadID": 1,
+      "targetID": 2,
+      "capsuleSHA256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+      "bytes": 548,
+      "hostCommitAttempts": 1,
+      "commitReply": "committing",
+      "freshStatus": "boot_confirmed",
+      "error": "none",
+      "slotTouched": true
+    },
+    {
+      "sketch": "state-a",
+      "recordSHA256": "9f3eb33da11696a49284b082f893811a96a6fbe7a81f751dc60a215b2553bb14",
+      "uploadID": 2,
+      "targetID": 2,
+      "capsuleSHA256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+      "bytes": 544,
+      "hostCommitAttempts": 1,
+      "commitReply": "committing",
+      "freshStatus": "boot_confirmed",
+      "error": "none",
+      "slotTouched": true
+    }
+  ],
+  "stateObservations": [
+    {
+      "sketch": "state-b",
+      "afterManualReset": false,
+      "bootMatchedTransaction": true,
+      "bootChangedFromTransaction": false,
+      "samples": [
+        {
+          "bytesBase64": "RlEyQjEAAAAXAAAAAAAAACTVAAAN1QAA",
+          "nonce": 49,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 54564,
+          "loops": 54541
+        },
+        {
+          "bytesBase64": "RlEyQnMAAAAXAAAAAAAAAGDVAABJ1QAA",
+          "nonce": 115,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 54624,
+          "loops": 54601
+        }
+      ],
+      "forwardLoopDelta": 60
+    },
+    {
+      "sketch": "state-a",
+      "afterManualReset": false,
+      "bootMatchedTransaction": true,
+      "bootChangedFromTransaction": false,
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAADWQAQAukAEA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 102453,
+          "loops": 102446
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAHOQAQBskAEA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 102515,
+          "loops": 102508
+        }
+      ],
+      "forwardLoopDelta": 62
+    },
+    {
+      "sketch": "state-a",
+      "afterManualReset": true,
+      "bootMatchedTransaction": false,
+      "bootChangedFromTransaction": true,
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAACcfAAAgHwAA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 7975,
+          "loops": 7968
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAGMfAABcHwAA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 8035,
+          "loops": 8028
+        }
+      ],
+      "forwardLoopDelta": 60
+    }
+  ],
+  "sameBootForBothUploads": true,
+  "selectedPhysicalIdentityMatched": true,
+  "rawDeviceAndBootIdentitiesPublished": false,
+  "exactBinaryEcho": {
+    "passes": 2,
+    "bytesPerPass": 256,
+    "includesAllByteValues": true,
+    "throughputOrSoakClaim": false
+  },
+  "manualGPIO": {
+    "initialStateA": "D13 off",
+    "afterStateB": "D13 on",
+    "afterStateA": "D13 off",
+    "afterManualReset": "D13 off",
+    "electricalMeasurement": false
+  },
+  "notes": [
+    "State A initially reported commit reply; a separately requested read-only query confirmed startup without installation retry.",
+    "Both uploads were in the same boot; manual RESET was a later separate action.",
+    "Raw journal and per-transaction records remain local; immutable captures are checked as prefixes of the final journal."
+  ],
+  "uploadArmRemoved": true,
+  "armRemovalNote": "User confirmed D2 removed and REC disconnected after completion; board remained on iPad for final own-report retrieval.",
+  "limits": [
+    "exact experimental package/resident/board and recorded iPad only",
+    "no default catalogue promotion or general Arduino support",
+    "no minimum OS/iPhone claim",
+    "no complete SDK initial-installation backend qualification",
+    "no cold-attachment/Internet/aggregate WebKit memory/power-loss/rollback qualification",
+    "no visual or accessibility inspection"
+  ]
+}

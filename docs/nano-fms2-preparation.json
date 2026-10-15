@@ -142,7 +142,9 @@
       "fms2"
     ],
     "workflowYAMLAndBashSyntaxPassed": true,
-    "remoteSDKCI": "unprovisioned/unrun"
+    "remoteSDKCI": "unprovisioned/unrun",
+    "actualRuntimeRequestedInDefaultSuite": false,
+    "runtimeBoundary": "Absent-service WebKit cases skip in source-checkout suite; signed macOS and physical iPad runs above supply actual FMS2 builds."
   },
   "firmwareInitialEvidence": "https://github.com/AlexGivens/Firmingo/blob/main/docs/evidence/nano-fms2-initial.json",
   "limits": [
@@ -151,5 +153,6 @@
     "no iPhone/minimum-OS claim",
     "no Internet/cold-attachment/power-loss/rollback qualification",
     "no visual or accessibility inspection"
-  ]
+  ],
+  "hostSourceCommit": "84acce66b2f2b2dc1f9aeeeab148b24109dde328"
 }

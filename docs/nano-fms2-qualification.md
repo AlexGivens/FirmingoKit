@@ -96,3 +96,15 @@ ABI-one hardware passes cannot supply those results. Minimum OS, iPhone,
 Internet routing, cold-attachment matrices, aggregate WebKit memory, interruption/
 power loss, rollback, general Arduino support and production promotion remain
 separate gates. Visual/accessibility inspection was not used.
+
+The [physical iPad record](nano-fms2-ipad.json) now pins the 30-event run and
+both actual 544/548-byte capsules, independently validated against the resident.
+Each target-2 upload records RAM verification, one host commit attempt,
+`committing` reply and fresh `boot_confirmed` status. State B and then State A
+both report their correct initialized data, zero startup BSS and advancing
+counters in the same boot; both exact 256-byte echoes pass. The user's D13
+observations change off/on/off with the selected variants. A later manual RESET
+changes the boot identity and again yields State A's initial values plus
+advancing state. D2 was removed after completion. This is a scoped pass for the
+recorded experimental Nano/iPad combination; it supplies none of the separate
+production or broader host gates above.
