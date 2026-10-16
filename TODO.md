@@ -54,7 +54,10 @@ intent/framing and explicit loopback checks remain separate from hardware result
 The [iPad pre-commit disconnect and USB power-cycle checks](docs/nano-fms2-interruption-ipad.json)
 now pass: connection close preserves continuous A state with an untouched slot;
 power-cycle preserves A and correctly leaves the saved transaction unknown after
-boot change. Restored uncertain-commit and iPhone observations remain pending.
+boot change. A real withheld commit reply produces SDK uncertainty; after actual
+app SIGKILL/relaunch, query-only restoration, matching boot-confirmed B, state and
+exact echo all pass without replay. Fresh ordinary upload after recovery and
+iPhone interruption observations remain pending.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 

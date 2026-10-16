@@ -41,9 +41,18 @@ matching record and underlying disconnect. The durable checkpoint contains
 commit intent. D13 was observed on, which alone does not prove installation or
 state correctness. CoreDevice then successfully sent SIGKILL to the verified
 original app process and normally launched the same executable with a different
-PID and no arguments. Restored query-only admission, fresh device reconciliation
-and useful behavior after restart remain pending. No Nano reset or commit replay
-was requested during this process restart.
+PID and no arguments. No Nano reset or commit replay was requested during this
+process restart.
+
+The new app run now recompiles the same exact capsules, restores the unchanged
+commit-intent checkpoint linked to the original run and admits only status
+queries. Its fresh SDK reconciliation returns `boot_confirmed`, `error=none`,
+`slot_touched=true`. The actual B snapshots match the saved Nano boot, seed 23,
+zero startup BSS and advancing counters; the exact 256-byte binary echo passes.
+The operator observes D13 on. The new run contains no stage or commit attempt.
+Both newly exported capsules also pass the independent production native
+validator. A subsequent fresh ordinary upload and iPhone interruption checks
+remain pending; this result does not qualify a flash-write power cut or rollback.
 
 ## Preparation and local checks
 
