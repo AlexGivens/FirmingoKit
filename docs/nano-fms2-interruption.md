@@ -85,9 +85,10 @@ wait/reconnect. The journal then records explicit connection close without
 abort/commit, a fresh SDK `unknown(bootChanged)` result and retained A replies
 from the new boot. The checkpoint remains RAM-only; A has seed 7, zero startup
 BSS and advancing counters, with D13 observed off. No commit attempt is present.
-The original transaction remains unknown, with host-context retirement and the
-separate lost-reply/restart sequence still pending. This power cycle occurs
-before any flash writer starts.
+The original transaction remains unknown. Explicit retirement of the RAM-only
+host context now passes, followed by a new operation with fresh inspection and
+reviewed association. The separate lost-reply/restart sequence remains pending.
+This power cycle occurs before any flash writer starts.
 
 ## Preparation and local checks
 
