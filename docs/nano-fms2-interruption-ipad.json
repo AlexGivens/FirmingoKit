@@ -60,6 +60,11 @@
       "phase": "powercycle",
       "reportSHA256": "b25b8133b55dcba168c1b16cd54759b5abd321fcc5a5d28631bdef746e9ee2f8",
       "events": 24
+    },
+    {
+      "phase": "replyloss-prerequisite",
+      "reportSHA256": "e48a191a0923e26758454b66a954cc3a5ef9cbcb70a012131c61bb05b8f70388",
+      "events": 30
     }
   ],
   "earlierCaptureIsUnchangedPrefix": true,
@@ -190,9 +195,12 @@
       "sameBootContinuityChecked": false
     },
     "manualD13Observation": "off",
-    "hostContextRetired": false,
+    "hostContextRetired": true,
     "usbPowerCycle": "operator performed unplug, five-second wait and reconnect after RAM verification",
     "lifecycleObservation": "operator reported Stage connection closed on inactivity; the explicit disconnect control was no longer available",
-    "flashWriteInterruption": false
-  }
+    "flashWriteInterruption": false,
+    "retirementNote": "Explicit RAM-only host-context retirement preserved the SDK unknown outcome; a new explicit operation required fresh inspection and reviewed association."
+  },
+  "originalHostProcessID": 9308,
+  "originalProcessReceiptSHA256": "530d59cb35460dd0c5b6d5cfbc380f354c12b2f02d621b929237349fe4bcf446"
 }

@@ -27,9 +27,10 @@ closed the stage and removed its disconnect control. The durable checkpoint
 still records RAM-only intent, and the journal contains no commit attempt.
 A fresh SDK query correctly returned `unknown(bootChanged)`. State A replies
 have a different boot identity, seed 7, zero startup BSS and advancing counters;
-D13 was observed off. The original transaction stays unknown. Retirement of
-this RAM-only host context, lost commit reply and process-restart recovery are
-separate subsequent checks. This was power loss before any flash writer started.
+D13 was observed off. The original transaction stays unknown. The operator then
+explicitly retired this RAM-only host context and started a new operation with
+fresh inspection and reviewed association. Lost commit reply and process-restart
+recovery remain pending. This was power loss before any flash writer started.
 
 ## Preparation and local checks
 
