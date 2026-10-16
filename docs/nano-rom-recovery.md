@@ -2,8 +2,9 @@
 
 This is an opt-in macOS developer experiment for the user-selected recoverable
 Nano. [Exact inputs and observations](nano-rom-recovery.json) currently record
-successful read-only identity, selected-volume inspection and candidate preflight.
-No SDK transfer or physical recovery pass is claimed by that preparation record.
+successful read-only identity/volume inspection, candidate preflight, one SDK
+transfer and fresh release hello/exact 256-byte echo. Independent ROM readback now matches all 144,128 payload bytes; physical
+interruption recovery is pending.
 The production library and its public API are unchanged.
 
 `Validation/ROMHost` is a separate SwiftPM command-line host using public
@@ -91,3 +92,16 @@ The normal `node Tools/ManagedWASM/run-validation.mjs` entry point runs these
 host admission/evidence tests without a board, real UF2, live mount, socket or
 paused transfer. Manual CI uses the same entry point; remote runner execution
 remains unverified. Hardware execution is always a separate explicit operation.
+
+## First SDK transfer — 2026-10-16
+
+Committed host `86a319e` executed one explicit transfer on the same checked ROM
+attachment: nine durable callbacks, all 288,256 UF2 bytes accepted, final
+`transferComplete`. A new process restored context and used fresh SDK sessions:
+expected release hello matched, then all 256 binary values echoed exactly.
+These observations are pinned in the JSON ledger. No retry or picotool write was
+used. The prior image was Firmingo FMS2, so this is replacement of that selected
+experimental resident, not first installation from non-Firmingo firmware.
+Independent ROM verification and a separately decoded/read-back payload now
+match all 563 UF2 blocks (144,128 payload bytes). Interrupted-write recovery,
+sandbox, minimum OS and other board/platform claims remain open.

@@ -217,7 +217,10 @@ fixtures have only reached memory sinks; the native writer has not been executed
 The separate [explicit developer host](nano-rom-recovery.md) now builds and
 passes eight deterministic tests. Its development-signed, hardened, unsandboxed
 ARM64 macOS 27.0 execution accepts the selected physical Nano ROM attachment
-and preflights the exact historical real 0.1.0 application candidate.
-[Provenance](nano-rom-recovery.json) records these read-only observations.
-SDK programming, exact written-image readback, interruption recovery, sandbox
-and minimum-OS execution remain unqualified at this preparation stage.
+and preflights the exact historical real 0.1.0 application candidate. One explicit
+SDK transfer now reaches `transferComplete`; fresh SDK sessions match release
+hello and pass exact 256-byte echo. [Provenance](nano-rom-recovery.json) records
+these scoped observations, including independent exact 144,128-byte ROM
+readback after the transfer. Interrupted-write recovery, first installation from non-Firmingo firmware, sandbox and minimum-OS
+execution remain unqualified. The historical matrix above predates this scoped
+experiment; it does not include these new observations.

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-16",
-  "status": "read-only prerequisites passed; no SDK write performed yet",
+  "status": "SDK one-shot transfer, fresh release hello, exact 256-byte echo and independent full payload readback passed; interruption recovery pending",
   "sdkBaseCommit": "bd772b258a660f6305bd0fa6bb458ab3658c739d",
   "hostSources": {
     "Validation/ROMHost/Package.swift": "a037714e0f8f8af808de8796dff39ff11bedecdbfd662a4a360434fbdd62af18",
@@ -55,6 +55,95 @@
       "reportSHA256": "d9b14ce0cb75abae785e354aba2dcc47189b810b5a14dec9749b339719ddf7c1",
       "runID": "7418613E-A496-4A63-829E-75A90D712F5C",
       "result": "exact candidate accepted; affected data and recovery instructions exported"
+    },
+    {
+      "kind": "SDK one-shot install",
+      "reportSHA256": "6c78820d43be27f840d0b7e51ce784422b7f6b53752f617843083ea149ed8f2f",
+      "runID": "218EEBE6-1AF2-4028-939B-C57C294148C8",
+      "records": [
+        {
+          "sha256": "ce70eb9f6be638ef6bb08d22a0a56f73347e730d691b6e3b0dd7e31cff351317",
+          "state": "prepared",
+          "acceptedBytes": 0
+        },
+        {
+          "sha256": "ce70eb9f6be638ef6bb08d22a0a56f73347e730d691b6e3b0dd7e31cff351317",
+          "state": "prepared",
+          "acceptedBytes": 0
+        },
+        {
+          "sha256": "2c01c0a79575eb1f206716727b6fcf16287d660d5d42713e10dbdef95f9233ae",
+          "state": "writeStarted",
+          "acceptedBytes": 0
+        },
+        {
+          "sha256": "ec27b3f409fafd01565c09348ebbd832f793a34071dc7e8c6611cf796d67d99b",
+          "state": "writeStarted",
+          "acceptedBytes": 65536
+        },
+        {
+          "sha256": "a15bd851d8953dfd04713ca2ae5291f8b3200b4c8513e132be51781b39773715",
+          "state": "writeStarted",
+          "acceptedBytes": 131072
+        },
+        {
+          "sha256": "bdfbe596182334f057c781e139b149bdb3281aba017696226a525cfb89375b53",
+          "state": "writeStarted",
+          "acceptedBytes": 196608
+        },
+        {
+          "sha256": "dce460da742c606669e7fc947aeb224b2257f71904af65ec0be119a77759fd7e",
+          "state": "writeStarted",
+          "acceptedBytes": 262144
+        },
+        {
+          "sha256": "a623e8c486f46b67021d776df23eb5002c626b2c8be562e266168b1b3c681456",
+          "state": "writeStarted",
+          "acceptedBytes": 288256
+        },
+        {
+          "sha256": "fdcc22a9f6586ddce1b32c52f9e63de0e4f0f0bc81bec3f8866173c7bbe8d8fe",
+          "state": "transferComplete",
+          "acceptedBytes": 288256
+        }
+      ],
+      "binaryEcho": null,
+      "result": "transferComplete"
+    },
+    {
+      "kind": "fresh SDK hello and exact binary echo",
+      "reportSHA256": "4817ce1191547b6e29571842f200058ace7abedb5cb1646124749857c4665502",
+      "runID": "340D3088-26D8-41F0-A682-5AA989992219",
+      "records": [
+        {
+          "sha256": "fdcc22a9f6586ddce1b32c52f9e63de0e4f0f0bc81bec3f8866173c7bbe8d8fe",
+          "state": "transferComplete",
+          "acceptedBytes": 288256
+        },
+        {
+          "sha256": "c242261fef3daeab35ebf91f5d9fe3cab0f3ad2d93f0246b94beeef580ad1ed7",
+          "state": "helloMatched",
+          "acceptedBytes": 288256
+        }
+      ],
+      "binaryEcho": "256/256 exact bytes; hello is not installed-image attestation",
+      "result": "helloMatched"
+    },
+    {
+      "kind": "independent ROM readback after SDK complete transfer",
+      "reportSHA256": "183471cd2a3b526030cb6923fab80ba994dc61f9fc52869547f28b36cb0bb64b",
+      "schema": 1,
+      "matchedBytes": 144128,
+      "start": "0x10000000",
+      "endExclusive": "0x10023300",
+      "payloadSHA256": "872bf96e5054827b7811ff245d3d057c730ed744d166f93f67bf19930060cbf5",
+      "uf2SHA256": "2e2d6082d07fd25257664918de02737ce77585451f3945add56cdcf99643f0a6",
+      "picotoolVerifyExitCode": 0,
+      "identitySHA256": "63f3f4d475b00af192df08b006fa7cbe5afb703b99c39fa28e22059d4729c0bf",
+      "verifyLogSHA256": "bd6405d623ee3385dbc237c8b6c3e314271ecd2b19bcceb731317a2da7479584",
+      "saveLogSHA256": "28102bd20ad43ed46cae652aabb1027ac923d4198ff36d199866052f326e8f92",
+      "newWritePerformed": false,
+      "rebootPerformed": false
     }
   ],
   "checks": {
@@ -64,9 +153,10 @@
     "codesignStrictVerification": "passed"
   },
   "limits": [
-    "No SDK transfer, post-install hello/echo, independent written-image readback or interruption recovery yet.",
+    "Exact selected candidate payload matches ROM readback after SDK transfer; initially non-Firmingo installation and interruption recovery remain unqualified.",
     "No sandbox, minimum OS, Pico or direct iOS/iPadOS ROM programming qualification.",
     "Manual unplug checkpoints cannot establish interruption inside a flash-chip command.",
     "No rollback, preservation, replay, offset resume or publisher authentication claim."
-  ]
+  ],
+  "executionSourceCommit": "86a319e90cfa4e63dc5d460c4c04571294e5aa8b"
 }
