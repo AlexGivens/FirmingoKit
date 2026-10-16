@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-15",
-  "status": "scoped iPad FMS2 pre-commit disconnect/power-cycle, real commit-reply loss, process-restart recovery and fresh upload passed; iPhone interruption checks pending",
+  "status": "scoped iPad FMS2 pre-commit disconnect/power-cycle, real commit-reply loss, process-restart recovery and fresh upload passed",
   "productionQualified": false,
   "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
   "context": {
@@ -148,9 +148,7 @@
     ],
     "manualD13Observation": "off"
   },
-  "remainingChecks": {
-    "iPhone": "pending"
-  },
+  "remainingChecks": {},
   "uploadArmRemoved": true,
   "notes": [
     "Raw device and boot identifiers remain in ignored local evidence.",
@@ -347,5 +345,6 @@
     "exactBinaryEchoBytes": 256,
     "manualD13Observation": "off"
   },
-  "uploadArmRemovalEvidence": "Operator confirmed Done after removing D2-to-GND; REC remains disconnected."
+  "uploadArmRemovalEvidence": "Operator confirmed Done after removing D2-to-GND; REC remains disconnected.",
+  "companionIPhoneEvidence": "nano-fms2-interruption-iphone.json"
 }

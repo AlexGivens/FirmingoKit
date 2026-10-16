@@ -102,6 +102,10 @@ The manual self-hosted workflow now names both profiles and uses the same suite.
 No remote SDK CI success is claimed without a provisioned runner/run. The later
 NanoStateful qualification explicitly replaces the selected recoverable Nano's
 resident with user authorization and full ROM readback, then records both
-physical hosts separately. Default catalogue/production delivery, minimum OS,
-broader host coverage, interruption and recovery remain open. Historical ABI-one
-results retain their original scope.
+physical hosts separately. The separate [NanoRecovery record](nano-fms2-interruption.md)
+now covers pre-commit disconnect/power-cycle and real commit-reply loss with
+query-only app-restart recovery, state/echo and a fresh upload on both hosts.
+The iPhone record preserves an unidentified prerequisite rejection before its
+successful final association. Default catalogue/production delivery, minimum OS,
+broader host coverage, flash-write power loss/corruption and full SDK ROM recovery
+remain open. Historical ABI-one results retain their original scope.

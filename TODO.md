@@ -46,26 +46,19 @@ Mark implementation tasks complete only with relevant checks and evidence. Recor
 - [x] Add a separate anchored NanoStateful host, two real-WASM state/echo sketches, independent observation checks and signed macOS offline execution; install its signed app on iPad over Wi-Fi. See [qualification procedure](docs/nano-fms2-qualification.md).
 - [x] Qualify both physical iPad target-2 uploads in the same boot, initialized data/zero BSS/advancing counters, two exact binary echoes and state initialization after manual RESET. [Exact scoped record](docs/nano-fms2-ipad.json); production and other host gates remain separate.
 - [x] Repeat the two-sketch same-boot upload/state/echo and manual-reboot checks on iPhone using the identical signed app. [Exact scoped record](docs/nano-fms2-iphone.json); the upload arm is removed after both device runs.
+- [x] Complete the scoped NanoRecovery sequence on iPad and iPhone: pre-commit disconnect/power-cycle, real withheld commit reply, query-only reconciliation after app SIGKILL/relaunch, state/echo and a fresh ordinary upload. Preserve the unidentified iPhone prerequisite rejection before successful final association; both upload arms are removed. [Exact evidence and limits](docs/nano-fms2-interruption.md).
 - [ ] Complete remaining FMS2 production-package/catalogue, minimum-OS, interruption/recovery and broader host/device gates before promotion. Scoped macOS offline and iPad/iPhone results do not close these gates.
 
-The [interruption/recovery qualification](docs/nano-fms2-interruption.md) now has
-a separately identified harness and bounded real-reply-loss proxy. Local source,
-intent/framing and explicit loopback checks remain separate from hardware results.
-The [iPad pre-commit disconnect and USB power-cycle checks](docs/nano-fms2-interruption-ipad.json)
-now pass: connection close preserves continuous A state with an untouched slot;
-power-cycle preserves A and correctly leaves the saved transaction unknown after
-boot change. A real withheld commit reply produces SDK uncertainty; after actual
-app SIGKILL/relaunch, query-only restoration, matching boot-confirmed B, state and
-exact echo all pass without replay. A fresh explicit ordinary A upload then
-passes startup/state/echo in the same Nano boot, and D2 is removed. The iPhone
-baseline and pre-commit disconnect now pass with continuous A counters and a
-fresh aborted/disconnected/untouched-slot status. Its pre-commit USB power cycle
-also passes: saved outcome stays unknown after boot change, with valid retained
-A state and RAM-only intent. Its real commit-reply loss and actual app
-SIGKILL/relaunch now pass. The iPhone also passes query-only restoration of the
-unchanged checkpoint, matching fresh boot-confirmed B, state and exact echo
-without replay. A fresh ordinary iPhone upload remains pending. Flash-write
-power-loss/recovery stays separate.
+The [interruption/recovery record](docs/nano-fms2-interruption.md) separates local
+source/intent/framing/loopback checks from both physical host results. Connection
+close preserves continuous A with an untouched slot; pre-commit power-cycle
+preserves A and leaves the saved transaction unknown after boot change. One real
+withheld B commit reply produces SDK uncertainty. Both actual app restarts restore
+query-only context and pass matching fresh startup/state/echo without replay,
+then a new explicit ordinary A upload passes in the same Nano boot. The iPhone
+record retains one earlier prerequisite rejection whose triggering action is
+unknown. Flash-write power-loss/corruption, rollback, complete SDK ROM recovery
+and broader production gates remain open.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 

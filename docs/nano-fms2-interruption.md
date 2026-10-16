@@ -5,14 +5,16 @@ This explicitly selected experiment uses **NanoRecovery**,
 resident, compiler assets, catalogue and State A/B sources as
 [the completed functional qualification](nano-fms2-qualification.md). Firmware's
 versioned contract remains authoritative; no resident or public SDK API change
-is required for this harness. The scoped iPad sequence now passes: baseline,
+is required for this harness. The scoped sequence passes on the recorded iPad
+Pro 11-inch (3rd generation)/iPadOS 27.0.1 and iPhone 15 Pro Max/iOS 27.0:
 pre-commit connection close and USB power cycle, a real withheld commit reply,
 actual app restart, query-only reconciliation and a fresh ordinary upload.
-[The iPad evidence](nano-fms2-interruption-ipad.json) pins both runs and captures.
-The identical signed app now passes the iPhone read-only baseline, pre-commit
-connection close and USB power cycle in [its separate evidence](nano-fms2-interruption-iphone.json);
-real commit-reply loss, app SIGKILL/relaunch and query-only reconciliation/state/
-echo after restart also pass there. A fresh ordinary iPhone upload remains pending.
+[The iPad evidence](nano-fms2-interruption-ipad.json) and
+[separate iPhone evidence](nano-fms2-interruption-iphone.json) pin two app runs
+per host and their immutable captures. One iPhone prerequisite rejection before
+the final association remains recorded with an unidentified trigger; the later
+single A stage/commit/startup/state/echo succeeds. Both upload arms are removed
+afterward. These are exact experimental combinations, not production promotion.
 Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
 apps, exact generated sources, offline outputs and local check results.
@@ -50,11 +52,11 @@ PID and no arguments. No Nano reset or commit replay was requested during this
 process restart.
 
 The new app run now recompiles the same exact capsules, restores the unchanged
-commit-intent checkpoint linked to the original run and admits only status
-queries. Its fresh SDK reconciliation returns `boot_confirmed`, `error=none`,
+commit-intent checkpoint linked to the original run, restoring only query
+capability for that transaction. Fresh SDK reconciliation returns `boot_confirmed`, `error=none`,
 `slot_touched=true`. The actual B snapshots match the saved Nano boot, seed 23,
 zero startup BSS and advancing counters; the exact 256-byte binary echo passes.
-The operator observes D13 on. The new run contains no stage or commit attempt.
+The operator observes D13 on. The recovery-only capture contains no stage or commit attempt.
 Both newly exported capsules also pass the independent production native
 validator.
 
@@ -66,7 +68,7 @@ advancing counters and an exact 256-byte echo; D13 is observed off. Its distinct
 transaction shares the recovered B boot. The original pre-restart journal is
 unchanged, and the recovery-only capture is an unchanged prefix of the final
 21-event second-run journal. The operator confirms D2 removed afterward, with
-REC disconnected. iPhone interruption checks remain pending; this result does
+REC disconnected. The separate iPhone sequence follows below; this result does
 not qualify a flash-write power cut or rollback.
 
 The iPhone 15 Pro Max/iOS 27.0 baseline produces the same two capsule hashes,
@@ -88,7 +90,7 @@ from the new boot. The checkpoint remains RAM-only; A has seed 7, zero startup
 BSS and advancing counters, with D13 observed off. No commit attempt is present.
 The original transaction remains unknown. Explicit retirement of the RAM-only
 host context now passes, followed by a new operation with fresh inspection and
-reviewed association. The separate lost-reply/restart sequence remains pending.
+reviewed association before the separate lost-reply/restart sequence.
 This power cycle occurs before any flash writer starts.
 
 The subsequent iPhone B upload now records one host commit attempt and one
@@ -103,12 +105,22 @@ No Nano reset or commit replay is requested.
 
 The new iPhone run now recompiles the same capsule bytes and restores the
 unchanged commit-intent checkpoint linked to its originating run. The gate is
-query-only, and the new run records no staging or commit attempt. Fresh SDK
+query-only, and the recovery-only capture records no staging or commit attempt. Fresh SDK
 reconciliation returns `boot_confirmed`, `error=none`, `slot_touched=true`.
 B snapshots match the saved Nano boot, seed 23, zero startup BSS and advancing
 counters; the exact 256-byte echo passes and D13 is observed on. Both new exports
-also pass the independent production native validator. A fresh ordinary upload
-after recovery remains pending.
+also pass the independent production native validator.
+
+The final iPhone operation has fresh inspection, one prerequisite rejection,
+then successful reviewed association. The journal does not identify the action
+that triggered rejection, and the operator does not recall it. This event is
+retained as a rejection before A staging, not counted as a successful attempt.
+The later ordinary A stage and commit each occur once. Fresh reconciliation
+returns `boot_confirmed`, no error and a touched slot; A has seed 7, zero startup
+BSS, advancing counters and an exact 256-byte echo. Its distinct transaction
+shares recovered B's boot, and D13 is observed off. The original 39-event journal
+remains unchanged; the recovery-only capture is an unchanged prefix of the final
+22-event new-run journal. The operator confirms D2 removed, with REC disconnected.
 
 ## Preparation and local checks
 
