@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-16",
-  "status": "SDK one-shot transfer, fresh release hello, exact 256-byte echo and independent full payload readback passed; interruption recovery pending",
+  "status": "scoped post-erase power-cut recovery passed: new full SDK transfer, fresh release hello/exact echo and exact full payload ROM readback",
   "sdkBaseCommit": "bd772b258a660f6305bd0fa6bb458ab3658c739d",
   "hostSources": {
     "Validation/ROMHost/Package.swift": "a037714e0f8f8af808de8796dff39ff11bedecdbfd662a4a360434fbdd62af18",
@@ -144,6 +144,102 @@
       "saveLogSHA256": "28102bd20ad43ed46cae652aabb1027ac923d4198ff36d199866052f326e8f92",
       "newWritePerformed": false,
       "rebootPerformed": false
+    },
+    {
+      "kind": "new full SDK recovery after manual post-erase power cut",
+      "interruptionEvidence": "https://github.com/AlexGivens/Firmingo/blob/3cdf4e4/docs/evidence/nano-flash-checkpoints.json",
+      "priorState": "erased managed sector and unchanged test resident independently ROM-read; exact resident hello after invalid-slot boot",
+      "freshOperationAndAttachment": true,
+      "sameSignedHostAndCandidate": true,
+      "automaticResumeOrReplay": false,
+      "runs": [
+        {
+          "command": "install",
+          "runID": "D31D8E01-3181-4CFD-A52C-F76ADF23AD86",
+          "reportSHA256": "a83d3468816f008d4c8a31cfe561ed43ca4ebb4d97b4a72a5ba2efa3b4201988",
+          "records": [
+            {
+              "sha256": "282d7bfabd9548ebe8c9f810ccf343d7699cf68d80a89bc1a4dd7015f2f55a91",
+              "state": "prepared",
+              "acceptedBytes": 0
+            },
+            {
+              "sha256": "282d7bfabd9548ebe8c9f810ccf343d7699cf68d80a89bc1a4dd7015f2f55a91",
+              "state": "prepared",
+              "acceptedBytes": 0
+            },
+            {
+              "sha256": "9c7ccbd0a141e75e62fb173019f545e9eaec7ce467e4660c460f4410a0dda484",
+              "state": "writeStarted",
+              "acceptedBytes": 0
+            },
+            {
+              "sha256": "b2c01f1ba69674997893f52111556e0cf03f12108000752679df155187246f38",
+              "state": "writeStarted",
+              "acceptedBytes": 65536
+            },
+            {
+              "sha256": "453d61421a391637a53b3b1f6a6ede5a92966c7e1ccf6f9f4b0c09cd92882b01",
+              "state": "writeStarted",
+              "acceptedBytes": 131072
+            },
+            {
+              "sha256": "1bf1727e5b24e27ce22a2e71cccc2dc88b21238afe7eb89d8fc91c39a2d4ab4a",
+              "state": "writeStarted",
+              "acceptedBytes": 196608
+            },
+            {
+              "sha256": "4106e9542067e50edc892811e4871409f0b3cb94b2491841fe9c2deea6d8b260",
+              "state": "writeStarted",
+              "acceptedBytes": 262144
+            },
+            {
+              "sha256": "2257599058b5dc57dcea42bcfd6c97cd2be9ae9e5eb22d39ad9bb50f222066b6",
+              "state": "writeStarted",
+              "acceptedBytes": 288256
+            },
+            {
+              "sha256": "de09a37c8cb128ed7dc93a6919e22ca2be96797bf55bc9a0834313d4831889e3",
+              "state": "transferComplete",
+              "acceptedBytes": 288256
+            }
+          ],
+          "binaryEcho": null
+        },
+        {
+          "command": "verify",
+          "runID": "17513E29-2E59-46F7-A711-E413E8DA16C6",
+          "reportSHA256": "36119c60a63905ef43912becfb541cdfd9f869318a5ed8dc3ca7d8a7d02dbfb6",
+          "records": [
+            {
+              "sha256": "de09a37c8cb128ed7dc93a6919e22ca2be96797bf55bc9a0834313d4831889e3",
+              "state": "transferComplete",
+              "acceptedBytes": 288256
+            },
+            {
+              "sha256": "dd4c43bdc40b7fca7c8f15bf2a12cb79c3fe82319dedd4712671d436a1502f4c",
+              "state": "helloMatched",
+              "acceptedBytes": 288256
+            }
+          ],
+          "binaryEcho": "256/256 exact bytes; hello is not installed-image attestation"
+        }
+      ],
+      "independentRecoveredImageReadback": {
+        "reportSHA256": "77c606ed9813a743411503263aab786658a34f681d121181143f7fc358ed020d",
+        "schema": 1,
+        "kind": "exact SDK recovered-image ROM readback after erase-checkpoint power cut",
+        "imageSHA256": "2e2d6082d07fd25257664918de02737ce77585451f3945add56cdcf99643f0a6",
+        "payloadBytes": 144128,
+        "payloadSHA256": "872bf96e5054827b7811ff245d3d057c730ed744d166f93f67bf19930060cbf5",
+        "allUF2BlocksMatch": true,
+        "managedSectorRemainsErased": true,
+        "managedSectorSHA256": "f47a8ec3e9aff2318d896942282ad4fe37d6391c82914f54a5da8a37de1300c6",
+        "picotoolVerifyExitCode": 0,
+        "identitySHA256": "63f3f4d475b00af192df08b006fa7cbe5afb703b99c39fa28e22059d4729c0bf",
+        "newWritePerformed": false,
+        "rebootPerformed": false
+      }
     }
   ],
   "checks": {
@@ -153,7 +249,7 @@
     "codesignStrictVerification": "passed"
   },
   "limits": [
-    "Exact selected candidate payload matches ROM readback after SDK transfer; initially non-Firmingo installation and interruption recovery remain unqualified.",
+    "This selected post-erase managed-slot checkpoint and new full SDK recovery pass; first-page power cut, paused SDK transfer, intra-command power loss and initially non-Firmingo installation remain unqualified.",
     "No sandbox, minimum OS, Pico or direct iOS/iPadOS ROM programming qualification.",
     "Manual unplug checkpoints cannot establish interruption inside a flash-chip command.",
     "No rollback, preservation, replay, offset resume or publisher authentication claim."

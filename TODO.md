@@ -66,7 +66,8 @@ Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.
 
 - [x] Add a separate explicit macOS SDK ROM host with exact real-candidate anchors, durable records, read-only attachment inspection and admission tests; record signed read-only Nano checks in [the procedure and ledger](docs/nano-rom-recovery.md).
 - [x] Execute one selected SDK transfer, fresh release hello/exact 256-byte echo and independent exact 144,128-byte ROM readback. This is replacement of the selected FMS2 resident; first installation from non-Firmingo firmware remains open.
-- [ ] Qualify a manually interrupted unfinished write and new explicit SDK full recovery. Keep host acceptance, flash readback and chip-command timing distinct.
+- [x] Qualify the selected manual post-erase managed checkpoint and new explicit SDK full recovery, including exact resident/erased-sector readback, invalid-slot network boot, fresh recovery hello/echo and exact recovered-image ROM readback. This is a between-command hold on the selected Nano/macOS host.
+- [ ] Qualify first-page and partial-SDK-transfer interruption/restart cases. Keep host acceptance, flash readback and chip-command timing distinct.
 - [ ] Qualify sandbox/minimum-OS and other claimed board/platform combinations separately.
 
 ## 1. Establish contracts, scope, and acceptance criteria

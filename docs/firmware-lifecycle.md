@@ -201,16 +201,18 @@ evidence; physical recovery and update compatibility are still acceptance work.
 | --- | --- | --- |
 | Local artifact acquisition/validation | Implemented, deterministic tests | Implemented, simulator tests; physical file access unqualified |
 | Artifact preflight/physical guidance | Implemented; explicit physical selection required | Implemented; external computer route |
-| SDK ROM first installation | Experimental backend/executor; no hardware/sandbox qualification | Unavailable; no direct backend |
+| SDK ROM first installation | Experimental backend; selected Nano/macOS 27 replacement passes exact echo/readback; first installation from non-Firmingo and sandbox pending | Unavailable; no direct backend |
 | Qualified updates | Pending compatibility and execution evidence | Pending |
-| SDK interruption records / new full reinstall request | Implemented context and explicit macOS executor; physical recovery unqualified | Records/verification build; computer required for transfer |
-| Fresh-hello verification | Implemented; fake inspection tests, no board/image attestation | API/simulator tests; networking/file access unqualified |
+| SDK interruption records / new full reinstall request | Selected post-erase checkpoint/new full Nano recovery passes exact echo/readback; other interruption/board/sandbox cases pending | Records/verification build; computer required for transfer |
+| Fresh-hello verification | Selected Nano/macOS release hello and exact echo pass; no installed-image attestation | API/simulator tests; networking/file access unqualified |
 
 Hardware qualification must start with a board not running Firmingo, install
 through an actual signed SDK host, connect, and exchange exact bytes. Updates and
 interrupted-operation recovery need dedicated evidence independently per board
-and host. None of those device-changing tests has been run. Synthetic parser
-fixtures have only reached memory sinks; the native writer has not been executed.
+and host. The selected replacement and post-erase recovery results below do not
+close first installation from non-Firmingo firmware. Synthetic parser fixtures
+remain memory-only; only the separately reviewed real candidate has reached the
+native writer in this experiment.
 
 ## Selected Nano ROM qualification preparation — 2026-10-16
 
@@ -221,6 +223,9 @@ and preflights the exact historical real 0.1.0 application candidate. One explic
 SDK transfer now reaches `transferComplete`; fresh SDK sessions match release
 hello and pass exact 256-byte echo. [Provenance](nano-rom-recovery.json) records
 these scoped observations, including independent exact 144,128-byte ROM
-readback after the transfer. Interrupted-write recovery, first installation from non-Firmingo firmware, sandbox and minimum-OS
-execution remain unqualified. The historical matrix above predates this scoped
-experiment; it does not include these new observations.
+readback after the transfer. A separate manual post-erase power-cut checkpoint
+now passes a new full SDK recovery, fresh release hello/exact echo and exact
+144,128-byte ROM readback. This replaces the test resident with the ordinary
+application; it does not restore the old managed sketch. First-page/partial-SDK
+interruption, first installation from non-Firmingo firmware, sandbox and
+minimum-OS execution remain unqualified.
