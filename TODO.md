@@ -62,6 +62,13 @@ and broader production gates remain open.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 
+## SDK ROM recovery qualification — 2026-10-16
+
+- [x] Add a separate explicit macOS SDK ROM host with exact real-candidate anchors, durable records, read-only attachment inspection and admission tests; record signed read-only Nano checks in [the procedure and ledger](docs/nano-rom-recovery.md).
+- [ ] Execute the selected SDK transfer, fresh hello/exact echo and independent written-image readback.
+- [ ] Qualify a manually interrupted unfinished write and new explicit SDK full recovery. Keep host acceptance, flash readback and chip-command timing distinct.
+- [ ] Qualify sandbox/minimum-OS and other claimed board/platform combinations separately.
+
 ## 1. Establish contracts, scope, and acceptance criteria
 
 - [ ] Select consistent Firmingo and Firmingo-Compiler inputs for each implementation increment; record full commits/local differences or checksummed bundles. ArduinoKit remains read-only. The initial split inventory is recorded in section 7.2 without selecting a new protocol compatibility baseline.

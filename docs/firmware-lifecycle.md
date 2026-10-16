@@ -211,3 +211,13 @@ through an actual signed SDK host, connect, and exchange exact bytes. Updates an
 interrupted-operation recovery need dedicated evidence independently per board
 and host. None of those device-changing tests has been run. Synthetic parser
 fixtures have only reached memory sinks; the native writer has not been executed.
+
+## Selected Nano ROM qualification preparation — 2026-10-16
+
+The separate [explicit developer host](nano-rom-recovery.md) now builds and
+passes eight deterministic tests. Its development-signed, hardened, unsandboxed
+ARM64 macOS 27.0 execution accepts the selected physical Nano ROM attachment
+and preflights the exact historical real 0.1.0 application candidate.
+[Provenance](nano-rom-recovery.json) records these read-only observations.
+SDK programming, exact written-image readback, interruption recovery, sandbox
+and minimum-OS execution remain unqualified at this preparation stage.

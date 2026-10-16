@@ -47,6 +47,8 @@ if (args.length === 1 && args[0] === "--help") {
   if (args[0]) env.FIRMINGOKIT_WASM_MODULE = resolve(args[0]);
   requireSwiftTesting(join(root, 'Tests'));
   run("swift", ["test", "--disable-xctest", "--enable-swift-testing"], env);
+  run("swift", ["test", "--package-path", "Validation/ROMHost", "--scratch-path", ".build/rom-host-checks",
+    "--disable-xctest", "--enable-swift-testing", "-Xswiftc", "-warnings-as-errors"], env);
   run("python3", ["-I", "-S", "-B", "Tools/ManagedWASM/check-compiler-host.py"]);
   run("python3", ["-I", "-S", "-B", "Tools/Hardware/check-nano-host.py"]);
   console.log(JSON.stringify({ status: "sdk_adapter_checks_completed", actualRuntimeRequested: Boolean(args[0]),

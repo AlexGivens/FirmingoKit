@@ -34,6 +34,8 @@ jobs:
       - name: Explain initial-connection waiting coverage
         run: |
           echo 'Swift Testing exercises the FMS2 golden staging/one-shot commit/reconciliation and production TCP actor through injected platform callbacks: initial waiting/ready, original deadline, cancellation, terminal failure and established path loss. No socket, OS permission reset or automatic reconnect is used; fresh physical permission prompts remain separate qualification.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Explain ROM qualification host boundary
+        run: echo 'The same validation entry point builds the explicit macOS ROM qualification host and tests command admission, exact Nano confirmation, changed-manifest rejection and preservation of existing evidence. No ROM mount, real UF2, programming, live socket or paused transfer is used by these tests. Signed host execution and physical power-loss/recovery remain separately selected experiments; direct iOS/iPadOS ROM programming is unavailable.' >> "$GITHUB_STEP_SUMMARY"
       - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
         run: |
           mkdir -p .build/owned-service-webkit

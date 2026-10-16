@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "date": "2026-10-16",
+  "status": "read-only prerequisites passed; no SDK write performed yet",
+  "sdkBaseCommit": "bd772b258a660f6305bd0fa6bb458ab3658c739d",
+  "hostSources": {
+    "Validation/ROMHost/Package.swift": "a037714e0f8f8af808de8796dff39ff11bedecdbfd662a4a360434fbdd62af18",
+    "Validation/ROMHost/Sources/ROMQualification/ROMArguments.swift": "04d3fdd28c01080f69c671a83577522187e8be2b8f7da2862e905dfac1f2f3a4",
+    "Validation/ROMHost/Sources/ROMQualification/ROMCandidate.swift": "240be3b71da9137ca046619888e0932408ce7ee46430896013c0ab50fb077134",
+    "Validation/ROMHost/Sources/ROMQualification/ROMJournal.swift": "f9d5ec259bb34f3350eaa534bdc0101f52694f8db02ed21140992ee7e7dac250",
+    "Validation/ROMHost/Sources/ROMQualification/ROMQualification.swift": "e7dc41d84ca05f988e276e8251c4e07002337c5aa17777871db092383f4df35a",
+    "Validation/ROMHost/Tests/ROMQualificationTests/ROMQualificationTests.swift": "187bd9b2509e3e3782c9accd56af8d545233cde22313653f7190b17b2918583d"
+  },
+  "host": {
+    "platform": "macOS 27.0 (26A428), ARM64",
+    "developmentSigned": true,
+    "hardenedRuntime": true,
+    "sandboxed": false,
+    "executableSHA256": "47838b565626b887b9f1a61937a679ad770903e73dafdf3a99feb96d2c8ec069"
+  },
+  "candidate": {
+    "board": "nano_rp2040_connect",
+    "profile": "application",
+    "version": "0.1.0 beta",
+    "manifestSHA256": "39b5fd642579137ae813ca00d498d4115fa532c3cda4718e5d4f925728861aa8",
+    "uf2SHA256": "2e2d6082d07fd25257664918de02737ce77585451f3945add56cdcf99643f0a6",
+    "uf2Bytes": 288256,
+    "payloadStart": "0x10000000",
+    "payloadEndExclusive": "0x10023300",
+    "conservativeEraseEndExclusive": "0x10024000",
+    "buildReportSHA256": "31c2ad970b73e3c7d3c8eaab588b0a97b88068e8aeaae4791ff384f6746a2cea",
+    "provenance": "Tests/FirmingoKitTests/Fixtures/lifecycle/provenance.json; observed manifest and actual local UF2, not authenticated publication or independently acquired build-report bytes"
+  },
+  "observations": [
+    {
+      "kind": "normal-mode hello before ROM entry",
+      "sha256": "0d71dcf00989e825d44077361e9e92caf1c2eee91cbcc809b83c19071302bf17",
+      "result": "selected Nano identity matched; 0.1.0-statefulupload-exp1 / target 2"
+    },
+    {
+      "kind": "pinned picotool info -a",
+      "sha256": "63f3f4d475b00af192df08b006fa7cbe5afb703b99c39fa28e22059d4729c0bf",
+      "toolSHA256": "d25535c5d179aa7268a57d5746c46873f53d6c215613c3eaa85caa16ec0d3153",
+      "result": "exact selected flash ID matched; RP2040 B1, 16384K"
+    },
+    {
+      "kind": "signed SDK inspect-volume",
+      "reportSHA256": "25a972b570073ad3ebd65f578ff7cc55de5e391982679a163956249c579abaa8",
+      "runID": "9ECD3912-1453-4C34-9395-6279D415F96F",
+      "infoSHA256": "c743f4a0e5481039eaa8e2a3c5bdbe75b67549b0655bfa4c2e50b926012d1d6b",
+      "result": "macos-rp2040-rom-uf2-v1 accepted selected current attachment; generic ROM metadata does not identify model"
+    },
+    {
+      "kind": "signed SDK candidate preflight",
+      "reportSHA256": "d9b14ce0cb75abae785e354aba2dcc47189b810b5a14dec9749b339719ddf7c1",
+      "runID": "7418613E-A496-4A63-829E-75A90D712F5C",
+      "result": "exact candidate accepted; affected data and recovery instructions exported"
+    }
+  ],
+  "checks": {
+    "focusedSwiftTests": 8,
+    "fullSDKEntryPoint": "passed before addition of eighth read-only admission test; 166 SDK tests, seven ROM-host tests, tool/source checks; absent compiler assets explicitly skipped",
+    "releaseBuild": "passed after eighth test / inspect-volume addition",
+    "codesignStrictVerification": "passed"
+  },
+  "limits": [
+    "No SDK transfer, post-install hello/echo, independent written-image readback or interruption recovery yet.",
+    "No sandbox, minimum OS, Pico or direct iOS/iPadOS ROM programming qualification.",
+    "Manual unplug checkpoints cannot establish interruption inside a flash-chip command.",
+    "No rollback, preservation, replay, offset resume or publisher authentication claim."
+  ]
+}
