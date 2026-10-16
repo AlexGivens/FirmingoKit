@@ -9,9 +9,9 @@ is required for this harness. The scoped iPad sequence now passes: baseline,
 pre-commit connection close and USB power cycle, a real withheld commit reply,
 actual app restart, query-only reconciliation and a fresh ordinary upload.
 [The iPad evidence](nano-fms2-interruption-ipad.json) pins both runs and captures.
-The identical signed app now passes the iPhone read-only baseline and pre-commit
-connection-close check in [its separate evidence](nano-fms2-interruption-iphone.json);
-the remaining iPhone interruption checks are pending.
+The identical signed app now passes the iPhone read-only baseline, pre-commit
+connection close and USB power cycle in [its separate evidence](nano-fms2-interruption-iphone.json);
+real commit-reply loss and restart recovery remain pending there.
 Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
 apps, exact generated sources, offline outputs and local check results.
@@ -79,6 +79,15 @@ explicitly disconnected without abort or commit. Retained A counters continue
 from the baseline in the same boot, and the subsequent fresh status query reports
 `aborted`, `disconnected`, `slot_touched=false`. The RAM-only checkpoint and both
 capture prefixes are preserved. No installation is attempted in this check.
+
+The next iPhone B stage is RAM-verified before an operator USB unplug/five-second
+wait/reconnect. The journal then records explicit connection close without
+abort/commit, a fresh SDK `unknown(bootChanged)` result and retained A replies
+from the new boot. The checkpoint remains RAM-only; A has seed 7, zero startup
+BSS and advancing counters, with D13 observed off. No commit attempt is present.
+The original transaction remains unknown, with host-context retirement and the
+separate lost-reply/restart sequence still pending. This power cycle occurs
+before any flash writer starts.
 
 ## Preparation and local checks
 

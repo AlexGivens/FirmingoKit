@@ -59,8 +59,10 @@ app SIGKILL/relaunch, query-only restoration, matching boot-confirmed B, state a
 exact echo all pass without replay. A fresh explicit ordinary A upload then
 passes startup/state/echo in the same Nano boot, and D2 is removed. The iPhone
 baseline and pre-commit disconnect now pass with continuous A counters and a
-fresh aborted/disconnected/untouched-slot status. Remaining iPhone interruption
-checks and flash-write power-loss/recovery remain separate open gates.
+fresh aborted/disconnected/untouched-slot status. Its pre-commit USB power cycle
+also passes: saved outcome stays unknown after boot change, with valid retained
+A state and RAM-only intent. iPhone lost-reply/restart recovery and flash-write
+power-loss/recovery remain separate open gates.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 

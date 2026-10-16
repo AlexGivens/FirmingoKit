@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-15",
-  "status": "in progress: iPhone baseline and pre-commit disconnect passed; power-cycle, commit-reply loss and restart recovery pending",
+  "status": "in progress: iPhone pre-commit disconnect and USB power-cycle checks passed; real commit-reply loss and restart recovery pending",
   "productionQualified": false,
   "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
   "context": {
@@ -52,6 +52,16 @@
       "phase": "disconnect-status",
       "reportSHA256": "e0a01a3737e096f8a9a233bead4ba421cd565d286262d7976576f74f5148fa80",
       "events": 16
+    },
+    {
+      "phase": "powercycle-prerequisite",
+      "reportSHA256": "8d6def400732e583e8db0c21e53129fd0c91aa0c03e95f9a103092afa149a8c0",
+      "events": 21
+    },
+    {
+      "phase": "powercycle",
+      "reportSHA256": "64c1f23f774fc7d408a9bc4deb455703513a96ad774714a48df3b9fa0213aa00",
+      "events": 27
     }
   ],
   "capsules": [
@@ -103,7 +113,6 @@
     "hostCommitAttempts": 0
   },
   "remainingChecks": {
-    "precommitUSBPowerCycle": "pending",
     "realCommitReplyWithheld": "pending",
     "realProcessRestartAndFreshQuery": "pending",
     "freshExplicitUpload": "pending"
@@ -154,5 +163,45 @@
       "forwardLoopDelta": 61
     },
     "manualD13Observation": "off"
+  },
+  "precommitUSBPowerCycle": {
+    "result": "passed",
+    "stagedSketch": "state-b",
+    "hostCommitAttempts": 0,
+    "explicitAbortCommands": 0,
+    "sdkOutcome": "unknown",
+    "sdkUnknownReason": "bootChanged",
+    "bootChangedFromSavedRecord": true,
+    "checkpointIntent": "ramOnly",
+    "checkpointSHA256": "2833d36fe6fd42b0f1b479f0a6579589a083670ce8e77bd61290118a21b8f9a4",
+    "transactionRecordSHA256": "e5bfa54ae8b5502a6fdce3d9ebc7a2fc70a19ea285c70caba8ce1b2bc323b2a0",
+    "retainedState": "state-a",
+    "stateObservation": {
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAAN70AADX9AAA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 62686,
+          "loops": 62679
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAABv1AAAU9QAA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 62747,
+          "loops": 62740
+        }
+      ],
+      "forwardLoopDelta": 61,
+      "sameBootContinuityChecked": false
+    },
+    "manualD13Observation": "off",
+    "hostContextRetired": false,
+    "usbPowerCycle": "operator performed unplug, five-second wait and reconnect after RAM verification",
+    "hostDisconnect": "explicit disconnect without abort/commit was recorded before the post-reconnect query",
+    "flashWriteInterruption": false
   }
 }
