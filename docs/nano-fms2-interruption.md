@@ -11,8 +11,8 @@ actual app restart, query-only reconciliation and a fresh ordinary upload.
 [The iPad evidence](nano-fms2-interruption-ipad.json) pins both runs and captures.
 The identical signed app now passes the iPhone read-only baseline, pre-commit
 connection close and USB power cycle in [its separate evidence](nano-fms2-interruption-iphone.json);
-real commit-reply loss and app SIGKILL/relaunch also pass there. Query-only
-restoration and reconciliation after restart remain pending on iPhone.
+real commit-reply loss, app SIGKILL/relaunch and query-only reconciliation/state/
+echo after restart also pass there. A fresh ordinary iPhone upload remains pending.
 Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
 apps, exact generated sources, offline outputs and local check results.
@@ -99,8 +99,16 @@ matching record and underlying disconnect; the checkpoint durably contains
 commit intent. D13 is observed on, with startup/state evidence still separate.
 CoreDevice successfully sends SIGKILL to the verified original app process and
 normally launches the same executable with a different PID and no arguments.
-No Nano reset or commit replay is requested. Query-only restoration, fresh
-reconciliation and useful behavior after restart remain pending.
+No Nano reset or commit replay is requested.
+
+The new iPhone run now recompiles the same capsule bytes and restores the
+unchanged commit-intent checkpoint linked to its originating run. The gate is
+query-only, and the new run records no staging or commit attempt. Fresh SDK
+reconciliation returns `boot_confirmed`, `error=none`, `slot_touched=true`.
+B snapshots match the saved Nano boot, seed 23, zero startup BSS and advancing
+counters; the exact 256-byte echo passes and D13 is observed on. Both new exports
+also pass the independent production native validator. A fresh ordinary upload
+after recovery remains pending.
 
 ## Preparation and local checks
 

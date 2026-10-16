@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-15",
-  "status": "in progress: iPhone pre-commit checks and real commit-reply loss passed; app SIGKILL/relaunch completed, restored reconciliation pending",
+  "status": "in progress: iPhone interruption, real commit-reply loss and process-restart reconciliation/state/echo passed; fresh explicit upload pending",
   "productionQualified": false,
   "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
   "context": {
@@ -123,7 +123,6 @@
     "hostCommitAttempts": 0
   },
   "remainingChecks": {
-    "realProcessRestartAndFreshQuery": "pending",
     "freshExplicitUpload": "pending"
   },
   "limits": [
@@ -258,7 +257,50 @@
       "termination": "2f3194fde184973f41eb42a5ab84d14b8c7c8f974723c85ca90387564f53c14b",
       "relaunch": "378385fe5e1be57de367d8480c039f86c48c415a6715b6216c26743be3e90fa8"
     },
-    "restoredQueryOnlyCheckpoint": "pending",
+    "restoredQueryOnlyCheckpoint": "passed",
     "boardResetOrCommitReplayRequested": false
+  },
+  "postRestartRecovery": {
+    "result": "passed",
+    "runID": "373B473F-583B-4A4E-8AD2-13B75C71E991",
+    "reportSHA256": "ab5586510bfff783d5bad430fbef92342ed6a5b1d76c76b550446df41850f50b",
+    "events": 9,
+    "originatingRunID": "95C219F1-A6EC-450B-AD71-C0C8543B3BF2",
+    "restoredIntent": "commitIntent",
+    "restoredCheckpointBytesUnchanged": true,
+    "restoredCheckpointSHA256": "9a050969f4ea3f4ce09fd54c6aba68b8b9c1d5e4709394d785f03820f9f66f13",
+    "restoredQueryOnly": true,
+    "hostCommitAttempts": 0,
+    "hostStageAttempts": 0,
+    "freshStatus": "boot_confirmed",
+    "error": "none",
+    "slotTouched": true,
+    "nanoBootMatchedSavedRecord": true,
+    "sketch": "state-b",
+    "stateObservation": {
+      "samples": [
+        {
+          "bytesBase64": "RlEyQjEAAAAXAAAAAAAAAFcRAwBAEQMA",
+          "nonce": 49,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 201047,
+          "loops": 201024
+        },
+        {
+          "bytesBase64": "RlEyQnMAAAAXAAAAAAAAAJQRAwB9EQMA",
+          "nonce": 115,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 201108,
+          "loops": 201085
+        }
+      ],
+      "forwardLoopDelta": 61
+    },
+    "exactBinaryEchoBytes": 256,
+    "manualD13Observation": "on",
+    "newOfflineCapsulesMatchBeforeRestart": true,
+    "newOfflineCapsulesProductionNativeValidatorPassed": true
   }
 }

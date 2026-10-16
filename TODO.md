@@ -62,8 +62,10 @@ baseline and pre-commit disconnect now pass with continuous A counters and a
 fresh aborted/disconnected/untouched-slot status. Its pre-commit USB power cycle
 also passes: saved outcome stays unknown after boot change, with valid retained
 A state and RAM-only intent. Its real commit-reply loss and actual app
-SIGKILL/relaunch now pass; post-restart restoration/reconciliation/state/echo
-and fresh upload remain pending. Flash-write power-loss/recovery stays separate.
+SIGKILL/relaunch now pass. The iPhone also passes query-only restoration of the
+unchanged checkpoint, matching fresh boot-confirmed B, state and exact echo
+without replay. A fresh ordinary iPhone upload remains pending. Flash-write
+power-loss/recovery stays separate.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 
