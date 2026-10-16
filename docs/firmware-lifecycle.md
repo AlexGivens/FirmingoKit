@@ -203,7 +203,7 @@ evidence; physical recovery and update compatibility are still acceptance work.
 | Artifact preflight/physical guidance | Implemented; explicit physical selection required | Implemented; external computer route |
 | SDK ROM first installation | Experimental backend; selected Nano/macOS 27 replacement passes exact echo/readback; first installation from non-Firmingo and sandbox pending | Unavailable; no direct backend |
 | Qualified updates | Pending compatibility and execution evidence | Pending |
-| SDK interruption records / new full reinstall request | Selected post-erase checkpoint/new full Nano recovery passes exact echo/readback; other interruption/board/sandbox cases pending | Records/verification build; computer required for transfer |
+| SDK interruption records / new full reinstall request | Selected post-erase, first-page and accepted-prefix host-restart/new full Nano recoveries pass exact echo/readback; first-page initial timeout retained; other board/sandbox cases pending | Records/verification build; computer required for transfer |
 | Fresh-hello verification | Selected Nano/macOS release hello and exact echo pass; no installed-image attestation | API/simulator tests; networking/file access unqualified |
 
 Hardware qualification must start with a board not running Firmingo, install
@@ -226,6 +226,10 @@ these scoped observations, including independent exact 144,128-byte ROM
 readback after the transfer. A separate manual post-erase power-cut checkpoint
 now passes a new full SDK recovery, fresh release hello/exact echo and exact
 144,128-byte ROM readback. This replaces the test resident with the ordinary
-application; it does not restore the old managed sketch. First-page/partial-SDK
-interruption, first installation from non-Firmingo firmware, sandbox and
-minimum-OS execution remain unqualified.
+application; it does not restore the old managed sketch. The separate first-page checkpoint and actual accepted-prefix SDK host
+SIGKILL/restart/new full recovery now also have exact readback and fresh
+hello/echo evidence. The original interrupted record stays unknown despite
+matching hello after recovery. First-page initial boot had one preserved TCP
+timeout before later separate read-only success; its cause remains unresolved.
+First installation from non-Firmingo firmware, sandbox, minimum OS and power
+loss inside a chip command remain unqualified.

@@ -57,8 +57,9 @@ withheld B commit reply produces SDK uncertainty. Both actual app restarts resto
 query-only context and pass matching fresh startup/state/echo without replay,
 then a new explicit ordinary A upload passes in the same Nano boot. The iPhone
 record retains one earlier prerequisite rejection whose triggering action is
-unknown. Flash-write power-loss/corruption, rollback, complete SDK ROM recovery
-and broader production gates remain open.
+unknown. The later [manual checkpoints and SDK ROM recovery](docs/nano-rom-recovery.md)
+now have separately scoped flash/readback/echo evidence. Chip-command-busy power
+loss, rollback and broader production recovery gates remain open.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 
@@ -67,7 +68,7 @@ Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.
 - [x] Add a separate explicit macOS SDK ROM host with exact real-candidate anchors, durable records, read-only attachment inspection and admission tests; record signed read-only Nano checks in [the procedure and ledger](docs/nano-rom-recovery.md).
 - [x] Execute one selected SDK transfer, fresh release hello/exact 256-byte echo and independent exact 144,128-byte ROM readback. This is replacement of the selected FMS2 resident; first installation from non-Firmingo firmware remains open.
 - [x] Qualify the selected manual post-erase managed checkpoint and new explicit SDK full recovery, including exact resident/erased-sector readback, invalid-slot network boot, fresh recovery hello/echo and exact recovered-image ROM readback. This is a between-command hold on the selected Nano/macOS host.
-- [ ] Qualify first-page and partial-SDK-transfer interruption/restart cases. Keep host acceptance, flash readback and chip-command timing distinct.
+- [x] Qualify the selected first-page checkpoint recovery and actual accepted-prefix SDK host SIGKILL/restart/new full recovery with independent flash readback. Original interrupted context stays unknown despite later matching hello. Retain the first-page initial post-boot TCP timeout; later separate read-only success does not identify its cause.
 - [ ] Qualify sandbox/minimum-OS and other claimed board/platform combinations separately.
 
 ## 1. Establish contracts, scope, and acceptance criteria
@@ -145,7 +146,7 @@ This track can progress alongside communication after contract selection. Initia
 - [x] Implement the explicit one-shot execution boundary: target-bound process-local token, physical-model assertion, attachment revalidation, relevant idle session shutdown, unresolved-work rejection, and process-wide attachment leases. No hardware qualification is implied.
 - [ ] Qualify the experimental macOS mounted-ROM backend on each board in a signed sandbox host. Its bounded partial writes, awaited progress, sync/close, cooperative cancellation and distinct transfer/hello/unknown states are implemented; reboot/install success is not inferred.
 - [x] Implement separately requested fresh-hello verification against board/profile/protocol/release/capabilities, with optional prior device identity. Preserve unknown writes and exact-image/USB association limits; physical verification remains unqualified.
-- [x] Expose schema-validated persistable operation provenance, byte/state/hello observations, and recovery context. Require awaited host durability before write permission; restored records cannot resume/replay. Image bytes must be explicitly reacquired/validated, and real restart recovery remains unqualified.
+- [x] Expose schema-validated persistable operation provenance, byte/state/hello observations, and recovery context. Require awaited host durability before write permission; restored records cannot resume/replay. Image bytes must be explicitly reacquired/validated, and scoped Nano/macOS accepted-prefix host SIGKILL/context restoration/new full recovery now pass with exact flash evidence. Other hosts/cases remain unqualified.
 - [ ] Implement qualified update and supported Firmingo reinstall/recovery paths. Require a new host action after uncertain results; do not blindly repeat writes.
 - [x] Report direct iOS/iPadOS programming as unavailable and present the external computer route. Distinguish experimental macOS automation from guided transfer and from hardware qualification.
 - [x] Test explicit target/write prevention, stale/re-enumerated attachments, leases, one-shot tokens, permission/persistence failure, partial writes/sync failure, cancellation, unresolved sessions, restored uncertainty, and hello mismatch with fake backends. Normal directories/invalid ROM metadata are rejected; real ambiguous-device and disconnect behavior remains qualification work.

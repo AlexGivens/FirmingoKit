@@ -6,7 +6,9 @@ successful read-only identity/volume inspection, candidate preflight, one SDK
 transfer and fresh release hello/exact 256-byte echo. Independent ROM readback
 matches all 144,128 payload bytes. The separately selected post-erase manual
 power-cut case now also passes a new full SDK recovery with exact echo/readback.
-First-page and partial SDK-transfer cases remain open.
+Both checkpoint recoveries and the accepted-prefix SDK host restart/new full
+recovery now pass their scoped checks. The first-page boot timeout remains
+recorded and unresolved.
 The production library and its public API are unchanged.
 
 `Validation/ROMHost` is a separate SwiftPM command-line host using public
@@ -68,7 +70,7 @@ written to a bootloader volume by the journal.
    Hello is self-reported; independent ROM readback is a separate physical step
    needed to establish exact written image bytes. No automatic reconnect/retry.
 
-## Interruption experiment, not yet executed
+## Accepted-prefix host interruption procedure
 
 `paused-install` requires the same explicit image/volume/model selection. It
 awaits a durable progress callback after the first accepted 65,536-byte UF2 prefix
@@ -127,3 +129,53 @@ Full hashes, records and exact scope are in [the ledger](nano-rom-recovery.json)
 This qualifies this between-command checkpoint/new full recovery combination;
 it does not establish power loss inside a chip command, sandbox/minimum-OS
 support, first-page interruption or initial installation from non-Firmingo.
+
+## Scoped first-page recovery — 2026-10-16
+
+The separate native test resident `5025f2c9…` paused after programming the first
+256-byte page. The operator observed slower pulses and removed USB power. ROM
+readback found exactly the selected header page followed by 3840 erased bytes,
+with the complete resident unchanged. The header hash matches; the payload hash
+fails. Production validation rejects the actual declared 380-byte readback span.
+
+The first read-only TCP connect after an explicit invalid-slot boot timed out
+after five seconds. USB attachment and the host address/route were present; no
+ARP entry was observed. A separately selected later hello matched without reset
+or reconnect. The initial failure is retained, and its cause remains unresolved.
+
+A new full SDK recovery on a newly selected ROM attachment then reached
+`transferComplete`, fresh release hello and exact 256-byte echo. Independent ROM
+verification/save matches all 144,128 recovered-image payload bytes. The partial
+managed sector remains outside this complete application image; this does not
+restore its old FMS2 sketch. The [ledger](nano-rom-recovery.json) preserves both
+recovery runs and the separate first-boot failure. This is not an unconditional
+first-attempt networking or broader production qualification.
+
+## Accepted-prefix host restart and recovery — 2026-10-16
+
+The reviewed prior resident `5025f2c9…` was fully ROM-verified and left in ROM.
+One explicit `paused-install` stopped after accepting 65,536 of 288,256 UF2 bytes.
+The operator removed USB power, then only the PID/command-verified test host was
+SIGKILLed (observed exit 137). A new process restored the identical `writeStarted`
+record and reported unknown outcome with no attachment, session, execution token
+or write authority. The original checkpoint remained unchanged.
+
+Independent ROM readback establishes actual programming: the first 32,768 flash
+payload bytes match the recovery image and every remaining resident byte matches
+the prior image. Exactly 19,500 bytes differ from that prior snapshot; the mixed
+image matches neither complete candidate. It remained in ROM until recovery.
+This physical result is separate from host filesystem acceptance.
+
+A new full SDK operation on the new attachment reached `transferComplete`, fresh
+release hello and exact 256-byte echo. Separately reconciling the original
+interrupted record returns `outcomeUnknown` despite matching hello/echo; no write
+is replayed and its old checkpoint stays unchanged. Final ROM verification/save
+matches every recovery payload byte (144,128, digest `872bf96e…`). A final normal
+reboot again passes fresh SDK release hello and exact echo. The Nano is left
+running the ordinary reviewed 0.1.0 application, with both jumpers removed.
+
+`inspect-record` and `verify` complete read-only commands; their exit status alone
+is not an installation verdict. Inspect the saved state and evidence. These
+scoped results do not qualify sandbox/minimum OS, other boards, initial
+non-Firmingo installation, publisher authenticity, chip-command-busy power loss
+or automatic rollback. The first-page initial networking timeout remains open.
