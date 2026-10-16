@@ -5,9 +5,11 @@ This explicitly selected experiment uses **NanoRecovery**,
 resident, compiler assets, catalogue and State A/B sources as
 [the completed functional qualification](nano-fms2-qualification.md). Firmware's
 versioned contract remains authoritative; no resident or public SDK API change
-is required for this harness. The iPad baseline, pre-commit connection-close
-and pre-commit USB power-cycle checks now pass; the remaining physical checks are pending in
-[the incremental iPad evidence](nano-fms2-interruption-ipad.json).
+is required for this harness. The scoped iPad sequence now passes: baseline,
+pre-commit connection close and USB power cycle, a real withheld commit reply,
+actual app restart, query-only reconciliation and a fresh ordinary upload.
+[The iPad evidence](nano-fms2-interruption-ipad.json) pins both runs and captures;
+the iPhone interruption sequence remains pending.
 Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
 apps, exact generated sources, offline outputs and local check results.
@@ -51,8 +53,18 @@ queries. Its fresh SDK reconciliation returns `boot_confirmed`, `error=none`,
 zero startup BSS and advancing counters; the exact 256-byte binary echo passes.
 The operator observes D13 on. The new run contains no stage or commit attempt.
 Both newly exported capsules also pass the independent production native
-validator. A subsequent fresh ordinary upload and iPhone interruption checks
-remain pending; this result does not qualify a flash-write power cut or rollback.
+validator.
+
+After explicit completion of recovered B, the operator starts a new operation,
+inspects and records reviewed resident evidence, then stages A through the
+ordinary SDK connection and commits it once. Fresh reconciliation reports
+`boot_confirmed`, no error and a touched slot. A has seed 7, zero startup BSS,
+advancing counters and an exact 256-byte echo; D13 is observed off. Its distinct
+transaction shares the recovered B boot. The original pre-restart journal is
+unchanged, and the recovery-only capture is an unchanged prefix of the final
+21-event second-run journal. The operator confirms D2 removed afterward, with
+REC disconnected. iPhone interruption checks remain pending; this result does
+not qualify a flash-write power cut or rollback.
 
 ## Preparation and local checks
 

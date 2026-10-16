@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-15",
-  "status": "in progress: iPad interruption, real commit-reply loss and process-restart reconciliation/state/echo passed; fresh explicit upload pending",
+  "status": "scoped iPad FMS2 pre-commit disconnect/power-cycle, real commit-reply loss, process-restart recovery and fresh upload passed; iPhone interruption checks pending",
   "productionQualified": false,
   "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
   "context": {
@@ -149,10 +149,9 @@
     "manualD13Observation": "off"
   },
   "remainingChecks": {
-    "freshExplicitUpload": "pending",
     "iPhone": "pending"
   },
-  "uploadArmRemoved": false,
+  "uploadArmRemoved": true,
   "notes": [
     "Raw device and boot identifiers remain in ignored local evidence.",
     "The user confirmed the retained State A result and D13 off; the captured journal independently supplies the aborted/disconnected result.",
@@ -293,5 +292,60 @@
     "manualD13Observation": "on",
     "newOfflineCapsulesMatchBeforeRestart": true,
     "newOfflineCapsulesProductionNativeValidatorPassed": true
-  }
+  },
+  "postRestartCaptures": [
+    {
+      "phase": "restored",
+      "runID": "039B72FC-B17F-4313-9C05-B1B14C4150C4",
+      "reportSHA256": "ee754475752d38cc4f13c7b3b6db89b36f7db3b47fd5c50e5ebdd6a083c9199c",
+      "events": 9
+    },
+    {
+      "phase": "fresh-a",
+      "runID": "039B72FC-B17F-4313-9C05-B1B14C4150C4",
+      "reportSHA256": "41eaf7ad63fcf8cfd195a40bae8a257e07529fdd304de73ec5fb07b6744610f4",
+      "events": 21
+    }
+  ],
+  "postRestartCapturePrefixVerified": true,
+  "originalJournalUnchangedAfterRestartAndFreshUpload": true,
+  "freshExplicitUpload": {
+    "result": "passed",
+    "sketch": "state-a",
+    "runID": "039B72FC-B17F-4313-9C05-B1B14C4150C4",
+    "hostCommitAttempts": 1,
+    "commitReply": "committing",
+    "freshStatus": "boot_confirmed",
+    "error": "none",
+    "slotTouched": true,
+    "sameNanoBootAsRecoveredB": true,
+    "differentTransactionFromRecoveredB": true,
+    "transactionRecordSHA256": "4ffe33a271df9b31f73de07b0bc04a764da0436dcd61436cd2a984b8f8444de9",
+    "checkpointSHA256": "9b6a67678d36fa730bcc44ca5fb41b5fec99e597195ce85562e097979f04cc1f",
+    "checkpointOriginatingRunID": "039B72FC-B17F-4313-9C05-B1B14C4150C4",
+    "stateObservation": {
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAALViAACuYgAA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 25269,
+          "loops": 25262
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAPNiAADsYgAA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 25331,
+          "loops": 25324
+        }
+      ],
+      "forwardLoopDelta": 62
+    },
+    "exactBinaryEchoBytes": 256,
+    "manualD13Observation": "off"
+  },
+  "uploadArmRemovalEvidence": "Operator confirmed Done after removing D2-to-GND; REC remains disconnected."
 }
