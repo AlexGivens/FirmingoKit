@@ -8,8 +8,10 @@ versioned contract remains authoritative; no resident or public SDK API change
 is required for this harness. The scoped iPad sequence now passes: baseline,
 pre-commit connection close and USB power cycle, a real withheld commit reply,
 actual app restart, query-only reconciliation and a fresh ordinary upload.
-[The iPad evidence](nano-fms2-interruption-ipad.json) pins both runs and captures;
-the iPhone interruption sequence remains pending.
+[The iPad evidence](nano-fms2-interruption-ipad.json) pins both runs and captures.
+The identical signed app now passes the iPhone read-only baseline in
+[its separate evidence](nano-fms2-interruption-iphone.json); iPhone interruption
+checks remain pending.
 Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
 apps, exact generated sources, offline outputs and local check results.
@@ -65,6 +67,14 @@ unchanged, and the recovery-only capture is an unchanged prefix of the final
 21-event second-run journal. The operator confirms D2 removed afterward, with
 REC disconnected. iPhone interruption checks remain pending; this result does
 not qualify a flash-write power cut or rollback.
+
+The iPhone 15 Pro Max/iOS 27.0 baseline produces the same two capsule hashes,
+both independently accepted by the production native validator. The first
+inspection succeeds in 1.483484375 seconds with one inactive-overlay event.
+The operator reports a local-network prompt and quick approval; exact approval
+timing is not independently measured. Retained A has seed 7, zero startup BSS
+and advancing counters, with D13 observed off. This read-only result does not
+close the iPhone interruption or broader authorization/cold-attachment gates.
 
 ## Preparation and local checks
 

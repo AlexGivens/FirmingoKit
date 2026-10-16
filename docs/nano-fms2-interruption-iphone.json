@@ -1,0 +1,111 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "in progress: iPhone read-only baseline passed; interruption/recovery checks pending",
+  "productionQualified": false,
+  "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
+  "context": {
+    "catalogueSHA256": "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "exportManifestSHA256": "90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65",
+    "preparedManifestSHA256": "f615b1a7b7279d197b4212cf1dd26ebeae5a7279d227b11710b55aadf4ccd361",
+    "sdkCommit": "e0bed3602b515c71f171971ab7f8a8f5ae3bea1f",
+    "testPlanSHA256": "2611f2f9c03954f2aa882c1a5f78a96286bf52f4a0a1381dfc49abdd145f1199"
+  },
+  "preparationEvidence": "nano-fms2-interruption-preparation.json",
+  "procedure": "nano-fms2-interruption.md",
+  "iosApp": {
+    "bundleIdentifier": "com.firmingokit.nanorecovery",
+    "displayName": "NanoRecovery",
+    "build": "1",
+    "executableSHA256": "4f9c9a6dc70fbdbc64797f6969971a98adb4ec9d7cc717afb01383ddd5dd245c",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.nanorecovery",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "strictDeepSignatureVerified": true,
+    "firmwareResourceCount": 0,
+    "installedOnIPhoneOverPairedLocalNetwork": true,
+    "installReceiptSHA256": "04a7f35f2dc5cef9672f69f52a5accc5bd0b5d03bf6a9c77ff72c61db6d2bfd4",
+    "launchReceiptSHA256": "40b3b2fbe5ec8353bf57b6baf8b853ffb6ce52b5f6b61fbba4b2f8649a84720c"
+  },
+  "iPhone": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "operatingSystem": "Version 27.0 (Build 24A437)"
+  },
+  "runID": "95C219F1-A6EC-450B-AD71-C0C8543B3BF2",
+  "captures": [
+    {
+      "phase": "baseline",
+      "reportSHA256": "89fca7b28d71a108f29e9af95f0a7c3d4507cd415840bdcafddd52992ae7d308",
+      "events": 9
+    }
+  ],
+  "capsules": [
+    {
+      "path": "state-a.fms",
+      "bytes": 544,
+      "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+      "productionNativeValidatorPassed": true
+    },
+    {
+      "path": "state-b.fms",
+      "bytes": 548,
+      "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+      "productionNativeValidatorPassed": true
+    }
+  ],
+  "readOnlyBaseline": {
+    "result": "passed",
+    "inspectionAttempts": 1,
+    "inspectionDurationSeconds": 1.483484375,
+    "inspectionInactiveEvents": 1,
+    "operatorReportedLocalNetworkPrompt": true,
+    "operatorReportedPromptApprovedQuickly": true,
+    "permissionApprovalTimingIndependentlyMeasured": false,
+    "retainedState": "state-a",
+    "stateObservation": {
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAAGeOAABgjgAA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 36455,
+          "loops": 36448
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAKSOAACdjgAA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 36516,
+          "loops": 36509
+        }
+      ],
+      "forwardLoopDelta": 61
+    },
+    "manualD13Observation": "off",
+    "hostStageAttempts": 0,
+    "hostCommitAttempts": 0
+  },
+  "remainingChecks": {
+    "precommitDisconnect": "pending",
+    "precommitUSBPowerCycle": "pending",
+    "realCommitReplyWithheld": "pending",
+    "realProcessRestartAndFreshQuery": "pending",
+    "freshExplicitUpload": "pending"
+  },
+  "limits": [
+    "exact experimental resident, compiler package, Nano and recorded iPhone only",
+    "no interruption during flash erase/program, corruption, rollback or complete SDK ROM recovery claim",
+    "no default catalogue promotion, minimum OS, broader USB authorization/cold-attachment or Internet routing claim"
+  ],
+  "notes": [
+    "Raw device and boot identifiers remain in ignored local evidence.",
+    "User reported the new local-network prompt and quick approval; successful first inspection and the inactive-overlay journal event do not independently measure prompt approval timing."
+  ]
+}
