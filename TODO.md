@@ -61,8 +61,9 @@ passes startup/state/echo in the same Nano boot, and D2 is removed. The iPhone
 baseline and pre-commit disconnect now pass with continuous A counters and a
 fresh aborted/disconnected/untouched-slot status. Its pre-commit USB power cycle
 also passes: saved outcome stays unknown after boot change, with valid retained
-A state and RAM-only intent. iPhone lost-reply/restart recovery and flash-write
-power-loss/recovery remain separate open gates.
+A state and RAM-only intent. Its real commit-reply loss and actual app
+SIGKILL/relaunch now pass; post-restart restoration/reconciliation/state/echo
+and fresh upload remain pending. Flash-write power-loss/recovery stays separate.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 

@@ -11,7 +11,8 @@ actual app restart, query-only reconciliation and a fresh ordinary upload.
 [The iPad evidence](nano-fms2-interruption-ipad.json) pins both runs and captures.
 The identical signed app now passes the iPhone read-only baseline, pre-commit
 connection close and USB power cycle in [its separate evidence](nano-fms2-interruption-iphone.json);
-real commit-reply loss and restart recovery remain pending there.
+real commit-reply loss and app SIGKILL/relaunch also pass there. Query-only
+restoration and reconciliation after restart remain pending on iPhone.
 Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
 apps, exact generated sources, offline outputs and local check results.
@@ -89,6 +90,17 @@ The original transaction remains unknown. Explicit retirement of the RAM-only
 host context now passes, followed by a new operation with fresh inspection and
 reviewed association. The separate lost-reply/restart sequence remains pending.
 This power cycle occurs before any flash writer starts.
+
+The subsequent iPhone B upload now records one host commit attempt and one
+observed complete commit frame through the proxy. Its captured actual response
+independently decodes to the matching 548-byte B transaction, `committing`,
+`error=none`, `slot_touched=false`. The SDK reports `uncertainCommit` with the
+matching record and underlying disconnect; the checkpoint durably contains
+commit intent. D13 is observed on, with startup/state evidence still separate.
+CoreDevice successfully sends SIGKILL to the verified original app process and
+normally launches the same executable with a different PID and no arguments.
+No Nano reset or commit replay is requested. Query-only restoration, fresh
+reconciliation and useful behavior after restart remain pending.
 
 ## Preparation and local checks
 
