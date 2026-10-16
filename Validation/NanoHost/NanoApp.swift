@@ -21,7 +21,7 @@ import Foundation
         WindowGroup {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
-                    Text(NanoCandidate.stateful ? "Nano FMS2 qualification" : "Nano SDK qualification").font(.title)
+                    Text(model.recoveryChecks ? "Nano interruption and recovery" : (NanoCandidate.stateful ? "Nano FMS2 qualification" : "Nano SDK qualification")).font(.title)
                     Text("Status").font(.headline)
                     Text(model.status)
                     Button("Prepare offline test sketches") { model.prepare() }.disabled(model.busy || model.gate.state != .empty)
@@ -35,6 +35,9 @@ import Foundation
                     }.disabled(model.busy || [.associated, .staged].contains(model.gate.state))
                     Button("Inspect selected Nano") { model.inspect() }
                         .disabled(model.busy || ![.prepared, .inspected, .associated].contains(model.gate.state))
+                    if model.recoveryChecks {
+                        Button("Check retained State A") { model.checkRetainedA() }.disabled(model.busy || [.empty, .staged].contains(model.gate.state))
+                    }
                     if model.permissionCheckOnly {
                         Text("Read-only permission check. Association, staging and installation are unavailable.")
                     } else {
@@ -55,12 +58,25 @@ import Foundation
                         }.disabled(model.busy || [.staged, .commitAttempted].contains(model.gate.state))
                         Text("Staging requires D2/GPIO25 connected to GND. Keep the arm present through installation; REC/GND is the separate ROM recovery path.")
                         Button("Stage selected sketch in RAM") { model.stage() }.disabled(model.busy || model.gate.state != .associated)
+                        if model.recoveryChecks {
+                            Button("Stage for commit-reply loss") { model.stage(replyLoss: true) }.disabled(model.busy || model.gate.state != .associated)
+                        }
                         if model.gate.state == .staged {
                             Text("Installation erases/replaces the managed sketch slot. Commit is attempted once; a lost reply must be reconciled.")
-                            Button("Install staged sketch once", role: .destructive) { model.commit() }.disabled(model.busy)
+                            if model.replyLossStage {
+                                Button("Commit once with real reply loss", role: .destructive) { model.commitLosingReply() }.disabled(model.busy)
+                            } else {
+                                Button("Install staged sketch once", role: .destructive) { model.commit() }.disabled(model.busy)
+                            }
                             Button("Abort RAM stage") { model.abort() }.disabled(model.busy)
+                            if model.recoveryChecks {
+                                Button("Disconnect stage without commit") { model.disconnectStage() }.disabled(model.busy)
+                            }
                         }
                         Button("Check installation and startup status") { model.reconcile() }.disabled(model.busy || model.gate.state != .commitAttempted)
+                        if model.canRetirePrecommit {
+                            Button("Retire pre-commit host context") { model.retirePrecommit() }.disabled(model.busy)
+                        }
                         Button("Check exact 256-byte console echo") { model.echo() }.disabled(model.busy || model.gate.state != .confirmed)
                         if NanoCandidate.stateful {
                             Button("Check initialized and advancing state") { model.checkState() }.disabled(model.busy || model.gate.state != .confirmed)
@@ -71,7 +87,7 @@ import Foundation
                             .textFieldStyle(.roundedBorder)
                             .disabled(model.busy || model.gate.state != .confirmed)
                         Button("Record GPIO observation") { model.recordGPIO() }.disabled(model.busy || model.gate.state != .confirmed)
-                        Button("Start another explicit test operation") { model.next() }.disabled(model.busy || ![.confirmed, .aborted].contains(model.gate.state))
+                        Button("Start another explicit test operation") { model.next() }.disabled(model.busy || ![.confirmed, .aborted, .retired].contains(model.gate.state))
                     }
                     Button("Cancel active work") { model.inactive() }.disabled(!model.busy)
                     if let journal = model.journal { ShareLink("Share qualification journal", item: journal) }

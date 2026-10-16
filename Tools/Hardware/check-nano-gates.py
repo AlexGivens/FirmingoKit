@@ -8,11 +8,13 @@ def main():
     """Use the maintained Apple toolchain and local module cache, then run finite policy checks."""
     argparse.ArgumentParser(description=__doc__).parse_args()
     root = Path(__file__).resolve().parents[2]; output = root / '.build/nano-gate-checks'; output.mkdir(parents=True, exist_ok=True)
-    for name in ('CheckNanoGate', 'CheckNanoState'):
+    for name in ('CheckNanoGate', 'CheckNanoState', 'CheckNanoRecovery'):
         executable = output / name
         subprocess.run(['xcrun', 'swiftc', '-parse-as-library', '-swift-version', '6', '-warnings-as-errors',
                     '-module-cache-path', str(output / 'cache'), str(root / 'Validation/NanoHost/NanoGate.swift'),
                     str(root / 'Validation/NanoHost/NanoStateProbe.swift'),
+                    str(root / 'Validation/NanoHost/NanoRecoveryIntent.swift'),
+                    str(root / 'Validation/NanoHost/NanoReplyLossGate.swift'),
                     str(root / 'Tools/Hardware' / (name + '.swift')), '-o', str(executable)], check=True, timeout=90)
         subprocess.run([str(executable)], check=True, timeout=10)
 

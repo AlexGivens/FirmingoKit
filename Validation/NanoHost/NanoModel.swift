@@ -25,6 +25,22 @@ import AppKit
     /// Explicit process mode for a fresh permission check; no association or device writes are available.
     let permissionCheckOnly = Bundle.main.bundleIdentifier == "com.firmingokit.nanopermission"
         || ProcessInfo.processInfo.arguments.contains("--nano-permission-check")
+    /// Separate explicit recovery host; no fault injector is enabled by the normal Nano apps.
+    let recoveryChecks = Bundle.main.bundleIdentifier == "com.firmingokit.nanorecovery"
+    /// Whether the current stage intentionally routes through the one-reply-loss proxy.
+    @Published private(set) var replyLossStage = false
+    /// A changed boot was actually observed during read-only reconciliation.
+    @Published private(set) var recoveryBootChanged = false
+    /// A host record can be retired only with durable no-commit intent and an observed boot change.
+    var canRetirePrecommit: Bool { recoveryChecks && recoveryBootChanged && recoveryIntent == .ramOnly && gate.state == .commitAttempted }
+    /// Durable admission state is saved before a commit can reach the SDK.
+    private var recoveryIntent = NanoRecoveryIntent.ramOnly
+    /// Original run associated with a restored checkpoint.
+    private var checkpointOrigin: String?
+    /// Optional test-only loopback proxy; ordinary connections continue to use the selected numeric endpoint.
+    private var commitProxy: NanoCommitProxy?
+    /// Last observed retained A state for same-boot continuity checks; never used to authorize a write.
+    private var retainedA: (boot: String, sample: NanoStateProbe.Sample)?
     /// Observable local one-shot policy, independent of firmware state.
     @Published private(set) var gate = NanoGate(imageSHA: NanoCandidate.imageSHA)
     /// Current run journal, available for explicit Share results.
@@ -62,7 +78,7 @@ import AppKit
         events.append(["stage": stage, "detail": String(detail.prefix(1024))])
         let value: [String: Any] = ["schema": 1, "kind": "nano-sdk-hardware-qualification", "runID": runID, "events": events,
             "firmwareBuildID": NanoCandidate.buildID, "context": context, "operatingSystem": ProcessInfo.processInfo.operatingSystemVersionString,
-            "hardwareQualified": false, "operationMode": permissionCheckOnly ? "read-only-permission-check" : "normal",
+            "hardwareQualified": false, "operationMode": recoveryChecks ? "interruption-recovery" : (permissionCheckOnly ? "read-only-permission-check" : "normal"),
             "note": "Individual observations only; installation/startup/behavior and host platforms require separate review"]
         try JSONSerialization.data(withJSONObject: value, options: [.sortedKeys, .prettyPrinted]).write(to: journal, options: .atomic)
         if offlineOnly {
@@ -77,6 +93,7 @@ import AppKit
             do { try await operation() }
             catch {
                 if let session { await session.disconnect(); self.session = nil }
+                if let commitProxy { await commitProxy.stop(); self.commitProxy = nil }
                 status = String(error.localizedDescription.prefix(1024))
                 if offlineOnly {
                     do { try FileHandle.standardError.write(contentsOf: Data(("FIRMINGO_NANO_FAILURE:" + status + "\n").utf8)) }
@@ -113,7 +130,7 @@ import AppKit
             let directory = documents.appendingPathComponent("NanoQualification-" + self.runID, isDirectory: true)
             try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: false)
             self.directory = directory; self.journal = directory.appendingPathComponent("report.json")
-            self.pendingURL = documents.appendingPathComponent("nano-pending-upload.json")
+            self.pendingURL = documents.appendingPathComponent(self.recoveryChecks ? "nano-recovery-checkpoint.json" : "nano-pending-upload.json")
             guard let contextURL = Bundle.main.url(forResource: "qualification-context", withExtension: "json") else { throw NanoGate.Rejected() }
             self.context = try JSONDecoder().decode([String: String].self, from: Data(contentsOf: contextURL))
             guard self.context["consumerManifestSHA256"] == NanoCandidate.consumerSHA else { throw NanoGate.Rejected() }
@@ -141,7 +158,11 @@ import AppKit
             if let pendingURL = self.pendingURL, FileManager.default.fileExists(atPath: pendingURL.path) {
                 let file = try FileHandle(forReadingFrom: pendingURL); let bytes = try file.read(upToCount: 8193) ?? Data(); try file.close()
                 guard bytes.count <= 8192 else { throw NanoGate.Rejected() }
-                self.record = try JSONDecoder().decode(ManagedUploadRecord.self, from: bytes)
+                if self.recoveryChecks {
+                    let checkpoint = try JSONDecoder().decode(NanoRecoveryCheckpoint.self, from: bytes)
+                    self.record = checkpoint.record; self.recoveryIntent = checkpoint.intent; self.checkpointOrigin = checkpoint.originatingRunID
+                    try self.log("restored-recovery-intent", "intent=" + checkpoint.intent.rawValue + " originRun=" + checkpoint.originatingRunID)
+                } else { self.record = try JSONDecoder().decode(ManagedUploadRecord.self, from: bytes) }
                 self.gate.restore(); self.deviceID = self.record?.deviceID ?? ""
                 try self.log("restored-query-only", "Pending transaction restored without a commit capability")
                 self.status = "Pending transaction restored. Check status; no commit can be replayed."
@@ -151,9 +172,9 @@ import AppKit
     }
 
     /// Connects once to the explicitly selected device and checks exact managed-target capabilities.
-    private func connect(id: String) async throws -> FirmingoSession {
+    private func connect(id: String, loopbackPort: UInt16? = nil) async throws -> FirmingoSession {
         guard !offlineOnly else { throw NanoGate.Rejected() }
-        let endpoint = try FirmingoEndpoint(address: address)
+        let endpoint = try FirmingoEndpoint(address: loopbackPort == nil ? address : "127.0.0.1", port: loopbackPort ?? 7420)
         let connection = try await FirmingoSession.connect(to: endpoint, expectedBoard: .nanoRP2040Connect,
             expectedBackend: .application, expectedDeviceID: id)
         let device = connection.device
@@ -212,17 +233,29 @@ import AppKit
         if FileManager.default.fileExists(atPath: saved.path) {
             guard try Data(contentsOf: saved) == bytes else { throw NanoGate.Rejected() }
         } else { try bytes.write(to: saved, options: .withoutOverwriting) }
-        try bytes.write(to: pendingURL, options: .atomic)
+        let checkpoint = recoveryChecks ? try encoder.encode(NanoRecoveryCheckpoint(record: record, intent: recoveryIntent, originatingRunID: checkpointOrigin ?? runID)) : bytes
+        try checkpoint.write(to: pendingURL, options: .atomic)
         let file = try FileHandle(forWritingTo: pendingURL); try file.synchronize(); try file.close()
         self.record = record
     }
 
     /// Explicit RAM-only transfer rechecks device/boot/capabilities; no flash commit occurs here.
-    func stage() {
+    func stage(replyLoss: Bool = false) {
         perform {
             guard !self.permissionCheckOnly else { throw NanoGate.Rejected() }
             guard self.gate.state == .associated, let artifact = self.artifacts[self.sketch] else { throw NanoGate.Rejected() }
-            let connection = try await self.connect(id: self.deviceID); self.session = connection
+            var port: UInt16?
+            if replyLoss {
+                guard self.recoveryChecks, NanoCandidate.stateful else { throw NanoGate.Rejected() }
+                let proxy = NanoCommitProxy(address: self.address); self.commitProxy = proxy
+                port = try await withThrowingTaskGroup(of: UInt16.self) { group in
+                    group.addTask { try await proxy.start() }
+                    group.addTask { try await Task.sleep(for: .seconds(5)); await proxy.stop(); throw FirmingoError.timedOut }
+                    defer { group.cancelAll() }; guard let first = try await group.next() else { throw NanoGate.Rejected() }; return first
+                }
+            }
+            let connection = try await self.connect(id: self.deviceID, loopbackPort: port); self.session = connection
+            self.recoveryIntent = .ramOnly; self.checkpointOrigin = nil; self.recoveryBootChanged = false; self.replyLossStage = replyLoss
             try self.gate.requireStage(address: self.address, deviceID: connection.device.deviceID, bootID: connection.device.bootID)
             let association = try ManagedDeviceAssociation(deviceID: self.deviceID, firmwareBuildID: NanoCandidate.buildID, evidence: .hostConfirmedExistingFirmware)
             let capsule = try artifact.bind(to: association)
@@ -237,7 +270,8 @@ import AppKit
     func commit() {
         perform {
             guard !self.permissionCheckOnly else { throw NanoGate.Rejected() }
-            guard let connection = self.session, let record = self.record else { throw NanoGate.Rejected() }
+            guard !self.replyLossStage, let connection = self.session, let record = self.record else { throw NanoGate.Rejected() }
+            self.recoveryIntent = .commitIntent
             try self.gate.requestCommit(); try self.save(record); try self.log("commit-attempted-once", record.sha256)
             self.status = "Commit requested. Any missing reply is uncertain; check status without replay."
             let snapshot = try await connection.commitManagedUpload(record); self.session = nil
@@ -251,6 +285,7 @@ import AppKit
         perform {
             guard self.gate.state == .staged, let connection = self.session, let record = self.record else { throw NanoGate.Rejected() }
             _ = try await connection.abortManagedUpload(record); await connection.disconnect(); self.session = nil
+            if let proxy = self.commitProxy { await proxy.stop(); self.commitProxy = nil }
             try self.gate.aborted(); try self.log("aborted", record.sha256); self.status = "RAM stage aborted; no flash commit."
         }
     }
@@ -266,13 +301,85 @@ import AppKit
             await connection.disconnect()
             switch outcome {
             case .unknown(let reason):
+                self.recoveryBootChanged = reason == .bootChanged
                 try self.log("unknown", String(describing: reason)); self.status = "Outcome unknown: " + String(describing: reason)
             case .snapshot(let snapshot):
+                self.recoveryBootChanged = false
                 try self.log("status-" + snapshot.state.rawValue, "error=" + snapshot.errorCode + " slotTouched=" + String(snapshot.slotTouched))
                 if snapshot.state == .bootConfirmed { try self.gate.confirmed() }
                 if snapshot.state == .aborted { try self.gate.aborted() }
                 self.status = "Status: " + snapshot.state.rawValue + ", " + snapshot.errorCode + ". Startup is separate from useful behavior."
             }
+        }
+    }
+
+    /// Deliberately closes verified RAM staging without flash.abort or commit, retaining query-only context.
+    func disconnectStage() {
+        perform {
+            guard self.recoveryChecks, self.gate.state == .staged, self.recoveryIntent == .ramOnly,
+                  let connection = self.session, let record = self.record else { throw NanoGate.Rejected() }
+            try self.save(record); try self.log("precommit-disconnect-requested", record.sha256)
+            self.gate.restore(); await connection.disconnect(); self.session = nil
+            if let proxy = self.commitProxy { await proxy.stop(); self.commitProxy = nil }
+            try self.log("precommit-connection-closed", "No abort or commit command; query saved transaction explicitly")
+            self.status = "Pre-commit connection closed. Check the saved transaction; commit cannot be replayed."
+        }
+    }
+
+    /// Retires host context only after a known no-commit intent and observed changed boot; device outcome stays unknown.
+    func retirePrecommit() {
+        perform {
+            guard self.recoveryChecks, self.gate.state == .commitAttempted else { throw NanoGate.Rejected() }
+            try self.recoveryIntent.requirePrecommitRetirement(bootChanged: self.recoveryBootChanged)
+            try self.log("precommit-context-retired", "SDK outcome remains unknown after boot change; this host never admitted commit")
+            try self.gate.retirePrecommit(intent: self.recoveryIntent, bootChanged: self.recoveryBootChanged)
+            self.status = "Pre-commit host context retired. Device transaction remains unknown; start a new explicit operation."
+        }
+    }
+
+    /// Observes the old State A through public console APIs, including forward progress if the boot is unchanged.
+    func checkRetainedA() {
+        perform {
+            guard self.recoveryChecks, ![.empty, .staged].contains(self.gate.state), self.session == nil,
+                  self.gate.state != .commitAttempted || self.recoveryIntent == .ramOnly else { throw NanoGate.Rejected() }
+            let connection = try await self.connect(id: self.deviceID)
+            do {
+                try await connection.openConsole()
+                let first = try await self.stateSample(connection, name: "state-a", nonce: 49)
+                try await Task.sleep(for: .milliseconds(50))
+                let second = try await self.stateSample(connection, name: "state-a", nonce: 115)
+                try NanoStateProbe.advancing(first, second)
+                if let prior = self.retainedA, prior.boot == connection.device.bootID { try NanoStateProbe.advancing(prior.sample, first) }
+                try await connection.closeConsole(); await connection.disconnect()
+                try self.log("retained-state-a", "boot=" + connection.device.bootID + " continuity=" + String(self.retainedA?.boot == connection.device.bootID) +
+                    " first=" + first.bytes.base64EncodedString() + " second=" + second.bytes.base64EncodedString())
+                self.retainedA = (connection.device.bootID, second)
+                self.status = "Retained State A initialization and advancing counters passed."
+            } catch { await connection.disconnect(); throw error }
+        }
+    }
+
+    /// Sends one real commit through the armed proxy and requires actual SDK uncertainCommit plus a withheld real response.
+    func commitLosingReply() {
+        perform {
+            guard self.recoveryChecks, self.replyLossStage, let proxy = self.commitProxy,
+                  let connection = self.session, let record = self.record else { throw NanoGate.Rejected() }
+            try await proxy.arm(uploadID: record.uploadID, size: record.size, sha256: record.sha256)
+            try self.gate.requestCommit(); self.recoveryIntent = .commitIntent
+            try self.save(record); try self.log("commit-attempted-once", record.sha256)
+            do {
+                _ = try await connection.commitManagedUpload(record)
+                throw NanoGate.Rejected()
+            } catch ManagedUploadError.uncertainCommit(let saved, let cause) {
+                let observed = await proxy.evidence()
+                guard saved == record, observed["commitRequestsObserved"] == "1", observed["failure"] == "",
+                      let raw = observed["withheldResponse"], !raw.isEmpty, raw.utf8.count <= 1024 else { throw NanoGate.Rejected() }
+                try self.log("proxy-commit-observed", "one complete commit frame; upstream send callback completed=" + (observed["commitSendCompleted"] ?? "missing"))
+                try self.log("real-commit-reply-withheld", raw)
+                try self.log("sdk-uncertain-commit", "record matched; underlying=" + String(describing: cause).prefix(400))
+                self.status = "Real commit reply withheld; SDK reports uncertainty. Restart this app, prepare, then query the saved transaction."
+            }
+            await proxy.stop(); self.commitProxy = nil; self.session = nil
         }
     }
 
@@ -369,6 +476,7 @@ import AppKit
             try self.gate.next()
             if let pendingURL = self.pendingURL { try FileManager.default.removeItem(at: pendingURL) }
             self.record = nil; self.imageSHA = ""; self.evidenceNote = ""
+            self.recoveryIntent = .ramOnly; self.checkpointOrigin = nil; self.recoveryBootChanged = false; self.replyLossStage = false
             try self.log("next-explicit-operation", "Fresh inspection and association required"); self.status = "Select the next sketch and inspect again."
         }
     }
@@ -386,6 +494,7 @@ import AppKit
         if gate.state == .staged {
             gate.restore()
             if let session { Task { await session.disconnect() }; self.session = nil }
+            if let proxy = commitProxy { Task { await proxy.stop() }; commitProxy = nil }
             status = "Stage connection closed on inactivity. Check the saved transaction; no commit can be replayed."
         }
     }

@@ -40,6 +40,13 @@ import Foundation
         try rejected { try stateful.associate(address: "192.168.77.1", deviceID: "actual", imageSHA: NanoGate.imageSHA, note: "legacy evidence") }
         try stateful.associate(address: "192.168.77.1", deviceID: "actual", imageSHA: "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f", note: "new reviewed evidence")
         try stateful.requireStage(address: "192.168.77.1", deviceID: "actual", bootID: "boot-one")
+        stateful.restore()
+        try rejected { try stateful.retirePrecommit(intent: .commitIntent, bootChanged: true) }
+        try rejected { try stateful.retirePrecommit(intent: .ramOnly, bootChanged: false) }
+        try stateful.retirePrecommit(intent: .ramOnly, bootChanged: true)
+        guard stateful.state == .retired else { throw NSError(domain: "NanoGateChecks", code: 3) }
+        try rejected { try stateful.requestCommit() }
+        try stateful.next()
         print("Nano production gate checks passed: stale endpoint/device/boot, evidence, one-shot commit, restoration and explicit terminal advancement; no device access")
     }
 }

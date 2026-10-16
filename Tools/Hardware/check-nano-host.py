@@ -29,6 +29,10 @@ def main():
                str(root / "Validation/NanoHost/NanoGate.swift"),
                str(root / "Validation/NanoHost/NanoCandidate.swift"),
                str(root / "Validation/NanoHost/NanoStateProbe.swift"),
+               str(root / "Validation/NanoHost/NanoRecoveryIntent.swift"),
+               str(root / "Validation/NanoHost/NanoRecoveryCheckpoint.swift"),
+               str(root / "Validation/NanoHost/NanoReplyLossGate.swift"),
+               str(root / "Validation/NanoHost/NanoCommitProxy.swift"),
                str(root / "Validation/NanoHost/NanoModel.swift"),
                str(root / "Validation/NanoHost/NanoApp.swift")]
     if args.ios_products:

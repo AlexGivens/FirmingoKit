@@ -48,6 +48,11 @@ Mark implementation tasks complete only with relevant checks and evidence. Recor
 - [x] Repeat the two-sketch same-boot upload/state/echo and manual-reboot checks on iPhone using the identical signed app. [Exact scoped record](docs/nano-fms2-iphone.json); the upload arm is removed after both device runs.
 - [ ] Complete remaining FMS2 production-package/catalogue, minimum-OS, interruption/recovery and broader host/device gates before promotion. Scoped macOS offline and iPad/iPhone results do not close these gates.
 
+The [interruption/recovery qualification](docs/nano-fms2-interruption.md) now has
+a separately identified harness and bounded real-reply-loss proxy. Local source,
+intent/framing and explicit loopback checks are separate from pending physical
+disconnect, pre-commit power-cycle and restored uncertain-commit observations.
+
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 
 ## 1. Establish contracts, scope, and acceptance criteria

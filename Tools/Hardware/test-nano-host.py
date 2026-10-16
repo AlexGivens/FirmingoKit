@@ -18,6 +18,25 @@ host = module('nano_host', 'make-nano-host.py')
 runner = module('nano_runner', 'run-nano-offline.py')
 
 class NanoHostTests(unittest.TestCase):
+    def test_recovery_bundle_requires_fms2_and_has_distinct_identity_without_extra_entitlements(self):
+        # Fixture-only SDK/plan verification bypass; no compiler or device is used.
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp); sdk = root / 'sdk'; sdk.mkdir(); inputs = root / 'inputs'; inputs.mkdir()
+            (inputs / 'test-plan.json').write_text('{}'); (inputs / 'catalogue.json').write_text('{}')
+            with self.assertRaises(ValueError): host.generate(sdk, 'a' * 64, inputs, 'b' * 64, root / 'bad', recovery=True)
+            self.assertFalse((root / 'bad').exists())
+            context = {'sdkCommit': '1' * 40, 'consumerManifestSHA256': host.CONSUMER}
+            output = root / 'host'
+            with patch.object(host, 'stateful_inputs', return_value={'files': []}), patch.object(host.host, 'prepared_sdk', return_value=context):
+                receipt = host.generate(sdk, 'a' * 64, inputs, 'b' * 64, output, stateful=True, recovery=True)
+            self.assertTrue(receipt['recoveryCheckBundle']); self.assertFalse(receipt['deviceOperations'])
+            self.assertIn('com.firmingokit.nanorecovery', (output / 'NanoQualification.xcodeproj/project.pbxproj').read_text())
+            self.assertEqual(plistlib.loads((output / 'Info.plist').read_bytes())['CFBundleDisplayName'], 'NanoRecovery')
+            for name in ['NanoRecoveryCheckpoint.swift', 'NanoReplyLossGate.swift', 'NanoCommitProxy.swift']:
+                self.assertTrue((output / 'Sources' / name).is_file())
+            self.assertEqual(plistlib.loads((output / 'NanoQualification.entitlements').read_bytes()),
+                             {'com.apple.security.app-sandbox': True, 'com.apple.security.network.client': True})
+
     def test_stateful_plan_keeps_independent_export_catalogue_and_consumer_anchors(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

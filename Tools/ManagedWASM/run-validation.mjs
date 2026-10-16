@@ -40,6 +40,7 @@ if (args.length === 1 && args[0] === "--help") {
   run(process.execPath, ["--check", "Tools/Hardware/prepare-nano-test.mjs"]);
   run(process.execPath, ["--check", "Tools/Hardware/prepare-stateful-nano-test.mjs"]);
   run("python3", ["-I", "-S", "-B", "Tools/Hardware/check-nano-gates.py"]);
+  run("python3", ["-I", "-S", "-B", "Tools/Hardware/check-nano-proxy.py", "--compile-only"]);
   run("python3", ["Tools/ManagedWASM/update-resource-inventory.py", "--check"]);
   const env = { ...process.env };
   delete env.FIRMINGOKIT_WASM_MODULE;

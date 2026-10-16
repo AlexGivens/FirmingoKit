@@ -93,16 +93,18 @@ def stateful_inputs(root, expected):
     return plan
 
 
-def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=False, stateful=False):
+def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=False, stateful=False, recovery=False):
     """Reuse the compiler host's anchored SDK verifier, then create a separate explicit device-capable app."""
     if stateful and permission_check: raise ValueError("Stateful qualification uses its own app identity")
+    if recovery and (not stateful or permission_check): raise ValueError("Recovery bundle requires explicit FMS2 inputs")
     plan = stateful_inputs(test_root, plan_anchor) if stateful else test_inputs(test_root, plan_anchor)
     host.generate(sdk, sdk_anchor, output)
     try:
         sources = output / 'Sources'
         for file in sources.iterdir():
             if file.name != 'qualification-context.json': file.unlink()
-        for name in ('NanoGate.swift', 'NanoCandidate.swift', 'NanoStateProbe.swift', 'NanoModel.swift', 'NanoApp.swift'):
+        for name in ('NanoGate.swift', 'NanoCandidate.swift', 'NanoStateProbe.swift', 'NanoRecoveryIntent.swift',
+                     'NanoRecoveryCheckpoint.swift', 'NanoReplyLossGate.swift', 'NanoCommitProxy.swift', 'NanoModel.swift', 'NanoApp.swift'):
             shutil.copyfile(ROOT / 'Validation/NanoHost' / name, sources / name)
         if stateful:
             for name in ('state-a.ino', 'state-b.ino'): shutil.copyfile(ROOT / 'Validation/NanoHost' / name, sources / name)
@@ -122,6 +124,9 @@ def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=F
             file = project / 'project.pbxproj'
             file.write_text(file.read_text().replace('com.firmingokit.nanoqualification', 'com.firmingokit.nanostateful').replace('SWIFT_VERSION = 6.0;', 'SWIFT_VERSION = 6.0; OTHER_SWIFT_FLAGS = "$(inherited) -D FMS2_QUALIFICATION";'))
             info['CFBundleDisplayName'] = 'NanoStateful'
+            if recovery:
+                file.write_text(file.read_text().replace('com.firmingokit.nanostateful', 'com.firmingokit.nanorecovery'))
+                info['CFBundleDisplayName'] = 'NanoRecovery'
         if permission_check:
             file = project / 'project.pbxproj'
             file.write_text(file.read_text().replace('com.firmingokit.nanoqualification', 'com.firmingokit.nanopermission'))
@@ -137,7 +142,7 @@ def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=F
         files = [{'path': f.relative_to(output).as_posix(), **host.identity(f)} for f in sorted(output.rglob('*')) if f.is_file()]
         receipt = {'schema': 1, 'operation': 'generated_nano_sdk_qualification_host', 'files': files,
                    'preparedManifestSHA256': sdk_anchor, 'testPlanSHA256': plan_anchor, 'consumerManifestSHA256': CONSUMER,
-                   'firmwareBuildID': STATEFUL_BUILD if stateful else BUILD, 'statefulContract': stateful, 'permissionCheckBundle': permission_check,
+                   'firmwareBuildID': STATEFUL_BUILD if stateful else BUILD, 'statefulContract': stateful, 'permissionCheckBundle': permission_check, 'recoveryCheckBundle': recovery,
                    'signed': False, 'installed': False, 'deviceOperations': False}
         (output / 'host-inputs.json').write_text(json.dumps(receipt, indent=2) + '\n'); return receipt
     except BaseException: shutil.rmtree(output); raise
@@ -150,8 +155,9 @@ def main():
     p.add_argument('test_plan_sha256'); p.add_argument('output', type=Path)
     p.add_argument('--permission-check-bundle', action='store_true', help='separate read-only NanoPermission identity/display name; no SDK product-name override')
     p.add_argument('--stateful-contract', action='store_true', help='separate explicit FMS2 NanoStateful bundle and state probes')
+    p.add_argument('--recovery-check-bundle', action='store_true', help='separate NanoRecovery identity; requires --stateful-contract, no device action in generator')
     a = p.parse_args()
-    result = generate(a.sdk.absolute(), a.sdk_sha256, a.test_inputs.absolute(), a.test_plan_sha256, a.output.absolute(), a.permission_check_bundle, a.stateful_contract)
+    result = generate(a.sdk.absolute(), a.sdk_sha256, a.test_inputs.absolute(), a.test_plan_sha256, a.output.absolute(), a.permission_check_bundle, a.stateful_contract, a.recovery_check_bundle)
     print(json.dumps({'status': result['operation'], 'files': len(result['files']), 'deviceOperations': False}))
 
 

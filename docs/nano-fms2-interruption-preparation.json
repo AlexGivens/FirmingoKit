@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "signed offline, local relay and Apple source/build preparation passed; physical interruption checks pending",
+  "hostSourceBaseCommit": "15b252f",
+  "hostSourceNote": "New harness files are identified by generated source hashes; physical result will pin their commit.",
+  "generatedHostInputsSHA256": "24b121afdf868d0e065e3c45890ed340a659efa3f2fbd6a792648faf6b2e166f",
+  "hostSources": [
+    {
+      "path": "Sources/NanoApp.swift",
+      "bytes": 7483,
+      "sha256": "5f03eafce1f705b8fa2665604a77c2980d45f51d986ed94d60a4be8aa1250055"
+    },
+    {
+      "path": "Sources/NanoCandidate.swift",
+      "bytes": 3813,
+      "sha256": "9171ceaedb2dc539a9f5d99f24b2407c8ba2970627a284d3e6c9404437332b03"
+    },
+    {
+      "path": "Sources/NanoCommitProxy.swift",
+      "bytes": 11614,
+      "sha256": "6a1f1d3d48cc34c278f5d8384cd4b09a70b614d8c7a9f56c8fcff6143ea1262d"
+    },
+    {
+      "path": "Sources/NanoGate.swift",
+      "bytes": 5040,
+      "sha256": "83330289a2a8a179f957f847373f904ddde943a7226394a36906ebe1c64e7613"
+    },
+    {
+      "path": "Sources/NanoModel.swift",
+      "bytes": 34551,
+      "sha256": "bdc4352ea1a83a3da00061ecb852316a8f6adb407eeed627dbead520af952234"
+    },
+    {
+      "path": "Sources/NanoRecoveryCheckpoint.swift",
+      "bytes": 2058,
+      "sha256": "e4665756e8d5fc3c9c0f48591236fd3a7c187a39824d064387047aa6ad72d260"
+    },
+    {
+      "path": "Sources/NanoRecoveryIntent.swift",
+      "bytes": 631,
+      "sha256": "e954ff7e394cbfc61232035b50dfb6ca9954eb2f9702edd7f764d97729360399"
+    },
+    {
+      "path": "Sources/NanoReplyLossGate.swift",
+      "bytes": 3929,
+      "sha256": "b2d1d6bc0757450a189ba74744a4a8d0cdecbd917ea5955985e975cc74760f4b"
+    },
+    {
+      "path": "Sources/NanoStateProbe.swift",
+      "bytes": 1979,
+      "sha256": "d8827c037f0ddf08f17252c0dddc8188c1dc8cb44fe9eb0ef2afdfccab6f16bf"
+    },
+    {
+      "path": "Sources/fms2-catalogue.json",
+      "bytes": 1069,
+      "sha256": "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd"
+    },
+    {
+      "path": "Sources/qualification-context.json",
+      "bytes": 525,
+      "sha256": "91b97aea09e8defeca96167fa57c67b5cdc5d5e3b514238ea9f532f980898273"
+    },
+    {
+      "path": "Sources/state-a.ino",
+      "bytes": 1099,
+      "sha256": "d29fd4a8d813140b89a801e244bf87cd40b4e17ba7a795a70dc64fec3084e0e3"
+    },
+    {
+      "path": "Sources/state-b.ino",
+      "bytes": 1100,
+      "sha256": "9576804970569a7df57e40a071d4c26fce0907fbe3f312af81ecf146466971f0"
+    }
+  ],
+  "context": {
+    "preparedManifestSHA256": "f615b1a7b7279d197b4212cf1dd26ebeae5a7279d227b11710b55aadf4ccd361",
+    "sdkCommit": "e0bed3602b515c71f171971ab7f8a8f5ae3bea1f",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "testPlanSHA256": "2611f2f9c03954f2aa882c1a5f78a96286bf52f4a0a1381dfc49abdd145f1199",
+    "exportManifestSHA256": "90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65",
+    "catalogueSHA256": "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd"
+  },
+  "compilerAndResidentChanged": false,
+  "macOSOffline": {
+    "runID": "A7EE4584-F3F7-47ED-B0F6-A595CBEE4FA9",
+    "reportSHA256": "1e5826e14e265e1322b9a2c0a8a6720eb0d0584b95f381aa2211947e73cf9dde",
+    "artifacts": [
+      {
+        "path": "state-a.fms",
+        "bytes": 544,
+        "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89"
+      },
+      {
+        "path": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      }
+    ],
+    "entitlements": {
+      "com.apple.security.app-sandbox": true,
+      "com.apple.security.network.client": true
+    },
+    "hardenedRuntime": true,
+    "deviceOperations": false
+  },
+  "iosApp": {
+    "bundleIdentifier": "com.firmingokit.nanorecovery",
+    "displayName": "NanoRecovery",
+    "build": "1",
+    "executableSHA256": "4f9c9a6dc70fbdbc64797f6969971a98adb4ec9d7cc717afb01383ddd5dd245c",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.nanorecovery",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "strictDeepSignatureVerified": true,
+    "firmwareResourceCount": 0,
+    "installedOnIPadOverPairedLocalNetwork": true
+  },
+  "localChecks": {
+    "sdkTests": 166,
+    "actualRuntimeRequestedInSourceSuite": false,
+    "assetDependentCases": "explicitly skipped; actual signed offline builds recorded separately",
+    "nanoToolFixtures": 9,
+    "pureExecutables": [
+      "CheckNanoGate",
+      "CheckNanoState",
+      "CheckNanoRecovery"
+    ],
+    "actualLoopbackProxy": "passed: fragmented/coalesced/binary frames preserved; one matching fake-peer commit reply withheld; no SDK/device result claimed",
+    "macOSHostVariants": [
+      "abi-one",
+      "fms2"
+    ],
+    "optimizedIOSHostVariants": [
+      "abi-one",
+      "fms2"
+    ],
+    "completeReleaseBuilds": [
+      "arm64 macOS",
+      "iOS"
+    ],
+    "workflowYAMLAndBashSyntaxPassed": true,
+    "actionlintAvailable": false,
+    "remoteSDKCI": "unprovisioned/unrun"
+  },
+  "physicalChecks": {
+    "precommitDisconnect": "pending",
+    "precommitUSBPowerCycle": "pending",
+    "realCommitReplyWithheld": "pending",
+    "realProcessRestartAndFreshQuery": "pending",
+    "freshExplicitUpload": "pending"
+  },
+  "limits": [
+    "no new firmware or compiler recipe/catalogue promotion",
+    "full flash-write power loss/corruption and ROM recovery are separate hardware gates",
+    "no default-test listener or device operation",
+    "no minimum OS, aggregate memory or broader network reliability claim"
+  ]
+}

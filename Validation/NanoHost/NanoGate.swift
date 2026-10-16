@@ -11,7 +11,7 @@ struct NanoGate {
     /// Keeps the one-shot policy identical across separately selected resident profiles.
     init(imageSHA: String = Self.imageSHA) { expectedImageSHA = imageSHA }
     /// State transitions require explicit host commands; restart never restores a commit capability.
-    enum State { case empty, prepared, inspected, associated, staged, commitAttempted, confirmed, aborted }
+    enum State { case empty, prepared, inspected, associated, staged, commitAttempted, confirmed, aborted, retired }
     /// Current local admission state, separate from actual firmware transaction state.
     private(set) var state: State = .empty
     /// Exact numeric endpoint inspected before an association was reviewed.
@@ -73,9 +73,16 @@ struct NanoGate {
         guard state == .staged || state == .commitAttempted else { throw Rejected() }; state = .aborted
     }
 
+    /// Retires only known no-commit host context after reboot; never converts an unknown device result to aborted.
+    mutating func retirePrecommit(intent: NanoRecoveryIntent, bootChanged: Bool) throws {
+        guard state == .commitAttempted else { throw Rejected() }
+        try intent.requirePrecommitRetirement(bootChanged: bootChanged)
+        state = .retired
+    }
+
     /// A new explicit test operation needs fresh inspection/association; previous records remain in the journal.
     mutating func next() throws {
-        guard state == .confirmed || state == .aborted else { throw Rejected() }
+        guard state == .confirmed || state == .aborted || state == .retired else { throw Rejected() }
         state = .prepared; address = ""; deviceID = ""; bootID = ""
     }
 }
