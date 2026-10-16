@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-15",
-  "status": "in progress: iPad pre-commit disconnect and USB power-cycle checks passed; commit-reply loss and process-restart recovery pending",
+  "status": "in progress: iPad pre-commit checks and real commit-reply loss passed; app SIGKILL/relaunch completed, restored reconciliation pending",
   "productionQualified": false,
   "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
   "context": {
@@ -65,6 +65,11 @@
       "phase": "replyloss-prerequisite",
       "reportSHA256": "e48a191a0923e26758454b66a954cc3a5ef9cbcb70a012131c61bb05b8f70388",
       "events": 30
+    },
+    {
+      "phase": "replyloss",
+      "reportSHA256": "92b46d5b374d82033d88e2696aefe3810daf09a4cf767b313d15302c709175b9",
+      "events": 36
     }
   ],
   "earlierCaptureIsUnchangedPrefix": true,
@@ -144,7 +149,6 @@
     "manualD13Observation": "off"
   },
   "remainingChecks": {
-    "realCommitReplyWithheld": "pending",
     "realProcessRestartAndFreshQuery": "pending",
     "freshExplicitUpload": "pending",
     "iPhone": "pending"
@@ -202,5 +206,50 @@
     "retirementNote": "Explicit RAM-only host-context retirement preserved the SDK unknown outcome; a new explicit operation required fresh inspection and reviewed association."
   },
   "originalHostProcessID": 9308,
-  "originalProcessReceiptSHA256": "530d59cb35460dd0c5b6d5cfbc380f354c12b2f02d621b929237349fe4bcf446"
+  "originalProcessReceiptSHA256": "530d59cb35460dd0c5b6d5cfbc380f354c12b2f02d621b929237349fe4bcf446",
+  "realCommitReplyWithheld": {
+    "result": "passed",
+    "stagedSketch": "state-b",
+    "hostCommitAttempts": 1,
+    "proxyObservedCommitFrames": 1,
+    "upstreamSendCallbackCompleted": true,
+    "withheldFrameBytesBase64": "Rk1HTwECAAAAAAAFAAAAw3sib2siOnRydWUsInJlc3VsdCI6eyJ1cGxvYWRfaWQiOjEsInN0YXRlIjoiY29tbWl0dGluZyIsInNpemUiOjU0OCwicmVjZWl2ZWQiOjU0OCwic2hhMjU2IjoiNTA1YzcyMzgwNGFkZGYyMThlOTAxODM3NWMxZjYzZmQwMzZjMmUwYmYxOWQwMTczYWUxODliMDQ0MThhYTliMCIsInNsb3RfdG91Y2hlZCI6ZmFsc2UsImVycm9yIjoibm9uZSJ9fQ==",
+    "withheldFrameSHA256": "857a13307a9ec3c8362e5e1ffdc74d6957d84287cb3bedcc5fe904420fee093d",
+    "withheldReply": {
+      "ok": true,
+      "result": {
+        "upload_id": 1,
+        "state": "committing",
+        "size": 548,
+        "received": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+        "slot_touched": false,
+        "error": "none"
+      }
+    },
+    "sdkError": "uncertainCommit",
+    "savedSDKRecordMatched": true,
+    "underlyingSDKCause": "disconnected",
+    "checkpointIntent": "commitIntent",
+    "checkpointSHA256": "e2f68d00c67c245b042da7ff0e5d45611347b84f5aea1a8283309e1483515984",
+    "transactionRecordSHA256": "fe6dcab7e96fbca32dbe04f3dbeca8370b1630518ffaad3cd46baaad159db813",
+    "originatingRunID": "CAEFF65F-F1F4-4696-95C3-B01C8DE6D345",
+    "manualD13Observation": "on",
+    "automaticReplays": 0
+  },
+  "hostProcessRestart": {
+    "terminationAndRelaunchResult": "passed",
+    "originalPID": 9308,
+    "restartedPID": 9358,
+    "signal": "SIGKILL",
+    "sameExecutable": true,
+    "launchArguments": [],
+    "receiptSHA256": {
+      "pretermination-process": "1502243f2f5af87775b0a656b478356cb379a1b032d5745e113d5932f99e7a65",
+      "termination": "d0d12c7a0b95e208c6a270b0ccecc59bf00c00eea51bffc36e215ed4cf4ac4e6",
+      "relaunch": "cb35a86f914136da4f6b4cfd8cdbc8dfba8747d3ca90103c86f9afe89b74343f"
+    },
+    "restoredQueryOnlyCheckpoint": "pending",
+    "boardResetOrCommitReplayRequested": false
+  }
 }

@@ -30,7 +30,20 @@ have a different boot identity, seed 7, zero startup BSS and advancing counters;
 D13 was observed off. The original transaction stays unknown. The operator then
 explicitly retired this RAM-only host context and started a new operation with
 fresh inspection and reviewed association. Lost commit reply and process-restart
-recovery remain pending. This was power loss before any flash writer started.
+recovery are recorded separately below. This was power loss before any flash writer started.
+
+The subsequent B upload used the explicit loopback proxy. The journal records
+one host commit attempt and one observed complete commit frame. Independent
+decoding of the captured real response confirms a correlated `committing`
+response for the exact 548-byte B capsule, `error=none`, `slot_touched=false`.
+The proxy withheld that reply, and the SDK reported `uncertainCommit` with the
+matching record and underlying disconnect. The durable checkpoint contains
+commit intent. D13 was observed on, which alone does not prove installation or
+state correctness. CoreDevice then successfully sent SIGKILL to the verified
+original app process and normally launched the same executable with a different
+PID and no arguments. Restored query-only admission, fresh device reconciliation
+and useful behavior after restart remain pending. No Nano reset or commit replay
+was requested during this process restart.
 
 ## Preparation and local checks
 
