@@ -57,9 +57,10 @@ power-cycle preserves A and correctly leaves the saved transaction unknown after
 boot change. A real withheld commit reply produces SDK uncertainty; after actual
 app SIGKILL/relaunch, query-only restoration, matching boot-confirmed B, state and
 exact echo all pass without replay. A fresh explicit ordinary A upload then
-passes startup/state/echo in the same Nano boot, and D2 is removed. iPhone
-interruption observations and flash-write power-loss/recovery remain separate
-open gates.
+passes startup/state/echo in the same Nano boot, and D2 is removed. The iPhone
+baseline and pre-commit disconnect now pass with continuous A counters and a
+fresh aborted/disconnected/untouched-slot status. Remaining iPhone interruption
+checks and flash-write power-loss/recovery remain separate open gates.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 

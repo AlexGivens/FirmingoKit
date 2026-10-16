@@ -9,9 +9,9 @@ is required for this harness. The scoped iPad sequence now passes: baseline,
 pre-commit connection close and USB power cycle, a real withheld commit reply,
 actual app restart, query-only reconciliation and a fresh ordinary upload.
 [The iPad evidence](nano-fms2-interruption-ipad.json) pins both runs and captures.
-The identical signed app now passes the iPhone read-only baseline in
-[its separate evidence](nano-fms2-interruption-iphone.json); iPhone interruption
-checks remain pending.
+The identical signed app now passes the iPhone read-only baseline and pre-commit
+connection-close check in [its separate evidence](nano-fms2-interruption-iphone.json);
+the remaining iPhone interruption checks are pending.
 Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
 apps, exact generated sources, offline outputs and local check results.
@@ -74,7 +74,11 @@ inspection succeeds in 1.483484375 seconds with one inactive-overlay event.
 The operator reports a local-network prompt and quick approval; exact approval
 timing is not independently measured. Retained A has seed 7, zero startup BSS
 and advancing counters, with D13 observed off. This read-only result does not
-close the iPhone interruption or broader authorization/cold-attachment gates.
+close the broader authorization/cold-attachment gates. A later B RAM stage is
+explicitly disconnected without abort or commit. Retained A counters continue
+from the baseline in the same boot, and the subsequent fresh status query reports
+`aborted`, `disconnected`, `slot_touched=false`. The RAM-only checkpoint and both
+capture prefixes are preserved. No installation is attempted in this check.
 
 ## Preparation and local checks
 

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-15",
-  "status": "in progress: iPhone read-only baseline passed; interruption/recovery checks pending",
+  "status": "in progress: iPhone baseline and pre-commit disconnect passed; power-cycle, commit-reply loss and restart recovery pending",
   "productionQualified": false,
   "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
   "context": {
@@ -42,6 +42,16 @@
       "phase": "baseline",
       "reportSHA256": "89fca7b28d71a108f29e9af95f0a7c3d4507cd415840bdcafddd52992ae7d308",
       "events": 9
+    },
+    {
+      "phase": "disconnect",
+      "reportSHA256": "ccb2f9ae6da741d6797d5e62db12083aa17e6fd23a8f841d85655fe1b869bb48",
+      "events": 15
+    },
+    {
+      "phase": "disconnect-status",
+      "reportSHA256": "e0a01a3737e096f8a9a233bead4ba421cd565d286262d7976576f74f5148fa80",
+      "events": 16
     }
   ],
   "capsules": [
@@ -93,7 +103,6 @@
     "hostCommitAttempts": 0
   },
   "remainingChecks": {
-    "precommitDisconnect": "pending",
     "precommitUSBPowerCycle": "pending",
     "realCommitReplyWithheld": "pending",
     "realProcessRestartAndFreshQuery": "pending",
@@ -106,6 +115,44 @@
   ],
   "notes": [
     "Raw device and boot identifiers remain in ignored local evidence.",
-    "User reported the new local-network prompt and quick approval; successful first inspection and the inactive-overlay journal event do not independently measure prompt approval timing."
-  ]
+    "User reported the new local-network prompt and quick approval; successful first inspection and the inactive-overlay journal event do not independently measure prompt approval timing.",
+    "Retained A was checked after explicit connection close; the separate fresh transaction-status query was requested and captured afterward. No staging or installation was repeated."
+  ],
+  "earlierCapturesAreUnchangedPrefixes": true,
+  "precommitDisconnect": {
+    "result": "passed",
+    "stagedSketch": "state-b",
+    "hostCommitAttempts": 0,
+    "explicitAbortCommands": 0,
+    "freshStatus": "aborted",
+    "error": "disconnected",
+    "slotTouched": false,
+    "transactionRecordSHA256": "bf59335e2d373c23b7056d75a784fa0da523afc9a9679ebdf9b7e1cd8878b12c",
+    "checkpointIntent": "ramOnly",
+    "checkpointSHA256": "980cacae7280faea7d94e3e7cca108a146dee13aaf0b9cc8e337db3b687e139c",
+    "retainedState": "state-a",
+    "sameBootCounterContinuityPassed": true,
+    "stateObservation": {
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAAGxOBQBlTgUA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 347756,
+          "loops": 347749
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAKlOBQCiTgUA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 347817,
+          "loops": 347810
+        }
+      ],
+      "forwardLoopDelta": 61
+    },
+    "manualD13Observation": "off"
+  }
 }
