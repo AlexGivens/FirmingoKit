@@ -5,8 +5,8 @@ This explicitly selected experiment uses **NanoRecovery**,
 resident, compiler assets, catalogue and State A/B sources as
 [the completed functional qualification](nano-fms2-qualification.md). Firmware's
 versioned contract remains authoritative; no resident or public SDK API change
-is required for this harness. The iPad baseline and pre-commit connection-close
-check now pass; the remaining physical checks are pending in
+is required for this harness. The iPad baseline, pre-commit connection-close
+and pre-commit USB power-cycle checks now pass; the remaining physical checks are pending in
 [the incremental iPad evidence](nano-fms2-interruption-ipad.json).
 Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
@@ -19,7 +19,17 @@ zero startup BSS and advancing counters; the later observation continues from th
 earlier one in the same boot. The user observed D13 off. Both actual capsules
 match the fixed hashes and pass Firmware's production native validator. The
 RAM-only checkpoint and immutable journal captures are pinned in the evidence;
-this result does not establish behavior after a power cycle or uncertain commit.
+this connection-close result remains separate from later recovery observations.
+
+A second B stage was verified in RAM, then the operator unplugged USB, waited
+five seconds and reconnected it. The operator reported that scene inactivity
+closed the stage and removed its disconnect control. The durable checkpoint
+still records RAM-only intent, and the journal contains no commit attempt.
+A fresh SDK query correctly returned `unknown(bootChanged)`. State A replies
+have a different boot identity, seed 7, zero startup BSS and advancing counters;
+D13 was observed off. The original transaction stays unknown. Retirement of
+this RAM-only host context, lost commit reply and process-restart recovery are
+separate subsequent checks. This was power loss before any flash writer started.
 
 ## Preparation and local checks
 

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-15",
-  "status": "in progress: iPad baseline and pre-commit disconnect passed; other interruption checks pending",
+  "status": "in progress: iPad pre-commit disconnect and USB power-cycle checks passed; commit-reply loss and process-restart recovery pending",
   "productionQualified": false,
   "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
   "context": {
@@ -45,6 +45,21 @@
       "phase": "disconnect",
       "reportSHA256": "9a5c0a4558b19d9fb3340ccb63e06626128d1f44e2103a62dd4d8ac882acdf36",
       "events": 15
+    },
+    {
+      "phase": "powercycle-prerequisite",
+      "reportSHA256": "bec1e3d1ca53eb7e679e49ee88d18e2f2878625dda489eb1f1a93c9473fd7039",
+      "events": 16
+    },
+    {
+      "phase": "powercycle-before-query",
+      "reportSHA256": "7c438f63f92fdd6997240c5b5d5d9a2bc1507171a430ebed9ea53b46535cfe99",
+      "events": 22
+    },
+    {
+      "phase": "powercycle",
+      "reportSHA256": "b25b8133b55dcba168c1b16cd54759b5abd321fcc5a5d28631bdef746e9ee2f8",
+      "events": 24
     }
   ],
   "earlierCaptureIsUnchangedPrefix": true,
@@ -124,7 +139,6 @@
     "manualD13Observation": "off"
   },
   "remainingChecks": {
-    "precommitUSBPowerCycle": "pending",
     "realCommitReplyWithheld": "pending",
     "realProcessRestartAndFreshQuery": "pending",
     "freshExplicitUpload": "pending",
@@ -133,11 +147,52 @@
   "uploadArmRemoved": false,
   "notes": [
     "Raw device and boot identifiers remain in ignored local evidence.",
-    "The user confirmed the retained State A result and D13 off; the captured journal independently supplies the aborted/disconnected result."
+    "The user confirmed the retained State A result and D13 off; the captured journal independently supplies the aborted/disconnected result.",
+    "The operator initially reached disabled association fields before fresh inspection; inspection enabled them. The immutable prerequisite capture shows only the new-operation event at that point, with no new stage or commit."
   ],
   "limits": [
     "exact experimental resident, compiler package, Nano and recorded iPad only",
     "no interruption during flash erase/program, corruption, rollback or complete SDK ROM recovery claim",
     "no default catalogue promotion, minimum OS or broader network reliability claim"
-  ]
+  ],
+  "precommitUSBPowerCycle": {
+    "result": "passed",
+    "stagedSketch": "state-b",
+    "hostCommitAttempts": 0,
+    "explicitAbortCommands": 0,
+    "sdkOutcome": "unknown",
+    "sdkUnknownReason": "bootChanged",
+    "bootChangedFromSavedRecord": true,
+    "checkpointIntent": "ramOnly",
+    "checkpointSHA256": "b1c7a90f2e7192769ef60d57ed9d1299d0d6863b2da63ae1160f385d077da74b",
+    "transactionRecordSHA256": "5bd4fece8ea506486f71e9bcf8346ab9c7a7994f1507cb8dc4c385af5202e323",
+    "retainedState": "state-a",
+    "stateObservation": {
+      "samples": [
+        {
+          "bytesBase64": "RlEyQTEAAAAHAAAAAAAAAAqTAgADkwIA",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 168714,
+          "loops": 168707
+        },
+        {
+          "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAEiTAgBBkwIA",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 168776,
+          "loops": 168769
+        }
+      ],
+      "forwardLoopDelta": 62,
+      "sameBootContinuityChecked": false
+    },
+    "manualD13Observation": "off",
+    "hostContextRetired": false,
+    "usbPowerCycle": "operator performed unplug, five-second wait and reconnect after RAM verification",
+    "lifecycleObservation": "operator reported Stage connection closed on inactivity; the explicit disconnect control was no longer available",
+    "flashWriteInterruption": false
+  }
 }
