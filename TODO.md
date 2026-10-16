@@ -50,8 +50,10 @@ Mark implementation tasks complete only with relevant checks and evidence. Recor
 
 The [interruption/recovery qualification](docs/nano-fms2-interruption.md) now has
 a separately identified harness and bounded real-reply-loss proxy. Local source,
-intent/framing and explicit loopback checks are separate from pending physical
-disconnect, pre-commit power-cycle and restored uncertain-commit observations.
+intent/framing and explicit loopback checks remain separate from hardware results.
+The [iPad pre-commit disconnect](docs/nano-fms2-interruption-ipad.json) now passes
+with an untouched slot and continuous retained A state; pre-commit power-cycle,
+restored uncertain-commit and iPhone observations remain pending.
 
 Evidence and exact input identities: [stateful adoption](docs/stateful-adoption.md).
 

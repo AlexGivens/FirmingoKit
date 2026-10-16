@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "date": "2026-10-15",
+  "status": "in progress: iPad baseline and pre-commit disconnect passed; other interruption checks pending",
+  "productionQualified": false,
+  "hostSourceCommit": "f5fb34f5fb5ce2dce1a30ecd28d5efb05ff8b6a6",
+  "context": {
+    "preparedManifestSHA256": "f615b1a7b7279d197b4212cf1dd26ebeae5a7279d227b11710b55aadf4ccd361",
+    "sdkCommit": "e0bed3602b515c71f171971ab7f8a8f5ae3bea1f",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "testPlanSHA256": "2611f2f9c03954f2aa882c1a5f78a96286bf52f4a0a1381dfc49abdd145f1199",
+    "exportManifestSHA256": "90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65",
+    "catalogueSHA256": "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd"
+  },
+  "preparationEvidence": "nano-fms2-interruption-preparation.json",
+  "procedure": "nano-fms2-interruption.md",
+  "iosApp": {
+    "bundleIdentifier": "com.firmingokit.nanorecovery",
+    "displayName": "NanoRecovery",
+    "build": "1",
+    "executableSHA256": "4f9c9a6dc70fbdbc64797f6969971a98adb4ec9d7cc717afb01383ddd5dd245c",
+    "profileSHA256": "1a22c096cb6d926f19bd60d1425dafaff818e74e523841064c1f84603369039b",
+    "entitlements": {
+      "application-identifier": "WGR9T9JH4L.com.firmingokit.nanorecovery",
+      "com.apple.developer.team-identifier": "WGR9T9JH4L",
+      "get-task-allow": true
+    },
+    "strictDeepSignatureVerified": true,
+    "firmwareResourceCount": 0,
+    "installedOnIPadOverPairedLocalNetwork": true
+  },
+  "iPad": {
+    "model": "iPad Pro 11-inch (3rd generation)",
+    "productType": "iPad13,4",
+    "operatingSystem": "Version 27.0.1 (Build 24A446)"
+  },
+  "runID": "CAEFF65F-F1F4-4696-95C3-B01C8DE6D345",
+  "captures": [
+    {
+      "phase": "baseline",
+      "reportSHA256": "eb91ecbaf6e6272c0900dfc0ba4e1c0cb4eb9ba18d388cbf981b3302aec0da37",
+      "events": 8
+    },
+    {
+      "phase": "disconnect",
+      "reportSHA256": "9a5c0a4558b19d9fb3340ccb63e06626128d1f44e2103a62dd4d8ac882acdf36",
+      "events": 15
+    }
+  ],
+  "earlierCaptureIsUnchangedPrefix": true,
+  "capsules": [
+    {
+      "path": "state-a.fms",
+      "bytes": 544,
+      "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+      "productionNativeValidatorPassed": true
+    },
+    {
+      "path": "state-b.fms",
+      "bytes": 548,
+      "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+      "productionNativeValidatorPassed": true
+    }
+  ],
+  "precommitDisconnect": {
+    "result": "passed",
+    "stagedSketch": "state-b",
+    "hostCommitAttempts": 0,
+    "explicitAbortCommands": 0,
+    "freshStatus": "aborted",
+    "error": "disconnected",
+    "slotTouched": false,
+    "transactionRecordSHA256": "42ec5db92935e93c7828a3dd9386a7667fa29613e2f1ee94219b40173bf341ab",
+    "checkpointIntent": "ramOnly",
+    "checkpointSHA256": "cde26126f943477629b66f5ec41b4909f74aacab43b7b4c5cb972f1c4bc16e48",
+    "retainedState": "state-a",
+    "sameBootCounterContinuityPassed": true,
+    "stateObservations": [
+      {
+        "sameBootContinuityChecked": false,
+        "samples": [
+          {
+            "bytesBase64": "RlEyQTEAAAAHAAAAAAAAAIF/AAB6fwAA",
+            "nonce": 49,
+            "initialData": 7,
+            "initialBSS": 0,
+            "counter": 32641,
+            "loops": 32634
+          },
+          {
+            "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAL5/AAC3fwAA",
+            "nonce": 115,
+            "initialData": 7,
+            "initialBSS": 0,
+            "counter": 32702,
+            "loops": 32695
+          }
+        ],
+        "forwardLoopDelta": 61
+      },
+      {
+        "sameBootContinuityChecked": true,
+        "samples": [
+          {
+            "bytesBase64": "RlEyQTEAAAAHAAAAAAAAAL9hBQC4YQUA",
+            "nonce": 49,
+            "initialData": 7,
+            "initialBSS": 0,
+            "counter": 352703,
+            "loops": 352696
+          },
+          {
+            "bytesBase64": "RlEyQXMAAAAHAAAAAAAAAP1hBQD2YQUA",
+            "nonce": 115,
+            "initialData": 7,
+            "initialBSS": 0,
+            "counter": 352765,
+            "loops": 352758
+          }
+        ],
+        "forwardLoopDelta": 62
+      }
+    ],
+    "manualD13Observation": "off"
+  },
+  "remainingChecks": {
+    "precommitUSBPowerCycle": "pending",
+    "realCommitReplyWithheld": "pending",
+    "realProcessRestartAndFreshQuery": "pending",
+    "freshExplicitUpload": "pending",
+    "iPhone": "pending"
+  },
+  "uploadArmRemoved": false,
+  "notes": [
+    "Raw device and boot identifiers remain in ignored local evidence.",
+    "The user confirmed the retained State A result and D13 off; the captured journal independently supplies the aborted/disconnected result."
+  ],
+  "limits": [
+    "exact experimental resident, compiler package, Nano and recorded iPad only",
+    "no interruption during flash erase/program, corruption, rollback or complete SDK ROM recovery claim",
+    "no default catalogue promotion, minimum OS or broader network reliability claim"
+  ]
+}

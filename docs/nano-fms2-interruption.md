@@ -5,10 +5,21 @@ This explicitly selected experiment uses **NanoRecovery**,
 resident, compiler assets, catalogue and State A/B sources as
 [the completed functional qualification](nano-fms2-qualification.md). Firmware's
 versioned contract remains authoritative; no resident or public SDK API change
-is required for this harness. Hardware results are pending until separately
-recorded. Normal launch starts no device operation or proxy.
+is required for this harness. The iPad baseline and pre-commit connection-close
+check now pass; the remaining physical checks are pending in
+[the incremental iPad evidence](nano-fms2-interruption-ipad.json).
+Normal launch starts no device operation or proxy.
 [Preparation evidence](nano-fms2-interruption-preparation.json) pins the signed
 apps, exact generated sources, offline outputs and local check results.
+
+The first iPad stage of B was verified in RAM and explicitly disconnected without
+abort or commit. Fresh SDK reconciliation returned `aborted`, `disconnected`,
+`slot_touched=false`. Two retained-A observations independently decode to seed 7,
+zero startup BSS and advancing counters; the later observation continues from the
+earlier one in the same boot. The user observed D13 off. Both actual capsules
+match the fixed hashes and pass Firmware's production native validator. The
+RAM-only checkpoint and immutable journal captures are pinned in the evidence;
+this result does not establish behavior after a power cycle or uncertain commit.
 
 ## Preparation and local checks
 
