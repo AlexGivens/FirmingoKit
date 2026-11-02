@@ -1,0 +1,159 @@
+# Firmingo Workbench consolidation
+
+Started 2026-11-02. This is the app-owned integration-test surface over public
+FirmingoKit APIs. Compiler execution/recipes stay in Firmingo-Compiler; device
+contracts and independent validators stay in Firmingo. Historical qualification
+hosts/results are retained until their scenarios have equivalent new evidence.
+
+## First increment (in progress)
+
+- Shared `Demo/WorkbenchSupport` package: version-one requests, scenario registry,
+  bounded durable reports, no-replay run identities, cancellation and retained history.
+- Existing demo becomes Firmingo Workbench, retaining its bundle identity and
+  normal documents, console, build/upload and installation guards. Test Lab uses
+  the same engine as an explicit app launch command.
+- Compiler catalogue/resource checks, pinned two-source smoke and diagnostic/fresh
+  build cases migrate first. Hardware/recovery and lifecycle cases are visibly
+  blocked until migrated; this command protocol has no device operation.
+- `Tools/Workbench/workbench.py`: list/run through the same selected macOS app
+  binary, validate correlated results and export evidence without private-container
+  access, native UI inspection, sibling checkout lookup or runtime provisioning.
+
+The initial CLI launches one owned app process per explicit offline command; it
+is not a live connection to an already running window. Mobile automation,
+paired Wi-Fi control, MCP, external lifecycle control and hardware scenario
+migration are later increments. The manual Test Lab shares code on all three
+Apple platforms. No network control listener is added in this increment.
+
+## Completion checks
+
+- Deterministic engine tests cover admission, stale/duplicate run rejection,
+  failed journal gates, busy/cancel, blocked resources and preserved incomplete history.
+- CLI fixtures reject stale/duplicate/malformed results and non-success test states.
+- Build the existing app for macOS, iOS device and Simulator; exercise CLI discovery
+  and an actual run using one development-signed sandboxed macOS app.
+- Required resources unavailable means blocked, never a WASM pass. Real-runtime
+  checks require explicitly provisioned reviewed assets and retain exact identities.
+- No board is contacted, installed, reset or flashed by this increment.
+
+## Follow-through
+
+Port compiler busy/deadline/lifecycle/stress scenarios, then read-only device and
+binary-console cases, then guarded upload/ROM recovery. Add a paired controller
+and thin MCP adapter over the versioned command engine. Retire legacy generators
+only after matching scenario evidence; preserve previous reports and unresolved
+networking/qualification limits. Firmware fault images remain separate physical
+inputs even when one app orchestrates every scenario.
+
+## App and CLI usage
+
+The canonical scheme is **FirmingoWorkbench** in the existing
+`Demo/FirmingoDemo.xcodeproj`; the old `FirmingoDemo` scheme remains an alias to
+that same target/product. Product/executable is `FirmingoWorkbench.app` /
+`FirmingoWorkbench`. Bundle ID remains `com.firmingokit.demo`; test phases do not
+create new app identities. Project build number is 2. No entitlement or listener
+is added. The original editor, device actions and programming guards remain.
+
+Build the app with your existing development signing configuration:
+
+```sh
+xcodebuild build -project Demo/FirmingoDemo.xcodeproj -scheme FirmingoWorkbench \
+  -configuration Release -destination 'generic/platform=macOS' \
+  -derivedDataPath .build/workbench-app
+python3 -I -S -B Tools/Workbench/workbench.py --help
+python3 -I -S -B Tools/Workbench/workbench.py list \
+  --app .build/workbench-app/Build/Products/Release/FirmingoWorkbench.app \
+  --team YOUR_TEAM_ID --output .build/workbench-list-1
+python3 -I -S -B Tools/Workbench/workbench.py run \
+  --app .build/workbench-app/Build/Products/Release/FirmingoWorkbench.app \
+  --team YOUR_TEAM_ID --output .build/workbench-catalogue-1 \
+  --scenario compiler.catalogue
+```
+
+Each output directory must be new. `--team` must match an existing Apple Development
+signature with hardened runtime, sandbox, outgoing networking and user-selected
+read/write entitlements. The CLI never signs/builds/installs an app. It launches
+only the selected app binary, with a fresh request ID by default, and kills only
+that owned process if its 180-second/output bound expires. This is an offline test
+invocation, not attachment to a preexisting editor process. UIKit/macOS may still
+present normal document startup UI; the automation task is app-owned, independent
+of view lifetime, and requests no document or device action.
+
+For `compiler.smoke` / `compiler.diagnostics`, supply the explicit migrated vector
+build ID with `--build-id`:
+
+`c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f`.
+
+The source checkout intentionally lacks `compiler.wasm`: catalogue verification
+can pass, while compiler resource/execution cases report **blocked**, exit 3.
+For actual compilation, first prepare a clean SDK copy using the existing
+`Tools/ManagedWASM/prepare-sdk-package.mjs` with an explicitly supplied reviewed
+consumer package and independent anchor. Build Workbench from that prepared copy.
+No service override, sibling search, binary download or production asset promotion
+is added. A package update may need a new build; selecting a different scenario
+within one prepared app never does.
+
+Manual access is the **Test Lab** toolbar button in a sketch window (and the macOS
+Test Lab window). Load SDK Catalogue, explicitly select a descriptor for compile
+cases, then run a case. Cases show scope, prerequisites and migration blockers;
+current run events retain earlier observations. Cancel settles the owned SDK task.
+Load Run History restores context only; incomplete snapshots display unknown
+without rewriting the original. Export run report uses the app's own sharing path.
+Layout, VoiceOver, keyboard/focus and physical mobile UI remain unqualified; no
+agent screenshot/native-UI inspection is used.
+
+## Version-one command and evidence contract
+
+CLI `list` and `run` encode at most 4096 JSON bytes into the explicit
+`--workbench-request BASE64` app launch argument. No filesystem path, service URL,
+physical board ID or hardware permission is accepted in a request.
+
+```json
+{"schema":1,"requestID":"17C4EC61-36F3-4EEA-ACF8-4CF70E170194","operation":"run","scenarioID":"compiler.catalogue"}
+```
+
+`run` may additionally carry an exact lowercase `firmwareBuildID` digest.
+`list` accepts neither selection. The app checks schema, allowed keys, operation,
+scenario, bounds and selection before journal admission. At most one scenario or
+metadata inspection runs in an engine. Run UUIDs reserve exclusive app-private
+directories before SDK work; an existing UUID is rejected even after restart.
+There is no resume operation, external execution token or device-changing command.
+
+The app exports exactly one bounded `FIRMINGO_WORKBENCH_RESULT:` base64 JSON line
+through inherited stdout. It contains schema, original request, actual PID,
+scenario registry, verified catalogue when available, terminal report or bounded
+command error. The CLI independently checks request/PID correlation, terminal
+state, event ordering/time bounds, artifact paths/sizes/digests and app exit status.
+Missing/duplicate/stale/malformed responses fail. Results retain the selected app
+signature, executable hash, original stdout/stderr, launch PID, request, complete
+response and any real exported capsules. No private-container access is required.
+
+Reports use at most 64 ordered events, three bounded capsule artifacts and 64 KiB
+serialized JSON. SDK offline receipts retain actual source/catalogue/descriptor,
+recipe/toolchain, ELF and capsule identities. Worker linear-memory observations
+are not aggregate app/WebKit peaks. `deviceOperations` is always false in this
+protocol. Journal writes synchronize file/directory metadata before publication;
+failed journal gates prevent later SDK work or a published success. History scans
+at most 4096 entries and returns at most 32 recent snapshots; archive old evidence
+explicitly rather than silently deleting it.
+
+Exit codes: 0 = discovery completed / scenario passed; 1 = failed or unknown;
+2 = invalid command, journal/transport/launch failure; 3 = blocked; 4 = cancelled.
+Blocked is never a successful compiler check. Command failure records do not erase
+app-private unfinished context. Durable device installation/upload journals remain
+in their existing SDK/demo workflows and are not replaced by these compiler reports.
+
+## Validation entry points
+
+```sh
+swift test --package-path Demo/WorkbenchSupport --scratch-path .build/workbench-support \
+  --disable-xctest --enable-swift-testing -Xswiftc -warnings-as-errors
+python3 -I -S -B Tools/Workbench/test-workbench.py
+node Tools/ManagedWASM/run-validation.mjs
+```
+
+The ordinary entry point includes both new suites and preserves all legacy host
+checks. Adapter CI also compiles the complete Workbench app for macOS, iOS and
+Simulator on its explicitly provisioned Apple runner; no signed app execution,
+compiler binary provisioning, test listener or hardware action runs implicitly.
+Local validation is recorded separately from any remote CI execution.

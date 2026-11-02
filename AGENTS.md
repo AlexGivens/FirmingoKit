@@ -21,6 +21,15 @@ The SDK exposes local sketch-compilation APIs by wrapping Firmingo-Compiler's la
 
 ## 2. Repository facts and proposed layout
 
+On 2026-11-02 the existing demo begins consolidation into Firmingo Workbench.
+`Demo/WorkbenchSupport` is an app-owned package for the shared scenario engine,
+version-one requests and bounded journals; Test Lab and `Tools/Workbench/workbench.py`
+invoke that same engine through the same app product. The normal SDK product gains
+no testing dependency. Current automation is macOS-only explicit offline app launch,
+with no live listener or device command. Hardware/lifecycle hosts remain for
+unmigrated cases and historical evidence. See `docs/workbench-consolidation.md`.
+
+
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped
 paired-source/notice review and replaced the historical `3e2544ac…` consumer pin.
 The imported fifty-source package is `4cbdf856…`, with four additional service

@@ -390,3 +390,10 @@ for this metadata/export increment; see `docs/compiler.md`.
   hardware deployment. Existing tests do not qualify those outcomes.
 
 See [delivery integration](docs/compiler-delivery.md) for exact identities and checks.
+
+## Firmingo Workbench consolidation — 2026-11-02
+
+- [ ] First increment in progress: app-owned shared scenario engine and versioned CLI, Test Lab in the existing demo, migrated compiler cases, bounded correlated evidence and local/CI checks. [Work log and scope](docs/workbench-consolidation.md).
+- [ ] Migrate remaining compiler lifecycle/deadline/stress, then device/console/upload/recovery scenarios with their existing guards and fresh evidence.
+- [ ] Add live paired mobile control and a thin MCP adapter after the shared command/evidence boundary is verified.
+- [ ] Retire phase-specific app generators only after equivalent Workbench scenario qualification; preserve historical identities/results.

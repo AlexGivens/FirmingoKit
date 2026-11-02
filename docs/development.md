@@ -649,3 +649,14 @@ write occurred. Service redistribution/provenance review, trusted production
 descriptors, signed sandbox/minimum-OS/physical iPad execution, UI/accessibility
 and hardware qualification remain open. Exact source hashes and validation limits
 are recorded in [demo-default-resources-experiment.json](demo-default-resources-experiment.json).
+
+## Firmingo Workbench consolidation — 2026-11-02
+
+[Workbench usage and protocol](workbench-consolidation.md) document the shared
+app-owned package, canonical `FirmingoWorkbench` scheme, manual Test Lab and
+explicit signed-app CLI. The older demo scheme aliases the same product; bundle
+identity is preserved. Normal tests include engine/CLI regressions and CI builds
+the whole app on declared Apple destinations. Compiler package provisioning stays
+explicit, while hardware/lifecycle migration and physical/UI qualification remain
+separate. Xcode 27.2 / Apple Swift 6.4.2 are the currently installed local tools;
+the existing CI Xcode 27.0 pin is retained and remote execution is not inferred.

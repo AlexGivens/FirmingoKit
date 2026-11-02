@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+        D00000000000000000000020 /* FirmingoWorkbenchCore in Frameworks */ = {isa = PBXBuildFile; productRef = D00000000000000000000022; };
 		D00000000000000000000007 /* FirmingoKit in Frameworks */ = {isa = PBXBuildFile; productRef = D00000000000000000000009 /* FirmingoKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D00000000000000000000006 /* FirmingoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirmingoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D00000000000000000000006 /* FirmingoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirmingoWorkbench.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -24,6 +25,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D00000000000000000000007 /* FirmingoKit in Frameworks */,
+                D00000000000000000000020 /* FirmingoWorkbenchCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +69,7 @@
 			name = FirmingoDemo;
 			packageProductDependencies = (
 				D00000000000000000000009 /* FirmingoKit */,
+                D00000000000000000000022 /* FirmingoWorkbenchCore */,
 			);
 			productName = FirmingoDemo;
 			productReference = D00000000000000000000006 /* FirmingoDemo.app */;
@@ -92,6 +95,7 @@
 			mainGroup = D00000000000000000000002;
 			packageReferences = (
 				D00000000000000000000008 /* XCLocalSwiftPackageReference ".." */,
+                D00000000000000000000021 /* WorkbenchSupport */,
 			);
 			productRefGroup = D00000000000000000000003 /* Products */;
 			projectDirPath = "";
@@ -159,7 +163,7 @@
 			buildSettings = {
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = FirmingoDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = WGR9T9JH4L;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -175,7 +179,7 @@
 				);
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.firmingokit.demo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FirmingoWorkbench;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
@@ -191,7 +195,7 @@
 			buildSettings = {
 				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = FirmingoDemo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = WGR9T9JH4L;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -206,7 +210,7 @@
 				);
 				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.firmingokit.demo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FirmingoWorkbench;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
@@ -240,6 +244,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+        D00000000000000000000021 /* WorkbenchSupport */ = {isa = XCLocalSwiftPackageReference; relativePath = WorkbenchSupport; };
 		D00000000000000000000008 /* XCLocalSwiftPackageReference ".." */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ..;
@@ -247,6 +252,7 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+        D00000000000000000000022 /* FirmingoWorkbenchCore */ = {isa = XCSwiftPackageProductDependency; package = D00000000000000000000021; productName = FirmingoWorkbenchCore; };
 		D00000000000000000000009 /* FirmingoKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirmingoKit;

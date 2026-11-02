@@ -37,6 +37,7 @@ if (args.length === 1 && args[0] === "--help") {
   run(process.execPath, ["--test", "Tools/ManagedWASM/test-consumer-package.mjs"]);
   run("python3", ["-I", "-S", "-B", "Tools/ManagedWASM/test-compiler-host.py"]);
   run("python3", ["-I", "-S", "-B", "Tools/Hardware/test-nano-host.py"]);
+  run("python3", ["-I", "-S", "-B", "Tools/Workbench/test-workbench.py"]);
   run(process.execPath, ["--check", "Tools/Hardware/prepare-nano-test.mjs"]);
   run(process.execPath, ["--check", "Tools/Hardware/prepare-stateful-nano-test.mjs"]);
   run("python3", ["-I", "-S", "-B", "Tools/Hardware/check-nano-gates.py"]);
@@ -48,6 +49,9 @@ if (args.length === 1 && args[0] === "--help") {
   requireSwiftTesting(join(root, 'Tests'));
   run("swift", ["test", "--disable-xctest", "--enable-swift-testing"], env);
   run("swift", ["test", "--package-path", "Validation/ROMHost", "--scratch-path", ".build/rom-host-checks",
+    "--disable-xctest", "--enable-swift-testing", "-Xswiftc", "-warnings-as-errors"], env);
+  requireSwiftTesting(join(root, "Demo/WorkbenchSupport/Tests"));
+  run("swift", ["test", "--package-path", "Demo/WorkbenchSupport", "--scratch-path", ".build/workbench-support",
     "--disable-xctest", "--enable-swift-testing", "-Xswiftc", "-warnings-as-errors"], env);
   run("python3", ["-I", "-S", "-B", "Tools/ManagedWASM/check-compiler-host.py"]);
   run("python3", ["-I", "-S", "-B", "Tools/Hardware/check-nano-host.py"]);

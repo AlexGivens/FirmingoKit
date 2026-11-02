@@ -169,3 +169,11 @@ public SDK/private-scheme, signed sandbox, minimum-OS and physical iOS/iPadOS
 qualification. No device is connected or changed. The manual SDK CI definition
 compiles this tool and runs `--check-inputs`; it deliberately does not fetch a WASM
 candidate or depend on a sibling compiler checkout.
+
+## Shared Workbench scenario runner
+
+The [Workbench app/CLI](../../docs/workbench-consolidation.md) now owns new manual
+and automated compiler integration scenarios. `run-validation.mjs` includes its
+shared Swift engine and CLI boundary tests. Legacy qualification generators remain
+for unmigrated scenarios and historical reproduction; no new phase-specific app
+identity is needed for the initial Workbench compiler cases.

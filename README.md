@@ -169,3 +169,12 @@ package identities, compatibility and actual checks.
 FirmingoKit is licensed under the [GNU General Public License version 3](LICENSE)
 (`GPL-3.0-only`), matching Firmingo-Compiler. Third-party components and imported
 fixtures retain their accompanying licenses and notices.
+
+## Firmingo Workbench
+
+The existing demo now consolidates manual and automated integration scenarios
+into one Workbench app. Its shared app-owned runner and explicit macOS CLI are
+documented in [Workbench consolidation](docs/workbench-consolidation.md).
+Compiler cases migrate first; hardware/lifecycle hosts remain until equivalent
+qualification exists. The CLI invokes the same app product and performs no device
+operation. SDK consumers gain no dependency on the testing package.

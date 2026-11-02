@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "date": "2026-11-02",
+  "status": "initial source-only signed app/CLI checks; prepared real WASM execution pending",
+  "toolchain": "Xcode 27.2 / Apple Swift 6.4.2",
+  "builds": [
+    "macOS Release",
+    "generic iOS Release",
+    "generic iOS Simulator Release"
+  ],
+  "checks": {
+    "initialEngineTests": 7,
+    "cliFixtureTests": 7,
+    "fullSDKEntryPoint": "passed: 166 SDK tests, eight ROM-host tests, seven initial Workbench tests and existing tool/source checks; absent runtime cases explicitly skipped",
+    "finalEngineTests": "eight deterministic Swift Testing cases passed, with warnings as errors",
+    "sourceOnlyRuntime": "compiler bytes absent; resource scenario blocked (exit 3), never a WASM pass"
+  },
+  "initialAppRuns": [
+    {
+      "operation": "list",
+      "scenarioID": null,
+      "requestID": "6A353096-2005-454A-863A-8D51B40B2FC8",
+      "observedStatus": "listed",
+      "resultSHA256": "3196c2ed55275dd087430873fd4169dff36b9855f2766bbd341191df09e560fe",
+      "executableSHA256": "b158999cb32bcc2e996e5807286839f7b60639e66f125320187d60bf538ffe93",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "deviceOperations": false
+    },
+    {
+      "operation": "run",
+      "scenarioID": "compiler.catalogue",
+      "requestID": "35D21FCB-703A-4323-9939-BF679D037EE1",
+      "observedStatus": "passed",
+      "resultSHA256": "3c1b4b4accb33f81d21065c5c8130af4a4141d11e3663c3d4bb18819c669a95c",
+      "executableSHA256": "b158999cb32bcc2e996e5807286839f7b60639e66f125320187d60bf538ffe93",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "deviceOperations": false
+    },
+    {
+      "operation": "run",
+      "scenarioID": "compiler.resources",
+      "requestID": "E35B581D-D635-4544-AAB4-EFC33D1A7865",
+      "observedStatus": "blocked",
+      "resultSHA256": "f5a4a160c3e953b61215897b449b43f23615caca46441ad91867f0100ce99271",
+      "executableSHA256": "b158999cb32bcc2e996e5807286839f7b60639e66f125320187d60bf538ffe93",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "deviceOperations": false
+    }
+  ],
+  "limitations": [
+    "No hardware, mobile execution, layout/accessibility or minimum-OS qualification.",
+    "Only legacy exact compiler-vector descriptor is migrated; hardware and lifecycle cases are blocked.",
+    "CLI is explicit macOS process launch, not live attachment/mobile pairing/MCP.",
+    "Legacy qualification hosts remain for unmigrated cases and historical evidence.",
+    "Prepared real WASM scenarios and final packaging review remain pending."
+  ]
+}

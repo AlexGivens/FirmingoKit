@@ -1,5 +1,13 @@
 # Firmingo demo instructions
 
+Current consolidation: [shared Workbench engine and CLI](../docs/workbench-consolidation.md).
+Use `WorkbenchSupport` for app-owned scenario orchestration and the shared registry;
+manual and CLI actions must invoke that same engine. Keep no-replay run IDs,
+bounded evidence, honest blocked results and public-SDK boundaries. Hardware and
+lifecycle hosts remain historical/unmigrated until equivalent evidence exists.
+The canonical scheme/product is FirmingoWorkbench; preserve the stable app bundle
+identity instead of creating another binary identity for each phase.
+
 The root AGENTS.md remains authoritative for SDK boundaries and reference safety.
 This is a separate document-based macOS/iOS/iPadOS host consuming the local package.
 

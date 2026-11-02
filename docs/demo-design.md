@@ -1,4 +1,10 @@
-# Native demo design
+# Firmingo Workbench design
+
+The [2026-11-02 Workbench consolidation](workbench-consolidation.md) is the current
+app/test direction. The existing project now produces one Workbench app with a
+shared compiler scenario engine, manual Test Lab and explicit macOS CLI. Historical
+increments below retain their original scope; legacy hardware/lifecycle hosts
+remain until their scenarios have equivalent Workbench evidence.
 
 The intended journey is select board → install Firmingo → connect → edit and build
 supported source → upload → confirm useful behavior → use console → update/recover.

@@ -36,6 +36,9 @@ jobs:
           echo 'Swift Testing exercises the FMS2 golden staging/one-shot commit/reconciliation and production TCP actor through injected platform callbacks: initial waiting/ready, original deadline, cancellation, terminal failure and established path loss. No socket, OS permission reset or automatic reconnect is used; fresh physical permission prompts remain separate qualification.' >> "$GITHUB_STEP_SUMMARY"
       - name: Explain ROM qualification host boundary
         run: echo 'The same validation entry point builds the explicit macOS ROM qualification host and tests command admission, exact Nano confirmation, changed-manifest rejection and preservation of existing evidence. No ROM mount, real UF2, programming, live socket or paused transfer is used by these tests. Signed host execution and physical power-loss/recovery remain separately selected experiments; direct iOS/iPadOS ROM programming is unavailable.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Explain Workbench consolidation boundary
+        run: |
+          echo 'The shared app-owned Workbench engine and CLI fixtures run through the normal SDK entry point: closed offline commands, exclusive run IDs, persistence gates, cancellation/busy settlement and correlated terminal evidence. Missing WASM is blocked, not passed. Signed app execution and prepared-resource compilation remain explicit; no listener, board, UI inspection or deployment runs in this job.' >> "$GITHUB_STEP_SUMMARY"
       - name: Compile maintained WebKit source-asset host and exercise address rejection without assets
         run: |
           mkdir -p .build/owned-service-webkit
@@ -70,6 +73,9 @@ jobs:
           - name: ios-device
             operation: build
             destination: generic/platform=iOS
+          - name: workbench-macos
+            operation: build
+            destination: generic/platform=macOS
           - name: docc
             operation: docbuild
             destination: generic/platform=macOS
@@ -84,6 +90,9 @@ jobs:
           swift --version | grep -q 'Swift version 6.4'
       - name: Build the SDK for the selected Apple destination
         run: xcodebuild '${{ matrix.operation }}' -workspace Validation/FirmingoKit.xcworkspace -scheme FirmingoKit -destination '${{ matrix.destination }}' -derivedDataPath '.build/adapter-ci-${{ matrix.name }}' CODE_SIGNING_ALLOWED=NO 2>&1 | tee '.build/adapter-ci/${{ matrix.name }}.log'
+      - name: Build the consolidated Workbench app for the selected destination
+        if: matrix.name != 'docc'
+        run: xcodebuild build -project Demo/FirmingoDemo.xcodeproj -scheme FirmingoWorkbench -configuration Release -destination '${{ matrix.destination }}' -derivedDataPath '.build/workbench-ci-${{ matrix.name }}' CODE_SIGNING_ALLOWED=NO 2>&1 | tee '.build/adapter-ci/workbench-${{ matrix.name }}.log'
       - name: Compile optimized qualification-host sources against the iOS SDK without compiler assets or signing
         if: matrix.name == 'ios-device'
         run: |

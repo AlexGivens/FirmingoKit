@@ -17,6 +17,10 @@ struct WorkbenchView: View {
     @State private var confirmingClear = false
     /// Stable document identity ties receipts to this window's source revisions.
     @State private var documentID = UUID()
+    /// One app-owned Test Lab shared with the automation launch path.
+    let lab: WorkbenchLabModel
+    /// Opens manual tests without changing compiler/device selections in the editor.
+    @State private var showingTestLab = false
     /// Original document filename used by source diagnostics.
     var filename: String = "Sketch.ino"
     /// Presents explicit endpoint selection.
@@ -46,6 +50,10 @@ struct WorkbenchView: View {
         }
         .toolbar {
             ToolbarItem {
+                Button("Test Lab", systemImage: "testtube.2") { showingTestLab = true }
+                    .accessibilityIdentifier("workbench.open-test-lab")
+            }
+            ToolbarItem {
                 Button("Inspect Device", systemImage: "network") { showingInspection = true }
                     .keyboardShortcut("i", modifiers: [.command, .shift])
             }
@@ -62,6 +70,7 @@ struct WorkbenchView: View {
                 if builds.isBusy { Button("Cancel Build/Run") { builds.cancel() } }
             }
         }
+        .sheet(isPresented: $showingTestLab) { WorkbenchLabView(model: lab) }
         .sheet(isPresented: $showingInspection) { DeviceInspectionView(model: model) }
         .sheet(isPresented: $showingInstallationReview) { InstallationReviewView(workbench: model) }
         .onChange(of: document.source) { revision &+= 1; builds.sourceChanged(revision: revision) }
