@@ -660,3 +660,10 @@ the whole app on declared Apple destinations. Compiler package provisioning stay
 explicit, while hardware/lifecycle migration and physical/UI qualification remain
 separate. Xcode 27.2 / Apple Swift 6.4.2 are the currently installed local tools;
 the existing CI Xcode 27.0 pin is retained and remote execution is not inferred.
+
+The first Workbench increment passed real WASM resource, two-source compilation
+and frontend-error/fresh-build checks through one signed sandboxed macOS binary.
+A fresh process rejected a completed UUID, and unmigrated hardware remained
+blocked. [Exact local evidence](workbench-consolidation-local.json) records the
+clean prepared source/package/binary identities and full terminal reports. Generic
+platform builds passed; no physical/UI or remote-CI qualification is inferred.

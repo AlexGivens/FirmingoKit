@@ -5,7 +5,7 @@ FirmingoKit APIs. Compiler execution/recipes stay in Firmingo-Compiler; device
 contracts and independent validators stay in Firmingo. Historical qualification
 hosts/results are retained until their scenarios have equivalent new evidence.
 
-## First increment (in progress)
+## First increment (locally validated)
 
 - Shared `Demo/WorkbenchSupport` package: version-one requests, scenario registry,
   bounded durable reports, no-replay run identities, cancellation and retained history.
@@ -157,3 +157,42 @@ checks. Adapter CI also compiles the complete Workbench app for macOS, iOS and
 Simulator on its explicitly provisioned Apple runner; no signed app execution,
 compiler binary provisioning, test listener or hardware action runs implicitly.
 Local validation is recorded separately from any remote CI execution.
+
+## Recorded first-increment results — 2026-11-02
+
+[Local evidence ledger](workbench-consolidation-local.json) retains the exact clean
+SDK source revision, reviewed package anchor, prepared inventory, signed executable
+identity, request/PID correlation, original response hashes and full terminal run
+reports with capsule bytes/receipts. Initial source-only observations retain their
+separate earlier binary identity.
+
+The prepared app was built from clean SDK commit
+`a28e3f044a92a1e52d9f467eb1e66d2ddaf92394`, with consumer manifest
+`1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a`.
+One development-signed, sandboxed Workbench binary on macOS 27.0 (26A428) completed
+CLI discovery, resource verification, cold/warm compilation and diagnostic/fresh
+build checks. The GPIO capsule was 316 bytes, SHA-256
+`958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d`;
+the console capsule was 392 bytes, SHA-256
+`b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0`.
+The real frontend error mapped to `Workbench-invalid.ino`, line 1, column 16;
+a subsequent known GPIO build passed using the same compiler instance.
+
+Reusing the completed smoke UUID in a new app process returned command error
+(exit 2), with no run report or catalogue load. Selecting the unmigrated hardware
+case returned blocked (exit 3). These are expected rejections, not compiler passes.
+All six invocations used the same executable digest. No board or external service
+was contacted, no app was deployed to a device and no native UI was inspected.
+
+Eight final engine tests and seven CLI fixtures passed. The ordinary SDK entry
+point also passed 166 SDK tests, eight ROM-host tests, the seven initial engine
+tests and existing source/tool checks; the added eighth parent-cancellation case
+passed separately with warnings as errors. Complete Release app builds passed
+for macOS, generic iOS and generic iOS Simulator; the Simulator check also built
+the prepared-resource snapshot. These builds do not qualify physical mobile UI,
+minimum OS, hardware or deployment behavior. Remote CI execution remains pending.
+
+The first increment is complete at this scope. Next migrate compiler lifecycle,
+deadline and stress cases, then pair a mobile controller before migrating device
+and guarded recovery operations. Keep the existing specialized hosts available
+until their replacements have equivalent evidence.

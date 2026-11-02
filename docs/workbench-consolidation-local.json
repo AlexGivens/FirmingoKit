@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-11-02",
-  "status": "initial source-only signed app/CLI checks; prepared real WASM execution pending",
+  "status": "first increment locally validated: shared engine, Test Lab and signed-app CLI; prepared real WASM checks passed",
   "toolchain": "Xcode 27.2 / Apple Swift 6.4.2",
   "builds": [
     "macOS Release",
@@ -13,7 +13,11 @@
     "cliFixtureTests": 7,
     "fullSDKEntryPoint": "passed: 166 SDK tests, eight ROM-host tests, seven initial Workbench tests and existing tool/source checks; absent runtime cases explicitly skipped",
     "finalEngineTests": "eight deterministic Swift Testing cases passed, with warnings as errors",
-    "sourceOnlyRuntime": "compiler bytes absent; resource scenario blocked (exit 3), never a WASM pass"
+    "sourceOnlyRuntime": "compiler bytes absent; resource scenario blocked (exit 3), never a WASM pass",
+    "finalSimulatorBuild": "prepared source snapshot a28e3f0: generic iOS Simulator Release passed",
+    "preparedRuntime": "resource verification, two-source compilation, frontend rejection and fresh build passed in the same development-signed sandboxed macOS binary",
+    "processRestartReplay": "completed smoke UUID rejected in a fresh process, exit 2 and no report/catalogue/backend work",
+    "unmigratedHardware": "blocked, exit 3; no device operations"
   },
   "initialAppRuns": [
     {
@@ -64,6 +68,410 @@
     "Only legacy exact compiler-vector descriptor is migrated; hardware and lifecycle cases are blocked.",
     "CLI is explicit macOS process launch, not live attachment/mobile pairing/MCP.",
     "Legacy qualification hosts remain for unmigrated cases and historical evidence.",
-    "Prepared real WASM scenarios and final packaging review remain pending."
+    "Remote CI has not run; workflow uses the retained Xcode 27.0 pin while local checks used 27.2.",
+    "Prepared compiler/resources were assembled from a clean committed SDK snapshot; the root source checkout remains source-only.",
+    "Initial source-only runs above preceded the final source snapshot and retain their separate executable identity."
+  ],
+  "preparedPackage": {
+    "sdkCommit": "a28e3f044a92a1e52d9f467eb1e66d2ddaf92394",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "preparedInventorySHA256": "82f6481e107f6b9fc3c501ea1163ce57cedde56ead98e0e0f785b570b782a9f0",
+    "source": "explicitly supplied reviewed experimental consumer package; no download or sibling discovery",
+    "published": false,
+    "team": "WGR9T9JH4L",
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "2",
+    "profile": "nano-managed-v1 (legacy pinned compiler vectors only)",
+    "qualification": "experimental local compiler execution; not hardware or production asset promotion"
+  },
+  "preparedAppRuns": [
+    {
+      "case": "list",
+      "request": {
+        "operation": "list",
+        "requestID": "BA62DEC0-8561-4A07-B21F-AB53474D24E4",
+        "schema": 1
+      },
+      "processID": 62209,
+      "observedStatus": "listed",
+      "expectedExitCode": 0,
+      "resultSHA256": "841a1e70cadef778939f2803df7313f0a9b5254f1bb7775ceed5f6c9d8507cc0",
+      "executableSHA256": "44bbc702061801bc5d54515936b7af456eebd529306077ddf905efb17bc7ac60",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": {
+        "builds": [
+          {
+            "board": "nano_rp2040_connect",
+            "id": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+            "profile": "nano-managed-v1"
+          }
+        ],
+        "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      },
+      "report": null,
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-prepared-list-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "resources",
+      "request": {
+        "operation": "run",
+        "requestID": "D7AAE594-C95C-4F49-AD69-5AB9870142A3",
+        "scenarioID": "compiler.resources",
+        "schema": 1
+      },
+      "processID": 62355,
+      "observedStatus": "passed",
+      "expectedExitCode": 0,
+      "resultSHA256": "1c442a165c5dd9ea9a1c025468d599677ddb01671c7c85bb3e9a79d889c871cb",
+      "executableSHA256": "44bbc702061801bc5d54515936b7af456eebd529306077ddf905efb17bc7ac60",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": {
+        "builds": [
+          {
+            "board": "nano_rp2040_connect",
+            "id": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+            "profile": "nano-managed-v1"
+          }
+        ],
+        "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "2",
+        "artifacts": [],
+        "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Loading actual SDK-verified catalogue metadata.",
+            "phase": "catalogue",
+            "seconds": 0.8483822499401867,
+            "sequence": 0
+          },
+          {
+            "detail": "Verifying real bundled compiler/runtime resources.",
+            "phase": "resources",
+            "seconds": 0.8710218328051269,
+            "sequence": 1
+          },
+          {
+            "detail": "All assertions in this offline scenario completed.",
+            "phase": "complete",
+            "seconds": 1.2778908326290548,
+            "sequence": 2
+          }
+        ],
+        "id": "D7AAE594-C95C-4F49-AD69-5AB9870142A3",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 62355,
+        "scenarioID": "compiler.resources",
+        "schema": 1,
+        "status": "passed"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-prepared-resources-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "smoke",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "79B0D45B-FBA5-4639-BF02-CFFEF9663BA2",
+        "scenarioID": "compiler.smoke",
+        "schema": 1
+      },
+      "processID": 62380,
+      "observedStatus": "passed",
+      "expectedExitCode": 0,
+      "resultSHA256": "34d526330e33b9a47661f6d34c26d606ec49b77c04a3543cf695f3dfc06af925",
+      "executableSHA256": "44bbc702061801bc5d54515936b7af456eebd529306077ddf905efb17bc7ac60",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": {
+        "builds": [
+          {
+            "board": "nano_rp2040_connect",
+            "id": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+            "profile": "nano-managed-v1"
+          }
+        ],
+        "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "2",
+        "artifacts": [
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+            "name": "gpio.fms",
+            "receiptJSON": "eyJzb3VyY2VGaWxlbmFtZSI6IldvcmtiZW5jaC1ncGlvLmlubyIsInNvdXJjZVJldmlzaW9uIjoxLCJkb2N1bWVudElEIjoiODFCMkE2QUEtOEExOS00QUY5LUE2QzQtNkZCQjQ0RjA2OEFDIiwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsImxpbmtlZEVMRlNIQTI1NiI6ImQ3MjlhOGI2YThlMzUzYjFmZGUwMTFlYTYyNTk3ZjBiYzVlMTQ1MDA0OTZlMDE4ZTdjNWJkNWMxNTI3NjA1MGQiLCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiIwOTEyMzZhZWVhMWQxYjRkZWQ0MTBkZTNlYjE1NWIxOTY3MzhhZTlkNzI3ZDFkNzQxMWQzYjljYTNiY2JlNGRlIiwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJidWlsZElucHV0U0hBMjU2IjoiMjRhYzlkYWFhOGFiMDUzZjJiOTU0YWU3NTRiMzdjYzFkNTFhNGMwYTBkNDU4ZTg2YzJmNTk2ZDUwNmYxZjgyMCIsImZpcm13YXJlQnVpbGRJRCI6ImM0NGQyNWVmZTc3NGViNDdiMTYzYmMwODI5MDZjZjQ4YjU5YjZlM2RkMWQwZTE5Yzc4MjI5MjVlNmJhODI3NWYiLCJwcm92ZW5hbmNlIjp7InRvb2xjaGFpblNIQTI1NiI6ImE0NGFmYTg0ZTc2YWU3YjE3NDJmZDVlY2ZlZWMyMDU1NjU2NDNiOTQ5NDhlMzRkOGM1NzAyOWFlM2NhZGE5ZmQiLCJyZWNpcGVJZGVudGlmaWVyIjoibmFuby1zdGF0ZWxlc3MtY2xhbmctMjIuMS44LXYxLWV4cGVyaW1lbnRhbCIsImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIiLCJyZWNpcGVTSEEyNTYiOiJiNzg2OWY2ZmM4NjNlMTkwNWRlYjY5NzQ0MDhjNmU3ZGM2Mzk0M2ExZmIzZTM0MmEzNTdmZGY3NTdiMWUyM2Q5In0sImNhcHN1bGVTSEEyNTYiOiI5NThiODYxYmJjMThkNDY2NmVkMDNlNjk3NmIzOWI5ZmVhNDgxMjQwOWFkOTFhMzUwMWFiYmI5Njg1YTgwZDdkIiwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MSIsInNvdXJjZVNIQTI1NiI6ImZkYWQ4OGFhOGIyMGIwNDVmMzUzNjJjMTNlNTYwOTBiYTg1YjdiZDNlOGYwMjQ0NTJiM2IzOWY4N2MwZjI1NjgiLCJ2ZXJzaW9uIjoxfQ==",
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBCIAAAAAQEgEAkBIBB1Er8mbpcQeimvK3s+mRIaw5V5WZrf1lJWRLO0DsrZswAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Bv4gL3gtQGoAUkA8AP4jL2AASAQvLUBrAVKIoAA8Bz4BUYESAJoAiEgRpBHQBm8vQ0KAAC0LAIQHLUGTKBogEcAKAXUAaoQcCNoASEQRphHHL3ARrQsAhCAtQhGACFCXEkcACr70QJKEmhJHpBHgL20LAIQcmVhZHkA1NQ=",
+            "name": "console.fms",
+            "receiptJSON": "eyJkb2N1bWVudElEIjoiMkE1RURFOEEtRjVGNS00OEI1LUJGRTUtN0YwRDUwQjA5ODdEIiwic291cmNlRmlsZW5hbWUiOiJXb3JrYmVuY2gtY29uc29sZS5pbm8iLCJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJsaW5rZWRFTEZTSEEyNTYiOiIyZmJkZDY3ZTRkNDQ0YjIwZTQ1MGYzZjdlODJjYWIwM2M4N2E5NTYzNWUwMTJlZTQ1MTgxYmQxZDE4ZWM5MDdhIiwiYnVpbGRJbnB1dFNIQTI1NiI6ImE3MTg2YmM2YWY2NTIzM2Q2ZjFiNDU2OTg2MWJhN2JmNWQ5YjNhZTVlZmIwZmMxOGNlNzJhMzY0ZWU1YjdkYzUiLCJ2ZXJzaW9uIjoxLCJzb3VyY2VSZXZpc2lvbiI6MSwiY2Fwc3VsZVNIQTI1NiI6ImIzNzJjMDBlZGY0YjYwYzY2MmY3MzA1NTY4NWVkODc2NGU5Zjg3OThmZTllZmJiYWZhZDA0MzAyNTQ5MTc0YzAiLCJwcm92ZW5hbmNlIjp7InJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSIsImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIiLCJ0b29sY2hhaW5TSEEyNTYiOiJhNDRhZmE4NGU3NmFlN2IxNzQyZmQ1ZWNmZWVjMjA1NTY1NjQzYjk0OTQ4ZTM0ZDhjNTcwMjlhZTNjYWRhOWZkIn0sInNvdXJjZVNIQTI1NiI6IjY5N2Y5NTQ3ZjcyZDQ3ODIxMGRkMjliZDY2YzYyOTNlMGE5YWU5MjZhMWI0ZThkNTY4YjEwYWVlYWIzN2Y1YTMiLCJwcm9maWxlIjoibmFuby1tYW5hZ2VkLXYxIiwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjUzYjBjMGE3MzJhMTFmZmZmMzQ5NjcyNTYzNmEwYTZiOTQ2NjMzNDRiMjdmZTNhNGUzMGY4NjlhMTYyY2VhOTUifQ==",
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Loading actual SDK-verified catalogue metadata.",
+            "phase": "catalogue",
+            "seconds": 0.8516296246089041,
+            "sequence": 0
+          },
+          {
+            "detail": "Verifying real bundled compiler/runtime resources.",
+            "phase": "resources",
+            "seconds": 0.8668954577296972,
+            "sequence": 1
+          },
+          {
+            "detail": "Executing actual WASM compile/link/package through the SDK.",
+            "phase": "compile-gpio",
+            "seconds": 1.2784738326445222,
+            "sequence": 2
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 2.824847166892141,
+            "sequence": 3
+          },
+          {
+            "detail": "Executing actual WASM compile/link/package through the SDK.",
+            "phase": "compile-console",
+            "seconds": 2.8260912080295384,
+            "sequence": 4
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 3.881496666930616,
+            "sequence": 5
+          },
+          {
+            "detail": "All assertions in this offline scenario completed.",
+            "phase": "complete",
+            "seconds": 3.882696666754782,
+            "sequence": 6
+          }
+        ],
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "id": "79B0D45B-FBA5-4639-BF02-CFFEF9663BA2",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 62380,
+        "scenarioID": "compiler.smoke",
+        "schema": 1,
+        "status": "passed"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-prepared-smoke-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "diagnostics",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "9BB82651-A44B-472C-977C-5440B78A6238",
+        "scenarioID": "compiler.diagnostics",
+        "schema": 1
+      },
+      "processID": 62413,
+      "observedStatus": "passed",
+      "expectedExitCode": 0,
+      "resultSHA256": "efbdc6edd8f16c3b302addfef96b7d617dc67c8bff2ae1556b56634ddde83508",
+      "executableSHA256": "44bbc702061801bc5d54515936b7af456eebd529306077ddf905efb17bc7ac60",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": {
+        "builds": [
+          {
+            "board": "nano_rp2040_connect",
+            "id": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+            "profile": "nano-managed-v1"
+          }
+        ],
+        "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "2",
+        "artifacts": [
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+            "name": "gpio.fms",
+            "receiptJSON": "eyJwcm92ZW5hbmNlIjp7InJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwiY29tcGlsZXIiOiJDbGFuZ1wvTExEIDIyLjEuOCBBQkktdHdvIFdBU0kgc2VydmljZSwgaXNvbGF0ZWQgV2ViS2l0IHdvcmtlciIsInRvb2xjaGFpblNIQTI1NiI6ImE0NGFmYTg0ZTc2YWU3YjE3NDJmZDVlY2ZlZWMyMDU1NjU2NDNiOTQ5NDhlMzRkOGM1NzAyOWFlM2NhZGE5ZmQiLCJyZWNpcGVTSEEyNTYiOiJiNzg2OWY2ZmM4NjNlMTkwNWRlYjY5NzQ0MDhjNmU3ZGM2Mzk0M2ExZmIzZTM0MmEzNTdmZGY3NTdiMWUyM2Q5In0sInZlcnNpb24iOjEsImJvYXJkSUQiOiJuYW5vX3JwMjA0MF9jb25uZWN0IiwidHJhbnNsYXRpb25Vbml0U0hBMjU2IjoiMDkxMjM2YWVlYTFkMWI0ZGVkNDEwZGUzZWIxNTViMTk2NzM4YWU5ZDcyN2QxZDc0MTFkM2I5Y2EzYmNiZTRkZSIsInNvdXJjZUZpbGVuYW1lIjoiV29ya2JlbmNoLWdwaW8uaW5vIiwiYnVpbGRJbnB1dFNIQTI1NiI6IjYxMzdiZDllYThmZjE5YWVjYTNjNDQyYmM3NjUzNWY5NWZkMWE5YWRhYjBmNWZiZDNkMTYyMDk5OTQxZWZjZTciLCJwcm9maWxlIjoibmFuby1tYW5hZ2VkLXYxIiwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsInNvdXJjZVJldmlzaW9uIjoxLCJkb2N1bWVudElEIjoiRUY2NzY1N0MtRjE3RS00NUU1LUEzMDUtREY2MUU4RTZGMEE1IiwiZmlybXdhcmVCdWlsZElEIjoiYzQ0ZDI1ZWZlNzc0ZWI0N2IxNjNiYzA4MjkwNmNmNDhiNTliNmUzZGQxZDBlMTljNzgyMjkyNWU2YmE4Mjc1ZiIsImxpbmtlZEVMRlNIQTI1NiI6ImQ3MjlhOGI2YThlMzUzYjFmZGUwMTFlYTYyNTk3ZjBiYzVlMTQ1MDA0OTZlMDE4ZTdjNWJkNWMxNTI3NjA1MGQiLCJzb3VyY2VTSEEyNTYiOiJmZGFkODhhYThiMjBiMDQ1ZjM1MzYyYzEzZTU2MDkwYmE4NWI3YmQzZThmMDI0NDUyYjNiMzlmODdjMGYyNTY4IiwiY2Fwc3VsZVNIQTI1NiI6Ijk1OGI4NjFiYmMxOGQ0NjY2ZWQwM2U2OTc2YjM5YjlmZWE0ODEyNDA5YWQ5MWEzNTAxYWJiYjk2ODVhODBkN2QifQ==",
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+        "deviceOperations": false,
+        "diagnostics": [
+          {
+            "column": 16,
+            "filename": "Workbench-invalid.ino",
+            "line": 1,
+            "message": "use of undeclared identifier 'missingFunction'",
+            "severity": "error"
+          },
+          {
+            "message": "    1 | void setup() { missingFunction(); }",
+            "severity": "note"
+          },
+          {
+            "message": "      |                ^~~~~~~~~~~~~~~",
+            "severity": "note"
+          }
+        ],
+        "diagnosticsOmitted": 0,
+        "events": [
+          {
+            "detail": "Loading actual SDK-verified catalogue metadata.",
+            "phase": "catalogue",
+            "seconds": 0.7655467502772808,
+            "sequence": 0
+          },
+          {
+            "detail": "Verifying real bundled compiler/runtime resources.",
+            "phase": "resources",
+            "seconds": 0.7865229584276676,
+            "sequence": 1
+          },
+          {
+            "detail": "Requiring typed compiler rejection and nonempty diagnostics.",
+            "phase": "frontend-error",
+            "seconds": 1.2055522911250591,
+            "sequence": 2
+          },
+          {
+            "detail": "Observed 3 source diagnostics.",
+            "phase": "frontend-rejected",
+            "seconds": 2.161700625438243,
+            "sequence": 3
+          },
+          {
+            "detail": "Executing actual WASM compile/link/package through the SDK.",
+            "phase": "compile-gpio",
+            "seconds": 2.1625394164584577,
+            "sequence": 4
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 3.1467202501371503,
+            "sequence": 5
+          },
+          {
+            "detail": "All assertions in this offline scenario completed.",
+            "phase": "complete",
+            "seconds": 3.14835250005126,
+            "sequence": 6
+          }
+        ],
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "id": "9BB82651-A44B-472C-977C-5440B78A6238",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 62413,
+        "scenarioID": "compiler.diagnostics",
+        "schema": 1,
+        "status": "passed"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-prepared-diagnostics-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "replay",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "79B0D45B-FBA5-4639-BF02-CFFEF9663BA2",
+        "scenarioID": "compiler.smoke",
+        "schema": 1
+      },
+      "processID": 62441,
+      "observedStatus": "commandError",
+      "expectedExitCode": 2,
+      "resultSHA256": "f44f61a83ce92b84bcec6066c1284a405e15e437648ccd1d4a6fb010460d8dde",
+      "executableSHA256": "44bbc702061801bc5d54515936b7af456eebd529306077ddf905efb17bc7ac60",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": null,
+      "report": null,
+      "error": "The operation couldn\u2019t be completed. File exists",
+      "localEvidenceDirectory": ".build/workbench-prepared-replay-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "blocked",
+      "request": {
+        "operation": "run",
+        "requestID": "6232B69A-3AE6-4945-A165-C752D5DBC201",
+        "scenarioID": "device.upload-recovery",
+        "schema": 1
+      },
+      "processID": 62452,
+      "observedStatus": "blocked",
+      "expectedExitCode": 3,
+      "resultSHA256": "989fa991b91230e2ea4b58dde8c34f6b7f8be8c2f1183c595a882832c7db4a24",
+      "executableSHA256": "44bbc702061801bc5d54515936b7af456eebd529306077ddf905efb17bc7ac60",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": null,
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "2",
+        "artifacts": [],
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Not migrated. This runner has no device, staging, commit or ROM-write command.",
+            "phase": "prerequisites",
+            "seconds": 0.9156909170560539,
+            "sequence": 0
+          }
+        ],
+        "id": "6232B69A-3AE6-4945-A165-C752D5DBC201",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 62452,
+        "scenarioID": "device.upload-recovery",
+        "schema": 1,
+        "status": "blocked"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-prepared-blocked-r1",
+      "deviceOperations": false
+    }
   ]
 }
