@@ -7,3 +7,5 @@ See [usage, protocol and limits](../../docs/workbench-consolidation.md).
 
 Run deterministic CLI fixtures with
 `python3 -I -S -B Tools/Workbench/test-workbench.py`.
+
+[Compiler lifetime, deadline, stress and mobile scene scenarios](../../docs/workbench-compiler-scenarios.md) use the same app and command engine.

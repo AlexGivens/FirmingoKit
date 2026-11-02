@@ -25,6 +25,10 @@ import Darwin
     /// Synchronizes contents and directory metadata; any error prevents a later passed report.
     public func save(_ report: WorkbenchReport) throws {
         guard report.events.count <= 64, report.artifacts.count <= 3 else { throw WorkbenchFailure("Run evidence bound exceeded.") }
+        if let exercise = report.exercise {
+            guard exercise.builds.count <= 40, exercise.progress.count <= 8, exercise.scenes.count <= 32,
+                  exercise.samples.count <= 128, exercise.droppedSamples >= 0 else { throw WorkbenchFailure("Compiler exercise evidence bound exceeded.") }
+        }
         let encoder = JSONEncoder(); encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         let bytes = try encoder.encode(report)
         guard bytes.count <= 65536 else { throw WorkbenchFailure("Run report exceeds 64 KiB.") }

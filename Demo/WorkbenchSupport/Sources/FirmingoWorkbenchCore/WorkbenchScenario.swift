@@ -14,7 +14,9 @@ public struct WorkbenchScenario: Codable, Sendable, Identifiable, Equatable {
     public let requiresBuild: Bool
     /// An explicit migration prerequisite; nil means this runner implements the case.
     public let unavailableReason: String?
-    /// Initial catalogue: real compiler cases plus clearly blocked future hardware/lifecycle migrations.
+    /// Requires a real interactive iOS/iPadOS scene adapter; launch-only CLI cannot synthesize it.
+    public var requiresSceneTransitions = false
+    /// Shared registry: real compiler/mobile scene cases and an explicitly blocked hardware migration.
     public static let all: [Self] = [
         .init(id: "compiler.catalogue", title: "Verify bundled catalogue", category: "Compiler",
               detail: "Load SDK-verified metadata. This does not execute WASM or inspect a board.", requiresBuild: false, unavailableReason: nil),
@@ -27,8 +29,20 @@ public struct WorkbenchScenario: Codable, Sendable, Identifiable, Equatable {
         .init(id: "device.upload-recovery", title: "Managed upload and recovery", category: "Device",
               detail: "Existing qualification guards remain in NanoHost until this migration is verified.", requiresBuild: true,
               unavailableReason: "Not migrated. This runner has no device, staging, commit or ROM-write command."),
-        .init(id: "host.lifecycle", title: "Compiler lifecycle and pressure", category: "Host",
-              detail: "Actual external lifecycle actions and broader resource measurement need their own migration.", requiresBuild: true,
-              unavailableReason: "Not migrated. Existing lifecycle evidence retains its exact app/source identity.")
+        .init(id: "compiler.cancellation", title: "SDK busy, cancellation and fresh build", category: "Compiler",
+              detail: "Observe source compilation, require typed SDK busy, cancel that request and build fresh.", requiresBuild: true, unavailableReason: nil),
+        .init(id: "compiler.deadline", title: "Production deadline and fresh build", category: "Compiler",
+              detail: "Use the pinned expensive input to require the real sixty-second SDK deadline; no injected timeout.", requiresBuild: true, unavailableReason: nil),
+        .init(id: "compiler.stress", title: "Twenty builds and memory observations", category: "Compiler",
+              detail: "Alternate twenty known builds with bounded self-process footprint samples; no leak-free or aggregate peak claim.", requiresBuild: true, unavailableReason: nil),
+        .init(id: "host.lifecycle", title: "Idle background and return", category: "Host",
+              detail: "Build known artifacts around actual iOS/iPadOS background/return events in the same app process.", requiresBuild: true,
+              unavailableReason: nil, requiresSceneTransitions: true),
+        .init(id: "host.lifecycle-active", title: "Active compiler background cancellation", category: "Host",
+              detail: "Explicitly start a pending build, go Home during source compilation, then return and build fresh.", requiresBuild: true,
+              unavailableReason: nil, requiresSceneTransitions: true),
+        .init(id: "host.lifecycle-worker", title: "Calibrated worker background cancellation", category: "Host",
+              detail: "Calibrate the pinned long source compile, explicitly start, go Home and require first-source cancellation plus fresh recovery.", requiresBuild: true,
+              unavailableReason: nil, requiresSceneTransitions: true)
     ]
 }

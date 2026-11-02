@@ -30,6 +30,8 @@ public struct WorkbenchReport: Codable, Sendable, Identifiable {
     public var diagnostics: [Diagnostic]?
     /// Number of additional compiler messages beyond the report's sixteen-message presentation bound.
     public var diagnosticsOmitted: Int?
+    /// Optional bounded compiler exercise extension; absent in earlier schema-one reports.
+    public var exercise: WorkbenchExerciseEvidence?
     /// This first protocol has no device-changing or connecting operation.
     public var deviceOperations = false
     /// Closed statuses; blocked/cancelled/incomplete can never be counted as passed.

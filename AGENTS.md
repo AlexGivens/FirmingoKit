@@ -26,8 +26,10 @@ On 2026-11-02 the existing demo begins consolidation into Firmingo Workbench.
 version-one requests and bounded journals; Test Lab and `Tools/Workbench/workbench.py`
 invoke that same engine through the same app product. The normal SDK product gains
 no testing dependency. Current automation is macOS-only explicit offline app launch,
-with no live listener or device command. Hardware/lifecycle hosts remain for
-unmigrated cases and historical evidence. See `docs/workbench-consolidation.md`.
+with no live listener or device command. The second increment adds compiler
+busy/cancellation, actual deadline, twenty-build stress and interactive mobile
+scene scenarios; see `docs/workbench-compiler-scenarios.md`. Legacy hosts remain
+until matching replacement qualification, including physical mobile evidence. See `docs/workbench-consolidation.md`.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

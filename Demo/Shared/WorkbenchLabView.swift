@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Compiler and device scenarios use public FirmingoKit APIs. This first increment runs offline compiler cases only.")
+                    Text("Compiler and device scenarios use public FirmingoKit APIs. Compiler checks are offline; lifecycle checks require this app on iOS/iPadOS.")
                     HStack {
                         Button("Load SDK Catalogue") { model.inspectCatalogue() }
                             .accessibilityIdentifier("workbench.lab.catalogue")
@@ -31,11 +31,14 @@ import UniformTypeIdentifiers
                                 Text(scenario.category + " · " + scenario.id).font(.caption.monospaced())
                                 Text(scenario.detail)
                                 if let reason = scenario.unavailableReason { Text("Blocked: " + reason).foregroundStyle(.secondary) }
+                                if scenario.requiresSceneTransitions && !model.engine.supportsSceneTransitions {
+                                    Text("Requires interactive iOS/iPadOS scene delivery; unavailable in this host.").foregroundStyle(.secondary)
+                                }
                                 if scenario.requiresBuild && model.selectedBuildID.isEmpty {
                                     Text("Prerequisite: load the catalogue and select the exact supported descriptor.").foregroundStyle(.secondary)
                                 }
                                 Button("Run " + scenario.title) { model.run(scenario) }
-                                    .disabled(model.engine.isRunning || scenario.unavailableReason != nil || (scenario.requiresBuild && model.selectedBuildID.isEmpty))
+                                    .disabled(model.engine.isRunning || scenario.unavailableReason != nil || (scenario.requiresSceneTransitions && !model.engine.supportsSceneTransitions) || (scenario.requiresBuild && model.selectedBuildID.isEmpty))
                                     .accessibilityIdentifier("workbench.lab.run." + scenario.id)
                             }.frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -44,6 +47,19 @@ import UniformTypeIdentifiers
                         Divider()
                         Text("Current run: " + report.status.rawValue).font(.headline)
                         Text(report.id.uuidString).font(.caption.monospaced()).textSelection(.enabled)
+                        if model.engine.awaitingLifecycleStart {
+                            Button("Start lifecycle interruption") { model.beginLifecycleInterruption() }
+                                .accessibilityIdentifier("workbench.lab.lifecycle.start")
+                        }
+                        if let exercise = report.exercise {
+                            Text("Completed builds: \(exercise.builds.count) · footprint samples: \(exercise.samples.count) · omitted: \(exercise.droppedSamples)")
+                            Text(exercise.sceneObservationScope).font(.caption)
+                            if let phase = exercise.progress.last { Text("Current SDK phase: " + phase.phase) }
+                            if let outcome = exercise.outcome { Text("Interrupted request: " + outcome) }
+                            if let peak = exercise.samples.map(\.bytes).max() {
+                                Text("Sampled self-process footprint maximum: \(peak) bytes; excludes WebKit children and missed peaks.").font(.caption)
+                            }
+                        }
                         if model.engine.isRunning { Button("Cancel current scenario") { model.cancel() } }
                         ForEach(report.events, id: \.sequence) { event in
                             VStack(alignment: .leading) {

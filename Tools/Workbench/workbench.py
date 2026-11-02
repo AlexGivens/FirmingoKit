@@ -40,6 +40,93 @@ def unique_object(pairs):
     return result
 
 
+GPIO_SHA = '958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d'
+CONSOLE_SHA = 'b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0'
+WORKER_SHA = '9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f'
+DEADLINE_SHA = 'bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb'
+EXERCISES = ('compiler.cancellation', 'compiler.deadline', 'compiler.stress',
+             'host.lifecycle', 'host.lifecycle-active', 'host.lifecycle-worker')
+
+
+def finite_seconds(value, maximum=600):
+    """Reject booleans, nonfinite values and timestamps outside a bounded scenario."""
+    return type(value) in (int, float) and 0 <= value <= maximum
+
+
+def validate_exercise(report):
+    """Independently reject unsupported lifetime/deadline/stress claims in terminal app evidence."""
+    kind = report['scenarioID']
+    exercise = report.get('exercise')
+    if kind not in EXERCISES:
+        return
+    if exercise is None and report['status'] != 'passed':
+        return
+    if not isinstance(exercise, dict) or exercise.get('kind') != kind:
+        raise ValueError('missing or mismatched compiler exercise evidence')
+    for field, maximum in (('builds', 40), ('progress', 8), ('scenes', 32), ('samples', 128)):
+        if not isinstance(exercise.get(field), list) or len(exercise[field]) > maximum:
+            raise ValueError('compiler exercise exceeds its evidence bound')
+    if type(exercise.get('droppedSamples')) is not int or exercise['droppedSamples'] < 0:
+        raise ValueError('invalid omitted memory sample count')
+    for collection in ('progress', 'scenes', 'samples'):
+        previous = 0
+        for point in exercise[collection]:
+            if not isinstance(point, dict) or not finite_seconds(point.get('seconds')) or point['seconds'] < previous:
+                raise ValueError('invalid exercise observation ordering')
+            previous = point['seconds']
+            if collection == 'progress' and point.get('phase') not in ('verifying', 'preparing', 'compiling', 'linking', 'packaging'):
+                raise ValueError('invalid SDK progress')
+            if collection == 'scenes' and point.get('phase') not in ('active', 'inactive', 'background'):
+                raise ValueError('invalid actual scene observation')
+            if collection == 'samples' and (type(point.get('bytes')) is not int or not 0 < point['bytes'] < 2**50):
+                raise ValueError('invalid self-process footprint observation')
+    for index, build in enumerate(exercise['builds']):
+        if (not isinstance(build, dict) or type(build.get('index')) is not int or build['index'] != index + 1
+                or build.get('input') not in ('gpio', 'console', 'worker')
+                or build.get('sha256') != (CONSOLE_SHA if build.get('input') == 'console' else GPIO_SHA)
+                or not isinstance(build.get('receiptSHA256'), str) or not re.fullmatch('[0-9a-f]{64}', build['receiptSHA256'])
+                or not finite_seconds(build.get('seconds'), 180)
+                or type(build.get('wasmLinearMemoryBytes')) is not int or not 0 < build['wasmLinearMemoryBytes'] <= 64 * 1024**2):
+            raise ValueError('invalid completed compiler build observation')
+    if report['status'] != 'passed':
+        return
+    inputs = [build['input'] for build in exercise['builds']]
+    expected = ['gpio', 'console'] * 10 if kind == 'compiler.stress' else [('worker' if kind == 'host.lifecycle-worker' else 'gpio'), 'console']
+    if inputs != expected:
+        raise ValueError('missing or reordered known build assertions')
+    if {artifact['sha256'] for artifact in report['artifacts']} != {GPIO_SHA, CONSOLE_SHA}:
+        raise ValueError('exercise lacks independently pinned capsule exports')
+    if kind == 'compiler.stress':
+        if len(exercise['samples']) < 2 or exercise['scenes'] or exercise.get('outcome') is not None:
+            raise ValueError('stress run lacks bounded actual memory observations')
+        return
+    if kind != 'host.lifecycle':
+        started, settled, fresh = (exercise.get(key) for key in ('startedSeconds', 'settledSeconds', 'freshStartedSeconds'))
+        if not all(finite_seconds(v) for v in (started, settled, fresh)) or not started <= settled <= fresh:
+            raise ValueError('fresh build did not follow request settlement')
+        compiling = [p for p in exercise['progress'] if p['phase'] == 'compiling']
+        if (len(compiling) != 1 or exercise['progress'][-1]['phase'] != 'compiling'
+                or not started <= compiling[0]['seconds'] <= settled):
+            raise ValueError('interruption was not in the first source compilation interval')
+        if kind == 'compiler.deadline':
+            if (exercise.get('outcome') != 'timedOut' or exercise.get('runtimeDeadlineSeconds') != 60
+                    or type(exercise['runtimeDeadlineSeconds']) is not int or not 60 <= settled - started <= 75
+                    or exercise.get('cancelRequestedSeconds') is not None
+                    or exercise.get('workloadSHA256') != DEADLINE_SHA or exercise.get('workloadBytes') != 227646):
+                raise ValueError('not a real public-deadline expiry')
+        else:
+            requested = exercise.get('cancelRequestedSeconds')
+            if exercise.get('outcome') != 'cancelled' or not finite_seconds(requested) or not compiling[0]['seconds'] <= requested <= settled:
+                raise ValueError('cancellation did not settle after first-source progress')
+            if kind == 'compiler.cancellation' and exercise.get('busyObserved') is not True:
+                raise ValueError('missing typed SDK busy result')
+    if kind.startswith('host.lifecycle'):
+        # Launch-only CLI has no real scene adapter. Even a plausible fabricated pass is forbidden.
+        raise ValueError('lifecycle qualification requires an interactive mobile report, not launch-only CLI')
+    if exercise['scenes'] or exercise.get('sceneObservationScope') != 'Launch process only; no foreground/background claim':
+        raise ValueError('launch-only command cannot claim foreground qualification')
+
+
 def decode_response(raw, request, pid):
     """Require exactly one bounded terminal envelope from the owned app process and exact request."""
     if len(raw) > MAX_CAPTURE:
@@ -77,6 +164,8 @@ def decode_response(raw, request, pid):
         raise ValueError('invalid, incomplete or mismatched run report')
     previous = 0
     for index, event in enumerate(report['events']):
+        if not isinstance(event, dict):
+            raise ValueError('invalid run event')
         elapsed = event.get('seconds')
         if (event.get('sequence') != index or type(elapsed) not in (int, float)
                 or not previous <= elapsed <= 180 or not isinstance(event.get('detail'), str)
@@ -87,6 +176,8 @@ def decode_response(raw, request, pid):
         raise ValueError('passed run lacks completion assertion')
     names = set()
     for artifact in report['artifacts']:
+        if not isinstance(artifact, dict):
+            raise ValueError('invalid artifact')
         name = artifact.get('name')
         if (not isinstance(name, str) or not re.fullmatch('[a-z0-9-]{1,48}\\.fms', name)
                 or name in names or not isinstance(artifact.get('bytes'), str)
@@ -99,6 +190,7 @@ def decode_response(raw, request, pid):
         if not 260 <= len(data) <= 4096 or hashlib.sha256(data).hexdigest() != artifact.get('sha256') or len(receipt) > 16384:
             raise ValueError('artifact bytes differ from their report')
         json.loads(receipt, object_pairs_hook=unique_object)
+    validate_exercise(report)
     return value
 
 

@@ -27,7 +27,7 @@ import FirmingoKit
         if let resourceError { throw resourceError }
     }
     /// Compilation is deliberately unavailable in injected tests, keeping real WASM checks explicit.
-    func compile(_ input: WorkbenchCompilerInput, buildID: String) async throws -> WorkbenchReport.Artifact {
+    func compile(_ input: WorkbenchCompilerInput, buildID: String, probe: WorkbenchCompilerProbe) async throws -> WorkbenchReport.Artifact {
         calls += 1; throw WorkbenchFailure("No simulated successful compilation.")
     }
 }

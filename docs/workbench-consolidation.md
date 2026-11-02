@@ -38,7 +38,8 @@ Apple platforms. No network control listener is added in this increment.
 
 ## Follow-through
 
-Port compiler busy/deadline/lifecycle/stress scenarios, then read-only device and
+Compiler busy/deadline/lifecycle/stress migration is tracked in
+[the compiler-scenario work log](workbench-compiler-scenarios.md). Next migrate read-only device and
 binary-console cases, then guarded upload/ROM recovery. Add a paired controller
 and thin MCP adapter over the versioned command engine. Retire legacy generators
 only after matching scenario evidence; preserve previous reports and unresolved
@@ -196,3 +197,10 @@ The first increment is complete at this scope. Next migrate compiler lifecycle,
 deadline and stress cases, then pair a mobile controller before migrating device
 and guarded recovery operations. Keep the existing specialized hosts available
 until their replacements have equivalent evidence.
+
+## Second increment — compiler scenarios
+
+[Compiler lifetime/deadline/stress work log](workbench-compiler-scenarios.md)
+tracks the extended shared registry, exact workloads, actual scene adapter,
+independent CLI assertions and qualification limits. First-increment results above
+remain scoped to their original source/binary identities.

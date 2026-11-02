@@ -394,6 +394,7 @@ See [delivery integration](docs/compiler-delivery.md) for exact identities and c
 ## Firmingo Workbench consolidation — 2026-11-02
 
 - [x] First increment locally validated: app-owned shared scenario engine and versioned CLI, Test Lab in the existing demo, migrated compiler cases, bounded correlated evidence, local tests/builds and updated CI definitions. One signed macOS binary passed real WASM vectors and diagnostic recovery; remote CI and physical/UI qualification remain separate. [Work log and scope](docs/workbench-consolidation.md).
-- [ ] Migrate remaining compiler lifecycle/deadline/stress, then device/console/upload/recovery scenarios with their existing guards and fresh evidence.
+- [ ] Compiler lifecycle/deadline/stress consolidation: shared scenarios and mobile scene adapter implemented; signed runtime/build checks in progress. [Work log](docs/workbench-compiler-scenarios.md). Physical mobile evidence remains pending.
+- [ ] Migrate device/console/upload/recovery scenarios with their existing guards and fresh evidence.
 - [ ] Add live paired mobile control and a thin MCP adapter after the shared command/evidence boundary is verified.
 - [ ] Retire phase-specific app generators only after equivalent Workbench scenario qualification; preserve historical identities/results.

@@ -18,11 +18,19 @@ import FirmingoKit
     private var task: Task<WorkbenchReport, Error>?
     /// Actual run start used only for monotonic host timings.
     private var started = 0.0
+    /// Active compiler exercise, never reconstructed from saved reports.
+    private var exercise: WorkbenchCompilerExercise?
+    /// Actual aggregate app scene delivered by the interactive host only.
+    private var scene = "unknown"
+    /// Whether this host supplies real iOS/iPadOS scene delivery.
+    public let supportsSceneTransitions: Bool
+    /// True only after a lifecycle baseline/calibration is complete.
+    public var awaitingLifecycleStart: Bool { exercise?.ready ?? false }
     /// Optional bounded progress observer, invoked only after persistence succeeds.
     public var observation: ((WorkbenchReport) -> Void)?
     /// Captures boundaries without SDK I/O or automatic work.
-    public init(backend: any WorkbenchCompilerBackend, store: any WorkbenchRunStore) {
-        self.backend = backend; self.store = store
+    public init(backend: any WorkbenchCompilerBackend, store: any WorkbenchRunStore, supportsSceneTransitions: Bool = false) {
+        self.backend = backend; self.store = store; self.supportsSceneTransitions = supportsSceneTransitions
     }
     /// Loads metadata for UI/CLI selection; no descriptor is automatically chosen.
     public func inspectCatalogue() async throws -> WorkbenchCatalogue {
@@ -42,7 +50,7 @@ import FirmingoKit
         observation?(initial)
         let pending = Task { try await self.perform(request) }
         task = pending
-        defer { task = nil; isRunning = false }
+        defer { task = nil; exercise = nil; isRunning = false }
         return try await withTaskCancellationHandler {
             try await pending.value
         } onCancel: {
@@ -54,12 +62,22 @@ import FirmingoKit
         guard report?.id == requestID else { return }
         task?.cancel()
     }
+    /// Receives real aggregate app-scene changes; unavailable to version-one launch commands.
+    public func recordScene(_ phase: String) {
+        guard supportsSceneTransitions, ["active", "inactive", "background"].contains(phase) else { return }
+        scene = phase; exercise?.recordScene(phase)
+    }
+    /// Explicit second action after lifecycle calibration; failures remain visible in the owning run.
+    public func beginLifecycleInterruption() throws {
+        guard let exercise else { throw WorkbenchFailure("No lifecycle scenario is waiting for explicit start.") }
+        try exercise.begin()
+    }
     /// Publishes bounded progress only after the store confirms durability.
     private func record(_ phase: String, _ detail: String, status: WorkbenchReport.Status? = nil,
                         artifact: WorkbenchReport.Artifact? = nil) throws {
         guard var next = report, next.events.count < 64 else { throw WorkbenchFailure("Missing or excessive run evidence.") }
         if let status { next.status = status }
-        if let artifact { next.artifacts.append(artifact) }
+        if let artifact, !next.artifacts.contains(where: { $0.name == artifact.name }) { next.artifacts.append(artifact) }
         next.events.append(.init(sequence: next.events.count, seconds: ProcessInfo.processInfo.systemUptime - started,
                                  phase: phase, detail: String(decoding: detail.utf8.prefix(1000), as: UTF8.self)))
         try store.save(next); report = next; observation?(next)
@@ -70,6 +88,8 @@ import FirmingoKit
             guard let scenario = WorkbenchScenario.all.first(where: { $0.id == request.scenarioID }) else { throw WorkbenchFailure("Unknown scenario.") }
             if let reason = scenario.unavailableReason {
                 try record("prerequisites", reason, status: .blocked)
+            } else if scenario.requiresSceneTransitions && !supportsSceneTransitions {
+                try record("prerequisites", "Requires interactive iOS/iPadOS scene delivery; CLI cannot synthesize lifecycle events.", status: .blocked)
             } else if scenario.requiresBuild && request.firmwareBuildID != WorkbenchCompilerInput.buildID {
                 try record("prerequisites", "Select the exact migrated compiler-vector descriptor; no latest or default build is assumed.", status: .blocked)
             } else {
@@ -103,8 +123,18 @@ import FirmingoKit
                         }
                         try await compile(.gpio, buildID: request.firmwareBuildID ?? "")
                     }
+                    if ["compiler.cancellation", "compiler.deadline", "compiler.stress", "host.lifecycle", "host.lifecycle-active", "host.lifecycle-worker"].contains(scenario.id) {
+                        let owner = WorkbenchCompilerExercise(kind: scenario.id, backend: backend, buildID: request.firmwareBuildID ?? "", scene: scene, observesScenes: supportsSceneTransitions,
+                            now: { ProcessInfo.processInfo.systemUptime - self.started },
+                            save: { value in
+                                guard var next = self.report else { throw WorkbenchFailure("Missing compiler exercise context.") }
+                                next.exercise = value; try self.store.save(next); self.report = next; self.observation?(next)
+                            }, emit: { phase, detail, artifact in try self.record(phase, detail, artifact: artifact) })
+                        exercise = owner
+                        try await owner.run()
+                    }
                     try Task.checkCancellation()
-                    try record("complete", scenario.id == "compiler.catalogue" ? "Catalogue verified; no WASM or hardware execution claimed." : "All assertions in this offline scenario completed.", status: .passed)
+                    try record("complete", scenario.id == "compiler.catalogue" ? "Catalogue verified; no WASM or hardware execution claimed." : "All assertions in the selected scenario completed.", status: .passed)
                 }
             }
         } catch is CancellationError {

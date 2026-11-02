@@ -24,8 +24,13 @@ import AppKit
     /// Creates app-owned boundaries; no metadata, compiler, session or hardware work starts implicitly.
     init() {
         store = WorkbenchFileRunStore(directory: URL.documentsDirectory.appendingPathComponent("FirmingoWorkbench/Runs", isDirectory: true))
-        engine = WorkbenchScenarioEngine(backend: SDKWorkbenchCompiler(), store: store)
         automationRequested = ProcessInfo.processInfo.arguments.contains { $0.hasPrefix("--workbench-") }
+        #if os(iOS)
+        let scenes = !automationRequested
+        #else
+        let scenes = false
+        #endif
+        engine = WorkbenchScenarioEngine(backend: SDKWorkbenchCompiler(), store: store, supportsSceneTransitions: scenes)
     }
     /// Runs discovery only after an explicit manual action; unavailable resources remain visible.
     func inspectCatalogue() {
@@ -51,6 +56,13 @@ import AppKit
     }
     /// Cancels only the currently displayed run, without clearing its evidence or starting another action.
     func cancel() { if let id = engine.report?.id { engine.cancel(requestID: id) } }
+    /// Routes real aggregate scene delivery, never an agent-authored synthetic transition.
+    func recordScene(_ phase: String) { engine.recordScene(phase) }
+    /// Starts the lifecycle interruption attempt only after its known baseline/calibration.
+    func beginLifecycleInterruption() {
+        do { try engine.beginLifecycleInterruption(); error = nil }
+        catch { self.error = error.localizedDescription }
+    }
     /// Loads existing records for explicit review; incomplete prior snapshots remain unknown.
     func refreshHistory() {
         do { history = try store.history(); error = nil }

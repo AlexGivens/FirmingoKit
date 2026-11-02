@@ -3,8 +3,9 @@
 Current consolidation: [shared Workbench engine and CLI](../docs/workbench-consolidation.md).
 Use `WorkbenchSupport` for app-owned scenario orchestration and the shared registry;
 manual and CLI actions must invoke that same engine. Keep no-replay run IDs,
-bounded evidence, honest blocked results and public-SDK boundaries. Hardware and
-lifecycle hosts remain historical/unmigrated until equivalent evidence exists.
+bounded evidence, honest blocked results and public-SDK boundaries. Lifecycle scenarios now use aggregate real mobile app scenes and the shared
+engine; launch-only CLI cannot synthesize them. Preserve the legacy hosts until
+equivalent evidence exists. Hardware migration is still pending.
 The canonical scheme/product is FirmingoWorkbench; preserve the stable app bundle
 identity instead of creating another binary identity for each phase.
 

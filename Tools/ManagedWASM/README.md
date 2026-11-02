@@ -177,3 +177,5 @@ and automated compiler integration scenarios. `run-validation.mjs` includes its
 shared Swift engine and CLI boundary tests. Legacy qualification generators remain
 for unmigrated scenarios and historical reproduction; no new phase-specific app
 identity is needed for the initial Workbench compiler cases.
+
+Workbench now shares compiler lifetime/deadline/stress and real mobile scene orchestration; see [migration scope and qualification](../../docs/workbench-compiler-scenarios.md). Legacy hosts remain until equivalent evidence exists.

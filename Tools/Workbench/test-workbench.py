@@ -96,5 +96,55 @@ class WorkbenchCLI(unittest.TestCase):
             if fault == 'artifact': value['report']['artifacts'] = [dict(name='../bad.fms')]
             with self.assertRaises(ValueError): cli.decode_response(self.envelope(value), request, 123)
 
+    def exercise_fixture(self, kind='compiler.deadline'):
+        request, value = self.fixture()
+        request['scenarioID'] = kind; value['request'] = request.copy(); report = value['report']; report['scenarioID'] = kind
+        report['events'][0]['seconds'] = 65
+        report['artifacts'] = [dict(sha256=sha) for sha in (cli.GPIO_SHA, cli.CONSOLE_SHA)]
+        def build(index, source):
+            return dict(index=index, input=source, sha256=cli.GPIO_SHA if source == 'gpio' else cli.CONSOLE_SHA,
+                        receiptSHA256='a'*64, seconds=1, wasmLinearMemoryBytes=27983872)
+        report['exercise'] = dict(kind=kind, builds=[build(1, 'gpio'), build(2, 'console')],
+            progress=[dict(phase='verifying', seconds=2), dict(phase='compiling', seconds=3)], scenes=[], samples=[], droppedSamples=0,
+            sceneObservationScope='Launch process only; no foreground/background claim',
+            startedSeconds=2, settledSeconds=62.5, freshStartedSeconds=62.6, outcome='timedOut', runtimeDeadlineSeconds=60,
+            workloadSHA256=cli.DEADLINE_SHA, workloadBytes=227646)
+        return report, build
+
+    def test_deadline_requires_actual_interval_workload_phase_and_fresh_settlement(self):
+        report, _ = self.exercise_fixture()
+        cli.validate_exercise(report)  # Parser-only fixture; not actual expiry evidence.
+        for change in (lambda e: e.update(settledSeconds=10), lambda e: e.update(outcome='cancelled'),
+                       lambda e: e.update(cancelRequestedSeconds=61), lambda e: e.update(workloadSHA256='0'*64),
+                       lambda e: e.update(freshStartedSeconds=61), lambda e: e.update(runtimeDeadlineSeconds=True),
+                       lambda e: e['progress'].append(dict(phase='compiling', seconds=4))):
+            report, _ = self.exercise_fixture(); change(report['exercise'])
+            with self.assertRaises(ValueError): cli.validate_exercise(report)
+
+    def test_stress_requires_twenty_alternating_builds_samples_and_receipt_ids(self):
+        report, build = self.exercise_fixture('compiler.stress')
+        report['exercise'] = dict(kind='compiler.stress', builds=[build(i+1, 'gpio' if i%2 == 0 else 'console') for i in range(20)],
+            progress=[], scenes=[], samples=[dict(seconds=0, bytes=50000000), dict(seconds=20, bytes=51000000)], droppedSamples=0)
+        cli.validate_exercise(report)
+        report['exercise']['builds'].pop()
+        with self.assertRaises(ValueError): cli.validate_exercise(report)
+        report['status'] = 'failed'
+        report['exercise']['samples'][0]['bytes'] = True
+        with self.assertRaises(ValueError): cli.validate_exercise(report)
+
+    def test_launch_only_cli_cannot_accept_fabricated_lifecycle_pass(self):
+        report, _ = self.exercise_fixture('host.lifecycle')
+        with self.assertRaises(ValueError): cli.validate_exercise(report)
+        report['status'] = 'blocked'; report.pop('exercise')
+        cli.validate_exercise(report)
+
+    def test_cancellation_needs_busy_and_cannot_accept_returned_artifact_as_settlement(self):
+        report, _ = self.exercise_fixture('compiler.cancellation')
+        exercise = report['exercise']; exercise.update(outcome='cancelled', cancelRequestedSeconds=3.5, busyObserved=True)
+        cli.validate_exercise(report)
+        for field, value in [('busyObserved', False), ('outcome', 'artifactReturned'), ('cancelRequestedSeconds', 2.5)]:
+            changed = json.loads(json.dumps(report)); changed['exercise'][field] = value
+            with self.assertRaises(ValueError): cli.validate_exercise(changed)
+
 
 if __name__ == '__main__': unittest.main()
