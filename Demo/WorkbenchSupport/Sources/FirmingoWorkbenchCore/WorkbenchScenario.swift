@@ -39,7 +39,7 @@ public struct WorkbenchScenario: Codable, Sendable, Identifiable, Equatable {
               detail: "Build known artifacts around actual iOS/iPadOS background/return events in the same app process.", requiresBuild: true,
               unavailableReason: nil, requiresSceneTransitions: true),
         .init(id: "host.lifecycle-active", title: "Active compiler background cancellation", category: "Host",
-              detail: "Explicitly start a pending build, go Home during source compilation, then return and build fresh.", requiresBuild: true,
+              detail: "Explicitly start a pinned long build, go Home while an SDK call is pending, then return and build fresh.", requiresBuild: true,
               unavailableReason: nil, requiresSceneTransitions: true),
         .init(id: "host.lifecycle-worker", title: "Calibrated worker background cancellation", category: "Host",
               detail: "Calibrate the pinned long source compile, explicitly start, go Home and require first-source cancellation plus fresh recovery.", requiresBuild: true,

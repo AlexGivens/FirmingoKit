@@ -146,5 +146,47 @@ class WorkbenchCLI(unittest.TestCase):
             changed = json.loads(json.dumps(report)); changed['exercise'][field] = value
             with self.assertRaises(ValueError): cli.validate_exercise(changed)
 
+    def test_interactive_idle_requires_ordered_real_adapter_interval(self):
+        report, _ = self.exercise_fixture('host.lifecycle')
+        report['events'].insert(0,dict(sequence=0,seconds=1,phase='waiting-for-background',detail='Known baseline complete'))
+        exercise = report['exercise']; exercise['sceneObservationScope'] = 'Actual aggregate SwiftUI app scenes; no suspension claim'
+        exercise['scenes'] = [dict(phase=p,seconds=t) for p,t in [('active',0),('inactive',2),('background',3),('active',8)]]
+        cli.validate_exercise(report,interactive=True)
+        exercise['scenes'][-1]['seconds']=4
+        with self.assertRaises(ValueError): cli.validate_exercise(report,interactive=True)
+
+    def test_generic_active_accepts_verification_but_worker_requires_calibration_and_source_interval(self):
+        report, _ = self.exercise_fixture('host.lifecycle-active'); exercise=report['exercise']
+        exercise.update(sceneObservationScope='Actual aggregate SwiftUI app scenes; no suspension claim',
+            scenes=[dict(phase=p,seconds=t) for p,t in [('active',0),('inactive',3),('background',4),('active',9)]],
+            progress=[dict(phase='verifying',seconds=2.5)],outcome='cancelled',cancelRequestedSeconds=3,
+            manuallyStartedSeconds=1.5,workloadSHA256=cli.WORKER_SHA,workloadBytes=227505)
+        cli.validate_exercise(report,interactive=True)
+        report['scenarioID']='host.lifecycle-worker'; exercise['kind']='host.lifecycle-worker'; exercise['builds'][0]['input']='worker'
+        with self.assertRaises(ValueError): cli.validate_exercise(report,interactive=True)
+        exercise['progress'].append(dict(phase='compiling',seconds=2.6)); exercise['calibratedCompileSeconds']=8
+        cli.validate_exercise(report,interactive=True)
+        exercise['calibratedCompileSeconds']=1
+        with self.assertRaises(ValueError): cli.validate_exercise(report,interactive=True)
+
+    def test_selected_mobile_file_checks_launch_run_app_and_receipt_identity(self):
+        spec = importlib.util.spec_from_file_location('workbench_mobile', Path(__file__).with_name('check-mobile-report.py'))
+        mobile = importlib.util.module_from_spec(spec); spec.loader.exec_module(mobile)
+        report, _ = self.exercise_fixture('host.lifecycle')
+        report['appVersion']='4'; report['firmwareBuildID']=mobile.BUILD_ID; report['catalogueSHA256']=mobile.CATALOGUE_SHA
+        report['events'].insert(0,dict(sequence=0,seconds=1,phase='waiting-for-background',detail='Parser-only scene fixture'))
+        for i,event in enumerate(report['events']): event['sequence']=i
+        exercise=report['exercise']; exercise['sceneObservationScope']='Actual aggregate SwiftUI app scenes; no suspension claim'
+        exercise['scenes']=[dict(phase=p,seconds=t) for p,t in [('active',0),('inactive',2),('background',3),('active',8)]]
+        # Exact already-exported capsule/receipt vectors are data only; this fixture executes no compiler or scene action.
+        recorded=json.loads((Path(__file__).resolve().parents[2]/'docs/workbench-compiler-scenarios-local.json').read_text())
+        report['artifacts']=recorded['runs'][0]['report']['artifacts']
+        raw=json.dumps(report).encode()
+        self.assertEqual(mobile.check(raw,run_id=report['id'],pid=123,scenario='host.lifecycle',app_version='4')['status'],
+                         'passed_mobile_workbench_report')
+        for field,value in [('run_id',str(uuid.uuid4())),('pid',124),('app_version','3')]:
+            args=dict(run_id=report['id'],pid=123,scenario='host.lifecycle',app_version='4');args[field]=value
+            with self.assertRaises(ValueError): mobile.check(raw,**args)
+
 
 if __name__ == '__main__': unittest.main()

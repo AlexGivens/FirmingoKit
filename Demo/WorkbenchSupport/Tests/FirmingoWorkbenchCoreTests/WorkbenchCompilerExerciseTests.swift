@@ -31,6 +31,8 @@ import FirmingoKit
     var timeoutSeconds = 60.0
     /// Models a pending call which ignores cancellation and returns bytes; it must never qualify.
     var ignoresCancellation = false
+    /// Test-only synchronous boundary for simulated actual scene adapter delivery.
+    var observedWorkerVerification: (() -> Void)?
     /// Whether the synthetic pending request is active when verifyResources is called.
     private var active = false
     /// Constructs no actual compiler or device state.
@@ -44,7 +46,11 @@ import FirmingoKit
     /// Models a completed baseline, then controlled first-source timeout/cancellation, then a known fresh response.
     func compile(_ input: WorkbenchCompilerInput, buildID: String, probe: WorkbenchCompilerProbe) async throws -> WorkbenchReport.Artifact {
         inputs.append(input)
-        probe.record(.verifying); probe.record(.compiling)
+        probe.record(.verifying)
+        if input == .worker, let observedWorkerVerification {
+            observedWorkerVerification(); try Task.checkCancellation()
+        }
+        probe.record(.compiling)
         if input == .deadline {
             context.seconds += timeoutSeconds
             throw ManagedCompilerError.timedOut
@@ -165,4 +171,24 @@ import FirmingoKit
     #expect(backend.inputs == [.gpio])
     pending.cancel()
     await #expect(throws: CancellationError.self) { try await pending.value }
+}
+
+/// Generic active-call eligibility accepts verification-phase cancellation; only the calibrated case claims first-source interruption.
+@Test @MainActor func activeLifecycleAcceptsPendingSDKVerificationCancellation() async throws {
+    let context = ExerciseContext(), backend = ExerciseBackend(ExerciseContext())
+    let origin = ProcessInfo.processInfo.systemUptime
+    var owner: WorkbenchCompilerExercise?
+    owner = WorkbenchCompilerExercise(kind: "host.lifecycle-active", backend: backend, buildID: WorkbenchCompilerInput.buildID,
+        scene: "active", observesScenes: true, now: { ProcessInfo.processInfo.systemUptime - origin + context.seconds }, save: context.save,
+        emit: { phase, _, _ in if phase == "waiting-for-start" { try owner?.begin() } })
+    backend.observedWorkerVerification = {
+        owner?.recordScene("inactive"); owner?.recordScene("background")
+        context.seconds += 5; owner?.recordScene("active")
+    }
+    try await #require(owner).run()
+    #expect(backend.inputs == [.gpio, .worker, .console])
+    #expect(context.evidence?.outcome == "cancelled")
+    #expect(context.evidence?.progress.last?.phase == "verifying")
+    #expect(context.evidence?.calibratedCompileSeconds == nil)
+    backend.observedWorkerVerification = nil; owner = nil
 }

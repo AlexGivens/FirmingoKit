@@ -9,3 +9,5 @@ Run deterministic CLI fixtures with
 `python3 -I -S -B Tools/Workbench/test-workbench.py`.
 
 [Compiler lifetime, deadline, stress and mobile scene scenarios](../../docs/workbench-compiler-scenarios.md) use the same app and command engine.
+
+Validate an explicitly exported mobile lifecycle report with `python3 -I -S -B Tools/Workbench/check-mobile-report.py --help`. This reads only the chosen local report and performs no device/launch operation.

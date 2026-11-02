@@ -12,7 +12,7 @@ matching signed/physical evidence.
 | `compiler.deadline` | Pinned 227,646-byte frontend workload; unchanged public 60-second runtime limit; typed timeout within 60–75 seconds, one compiling callback; fresh known console artifact after settlement | Automatic CLI has process-only scope; interactive mobile additionally requires observed foreground |
 | `compiler.stress` | Twenty alternating exact GPIO/console builds; receipts identified per call; bounded self-process footprint samples and post-build worker linear bytes | Automatic, same signed macOS CLI or manual Test Lab |
 | `host.lifecycle` | Known artifacts around actual active/background/active observations, at least three seconds away, same app process | Interactive iOS/iPadOS; go Home for five seconds and return when prompted |
-| `host.lifecycle-active` | Baseline, explicit second Start action, inactivity during first observed source compilation, typed cancellation settlement, actual background/return, fresh artifact | Interactive iOS/iPadOS; a missed interval fails and needs a new explicit run |
+| `host.lifecycle-active` | Baseline, explicit second Start action, inactivity while a pinned long SDK call is pending, typed cancellation settlement, actual background/return, fresh artifact | Interactive iOS/iPadOS; observed phase is recorded without a source-phase claim |
 | `host.lifecycle-worker` | Same active check with exact 227,505-byte workload and a completed 4–55-second source-calibration interval first | Interactive iOS/iPadOS; no synthetic scene control |
 
 Use the exact migrated build ID
@@ -98,3 +98,23 @@ gate prevents a second SDK call; all focused tests and macOS/iOS rebuilds passed
 This follow-up affects only interactive lifecycle admission; automatic runtime
 reports retain the exact preceding clean `5d9c151` source/binary identity. No
 physical scene qualification is inferred from the synthetic regression test.
+
+## Physical Workbench iPad qualification — in progress
+
+The previously selected iPad is now available over paired Wi-Fi. The deployment
+uses one Workbench app identity and reviewed prepared compiler package. Build 4
+separates generic pending-call cancellation from the stricter calibrated first
+source-compilation case: the generic attempt uses the same pinned long workload
+to provide a practical manual interruption window, and records the actual SDK
+phase. It does not require or claim a source-phase interruption. Workload
+calibration and strict first-source assertions remain mandatory in the worker case.
+The native callback timestamps now use a fixed monotonic origin.
+
+`Tools/Workbench/check-mobile-report.py --help` validates only an explicitly
+exported local report with an independently selected run UUID, actual launch PID,
+scenario and app build number. It checks real scene sequence/interval, durable
+manual admission, typed cancellation/settlement, workload/calibration where
+required, fresh known capsules and SDK receipt bindings. It performs no device or
+UI operation. Launch-only CLI continues to reject lifecycle passes. CoreDevice
+may retrieve only Workbench's own selected run reports, matching the established
+iOS qualification workflow; the controller never scans another app's data.

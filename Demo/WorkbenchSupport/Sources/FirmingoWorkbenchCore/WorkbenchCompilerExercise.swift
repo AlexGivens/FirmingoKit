@@ -18,6 +18,8 @@ import FirmingoKit
     private let emit: (String, String, WorkbenchReport.Artifact?) throws -> Void
     /// One run-relative monotonic clock; injectable only in deterministic package tests.
     private let now: () -> Double
+    /// Fixed conversion from synchronous SDK uptime observations to the run clock.
+    private let uptimeOrigin: Double
     /// Actual most recent aggregate app scene, unknown until SwiftUI delivers it.
     private var scene: String
     /// Exact current child call; cancellation must settle before fresh admission.
@@ -45,6 +47,7 @@ import FirmingoKit
          emit: @escaping (String, String, WorkbenchReport.Artifact?) throws -> Void) {
         evidence = .init(kind: kind); self.backend = backend; self.buildID = buildID
         self.scene = scene; self.observesScenes = observesScenes; self.now = now; self.save = save; self.emit = emit
+        uptimeOrigin = ProcessInfo.processInfo.systemUptime - now()
         evidence.sceneObservationScope = observesScenes ? "Actual aggregate SwiftUI app scenes; no suspension claim" : "Launch process only; no foreground/background claim"
     }
     /// Called only by an explicit UI button; normal activation never starts the interruption attempt.
@@ -116,11 +119,11 @@ import FirmingoKit
             if lifecycle {
                 try save(evidence)
                 ready = true
-                try emit("waiting-for-start", "Tap Start lifecycle interruption, wait for first source compilation, then go Home for five seconds and return.", nil)
+                try emit("waiting-for-start", "Tap Start lifecycle interruption, wait one second, then go Home for five seconds and return.", nil)
                 while evidence.manuallyStartedSeconds == nil { try check(); try await Task.sleep(for: .milliseconds(50)) }
                 observingReturn = true
             }
-            let input: WorkbenchCompilerInput = evidence.kind == "compiler.deadline" ? .deadline : (worker ? .worker : .gpio)
+            let input: WorkbenchCompilerInput = evidence.kind == "compiler.deadline" ? .deadline : (lifecycle ? .worker : .gpio)
             if input == .deadline || input == .worker {
                 evidence.workloadSHA256 = input == .deadline ? WorkbenchWorkload.deadlineSHA256 : WorkbenchWorkload.workerSHA256
                 evidence.workloadBytes = input == .deadline ? 227646 : 227505
@@ -141,8 +144,11 @@ import FirmingoKit
             evidence.settledSeconds = now(); interrupted = false; try save(evidence)
             try check()
             let compiling = evidence.progress.filter { $0.phase == "compiling" }
-            guard evidence.progress.last?.phase == "compiling", compiling.count == 1 else {
+            guard !evidence.progress.isEmpty else { throw WorkbenchFailure("Inactivity preceded all actual SDK progress.") }
+            if evidence.kind != "host.lifecycle-active" {
+                guard evidence.progress.last?.phase == "compiling", compiling.count == 1 else {
                 throw WorkbenchFailure("Interruption must occur in the first observed source-compilation interval.")
+                }
             }
             if evidence.kind == "compiler.deadline" {
                 guard let began = evidence.startedSeconds, let settled = evidence.settledSeconds,
@@ -152,8 +158,8 @@ import FirmingoKit
             } else if evidence.kind == "compiler.cancellation" {
                 guard evidence.busyObserved else { throw WorkbenchFailure("The overlapping SDK request did not return typed busy.") }
             } else {
-                guard let requested = evidence.cancelRequestedSeconds, requested >= compiling[0].seconds else {
-                    throw WorkbenchFailure("Inactivity happened before actual source compilation; rerun explicitly.")
+                guard let requested = evidence.cancelRequestedSeconds, let last = evidence.progress.last, requested >= last.seconds else {
+                    throw WorkbenchFailure("Inactivity preceded observed SDK work; rerun explicitly.")
                 }
                 try emit("waiting-for-return", "Cancellation settled. Return after five seconds on Home; no commit or build is replayed.", nil)
                 try await waitForReturn()
@@ -181,8 +187,7 @@ import FirmingoKit
     /// Converts synchronous per-call progress to the shared monotonic origin; stale probes never cross calls.
     private func captureProgress() throws {
         guard let probe else { return }
-        let offset = ProcessInfo.processInfo.systemUptime - now()
-        evidence.progress = try probe.snapshot().map { .init(phase: $0.phase, seconds: max(0, $0.seconds - offset)) }
+        evidence.progress = try probe.snapshot().map { .init(phase: $0.phase, seconds: max(0, $0.seconds - uptimeOrigin)) }
     }
     /// Bounds optional self-process measurements and makes omitted samples explicit.
     private func sample() throws {

@@ -53,7 +53,7 @@ def finite_seconds(value, maximum=600):
     return type(value) in (int, float) and 0 <= value <= maximum
 
 
-def validate_exercise(report):
+def validate_exercise(report, *, interactive=False):
     """Independently reject unsupported lifetime/deadline/stress claims in terminal app evidence."""
     kind = report['scenarioID']
     exercise = report.get('exercise')
@@ -105,8 +105,8 @@ def validate_exercise(report):
         if not all(finite_seconds(v) for v in (started, settled, fresh)) or not started <= settled <= fresh:
             raise ValueError('fresh build did not follow request settlement')
         compiling = [p for p in exercise['progress'] if p['phase'] == 'compiling']
-        if (len(compiling) != 1 or exercise['progress'][-1]['phase'] != 'compiling'
-                or not started <= compiling[0]['seconds'] <= settled):
+        if (kind != 'host.lifecycle-active' and (len(compiling) != 1 or exercise['progress'][-1]['phase'] != 'compiling'
+                or not started <= compiling[0]['seconds'] <= settled)):
             raise ValueError('interruption was not in the first source compilation interval')
         if kind == 'compiler.deadline':
             if (exercise.get('outcome') != 'timedOut' or exercise.get('runtimeDeadlineSeconds') != 60
@@ -116,18 +116,49 @@ def validate_exercise(report):
                 raise ValueError('not a real public-deadline expiry')
         else:
             requested = exercise.get('cancelRequestedSeconds')
-            if exercise.get('outcome') != 'cancelled' or not finite_seconds(requested) or not compiling[0]['seconds'] <= requested <= settled:
+            progress = exercise['progress']
+            if (exercise.get('outcome') != 'cancelled' or not finite_seconds(requested) or not progress
+                    or not started <= progress[-1]['seconds'] <= requested <= settled):
                 raise ValueError('cancellation did not settle after first-source progress')
             if kind == 'compiler.cancellation' and exercise.get('busyObserved') is not True:
                 raise ValueError('missing typed SDK busy result')
     if kind.startswith('host.lifecycle'):
-        # Launch-only CLI has no real scene adapter. Even a plausible fabricated pass is forbidden.
-        raise ValueError('lifecycle qualification requires an interactive mobile report, not launch-only CLI')
+        if not interactive:
+            raise ValueError('lifecycle qualification requires an interactive mobile report, not launch-only CLI')
+        scenes = exercise['scenes']
+        if (exercise.get('sceneObservationScope') != 'Actual aggregate SwiftUI app scenes; no suspension claim'
+                or not scenes or scenes[0]['phase'] != 'active' or scenes[-1]['phase'] != 'active'
+                or any(a['phase'] == b['phase'] for a, b in zip(scenes, scenes[1:]))):
+            raise ValueError('missing actual ordered scene observations')
+        backgrounds = [i for i, point in enumerate(scenes) if point['phase'] == 'background']
+        if len(backgrounds) != 1:
+            raise ValueError('expected one explicit background interval')
+        index = backgrounds[0]
+        later = next((point for point in scenes[index+1:] if point['phase'] == 'active'), None)
+        if (index == 0 or scenes[index-1]['phase'] != 'inactive' or later is None
+                or later['seconds'] - scenes[index]['seconds'] < 3
+                or not finite_seconds(exercise.get('freshStartedSeconds'))
+                or not later['seconds'] <= exercise['freshStartedSeconds'] <= report['events'][-1]['seconds']):
+            raise ValueError('fresh build did not follow a meaningful real background and return')
+        if kind == 'host.lifecycle':
+            boundary = next((event for event in report['events'] if event['phase'] == 'waiting-for-background'), None)
+            if boundary is None or scenes[index-1]['seconds'] < boundary['seconds']:
+                raise ValueError('backgrounding preceded the idle baseline boundary')
+        else:
+            manual = exercise.get('manuallyStartedSeconds')
+            if (not finite_seconds(manual) or not manual <= exercise['startedSeconds'] <= exercise['cancelRequestedSeconds']
+                    or not scenes[index-1]['seconds'] <= exercise['cancelRequestedSeconds'] <= scenes[index]['seconds']
+                    or exercise.get('workloadSHA256') != WORKER_SHA or exercise.get('workloadBytes') != 227505):
+                raise ValueError('missing explicit active-call admission or pinned workload')
+            if kind == 'host.lifecycle-worker' and (not finite_seconds(exercise.get('calibratedCompileSeconds'), 55)
+                    or exercise['calibratedCompileSeconds'] < 4):
+                raise ValueError('worker source calibration was not eligible')
+        return
     if exercise['scenes'] or exercise.get('sceneObservationScope') != 'Launch process only; no foreground/background claim':
         raise ValueError('launch-only command cannot claim foreground qualification')
 
 
-def decode_response(raw, request, pid):
+def decode_response(raw, request, pid, *, interactive=False):
     """Require exactly one bounded terminal envelope from the owned app process and exact request."""
     if len(raw) > MAX_CAPTURE:
         raise ValueError('app output exceeds its bound')
@@ -168,7 +199,7 @@ def decode_response(raw, request, pid):
             raise ValueError('invalid run event')
         elapsed = event.get('seconds')
         if (event.get('sequence') != index or type(elapsed) not in (int, float)
-                or not previous <= elapsed <= 180 or not isinstance(event.get('detail'), str)
+                or not previous <= elapsed <= (600 if interactive else 180) or not isinstance(event.get('detail'), str)
                 or len(event['detail'].encode()) > 4096):
             raise ValueError('invalid run timeline')
         previous = elapsed
@@ -190,7 +221,7 @@ def decode_response(raw, request, pid):
         if not 260 <= len(data) <= 4096 or hashlib.sha256(data).hexdigest() != artifact.get('sha256') or len(receipt) > 16384:
             raise ValueError('artifact bytes differ from their report')
         json.loads(receipt, object_pairs_hook=unique_object)
-    validate_exercise(report)
+    validate_exercise(report, interactive=interactive)
     return value
 
 
