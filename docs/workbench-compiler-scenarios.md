@@ -118,3 +118,22 @@ required, fresh known capsules and SDK receipt bindings. It performs no device o
 UI operation. Launch-only CLI continues to reject lifecycle passes. CoreDevice
 may retrieve only Workbench's own selected run reports, matching the established
 iOS qualification workflow; the controller never scans another app's data.
+
+The corrected build 4 is now installed and launched on the selected physical
+11-inch iPad Pro (3rd generation), iPadOS 27.0.1 (24A446), through paired
+`localNetwork`. Its clean source is `78001f551bab3907b94020bd6ce4798e309152fa`.
+[Deployment and physical qualification ledger](workbench-ipad-qualification.json)
+keeps the prepared inventory, signed executable identity, independently launched
+PID and actual reports as checks proceed. Seventeen Workbench tests, fourteen
+CLI/report fixtures and the full SDK entry point pass. Development signing needs
+`DEVELOPMENT_TEAM=WGR9T9JH4L` applied to the resource bundle as well as the app.
+The user has been asked to run the idle scenario from Test Lab; no mobile lifecycle
+pass is claimed yet.
+
+The first physical Workbench idle check now passes independent validation in
+PID 2085. Run `D2277232-1AA1-4153-86DD-9BE0F4A2A504` records actual aggregate
+active/inactive/background/return events with a 6.113-second background-to-active
+interval, the exact known baseline GPIO capsule and fresh console capsule in the
+same process. Full report/receipts and validator result are in the iPad ledger.
+Active-call and calibrated worker scenarios remain pending; no suspension claim
+follows from the idle transition.
