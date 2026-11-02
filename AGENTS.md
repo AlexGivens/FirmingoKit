@@ -30,9 +30,10 @@ with no live listener or device command. The second increment adds compiler
 busy/cancellation, actual deadline, twenty-build stress and interactive mobile
 scene scenarios; see `docs/workbench-compiler-scenarios.md`. Legacy hosts remain
 until matching replacement qualification. Workbench build 4 now passes all three
-physical iPad lifecycle cases in the same PID over paired Wi-Fi; see
-`docs/workbench-ipad-qualification.json`. iPhone replacement qualification is in
-progress. See `docs/workbench-consolidation.md`.
+physical iPad and iPhone lifecycle cases over paired Wi-Fi using one identical
+signed input app and one unchanged PID per device; see
+`docs/workbench-ipad-qualification.json` and `docs/workbench-iphone-qualification.json`.
+This does not qualify pressure/suspension, minimum OS or remaining mobile deadline/stress cases. See `docs/workbench-consolidation.md`.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

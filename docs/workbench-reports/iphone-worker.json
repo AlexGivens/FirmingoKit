@@ -1,0 +1,167 @@
+{
+  "appIdentifier" : "com.firmingokit.demo",
+  "appVersion" : "4",
+  "artifacts" : [
+    {
+      "bytes" : "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+      "name" : "worker.fms",
+      "receiptJSON" : "eyJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwicHJvdmVuYW5jZSI6eyJ0b29sY2hhaW5TSEEyNTYiOiJhNDRhZmE4NGU3NmFlN2IxNzQyZmQ1ZWNmZWVjMjA1NTY1NjQzYjk0OTQ4ZTM0ZDhjNTcwMjlhZTNjYWRhOWZkIiwiY29tcGlsZXIiOiJDbGFuZ1wvTExEIDIyLjEuOCBBQkktdHdvIFdBU0kgc2VydmljZSwgaXNvbGF0ZWQgV2ViS2l0IHdvcmtlciIsInJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSJ9LCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiJiODExZTc3NmZkZTE1NGNlMTUzOTQ4NGRlZGUyNjQyNTZkMDc1OGE1MWVhMzI2MzZhNTZhZDBjZGJlNDJkODQyIiwiYnVpbGRJbnB1dFNIQTI1NiI6IjM1NTcwMmZlNDUyYjM3Y2JmYTNlN2FlNzE3N2VlZDYyODMyMmMwMzk0MTM0ZTFlNDE2YWJmMWI5NTI1ZWI3YzIiLCJjYXBzdWxlU0hBMjU2IjoiOTU4Yjg2MWJiYzE4ZDQ2NjZlZDAzZTY5NzZiMzliOWZlYTQ4MTI0MDlhZDkxYTM1MDFhYmJiOTY4NWE4MGQ3ZCIsInNvdXJjZUZpbGVuYW1lIjoiV29ya2JlbmNoLXdvcmtlci5pbm8iLCJzb3VyY2VSZXZpc2lvbiI6MSwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsImJvYXJkSUQiOiJuYW5vX3JwMjA0MF9jb25uZWN0IiwidmVyc2lvbiI6MSwic291cmNlU0hBMjU2IjoiOWExNzEwNWI1ZDE3ZjczMjQzNWFiODFjNmJmMTA4MzM4NmU1Y2I1YWU4YjM2NTY5MjU5YmFjOGNmNDc5ZWMzZiIsImRvY3VtZW50SUQiOiJBNzBGMzVFNC02QTdELTQ2N0QtQjc3NC1CNkQxQjMwN0Y3NjEiLCJwcm9maWxlIjoibmFuby1tYW5hZ2VkLXYxIiwibGlua2VkRUxGU0hBMjU2IjoiZDcyOWE4YjZhOGUzNTNiMWZkZTAxMWVhNjI1OTdmMGJjNWUxNDUwMDQ5NmUwMThlN2M1YmQ1YzE1Mjc2MDUwZCJ9",
+      "sha256" : "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "wasmLinearMemoryBytes" : 28049408
+    },
+    {
+      "bytes" : "Rk1TMQEAQABOQU5PnCwCEAABIBCIAAAAAQEgEAkBIBB1Er8mbpcQeimvK3s+mRIaw5V5WZrf1lJWRLO0DsrZswAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Bv4gL3gtQGoAUkA8AP4jL2AASAQvLUBrAVKIoAA8Bz4BUYESAJoAiEgRpBHQBm8vQ0KAAC0LAIQHLUGTKBogEcAKAXUAaoQcCNoASEQRphHHL3ARrQsAhCAtQhGACFCXEkcACr70QJKEmhJHpBHgL20LAIQcmVhZHkA1NQ=",
+      "name" : "console.fms",
+      "receiptJSON" : "eyJjYXRhbG9ndWVTSEEyNTYiOiJlMzQxYmZjMDM4NWZlYTliMmIwMjZkYzYyNGRhYTI2Y2RlYWMzMzI4NmY0YmIwNzI0M2IzN2MxYzMxODM3ZDBlIiwic291cmNlUmV2aXNpb24iOjEsImNhcHN1bGVTSEEyNTYiOiJiMzcyYzAwZWRmNGI2MGM2NjJmNzMwNTU2ODVlZDg3NjRlOWY4Nzk4ZmU5ZWZiYmFmYWQwNDMwMjU0OTE3NGMwIiwic291cmNlU0hBMjU2IjoiNjk3Zjk1NDdmNzJkNDc4MjEwZGQyOWJkNjZjNjI5M2UwYTlhZTkyNmExYjRlOGQ1NjhiMTBhZWVhYjM3ZjVhMyIsImRvY3VtZW50SUQiOiJBMzA4RENEQS02QTI0LTRCRjgtOTRBMi0wODczNzBEMUI1MjciLCJwcm9maWxlIjoibmFuby1tYW5hZ2VkLXYxIiwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJidWlsZElucHV0U0hBMjU2IjoiYTEwYmMxNDc1ZGNiNTBiYjQ5YTg2NDRlYTcyYmU3OTRkZTY5NDMyOWVjYTc3ZjZkMjViNjhkODIxYzYyODFkMyIsInByb3ZlbmFuY2UiOnsidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCIsInJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSIsImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIifSwic291cmNlRmlsZW5hbWUiOiJXb3JrYmVuY2gtY29uc29sZS5pbm8iLCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiI1M2IwYzBhNzMyYTExZmZmZjM0OTY3MjU2MzZhMGE2Yjk0NjYzMzQ0YjI3ZmUzYTRlMzBmODY5YTE2MmNlYTk1IiwibGlua2VkRUxGU0hBMjU2IjoiMmZiZGQ2N2U0ZDQ0NGIyMGU0NTBmM2Y3ZTgyY2FiMDNjODdhOTU2MzVlMDEyZWU0NTE4MWJkMWQxOGVjOTA3YSIsInZlcnNpb24iOjEsImZpcm13YXJlQnVpbGRJRCI6ImM0NGQyNWVmZTc3NGViNDdiMTYzYmMwODI5MDZjZjQ4YjU5YjZlM2RkMWQwZTE5Yzc4MjI5MjVlNmJhODI3NWYifQ==",
+      "sha256" : "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "wasmLinearMemoryBytes" : 27983872
+    }
+  ],
+  "catalogueSHA256" : "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+  "deviceOperations" : false,
+  "events" : [
+    {
+      "detail" : "Loading actual SDK-verified catalogue metadata.",
+      "phase" : "catalogue",
+      "seconds" : 0.0002153333625756204,
+      "sequence" : 0
+    },
+    {
+      "detail" : "Verifying real bundled compiler\/runtime resources.",
+      "phase" : "resources",
+      "seconds" : 0.029126541689038277,
+      "sequence" : 1
+    },
+    {
+      "detail" : "Executing the exact SDK compiler input: worker",
+      "phase" : "compile-worker",
+      "seconds" : 0.1314227083348669,
+      "sequence" : 2
+    },
+    {
+      "detail" : "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "phase" : "artifact-worker",
+      "seconds" : 9.665099875011947,
+      "sequence" : 3
+    },
+    {
+      "detail" : "Tap Start lifecycle interruption, wait one second, then go Home for five seconds and return.",
+      "phase" : "waiting-for-start",
+      "seconds" : 9.668405833363067,
+      "sequence" : 4
+    },
+    {
+      "detail" : "Executing the exact SDK compiler input: worker",
+      "phase" : "compile-worker",
+      "seconds" : 23.246006125002168,
+      "sequence" : 5
+    },
+    {
+      "detail" : "Cancellation settled. Return after five seconds on Home; no commit or build is replayed.",
+      "phase" : "waiting-for-return",
+      "seconds" : 25.1246709167026,
+      "sequence" : 6
+    },
+    {
+      "detail" : "Executing the exact SDK compiler input: console",
+      "phase" : "compile-console",
+      "seconds" : 33.887635125021916,
+      "sequence" : 7
+    },
+    {
+      "detail" : "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "phase" : "artifact-console",
+      "seconds" : 34.57824154169066,
+      "sequence" : 8
+    },
+    {
+      "detail" : "All assertions in the selected scenario completed.",
+      "phase" : "complete",
+      "seconds" : 34.57898962503532,
+      "sequence" : 9
+    }
+  ],
+  "exercise" : {
+    "builds" : [
+      {
+        "index" : 1,
+        "input" : "worker",
+        "receiptSHA256" : "f493520dd827b4f0d44e4dcac53b7e1889832591f9c16643a1ea8b8c91bacdce",
+        "seconds" : 9.53177833330119,
+        "sha256" : "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "wasmLinearMemoryBytes" : 28049408
+      },
+      {
+        "index" : 2,
+        "input" : "console",
+        "receiptSHA256" : "b37adcafc2596ef0b58064e43e7c112041ef667c8f49acff475220676902387c",
+        "seconds" : 0.6879594166530296,
+        "sha256" : "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "wasmLinearMemoryBytes" : 27983872
+      }
+    ],
+    "busyObserved" : false,
+    "calibratedCompileSeconds" : 9.068568625021726,
+    "cancelRequestedSeconds" : 25.09755395835964,
+    "droppedSamples" : 0,
+    "freshStartedSeconds" : 33.88530470832484,
+    "kind" : "host.lifecycle-worker",
+    "manuallyStartedSeconds" : 23.22528474999126,
+    "outcome" : "cancelled",
+    "progress" : [
+      {
+        "phase" : "verifying",
+        "seconds" : 23.270184916676953
+      },
+      {
+        "phase" : "verifying",
+        "seconds" : 23.454789166687988
+      },
+      {
+        "phase" : "preparing",
+        "seconds" : 23.64982200000668
+      },
+      {
+        "phase" : "compiling",
+        "seconds" : 23.666712625010405
+      }
+    ],
+    "samples" : [
+
+    ],
+    "sceneObservationScope" : "Actual aggregate SwiftUI app scenes; no suspension claim",
+    "scenes" : [
+      {
+        "phase" : "active",
+        "seconds" : 0.13142104167491198
+      },
+      {
+        "phase" : "inactive",
+        "seconds" : 25.09755141666392
+      },
+      {
+        "phase" : "background",
+        "seconds" : 25.877272208337672
+      },
+      {
+        "phase" : "inactive",
+        "seconds" : 33.610425416671205
+      },
+      {
+        "phase" : "active",
+        "seconds" : 33.84074766666163
+      }
+    ],
+    "settledSeconds" : 25.124006791680586,
+    "startedSeconds" : 23.242636875016615,
+    "workloadBytes" : 227505,
+    "workloadSHA256" : "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"
+  },
+  "firmwareBuildID" : "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+  "id" : "87E8113C-BF9D-44B4-AAE6-386C6F3970FA",
+  "operatingSystem" : "Version 27.0.1 (Build 24A446)",
+  "processID" : 29011,
+  "scenarioID" : "host.lifecycle-worker",
+  "schema" : 1,
+  "status" : "passed"
+}

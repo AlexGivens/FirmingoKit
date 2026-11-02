@@ -680,3 +680,26 @@ full SDK entry point passed before the final manual-admission regression fix.
 Release macOS/iOS/Simulator builds passed, with macOS/iOS rebuilt after that fix. Physical mobile scene
 checks, UI/minimum-OS/pressure and remote CI remain separate pending work; no board
 was contacted. Legacy hosts and their evidence remain available.
+
+## Workbench physical mobile lifecycle — 2026-11-02
+
+Build 4 from clean SDK source `78001f551bab3907b94020bd6ce4798e309152fa`
+passes all three shared lifecycle cases on the physical 11-inch iPad Pro
+(3rd generation) and iPhone 15 Pro Max, both on OS 27.0.1 (24A446). The identical
+signed input app was installed over paired Wi-Fi on both, without rebuilds or
+re-signing between scenarios/devices. Each kept one PID across its three runs.
+The [iPad](workbench-ipad-qualification.json) and
+[iPhone](workbench-iphone-qualification.json) ledgers retain exact source/package/
+binary identities, actual reports, receipts and independent checks. Generic
+active-call cancellation records its observed SDK phase; the calibrated case
+separately requires eligible complete source timing and first-source interruption.
+Seventeen engine tests, fourteen CLI/report fixtures and the ordinary SDK entry
+point pass. The selected mobile-report checker is a read-only local file tool;
+CoreDevice collection was restricted to this app's selected run reports. No
+screenshot/native UI inspection or board action occurred. Live paired control,
+remaining mobile compiler cases, minimum OS and pressure/suspension remain open.
+
+The final offline entry-point rerun includes fifteen CLI/report tests and replays
+all six original byte-for-byte mobile reports, alongside seventeen Workbench
+engine tests, 166 SDK tests, eight ROM-host tests and retained host/source checks.
+These passed locally; remote CI execution remains pending.

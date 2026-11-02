@@ -188,5 +188,21 @@ class WorkbenchCLI(unittest.TestCase):
             args=dict(run_id=report['id'],pid=123,scenario='host.lifecycle',app_version='4');args[field]=value
             with self.assertRaises(ValueError): mobile.check(raw,**args)
 
+    def test_recorded_mobile_report_corpus_remains_independently_verifiable(self):
+        # Replaying original JSON is parser regression coverage, not a fresh physical run.
+        spec=importlib.util.spec_from_file_location('workbench_mobile_corpus',Path(__file__).with_name('check-mobile-report.py'))
+        mobile=importlib.util.module_from_spec(spec);spec.loader.exec_module(mobile)
+        docs=Path(__file__).resolve().parents[2]/'docs'
+        for device in ('ipad','iphone'):
+            ledger=json.loads((docs/('workbench-'+device+'-qualification.json')).read_text())
+            self.assertEqual(len(ledger['reports']),3)
+            for row in ledger['reports']:
+                with self.subTest(device=device,scenario=row['scenarioID']):
+                    raw=(docs/row['reportPath']).read_bytes()
+                    self.assertEqual(hashlib.sha256(raw).hexdigest(),row['reportSHA256'])
+                    result=mobile.check(raw,run_id=row['runID'],pid=ledger['launch']['processID'],
+                        scenario=row['scenarioID'],app_version=ledger['app']['appVersion'])
+                    self.assertEqual(result['status'],'passed_mobile_workbench_report')
+
 
 if __name__ == '__main__': unittest.main()

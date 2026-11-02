@@ -37,7 +37,8 @@
     "wirelessInstallAndLaunch": "passed",
     "fullSDKEntryPoint": "166 SDK tests, eight ROM-host tests, seventeen Workbench tests, fourteen CLI/report fixtures and retained legacy checks passed; absent runtime tests explicitly skipped",
     "independentMobileReportChecker": "selected local files only; run UUID/PID/app-version, scene sequence, typed outcomes, fixed workload/calibration and capsule/receipt assertions",
-    "finalIndependentProcessObservation": "Workbench PID 2085 still running after all three completed checks"
+    "finalIndependentProcessObservation": "Workbench PID 2085 still running after all three completed checks",
+    "finalOfflineRegression": "Normal SDK entry point passed 166 SDK tests, eight ROM-host tests, seventeen Workbench tests, fifteen CLI/report tests including six original reports, and retained legacy host checks; absent-runtime ordinary tests explicitly skipped. Remote CI not run."
   },
   "reports": [
     {
@@ -229,7 +230,8 @@
           ]
         },
         "scope": "Actual app scene delivery and known SDK artifacts; no OS suspension, pressure, board or minimum-OS claim"
-      }
+      },
+      "reportPath": "workbench-reports/ipad-idle.json"
     },
     {
       "scenarioID": "host.lifecycle-active",
@@ -480,7 +482,8 @@
           "workloadSHA256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"
         },
         "scope": "Actual app scene delivery and known SDK artifacts; no OS suspension, pressure, board or minimum-OS claim"
-      }
+      },
+      "reportPath": "workbench-reports/ipad-active.json"
     },
     {
       "scenarioID": "host.lifecycle-worker",
@@ -733,7 +736,8 @@
           "workloadSHA256": "9a17105b5d17f732435ab81c6bf1083386e5cb5ae8b36569259bac8cf479ec3f"
         },
         "scope": "Actual app scene delivery and known SDK artifacts; no OS suspension, pressure, board or minimum-OS claim"
-      }
+      },
+      "reportPath": "workbench-reports/ipad-worker.json"
     }
   ],
   "limitations": [

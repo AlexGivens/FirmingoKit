@@ -154,3 +154,51 @@ build 4 and PID 2085; final CoreDevice observation confirms that same process an
 `localNetwork`. No rebuild, reinstallation or app restart occurred between cases.
 The iPhone is now available for the same tests using the identical signed app;
 its evidence will be recorded separately.
+
+## Physical Workbench iPhone qualification — three scoped cases passed
+
+The identical signed build 4 was installed over paired Wi-Fi on the selected
+iPhone 15 Pro Max, iOS 27.0.1 (24A446), and launched in PID 29011. There was no
+rebuild or re-sign between devices. The first idle case passes independent
+validation: run `AE151D29-E2E6-423A-A7AC-6931CBEE1EB5` records a 5.931-second
+background-to-active interval and exact baseline/fresh artifacts. The separate
+[iPhone ledger](workbench-iphone-qualification.json) retains full device-specific
+reports and correlation; the iPad pass is not reused as an iPhone result.
+
+The iPhone generic active-call check also passes independently in PID 29011.
+Run `6862974D-A2FA-4CE6-9AC3-42166CFA8354` records compiling progress at
+inactivity, typed cancellation settlement in 11.716 ms, actual background/return
+and the exact known fresh console capsule. The calibrated worker case remains
+pending; no cross-device timing result is substituted for it.
+
+The iPhone calibrated worker check now passes independently in the same PID.
+Run `87E8113C-BF9D-44B4-AAE6-386C6F3970FA` records a 9.069-second completed
+source-compilation calibration, exactly one compiling notification during the
+interrupted request, typed cancellation settlement in 26.453 ms, actual
+background/return and the exact fresh console capsule. Final CoreDevice process
+and connection observations confirm PID 29011 and paired `localNetwork`.
+
+All six physical lifecycle runs therefore passed using one signed build 4 input
+app, zero rebuilds/re-signs between devices or scenarios, and one process per
+device. The iPad and iPhone ledgers retain each actual report, original byte hash,
+validator result and device/OS identity. No screen was inspected and no board was
+used. This does not qualify OS suspension, memory pressure, minimum OS or physical
+mobile deadline/stress scenarios. Legacy hosts remain for unmatched cases and
+historical reproducibility; live paired control and device scenarios are next.
+
+Original byte-for-byte app reports are retained under `docs/workbench-reports/`;
+each device ledger links its exact files and SHA-256 values. The read-only checker
+passes against all six committed report files, so verification does not depend on
+the developer's ignored build directory or a live device.
+
+The ordinary CLI fixture suite also replays all six original report files against
+their recorded launch identities and hashes. This is offline parser regression
+coverage, not six new physical runs. The final suite has fifteen tests; the
+seventeen engine tests and the earlier fourteen-test full entry-point result
+retain their actual scopes.
+
+The final normal SDK entry point also passed: 166 SDK tests, eight ROM-host tests,
+seventeen Workbench tests and fifteen CLI/report tests including the six archived
+reports, plus retained legacy host/source checks. Absent-runtime ordinary tests
+remain explicitly skipped; the six physical passes above come from actual app
+reports. Remote CI has not been run.

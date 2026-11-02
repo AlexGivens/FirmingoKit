@@ -1,0 +1,132 @@
+{
+  "appIdentifier" : "com.firmingokit.demo",
+  "appVersion" : "4",
+  "artifacts" : [
+    {
+      "bytes" : "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+      "name" : "gpio.fms",
+      "receiptJSON" : "eyJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwic291cmNlUmV2aXNpb24iOjEsInZlcnNpb24iOjEsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjEiLCJkb2N1bWVudElEIjoiRjVENDZDOTMtMzgwMS00RjZCLTg2QzQtODVBNUExQ0E5RUI0IiwidHJhbnNsYXRpb25Vbml0U0hBMjU2IjoiMDkxMjM2YWVlYTFkMWI0ZGVkNDEwZGUzZWIxNTViMTk2NzM4YWU5ZDcyN2QxZDc0MTFkM2I5Y2EzYmNiZTRkZSIsImNhcHN1bGVTSEEyNTYiOiI5NThiODYxYmJjMThkNDY2NmVkMDNlNjk3NmIzOWI5ZmVhNDgxMjQwOWFkOTFhMzUwMWFiYmI5Njg1YTgwZDdkIiwibGlua2VkRUxGU0hBMjU2IjoiZDcyOWE4YjZhOGUzNTNiMWZkZTAxMWVhNjI1OTdmMGJjNWUxNDUwMDQ5NmUwMThlN2M1YmQ1YzE1Mjc2MDUwZCIsImJ1aWxkSW5wdXRTSEEyNTYiOiIwNWQzZjM5NjRlNjc1MjQxYjY0YTQ1YzJjZmFlZGIyYmI4ZjYyMjE3ODRiZjE1YWFjNzAwYjFhNTdjZjczYTg4Iiwic291cmNlU0hBMjU2IjoiZmRhZDg4YWE4YjIwYjA0NWYzNTM2MmMxM2U1NjA5MGJhODViN2JkM2U4ZjAyNDQ1MmIzYjM5Zjg3YzBmMjU2OCIsImNhdGFsb2d1ZVNIQTI1NiI6ImUzNDFiZmMwMzg1ZmVhOWIyYjAyNmRjNjI0ZGFhMjZjZGVhYzMzMjg2ZjRiYjA3MjQzYjM3YzFjMzE4MzdkMGUiLCJwcm92ZW5hbmNlIjp7InJlY2lwZVNIQTI1NiI6ImI3ODY5ZjZmYzg2M2UxOTA1ZGViNjk3NDQwOGM2ZTdkYzYzOTQzYTFmYjNlMzQyYTM1N2ZkZjc1N2IxZTIzZDkiLCJ0b29sY2hhaW5TSEEyNTYiOiJhNDRhZmE4NGU3NmFlN2IxNzQyZmQ1ZWNmZWVjMjA1NTY1NjQzYjk0OTQ4ZTM0ZDhjNTcwMjlhZTNjYWRhOWZkIiwicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVsZXNzLWNsYW5nLTIyLjEuOC12MS1leHBlcmltZW50YWwiLCJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIn0sImJvYXJkSUQiOiJuYW5vX3JwMjA0MF9jb25uZWN0Iiwic291cmNlRmlsZW5hbWUiOiJXb3JrYmVuY2gtZ3Bpby5pbm8ifQ==",
+      "sha256" : "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "wasmLinearMemoryBytes" : 27983872
+    },
+    {
+      "bytes" : "Rk1TMQEAQABOQU5PnCwCEAABIBCIAAAAAQEgEAkBIBB1Er8mbpcQeimvK3s+mRIaw5V5WZrf1lJWRLO0DsrZswAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Bv4gL3gtQGoAUkA8AP4jL2AASAQvLUBrAVKIoAA8Bz4BUYESAJoAiEgRpBHQBm8vQ0KAAC0LAIQHLUGTKBogEcAKAXUAaoQcCNoASEQRphHHL3ARrQsAhCAtQhGACFCXEkcACr70QJKEmhJHpBHgL20LAIQcmVhZHkA1NQ=",
+      "name" : "console.fms",
+      "receiptJSON" : "eyJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwidHJhbnNsYXRpb25Vbml0U0hBMjU2IjoiNTNiMGMwYTczMmExMWZmZmYzNDk2NzI1NjM2YTBhNmI5NDY2MzM0NGIyN2ZlM2E0ZTMwZjg2OWExNjJjZWE5NSIsInByb3ZlbmFuY2UiOnsiY29tcGlsZXIiOiJDbGFuZ1wvTExEIDIyLjEuOCBBQkktdHdvIFdBU0kgc2VydmljZSwgaXNvbGF0ZWQgV2ViS2l0IHdvcmtlciIsInRvb2xjaGFpblNIQTI1NiI6ImE0NGFmYTg0ZTc2YWU3YjE3NDJmZDVlY2ZlZWMyMDU1NjU2NDNiOTQ5NDhlMzRkOGM1NzAyOWFlM2NhZGE5ZmQiLCJyZWNpcGVTSEEyNTYiOiJiNzg2OWY2ZmM4NjNlMTkwNWRlYjY5NzQ0MDhjNmU3ZGM2Mzk0M2ExZmIzZTM0MmEzNTdmZGY3NTdiMWUyM2Q5IiwicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVsZXNzLWNsYW5nLTIyLjEuOC12MS1leHBlcmltZW50YWwifSwiYnVpbGRJbnB1dFNIQTI1NiI6IjMyZDdkNTBhNTQyMGU5MTc2YjFhNWZjYjU0ZDU0M2U2MDUwYzI3OGRmY2ZmMmM0MWRiZmFiMjUwODU0MjQ0MjIiLCJjYXBzdWxlU0hBMjU2IjoiYjM3MmMwMGVkZjRiNjBjNjYyZjczMDU1Njg1ZWQ4NzY0ZTlmODc5OGZlOWVmYmJhZmFkMDQzMDI1NDkxNzRjMCIsInNvdXJjZUZpbGVuYW1lIjoiV29ya2JlbmNoLWNvbnNvbGUuaW5vIiwic291cmNlUmV2aXNpb24iOjEsImNhdGFsb2d1ZVNIQTI1NiI6ImUzNDFiZmMwMzg1ZmVhOWIyYjAyNmRjNjI0ZGFhMjZjZGVhYzMzMjg2ZjRiYjA3MjQzYjM3YzFjMzE4MzdkMGUiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsInZlcnNpb24iOjEsInNvdXJjZVNIQTI1NiI6IjY5N2Y5NTQ3ZjcyZDQ3ODIxMGRkMjliZDY2YzYyOTNlMGE5YWU5MjZhMWI0ZThkNTY4YjEwYWVlYWIzN2Y1YTMiLCJkb2N1bWVudElEIjoiRDNBQTgzMzQtOTUxRi00RUJBLUFCQ0MtREVCQUNERjg3NjI3IiwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MSIsImxpbmtlZEVMRlNIQTI1NiI6IjJmYmRkNjdlNGQ0NDRiMjBlNDUwZjNmN2U4MmNhYjAzYzg3YTk1NjM1ZTAxMmVlNDUxODFiZDFkMThlYzkwN2EifQ==",
+      "sha256" : "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "wasmLinearMemoryBytes" : 27983872
+    }
+  ],
+  "catalogueSHA256" : "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+  "deviceOperations" : false,
+  "events" : [
+    {
+      "detail" : "Loading actual SDK-verified catalogue metadata.",
+      "phase" : "catalogue",
+      "seconds" : 0.0008320833439938724,
+      "sequence" : 0
+    },
+    {
+      "detail" : "Verifying real bundled compiler\/runtime resources.",
+      "phase" : "resources",
+      "seconds" : 0.025795208348426968,
+      "sequence" : 1
+    },
+    {
+      "detail" : "Executing the exact SDK compiler input: gpio",
+      "phase" : "compile-gpio",
+      "seconds" : 0.10447912500239909,
+      "sequence" : 2
+    },
+    {
+      "detail" : "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "phase" : "artifact-gpio",
+      "seconds" : 0.8178969166474417,
+      "sequence" : 3
+    },
+    {
+      "detail" : "Go Home, wait five seconds, then reopen Workbench. No OS suspension is inferred.",
+      "phase" : "waiting-for-background",
+      "seconds" : 0.8185372916632332,
+      "sequence" : 4
+    },
+    {
+      "detail" : "Executing the exact SDK compiler input: console",
+      "phase" : "compile-console",
+      "seconds" : 14.16988270834554,
+      "sequence" : 5
+    },
+    {
+      "detail" : "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+      "phase" : "artifact-console",
+      "seconds" : 14.875731625012122,
+      "sequence" : 6
+    },
+    {
+      "detail" : "All assertions in the selected scenario completed.",
+      "phase" : "complete",
+      "seconds" : 14.876977916632313,
+      "sequence" : 7
+    }
+  ],
+  "exercise" : {
+    "builds" : [
+      {
+        "index" : 1,
+        "input" : "gpio",
+        "receiptSHA256" : "931644001818b8be6d0688135396bf6f78483bacbbd570c2f79de9d4f5f15d0a",
+        "seconds" : 0.7120018333080225,
+        "sha256" : "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "wasmLinearMemoryBytes" : 27983872
+      },
+      {
+        "index" : 2,
+        "input" : "console",
+        "receiptSHA256" : "29315ac032e4907895cc852d338fd542e1dab2df8d4d2e067e02e3712fa44a78",
+        "seconds" : 0.7038112499867566,
+        "sha256" : "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "wasmLinearMemoryBytes" : 27983872
+      }
+    ],
+    "busyObserved" : false,
+    "droppedSamples" : 0,
+    "freshStartedSeconds" : 14.167757708346471,
+    "kind" : "host.lifecycle",
+    "progress" : [
+
+    ],
+    "samples" : [
+
+    ],
+    "sceneObservationScope" : "Actual aggregate SwiftUI app scenes; no suspension claim",
+    "scenes" : [
+      {
+        "phase" : "active",
+        "seconds" : 0.10444283334072679
+      },
+      {
+        "phase" : "inactive",
+        "seconds" : 7.415637791680638
+      },
+      {
+        "phase" : "background",
+        "seconds" : 8.18890912499046
+      },
+      {
+        "phase" : "inactive",
+        "seconds" : 13.889386374969035
+      },
+      {
+        "phase" : "active",
+        "seconds" : 14.120316416665446
+      }
+    ]
+  },
+  "firmwareBuildID" : "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+  "id" : "AE151D29-E2E6-423A-A7AC-6931CBEE1EB5",
+  "operatingSystem" : "Version 27.0.1 (Build 24A446)",
+  "processID" : 29011,
+  "scenarioID" : "host.lifecycle",
+  "schema" : 1,
+  "status" : "passed"
+}
