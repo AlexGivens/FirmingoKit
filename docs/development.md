@@ -667,3 +667,16 @@ A fresh process rejected a completed UUID, and unmigrated hardware remained
 blocked. [Exact local evidence](workbench-consolidation-local.json) records the
 clean prepared source/package/binary identities and full terminal reports. Generic
 platform builds passed; no physical/UI or remote-CI qualification is inferred.
+
+## Workbench compiler scenarios — 2026-11-02
+
+[Compiler scenario work log](workbench-compiler-scenarios.md) and
+[exact local evidence](workbench-compiler-scenarios-local.json) record the second
+increment. The same clean prepared, signed sandboxed build 3 passed actual SDK
+busy/first-source cancellation, production sixty-second deadline/fresh recovery
+and twenty repeated exact builds. The public SDK timer/recipe/assets were not
+modified. Sixteen final focused engine tests and eleven CLI fixtures passed; the
+full SDK entry point passed before the final manual-admission regression fix.
+Release macOS/iOS/Simulator builds passed, with macOS/iOS rebuilt after that fix. Physical mobile scene
+checks, UI/minimum-OS/pressure and remote CI remain separate pending work; no board
+was contacted. Legacy hosts and their evidence remain available.

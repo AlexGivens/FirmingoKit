@@ -52,7 +52,8 @@ import FirmingoKit
         guard ready, scene == "active", evidence.manuallyStartedSeconds == nil else {
             throw WorkbenchFailure("The lifecycle check is not ready for explicit start.")
         }
-        evidence.manuallyStartedSeconds = now(); try save(evidence); ready = false
+        var next = evidence; next.manuallyStartedSeconds = now()
+        try save(next); evidence = next; ready = false
     }
     /// Accepts only actual app-scene delivery; CLI requests have no scene injection command.
     func recordScene(_ phase: String) {
@@ -113,6 +114,7 @@ import FirmingoKit
             try await waitForReturn()
         } else {
             if lifecycle {
+                try save(evidence)
                 ready = true
                 try emit("waiting-for-start", "Tap Start lifecycle interruption, wait for first source compilation, then go Home for five seconds and return.", nil)
                 while evidence.manuallyStartedSeconds == nil { try check(); try await Task.sleep(for: .milliseconds(50)) }

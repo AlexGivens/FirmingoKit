@@ -69,5 +69,32 @@ pressure recovery or survival of OS suspension/termination.
   prerequisites, progress/outcome and sample presentation to the existing Test Lab.
 - Added deterministic orchestration and independent CLI rejection tests to the
   existing validation entry point; retained legacy qualification checks.
-- Signed real-runtime checks and final platform builds are in progress. Physical
-  mobile lifecycle, minimum-OS/UI/accessibility and remote CI remain unqualified.
+- Sixteen final deterministic Workbench tests and eleven CLI fixtures pass. The
+  full SDK entry point passed 166 SDK tests, eight ROM-host tests, the fifteen
+  initial Workbench tests and retained legacy host/tool checks. Runtime-unavailable ordinary tests remain explicitly skipped.
+- One development-signed sandboxed Workbench build 3 passes actual SDK busy and
+  first-source cancellation followed by fresh compilation; the actual deadline
+  settles after **60.633 seconds** from request admission with typed timedOut and
+  one compiling notification, then a known fresh console build passes.
+- The same executable passes twenty alternating exact builds in **21.617 seconds**
+  overall, with 74 self-process footprint samples and zero omissions. Sampled
+  self-process maximum is 240,426,032 bytes; post-build WASM linear memory is
+  27,983,872 bytes for all twenty builds. These are distinct scoped observations.
+- That same binary returns blocked (exit 3) for all three lifecycle scenarios
+  through the launch-only CLI, before any catalogue/SDK work.
+- Release app builds pass for macOS, iOS device target and Simulator.
+  Strict development signature, YAML and shell syntax checks pass. Actionlint is
+  unavailable and remote CI has not run.
+- [Exact source/package/binary identities and terminal reports](workbench-compiler-scenarios-local.json)
+  retain these results. Physical Workbench mobile lifecycle, minimum-OS,
+  layout/accessibility, actual suspension/termination and pressure remain pending.
+  The previously selected iPad was not reachable during this increment; no mobile
+  app was installed and no board interaction occurred.
+
+Final source review found and fixed an interactive admission error: a failed save
+of the explicit manual Start must leave the attempt unarmed. Calibration is also
+saved before exposing Start. A sixteenth focused regression test proves the failed
+gate prevents a second SDK call; all focused tests and macOS/iOS rebuilds passed.
+This follow-up affects only interactive lifecycle admission; automatic runtime
+reports retain the exact preceding clean `5d9c151` source/binary identity. No
+physical scene qualification is inferred from the synthetic regression test.

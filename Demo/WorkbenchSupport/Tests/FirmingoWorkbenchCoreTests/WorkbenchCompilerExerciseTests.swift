@@ -11,8 +11,11 @@ import FirmingoKit
     var evidence: WorkbenchExerciseEvidence?
     /// Rejects a progress save before cancellation/fresh work.
     var refuseInterruptedSave = false
+    /// Injects failure at the explicit second-action journal gate.
+    var refuseManualStart = false
     /// Captures acknowledged evidence or fails its durable gate.
     func save(_ value: WorkbenchExerciseEvidence) throws {
+        if refuseManualStart && value.manuallyStartedSeconds != nil { throw WorkbenchFailure("Injected manual-start save failure.") }
         if refuseInterruptedSave && value.startedSeconds != nil { throw WorkbenchFailure("Injected journal failure.") }
         evidence = value
     }
@@ -143,4 +146,23 @@ import FirmingoKit
         #expect(backend.inputs == (short ? [.gpio] : [.gpio, .console]))
         owner = nil
     }
+}
+
+/// A failed explicit-start save leaves the private admission state unarmed; no second SDK call may begin.
+@Test @MainActor func failedManualStartDoesNotArmALifecycleAttempt() async throws {
+    let context = ExerciseContext(), backend = ExerciseBackend(ExerciseContext())
+    let owner = WorkbenchCompilerExercise(kind: "host.lifecycle-active", backend: backend, buildID: WorkbenchCompilerInput.buildID,
+        scene: "active", observesScenes: true, now: { context.seconds }, save: context.save,
+        emit: { _, _, _ in })
+    let pending = Task { try await owner.run() }
+    defer { pending.cancel() }
+    for _ in 0..<1000 { if owner.ready { break }; await Task.yield() }
+    try #require(owner.ready)
+    context.refuseManualStart = true
+    #expect(throws: WorkbenchFailure.self) { try owner.begin() }
+    #expect(owner.ready)
+    #expect(context.evidence?.manuallyStartedSeconds == nil)
+    #expect(backend.inputs == [.gpio])
+    pending.cancel()
+    await #expect(throws: CancellationError.self) { try await pending.value }
 }

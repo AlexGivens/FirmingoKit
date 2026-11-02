@@ -52,7 +52,7 @@ The canonical scheme is **FirmingoWorkbench** in the existing
 `Demo/FirmingoDemo.xcodeproj`; the old `FirmingoDemo` scheme remains an alias to
 that same target/product. Product/executable is `FirmingoWorkbench.app` /
 `FirmingoWorkbench`. Bundle ID remains `com.firmingokit.demo`; test phases do not
-create new app identities. Project build number is 2. No entitlement or listener
+create new app identities. The first increment used build 2; the compiler-scenario increment uses build 3. No entitlement or listener
 is added. The original editor, device actions and programming guards remain.
 
 Build the app with your existing development signing configuration:

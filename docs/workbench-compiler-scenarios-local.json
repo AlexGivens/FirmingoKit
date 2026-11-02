@@ -1,0 +1,1296 @@
+{
+  "schema": 1,
+  "date": "2026-11-02",
+  "status": "automatic compiler scenarios locally qualified; physical Workbench mobile lifecycle pending",
+  "toolchain": "Xcode 27.2 / Apple Swift 6.4.2",
+  "preparedPackage": {
+    "sdkCommit": "5d9c151a66b87dfdfff1301ea779ca0d5c555be8",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "preparedInventorySHA256": "e8664dc3b8dcd89899928bc11116bd8044b6879d98dce9688e72b4a560eff36a",
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "3",
+    "team": "WGR9T9JH4L",
+    "qualification": "experimental reviewed assets, explicit local preparation; no publication/production asset promotion"
+  },
+  "checks": {
+    "fullSDKEntryPoint": "passed: 166 SDK tests, eight ROM-host tests, fifteen Workbench tests, eleven CLI fixtures and all retained legacy host/tool checks; absent runtime tests explicitly skipped",
+    "focusedEngineTests": "16 passed with warnings as errors after the interactive manual-admission fix; synthetic boundary tests are not runtime/scene evidence",
+    "CLI": "11 fixtures passed; independent actual run assertions also passed",
+    "macOS": "prepared Release build and strict development-signature verification passed",
+    "iOS": "final source Release device-target build passed without installation",
+    "simulator": "prepared Release build passed without simulator launch",
+    "workflow": "Ruby YAML parsing and bash syntax checks passed; actionlint not installed; no remote CI run",
+    "finalInteractiveAdmissionFix": {
+      "scope": "Follow-up after the clean 5d9c151 automatic runtime snapshot: manual-start state is published only after a successful durable save; worker calibration is saved before exposing Start.",
+      "exerciseSourceSHA256": "f2689dc0ecd20d2774f24d13814105a5f33eb915ef63110e31dfb5aaccb15c34",
+      "regression": "Failed manual-start persistence leaves the attempt unarmed and permits no second SDK call; all sixteen focused tests passed.",
+      "builds": "Final macOS and iOS Release app rebuilds passed. Simulator Release passed at the preceding clean prepared snapshot.",
+      "runtimeQualification": "Automatic case reports below remain pinned to their actually executed 5d9c151 source/binary; interactive mobile cases remain physically unqualified."
+    }
+  },
+  "runs": [
+    {
+      "case": "cancellation",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "B8F603B7-167C-4FBC-B37C-0918131B2FFB",
+        "scenarioID": "compiler.cancellation",
+        "schema": 1
+      },
+      "processID": 65242,
+      "observedStatus": "passed",
+      "expectedExitCode": 0,
+      "resultSHA256": "18e719c5cde8300d3aeb9f30a705a41d160cf96f3607445c217d45f709036b5f",
+      "executableSHA256": "0440f6c74f1121e91d29d6b043da47a4037563fe32cdb0c581609903382eb64a",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": {
+        "builds": [
+          {
+            "board": "nano_rp2040_connect",
+            "id": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+            "profile": "nano-managed-v1"
+          }
+        ],
+        "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "3",
+        "artifacts": [
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+            "name": "gpio.fms",
+            "receiptJSON": "eyJzb3VyY2VSZXZpc2lvbiI6MSwiYnVpbGRJbnB1dFNIQTI1NiI6IjY1NzkxYzdmMTRjZjliOWE2NzI2MWNlZTk5MzNiNjk0ZDU3YTY5YjIwZjFlYTU1ZDM5Mzc5MjNjZjY0ZDYxNzIiLCJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwibGlua2VkRUxGU0hBMjU2IjoiZDcyOWE4YjZhOGUzNTNiMWZkZTAxMWVhNjI1OTdmMGJjNWUxNDUwMDQ5NmUwMThlN2M1YmQ1YzE1Mjc2MDUwZCIsImNhcHN1bGVTSEEyNTYiOiI5NThiODYxYmJjMThkNDY2NmVkMDNlNjk3NmIzOWI5ZmVhNDgxMjQwOWFkOTFhMzUwMWFiYmI5Njg1YTgwZDdkIiwic291cmNlU0hBMjU2IjoiZmRhZDg4YWE4YjIwYjA0NWYzNTM2MmMxM2U1NjA5MGJhODViN2JkM2U4ZjAyNDQ1MmIzYjM5Zjg3YzBmMjU2OCIsInZlcnNpb24iOjEsInByb3ZlbmFuY2UiOnsiY29tcGlsZXIiOiJDbGFuZ1wvTExEIDIyLjEuOCBBQkktdHdvIFdBU0kgc2VydmljZSwgaXNvbGF0ZWQgV2ViS2l0IHdvcmtlciIsInJlY2lwZVNIQTI1NiI6ImI3ODY5ZjZmYzg2M2UxOTA1ZGViNjk3NDQwOGM2ZTdkYzYzOTQzYTFmYjNlMzQyYTM1N2ZkZjc1N2IxZTIzZDkiLCJyZWNpcGVJZGVudGlmaWVyIjoibmFuby1zdGF0ZWxlc3MtY2xhbmctMjIuMS44LXYxLWV4cGVyaW1lbnRhbCIsInRvb2xjaGFpblNIQTI1NiI6ImE0NGFmYTg0ZTc2YWU3YjE3NDJmZDVlY2ZlZWMyMDU1NjU2NDNiOTQ5NDhlMzRkOGM1NzAyOWFlM2NhZGE5ZmQifSwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MSIsImNhdGFsb2d1ZVNIQTI1NiI6ImUzNDFiZmMwMzg1ZmVhOWIyYjAyNmRjNjI0ZGFhMjZjZGVhYzMzMjg2ZjRiYjA3MjQzYjM3YzFjMzE4MzdkMGUiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsInNvdXJjZUZpbGVuYW1lIjoiV29ya2JlbmNoLWdwaW8uaW5vIiwidHJhbnNsYXRpb25Vbml0U0hBMjU2IjoiMDkxMjM2YWVlYTFkMWI0ZGVkNDEwZGUzZWIxNTViMTk2NzM4YWU5ZDcyN2QxZDc0MTFkM2I5Y2EzYmNiZTRkZSIsImRvY3VtZW50SUQiOiI5RjI2RjI0RC0xNjhBLTQ1QzItQTgyMy02MDc1MTc5MUMyNjYifQ==",
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBCIAAAAAQEgEAkBIBB1Er8mbpcQeimvK3s+mRIaw5V5WZrf1lJWRLO0DsrZswAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Bv4gL3gtQGoAUkA8AP4jL2AASAQvLUBrAVKIoAA8Bz4BUYESAJoAiEgRpBHQBm8vQ0KAAC0LAIQHLUGTKBogEcAKAXUAaoQcCNoASEQRphHHL3ARrQsAhCAtQhGACFCXEkcACr70QJKEmhJHpBHgL20LAIQcmVhZHkA1NQ=",
+            "name": "console.fms",
+            "receiptJSON": "eyJ2ZXJzaW9uIjoxLCJzb3VyY2VTSEEyNTYiOiI2OTdmOTU0N2Y3MmQ0NzgyMTBkZDI5YmQ2NmM2MjkzZTBhOWFlOTI2YTFiNGU4ZDU2OGIxMGFlZWFiMzdmNWEzIiwiZG9jdW1lbnRJRCI6IjI1QjY4QjFBLTMyNDgtNEQyMS1CNDAyLTEwNEQ2MzlBREY3MiIsInNvdXJjZUZpbGVuYW1lIjoiV29ya2JlbmNoLWNvbnNvbGUuaW5vIiwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MSIsImJ1aWxkSW5wdXRTSEEyNTYiOiIzMjU4MmQ1NGYzYzBmYTk4MTBhODNlMTAwMmZhZmU1Zjc1NGE1NmNmODEyNjJhMDIxM2IzM2RmNWI0NzM2ZjJiIiwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsImNhcHN1bGVTSEEyNTYiOiJiMzcyYzAwZWRmNGI2MGM2NjJmNzMwNTU2ODVlZDg3NjRlOWY4Nzk4ZmU5ZWZiYmFmYWQwNDMwMjU0OTE3NGMwIiwidHJhbnNsYXRpb25Vbml0U0hBMjU2IjoiNTNiMGMwYTczMmExMWZmZmYzNDk2NzI1NjM2YTBhNmI5NDY2MzM0NGIyN2ZlM2E0ZTMwZjg2OWExNjJjZWE5NSIsImZpcm13YXJlQnVpbGRJRCI6ImM0NGQyNWVmZTc3NGViNDdiMTYzYmMwODI5MDZjZjQ4YjU5YjZlM2RkMWQwZTE5Yzc4MjI5MjVlNmJhODI3NWYiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsImxpbmtlZEVMRlNIQTI1NiI6IjJmYmRkNjdlNGQ0NDRiMjBlNDUwZjNmN2U4MmNhYjAzYzg3YTk1NjM1ZTAxMmVlNDUxODFiZDFkMThlYzkwN2EiLCJzb3VyY2VSZXZpc2lvbiI6MSwicHJvdmVuYW5jZSI6eyJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIiwicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVsZXNzLWNsYW5nLTIyLjEuOC12MS1leHBlcmltZW50YWwiLCJyZWNpcGVTSEEyNTYiOiJiNzg2OWY2ZmM4NjNlMTkwNWRlYjY5NzQ0MDhjNmU3ZGM2Mzk0M2ExZmIzZTM0MmEzNTdmZGY3NTdiMWUyM2Q5IiwidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCJ9fQ==",
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Loading actual SDK-verified catalogue metadata.",
+            "phase": "catalogue",
+            "seconds": 1.2509140423499048,
+            "sequence": 0
+          },
+          {
+            "detail": "Verifying real bundled compiler/runtime resources.",
+            "phase": "resources",
+            "seconds": 1.276876584161073,
+            "sequence": 1
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 1.6856331252492964,
+            "sequence": 2
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 3.294441709294915,
+            "sequence": 3
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 3.2962722503580153,
+            "sequence": 4
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 4.070250042248517,
+            "sequence": 5
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 5.083450250327587,
+            "sequence": 6
+          },
+          {
+            "detail": "All assertions in the selected scenario completed.",
+            "phase": "complete",
+            "seconds": 5.0842329589650035,
+            "sequence": 7
+          }
+        ],
+        "exercise": {
+          "builds": [
+            {
+              "index": 1,
+              "input": "gpio",
+              "receiptSHA256": "c534dea71c90eaf301b1243e3b8dd6f07fa1cbe4e2ab5f25bfea87777f37639f",
+              "seconds": 1.6071260832250118,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 2,
+              "input": "console",
+              "receiptSHA256": "a9b03ab8e8d137c6a4db27b4676b0b09b4b641b2789fe2f9ee81f830644a9e68",
+              "seconds": 1.01170750008896,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            }
+          ],
+          "busyObserved": true,
+          "cancelRequestedSeconds": 4.061830417253077,
+          "droppedSamples": 0,
+          "freshStartedSeconds": 4.069468125235289,
+          "kind": "compiler.cancellation",
+          "outcome": "cancelled",
+          "progress": [
+            {
+              "phase": "verifying",
+              "seconds": 3.297361332923174
+            },
+            {
+              "phase": "verifying",
+              "seconds": 3.8604387920349836
+            },
+            {
+              "phase": "preparing",
+              "seconds": 4.0466791251674294
+            },
+            {
+              "phase": "compiling",
+              "seconds": 4.061621707864106
+            }
+          ],
+          "samples": [],
+          "sceneObservationScope": "Launch process only; no foreground/background claim",
+          "scenes": [],
+          "settledSeconds": 4.068316750228405,
+          "startedSeconds": 3.2953907093033195
+        },
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "id": "B8F603B7-167C-4FBC-B37C-0918131B2FFB",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 65242,
+        "scenarioID": "compiler.cancellation",
+        "schema": 1,
+        "status": "passed"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-lifetime-cancellation-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "deadline",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "773AC738-A29D-4AED-B99B-07F15E9EB5ED",
+        "scenarioID": "compiler.deadline",
+        "schema": 1
+      },
+      "processID": 65285,
+      "observedStatus": "passed",
+      "expectedExitCode": 0,
+      "resultSHA256": "51c47b1fc00ad51db2bb659555a4215d304f7ebd52022238c11803aaaba00277",
+      "executableSHA256": "0440f6c74f1121e91d29d6b043da47a4037563fe32cdb0c581609903382eb64a",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": {
+        "builds": [
+          {
+            "board": "nano_rp2040_connect",
+            "id": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+            "profile": "nano-managed-v1"
+          }
+        ],
+        "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "3",
+        "artifacts": [
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+            "name": "gpio.fms",
+            "receiptJSON": "eyJzb3VyY2VTSEEyNTYiOiJmZGFkODhhYThiMjBiMDQ1ZjM1MzYyYzEzZTU2MDkwYmE4NWI3YmQzZThmMDI0NDUyYjNiMzlmODdjMGYyNTY4IiwiZG9jdW1lbnRJRCI6IjE2MjI1QThELTkyQUMtNDNBNi04RDc4LTZGQjNDNTEwOTQ2NyIsInByb3ZlbmFuY2UiOnsicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSIsImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIiLCJyZWNpcGVJZGVudGlmaWVyIjoibmFuby1zdGF0ZWxlc3MtY2xhbmctMjIuMS44LXYxLWV4cGVyaW1lbnRhbCIsInRvb2xjaGFpblNIQTI1NiI6ImE0NGFmYTg0ZTc2YWU3YjE3NDJmZDVlY2ZlZWMyMDU1NjU2NDNiOTQ5NDhlMzRkOGM1NzAyOWFlM2NhZGE5ZmQifSwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MSIsInNvdXJjZVJldmlzaW9uIjoxLCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiIwOTEyMzZhZWVhMWQxYjRkZWQ0MTBkZTNlYjE1NWIxOTY3MzhhZTlkNzI3ZDFkNzQxMWQzYjljYTNiY2JlNGRlIiwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJjYXBzdWxlU0hBMjU2IjoiOTU4Yjg2MWJiYzE4ZDQ2NjZlZDAzZTY5NzZiMzliOWZlYTQ4MTI0MDlhZDkxYTM1MDFhYmJiOTY4NWE4MGQ3ZCIsImZpcm13YXJlQnVpbGRJRCI6ImM0NGQyNWVmZTc3NGViNDdiMTYzYmMwODI5MDZjZjQ4YjU5YjZlM2RkMWQwZTE5Yzc4MjI5MjVlNmJhODI3NWYiLCJ2ZXJzaW9uIjoxLCJjYXRhbG9ndWVTSEEyNTYiOiJlMzQxYmZjMDM4NWZlYTliMmIwMjZkYzYyNGRhYTI2Y2RlYWMzMzI4NmY0YmIwNzI0M2IzN2MxYzMxODM3ZDBlIiwic291cmNlRmlsZW5hbWUiOiJXb3JrYmVuY2gtZ3Bpby5pbm8iLCJidWlsZElucHV0U0hBMjU2IjoiY2U5MzUxNzA0Yzk1MTRmODIyOTA5ZTFkNmU5ZDU0YWU2YTA3M2JjY2RkMmJiZjIzMDc0NjBlOTU3YTkwNDYzYiIsImxpbmtlZEVMRlNIQTI1NiI6ImQ3MjlhOGI2YThlMzUzYjFmZGUwMTFlYTYyNTk3ZjBiYzVlMTQ1MDA0OTZlMDE4ZTdjNWJkNWMxNTI3NjA1MGQifQ==",
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBCIAAAAAQEgEAkBIBB1Er8mbpcQeimvK3s+mRIaw5V5WZrf1lJWRLO0DsrZswAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Bv4gL3gtQGoAUkA8AP4jL2AASAQvLUBrAVKIoAA8Bz4BUYESAJoAiEgRpBHQBm8vQ0KAAC0LAIQHLUGTKBogEcAKAXUAaoQcCNoASEQRphHHL3ARrQsAhCAtQhGACFCXEkcACr70QJKEmhJHpBHgL20LAIQcmVhZHkA1NQ=",
+            "name": "console.fms",
+            "receiptJSON": "eyJzb3VyY2VGaWxlbmFtZSI6IldvcmtiZW5jaC1jb25zb2xlLmlubyIsImZpcm13YXJlQnVpbGRJRCI6ImM0NGQyNWVmZTc3NGViNDdiMTYzYmMwODI5MDZjZjQ4YjU5YjZlM2RkMWQwZTE5Yzc4MjI5MjVlNmJhODI3NWYiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsImJ1aWxkSW5wdXRTSEEyNTYiOiI2M2E3OWE3MDRlYjU5YTk5YTgzZWNjYmYwZDkxMzVmY2ZjMmUwYWQ0YjQyZWIzNGQzZTFiMGM3Y2IzOTQ4MDZiIiwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjEiLCJjYXBzdWxlU0hBMjU2IjoiYjM3MmMwMGVkZjRiNjBjNjYyZjczMDU1Njg1ZWQ4NzY0ZTlmODc5OGZlOWVmYmJhZmFkMDQzMDI1NDkxNzRjMCIsInZlcnNpb24iOjEsInNvdXJjZVNIQTI1NiI6IjY5N2Y5NTQ3ZjcyZDQ3ODIxMGRkMjliZDY2YzYyOTNlMGE5YWU5MjZhMWI0ZThkNTY4YjEwYWVlYWIzN2Y1YTMiLCJwcm92ZW5hbmNlIjp7ImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIiLCJyZWNpcGVTSEEyNTYiOiJiNzg2OWY2ZmM4NjNlMTkwNWRlYjY5NzQ0MDhjNmU3ZGM2Mzk0M2ExZmIzZTM0MmEzNTdmZGY3NTdiMWUyM2Q5IiwicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVsZXNzLWNsYW5nLTIyLjEuOC12MS1leHBlcmltZW50YWwiLCJ0b29sY2hhaW5TSEEyNTYiOiJhNDRhZmE4NGU3NmFlN2IxNzQyZmQ1ZWNmZWVjMjA1NTY1NjQzYjk0OTQ4ZTM0ZDhjNTcwMjlhZTNjYWRhOWZkIn0sInNvdXJjZVJldmlzaW9uIjoxLCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiI1M2IwYzBhNzMyYTExZmZmZjM0OTY3MjU2MzZhMGE2Yjk0NjYzMzQ0YjI3ZmUzYTRlMzBmODY5YTE2MmNlYTk1IiwibGlua2VkRUxGU0hBMjU2IjoiMmZiZGQ2N2U0ZDQ0NGIyMGU0NTBmM2Y3ZTgyY2FiMDNjODdhOTU2MzVlMDEyZWU0NTE4MWJkMWQxOGVjOTA3YSIsImRvY3VtZW50SUQiOiI3MzcyRUIyRS03MjAyLTQ3MDMtOUMwOC1DQjZBN0RBNTJDQjgifQ==",
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Loading actual SDK-verified catalogue metadata.",
+            "phase": "catalogue",
+            "seconds": 0.9009125409647822,
+            "sequence": 0
+          },
+          {
+            "detail": "Verifying real bundled compiler/runtime resources.",
+            "phase": "resources",
+            "seconds": 0.9173914999701083,
+            "sequence": 1
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 1.327861832920462,
+            "sequence": 2
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 2.4701510407030582,
+            "sequence": 3
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: deadline",
+            "phase": "compile-deadline",
+            "seconds": 2.471586207859218,
+            "sequence": 4
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 63.11340579064563,
+            "sequence": 5
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 65.10999783268198,
+            "sequence": 6
+          },
+          {
+            "detail": "All assertions in the selected scenario completed.",
+            "phase": "complete",
+            "seconds": 65.11954858293757,
+            "sequence": 7
+          }
+        ],
+        "exercise": {
+          "builds": [
+            {
+              "index": 1,
+              "input": "gpio",
+              "receiptSHA256": "b45dd606b503f77a4bdf6287d60b08e4292aeb169567053d5316f44d50da8d7e",
+              "seconds": 1.1406468329951167,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 2,
+              "input": "console",
+              "receiptSHA256": "80dcb58e1528848130ff35b4fdecae3e5ce4acb8b80d0ec447259ed36c9c68e5",
+              "seconds": 1.9896239168010652,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            }
+          ],
+          "busyObserved": false,
+          "droppedSamples": 0,
+          "freshStartedSeconds": 63.10612212494016,
+          "kind": "compiler.deadline",
+          "outcome": "timedOut",
+          "progress": [
+            {
+              "phase": "verifying",
+              "seconds": 2.4843676248565316
+            },
+            {
+              "phase": "verifying",
+              "seconds": 3.0656552501022816
+            },
+            {
+              "phase": "preparing",
+              "seconds": 3.249730042181909
+            },
+            {
+              "phase": "compiling",
+              "seconds": 3.2705330830067396
+            }
+          ],
+          "runtimeDeadlineSeconds": 60,
+          "samples": [],
+          "sceneObservationScope": "Launch process only; no foreground/background claim",
+          "scenes": [],
+          "settledSeconds": 63.10344920773059,
+          "startedSeconds": 2.470832415856421,
+          "workloadBytes": 227646,
+          "workloadSHA256": "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb"
+        },
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "id": "773AC738-A29D-4AED-B99B-07F15E9EB5ED",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 65285,
+        "scenarioID": "compiler.deadline",
+        "schema": 1,
+        "status": "passed"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-lifetime-deadline-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "stress",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "E508D77B-3D36-4B41-A160-372B7E1196D4",
+        "scenarioID": "compiler.stress",
+        "schema": 1
+      },
+      "processID": 65381,
+      "observedStatus": "passed",
+      "expectedExitCode": 0,
+      "resultSHA256": "983e6b2a42176df25f26ad4179b2543ae30bfcc0c8711b41aff591789fc4420f",
+      "executableSHA256": "0440f6c74f1121e91d29d6b043da47a4037563fe32cdb0c581609903382eb64a",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": {
+        "builds": [
+          {
+            "board": "nano_rp2040_connect",
+            "id": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+            "profile": "nano-managed-v1"
+          }
+        ],
+        "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "3",
+        "artifacts": [
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+            "name": "gpio.fms",
+            "receiptJSON": "eyJ2ZXJzaW9uIjoxLCJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwiY2Fwc3VsZVNIQTI1NiI6Ijk1OGI4NjFiYmMxOGQ0NjY2ZWQwM2U2OTc2YjM5YjlmZWE0ODEyNDA5YWQ5MWEzNTAxYWJiYjk2ODVhODBkN2QiLCJzb3VyY2VGaWxlbmFtZSI6IldvcmtiZW5jaC1ncGlvLmlubyIsInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjA5MTIzNmFlZWExZDFiNGRlZDQxMGRlM2ViMTU1YjE5NjczOGFlOWQ3MjdkMWQ3NDExZDNiOWNhM2JjYmU0ZGUiLCJzb3VyY2VTSEEyNTYiOiJmZGFkODhhYThiMjBiMDQ1ZjM1MzYyYzEzZTU2MDkwYmE4NWI3YmQzZThmMDI0NDUyYjNiMzlmODdjMGYyNTY4IiwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJwcm92ZW5hbmNlIjp7InJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSIsInRvb2xjaGFpblNIQTI1NiI6ImE0NGFmYTg0ZTc2YWU3YjE3NDJmZDVlY2ZlZWMyMDU1NjU2NDNiOTQ5NDhlMzRkOGM1NzAyOWFlM2NhZGE5ZmQiLCJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIn0sInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjEiLCJidWlsZElucHV0U0hBMjU2IjoiMGQ2ZjM2M2FmMjcyNWI3YTIyNWU5ZjNiN2NmZTk3Njg5YzQ5ODc2ZDcwZDk1ZGVjZDhjNDI0YjI4ZmJmMjZiMCIsImNhdGFsb2d1ZVNIQTI1NiI6ImUzNDFiZmMwMzg1ZmVhOWIyYjAyNmRjNjI0ZGFhMjZjZGVhYzMzMjg2ZjRiYjA3MjQzYjM3YzFjMzE4MzdkMGUiLCJsaW5rZWRFTEZTSEEyNTYiOiJkNzI5YThiNmE4ZTM1M2IxZmRlMDExZWE2MjU5N2YwYmM1ZTE0NTAwNDk2ZTAxOGU3YzViZDVjMTUyNzYwNTBkIiwiZG9jdW1lbnRJRCI6IkMwNUEzM0I2LTk5OUUtNDcwOS05Rjc4LUU3NTE4ODA5Q0Y1OCIsInNvdXJjZVJldmlzaW9uIjoxfQ==",
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          {
+            "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBCIAAAAAQEgEAkBIBB1Er8mbpcQeimvK3s+mRIaw5V5WZrf1lJWRLO0DsrZswAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Bv4gL3gtQGoAUkA8AP4jL2AASAQvLUBrAVKIoAA8Bz4BUYESAJoAiEgRpBHQBm8vQ0KAAC0LAIQHLUGTKBogEcAKAXUAaoQcCNoASEQRphHHL3ARrQsAhCAtQhGACFCXEkcACr70QJKEmhJHpBHgL20LAIQcmVhZHkA1NQ=",
+            "name": "console.fms",
+            "receiptJSON": "eyJzb3VyY2VSZXZpc2lvbiI6MSwidmVyc2lvbiI6MSwiY2Fwc3VsZVNIQTI1NiI6ImIzNzJjMDBlZGY0YjYwYzY2MmY3MzA1NTY4NWVkODc2NGU5Zjg3OThmZTllZmJiYWZhZDA0MzAyNTQ5MTc0YzAiLCJjYXRhbG9ndWVTSEEyNTYiOiJlMzQxYmZjMDM4NWZlYTliMmIwMjZkYzYyNGRhYTI2Y2RlYWMzMzI4NmY0YmIwNzI0M2IzN2MxYzMxODM3ZDBlIiwic291cmNlRmlsZW5hbWUiOiJXb3JrYmVuY2gtY29uc29sZS5pbm8iLCJzb3VyY2VTSEEyNTYiOiI2OTdmOTU0N2Y3MmQ0NzgyMTBkZDI5YmQ2NmM2MjkzZTBhOWFlOTI2YTFiNGU4ZDU2OGIxMGFlZWFiMzdmNWEzIiwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJsaW5rZWRFTEZTSEEyNTYiOiIyZmJkZDY3ZTRkNDQ0YjIwZTQ1MGYzZjdlODJjYWIwM2M4N2E5NTYzNWUwMTJlZTQ1MTgxYmQxZDE4ZWM5MDdhIiwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MSIsImZpcm13YXJlQnVpbGRJRCI6ImM0NGQyNWVmZTc3NGViNDdiMTYzYmMwODI5MDZjZjQ4YjU5YjZlM2RkMWQwZTE5Yzc4MjI5MjVlNmJhODI3NWYiLCJkb2N1bWVudElEIjoiMTIyQkI2MjQtOTM5My00MDc4LUEzMTItMDBGQjg3MDY0RUZEIiwidHJhbnNsYXRpb25Vbml0U0hBMjU2IjoiNTNiMGMwYTczMmExMWZmZmYzNDk2NzI1NjM2YTBhNmI5NDY2MzM0NGIyN2ZlM2E0ZTMwZjg2OWExNjJjZWE5NSIsInByb3ZlbmFuY2UiOnsicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSIsInJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCIsImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIifSwiYnVpbGRJbnB1dFNIQTI1NiI6ImJkOTc1ZTI1OTY4ZDMyZjBiZDA0NzIxOTkwZDdlZTk1YWYxNWExYTJmOTRjZTM2YjIyY2YzMzZhYzI3ZDczZmYifQ==",
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "wasmLinearMemoryBytes": 27983872
+          }
+        ],
+        "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Loading actual SDK-verified catalogue metadata.",
+            "phase": "catalogue",
+            "seconds": 0.012706874869763851,
+            "sequence": 0
+          },
+          {
+            "detail": "Verifying real bundled compiler/runtime resources.",
+            "phase": "resources",
+            "seconds": 0.024305916856974363,
+            "sequence": 1
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 0.40349687496200204,
+            "sequence": 2
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 1.4784604590386152,
+            "sequence": 3
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 1.4792473339475691,
+            "sequence": 4
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 2.539013042114675,
+            "sequence": 5
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 2.539938542060554,
+            "sequence": 6
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 3.5000277920626104,
+            "sequence": 7
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 3.5008887918666005,
+            "sequence": 8
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 4.531759333796799,
+            "sequence": 9
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 4.532557167112827,
+            "sequence": 10
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 5.4893389591015875,
+            "sequence": 11
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 5.490161959081888,
+            "sequence": 12
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 6.5268773338757455,
+            "sequence": 13
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 6.527779291849583,
+            "sequence": 14
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 7.489030624739826,
+            "sequence": 15
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 7.48988183401525,
+            "sequence": 16
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 8.525162334088236,
+            "sequence": 17
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 8.526052333880216,
+            "sequence": 18
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 9.47316262498498,
+            "sequence": 19
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 9.474240500014275,
+            "sequence": 20
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 10.521196417044848,
+            "sequence": 21
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 10.522139749955386,
+            "sequence": 22
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 11.507198959123343,
+            "sequence": 23
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 11.50815995875746,
+            "sequence": 24
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 12.553373333998024,
+            "sequence": 25
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 12.554399916902184,
+            "sequence": 26
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 13.523024291731417,
+            "sequence": 27
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 13.524102250114083,
+            "sequence": 28
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 14.563311541918665,
+            "sequence": 29
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 14.56439600000158,
+            "sequence": 30
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 15.498523334041238,
+            "sequence": 31
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 15.499595333822072,
+            "sequence": 32
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 16.53268595878035,
+            "sequence": 33
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 16.533903291914612,
+            "sequence": 34
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 17.49937850004062,
+            "sequence": 35
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 17.500468833837658,
+            "sequence": 36
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 18.542240167036653,
+            "sequence": 37
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: gpio",
+            "phase": "compile-gpio",
+            "seconds": 18.543393041938543,
+            "sequence": 38
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "phase": "artifact-gpio",
+            "seconds": 19.503834791947156,
+            "sequence": 39
+          },
+          {
+            "detail": "Executing the exact SDK compiler input: console",
+            "phase": "compile-console",
+            "seconds": 19.50501662492752,
+            "sequence": 40
+          },
+          {
+            "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "phase": "artifact-console",
+            "seconds": 20.54031449975446,
+            "sequence": 41
+          },
+          {
+            "detail": "Twenty exact builds completed; sampling one second of idle host footprint.",
+            "phase": "idle-after-builds",
+            "seconds": 20.541520833969116,
+            "sequence": 42
+          },
+          {
+            "detail": "All assertions in the selected scenario completed.",
+            "phase": "complete",
+            "seconds": 21.61704216711223,
+            "sequence": 43
+          }
+        ],
+        "exercise": {
+          "builds": [
+            {
+              "index": 1,
+              "input": "gpio",
+              "receiptSHA256": "97d79992d964150458eac71a4b49ae72109e14c62aaba5fe906d71ffc6d5ce76",
+              "seconds": 1.0733251250348985,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 2,
+              "input": "console",
+              "receiptSHA256": "f9831d58e2fc24a8258ed0e6a091ca89c17e635a33c3936070923d3d078db8b8",
+              "seconds": 1.0578930834308267,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 3,
+              "input": "gpio",
+              "receiptSHA256": "61b6c2d3786b86cec3222b2ad8d1f0d8d0526db0dbe68006cde26e1f8315fdaf",
+              "seconds": 0.9583986671641469,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 4,
+              "input": "console",
+              "receiptSHA256": "470ef6bd2968895bf59d8d9c3053f8163a8d48f44f0cae12a5597d4165e0b333",
+              "seconds": 1.0291579999029636,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 5,
+              "input": "gpio",
+              "receiptSHA256": "a40295b2da5c347e8707d6a1096e939a8cad36a44d38fabe5ff8978d8a72bc43",
+              "seconds": 0.9549922910518944,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 6,
+              "input": "console",
+              "receiptSHA256": "49a425411d8799bf36a2efdcfb173a9d7abc717bc78ac1b8f2e6fcae71876fa7",
+              "seconds": 1.0349328331649303,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 7,
+              "input": "gpio",
+              "receiptSHA256": "86c1b70953cffe384fcfd4d9086e2a21d0a6fe9a86063bb1dd7c16ee09b1ca3f",
+              "seconds": 0.9593635001219809,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 8,
+              "input": "console",
+              "receiptSHA256": "49267ce45f0cadd514d87578f5b754ad449c3e0c7617411f83e2c5c3fb5024cc",
+              "seconds": 1.033311165869236,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 9,
+              "input": "gpio",
+              "receiptSHA256": "e7513cb16ce41c2818080fef00bfe30a67608551504b81af5de4bb756b699f88",
+              "seconds": 0.945041292347014,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 10,
+              "input": "console",
+              "receiptSHA256": "64f614ff8c2fb57f542308ea7e1f591acee9fe2f5ca9d4a28c58f3407a56745d",
+              "seconds": 1.0449316250160336,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 11,
+              "input": "gpio",
+              "receiptSHA256": "4dc31114945daeb0fe8d2473ddb62fed3153708464ae0477ecf4e2413eb62754",
+              "seconds": 0.9830075833015144,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 12,
+              "input": "console",
+              "receiptSHA256": "39029c02b7c945c57794d89f24fcbd6db2b21dbb79ab0d44ad0d855e389de786",
+              "seconds": 1.0431262915953994,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 13,
+              "input": "gpio",
+              "receiptSHA256": "9bbb9d46ba3c17d5d8023eb9e155680df69d4053ba1a69adc1fa4e30be8e60d5",
+              "seconds": 0.9665324999950826,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 14,
+              "input": "console",
+              "receiptSHA256": "7c35dfa498a544e112c5d9d4e2e56cf3ff4f31c0a97cfac3bb4853cdf2580dc0",
+              "seconds": 1.0369418747723103,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 15,
+              "input": "gpio",
+              "receiptSHA256": "bce12316c69ace9fe35e782f0f42bafa0219acceb887cda47fd7534499256583",
+              "seconds": 0.9318760423921049,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 16,
+              "input": "console",
+              "receiptSHA256": "77f9f629080884995806f0d5202c35254a1ef944b8c4098c3eec37a5bfb64864",
+              "seconds": 1.0307469577528536,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 17,
+              "input": "gpio",
+              "receiptSHA256": "8177c33f15392982d3fcb122f21a40f91a2d1bb9f8e97f696d09608f1affd2a8",
+              "seconds": 0.9630366247147322,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 18,
+              "input": "console",
+              "receiptSHA256": "13afeddaa84bc55babb0c0576bda953d0d062311d7f5cc74e9700d80b5884435",
+              "seconds": 1.0394242499023676,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 19,
+              "input": "gpio",
+              "receiptSHA256": "99986ff4710716060f59ed7529b25a0308c87352aa11142eb7f0663cfd1f6280",
+              "seconds": 0.9580050827935338,
+              "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            {
+              "index": 20,
+              "input": "console",
+              "receiptSHA256": "21e9becc7bc83afa1f2edd574f61d5f2a5040a543d9ab07298f2caf81c724da3",
+              "seconds": 1.0328457080759108,
+              "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+              "wasmLinearMemoryBytes": 27983872
+            }
+          ],
+          "busyObserved": false,
+          "droppedSamples": 0,
+          "kind": "compiler.stress",
+          "progress": [],
+          "samples": [
+            {
+              "bytes": 120658440,
+              "seconds": 0.4045410421676934
+            },
+            {
+              "bytes": 120687112,
+              "seconds": 0.6726898751221597
+            },
+            {
+              "bytes": 230034384,
+              "seconds": 0.9514651671051979
+            },
+            {
+              "bytes": 129215464,
+              "seconds": 1.2226935420185328
+            },
+            {
+              "bytes": 129281000,
+              "seconds": 1.4804185000248253
+            },
+            {
+              "bytes": 130313192,
+              "seconds": 1.744796209037304
+            },
+            {
+              "bytes": 233384984,
+              "seconds": 2.005278999917209
+            },
+            {
+              "bytes": 132181016,
+              "seconds": 2.2681451668031514
+            },
+            {
+              "bytes": 132181016,
+              "seconds": 2.528956125024706
+            },
+            {
+              "bytes": 133626904,
+              "seconds": 2.8083347091451287
+            },
+            {
+              "bytes": 134773784,
+              "seconds": 3.099978417158127
+            },
+            {
+              "bytes": 134777880,
+              "seconds": 3.365887667052448
+            },
+            {
+              "bytes": 134786072,
+              "seconds": 3.661795041989535
+            },
+            {
+              "bytes": 135048216,
+              "seconds": 3.953867542091757
+            },
+            {
+              "bytes": 135035928,
+              "seconds": 4.223108999896795
+            },
+            {
+              "bytes": 135035928,
+              "seconds": 4.490319209173322
+            },
+            {
+              "bytes": 135035928,
+              "seconds": 4.745619209017605
+            },
+            {
+              "bytes": 236850200,
+              "seconds": 5.038304791785777
+            },
+            {
+              "bytes": 135646232,
+              "seconds": 5.304426916874945
+            },
+            {
+              "bytes": 135646232,
+              "seconds": 5.598127875011414
+            },
+            {
+              "bytes": 135801880,
+              "seconds": 5.887742249760777
+            },
+            {
+              "bytes": 135728152,
+              "seconds": 6.153899459168315
+            },
+            {
+              "bytes": 135711768,
+              "seconds": 6.423221834003925
+            },
+            {
+              "bytes": 135752752,
+              "seconds": 6.687734583858401
+            },
+            {
+              "bytes": 135814192,
+              "seconds": 6.9853659169748425
+            },
+            {
+              "bytes": 135806000,
+              "seconds": 7.254627416841686
+            },
+            {
+              "bytes": 136875056,
+              "seconds": 7.543679916765541
+            },
+            {
+              "bytes": 136875056,
+              "seconds": 7.81215870892629
+            },
+            {
+              "bytes": 136989744,
+              "seconds": 8.104973124805838
+            },
+            {
+              "bytes": 136981552,
+              "seconds": 8.374304125085473
+            },
+            {
+              "bytes": 136993840,
+              "seconds": 8.634297042153776
+            },
+            {
+              "bytes": 137161776,
+              "seconds": 8.931388792116195
+            },
+            {
+              "bytes": 137059376,
+              "seconds": 9.197658875025809
+            },
+            {
+              "bytes": 137063472,
+              "seconds": 9.463814666960388
+            },
+            {
+              "bytes": 137092144,
+              "seconds": 9.738796417135745
+            },
+            {
+              "bytes": 137194544,
+              "seconds": 10.034847042057663
+            },
+            {
+              "bytes": 137194544,
+              "seconds": 10.305367624852806
+            },
+            {
+              "bytes": 137190448,
+              "seconds": 10.57672854186967
+            },
+            {
+              "bytes": 137190448,
+              "seconds": 10.846021249890327
+            },
+            {
+              "bytes": 137296944,
+              "seconds": 11.148924374952912
+            },
+            {
+              "bytes": 137288752,
+              "seconds": 11.416996959131211
+            },
+            {
+              "bytes": 137292848,
+              "seconds": 11.669799083843827
+            },
+            {
+              "bytes": 137333808,
+              "seconds": 11.965789209119976
+            },
+            {
+              "bytes": 137317424,
+              "seconds": 12.233165875077248
+            },
+            {
+              "bytes": 137317424,
+              "seconds": 12.50269520888105
+            },
+            {
+              "bytes": 137317424,
+              "seconds": 12.766061583999544
+            },
+            {
+              "bytes": 238554160,
+              "seconds": 13.067031166981906
+            },
+            {
+              "bytes": 137350192,
+              "seconds": 13.336338417138904
+            },
+            {
+              "bytes": 137878576,
+              "seconds": 13.629222166724503
+            },
+            {
+              "bytes": 138005552,
+              "seconds": 13.922878792043775
+            },
+            {
+              "bytes": 137919536,
+              "seconds": 14.188958541955799
+            },
+            {
+              "bytes": 137903152,
+              "seconds": 14.456180749926716
+            },
+            {
+              "bytes": 137866288,
+              "seconds": 14.726116999983788
+            },
+            {
+              "bytes": 137874480,
+              "seconds": 15.02143695903942
+            },
+            {
+              "bytes": 137858096,
+              "seconds": 15.290557791944593
+            },
+            {
+              "bytes": 137845808,
+              "seconds": 15.554335624910891
+            },
+            {
+              "bytes": 137845808,
+              "seconds": 15.823480084072798
+            },
+            {
+              "bytes": 139095088,
+              "seconds": 16.117539584171027
+            },
+            {
+              "bytes": 139078704,
+              "seconds": 16.384673624765128
+            },
+            {
+              "bytes": 139086896,
+              "seconds": 16.642283250112087
+            },
+            {
+              "bytes": 139234352,
+              "seconds": 16.93745933379978
+            },
+            {
+              "bytes": 139131952,
+              "seconds": 17.206741416826844
+            },
+            {
+              "bytes": 139115568,
+              "seconds": 17.47549912473187
+            },
+            {
+              "bytes": 139123760,
+              "seconds": 17.76911733392626
+            },
+            {
+              "bytes": 139148336,
+              "seconds": 18.061534042004496
+            },
+            {
+              "bytes": 139148336,
+              "seconds": 18.330205916892737
+            },
+            {
+              "bytes": 139144240,
+              "seconds": 18.598265416920185
+            },
+            {
+              "bytes": 139144240,
+              "seconds": 18.867584791965783
+            },
+            {
+              "bytes": 139189296,
+              "seconds": 19.162611291743815
+            },
+            {
+              "bytes": 139172912,
+              "seconds": 19.42990962509066
+            },
+            {
+              "bytes": 139185200,
+              "seconds": 19.718949041794986
+            },
+            {
+              "bytes": 240426032,
+              "seconds": 20.01026774989441
+            },
+            {
+              "bytes": 139222064,
+              "seconds": 20.273744042031467
+            },
+            {
+              "bytes": 139213872,
+              "seconds": 21.609878125134856
+            }
+          ],
+          "sceneObservationScope": "Launch process only; no foreground/background claim",
+          "scenes": []
+        },
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "id": "E508D77B-3D36-4B41-A160-372B7E1196D4",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 65381,
+        "scenarioID": "compiler.stress",
+        "schema": 1,
+        "status": "passed"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-lifetime-stress-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "idle-cli-blocked",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "4F36AE4A-DE9A-4340-8339-26A4059AFB63",
+        "scenarioID": "host.lifecycle",
+        "schema": 1
+      },
+      "processID": 65466,
+      "observedStatus": "blocked",
+      "expectedExitCode": 3,
+      "resultSHA256": "6f02b2c7860b78905fb77d4bdac94f2626a69176cdbbcc0b07e8c0dbbae62f4f",
+      "executableSHA256": "0440f6c74f1121e91d29d6b043da47a4037563fe32cdb0c581609903382eb64a",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": null,
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "3",
+        "artifacts": [],
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Requires interactive iOS/iPadOS scene delivery; CLI cannot synthesize lifecycle events.",
+            "phase": "prerequisites",
+            "seconds": 0.0074646249413490295,
+            "sequence": 0
+          }
+        ],
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "id": "4F36AE4A-DE9A-4340-8339-26A4059AFB63",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 65466,
+        "scenarioID": "host.lifecycle",
+        "schema": 1,
+        "status": "blocked"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-lifetime-host-lifecycle-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "active-cli-blocked",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "37F23A7C-9D9D-44A3-857A-FC1DCC8087F7",
+        "scenarioID": "host.lifecycle-active",
+        "schema": 1
+      },
+      "processID": 65472,
+      "observedStatus": "blocked",
+      "expectedExitCode": 3,
+      "resultSHA256": "d0410a37a5379806a65ab435501fe5847f91c1bb32411d0d55ab52c0334fca87",
+      "executableSHA256": "0440f6c74f1121e91d29d6b043da47a4037563fe32cdb0c581609903382eb64a",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": null,
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "3",
+        "artifacts": [],
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Requires interactive iOS/iPadOS scene delivery; CLI cannot synthesize lifecycle events.",
+            "phase": "prerequisites",
+            "seconds": 0.0077191246673464775,
+            "sequence": 0
+          }
+        ],
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "id": "37F23A7C-9D9D-44A3-857A-FC1DCC8087F7",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 65472,
+        "scenarioID": "host.lifecycle-active",
+        "schema": 1,
+        "status": "blocked"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-lifetime-host-lifecycle-active-r1",
+      "deviceOperations": false
+    },
+    {
+      "case": "worker-cli-blocked",
+      "request": {
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "operation": "run",
+        "requestID": "89C07C07-EBF6-4592-9083-8CA2A37631B4",
+        "scenarioID": "host.lifecycle-worker",
+        "schema": 1
+      },
+      "processID": 65477,
+      "observedStatus": "blocked",
+      "expectedExitCode": 3,
+      "resultSHA256": "8d77035c8efd0a8fe1f4f33daa01f88f93932451daaf658c600fc7aa249e97be",
+      "executableSHA256": "0440f6c74f1121e91d29d6b043da47a4037563fe32cdb0c581609903382eb64a",
+      "entitlements": {
+        "com.apple.security.app-sandbox": true,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true
+      },
+      "catalogue": null,
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "3",
+        "artifacts": [],
+        "deviceOperations": false,
+        "events": [
+          {
+            "detail": "Requires interactive iOS/iPadOS scene delivery; CLI cannot synthesize lifecycle events.",
+            "phase": "prerequisites",
+            "seconds": 0.007966708391904831,
+            "sequence": 0
+          }
+        ],
+        "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+        "id": "89C07C07-EBF6-4592-9083-8CA2A37631B4",
+        "operatingSystem": "Version 27.0 (Build 26A428)",
+        "processID": 65477,
+        "scenarioID": "host.lifecycle-worker",
+        "schema": 1,
+        "status": "blocked"
+      },
+      "error": null,
+      "localEvidenceDirectory": ".build/workbench-lifetime-host-lifecycle-worker-r1",
+      "deviceOperations": false
+    }
+  ],
+  "limitations": [
+    "No physical mobile lifecycle, minimum-OS, layout/accessibility, suspension, termination or memory-pressure qualification.",
+    "CLI deadline run has process-only scope and no foreground/background assertion; interactive foreground evidence remains separate.",
+    "Self-process phys_footprint samples exclude WebKit children and missed peaks; no aggregate peak/leak-free claim.",
+    "Only the pinned legacy Nano compiler descriptor/vectors are migrated; no board, upload or ROM operation is used.",
+    "Existing specialized hosts and their historical evidence remain until matching replacement qualification.",
+    "The paired live mobile controller/MCP interface is a later increment; all current CLI commands are explicit macOS app launches."
+  ]
+}
