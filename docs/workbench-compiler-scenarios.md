@@ -99,7 +99,7 @@ This follow-up affects only interactive lifecycle admission; automatic runtime
 reports retain the exact preceding clean `5d9c151` source/binary identity. No
 physical scene qualification is inferred from the synthetic regression test.
 
-## Physical Workbench iPad qualification — in progress
+## Physical Workbench iPad qualification — three scoped cases passed
 
 The previously selected iPad is now available over paired Wi-Fi. The deployment
 uses one Workbench app identity and reviewed prepared compiler package. Build 4
@@ -137,3 +137,20 @@ interval, the exact known baseline GPIO capsule and fresh console capsule in the
 same process. Full report/receipts and validator result are in the iPad ledger.
 Active-call and calibrated worker scenarios remain pending; no suspension claim
 follows from the idle transition.
+
+The generic active-call check also passes in the same installed app and PID.
+Run `9722FC98-BB52-4ED6-9E8B-0A839C3191B8` records actual SDK compiling
+progress at inactivity, typed CancellationError settlement in 36.374 ms without
+an interrupted artifact, real background/return and the exact fresh console
+capsule. This case records its actual phase without borrowing calibration from
+another run; the stricter calibrated worker case is still pending.
+
+The calibrated worker case now passes as well. Run
+`D1C3E177-84F3-492A-A686-A4428507612E` records a 9.807-second completed
+source-compilation calibration, exactly one compiling notification during the
+interrupted request, typed cancellation settlement in 32.593 ms, actual
+background/return and the exact fresh console capsule. All three reports match
+build 4 and PID 2085; final CoreDevice observation confirms that same process and
+`localNetwork`. No rebuild, reinstallation or app restart occurred between cases.
+The iPhone is now available for the same tests using the identical signed app;
+its evidence will be recorded separately.

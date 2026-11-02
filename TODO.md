@@ -395,7 +395,8 @@ See [delivery integration](docs/compiler-delivery.md) for exact identities and c
 
 - [x] First increment locally validated: app-owned shared scenario engine and versioned CLI, Test Lab in the existing demo, migrated compiler cases, bounded correlated evidence, local tests/builds and updated CI definitions. One signed macOS binary passed real WASM vectors and diagnostic recovery; remote CI and physical/UI qualification remain separate. [Work log and scope](docs/workbench-consolidation.md).
 - [x] Implement compiler lifecycle/deadline/stress consolidation: shared scenarios, real mobile scene adapter, bounded evidence and independent CLI checks. One signed macOS Workbench passes actual busy/cancellation, 60.633-second deadline expiry/fresh recovery and twenty exact repeated builds; all platform builds pass. [Work log](docs/workbench-compiler-scenarios.md). Physical Workbench mobile evidence remains pending.
-- [ ] Qualify the three Workbench lifecycle scenarios on the selected physical iPad/iPhone, retain exported reports, then retire corresponding legacy hosts only where evidence matches.
+- [x] Qualify the three Workbench lifecycle scenarios on the selected physical iPad using one signed build/PID; retain full reports and independent verification in [the iPad ledger](docs/workbench-ipad-qualification.json).
+- [ ] Repeat the three Workbench lifecycle scenarios on the selected physical iPhone. Retire corresponding legacy hosts only where all claimed replacement evidence matches.
 - [ ] Migrate device/console/upload/recovery scenarios with their existing guards and fresh evidence.
 - [ ] Add live paired mobile control and a thin MCP adapter after the shared command/evidence boundary is verified.
 - [ ] Retire phase-specific app generators only after equivalent Workbench scenario qualification; preserve historical identities/results.
