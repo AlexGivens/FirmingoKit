@@ -125,29 +125,47 @@ class PairedController(unittest.TestCase):
         docs=Path(__file__).resolve().parents[2]/'docs'
         ledger=json.loads((docs/'workbench-paired-qualification.json').read_text())
         for device in ledger['devices']:
-            identity=device['pairing']
-            for row in device['reports']+device.get('controlTrials',[]):
-                with self.subTest(device=device['label'],run=row['runID']):
-                    raw=(docs/row['reportPath']).read_bytes()
-                    self.assertEqual(hashlib.sha256(raw).hexdigest(),row['exportSHA256'])
-                    reply_raw=(docs/row['replyPath']).read_bytes()
-                    self.assertEqual(hashlib.sha256(reply_raw).hexdigest(),row['transportReplySHA256'])
-                    reply=json.loads(reply_raw);report=json.loads(raw)
-                    self.assertEqual(reply['report'],report)
-                    self.assertEqual(reply['processID'],identity['processID'])
-                    self.assertEqual(reply['instanceID'],identity['instanceID'])
-                    self.assertEqual(report['appVersion'],ledger['app']['appVersion'])
-                    checked=paired.export_report(reply,row['runID'],row['scenarioID'],report.get('firmwareBuildID'))
-                    self.assertEqual(checked['status'],row['state']['status'])
-                    wrong=json.loads(reply_raw);wrong['processID']+=1
-                    with self.assertRaises(ValueError): paired.export_report(wrong,row['runID'],row['scenarioID'],report.get('firmwareBuildID'))
-            if 'revocation' in device:
-                revoked=device['revocation'];row=revoked['report']
+            batches=[(device,ledger['app'])]
+            if 'followUp' in device: batches.append((device['followUp'],device['followUp']['app']))
+            for batch,app in batches:
+                producer=batch['pairing']
+                for row in batch['reports']+batch.get('controlTrials',[]):
+                    with self.subTest(device=device['label'],run=row['runID']):
+                        raw=(docs/row['reportPath']).read_bytes()
+                        self.assertEqual(hashlib.sha256(raw).hexdigest(),row['exportSHA256'])
+                        reply_raw=(docs/row['replyPath']).read_bytes()
+                        self.assertEqual(hashlib.sha256(reply_raw).hexdigest(),row['transportReplySHA256'])
+                        reply=json.loads(reply_raw);report=json.loads(raw)
+                        self.assertEqual(reply['report'],report)
+                        self.assertEqual(reply['processID'],producer['processID'])
+                        self.assertEqual(reply['instanceID'],producer['instanceID'])
+                        self.assertEqual(report['appVersion'],app['appVersion'])
+                        checked=paired.export_report(reply,row['runID'],row['scenarioID'],report.get('firmwareBuildID'))
+                        self.assertEqual(checked['status'],row['state']['status'])
+                        wrong=json.loads(reply_raw);wrong['processID']+=1
+                        with self.assertRaises(ValueError): paired.export_report(wrong,row['runID'],row['scenarioID'],report.get('firmwareBuildID'))
+            for batch,_ in batches:
+                if 'revocation' not in batch: continue
+                revoked=batch['revocation'];row=revoked['report']
                 raw=(docs/row['reportPath']).read_bytes()
                 self.assertEqual(hashlib.sha256(raw).hexdigest(),row['exportSHA256'])
                 self.assertEqual(json.loads(raw)['status'],'cancelled')
                 self.assertFalse(revoked['diagnostic']['isPaired'])
-                self.assertEqual(revoked['diagnostic']['processID'],identity['processID'])
+                self.assertEqual(revoked['diagnostic']['processID'],batch['pairing']['processID'])
+
+    def test_interrupted_deadline_cannot_be_upgraded_to_a_timeout_pass(self):
+        """The actual foreground-loss journal stays failed; parser replay cannot turn its partial build into expiry evidence."""
+        docs=Path(__file__).resolve().parents[2]/'docs'
+        phone=json.loads((docs/'workbench-paired-qualification.json').read_text())['devices'][1]
+        row=phone['interruptedDeadline'];raw=(docs/row['reportPath']).read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(),row['originalJournalSHA256'])
+        report=json.loads(raw);self.assertEqual(report['status'],'failed')
+        self.assertEqual(report['exercise']['scenes'][-1]['phase'],'inactive')
+        # Parser-only envelope over an original selected journal, not a captured RPC response.
+        reply=dict(processID=report['processID'],report=report)
+        self.assertEqual(paired.export_report(reply,report['id'],report['scenarioID'],report['firmwareBuildID'])['status'],'failed')
+        report['status']='passed'
+        with self.assertRaises(ValueError):paired.export_report(reply,report['id'],report['scenarioID'],report['firmwareBuildID'])
 
     def test_no_session_or_command_is_restored_after_restart(self):
         other=paired.Broker('https://127.0.0.1:8443/','a'*64)

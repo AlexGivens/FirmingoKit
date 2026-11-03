@@ -196,8 +196,9 @@ admitted, but a later status reply was not observed after the device stopped
 polling. Subsequent read-only CoreDevice checks could not obtain a connectivity
 assertion. No run was replayed and no deadline pass is claimed. Unlock/reopen and
 read-only reconciliation, then remaining deadline/stress/pause/revocation
-qualification, are pending. The app pauses transport on real backgrounding and
-does not prevent auto-lock; keep it foreground and awake for these checks.
+qualification were pending at that checkpoint. Build 8 pauses transport on real
+backgrounding and does not prevent auto-lock. The returned-phone follow-up below
+retains this failed attempt and records the build-9 policy and fresh qualification.
 
 Final source validation passes the normal SDK entry point, 15 CLI fixtures and
 10 socket-free controller fixtures (including archived paired reports and full
@@ -230,3 +231,40 @@ not keep the display awake. Home/lock remain real device actions; this grants no
 background execution and changes no SDK timeout. Deterministic policy tests cover
 repeated updates, restoration, background release and an already-disabled timer.
 Build and physical follow-up results are recorded below when completed.
+
+
+Build 9 from clean source `8519d6beee40932710db0fe6caeab266d890fce3`
+now passes all seven iPhone compiler scenarios through one authenticated session
+and PID 30206. The actual public deadline expires in 60.125 seconds with only an
+active scene recorded, typed timeout, and a known fresh console build. The stress
+case completes twenty exact builds with 54 self-process footprint samples; the
+largest is 221,513,760 bytes. These samples do not measure aggregate WebKit/app
+peak memory or establish leak freedom. Normal SDK validation passes, including
+24 non-network Workbench tests plus one opt-in TLS skip, eleven broker/report
+fixtures and fifteen CLI fixtures. Release macOS, Simulator and signed-device
+builds pass. The follow-up uses the same existing app product/bundle and reviewed
+compiler assets; no new per-scenario app identity or hardware operation is added.
+
+
+## Completed scoped follow-up
+
+The iPhone build-9 Home/return check passes with the same PID/instance/session;
+the controller receives the terminal report after real transport resumption.
+The journal records 4.762 seconds from background to active after the requested
+Home/five-second/reopen action. A new waiting controller-owned run is then
+explicitly revoked: later commands reject, its selected original journal records
+`cancelled`, and the safe diagnostic records `isPaired: false`. These revocation
+files alone use exact app-owned CoreDevice reads because network authority was
+intentionally removed; ordinary compiler/lifecycle reports use authenticated RPC.
+
+The [paired ledger](workbench-paired-qualification.json) and archived exports
+retain both app identities: iPad build 8 and iPhone build 9 each have seven
+compiler passes plus actual connection resumption and live revocation. Build 9
+is not claimed physically tested on iPad. Earlier failed attempts, the original
+foreground-interrupted deadline and its stale status command remain historical
+facts. The controller is stopped after revocation; no listener or reusable paired
+credential is left active. Future runs require a new explicit controller/pairing.
+
+Next work is a thin MCP adapter and migration of guarded read-only device,
+console, upload and recovery scenarios. UI/accessibility, minimum OS, real pressure
+and hardware qualification remain separate; this increment contacts no Nano.

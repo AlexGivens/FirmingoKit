@@ -728,3 +728,25 @@ skip; the explicit streamed TLS test also passes with good/wrong pins. Release
 macOS, Simulator and signed device builds pass. The tested app source is
 `0ad5d321634ab2f0d83d9be7ee02cb2a1d004002`; later CLI/docs changes do not alter its
 identity. Remote CI and visual/minimum-OS/pressure qualification are not claimed.
+
+
+The returned-iPhone follow-up recovers the original exact journal as failed on
+actual foreground loss at 41 seconds, before starting anything new. Build 9
+(`8519d6beee40932710db0fe6caeab266d890fce3`) adds a scoped, restorable app idle
+policy during real foreground test runs. The selected physical iPhone then
+passes all seven automatic compiler scenarios, including actual 60.125-second
+expiry/fresh recovery and twenty-build stress, in one paired process. The normal
+validation entry point passes with 24 non-network Workbench tests plus one
+opt-in TLS skip, eleven broker/report fixtures and fifteen CLI fixtures. Generic
+macOS/Simulator and signed-device builds pass. The original failed journal and
+new app/source identities remain separate in the paired ledger.
+
+
+The same build-9 iPhone process also passes actual Home/return paired transport
+resumption and live revocation of a waiting controller-owned run. All eight
+normal reports are RPC exports; only the revoked run's exact journal and safe
+controller diagnostic require CoreDevice reads. The final expanded archive
+fixtures revalidate both app versions and preserve failed/cancelled outcomes.
+Both device sessions are revoked and the owned Mac controller is stopped.
+The paired-controller increment is complete for these exact model/OS/app builds;
+MCP, hardware scenario migration and broader host qualification remain open.

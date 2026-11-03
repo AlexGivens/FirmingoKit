@@ -30,17 +30,20 @@ pinned TLS app sessions and a private Mac controller CLI; see
 `docs/workbench-paired-controller.md`. It adds no mobile listener or device command.
 Build 8 now passes seven paired iPad compiler scenarios, actual background/return
 transport resumption, exact-run remote start/cancel and live revocation; the same
-app passes five iPhone compiler scenarios. The iPhone deadline response stopped
-being observable when the device became unavailable; remaining iPhone checks are
-pending, not passed. See `docs/workbench-paired-qualification.json`. The original
-macOS launch CLI remains. The second increment adds compiler
+app's original five iPhone passes remain recorded. After the phone returned to
+Wi-Fi, its exact original deadline journal was recovered as failed on actual
+foreground loss. Build 9 adds restorable foreground-test idle prevention and
+passes all seven iPhone compiler cases, real Home/return transport resumption and
+live revocation in one paired process. Original failed trials remain recorded;
+the controller is stopped and future runs need fresh pairing. See
+`docs/workbench-paired-qualification.json`. The original macOS launch CLI remains. The second increment adds compiler
 busy/cancellation, actual deadline, twenty-build stress and interactive mobile
 scene scenarios; see `docs/workbench-compiler-scenarios.md`. Legacy hosts remain
 until matching replacement qualification. Workbench build 4 now passes all three
 physical iPad and iPhone lifecycle cases over paired Wi-Fi using one identical
 signed input app and one unchanged PID per device; see
 `docs/workbench-ipad-qualification.json` and `docs/workbench-iphone-qualification.json`.
-This does not qualify pressure/suspension, minimum OS or remaining iPhone deadline/stress cases. See `docs/workbench-consolidation.md`.
+This does not qualify pressure/suspension, minimum OS or broader hardware/device scenarios. See `docs/workbench-consolidation.md`.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

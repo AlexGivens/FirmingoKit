@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-11-02",
-  "status": "iPad qualification and first-five iPhone passes retained; original iPhone deadline reconciled as failed on foreground loss; scoped foreground idle policy preparing follow-up",
+  "status": "completed scoped paired qualification: iPad build 8 and iPhone build 9 each pass seven compiler scenarios, actual pause/resume and live revocation; earlier failed trials retained",
   "app": {
     "schema": 1,
     "appVersion": "8",
@@ -14,7 +14,20 @@
   "controller": {
     "sourceCommit": "09908c1a2cf0c47c55b56db22855c2f71d16b237",
     "certificateSHA256": "c95b84f0b99e7952e958468321216bf682af64f707ae8c76bf1a3689955932a3",
-    "transport": "private IPv4 TLS; outgoing app polling; owner-only local operator socket"
+    "transport": "private IPv4 TLS; outgoing app polling; owner-only local operator socket",
+    "shutdown": {
+      "schema": 1,
+      "processID": 76928,
+      "ownedCommandVerified": true,
+      "termination": "SIGTERM",
+      "operatorSocketClosed": true,
+      "sessionsRevokedBeforeStop": [
+        "5A9E3350-46E6-4D07-958D-39B1D983CDE9",
+        "1D4D9B32-BBE0-4E2E-9CA5-D2C90C5705E3",
+        "3C6A3DD3-E453-4541-BDF1-0F9BDA488F1F"
+      ],
+      "tlsListenerClosed": true
+    }
   },
   "priorFailedTrials": [
     {
@@ -458,19 +471,6 @@
           }
         }
       ],
-      "pendingObservation": {
-        "runID": "F8BA1FAB-7248-4567-93AA-E6C706C5D9D6",
-        "scenarioID": "compiler.deadline",
-        "commandID": "F9F25B2A-8A86-4B9D-BAF5-5C57BCE8B8F5",
-        "observation": "Status reply not observed; no run replay. User asked to unlock and reopen the same app.",
-        "coreDeviceObservation": {
-          "errorDomain": "com.apple.dt.CoreDeviceError",
-          "code": 4016,
-          "description": "The device is not able to fulfill the requested usage assertion requirements.",
-          "scope": "Read-only lockState and own-app diagnostic copy attempts; neither succeeded. Lock state/cause not established."
-        },
-        "resolution": "Original report recovered unchanged: failed on actual foreground loss at 41 seconds, not a deadline pass. Session expired during absence; follow-up requires explicit new pairing."
-      },
       "interruptedDeadline": {
         "runID": "F8BA1FAB-7248-4567-93AA-E6C706C5D9D6",
         "scenarioID": "compiler.deadline",
@@ -496,6 +496,270 @@
           "processID": 30066,
           "status": "Pairing stopped: Controller rejected the paired request."
         }
+      },
+      "followUp": {
+        "app": {
+          "schema": 1,
+          "appVersion": "9",
+          "appIdentifier": "com.firmingokit.demo",
+          "sourceCommit": "8519d6beee40932710db0fe6caeab266d890fce3",
+          "executableSHA256": "70c4f7cf92bb29a5ac70c24bf6c2a2582ee05e21f2144845016018da11ba67c0",
+          "preparedInventorySHA256": "81a8c4cb6b7a71a859495fe14c9f15028917ad8d8824b4f336973243d9803bfc",
+          "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a"
+        },
+        "pairing": {
+          "appVersion": "9",
+          "expired": false,
+          "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+          "label": "iPhone9",
+          "lastSeenSeconds": 0.10974525008350611,
+          "paired": true,
+          "processID": 30206,
+          "revoked": false,
+          "sessionID": "3C6A3DD3-E453-4541-BDF1-0F9BDA488F1F"
+        },
+        "reports": [
+          {
+            "scenarioID": "compiler.catalogue",
+            "runID": "55969A4C-0708-4179-AA6B-87A88EE358EE",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/compiler-catalogue.report.json",
+            "exportSHA256": "f25207b8f36ec4f8395daa02be00564561594e9a66e610ad7195b72a111497fc",
+            "replyPath": "workbench-paired-reports/iphone-build9/compiler-catalogue.reply.json",
+            "transportReplySHA256": "853771111db7fc8763dea7082989f6c58fbba5ce692e4aba59e7008d662cff4d",
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+            "command": {
+              "action": "report",
+              "commandID": "53F1318A-DBBC-4A22-B455-7013D3F93142",
+              "runID": "55969A4C-0708-4179-AA6B-87A88EE358EE",
+              "schema": 1
+            },
+            "state": {
+              "awaitingLifecycleStart": false,
+              "isRunning": false,
+              "phase": "complete",
+              "runID": "55969A4C-0708-4179-AA6B-87A88EE358EE",
+              "status": "passed"
+            }
+          },
+          {
+            "scenarioID": "compiler.resources",
+            "runID": "0A0B84A5-5D59-44A3-99C3-000F6719753E",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/compiler-resources.report.json",
+            "exportSHA256": "1f320d6c8715bbc3857bcc6166bebfd8798061842f94b57699985934bfda9fcd",
+            "replyPath": "workbench-paired-reports/iphone-build9/compiler-resources.reply.json",
+            "transportReplySHA256": "41667ec828e245026dced86429460df800cc3f74145655276761d7f10f15c976",
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+            "command": {
+              "action": "report",
+              "commandID": "70198D3B-7372-45B4-B720-80121033A567",
+              "runID": "0A0B84A5-5D59-44A3-99C3-000F6719753E",
+              "schema": 1
+            },
+            "state": {
+              "awaitingLifecycleStart": false,
+              "isRunning": false,
+              "phase": "complete",
+              "runID": "0A0B84A5-5D59-44A3-99C3-000F6719753E",
+              "status": "passed"
+            }
+          },
+          {
+            "scenarioID": "compiler.smoke",
+            "runID": "B87DC625-FB19-44E1-8657-17B031760782",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/compiler-smoke.report.json",
+            "exportSHA256": "c9cee40a9b665229e1786432de745585e20c1d778be997c8b2d5d7b55e2fde2a",
+            "replyPath": "workbench-paired-reports/iphone-build9/compiler-smoke.reply.json",
+            "transportReplySHA256": "e611b0c0b17c96b88a2f18f41cc67194dac8479a578dc73d1b79f2910b1004ae",
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+            "command": {
+              "action": "report",
+              "commandID": "F18E72F3-0DE7-4138-BD14-7718E80D637A",
+              "runID": "B87DC625-FB19-44E1-8657-17B031760782",
+              "schema": 1
+            },
+            "state": {
+              "awaitingLifecycleStart": false,
+              "isRunning": false,
+              "phase": "complete",
+              "runID": "B87DC625-FB19-44E1-8657-17B031760782",
+              "status": "passed"
+            }
+          },
+          {
+            "scenarioID": "compiler.diagnostics",
+            "runID": "9D976EB3-395F-40E5-9F94-F12478A24453",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/compiler-diagnostics.report.json",
+            "exportSHA256": "6af1af740031e4f47e6700981baec3177c12bf9e1041cfc6253ec4cddb4079fe",
+            "replyPath": "workbench-paired-reports/iphone-build9/compiler-diagnostics.reply.json",
+            "transportReplySHA256": "51b940239f735cc320ca350833bbcb196bf6a2049a409734345df87d89cc2d77",
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+            "command": {
+              "action": "report",
+              "commandID": "523F06CA-8C22-4460-BD21-DA96D1A4B62B",
+              "runID": "9D976EB3-395F-40E5-9F94-F12478A24453",
+              "schema": 1
+            },
+            "state": {
+              "awaitingLifecycleStart": false,
+              "isRunning": false,
+              "phase": "complete",
+              "runID": "9D976EB3-395F-40E5-9F94-F12478A24453",
+              "status": "passed"
+            }
+          },
+          {
+            "scenarioID": "compiler.cancellation",
+            "runID": "5B1B50BB-207A-45FC-8CBA-4253357AFAD5",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/compiler-cancellation.report.json",
+            "exportSHA256": "b27e349f3e9b95cd4fe171efb314fa2f08993ca04bfeb98c874e1df89c37cc73",
+            "replyPath": "workbench-paired-reports/iphone-build9/compiler-cancellation.reply.json",
+            "transportReplySHA256": "e90525597fd3e027a49a9c38140d6ad8466b344fff922d4558356aaa7efdf295",
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+            "command": {
+              "action": "report",
+              "commandID": "D24481F0-0913-424C-BDB8-BE65C7F564B3",
+              "runID": "5B1B50BB-207A-45FC-8CBA-4253357AFAD5",
+              "schema": 1
+            },
+            "state": {
+              "awaitingLifecycleStart": false,
+              "isRunning": false,
+              "phase": "complete",
+              "runID": "5B1B50BB-207A-45FC-8CBA-4253357AFAD5",
+              "status": "passed"
+            }
+          },
+          {
+            "scenarioID": "compiler.deadline",
+            "runID": "342D086C-DD7E-49D8-88A6-F1169C6DDD8F",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/compiler-deadline.report.json",
+            "exportSHA256": "803507927a45e5f4f5851bd0c4a7df484c1accc2c07c82de806df7c44999c3d3",
+            "replyPath": "workbench-paired-reports/iphone-build9/compiler-deadline.reply.json",
+            "transportReplySHA256": "13005dfe6ebf6fdcb8923ea5080478dbcf20d9bef8bfb52e687022ee7946a30a",
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+            "command": {
+              "action": "report",
+              "commandID": "D326CA7C-C941-4859-A8A4-81093A550BE1",
+              "runID": "342D086C-DD7E-49D8-88A6-F1169C6DDD8F",
+              "schema": 1
+            },
+            "state": {
+              "awaitingLifecycleStart": false,
+              "isRunning": false,
+              "phase": "complete",
+              "runID": "342D086C-DD7E-49D8-88A6-F1169C6DDD8F",
+              "status": "passed"
+            }
+          },
+          {
+            "scenarioID": "compiler.stress",
+            "runID": "DF5B658D-EC7E-4827-8828-2A6AB332A88D",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/compiler-stress.report.json",
+            "exportSHA256": "bd2cf6ba0668dc0c30006d220b01a41ecd749964f9b67249bda4525e02485d73",
+            "replyPath": "workbench-paired-reports/iphone-build9/compiler-stress.reply.json",
+            "transportReplySHA256": "7e55c65eb30220f05acc01276a6bd3d11c76ddec6bb87e165b3a6f99a29996cc",
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+            "command": {
+              "action": "report",
+              "commandID": "036F86EA-80D5-4C31-8309-54B521DDEFC9",
+              "runID": "DF5B658D-EC7E-4827-8828-2A6AB332A88D",
+              "schema": 1
+            },
+            "state": {
+              "awaitingLifecycleStart": false,
+              "isRunning": false,
+              "phase": "complete",
+              "runID": "DF5B658D-EC7E-4827-8828-2A6AB332A88D",
+              "status": "passed"
+            }
+          },
+          {
+            "scenarioID": "host.lifecycle",
+            "runID": "E982EA32-0566-4D9A-A0A4-6908B2EAB497",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/idle-resume.report.json",
+            "exportSHA256": "56490b30dcf61abf477529e7d653372204035a8ac85a0ca54ca75543e5f77b8d",
+            "replyPath": "workbench-paired-reports/iphone-build9/idle-resume.reply.json",
+            "transportReplySHA256": "23574acda71a3aed00030897084e8d99677416b6abb4a6918f1b6f39c9f3c42c",
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF",
+            "command": {
+              "action": "report",
+              "commandID": "4BF197C1-1602-4B77-9089-7DCD70528F9E",
+              "runID": "E982EA32-0566-4D9A-A0A4-6908B2EAB497",
+              "schema": 1
+            },
+            "state": {
+              "awaitingLifecycleStart": false,
+              "isRunning": false,
+              "phase": "complete",
+              "runID": "E982EA32-0566-4D9A-A0A4-6908B2EAB497",
+              "status": "passed"
+            }
+          }
+        ],
+        "revocation": {
+          "revoke": {
+            "revoked": true
+          },
+          "diagnostic": {
+            "sessionID": "3C6A3DD3-E453-4541-BDF1-0F9BDA488F1F",
+            "acknowledged": 93,
+            "status": "Pairing stopped: Controller rejected the paired request.",
+            "isPaired": false,
+            "phase": "active",
+            "processID": 30206,
+            "tls": "Pinned leaf trust evaluation passed",
+            "schema": 1,
+            "instanceID": "A61A235E-18D5-43C0-9D43-20BBC3A901FF"
+          },
+          "report": {
+            "scenarioID": "host.lifecycle-active",
+            "runID": "BB7FD01E-0805-4DF4-93E3-C343E25E9760",
+            "processID": 30206,
+            "reportPath": "workbench-paired-reports/iphone-build9/revoked-run.report.json",
+            "exportSHA256": "b43b0de696316d954a3f7d605f906b138c49672f7a5109f4c83338ab3e09a456"
+          },
+          "laterCommandRejected": true,
+          "collection": "Only selected app-owned diagnostic and exact run journal copied through CoreDevice after revocation"
+        },
+        "device": {
+          "model": "iPhone 15 Pro Max",
+          "productType": "iPhone16,2",
+          "osVersion": "27.0.1",
+          "osBuild": "24A446",
+          "transport": "localNetwork"
+        },
+        "status": "all seven automatic compiler scenarios, real idle Home/return transport resumption and live revocation passed in one app process",
+        "observations": {
+          "deadlineSeconds": 60.12477358331671,
+          "stressBuilds": 20,
+          "stressSelfProcessSamples": 54,
+          "largestSampledSelfProcessFootprintBytes": 221513760,
+          "idleBackgroundToActiveSeconds": 4.761646458355244,
+          "idleReportExportedOverResumedTLS": true,
+          "runReplay": false
+        }
+      },
+      "originalUnobservedStatus": {
+        "runID": "F8BA1FAB-7248-4567-93AA-E6C706C5D9D6",
+        "scenarioID": "compiler.deadline",
+        "commandID": "F9F25B2A-8A86-4B9D-BAF5-5C57BCE8B8F5",
+        "observation": "Status reply not observed; no run replay. User asked to unlock and reopen the same app.",
+        "coreDeviceObservation": {
+          "errorDomain": "com.apple.dt.CoreDeviceError",
+          "code": 4016,
+          "description": "The device is not able to fulfill the requested usage assertion requirements.",
+          "scope": "Read-only lockState and own-app diagnostic copy attempts; neither succeeded. Lock state/cause not established."
+        },
+        "resolution": "Original report recovered unchanged: failed on actual foreground loss at 41 seconds, not a deadline pass. Session expired during absence; follow-up requires explicit new pairing.",
+        "state": "resolved as failed foreground interruption using unchanged original journal"
       }
     }
   ],
@@ -503,8 +767,9 @@
     "Reports are encrypted RPC exports, not byte-for-byte copies of the app journal; export and transport reply hashes are retained separately.",
     "No device-writing/board action, simulated scene change, OS suspension/pressure or minimum-OS qualification.",
     "The first authorization/offline failure is preserved; permission was already approved for later successful pairing.",
-    "The paired client pauses in background and does not suppress device auto-lock. A foreground-only deadline requires keeping the device awake; a lost CLI observation is not a pass.",
-    "The paired client pauses in background and does not suppress device auto-lock. A foreground-only deadline requires keeping the device awake; a lost CLI observation is not a pass."
+    "Build 8 lacks idle prevention. Build 9 keeps only actual foreground test runs awake and restores the prior app idle policy on completion/cancellation/backgrounding; it grants no background execution.",
+    "The physical iPad evidence uses build 8; the physical iPhone follow-up uses build 9. The same product/bundle and compiler assets are retained, but build 9 is not claimed physically qualified on the iPad.",
+    "The controller is stopped and sessions revoked. Future runs need an explicitly started controller and fresh invitations."
   ],
   "negativeChecks": {
     "unauthorizedTLSRequest": "rejected HTTP 403",
@@ -532,6 +797,21 @@
       "brokerTests": 10,
       "cliTests": 15,
       "result": "passed; no app or network execution in fixtures"
+    },
+    "followUp": {
+      "command": "node Tools/ManagedWASM/run-validation.mjs",
+      "result": "passed",
+      "workbenchNonNetworkTests": 24,
+      "workbenchOptInTLSSkips": 1,
+      "brokerAndReportFixtures": 11,
+      "cliFixtures": 15,
+      "platformBuilds": [
+        "Release macOS",
+        "Release iOS Simulator",
+        "Release development-signed iOS device"
+      ],
+      "signedAppSource": "8519d6beee40932710db0fe6caeab266d890fce3",
+      "scope": "Normal validation passed before final archived follow-up corpus expansion; final expanded Python corpus rechecked separately"
     }
   }
 }
