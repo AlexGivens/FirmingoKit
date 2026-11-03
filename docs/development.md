@@ -750,3 +750,24 @@ fixtures revalidate both app versions and preserve failed/cancelled outcomes.
 Both device sessions are revoked and the owned Mac controller is stopped.
 The paired-controller increment is complete for these exact model/OS/app builds;
 MCP, hardware scenario migration and broader host qualification remain open.
+
+
+## Workbench MCP adapter — 2026-11-02
+
+The [MCP guide](workbench-mcp.md) documents an operator-selected stdio server,
+client-neutral launch configuration and asynchronous explicit-UUID tool flow.
+It delegates to the existing private paired-controller API and report checker;
+normal SDK/app behavior and compiler/firmware contracts are unchanged. Fifteen
+new offline fixtures cover both MCP protocol families, bounded workers/framing,
+request cancellation/EOF, uncertain submission, producer/report selection and
+non-overwriting checked evidence exports. The normal validation entry point and
+CI definitions include these tests and the optional runner's syntax check.
+
+The separately selected `check-mcp-interop.mjs` uses reviewed lockfile pins for
+modern official client 2.4.0 and legacy SDK client 1.32.2. Both clients pass real
+stdio/local-Unix-broker discovery, tool/session access and validation/export of
+archived reports. Optional dependencies live outside the normal SDK/runtime and
+are never auto-installed by the server or CI. Fixture processes are stopped.
+[Validation ledger](workbench-mcp-validation.json) retains source/lock/export
+hashes and exact scope. These results are not a new app/compiler/device pass;
+actual agent-host registration and fresh MCP-to-mobile qualification remain open.

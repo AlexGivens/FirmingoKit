@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "date": "2026-11-02",
+  "status": "implemented and locally validated",
+  "adapterVersion": "0.1.0",
+  "scope": "Thin tools-only stdio adapter over the existing operator socket. Official-client execution uses archived report fixtures, not a live Apple app or device.",
+  "protocols": {
+    "perRequest": "2026-07-28",
+    "legacyInitialize": [
+      "2025-11-25",
+      "2025-06-18",
+      "2025-03-26",
+      "2024-11-05"
+    ]
+  },
+  "tools": [
+    "workbench_sessions",
+    "workbench_submit",
+    "workbench_result",
+    "workbench_revoke"
+  ],
+  "sourceFiles": {
+    "Tools/Workbench/mcp-server.py": "8c3f202f83c6fed17f24eaac3e3e0e5dfe7eeb0990f77d93e7920c77a4f62c7b",
+    "Tools/Workbench/test-mcp.py": "6e32eec7001817940b3ccb5bd14fd4583aa7d66f4c673ea83ce48818dc9ab76a",
+    "Tools/Workbench/check-mcp-interop.mjs": "81c78fcf8a800c66c64b9ecc297d5acff799047be407456089104437bece05e6",
+    "Tools/Workbench/paired.py": "70b8b4143e12bdfbe780bdae1b47888f200a2ca3f68ed086d72540d73bf5630e",
+    "Tools/Workbench/workbench.py": "793c78153eb0d6336cc4bc30286e51a43f98e65d1d31156f87e203f5ae7d13f6",
+    "Tools/Workbench/MCPClient/package.json": "63322a921fe313d10915386d021484abb3d988ecfa7a4712a7535885a049054a",
+    "Tools/Workbench/MCPClient/package-lock.json": "7972b180f07178466d5ceb6f1e69128703fcea38b6f039d4a4d31cd75681d2de"
+  },
+  "checks": {
+    "normalEntryPoint": "node Tools/ManagedWASM/run-validation.mjs",
+    "normalResult": "passed; unavailable WASM cases and the opt-in live TLS case skipped explicitly",
+    "sdkReportedTests": 166,
+    "romHostTests": 8,
+    "workbenchNonNetworkTests": 24,
+    "workbenchOptInTLSSkips": 1,
+    "workbenchCLIFixtures": 15,
+    "pairedBrokerFixtures": 11,
+    "mcpFixtures": 15,
+    "finalFocusedRecheck": "Fifteen MCP fixtures plus both official clients pass after final rejected-envelope evidence guard",
+    "syntax": "Optional Node runner syntax and workflow YAML parsed; actionlint unavailable; no remote CI claim"
+  },
+  "officialClientInterop": {
+    "schema": 1,
+    "scope": "Official-client stdio/local-broker interoperability over archived bytes; no live app, TLS, compiler or device execution",
+    "packages": {
+      "@modelcontextprotocol/client": "2.4.0",
+      "@modelcontextprotocol/sdk": "1.32.2"
+    },
+    "packageLockSHA256": "7972b180f07178466d5ceb6f1e69128703fcea38b6f039d4a4d31cd75681d2de",
+    "nodeVersion": "v22.12.0",
+    "sourceFiles": {
+      "mcp-server.py": "8c3f202f83c6fed17f24eaac3e3e0e5dfe7eeb0990f77d93e7920c77a4f62c7b",
+      "paired.py": "70b8b4143e12bdfbe780bdae1b47888f200a2ca3f68ed086d72540d73bf5630e",
+      "workbench.py": "793c78153eb0d6336cc4bc30286e51a43f98e65d1d31156f87e203f5ae7d13f6",
+      "check-mcp-interop.mjs": "81c78fcf8a800c66c64b9ecc297d5acff799047be407456089104437bece05e6"
+    },
+    "fixtureStopped": true,
+    "results": [
+      {
+        "era": "modern",
+        "server": {
+          "name": "firmingo-workbench",
+          "version": "0.1.0"
+        },
+        "tools": [
+          "workbench_sessions",
+          "workbench_submit",
+          "workbench_result",
+          "workbench_revoke"
+        ],
+        "validatedArchivedReport": true,
+        "evidence": [
+          {
+            "bytes": 6129,
+            "sha256": "8449329bc18eb0a2193003880bdcfdc45838d890505421026b065ee07daf4ee7",
+            "filename": "reply.json"
+          },
+          {
+            "bytes": 6138,
+            "sha256": "a91e21f507ab132e9bce41431fd62fac2deb257c54ce422181b4bc809a48c427",
+            "filename": "report.json"
+          },
+          {
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "filename": "gpio.fms"
+          },
+          {
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "filename": "console.fms"
+          }
+        ],
+        "stderr": ""
+      },
+      {
+        "era": "legacy",
+        "server": {
+          "name": "firmingo-workbench",
+          "version": "0.1.0"
+        },
+        "tools": [
+          "workbench_sessions",
+          "workbench_submit",
+          "workbench_result",
+          "workbench_revoke"
+        ],
+        "validatedArchivedReport": true,
+        "evidence": [
+          {
+            "bytes": 6129,
+            "sha256": "8449329bc18eb0a2193003880bdcfdc45838d890505421026b065ee07daf4ee7",
+            "filename": "reply.json"
+          },
+          {
+            "bytes": 6138,
+            "sha256": "a91e21f507ab132e9bce41431fd62fac2deb257c54ce422181b4bc809a48c427",
+            "filename": "report.json"
+          },
+          {
+            "bytes": 316,
+            "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+            "filename": "gpio.fms"
+          },
+          {
+            "bytes": 392,
+            "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+            "filename": "console.fms"
+          }
+        ],
+        "stderr": ""
+      }
+    ]
+  },
+  "cleanup": {
+    "ownedFixtureUnixSocketsClosed": true,
+    "fixtureProcessesStopped": true,
+    "temporaryUnixFixtureBrokerStarted": true,
+    "mobileTLSListenerStarted": false,
+    "liveAppOrDeviceStarted": false
+  },
+  "unchanged": [
+    "Swift/app binaries and entitlements",
+    "compiler assets and recipes",
+    "firmware and device-writing contracts",
+    "user agent-host settings"
+  ],
+  "limitations": [
+    "No new MCP-to-physical-device qualification. Existing paired evidence remains separate.",
+    "No actual Codex/Claude server registration was performed. Client-neutral launch instructions are documented.",
+    "Only tools/stdio and the enumerated protocol versions are supported; build/deploy/pairing remain explicit CLI workflows."
+  ]
+}

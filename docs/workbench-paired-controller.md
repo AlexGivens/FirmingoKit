@@ -265,6 +265,14 @@ foreground-interrupted deadline and its stale status command remain historical
 facts. The controller is stopped after revocation; no listener or reusable paired
 credential is left active. Future runs require a new explicit controller/pairing.
 
-Next work is a thin MCP adapter and migration of guarded read-only device,
-console, upload and recovery scenarios. UI/accessibility, minimum OS, real pressure
+The thin MCP adapter is now implemented below. Next work is migration of guarded
+read-only device, console, upload and recovery scenarios. UI/accessibility, minimum OS, real pressure
 and hardware qualification remain separate; this increment contacts no Nano.
+
+
+The [tools-only MCP adapter](workbench-mcp.md) now exposes the same private
+operator API through stdio. It delegates admission, deduplication, dispatch and
+report validation to the existing controller/app boundaries. Pairing/build/
+deployment remain explicit CLI workflows; MCP carries no invitation credential.
+The adapter's official-client compatibility checks use archived data and do not
+replace the physical evidence above.

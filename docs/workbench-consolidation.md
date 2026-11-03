@@ -41,7 +41,7 @@ Apple platforms. No network control listener is added in this increment.
 Compiler busy/deadline/lifecycle/stress migration is tracked in
 [the compiler-scenario work log](workbench-compiler-scenarios.md). Next migrate read-only device and
 binary-console cases, then guarded upload/ROM recovery. The paired iPad/build-8 and iPhone/build-9 compiler, resume and revocation
-qualification is recorded in the controller ledger. Add a thin MCP adapter over the versioned command engine. Retire legacy generators
+qualification is recorded in the controller ledger. The [thin MCP adapter](workbench-mcp.md) now wraps the versioned controller API; client-host registration and fresh MCP-to-device qualification remain separate. Retire legacy generators
 only after matching scenario evidence; preserve previous reports and unresolved
 networking/qualification limits. Firmware fault images remain separate physical
 inputs even when one app orchestrates every scenario.

@@ -36,7 +36,14 @@ foreground loss. Build 9 adds restorable foreground-test idle prevention and
 passes all seven iPhone compiler cases, real Home/return transport resumption and
 live revocation in one paired process. Original failed trials remain recorded;
 the controller is stopped and future runs need fresh pairing. See
-`docs/workbench-paired-qualification.json`. The original macOS launch CLI remains. The second increment adds compiler
+`docs/workbench-paired-qualification.json`. The original macOS launch CLI remains.
+`Tools/Workbench/mcp-server.py` now adds a tools-only stdio adapter over that
+controller: explicit session/command/run selection, asynchronous submission,
+result/report validation and revocation. It starts no app/controller or device
+operation. Both current per-request MCP and legacy initialization are checked;
+normal fixtures use an in-memory broker, and opt-in official-client checks use
+archived bytes over a local Unix socket. No fresh MCP-to-physical-device or
+Codex/Claude registration claim follows. See `docs/workbench-mcp.md`. The second increment adds compiler
 busy/cancellation, actual deadline, twenty-build stress and interactive mobile
 scene scenarios; see `docs/workbench-compiler-scenarios.md`. Legacy hosts remain
 until matching replacement qualification. Workbench build 4 now passes all three

@@ -15,3 +15,11 @@ Validate an explicitly exported mobile lifecycle report with `python3 -I -S -B T
 [Paired mobile controller](../../docs/workbench-paired-controller.md) documents
 `paired.py serve|pair-device|command|sessions|revoke` and manual invitations.
 Run `python3 -I -S -B Tools/Workbench/test-paired.py` for socket-free broker fixtures.
+
+
+[Thin MCP adapter](../../docs/workbench-mcp.md) documents the tools-only stdio
+server, client launch configuration, explicit command/run IDs and validated
+report collection. Run `python3 -I -S -B Tools/Workbench/mcp-server.py --help`.
+Normal offline coverage is `python3 -I -S -B Tools/Workbench/test-mcp.py`;
+`check-mcp-interop.mjs --help` describes the separate opt-in official-client check.
+The adapter connects only to an operator-selected existing controller.
