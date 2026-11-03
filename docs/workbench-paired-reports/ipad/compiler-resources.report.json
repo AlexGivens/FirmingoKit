@@ -1,0 +1,33 @@
+{
+  "appIdentifier": "com.firmingokit.demo",
+  "appVersion": "8",
+  "artifacts": [],
+  "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+  "deviceOperations": false,
+  "events": [
+    {
+      "detail": "Loading actual SDK-verified catalogue metadata.",
+      "phase": "catalogue",
+      "seconds": 9.120833419729024e-05,
+      "sequence": 0
+    },
+    {
+      "detail": "Verifying real bundled compiler/runtime resources.",
+      "phase": "resources",
+      "seconds": 0.015418625000165775,
+      "sequence": 1
+    },
+    {
+      "detail": "All assertions in the selected scenario completed.",
+      "phase": "complete",
+      "seconds": 0.12354287500056671,
+      "sequence": 2
+    }
+  ],
+  "id": "CA2A0B59-CA2A-4860-BDEA-530014130860",
+  "operatingSystem": "Version 27.0.1 (Build 24A446)",
+  "processID": 2799,
+  "scenarioID": "compiler.resources",
+  "schema": 1,
+  "status": "passed"
+}

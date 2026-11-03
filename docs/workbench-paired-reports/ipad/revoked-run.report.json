@@ -1,0 +1,88 @@
+{
+  "appIdentifier" : "com.firmingokit.demo",
+  "appVersion" : "8",
+  "artifacts" : [
+    {
+      "bytes" : "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+      "name" : "gpio.fms",
+      "receiptJSON" : "eyJwcm9maWxlIjoibmFuby1tYW5hZ2VkLXYxIiwicHJvdmVuYW5jZSI6eyJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIiwicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVsZXNzLWNsYW5nLTIyLjEuOC12MS1leHBlcmltZW50YWwiLCJyZWNpcGVTSEEyNTYiOiJiNzg2OWY2ZmM4NjNlMTkwNWRlYjY5NzQ0MDhjNmU3ZGM2Mzk0M2ExZmIzZTM0MmEzNTdmZGY3NTdiMWUyM2Q5IiwidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCJ9LCJjYXRhbG9ndWVTSEEyNTYiOiJlMzQxYmZjMDM4NWZlYTliMmIwMjZkYzYyNGRhYTI2Y2RlYWMzMzI4NmY0YmIwNzI0M2IzN2MxYzMxODM3ZDBlIiwiYnVpbGRJbnB1dFNIQTI1NiI6ImY1ZGEwZWExMjUyYTBlYTRiYzcxMzcyZjYzZjRlMjY2YzI4YTJlZmU3ZTE1MDA4MmI2ZDM3MTRjNTQ3MGQ4YjciLCJ2ZXJzaW9uIjoxLCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiIwOTEyMzZhZWVhMWQxYjRkZWQ0MTBkZTNlYjE1NWIxOTY3MzhhZTlkNzI3ZDFkNzQxMWQzYjljYTNiY2JlNGRlIiwic291cmNlU0hBMjU2IjoiZmRhZDg4YWE4YjIwYjA0NWYzNTM2MmMxM2U1NjA5MGJhODViN2JkM2U4ZjAyNDQ1MmIzYjM5Zjg3YzBmMjU2OCIsInNvdXJjZUZpbGVuYW1lIjoiV29ya2JlbmNoLWdwaW8uaW5vIiwiY2Fwc3VsZVNIQTI1NiI6Ijk1OGI4NjFiYmMxOGQ0NjY2ZWQwM2U2OTc2YjM5YjlmZWE0ODEyNDA5YWQ5MWEzNTAxYWJiYjk2ODVhODBkN2QiLCJzb3VyY2VSZXZpc2lvbiI6MSwiZG9jdW1lbnRJRCI6IjI4M0UwREIzLTZFMzEtNEU3Mi04QUEwLTZDOEQ3MDZDQUI3MCIsImJvYXJkSUQiOiJuYW5vX3JwMjA0MF9jb25uZWN0IiwiZmlybXdhcmVCdWlsZElEIjoiYzQ0ZDI1ZWZlNzc0ZWI0N2IxNjNiYzA4MjkwNmNmNDhiNTliNmUzZGQxZDBlMTljNzgyMjkyNWU2YmE4Mjc1ZiIsImxpbmtlZEVMRlNIQTI1NiI6ImQ3MjlhOGI2YThlMzUzYjFmZGUwMTFlYTYyNTk3ZjBiYzVlMTQ1MDA0OTZlMDE4ZTdjNWJkNWMxNTI3NjA1MGQifQ==",
+      "sha256" : "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "wasmLinearMemoryBytes" : 27983872
+    }
+  ],
+  "catalogueSHA256" : "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+  "deviceOperations" : false,
+  "events" : [
+    {
+      "detail" : "Loading actual SDK-verified catalogue metadata.",
+      "phase" : "catalogue",
+      "seconds" : 8.225000055972487e-05,
+      "sequence" : 0
+    },
+    {
+      "detail" : "Verifying real bundled compiler\/runtime resources.",
+      "phase" : "resources",
+      "seconds" : 0.014099375002842862,
+      "sequence" : 1
+    },
+    {
+      "detail" : "Executing the exact SDK compiler input: gpio",
+      "phase" : "compile-gpio",
+      "seconds" : 0.09621929166678456,
+      "sequence" : 2
+    },
+    {
+      "detail" : "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "phase" : "artifact-gpio",
+      "seconds" : 0.7072574583362439,
+      "sequence" : 3
+    },
+    {
+      "detail" : "Tap Start lifecycle interruption, wait one second, then go Home for five seconds and return.",
+      "phase" : "waiting-for-start",
+      "seconds" : 0.7090215833341063,
+      "sequence" : 4
+    },
+    {
+      "detail" : "Cancellation settled; no fallback artifact or replay.",
+      "phase" : "cancelled",
+      "seconds" : 1.616109916667483,
+      "sequence" : 5
+    }
+  ],
+  "exercise" : {
+    "builds" : [
+      {
+        "index" : 1,
+        "input" : "gpio",
+        "receiptSHA256" : "012c468c090e01a577912a44a1ac8b21fabe0fc348cb7dcefa537c6292ebe055",
+        "seconds" : 0.609105333332991,
+        "sha256" : "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "wasmLinearMemoryBytes" : 27983872
+      }
+    ],
+    "busyObserved" : false,
+    "droppedSamples" : 0,
+    "kind" : "host.lifecycle-active",
+    "progress" : [
+
+    ],
+    "samples" : [
+
+    ],
+    "sceneObservationScope" : "Actual aggregate SwiftUI app scenes; no suspension claim",
+    "scenes" : [
+      {
+        "phase" : "active",
+        "seconds" : 0.09621658333344385
+      }
+    ]
+  },
+  "firmwareBuildID" : "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+  "id" : "FE595249-85FA-4155-A0E8-83947AD9B346",
+  "operatingSystem" : "Version 27.0.1 (Build 24A446)",
+  "processID" : 2799,
+  "scenarioID" : "host.lifecycle-active",
+  "schema" : 1,
+  "status" : "cancelled"
+}

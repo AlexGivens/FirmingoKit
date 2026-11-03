@@ -1,0 +1,510 @@
+{
+  "schema": 1,
+  "date": "2026-11-02",
+  "status": "iPad seven automatic compiler scenarios, real pause/resume, explicit start/cancel and live revocation passed; iPhone five automatic scenarios passed, interrupted deadline under investigation",
+  "app": {
+    "schema": 1,
+    "appVersion": "8",
+    "appIdentifier": "com.firmingokit.demo",
+    "sourceCommit": "0ad5d321634ab2f0d83d9be7ee02cb2a1d004002",
+    "executableSHA256": "e3596575651764c3d8cd922db519f1155d4bdc7527cd279b128fabbbb537a5d0",
+    "preparedInventorySHA256": "39b0c21ee9a3b96159cb890792a2e3c45c8685a13e78d5361e460a512c3ef375",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a"
+  },
+  "controller": {
+    "sourceCommit": "09908c1a2cf0c47c55b56db22855c2f71d16b237",
+    "certificateSHA256": "c95b84f0b99e7952e958468321216bf682af64f707ae8c76bf1a3689955932a3",
+    "transport": "private IPv4 TLS; outgoing app polling; owner-only local operator socket"
+  },
+  "priorFailedTrials": [
+    {
+      "build": "5",
+      "device": "iPhone",
+      "observation": "User approved initial local-network prompt; app then reported offline",
+      "passed": false
+    },
+    {
+      "build": "5",
+      "device": "iPad",
+      "observation": "User reported invalid server certificate",
+      "passed": false
+    },
+    {
+      "build": "6",
+      "devices": [
+        "iPad",
+        "iPhone"
+      ],
+      "observation": "Safe diagnostics recorded invalid server certificate; no pairing",
+      "passed": false
+    },
+    {
+      "build": "7",
+      "devices": [
+        "iPad",
+        "iPhone"
+      ],
+      "observation": "Safe diagnostics recorded no TLS callback and invalid server certificate; streamed native reproduction exposed the missing task delegate",
+      "passed": false
+    }
+  ],
+  "devices": [
+    {
+      "label": "ipad",
+      "model": "iPad Pro 11-inch (3rd generation), iPad13,4",
+      "operatingSystem": "27.0.1 (24A446)",
+      "developmentTransport": "CoreDevice localNetwork; controller TLS over private LAN",
+      "pairing": {
+        "appVersion": "8",
+        "expired": false,
+        "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+        "label": "iPad8",
+        "lastSeenSeconds": 0.12683570804074407,
+        "paired": true,
+        "processID": 2799,
+        "revoked": false,
+        "sessionID": "5A9E3350-46E6-4D07-958D-39B1D983CDE9"
+      },
+      "reports": [
+        {
+          "scenarioID": "compiler.catalogue",
+          "runID": "C25AD1D8-4FC7-4352-94EC-626205B5443A",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/compiler-catalogue.report.json",
+          "exportSHA256": "2f3a6021222b2504a0a3b6968ae392511e882a9146f60a4f3cd9e210337b5189",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/compiler-catalogue.reply.json",
+          "transportReplySHA256": "231dfa414e54881c340d04c0d20bf33df77cf4611d0eb8ea9845702da374d782",
+          "command": {
+            "action": "report",
+            "commandID": "0F43DEA3-76D5-4FE3-B070-8E5AA19379D5",
+            "runID": "C25AD1D8-4FC7-4352-94EC-626205B5443A",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "C25AD1D8-4FC7-4352-94EC-626205B5443A",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.resources",
+          "runID": "CA2A0B59-CA2A-4860-BDEA-530014130860",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/compiler-resources.report.json",
+          "exportSHA256": "c3f51efee520f339d0b49c3b43561ab5df8fb5c845ddfdf44d1d8bf54c22aff7",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/compiler-resources.reply.json",
+          "transportReplySHA256": "3c08b626483bd4522e7f11fbf5c213ecb571d67ca25a713694ed2031b208d81f",
+          "command": {
+            "action": "report",
+            "commandID": "43B1207F-BFD5-4097-8633-0D600B3CEF3F",
+            "runID": "CA2A0B59-CA2A-4860-BDEA-530014130860",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "CA2A0B59-CA2A-4860-BDEA-530014130860",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.smoke",
+          "runID": "5676281F-A217-404B-91D8-4D0A7FBCD446",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/compiler-smoke.report.json",
+          "exportSHA256": "a91e21f507ab132e9bce41431fd62fac2deb257c54ce422181b4bc809a48c427",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/compiler-smoke.reply.json",
+          "transportReplySHA256": "8449329bc18eb0a2193003880bdcfdc45838d890505421026b065ee07daf4ee7",
+          "command": {
+            "action": "report",
+            "commandID": "8D32DE04-CFF7-4784-BE7A-66ADE206B47E",
+            "runID": "5676281F-A217-404B-91D8-4D0A7FBCD446",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "5676281F-A217-404B-91D8-4D0A7FBCD446",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.diagnostics",
+          "runID": "44DE2301-7FC1-4948-955D-1013F536E366",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/compiler-diagnostics.report.json",
+          "exportSHA256": "ea25fcf0a3dfd16716eaa89bf111fc3ade328048374d1b1cb049d15a0c73d2bf",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/compiler-diagnostics.reply.json",
+          "transportReplySHA256": "5fb5468e8557bcef465279b55dd6970ed2c19864a94f18d3777fd88a95a8ef70",
+          "command": {
+            "action": "report",
+            "commandID": "8B34898C-AF3C-41C2-B6BE-88DF5B105A68",
+            "runID": "44DE2301-7FC1-4948-955D-1013F536E366",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "44DE2301-7FC1-4948-955D-1013F536E366",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.cancellation",
+          "runID": "A9A7F510-AA54-4AC9-8B4A-CAD8A434F639",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/compiler-cancellation.report.json",
+          "exportSHA256": "d6241c3424bbe9aa8c6b98b16cbdf53129649ad128fc997da65b89903e335acb",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/compiler-cancellation.reply.json",
+          "transportReplySHA256": "6fb66bc513e4d5912a59733b0045d11dfe1ad1a32557f8e20455c28060c567a1",
+          "command": {
+            "action": "report",
+            "commandID": "20E2CFEB-7BA3-43E0-B534-2030AE4A8C0C",
+            "runID": "A9A7F510-AA54-4AC9-8B4A-CAD8A434F639",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "A9A7F510-AA54-4AC9-8B4A-CAD8A434F639",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.deadline",
+          "runID": "25FEC848-F198-4523-8AFF-2ECA59538338",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/compiler-deadline.report.json",
+          "exportSHA256": "b0aa2d1c2be7465f960f8cb53b7fa83db0a0a25bd4657ce0b2728de7451ed5fe",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/compiler-deadline.reply.json",
+          "transportReplySHA256": "0f5944256ec0e37ae1e9deeca9f5e7aadd4607c270dac3da8c2c0fe1186d0ff7",
+          "command": {
+            "action": "report",
+            "commandID": "A02F9113-0E6C-4C1D-A21E-6E3E3AA4321B",
+            "runID": "25FEC848-F198-4523-8AFF-2ECA59538338",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "25FEC848-F198-4523-8AFF-2ECA59538338",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.stress",
+          "runID": "A4F840F1-7DFD-4E69-9693-1B6B974842A8",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/compiler-stress.report.json",
+          "exportSHA256": "863493f7fa670fd82a2d882c7b15d12195a9b1920a9bfc4acc7f5c1614d3dd02",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/compiler-stress.reply.json",
+          "transportReplySHA256": "c5ef29322293a25321360ddae361b3669f34e0473ebfcefdb28571b832efa53f",
+          "command": {
+            "action": "report",
+            "commandID": "C9CE2348-A336-4A57-AECE-29574DD0DA43",
+            "runID": "A4F840F1-7DFD-4E69-9693-1B6B974842A8",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "A4F840F1-7DFD-4E69-9693-1B6B974842A8",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "host.lifecycle",
+          "runID": "6215050D-E0D2-43D6-A05A-18C97DB21A68",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/idle-resume.report.json",
+          "exportSHA256": "c29ccd3ea203d32861a680b15700ca050680ed95b6fba8a819a0c9aa73a3b418",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/idle-resume.reply.json",
+          "transportReplySHA256": "28db597f4df7ef47831a9399443c6c0e485ba52fc2f2b76796ec7f4d65b5b81e",
+          "command": {
+            "action": "report",
+            "commandID": "EA470247-BBD4-4D77-B22E-E9E683386AF2",
+            "runID": "6215050D-E0D2-43D6-A05A-18C97DB21A68",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "6215050D-E0D2-43D6-A05A-18C97DB21A68",
+            "status": "passed"
+          }
+        }
+      ],
+      "controlTrials": [
+        {
+          "scenarioID": "host.lifecycle-active",
+          "runID": "50BCEA28-7C6B-404D-9729-A198D2394480",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/late-cancel-failed.report.json",
+          "exportSHA256": "9eef091ad44a8ced5b0842fcfbd6ea99b32b4e5e513c73b590f56011afa120cd",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/late-cancel-failed.reply.json",
+          "transportReplySHA256": "06c9901e3182fcdf43e3608185689d651187df725a382a9953f3cc5d5ed0de79",
+          "command": {
+            "action": "report",
+            "commandID": "187325AB-FF50-4BDB-B2EE-5847DC6F006D",
+            "runID": "50BCEA28-7C6B-404D-9729-A198D2394480",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "failed",
+            "runID": "50BCEA28-7C6B-404D-9729-A198D2394480",
+            "status": "failed"
+          }
+        },
+        {
+          "scenarioID": "host.lifecycle-active",
+          "runID": "95427D5F-148C-4C19-AA38-D57557559387",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/explicit-cancel.report.json",
+          "exportSHA256": "f985cec927a72eb83a80764708c23607887e882bf4e053ad681bd616c05d6324",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "replyPath": "workbench-paired-reports/ipad/explicit-cancel.reply.json",
+          "transportReplySHA256": "baa469638d33eaa1e02c6b0e320f414daed0d5c1ece3bff5a9d5d107be222507",
+          "command": {
+            "action": "report",
+            "commandID": "7F28C635-FFCB-48B3-8B48-5B6A32D6486D",
+            "runID": "95427D5F-148C-4C19-AA38-D57557559387",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "cancelled",
+            "runID": "95427D5F-148C-4C19-AA38-D57557559387",
+            "status": "cancelled"
+          }
+        }
+      ],
+      "revocation": {
+        "revoke": {
+          "revoked": true
+        },
+        "diagnostic": {
+          "processID": 2799,
+          "status": "Pairing stopped: Controller rejected the paired request.",
+          "schema": 1,
+          "sessionID": "5A9E3350-46E6-4D07-958D-39B1D983CDE9",
+          "instanceID": "2D3F349F-29B6-43D6-A728-C8798E471AC1",
+          "isPaired": false,
+          "acknowledged": 105,
+          "tls": "Pinned leaf trust evaluation passed",
+          "phase": "active"
+        },
+        "report": {
+          "scenarioID": "host.lifecycle-active",
+          "runID": "FE595249-85FA-4155-A0E8-83947AD9B346",
+          "processID": 2799,
+          "reportPath": "workbench-paired-reports/ipad/revoked-run.report.json",
+          "exportSHA256": "590a8f28103fe0c371e6a6dc97a8b243a1cad4045ed146e2b880d54b28240f37"
+        },
+        "laterCommandRejected": true,
+        "collection": "Only selected app-owned diagnostic and exact run journal copied through CoreDevice after network authority was revoked"
+      }
+    },
+    {
+      "label": "iphone",
+      "model": "iPhone 15 Pro Max, iPhone16,2",
+      "operatingSystem": "27.0.1 (24A446)",
+      "developmentTransport": "CoreDevice localNetwork; controller TLS over private LAN",
+      "pairing": {
+        "appVersion": "8",
+        "expired": false,
+        "instanceID": "4EEAD563-31B0-45FB-ADB5-DE2340035AC2",
+        "label": "iPhone8-ready",
+        "lastSeenSeconds": 0.2219068338163197,
+        "paired": true,
+        "processID": 30066,
+        "revoked": false,
+        "sessionID": "1D4D9B32-BBE0-4E2E-9CA5-D2C90C5705E3"
+      },
+      "reports": [
+        {
+          "scenarioID": "compiler.catalogue",
+          "runID": "393A0A1D-496A-4C5B-ABD7-9D51E3DDEBFF",
+          "processID": 30066,
+          "reportPath": "workbench-paired-reports/iphone/compiler-catalogue.report.json",
+          "exportSHA256": "c0b6c07310839fe54d2faaa07f42ce48767d271810f785a113b0b7b9f509862b",
+          "instanceID": "4EEAD563-31B0-45FB-ADB5-DE2340035AC2",
+          "replyPath": "workbench-paired-reports/iphone/compiler-catalogue.reply.json",
+          "transportReplySHA256": "3c535b782c2ac07b1334e17c32d3f7269e601f11ed5c147f83a90f56cbc91989",
+          "command": {
+            "action": "report",
+            "commandID": "E2FE30B1-B7F5-4C72-BD1D-4216DA495918",
+            "runID": "393A0A1D-496A-4C5B-ABD7-9D51E3DDEBFF",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "393A0A1D-496A-4C5B-ABD7-9D51E3DDEBFF",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.resources",
+          "runID": "A83E0EA7-4E23-4EA3-8704-9206B0A252A8",
+          "processID": 30066,
+          "reportPath": "workbench-paired-reports/iphone/compiler-resources.report.json",
+          "exportSHA256": "46b46b6f30fe0ec5da40bbbceebfe2ca33aabb2ae2758b3871199001fd0cbf8d",
+          "instanceID": "4EEAD563-31B0-45FB-ADB5-DE2340035AC2",
+          "replyPath": "workbench-paired-reports/iphone/compiler-resources.reply.json",
+          "transportReplySHA256": "9619f1be38673134b9c0b074c843f18c7dee0049c0ddb8e6ebdfc652f37feae7",
+          "command": {
+            "action": "report",
+            "commandID": "F2171514-DA01-4425-B4B4-4A5CF87E0A3F",
+            "runID": "A83E0EA7-4E23-4EA3-8704-9206B0A252A8",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "A83E0EA7-4E23-4EA3-8704-9206B0A252A8",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.smoke",
+          "runID": "27ED9029-677F-4D1A-942E-09CFE1968E91",
+          "processID": 30066,
+          "reportPath": "workbench-paired-reports/iphone/compiler-smoke.report.json",
+          "exportSHA256": "4214cdabafda940e51279903c680176dae63682f69a3cd41a74709e14751eac9",
+          "instanceID": "4EEAD563-31B0-45FB-ADB5-DE2340035AC2",
+          "replyPath": "workbench-paired-reports/iphone/compiler-smoke.reply.json",
+          "transportReplySHA256": "9d9d8f9d33efbfbcae7b322f13893732d6ff15bc234b69cdaba29a02a2277b9b",
+          "command": {
+            "action": "report",
+            "commandID": "F716B2A2-315F-4594-9C1D-B85463CADBED",
+            "runID": "27ED9029-677F-4D1A-942E-09CFE1968E91",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "27ED9029-677F-4D1A-942E-09CFE1968E91",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.diagnostics",
+          "runID": "F57B6E6E-C35E-4B9C-BE66-E42E0EB24103",
+          "processID": 30066,
+          "reportPath": "workbench-paired-reports/iphone/compiler-diagnostics.report.json",
+          "exportSHA256": "83fcc5fb49656147273522abaf2733b07725dad87588911c8c7f91e37c6ec4bd",
+          "instanceID": "4EEAD563-31B0-45FB-ADB5-DE2340035AC2",
+          "replyPath": "workbench-paired-reports/iphone/compiler-diagnostics.reply.json",
+          "transportReplySHA256": "aa8301ef50c655f46a5234b4d8c55078ef3fe9dbbfb5340f58632324527110e8",
+          "command": {
+            "action": "report",
+            "commandID": "AAFA2784-B60C-49FD-B9C4-17B0679E6051",
+            "runID": "F57B6E6E-C35E-4B9C-BE66-E42E0EB24103",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "F57B6E6E-C35E-4B9C-BE66-E42E0EB24103",
+            "status": "passed"
+          }
+        },
+        {
+          "scenarioID": "compiler.cancellation",
+          "runID": "BFEECCE4-69D1-4C33-B256-CEA83218819A",
+          "processID": 30066,
+          "reportPath": "workbench-paired-reports/iphone/compiler-cancellation.report.json",
+          "exportSHA256": "15195d2d6684eafb3e8c8120cc8ca23ccd65596fef904d0ec99e2306f3ff46b1",
+          "instanceID": "4EEAD563-31B0-45FB-ADB5-DE2340035AC2",
+          "replyPath": "workbench-paired-reports/iphone/compiler-cancellation.reply.json",
+          "transportReplySHA256": "81c0bcf6c2b2bf043e699fc17e1d77c0b0ced5df69b6383ae925ed48a37f272f",
+          "command": {
+            "action": "report",
+            "commandID": "6D4E9CF4-A968-4A0A-9576-97041F97EDB0",
+            "runID": "BFEECCE4-69D1-4C33-B256-CEA83218819A",
+            "schema": 1
+          },
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "BFEECCE4-69D1-4C33-B256-CEA83218819A",
+            "status": "passed"
+          }
+        }
+      ],
+      "pendingObservation": {
+        "runID": "F8BA1FAB-7248-4567-93AA-E6C706C5D9D6",
+        "scenarioID": "compiler.deadline",
+        "commandID": "F9F25B2A-8A86-4B9D-BAF5-5C57BCE8B8F5",
+        "observation": "Status reply not observed; no run replay. User asked to unlock and reopen the same app.",
+        "coreDeviceObservation": {
+          "errorDomain": "com.apple.dt.CoreDeviceError",
+          "code": 4016,
+          "description": "The device is not able to fulfill the requested usage assertion requirements.",
+          "scope": "Read-only lockState and own-app diagnostic copy attempts; neither succeeded. Lock state/cause not established."
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Reports are encrypted RPC exports, not byte-for-byte copies of the app journal; export and transport reply hashes are retained separately.",
+    "No device-writing/board action, simulated scene change, OS suspension/pressure or minimum-OS qualification.",
+    "The first authorization/offline failure is preserved; permission was already approved for later successful pairing.",
+    "The paired client pauses in background and does not suppress device auto-lock. A foreground-only deadline requires keeping the device awake; a lost CLI observation is not a pass.",
+    "The paired client pauses in background and does not suppress device auto-lock. A foreground-only deadline requires keeping the device awake; a lost CLI observation is not a pass."
+  ],
+  "negativeChecks": {
+    "unauthorizedTLSRequest": "rejected HTTP 403",
+    "duplicateRunUUID": "rejected by durable engine before SDK work",
+    "existingOutput": "rejected before enqueue",
+    "duplicateRunID": "A4F840F1-7DFD-4E69-9693-1B6B974842A8",
+    "sessionID": "5A9E3350-46E6-4D07-958D-39B1D983CDE9",
+    "processID": 2799
+  },
+  "validation": {
+    "normal": "node Tools/ManagedWASM/run-validation.mjs passed: 166 SDK tests with unavailable-runtime skips, 8 ROM-host tests, 22 non-network Workbench tests and 1 opt-in TLS skip, 15 CLI fixtures, 8 broker fixtures at app-source freeze",
+    "additional": "Live streamed URLSession TLS test accepted the selected pin and rejected a wrong pin; 23 Workbench tests including actual TLS passed",
+    "builds": [
+      "Release signed physical iOS app, version 8",
+      "Release macOS build",
+      "Release iOS Simulator build"
+    ],
+    "remoteCI": "Not run or claimed",
+    "visualInspection": "Disabled by user; no screenshots or native UI inspection",
+    "finalPythonFixtures": {
+      "commands": [
+        "python3 -I -S -B Tools/Workbench/test-paired.py",
+        "python3 -I -S -B Tools/Workbench/test-workbench.py"
+      ],
+      "brokerTests": 10,
+      "cliTests": 15,
+      "result": "passed; no app or network execution in fixtures"
+    }
+  }
+}

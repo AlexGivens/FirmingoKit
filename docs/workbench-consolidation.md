@@ -20,9 +20,9 @@ hosts/results are retained until their scenarios have equivalent new evidence.
   access, native UI inspection, sibling checkout lookup or runtime provisioning.
 
 The initial CLI launches one owned app process per explicit offline command; it
-is not a live connection to an already running window. Mobile automation,
-paired Wi-Fi control, MCP, external lifecycle control and hardware scenario
-migration are later increments. The manual Test Lab shares code on all three
+is not a live connection to an already running window. The subsequent [paired controller](workbench-paired-controller.md) adds live
+mobile commands and automatic report collection. MCP, external lifecycle control
+and hardware scenario migration remain later increments. The manual Test Lab shares code on all three
 Apple platforms. No network control listener is added in this increment.
 
 ## Completion checks
@@ -40,8 +40,8 @@ Apple platforms. No network control listener is added in this increment.
 
 Compiler busy/deadline/lifecycle/stress migration is tracked in
 [the compiler-scenario work log](workbench-compiler-scenarios.md). Next migrate read-only device and
-binary-console cases, then guarded upload/ROM recovery. Add a paired controller
-and thin MCP adapter over the versioned command engine. Retire legacy generators
+binary-console cases, then guarded upload/ROM recovery. Complete remaining paired
+iPhone qualification and add a thin MCP adapter over the versioned command engine. Retire legacy generators
 only after matching scenario evidence; preserve previous reports and unresolved
 networking/qualification limits. Firmware fault images remain separate physical
 inputs even when one app orchestrates every scenario.

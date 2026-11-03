@@ -166,3 +166,47 @@ while the earlier `data(from:)` probe did. The production request and opt-in tes
 now explicitly supply the task-specific pin delegate and forward task trust
 challenges through the same pin/anchor policy. Build 7 device failures are retained
 as failures; the earlier data-request TLS pass was insufficient for this path.
+
+## Actual paired iPad execution
+
+Build 8 from clean source `0ad5d321634ab2f0d83d9be7ee02cb2a1d004002`
+now pairs on the physical iPad and automatically passes catalogue, resource,
+smoke, diagnostics, SDK busy/cancellation, actual sixty-second deadline/fresh
+recovery and twenty-build stress scenarios. One app process handled all seven;
+commands, terminal reports and actual capsule exports came through the pinned
+controller, without Test Lab navigation or container scraping. The
+[paired qualification ledger](workbench-paired-qualification.json) preserves
+producer/run correlation, exported reports, receipts and separate RPC export/reply
+hashes, including earlier failed trials. The iPad also passes an actual Home Screen/five-second/return transition: the
+same paired connection automatically exports the passed idle-lifecycle report
+after resuming. A separate remote `beginLifecycle`/exact-run `cancel` trial exports
+`cancelled`, with `startOrigin: pairedController`. An earlier late cancellation
+correctly rejects after the un-interrupted worker returned an artifact; that run
+remains failed, never a lifecycle pass.
+
+Explicitly revoking an iPad session during a waiting controller-owned run rejects
+later commands, stops pairing and cancels that exact run. Only its selected
+app-owned diagnostic and report were copied through CoreDevice after revocation;
+the normal scenario results came through authenticated RPC. Invalid credentials,
+reused completed run UUIDs and existing output directories also reject.
+
+The identical app pairs on the iPhone and automatically passes catalogue,
+resources, smoke, diagnostics and busy/cancellation. Its next deadline run was
+admitted, but a later status reply was not observed after the device stopped
+polling. Subsequent read-only CoreDevice checks could not obtain a connectivity
+assertion. No run was replayed and no deadline pass is claimed. Unlock/reopen and
+read-only reconciliation, then remaining deadline/stress/pause/revocation
+qualification, are pending. The app pauses transport on real backgrounding and
+does not prevent auto-lock; keep it foreground and awake for these checks.
+
+Final source validation passes the normal SDK entry point, 15 CLI fixtures and
+10 socket-free controller fixtures (including archived paired reports and full
+CoreDevice metadata redaction). A separate opt-in test exercises the exact
+streamed TLS API with the selected pin and a wrong pin. Release builds pass for
+macOS, Simulator and the signed iOS device app. Remote CI and UI/accessibility
+inspection remain unqualified; no board was contacted.
+
+CoreDevice launch failure diagnostics now retain bounded failure reasons without
+retrying or losing a device-locked error. Both repeated argument arrays and nested
+error metadata redact base64 invitations and raw credentials before persistence;
+only the explicit private invitation file contains bootstrap authority.

@@ -1,5 +1,12 @@
 """Deterministic controller/state fixtures. No listener, network, app or device is opened by these tests."""
 import copy
+import base64
+import contextlib
+import hashlib
+import io
+import tempfile
+from types import SimpleNamespace
+from unittest.mock import patch
 import importlib.util
 import json
 from pathlib import Path
@@ -85,6 +92,62 @@ class PairedController(unittest.TestCase):
         command=self.command();self.broker.command(self.session['sessionID'],command)
         changed=copy.deepcopy(command);changed['action']='run';changed['request']=dict(schema=1,requestID=paired.identifier(str(uuid.uuid4())),operation='run',scenarioID='compiler.resources')
         with self.assertRaises(ValueError):self.broker.command(self.session['sessionID'],changed)
+
+    def test_launch_metadata_redacts_all_credential_locations_and_preserves_failures(self):
+        """CoreDevice repeats launch arguments outside launchOptions; neither branch may retain a credential."""
+        encoded=base64.b64encode(paired.encode(self.invite)).decode()
+        for success in (True, False):
+            with self.subTest(success=success), tempfile.TemporaryDirectory() as temp:
+                output=Path(temp)/'launch'
+                args=SimpleNamespace(directory=Path(temp),device='explicit-device',label='Fixture',output=output)
+                def launch(command, **kwargs):
+                    raw=Path(command[command.index('--json-output')+1])
+                    raw.write_text(json.dumps(dict(info=dict(arguments=command),
+                        result=dict(process=dict(processIdentifier=123),launchOptions=dict(arguments=['--workbench-pair',encoded])),
+                        error=dict(NSLocalizedDescription=dict(string='Locked '+encoded+' '+self.invite['token'])))))
+                    return SimpleNamespace(returncode=0 if success else 1)
+                responses=[self.invite,[dict(sessionID=self.invite['sessionID'],paired=True,processID=123)]]
+                with patch.object(paired,'rpc',side_effect=responses), patch.object(paired.subprocess,'run',side_effect=launch):
+                    if success:
+                        with contextlib.redirect_stdout(io.StringIO()): self.assertEqual(paired.pair_device(args),0)
+                        recorded=(output/'launch.json').read_text()
+                    else:
+                        with self.assertRaisesRegex(ValueError,'Locked'): paired.pair_device(args)
+                        recorded=(output/'launch-failure.json').read_text()
+                        self.assertIn('Locked',recorded)
+                        self.assertFalse(json.loads(recorded)['automaticRetry'])
+                self.assertNotIn(encoded,recorded)
+                self.assertNotIn(self.invite['token'],recorded)
+                self.assertFalse((output/'launch-raw.json').exists())
+
+    def test_recorded_paired_exports_keep_producer_binding_and_nonpass_outcomes(self):
+        """Revalidate archived RPC bytes without contacting an app, replaying work or upgrading failed/cancelled outcomes."""
+        docs=Path(__file__).resolve().parents[2]/'docs'
+        ledger=json.loads((docs/'workbench-paired-qualification.json').read_text())
+        for device in ledger['devices']:
+            identity=device['pairing']
+            for row in device['reports']+device.get('controlTrials',[]):
+                with self.subTest(device=device['label'],run=row['runID']):
+                    raw=(docs/row['reportPath']).read_bytes()
+                    self.assertEqual(hashlib.sha256(raw).hexdigest(),row['exportSHA256'])
+                    reply_raw=(docs/row['replyPath']).read_bytes()
+                    self.assertEqual(hashlib.sha256(reply_raw).hexdigest(),row['transportReplySHA256'])
+                    reply=json.loads(reply_raw);report=json.loads(raw)
+                    self.assertEqual(reply['report'],report)
+                    self.assertEqual(reply['processID'],identity['processID'])
+                    self.assertEqual(reply['instanceID'],identity['instanceID'])
+                    self.assertEqual(report['appVersion'],ledger['app']['appVersion'])
+                    checked=paired.export_report(reply,row['runID'],row['scenarioID'],report.get('firmwareBuildID'))
+                    self.assertEqual(checked['status'],row['state']['status'])
+                    wrong=json.loads(reply_raw);wrong['processID']+=1
+                    with self.assertRaises(ValueError): paired.export_report(wrong,row['runID'],row['scenarioID'],report.get('firmwareBuildID'))
+            if 'revocation' in device:
+                revoked=device['revocation'];row=revoked['report']
+                raw=(docs/row['reportPath']).read_bytes()
+                self.assertEqual(hashlib.sha256(raw).hexdigest(),row['exportSHA256'])
+                self.assertEqual(json.loads(raw)['status'],'cancelled')
+                self.assertFalse(revoked['diagnostic']['isPaired'])
+                self.assertEqual(revoked['diagnostic']['processID'],identity['processID'])
 
     def test_no_session_or_command_is_restored_after_restart(self):
         other=paired.Broker('https://127.0.0.1:8443/','a'*64)

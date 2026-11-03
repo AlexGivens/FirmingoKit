@@ -28,14 +28,19 @@ invoke that same engine through the same app product. The normal SDK product gai
 no testing dependency. The paired-controller increment now adds explicit outbound
 pinned TLS app sessions and a private Mac controller CLI; see
 `docs/workbench-paired-controller.md`. It adds no mobile listener or device command.
-Actual paired qualification is in progress; the original macOS launch CLI remains. The second increment adds compiler
+Build 8 now passes seven paired iPad compiler scenarios, actual background/return
+transport resumption, exact-run remote start/cancel and live revocation; the same
+app passes five iPhone compiler scenarios. The iPhone deadline response stopped
+being observable when the device became unavailable; remaining iPhone checks are
+pending, not passed. See `docs/workbench-paired-qualification.json`. The original
+macOS launch CLI remains. The second increment adds compiler
 busy/cancellation, actual deadline, twenty-build stress and interactive mobile
 scene scenarios; see `docs/workbench-compiler-scenarios.md`. Legacy hosts remain
 until matching replacement qualification. Workbench build 4 now passes all three
 physical iPad and iPhone lifecycle cases over paired Wi-Fi using one identical
 signed input app and one unchanged PID per device; see
 `docs/workbench-ipad-qualification.json` and `docs/workbench-iphone-qualification.json`.
-This does not qualify pressure/suspension, minimum OS or remaining mobile deadline/stress cases. See `docs/workbench-consolidation.md`.
+This does not qualify pressure/suspension, minimum OS or remaining iPhone deadline/stress cases. See `docs/workbench-consolidation.md`.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

@@ -391,6 +391,17 @@ def send(args):
     return 0 if reply['accepted'] else 2
 
 
+def redact_launch(value, invitation, encoded):
+    """Remove both credential forms from every CoreDevice metadata branch before persistence."""
+    if isinstance(value, str):
+        return value.replace(encoded, '<invitation redacted>').replace(invitation['token'], '<credential redacted>')
+    if isinstance(value, list):
+        return [redact_launch(item, invitation, encoded) for item in value]
+    if isinstance(value, dict):
+        return {key: redact_launch(item, invitation, encoded) for key, item in value.items()}
+    return value
+
+
 def pair_device(args):
     """Bootstrap only the explicitly selected already-installed app through paired Apple development tools."""
     args.output.mkdir(mode=0o700,parents=False,exist_ok=False)
@@ -400,8 +411,22 @@ def pair_device(args):
     raw=args.output/'launch-raw.json'
     result=subprocess.run(['xcrun','devicectl','device','process','launch','--device',args.device,'--terminate-existing','--activate',
         '--json-output',str(raw),BUNDLE,'--','--workbench-pair',encoded],capture_output=True,text=True,timeout=45)
-    if result.returncode: raise ValueError('selected Workbench launch failed; see development device connection, no retry was performed')
-    value=json.loads(raw.read_text());launch=value['result'];launch['launchOptions']['arguments']=['--workbench-pair','<consumed-or-expiring invitation>']
+    if result.returncode:
+        messages=[]
+        def collect(value):
+            if isinstance(value,dict):
+                for key,item in value.items():
+                    if key in ('NSLocalizedDescription','NSLocalizedFailureReason') and isinstance(item,dict) and isinstance(item.get('string'),str):
+                        messages.append(redact_launch(item['string'],invitation,encoded)[:1024])
+                    else:collect(item)
+            elif isinstance(value,list):
+                for item in value:collect(item)
+        if raw.exists():
+            collect(json.loads(raw.read_text()).get('error',{}));raw.unlink()
+        private_write(args.output/'launch-failure.json',encode(dict(schema=1,status='launch_failed',sessionID=invitation['sessionID'],messages=messages[:8],automaticRetry=False)))
+        reason=messages[-1] if messages else 'check the selected development device connection'
+        raise ValueError('selected Workbench launch failed; no retry: '+reason)
+    value=redact_launch(json.loads(raw.read_text()),invitation,encoded);launch=value['result']
     private_write(args.output/'launch.json',encode(value));raw.unlink()
     deadline=time.monotonic()+60
     while time.monotonic()<deadline:

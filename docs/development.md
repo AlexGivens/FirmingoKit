@@ -703,3 +703,28 @@ The final offline entry-point rerun includes fifteen CLI/report tests and replay
 all six original byte-for-byte mobile reports, alongside seventeen Workbench
 engine tests, 166 SDK tests, eight ROM-host tests and retained host/source checks.
 These passed locally; remote CI execution remains pending.
+
+
+## Paired Workbench controller — 2026-11-02
+
+The [paired controller guide](workbench-paired-controller.md) documents explicit
+`serve`, `pair-device`, `command`, `result`, `sessions` and `revoke` operations.
+One build-8 app serves both devices and every scenario. Commands call the shared
+Test Lab engine; reports are bounded, producer/run-correlated RPC exports. There
+is no mobile listener, background execution grant, board-write action or normal
+launch connection. Pairing authority is ephemeral and invitations are private.
+
+The [qualification ledger](workbench-paired-qualification.json) retains exact
+export/reply bytes and hashes: seven automatic iPad compiler cases, real iPad
+Home/return transport resumption, remote start/cancel, live revocation, and five
+automatic iPhone cases pass. The iPhone deadline status reply became unavailable;
+its device could not satisfy a subsequent CoreDevice connectivity assertion.
+That run remains unresolved, and further phone qualification is pending.
+
+The normal validation entry point passed after the app-source fixes. The final
+Python-only logging/evidence changes pass 15 CLI and 10 socket-free broker
+fixtures. Normal Workbench tests have 22 non-network passes and one opt-in TLS
+skip; the explicit streamed TLS test also passes with good/wrong pins. Release
+macOS, Simulator and signed device builds pass. The tested app source is
+`0ad5d321634ab2f0d83d9be7ee02cb2a1d004002`; later CLI/docs changes do not alter its
+identity. Remote CI and visual/minimum-OS/pressure qualification are not claimed.
