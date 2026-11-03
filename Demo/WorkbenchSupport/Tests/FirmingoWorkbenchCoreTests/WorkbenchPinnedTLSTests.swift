@@ -14,14 +14,16 @@ import Testing
     for valid in [true, false] {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = 5; configuration.timeoutIntervalForResource = 8
-        let session = URLSession(configuration: configuration,
-            delegate: WorkbenchPinnedTLS(digest: valid ? invitation.certificateSHA256 : String(repeating:"0",count:64)),delegateQueue:nil)
+        let pin = WorkbenchPinnedTLS(digest: valid ? invitation.certificateSHA256 : String(repeating:"0",count:64),
+                                     observation: { print("TLS probe:", $0) })
+        let session = URLSession(configuration: configuration, delegate: pin, delegateQueue: nil)
         defer { session.invalidateAndCancel() }
         if valid {
-            let (_, response) = try await session.data(from: invitation.endpoint)
+            let (bytes, response) = try await session.bytes(for: URLRequest(url: invitation.endpoint), delegate: pin)
+            for try await _ in bytes {}
             #expect((response as? HTTPURLResponse)?.statusCode == 501)
         } else {
-            await #expect(throws: URLError.self) { try await session.data(from: invitation.endpoint) }
+            await #expect(throws: URLError.self) { try await session.bytes(for: URLRequest(url: invitation.endpoint), delegate: pin) }
         }
     }
 }

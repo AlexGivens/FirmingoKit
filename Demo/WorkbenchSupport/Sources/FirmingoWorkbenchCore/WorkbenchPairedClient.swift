@@ -15,6 +15,8 @@ import Observation
     private let host: WorkbenchControlHost
     /// Per-request network session with certificate pinning and no persistent cookie/cache/credential store.
     private var network: URLSession?
+    /// Same immutable trust delegate explicitly supplied to each streamed request.
+    private var pinDelegate: WorkbenchPinnedTLS?
     /// Exactly one owned poll/handshake task.
     private var task: Task<Void, Never>?
     /// One-time pending invitation, discarded after successful exchange or disconnect.
@@ -60,6 +62,7 @@ import Observation
                 self.tlsObservation = message; self.saveDiagnostic()
             }
         }
+        pinDelegate = pin
         network = URLSession(configuration: configuration, delegate: pin, delegateQueue: nil)
         status = "Waiting for foreground to pair with " + value.label
         resume()
@@ -67,7 +70,7 @@ import Observation
     /// User/controller revocation forgets credentials and cancels only the controller-owned scenario, retaining its journal.
     public func disconnect() {
         generation += 1; task?.cancel(); task = nil
-        network?.invalidateAndCancel(); network = nil
+        network?.invalidateAndCancel(); network = nil; pinDelegate = nil
         invitation = nil; token = nil; endpoint = nil; sessionID = nil
         isPaired = false; label = ""; acknowledged = 0; lastReply = nil; failures = 0; tlsObservation = nil
         status = "Not paired"; host.disconnect()
@@ -145,7 +148,7 @@ import Observation
             catch {
                 guard current == generation else { return }
                 let message = String(error.localizedDescription.prefix(256))
-                network?.invalidateAndCancel(); network = nil; invitation = nil; token = nil; endpoint = nil
+                network?.invalidateAndCancel(); network = nil; pinDelegate = nil; invitation = nil; token = nil; endpoint = nil
                 isPaired = false; sessionID = nil; host.disconnect()
                 status = "Pairing stopped: " + message
             }
@@ -187,13 +190,13 @@ import Observation
     }
     /// One pinned POST with bounded streamed response; no redirect or persistent transport state.
     private func post<Body: Encodable>(_ path: String, credential: String, body: Body) async throws -> Data {
-        guard let network, let endpoint else { throw WorkbenchFailure("No explicit pairing endpoint.") }
+        guard let network, let endpoint, let pinDelegate else { throw WorkbenchFailure("No explicit pairing endpoint.") }
         var request = URLRequest(url: endpoint.appendingPathComponent("v1/" + path))
         request.httpMethod = "POST"; request.setValue("Bearer " + credential, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = try JSONEncoder().encode(body)
         guard (request.httpBody?.count ?? 0) <= 98304 else { throw WorkbenchFailure("Controller request exceeds its bound.") }
-        let (stream, response) = try await network.bytes(for: request)
+        let (stream, response) = try await network.bytes(for: request, delegate: pinDelegate)
         guard let http = response as? HTTPURLResponse, http.statusCode == 200,
               response.expectedContentLength <= 98304 else { throw WorkbenchFailure("Controller rejected the paired request.") }
         var data = Data()

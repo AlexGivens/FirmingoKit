@@ -33,6 +33,11 @@ final class WorkbenchPinnedTLS: NSObject, URLSessionDelegate, URLSessionTaskDele
         observation("Pinned leaf trust evaluation passed")
         completionHandler(.useCredential, URLCredential(trust: trust))
     }
+    /// Async streamed requests use their task-specific delegate; forward that challenge through the identical pin policy.
+    func urlSession(_ session: URLSession, task: URLSessionTask, didReceive challenge: URLAuthenticationChallenge,
+                    completionHandler: @escaping @Sendable (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        urlSession(session, didReceive: challenge, completionHandler: completionHandler)
+    }
     /// A redirect may not forward a pairing/session token to another endpoint.
     func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse,
                     newRequest request: URLRequest, completionHandler: @escaping @Sendable (URLRequest?) -> Void) {

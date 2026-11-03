@@ -159,3 +159,10 @@ The ephemeral controller certificate explicitly declares a non-CA TLS server
 leaf, digital-signature/key-encipherment usage, serverAuth EKU and the selected
 private-IP SAN. Connection-local anchor evaluation follows Apple's
 [server trust guidance](https://developer.apple.com/library/archive/technotes/tn2232/_index.html).
+
+The streamed-request native reproduction then exposed the missing delegate
+route: `URLSession.bytes(for:)` did not invoke the session-level trust callback,
+while the earlier `data(from:)` probe did. The production request and opt-in test
+now explicitly supply the task-specific pin delegate and forward task trust
+challenges through the same pin/anchor policy. Build 7 device failures are retained
+as failures; the earlier data-request TLS pass was insufficient for this path.
