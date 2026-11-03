@@ -4,7 +4,7 @@ import Observation
 /// Outbound, explicitly paired app controller. No listener, discovery, background grant or Keychain persistence is added.
 @Observable @MainActor public final class WorkbenchPairedClient {
     /// Human-visible transport state, never a scenario pass/fail assertion or credential.
-    public private(set) var status = "Not paired"
+    public private(set) var status = "Not paired" { didSet { if status != oldValue { saveDiagnostic() } } }
     /// Whether a live in-memory paired session exists.
     public private(set) var isPaired = false
     /// Explicit controller label; not installed-app or device attestation.
@@ -29,19 +29,26 @@ import Observation
     private var lastReply: WorkbenchControlReply?
     /// Real aggregate phase supplied by the app; never part of a controller command.
     private var phase = "unknown"
+    /// Optional app-owned diagnostic snapshot, containing no invitation/session credentials.
+    private let diagnosticURL: URL?
+    /// Last attempted session remains identifiable after failure/revocation.
+    private var attemptedSessionID: UUID?
+    /// Explicit diagnostic-write errors remain visible, never a silent telemetry success.
+    public private(set) var diagnosticError: String?
     /// Changes on explicit disconnect/replacement so an old task cannot mutate a newer pairing.
     private var generation = 0
     /// Consecutive transport failures; finite retries only retransmit the same acknowledgement.
     private var failures = 0
     /// Creates no network operation until an explicit invitation is connected.
-    public init(host: WorkbenchControlHost) { self.host = host }
+    public init(host: WorkbenchControlHost, diagnosticURL: URL? = nil) { self.host = host; self.diagnosticURL = diagnosticURL }
     /// Begins one explicit ephemeral pairing. Replacing a pairing revokes the prior owned run locally.
     public func connect(_ value: WorkbenchPairingInvitation) {
         disconnect()
-        invitation = value; endpoint = value.endpoint; sessionID = value.sessionID; label = value.label
+        invitation = value; endpoint = value.endpoint; sessionID = value.sessionID; attemptedSessionID = value.sessionID; label = value.label
         let configuration = URLSessionConfiguration.ephemeral
         configuration.urlCache = nil; configuration.httpCookieStorage = nil; configuration.urlCredentialStorage = nil
         configuration.httpShouldSetCookies = false
+        configuration.waitsForConnectivity = true
         configuration.timeoutIntervalForRequest = 45; configuration.timeoutIntervalForResource = 60
         configuration.tlsMinimumSupportedProtocolVersion = .TLSv12
         network = URLSession(configuration: configuration, delegate: WorkbenchPinnedTLS(digest: value.certificateSHA256), delegateQueue: nil)
@@ -74,6 +81,7 @@ import Observation
             }
             do {
                 if let invitation {
+                    status = "Pairing with " + label
                     let body = PairRequest(instanceID: host.instanceID, appIdentifier: Bundle.main.bundleIdentifier ?? "unbundled",
                         appVersion: Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "unbundled",
                         processID: ProcessInfo.processInfo.processIdentifier)
@@ -133,6 +141,38 @@ import Observation
                 status = "Pairing stopped: " + message
             }
         }
+    }
+    /// Saves a small safe pairing snapshot for automation diagnostics before a network session exists.
+    private func saveDiagnostic() {
+        guard let diagnosticURL else { return }
+        do {
+            let value = Diagnostic(instanceID: host.instanceID, sessionID: attemptedSessionID,
+                processID: ProcessInfo.processInfo.processIdentifier, phase: phase, status: String(status.prefix(512)),
+                isPaired: isPaired, acknowledged: acknowledged)
+            let bytes = try JSONEncoder().encode(value)
+            guard bytes.count <= 4096 else { throw WorkbenchFailure("Pairing diagnostic exceeds its bound.") }
+            try FileManager.default.createDirectory(at: diagnosticURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try bytes.write(to: diagnosticURL, options: .atomic); diagnosticError = nil
+        } catch { diagnosticError = "Pairing diagnostic unavailable: " + String(error.localizedDescription.prefix(256)) }
+    }
+    /// Safe app-owned transport evidence. Secrets and request payloads are absent; network errors may name the selected private host.
+    private struct Diagnostic: Encodable {
+        /// Diagnostic schema.
+        let schema = 1
+        /// Actual app instance.
+        let instanceID: UUID
+        /// Last explicit invitation/session identity, retained after failure.
+        let sessionID: UUID?
+        /// Actual runtime PID.
+        let processID: Int32
+        /// Real aggregate scene at observation.
+        let phase: String
+        /// Bounded status/error without tokens.
+        let status: String
+        /// Live credential/session presence.
+        let isPaired: Bool
+        /// Last executed command sequence.
+        let acknowledged: Int
     }
     /// One pinned POST with bounded streamed response; no redirect or persistent transport state.
     private func post<Body: Encodable>(_ path: String, credential: String, body: Body) async throws -> Data {

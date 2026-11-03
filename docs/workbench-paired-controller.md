@@ -132,3 +132,18 @@ rejection and revocation; an opt-in Foundation test passed the actual native
 certificate-pin delegate against the same endpoint and rejected a wrong leaf pin.
 The complete unsigned iOS app also builds. Actual signed paired mobile execution
 remains in progress; the probes do not count as physical device/compiler evidence.
+
+## Initial physical connection observations
+
+Build 5 launched on both devices but neither paired. The user reported the iPhone
+first local-network prompt followed by an offline error, and an invalid-server-
+certificate error on iPad. Both failed invitations are preserved as failed trials,
+not successful pairings. Build 6 adds URLSession connectivity waiting within the
+existing transport bounds and a scoped `NSAllowsLocalNetworking` declaration.
+Private HTTPS selection and exact TLS certificate pin remain enforced; no global
+arbitrary-load or system trust exception is added. See Apple's
+[local-network ATS documentation](https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nsallowslocalnetworking)
+and [connectivity waiting](https://developer.apple.com/documentation/foundation/urlsessionconfiguration/waitsforconnectivity).
+A bounded, secret-free app-owned `controller.json` snapshot now makes pre-pair
+failures visible to development automation; a timed-out pair-device operation
+collects only that fixed file and checks its actual launch PID.

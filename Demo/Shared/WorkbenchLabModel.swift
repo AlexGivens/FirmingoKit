@@ -35,7 +35,8 @@ import AppKit
         let scenes = false
         #endif
         engine = WorkbenchScenarioEngine(backend: SDKWorkbenchCompiler(), store: store, supportsSceneTransitions: scenes)
-        pairing = WorkbenchPairedClient(host: WorkbenchControlHost(engine: engine, store: store))
+        pairing = WorkbenchPairedClient(host: WorkbenchControlHost(engine: engine, store: store),
+            diagnosticURL: store.directory.deletingLastPathComponent().appendingPathComponent("controller.json"))
     }
     /// Runs discovery only after an explicit manual action; unavailable resources remain visible.
     func inspectCatalogue() {

@@ -38,6 +38,8 @@
 	<true/>
 	<key>NSDocumentsFolderUsageDescription</key>
 	<string>Open and save Arduino-style sketch documents you select.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict><key>NSAllowsLocalNetworking</key><true/></dict>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Connect to the explicitly paired Workbench controller or selected Firmingo board on your local network.</string>
 	<key>UIApplicationSceneManifest</key>

@@ -93,3 +93,22 @@ private func controlCommand(_ action: String, runID: UUID? = nil, request: Workb
     let reply = await host.handle(try controlCommand("run", request: request))
     #expect(!reply.accepted && backend.calls == 0 && !engine.isRunning)
 }
+
+/// Pre-pair diagnostics are bounded and contain no bootstrap credential; this fixture initiates no network task.
+@Test @MainActor func pairingDiagnosticDoesNotExportSecrets() throws {
+    let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { do { try FileManager.default.removeItem(at: directory) } catch { Issue.record(error) } }
+    let backend = ControlBackend(), store = WorkbenchFileRunStore(directory: directory.appendingPathComponent("Runs"))
+    let engine = WorkbenchScenarioEngine(backend: backend, store: store), host = WorkbenchControlHost(engine: engine, store: store)
+    let file = directory.appendingPathComponent("controller.json")
+    let client = WorkbenchPairedClient(host: host, diagnosticURL: file)
+    let secret = String(repeating: "b", count: 64)
+    let value: [String:Any] = ["schema":1,"sessionID":UUID().uuidString,"endpoint":"https://192.168.1.2:8443/",
+        "certificateSHA256":String(repeating:"a",count:64),"token":secret,"label":"Fixture"]
+    client.connect(try WorkbenchPairingInvitation.decode(JSONSerialization.data(withJSONObject: value)))
+    let bytes = try Data(contentsOf: file)
+    #expect(bytes.count <= 4096)
+    #expect(!String(decoding: bytes, as: UTF8.self).contains(secret))
+    #expect(!client.isPaired && backend.calls == 0)
+    client.disconnect()
+}

@@ -15,6 +15,7 @@ import UniformTypeIdentifiers
                     GroupBox("Paired controller") {
                         VStack(alignment: .leading, spacing: 8) {
                             Text(model.pairing.status).textSelection(.enabled)
+                            if let error = model.pairing.diagnosticError { Text(error).foregroundStyle(.red) }
                             if let id = model.pairing.sessionID { Text("Session: " + id.uuidString).font(.caption.monospaced()) }
                             SecureField("One-time pairing invitation (base64)", text: $model.pairingText)
                                 .accessibilityIdentifier("workbench.pairing.invitation")

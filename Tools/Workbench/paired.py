@@ -54,7 +54,7 @@ def decode(raw):
 
 def encode(value):
     """Bound serialized output before handing it to any socket."""
-    raw = json.dumps(value, separators=(',', ':'), allow_nan=False).encode()
+    raw = json.dumps(value, separators=(',', ':'), allow_nan=False, sort_keys=True).encode()
     if len(raw) > LIMIT:
         raise ValueError('response exceeds protocol bound')
     return raw
@@ -409,7 +409,16 @@ def pair_device(args):
             if session['processID']!=launch['process']['processIdentifier']: raise ValueError('paired app differs from actual launch PID')
             private_write(args.output/'pairing.json',encode(session));print(json.dumps(session,indent=2));return 0
         time.sleep(0.25)
-    raise TimeoutError('pairing not observed; approve local-network permission in Workbench, then create a fresh invitation explicitly if expired')
+    # Only this app's fixed safe snapshot is collected; never scan another app/container.
+    diagnostic=args.output/'controller-diagnostic.json'
+    copied=subprocess.run(['xcrun','devicectl','device','copy','from','--device',args.device,'--domain-type','appDataContainer',
+        '--domain-identifier',BUNDLE,'--source','Documents/FirmingoWorkbench/controller.json','--destination',str(diagnostic)],
+        capture_output=True,text=True,timeout=20)
+    if copied.returncode==0:
+        value=decode(diagnostic.read_bytes())
+        if value.get('processID')==launch['process']['processIdentifier']:
+            print(json.dumps(dict(status='pairing_not_observed',diagnostic=value),indent=2))
+    raise TimeoutError('pairing not observed; inspect the safe diagnostic and create a fresh invitation explicitly after correcting the cause')
 
 
 def main():
