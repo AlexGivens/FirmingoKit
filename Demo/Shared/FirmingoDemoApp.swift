@@ -19,6 +19,7 @@ struct FirmingoDemoApp: App {
         DocumentGroup(newDocument: SketchDocument()) { file in
             WorkbenchView(document: file.$document, lab: lab, filename: file.fileURL?.lastPathComponent ?? "Sketch.ino")
         }
+        .onChange(of: lab.engine.isRunning, initial: true) { _, _ in lab.updateIdleTimerPolicy() }
         .onChange(of: scenePhase, initial: true) { _, phase in lab.recordScene(String(describing: phase)) }
         #if os(macOS)
         Window("Firmingo Workbench Test Lab", id: "workbench-lab") { WorkbenchLabView(model: lab) }

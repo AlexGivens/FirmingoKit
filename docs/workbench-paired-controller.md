@@ -210,3 +210,23 @@ CoreDevice launch failure diagnostics now retain bounded failure reasons without
 retrying or losing a device-locked error. Both repeated argument arrays and nested
 error metadata redact base64 invitations and raw credentials before persistence;
 only the explicit private invitation file contains bootstrap authority.
+
+
+## Returned iPhone and foreground idle policy
+
+The user later explained that the phone had left home and returned to Wi-Fi.
+Before any restart, CoreDevice retrieved only its exact deadline journal and
+safe controller diagnostic. The original journal is terminal **failed**: actual
+inactivity at 41.026 seconds cancelled the foreground-only check. It is preserved
+unchanged in the paired ledger; no deadline result was replayed or upgraded.
+The old session had expired and the returned app correctly dropped authority.
+
+Build 9 adds app-owned idle prevention only while an actual foreground test is
+running, through the same engine for manual and paired runs. It captures the
+previous UIKit idle setting once, restores it on completion/cancellation or real
+backgrounding, and captures the current setting again on return. A visible Test
+Lab caption explains this behavior. Ordinary editor use and an idle pairing do
+not keep the display awake. Home/lock remain real device actions; this grants no
+background execution and changes no SDK timeout. Deterministic policy tests cover
+repeated updates, restoration, background release and an already-disabled timer.
+Build and physical follow-up results are recorded below when completed.

@@ -3,6 +3,8 @@ import Observation
 import FirmingoWorkbenchCore
 #if os(macOS)
 import AppKit
+#elseif os(iOS)
+import UIKit
 #endif
 
 /// App-lifetime Test Lab shared by document windows and the explicit CLI launch path.
@@ -25,6 +27,12 @@ import AppKit
     let automationRequested: Bool
     /// Owns manual or automation work until its terminal settlement.
     private var task: Task<Void, Never>?
+    #if os(iOS)
+    /// Restorable idle prevention belongs to this test host, never the reusable SDK or paired transport.
+    private var idleTimerPolicy = WorkbenchIdleTimerPolicy()
+    /// Real scene delivery determines whether the host may keep a running test awake.
+    private var isForeground = false
+    #endif
     /// Creates app-owned boundaries; no metadata, compiler, session or hardware work starts implicitly.
     init() {
         store = WorkbenchFileRunStore(directory: URL.documentsDirectory.appendingPathComponent("FirmingoWorkbench/Runs", isDirectory: true))
@@ -63,7 +71,21 @@ import AppKit
     /// Cancels only the currently displayed run, without clearing its evidence or starting another action.
     func cancel() { if let id = engine.report?.id { engine.cancel(requestID: id) } }
     /// Routes real aggregate scene delivery, never an agent-authored synthetic transition.
-    func recordScene(_ phase: String) { engine.recordScene(phase); pairing.recordScene(phase) }
+    func recordScene(_ phase: String) {
+        #if os(iOS)
+        isForeground = phase == "active"
+        #endif
+        engine.recordScene(phase); pairing.recordScene(phase)
+        updateIdleTimerPolicy()
+    }
+    /// Keeps only an active foreground test awake and restores the previous UIKit setting on completion or backgrounding.
+    func updateIdleTimerPolicy() {
+        #if os(iOS)
+        let application = UIApplication.shared
+        application.isIdleTimerDisabled = idleTimerPolicy.update(isForeground: isForeground,
+            isRunning: engine.isRunning, currentValue: application.isIdleTimerDisabled)
+        #endif
+    }
     /// Starts the lifecycle interruption attempt only after its known baseline/calibration.
     func beginLifecycleInterruption() {
         do { try engine.beginLifecycleInterruption(); error = nil }

@@ -1,0 +1,111 @@
+{
+  "appIdentifier" : "com.firmingokit.demo",
+  "appVersion" : "8",
+  "artifacts" : [
+    {
+      "bytes" : "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+      "name" : "gpio.fms",
+      "receiptJSON" : "eyJwcm92ZW5hbmNlIjp7InJlY2lwZVNIQTI1NiI6ImI3ODY5ZjZmYzg2M2UxOTA1ZGViNjk3NDQwOGM2ZTdkYzYzOTQzYTFmYjNlMzQyYTM1N2ZkZjc1N2IxZTIzZDkiLCJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIiwicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVsZXNzLWNsYW5nLTIyLjEuOC12MS1leHBlcmltZW50YWwiLCJ0b29sY2hhaW5TSEEyNTYiOiJhNDRhZmE4NGU3NmFlN2IxNzQyZmQ1ZWNmZWVjMjA1NTY1NjQzYjk0OTQ4ZTM0ZDhjNTcwMjlhZTNjYWRhOWZkIn0sInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjA5MTIzNmFlZWExZDFiNGRlZDQxMGRlM2ViMTU1YjE5NjczOGFlOWQ3MjdkMWQ3NDExZDNiOWNhM2JjYmU0ZGUiLCJzb3VyY2VTSEEyNTYiOiJmZGFkODhhYThiMjBiMDQ1ZjM1MzYyYzEzZTU2MDkwYmE4NWI3YmQzZThmMDI0NDUyYjNiMzlmODdjMGYyNTY4IiwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjEiLCJ2ZXJzaW9uIjoxLCJsaW5rZWRFTEZTSEEyNTYiOiJkNzI5YThiNmE4ZTM1M2IxZmRlMDExZWE2MjU5N2YwYmM1ZTE0NTAwNDk2ZTAxOGU3YzViZDVjMTUyNzYwNTBkIiwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJjYXBzdWxlU0hBMjU2IjoiOTU4Yjg2MWJiYzE4ZDQ2NjZlZDAzZTY5NzZiMzliOWZlYTQ4MTI0MDlhZDkxYTM1MDFhYmJiOTY4NWE4MGQ3ZCIsImJ1aWxkSW5wdXRTSEEyNTYiOiI5MjI2YmVlZTQzM2U0NDJmYjdmMTgwYmFhNDhkZDk4YjNhYmQ0OGNiMTgwODE0ZDNiODdhMGQ2MjBhNzg3ZDliIiwiZmlybXdhcmVCdWlsZElEIjoiYzQ0ZDI1ZWZlNzc0ZWI0N2IxNjNiYzA4MjkwNmNmNDhiNTliNmUzZGQxZDBlMTljNzgyMjkyNWU2YmE4Mjc1ZiIsImRvY3VtZW50SUQiOiIwNjRFMzI1RS0yNzc5LTQ2REItQjcwOS0zNUQxRDAwNUM0REEiLCJzb3VyY2VGaWxlbmFtZSI6IldvcmtiZW5jaC1ncGlvLmlubyIsInNvdXJjZVJldmlzaW9uIjoxfQ==",
+      "sha256" : "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "wasmLinearMemoryBytes" : 27983872
+    }
+  ],
+  "catalogueSHA256" : "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+  "deviceOperations" : false,
+  "events" : [
+    {
+      "detail" : "Loading actual SDK-verified catalogue metadata.",
+      "phase" : "catalogue",
+      "seconds" : 8.37499974295497e-05,
+      "sequence" : 0
+    },
+    {
+      "detail" : "Verifying real bundled compiler\/runtime resources.",
+      "phase" : "resources",
+      "seconds" : 0.012743541621603072,
+      "sequence" : 1
+    },
+    {
+      "detail" : "Executing the exact SDK compiler input: gpio",
+      "phase" : "compile-gpio",
+      "seconds" : 0.08813724998617545,
+      "sequence" : 2
+    },
+    {
+      "detail" : "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "phase" : "artifact-gpio",
+      "seconds" : 0.6332757499767467,
+      "sequence" : 3
+    },
+    {
+      "detail" : "Executing the exact SDK compiler input: deadline",
+      "phase" : "compile-deadline",
+      "seconds" : 0.6346161249675788,
+      "sequence" : 4
+    },
+    {
+      "detail" : "Foreground changed during the deadline check; cancellation cannot qualify timeout.",
+      "phase" : "failed",
+      "seconds" : 41.04239891667385,
+      "sequence" : 5
+    }
+  ],
+  "exercise" : {
+    "builds" : [
+      {
+        "index" : 1,
+        "input" : "gpio",
+        "receiptSHA256" : "d1b92890367fe91c05c4986a2296632a821a6b9d6e9d4e7b00ba23357341177b",
+        "seconds" : 0.5438848332851194,
+        "sha256" : "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "wasmLinearMemoryBytes" : 27983872
+      }
+    ],
+    "busyObserved" : false,
+    "droppedSamples" : 0,
+    "kind" : "compiler.deadline",
+    "progress" : [
+      {
+        "phase" : "verifying",
+        "seconds" : 0.6424632083508186
+      },
+      {
+        "phase" : "verifying",
+        "seconds" : 0.8001684583141468
+      },
+      {
+        "phase" : "preparing",
+        "seconds" : 0.9985340000130236
+      },
+      {
+        "phase" : "compiling",
+        "seconds" : 1.0158291250118054
+      }
+    ],
+    "runtimeDeadlineSeconds" : 60,
+    "samples" : [
+
+    ],
+    "sceneObservationScope" : "Actual aggregate SwiftUI app scenes; no suspension claim",
+    "scenes" : [
+      {
+        "phase" : "active",
+        "seconds" : 0.0881311249686405
+      },
+      {
+        "phase" : "inactive",
+        "seconds" : 41.02595574996667
+      }
+    ],
+    "startedSeconds" : 0.6339283332927153,
+    "workloadBytes" : 227646,
+    "workloadSHA256" : "bde5df426deb79fd8277abfd5b406cf1288b28b307646b62bc5ee1028cce26eb"
+  },
+  "firmwareBuildID" : "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+  "id" : "F8BA1FAB-7248-4567-93AA-E6C706C5D9D6",
+  "operatingSystem" : "Version 27.0.1 (Build 24A446)",
+  "processID" : 30066,
+  "scenarioID" : "compiler.deadline",
+  "schema" : 1,
+  "status" : "failed"
+}

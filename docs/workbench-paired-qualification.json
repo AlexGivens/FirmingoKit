@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-11-02",
-  "status": "iPad seven automatic compiler scenarios, real pause/resume, explicit start/cancel and live revocation passed; iPhone five automatic scenarios passed, interrupted deadline under investigation",
+  "status": "iPad qualification and first-five iPhone passes retained; original iPhone deadline reconciled as failed on foreground loss; scoped foreground idle policy preparing follow-up",
   "app": {
     "schema": 1,
     "appVersion": "8",
@@ -468,6 +468,33 @@
           "code": 4016,
           "description": "The device is not able to fulfill the requested usage assertion requirements.",
           "scope": "Read-only lockState and own-app diagnostic copy attempts; neither succeeded. Lock state/cause not established."
+        },
+        "resolution": "Original report recovered unchanged: failed on actual foreground loss at 41 seconds, not a deadline pass. Session expired during absence; follow-up requires explicit new pairing."
+      },
+      "interruptedDeadline": {
+        "runID": "F8BA1FAB-7248-4567-93AA-E6C706C5D9D6",
+        "scenarioID": "compiler.deadline",
+        "processID": 30066,
+        "status": "failed",
+        "reportPath": "workbench-paired-reports/iphone/interrupted-deadline.original.json",
+        "originalJournalSHA256": "e8cb11cf65b2155aba4d4694f2474a596b59b3eb3ce7f6f731e8056a368dc914",
+        "collection": "Only this exact app-owned journal copied through CoreDevice before any new launch",
+        "reason": "Foreground changed during the deadline check; cancellation cannot qualify timeout.",
+        "lastScene": {
+          "phase": "inactive",
+          "seconds": 41.02595574996667
+        },
+        "userObservation": "User left home with the phone, returned to Wi-Fi and reopened Workbench",
+        "diagnostic": {
+          "acknowledged": 52,
+          "instanceID": "4EEAD563-31B0-45FB-ADB5-DE2340035AC2",
+          "sessionID": "1D4D9B32-BBE0-4E2E-9CA5-D2C90C5705E3",
+          "tls": "Pinned leaf trust evaluation passed",
+          "phase": "active",
+          "schema": 1,
+          "isPaired": false,
+          "processID": 30066,
+          "status": "Pairing stopped: Controller rejected the paired request."
         }
       }
     }

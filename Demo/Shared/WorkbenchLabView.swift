@@ -12,6 +12,9 @@ import UniformTypeIdentifiers
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Compiler and device scenarios use public FirmingoKit APIs. Compiler checks are offline; lifecycle checks require this app on iOS/iPadOS.")
+                    #if os(iOS)
+                    Text("The screen stays awake during foreground test runs. Going Home still pauses the controller and exercises real lifecycle behavior.").font(.caption)
+                    #endif
                     GroupBox("Paired controller") {
                         VStack(alignment: .leading, spacing: 8) {
                             Text(model.pairing.status).textSelection(.enabled)
