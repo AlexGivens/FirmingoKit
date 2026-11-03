@@ -294,7 +294,8 @@ def serve(args):
     directory.mkdir(mode=0o700,parents=False,exist_ok=False)
     key,cert=directory/'key.pem',directory/'certificate.pem'
     subprocess.run(['openssl','req','-x509','-newkey','rsa:2048','-nodes','-days','1','-subj','/CN=Firmingo Workbench Controller',
-        '-addext','subjectAltName=IP:'+bind,'-keyout',str(key),'-out',str(cert)],check=True,capture_output=True,timeout=30)
+        '-addext','subjectAltName=IP:'+bind,'-addext','basicConstraints=critical,CA:FALSE',
+        '-addext','keyUsage=critical,digitalSignature,keyEncipherment','-addext','extendedKeyUsage=serverAuth','-keyout',str(key),'-out',str(cert)],check=True,capture_output=True,timeout=30)
     key.chmod(0o600);cert.chmod(0o600)
     context=ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER);context.minimum_version=ssl.TLSVersion.TLSv1_2;context.load_cert_chain(cert,key)
     mobile=MobileServer((bind,args.port),context)

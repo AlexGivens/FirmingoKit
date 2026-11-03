@@ -31,6 +31,8 @@ import Observation
     private var phase = "unknown"
     /// Optional app-owned diagnostic snapshot, containing no invitation/session credentials.
     private let diagnosticURL: URL?
+    /// Safe last TLS evaluation marker for pre-pair diagnostics.
+    private var tlsObservation: String?
     /// Last attempted session remains identifiable after failure/revocation.
     private var attemptedSessionID: UUID?
     /// Explicit diagnostic-write errors remain visible, never a silent telemetry success.
@@ -51,7 +53,14 @@ import Observation
         configuration.waitsForConnectivity = true
         configuration.timeoutIntervalForRequest = 45; configuration.timeoutIntervalForResource = 60
         configuration.tlsMinimumSupportedProtocolVersion = .TLSv12
-        network = URLSession(configuration: configuration, delegate: WorkbenchPinnedTLS(digest: value.certificateSHA256), delegateQueue: nil)
+        let current = generation
+        let pin = WorkbenchPinnedTLS(digest: value.certificateSHA256) { [weak self] message in
+            Task { @MainActor [weak self] in
+                guard let self, self.generation == current else { return }
+                self.tlsObservation = message; self.saveDiagnostic()
+            }
+        }
+        network = URLSession(configuration: configuration, delegate: pin, delegateQueue: nil)
         status = "Waiting for foreground to pair with " + value.label
         resume()
     }
@@ -60,7 +69,7 @@ import Observation
         generation += 1; task?.cancel(); task = nil
         network?.invalidateAndCancel(); network = nil
         invitation = nil; token = nil; endpoint = nil; sessionID = nil
-        isPaired = false; label = ""; acknowledged = 0; lastReply = nil; failures = 0
+        isPaired = false; label = ""; acknowledged = 0; lastReply = nil; failures = 0; tlsObservation = nil
         status = "Not paired"; host.disconnect()
     }
     /// Pauses transport on actual backgrounding; lifecycle engine policy remains separate and can settle its own cancellation.
@@ -148,7 +157,7 @@ import Observation
         do {
             let value = Diagnostic(instanceID: host.instanceID, sessionID: attemptedSessionID,
                 processID: ProcessInfo.processInfo.processIdentifier, phase: phase, status: String(status.prefix(512)),
-                isPaired: isPaired, acknowledged: acknowledged)
+                isPaired: isPaired, acknowledged: acknowledged, tls: tlsObservation)
             let bytes = try JSONEncoder().encode(value)
             guard bytes.count <= 4096 else { throw WorkbenchFailure("Pairing diagnostic exceeds its bound.") }
             try FileManager.default.createDirectory(at: diagnosticURL.deletingLastPathComponent(), withIntermediateDirectories: true)
@@ -173,6 +182,8 @@ import Observation
         let isPaired: Bool
         /// Last executed command sequence.
         let acknowledged: Int
+        /// Last safe pin/trust result; absent until the TLS callback runs.
+        let tls: String?
     }
     /// One pinned POST with bounded streamed response; no redirect or persistent transport state.
     private func post<Body: Encodable>(_ path: String, credential: String, body: Body) async throws -> Data {

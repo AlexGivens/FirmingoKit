@@ -147,3 +147,15 @@ and [connectivity waiting](https://developer.apple.com/documentation/foundation/
 A bounded, secret-free app-owned `controller.json` snapshot now makes pre-pair
 failures visible to development automation; a timed-out pair-device operation
 collects only that fixed file and checks its actual launch PID.
+
+Build 6 reached TLS on both devices, but the safe snapshots still recorded
+invalid-server-certificate failures; neither trial counts as pairing success.
+Build 7 performs explicit SecTrust evaluation using only the already matched
+pinned leaf as a connection-local anchor, retaining the existing TLS hostname
+and certificate-validity policies. Nothing is added to system trust. Safe TLS
+evaluation markers distinguish a pin mismatch from trust-policy failure.
+
+The ephemeral controller certificate explicitly declares a non-CA TLS server
+leaf, digital-signature/key-encipherment usage, serverAuth EKU and the selected
+private-IP SAN. Connection-local anchor evaluation follows Apple's
+[server trust guidance](https://developer.apple.com/library/archive/technotes/tn2232/_index.html).
