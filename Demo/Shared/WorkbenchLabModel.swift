@@ -11,6 +11,10 @@ import AppKit
     let engine: WorkbenchScenarioEngine
     /// Durable app-owned history, exported through UI or correlated stdout rather than container scraping.
     let store: WorkbenchFileRunStore
+    /// Optional outbound paired controller; ordinary app launch leaves it disconnected.
+    let pairing: WorkbenchPairedClient
+    /// Manual developer invitation input, cleared immediately after validation.
+    var pairingText = ""
     /// Explicit descriptor selected by the developer; never defaults to the first choice.
     var selectedBuildID = ""
     /// Host error outside a scenario, separate from assertions inside its report.
@@ -24,13 +28,14 @@ import AppKit
     /// Creates app-owned boundaries; no metadata, compiler, session or hardware work starts implicitly.
     init() {
         store = WorkbenchFileRunStore(directory: URL.documentsDirectory.appendingPathComponent("FirmingoWorkbench/Runs", isDirectory: true))
-        automationRequested = ProcessInfo.processInfo.arguments.contains { $0.hasPrefix("--workbench-") }
+        automationRequested = ProcessInfo.processInfo.arguments.contains { $0.hasPrefix("--workbench-") && $0 != "--workbench-pair" }
         #if os(iOS)
         let scenes = !automationRequested
         #else
         let scenes = false
         #endif
         engine = WorkbenchScenarioEngine(backend: SDKWorkbenchCompiler(), store: store, supportsSceneTransitions: scenes)
+        pairing = WorkbenchPairedClient(host: WorkbenchControlHost(engine: engine, store: store))
     }
     /// Runs discovery only after an explicit manual action; unavailable resources remain visible.
     func inspectCatalogue() {
@@ -57,7 +62,7 @@ import AppKit
     /// Cancels only the currently displayed run, without clearing its evidence or starting another action.
     func cancel() { if let id = engine.report?.id { engine.cancel(requestID: id) } }
     /// Routes real aggregate scene delivery, never an agent-authored synthetic transition.
-    func recordScene(_ phase: String) { engine.recordScene(phase) }
+    func recordScene(_ phase: String) { engine.recordScene(phase); pairing.recordScene(phase) }
     /// Starts the lifecycle interruption attempt only after its known baseline/calibration.
     func beginLifecycleInterruption() {
         do { try engine.beginLifecycleInterruption(); error = nil }
@@ -67,6 +72,29 @@ import AppKit
     func refreshHistory() {
         do { history = try store.history(); error = nil }
         catch { self.error = error.localizedDescription }
+    }
+    /// Explicit manual pairing uses the same bounded invitation decoder as development launch.
+    func connectPairing() {
+        do {
+            guard pairingText.utf8.count <= 3000, let data = Data(base64Encoded: pairingText.trimmingCharacters(in: .whitespacesAndNewlines)) else {
+                throw WorkbenchFailure("Paste one bounded base64 pairing invitation.")
+            }
+            let invitation = try WorkbenchPairingInvitation.decode(data)
+            pairingText = ""; pairing.connect(invitation); error = nil
+        } catch { self.error = error.localizedDescription }
+    }
+    /// One explicit launch invitation, usable on either Apple platform without a document/view dependency.
+    func startPairingIfRequested() {
+        let args = ProcessInfo.processInfo.arguments
+        guard args.contains("--workbench-pair") else { return }
+        do {
+            let flags = args.enumerated().filter { $0.element.hasPrefix("--workbench-") }
+            guard flags.count == 1, let flag = flags.first, flag.element == "--workbench-pair", flag.offset + 1 < args.count,
+                  args[flag.offset + 1].utf8.count <= 3000, let data = Data(base64Encoded: args[flag.offset + 1]) else {
+                throw WorkbenchFailure("Invalid explicit pairing launch.")
+            }
+            pairing.connect(try WorkbenchPairingInvitation.decode(data))
+        } catch { self.error = error.localizedDescription }
     }
     /// App-lifetime startup avoids depending on a view task that can disappear before evidence export.
     func startAutomationIfRequested() {

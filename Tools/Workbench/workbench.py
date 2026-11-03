@@ -97,7 +97,7 @@ def validate_exercise(report, *, interactive=False):
     if {artifact['sha256'] for artifact in report['artifacts']} != {GPIO_SHA, CONSOLE_SHA}:
         raise ValueError('exercise lacks independently pinned capsule exports')
     if kind == 'compiler.stress':
-        if len(exercise['samples']) < 2 or exercise['scenes'] or exercise.get('outcome') is not None:
+        if len(exercise['samples']) < 2 or (exercise['scenes'] and not interactive) or exercise.get('outcome') is not None:
             raise ValueError('stress run lacks bounded actual memory observations')
         return
     if kind != 'host.lifecycle':
@@ -154,7 +154,12 @@ def validate_exercise(report, *, interactive=False):
                     or exercise['calibratedCompileSeconds'] < 4):
                 raise ValueError('worker source calibration was not eligible')
         return
-    if exercise['scenes'] or exercise.get('sceneObservationScope') != 'Launch process only; no foreground/background claim':
+    if interactive:
+        if exercise.get('sceneObservationScope') != 'Actual aggregate SwiftUI app scenes; no suspension claim':
+            raise ValueError('paired mobile evidence lacks actual scene-observation scope')
+        if kind == 'compiler.deadline' and (not exercise['scenes'] or any(s['phase'] != 'active' for s in exercise['scenes'])):
+            raise ValueError('mobile deadline lost foreground')
+    elif exercise['scenes'] or exercise.get('sceneObservationScope') != 'Launch process only; no foreground/background claim':
         raise ValueError('launch-only command cannot claim foreground qualification')
 
 

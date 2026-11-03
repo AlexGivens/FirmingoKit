@@ -30,6 +30,15 @@ public struct WorkbenchExerciseEvidence: Codable, Sendable {
     public var cancelRequestedSeconds: Double?
     /// Explicit UI start after worker calibration; absent for automatic CLI checks.
     public var manuallyStartedSeconds: Double?
+    /// Explicit initiator, distinguishing paired agent commands from a developer's UI action.
+    public var startOrigin: StartOrigin?
+    /// No synthetic scene transition is implied by either initiator.
+    public enum StartOrigin: String, Codable, Sendable {
+        /// Developer tapped the Test Lab button.
+        case manualUI
+        /// Explicit paired-controller begin command after calibration.
+        case pairedController
+    }
     /// Known fresh build admission after the interrupted request settled.
     public var freshStartedSeconds: Double?
     /// Typed result only: cancelled or timedOut; a generic failure cannot substitute.

@@ -49,6 +49,25 @@ import Darwin
         guard Darwin.close(fd) == 0 else { throw NSError(domain: NSPOSIXErrorDomain, code: Int(errno)) }
         guard result == 0 else { throw NSError(domain: NSPOSIXErrorDomain, code: Int(failure)) }
     }
+    /// Loads one explicitly selected saved report without executing or rewriting it; interrupted context remains unknown.
+    public func load(id: UUID) throws -> WorkbenchReport {
+        let run = directory.appendingPathComponent(id.uuidString, isDirectory: true)
+        let meta = try run.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey])
+        guard meta.isDirectory == true, meta.isSymbolicLink != true else { throw WorkbenchFailure("Invalid saved run directory.") }
+        let file = run.appendingPathComponent("report.json")
+        let values = try file.resourceValues(forKeys: [.isRegularFileKey, .isSymbolicLinkKey, .fileSizeKey])
+        guard values.isRegularFile == true, values.isSymbolicLink != true, let size = values.fileSize, size <= 65536 else {
+            throw WorkbenchFailure("Invalid saved run.")
+        }
+        let bytes = try Data(contentsOf: file)
+        guard bytes.count <= 65536 else { throw WorkbenchFailure("Saved run exceeds its bound.") }
+        var result = try JSONDecoder().decode(WorkbenchReport.self, from: bytes)
+        guard result.schema == 1, result.id == id, !result.deviceOperations, result.events.count <= 64, result.artifacts.count <= 3 else {
+            throw WorkbenchFailure("Invalid saved run identity.")
+        }
+        if result.status == .running { result.status = .outcomeUnknown }
+        return result
+    }
     /// Reads at most 32 recent snapshots; stale running reports are returned unknown without modifying originals.
     public func history() throws -> [WorkbenchReport] {
         guard FileManager.default.fileExists(atPath: directory.path) else { return [] }

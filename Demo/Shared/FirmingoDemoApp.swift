@@ -12,6 +12,7 @@ struct FirmingoDemoApp: App {
         let model = WorkbenchLabModel()
         _lab = State(initialValue: model)
         model.startAutomationIfRequested()
+        model.startPairingIfRequested()
     }
     /// Preserves native documents while exposing the same shared Test Lab on each platform.
     var body: some Scene {

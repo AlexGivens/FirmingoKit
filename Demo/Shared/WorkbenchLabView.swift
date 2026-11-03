@@ -12,6 +12,21 @@ import UniformTypeIdentifiers
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Compiler and device scenarios use public FirmingoKit APIs. Compiler checks are offline; lifecycle checks require this app on iOS/iPadOS.")
+                    GroupBox("Paired controller") {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(model.pairing.status).textSelection(.enabled)
+                            if let id = model.pairing.sessionID { Text("Session: " + id.uuidString).font(.caption.monospaced()) }
+                            SecureField("One-time pairing invitation (base64)", text: $model.pairingText)
+                                .accessibilityIdentifier("workbench.pairing.invitation")
+                            HStack {
+                                Button("Connect controller") { model.connectPairing() }
+                                    .disabled(model.pairingText.isEmpty || model.engine.isRunning)
+                                Button("Disconnect controller") { model.pairing.disconnect() }
+                                    .disabled(model.pairing.sessionID == nil)
+                            }
+                            Text("Explicit developer session; controller can run offline scenarios and export reports. Real scene transitions remain device actions. Pair again after app/controller restart.").font(.caption)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
+                    }
                     HStack {
                         Button("Load SDK Catalogue") { model.inspectCatalogue() }
                             .accessibilityIdentifier("workbench.lab.catalogue")

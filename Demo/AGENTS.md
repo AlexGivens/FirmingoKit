@@ -64,3 +64,9 @@ controller harnesses and builds; retain honest UI/accessibility qualification li
 - Declare macOS 14/iOS 17 minimums and Swift 6 concurrency semantics; build both
   platforms and document signing/permissions separately from device qualification.
 - Document every named declaration using triple-slash comments, as in root guidance.
+
+Paired control uses the app-owned dispatcher/engine and explicit outbound pinned
+TLS invitations; normal launch stays disconnected. Keep sequence deduplication,
+producer/run correlation, foreground admission and a visible disconnect control.
+No paired command may inject scenes, arbitrary paths/source/service URLs or device
+write authority. See [paired controller](../docs/workbench-paired-controller.md).

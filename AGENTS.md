@@ -25,8 +25,10 @@ On 2026-11-02 the existing demo begins consolidation into Firmingo Workbench.
 `Demo/WorkbenchSupport` is an app-owned package for the shared scenario engine,
 version-one requests and bounded journals; Test Lab and `Tools/Workbench/workbench.py`
 invoke that same engine through the same app product. The normal SDK product gains
-no testing dependency. Current automation is macOS-only explicit offline app launch,
-with no live listener or device command. The second increment adds compiler
+no testing dependency. The paired-controller increment now adds explicit outbound
+pinned TLS app sessions and a private Mac controller CLI; see
+`docs/workbench-paired-controller.md`. It adds no mobile listener or device command.
+Actual paired qualification is in progress; the original macOS launch CLI remains. The second increment adds compiler
 busy/cancellation, actual deadline, twenty-build stress and interactive mobile
 scene scenarios; see `docs/workbench-compiler-scenarios.md`. Legacy hosts remain
 until matching replacement qualification. Workbench build 4 now passes all three

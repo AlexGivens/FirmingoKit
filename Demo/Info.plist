@@ -39,7 +39,7 @@
 	<key>NSDocumentsFolderUsageDescription</key>
 	<string>Open and save Arduino-style sketch documents you select.</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Inspect the explicitly selected Firmingo board on your local network.</string>
+	<string>Connect to the explicitly paired Workbench controller or selected Firmingo board on your local network.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

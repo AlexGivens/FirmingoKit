@@ -399,5 +399,6 @@ See [delivery integration](docs/compiler-delivery.md) for exact identities and c
 - [x] Repeat the three Workbench lifecycle scenarios on the selected physical iPhone with the identical signed input app, separate reports and unchanged PID. [iPhone ledger](docs/workbench-iphone-qualification.json).
 - [ ] Qualify remaining Workbench mobile compiler deadline/stress/diagnostic cases before retiring unmatched legacy compiler-host paths; preserve historical reproducibility.
 - [ ] Migrate device/console/upload/recovery scenarios with their existing guards and fresh evidence.
-- [ ] Add live paired mobile control and a thin MCP adapter after the shared command/evidence boundary is verified.
+- [ ] Paired mobile control in progress: outbound pinned TLS, one-use invitations, closed shared-engine commands, no-replay sequences and automatic report export. [Work log](docs/workbench-paired-controller.md).
+- [ ] Add a thin MCP adapter over the verified controller; retain real device actions and deployment guards.
 - [ ] Retire phase-specific app generators only after equivalent Workbench scenario qualification; preserve historical identities/results.

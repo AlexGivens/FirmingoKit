@@ -51,11 +51,11 @@ import FirmingoKit
         evidence.sceneObservationScope = observesScenes ? "Actual aggregate SwiftUI app scenes; no suspension claim" : "Launch process only; no foreground/background claim"
     }
     /// Called only by an explicit UI button; normal activation never starts the interruption attempt.
-    func begin() throws {
+    func begin(origin: WorkbenchExerciseEvidence.StartOrigin = .manualUI) throws {
         guard ready, scene == "active", evidence.manuallyStartedSeconds == nil else {
             throw WorkbenchFailure("The lifecycle check is not ready for explicit start.")
         }
-        var next = evidence; next.manuallyStartedSeconds = now()
+        var next = evidence; next.manuallyStartedSeconds = now(); next.startOrigin = origin
         try save(next); evidence = next; ready = false
     }
     /// Accepts only actual app-scene delivery; CLI requests have no scene injection command.

@@ -40,14 +40,14 @@ import FirmingoKit
         let result = try await backend.catalogue(); catalogue = result; return result
     }
     /// Runs one explicit request; validates and durably reserves its UUID before any backend operation.
-    public func run(_ request: WorkbenchRequest) async throws -> WorkbenchReport {
+    public func run(_ request: WorkbenchRequest, onAdmission: () -> Void = {}) async throws -> WorkbenchReport {
         try request.validate()
         try Task.checkCancellation()
         guard request.operation == .run, !isRunning else { throw WorkbenchFailure("A run command requires an idle Workbench.") }
         let initial = WorkbenchReport(request: request)
         try store.begin(initial)
         isRunning = true; report = initial; started = ProcessInfo.processInfo.systemUptime
-        observation?(initial)
+        observation?(initial); onAdmission()
         let pending = Task { try await self.perform(request) }
         task = pending
         defer { task = nil; exercise = nil; isRunning = false }
@@ -68,9 +68,9 @@ import FirmingoKit
         scene = phase; exercise?.recordScene(phase)
     }
     /// Explicit second action after lifecycle calibration; failures remain visible in the owning run.
-    public func beginLifecycleInterruption() throws {
+    public func beginLifecycleInterruption(origin: WorkbenchExerciseEvidence.StartOrigin = .manualUI) throws {
         guard let exercise else { throw WorkbenchFailure("No lifecycle scenario is waiting for explicit start.") }
-        try exercise.begin()
+        try exercise.begin(origin: origin)
     }
     /// Publishes bounded progress only after the store confirms durability.
     private func record(_ phase: String, _ detail: String, status: WorkbenchReport.Status? = nil,
