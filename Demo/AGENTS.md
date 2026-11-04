@@ -5,7 +5,10 @@ Use `WorkbenchSupport` for app-owned scenario orchestration and the shared regis
 manual and CLI actions must invoke that same engine. Keep no-replay run IDs,
 bounded evidence, honest blocked results and public-SDK boundaries. Lifecycle scenarios now use aggregate real mobile app scenes and the shared
 engine; launch-only CLI cannot synthesize them. Preserve the legacy hosts until
-equivalent evidence exists. Hardware migration is still pending.
+equivalent evidence exists. Selected inspection and fixed binary console scenarios
+now use schema-two requests/reports and public SDK APIs; see
+[device scenario scope](../docs/workbench-device-scenarios.md). Upload/recovery
+migration and fresh Workbench hardware qualification remain pending.
 The canonical scheme/product is FirmingoWorkbench; preserve the stable app bundle
 identity instead of creating another binary identity for each phase.
 
@@ -69,4 +72,7 @@ Paired control uses the app-owned dispatcher/engine and explicit outbound pinned
 TLS invitations; normal launch stays disconnected. Keep sequence deduplication,
 producer/run correlation, foreground admission and a visible disconnect control.
 No paired command may inject scenes, arbitrary paths/source/service URLs or device
-write authority. See [paired controller](../docs/workbench-paired-controller.md).
+write authority beyond an explicitly selected fixed binary probe. Device checks
+require exact endpoint/board/identity; console additionally checks a separately
+observed boot before any byte write. Preserve shared deployment leases and no
+automatic retries. See [paired controller](../docs/workbench-paired-controller.md).

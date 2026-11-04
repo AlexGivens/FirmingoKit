@@ -19,7 +19,7 @@ spec.loader.exec_module(paired)
 
 MODERN = '2026-07-28'
 LEGACY = ('2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05')
-INFO = dict(name='firmingo-workbench', version='0.1.0')  # Adapter version, not a product release.
+INFO = dict(name='firmingo-workbench', version='0.2.0')  # Adapter version, not a product release.
 META = 'io.modelcontextprotocol/'
 INPUT_LIMIT, OUTPUT_LIMIT = 16384, 524288
 INSTRUCTIONS = ('Use an explicitly paired session. Submit once with caller-chosen command/run UUIDs; '
@@ -52,6 +52,13 @@ def tool(name, description, properties, required, *, read_only):
                          idempotentHint=read_only, openWorldHint=False))
 
 
+HARDWARE = dict(device_address=field('Canonical private IPv4; FMGO port is fixed at 7420.'),
+    device_board=field('Explicit SDK board identifier.',enum=list(paired.request_checker().DEVICE_BOARDS)),
+    device_id=field('Expected stable device ID.',pattern=r'^[0-9a-f]{16}$'),
+    device_boot_id=field('Boot from a separate successful inspection; required before console bytes.',pattern=r'^[0-9a-f]{16}$'),
+    console_probe=field('Explicit fixed binary probe for the already-running application.',enum=['raw-256-v1','fms2-command-2-v1']))
+
+
 TOOLS = [
     tool('workbench_sessions', 'List safe pairing metadata from the selected controller; does not pair or start an app.', {}, [], read_only=True),
     tool('workbench_submit', 'Queue one existing controller command. Returns transport admission only, never scenario success. '
@@ -59,12 +66,12 @@ TOOLS = [
          'run requires a fresh run_id and scenario_id; list takes no run; other actions require an exact run_id. '
          'report expectations are supplied to workbench_result.',
          dict(session_id=UUID, command_id=UUID, action=field('Closed controller action.', enum=list(paired.ACTIONS)),
-              run_id=UUID, scenario_id=SCENARIO, firmware_build_id=BUILD),
+              run_id=UUID, scenario_id=SCENARIO, firmware_build_id=BUILD, **HARDWARE),
          ['session_id', 'command_id', 'action'], read_only=False),
     tool('workbench_result', 'Read one command result without enqueueing anything. Pending/archived is not a pass. '
          'A report requires scenario_id and its exact firmware_build_id when applicable; validates identity, timeline and bytes '
          'through the existing CLI checker. Valid reports are also saved when an evidence directory is configured.',
-         dict(session_id=UUID, command_id=UUID, scenario_id=SCENARIO, firmware_build_id=BUILD),
+         dict(session_id=UUID, command_id=UUID, scenario_id=SCENARIO, firmware_build_id=BUILD, **HARDWARE),
          ['session_id', 'command_id'], read_only=False),
     tool('workbench_revoke', 'Explicitly revoke this pairing; the app cancels only controller-owned work on its next exchange. '
          'Does not terminate the app, flash a board or stop the controller.',
@@ -75,7 +82,7 @@ TOOLS[2]['annotations'].update(destructiveHint=False, idempotentHint=True)
 
 
 def arguments(name, value):
-    """Reject unknown/nested runtime, file, device and shell authority before contacting the controller."""
+    """Reject unknown/nested runtime, file, update and shell authority before contacting the controller."""
     definition = next((item for item in TOOLS if item['name'] == name), None)
     if definition is None: raise ProtocolError(-32602, 'Unknown tool')
     schema = definition['inputSchema']
@@ -134,6 +141,9 @@ class Adapter:
         sid = paired.identifier(args['session_id']) if 'session_id' in args else None
         cid = paired.identifier(args['command_id']) if 'command_id' in args else None
         try:
+            device = paired.request_checker().selected_device(args,args.get('scenario_id'))
+            if device is not None and (name not in ('workbench_submit','workbench_result') or (name=='workbench_submit' and args.get('action')!='run')):
+                raise ValueError('Hardware selection belongs only to a selected run or report query')
             if name == 'workbench_sessions':
                 return dict(sessions=self.rpc(self.directory, dict(operation='sessions'))), False
             if name == 'workbench_revoke':
@@ -145,6 +155,8 @@ class Adapter:
                     if 'run_id' not in args or 'scenario_id' not in args: raise ValueError('run requires explicit run_id and scenario_id')
                     command['request'] = dict(schema=1, requestID=paired.identifier(args['run_id']), operation='run', scenarioID=args['scenario_id'])
                     if 'firmware_build_id' in args: command['request']['firmwareBuildID'] = args['firmware_build_id']
+                    if device is not None: command['request'].update(schema=2,device=device)
+                    paired.request_checker().validate_request(command['request'])
                 else:
                     if 'scenario_id' in args or 'firmware_build_id' in args: raise ValueError('Only run accepts scenario/build selection on submission')
                     if action == 'list':
@@ -180,7 +192,7 @@ class Adapter:
                 if not reply['accepted']: raise ValueError('Rejected app command cannot qualify a report')
                 command = reply['command']
                 if command.get('action') != 'report' or not args.get('scenario_id'): raise ValueError('Select the expected report scenario_id')
-                report = paired.export_report(reply, command['runID'], args['scenario_id'], args.get('firmware_build_id'))
+                report = paired.export_report(reply, command['runID'], args['scenario_id'], args.get('firmware_build_id'), device)
                 if report.get('appVersion') != peer['appVersion']: raise ValueError('Report app version differs from its producer')
                 result.update(validatedReport=True, scenarioCompletion=report['status'])
                 if self.evidence: result['evidence'] = save_report(self.evidence, sid, cid, reply)

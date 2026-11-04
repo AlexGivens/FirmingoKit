@@ -3,6 +3,7 @@
 import argparse
 import base64
 import hashlib
+import ipaddress
 import json
 import os
 import stat
@@ -15,6 +16,90 @@ import uuid
 
 PREFIX = b'FIRMINGO_WORKBENCH_RESULT:'
 MAX_CAPTURE = 1024 * 1024
+
+
+DEVICE_BOARDS = ('nano_rp2040_connect', 'raspberry_pi_pico')
+DEVICE_SCENARIOS = ('device.inspect', 'device.console-binary')
+DEVICE_FIELDS = {'device_address': 'address', 'device_board': 'boardID', 'device_id': 'deviceID',
+                 'device_boot_id': 'bootID', 'console_probe': 'consoleProbe'}
+
+
+def validate_device_selection(value, scenario):
+    """Version-two local FMGO selection; no hostname, arbitrary port, source or update authority."""
+    if (not isinstance(value, dict) or set(value)-set(DEVICE_FIELDS.values())
+            or not {'address','boardID','deviceID'} <= set(value)):
+        raise ValueError('select an exact device endpoint and identity')
+    address = ipaddress.IPv4Address(value['address'])
+    if str(address) != value['address'] or not any(address in ipaddress.IPv4Network(block) for block in ('10.0.0.0/8','172.16.0.0/12','192.168.0.0/16')):
+        raise ValueError('select a canonical private IPv4 endpoint')
+    if value['boardID'] not in DEVICE_BOARDS or not re.fullmatch('[0-9a-f]{16}',value['deviceID']):
+        raise ValueError('select an exact SDK board/device identity')
+    if scenario == 'device.inspect':
+        if set(value) != {'address','boardID','deviceID'}: raise ValueError('inspection accepts no boot assumption or probe')
+    elif scenario == 'device.console-binary':
+        if (set(value) != set(DEVICE_FIELDS.values()) or not re.fullmatch('[0-9a-f]{16}',value['bootID'])
+                or value['consoleProbe'] not in ('raw-256-v1','fms2-command-2-v1')):
+            raise ValueError('inspect first, then explicitly select that boot and fixed binary probe')
+    else: raise ValueError('device selection is only for implemented hardware scenarios')
+    return value
+
+
+def selected_device(arguments, scenario):
+    """Share closed flat CLI/MCP argument conversion instead of adding another endpoint parser."""
+    value = {target:arguments[key] for key,target in DEVICE_FIELDS.items() if arguments.get(key) is not None}
+    return validate_device_selection(value,scenario) if value else None
+
+
+def validate_request(request):
+    """Keep legacy offline requests closed and admit hardware only through the explicit version-two extension."""
+    if (not isinstance(request,dict) or set(request)-{'schema','requestID','operation','scenarioID','firmwareBuildID','device'}
+            or type(request.get('schema')) is not int or request['schema'] not in (1,2)):
+        raise ValueError('invalid request schema/options')
+    uuid.UUID(request['requestID'])
+    if request.get('operation') == 'list':
+        if set(request) != {'schema','requestID','operation'} or request['schema'] != 1: raise ValueError('invalid discovery selection')
+    elif request.get('operation') == 'run':
+        if not isinstance(request.get('scenarioID'),str): raise ValueError('select an exact scenario')
+        if request['schema'] == 2:
+            validate_device_selection(request.get('device'),request['scenarioID'])
+            if 'firmwareBuildID' in request: raise ValueError('hardware checks need no compiler descriptor')
+        elif 'device' in request or request['scenarioID'] in DEVICE_SCENARIOS:
+            raise ValueError('hardware scenarios require a version-two device selection')
+    else: raise ValueError('unsupported request operation')
+    return request
+
+
+def validate_device_report(report, selection):
+    """Check actual hardware observation scope and every binary reply byte; nonpass reports retain partial evidence."""
+    value = report.get('deviceEvidence')
+    if not isinstance(value,dict) or value.get('selection') != selection or report.get('artifacts') or report.get('exercise') is not None:
+        raise ValueError('missing or foreign hardware evidence')
+    for key in ('connectionAttempted','consoleOpened','probeAttempted','consoleClosed','disconnected'):
+        if type(value.get(key)) is not bool: raise ValueError('invalid hardware state flags')
+    if type(value.get('sentBytes')) is not int or not 0 <= value['sentBytes'] <= 257: raise ValueError('invalid sent-byte count')
+    received = base64.b64decode(value.get('received',''),validate=True)
+    if len(received)>257: raise ValueError('excessive probe evidence')
+    mismatch = value.get('firstMismatchOffset')
+    if mismatch is not None and (type(mismatch) is not int or not 0<=mismatch<=256): raise ValueError('invalid mismatch offset')
+    if report['status'] != 'passed': return
+    snapshot = value.get('snapshot')
+    if (not value['connectionAttempted'] or not value['disconnected'] or not isinstance(snapshot,dict)
+            or type(snapshot.get('protocolMajor')) is not int or snapshot.get('protocolMajor') != 1 or snapshot.get('deviceID') != selection['deviceID']
+            or snapshot.get('boardID') != selection['boardID'] or not re.fullmatch('[0-9a-f]{16}',snapshot.get('bootID',''))
+            or not isinstance(snapshot.get('channels'),list) or not 1<=len(snapshot['channels'])<=16
+            or not isinstance(snapshot.get('targets'),list) or len(snapshot['targets'])>16
+            or not isinstance(snapshot.get('firmwareVersion'),str) or not re.fullmatch('[A-Za-z0-9_.-]{1,32}',snapshot['firmwareVersion'])
+            or type(snapshot.get('maximumPayload')) is not int or not 512<=snapshot['maximumPayload']<=65536
+            or not isinstance(snapshot.get('authenticationMode'),str) or not 1<=len(snapshot['authenticationMode'])<=64):
+        raise ValueError('missing validated hello/cleanup evidence')
+    if report['scenarioID']=='device.inspect':
+        if value['consoleOpened'] or value['probeAttempted'] or value['consoleClosed'] or value['sentBytes'] or received or mismatch is not None:
+            raise ValueError('inspection cannot qualify console writes')
+    elif (not value['consoleOpened'] or not value['probeAttempted'] or not value['consoleClosed']
+            or snapshot['bootID'] != selection['bootID'] or not any(c.get('id')==1 and c.get('backend')=='application' for c in snapshot['channels'])
+            or value['sentBytes'] != (257 if selection['consoleProbe']=='fms2-command-2-v1' else 256)
+            or received != bytes(range(256)) or mismatch is not None):
+        raise ValueError('binary probe/boot/cleanup assertions did not pass')
 
 
 def bounded_file(path, maximum):
@@ -165,6 +250,7 @@ def validate_exercise(report, *, interactive=False):
 
 def decode_response(raw, request, pid, *, interactive=False):
     """Require exactly one bounded terminal envelope from the owned app process and exact request."""
+    validate_request(request)
     if len(raw) > MAX_CAPTURE:
         raise ValueError('app output exceeds its bound')
     envelopes = [line[len(PREFIX):] for line in raw.splitlines() if line.startswith(PREFIX)]
@@ -189,11 +275,11 @@ def decode_response(raw, request, pid, *, interactive=False):
             raise ValueError('discovery returned a run')
         return value
     report = value.get('report')
-    if (not isinstance(report, dict) or type(report.get('schema')) is not int or report.get('schema') != 1
+    if (not isinstance(report, dict) or type(report.get('schema')) is not int or report.get('schema') != request['schema']
             or report.get('id') != request['requestID'] or report.get('scenarioID') != request['scenarioID']
             or report.get('firmwareBuildID') != request.get('firmwareBuildID')
             or report.get('processID') != pid or report.get('appIdentifier') != 'com.firmingokit.demo'
-            or report.get('deviceOperations') is not False
+            or report.get('deviceOperations') is not (request['schema'] == 2)
             or report.get('status') not in ('passed', 'failed', 'blocked', 'cancelled', 'outcomeUnknown')
             or not isinstance(report.get('events'), list) or not 1 <= len(report['events']) <= 64
             or not isinstance(report.get('artifacts'), list) or len(report['artifacts']) > 3):
@@ -226,7 +312,10 @@ def decode_response(raw, request, pid, *, interactive=False):
         if not 260 <= len(data) <= 4096 or hashlib.sha256(data).hexdigest() != artifact.get('sha256') or len(receipt) > 16384:
             raise ValueError('artifact bytes differ from their report')
         json.loads(receipt, object_pairs_hook=unique_object)
-    validate_exercise(report, interactive=interactive)
+    if request['schema'] == 2: validate_device_report(report, request['device'])
+    else:
+        if report.get('deviceEvidence') is not None: raise ValueError('offline report cannot contain hardware evidence')
+        validate_exercise(report, interactive=interactive)
     return value
 
 
@@ -293,7 +382,7 @@ def launch(app, team, output, request):
             (output / artifact['name']).write_bytes(base64.b64decode(artifact['bytes'], validate=True))
         summary = {'schema': 1, 'requestID': request['requestID'], 'status': report['status'] if report else ('commandError' if value.get('error') else 'listed'),
                    'resultSHA256': hashlib.sha256(result.encode()).hexdigest(), 'result': str(output / 'result.json'),
-                   'deviceOperations': False}
+                   'deviceOperations': report['deviceOperations'] if report else False}
         if not report:
             summary['scenarios'] = value['scenarios']; summary['catalogue'] = value.get('catalogue'); summary['error'] = value.get('error')
         print(json.dumps(summary, indent=2))
@@ -315,6 +404,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True, help='new local result directory')
     parser.add_argument('--scenario')
     parser.add_argument('--build-id')
+    for field in DEVICE_FIELDS: parser.add_argument('--'+field.replace('_','-'))
     parser.add_argument('--request-id', default=None, help='fresh UUID; replay is rejected by the app journal')
     args = parser.parse_args()
     if ((args.operation == 'list' and (args.scenario or args.build_id))
@@ -326,6 +416,9 @@ def main():
         request['scenarioID'] = args.scenario
     if args.build_id:
         request['firmwareBuildID'] = args.build_id
+    device = selected_device(vars(args),args.scenario)
+    if device: request.update(schema=2,device=device)
+    validate_request(request)
     return launch(args.app.absolute(), args.team, args.output.absolute(), request)
 
 

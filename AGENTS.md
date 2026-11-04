@@ -23,7 +23,7 @@ The SDK exposes local sketch-compilation APIs by wrapping Firmingo-Compiler's la
 
 On 2026-11-02 the existing demo begins consolidation into Firmingo Workbench.
 `Demo/WorkbenchSupport` is an app-owned package for the shared scenario engine,
-version-one requests and bounded journals; Test Lab and `Tools/Workbench/workbench.py`
+versioned requests and bounded journals; Test Lab and `Tools/Workbench/workbench.py`
 invoke that same engine through the same app product. The normal SDK product gains
 no testing dependency. The paired-controller increment now adds explicit outbound
 pinned TLS app sessions and a private Mac controller CLI; see
@@ -56,6 +56,16 @@ physical iPad and iPhone lifecycle cases over paired Wi-Fi using one identical
 signed input app and one unchanged PID per device; see
 `docs/workbench-ipad-qualification.json` and `docs/workbench-iphone-qualification.json`.
 This does not qualify pressure/suspension, minimum OS or broader hardware/device scenarios. See `docs/workbench-consolidation.md`.
+
+On 2026-11-04 Workbench adds selected `device.inspect` and
+`device.console-binary` through public SDK APIs. Hardware requests/reports use
+schema two, explicit private endpoint/board/device selection and console-only
+boot/probe authorization; compiler schema one remains offline. They do not load
+compiler assets or grant upload/reset/flash authority. Test Lab, CLI and MCP share
+the engine and existing demo operation leases. Local regression/platform builds
+pass; fresh signed Nano qualification remains pending. See
+`docs/workbench-device-scenarios.md`; preserve legacy hosts until equivalent
+hardware evidence exists.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

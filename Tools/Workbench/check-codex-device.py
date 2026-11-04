@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Explicit live Codex-host/MCP/iPhone compiler qualification; never builds, pairs, flashes or starts a model turn."""
+"""Explicit live Codex-host/MCP compiler or selected-device checks; never builds, pairs, flashes or starts a model turn."""
 import argparse
 import hashlib
 import json
@@ -95,17 +95,21 @@ class CodexHost:
         if result.get('isError') and not allow_error: raise ValueError(json.dumps(result.get('structuredContent', {}))[:512])
         return result
 
-    def command(self, session, action, *, run=None, scenario=None, build=None):
+    def command(self, session, action, *, run=None, scenario=None, build=None, device=None):
         """Submit once, then observe that exact controller command; no implicit run replay or latest-run selection."""
         command = str(uuid.uuid4()).upper()
         arguments = dict(session_id=session, command_id=command, action=action)
         if run: arguments['run_id'] = run
         if action == 'run':
             arguments['scenario_id'] = scenario
-            arguments['firmware_build_id'] = build
+            if build: arguments['firmware_build_id'] = build
+            if device: arguments.update(device)
         self.tool('workbench_submit', arguments)
         selection = dict(session_id=session, command_id=command)
-        if action == 'report': selection.update(scenario_id=scenario, firmware_build_id=build)
+        if action == 'report':
+            selection['scenario_id'] = scenario
+            if build: selection['firmware_build_id'] = build
+            if device: selection.update(device)
         end = time.monotonic() + 30
         while time.monotonic() < end:
             result = self.tool('workbench_result', selection)['structuredContent']
@@ -131,18 +135,28 @@ def main():
     parser.add_argument('--codex', required=True, type=Path)
     parser.add_argument('--server', default='firmingo-workbench')
     parser.add_argument('--pairing', required=True, type=Path)
-    parser.add_argument('--build-id', required=True)
+    parser.add_argument('--build-id')
+    parser.add_argument('--device-address')
+    parser.add_argument('--device-id')
+    parser.add_argument('--device-board')
+    parser.add_argument('--console-probe', choices=['raw-256-v1','fms2-command-2-v1'])
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--revoke', action='store_true', help='Explicitly revoke the selected pairing after successful collection')
     args = parser.parse_args()
-    if not re.fullmatch('[0-9a-f]{64}', args.build_id): parser.error('Select an exact descriptor SHA-256')
+    hardware = any([args.device_address,args.device_id,args.device_board,args.console_probe])
+    if hardware:
+        if not all([args.device_address,args.device_id,args.device_board]) or args.build_id: parser.error('Select device address/ID/board without a compiler descriptor')
+        scenarios = ['device.inspect'] + (['device.console-binary'] if args.console_probe else [])
+    else:
+        if not args.build_id or not re.fullmatch('[0-9a-f]{64}', args.build_id): parser.error('Select an exact descriptor SHA-256')
+        scenarios = ['compiler.smoke','compiler.diagnostics']
     if args.pairing.stat().st_size > 4096: parser.error('Pairing metadata is excessive')
     pairing = json.loads(args.pairing.read_text())
     session = str(uuid.UUID(pairing['sessionID'])).upper()
     if type(pairing['processID']) is not int or not isinstance(pairing['instanceID'], str): parser.error('Invalid selected app identity')
     args.output.mkdir(mode=0o700)
     private_write(args.output / 'selection.json', dict(pairing=pairing, buildID=args.build_id, server=args.server,
-        scenarios=['compiler.smoke', 'compiler.diagnostics'], revokeAfter=args.revoke))
+        scenarios=scenarios, deviceAddress=args.device_address, deviceID=args.device_id, deviceBoard=args.device_board, consoleProbe=args.console_probe, revokeAfter=args.revoke))
     host = CodexHost(str(args.codex), args.output, args.server)
     summary = []
     try:
@@ -154,18 +168,26 @@ def main():
             raise ValueError('The selected app is not currently paired with the expected producer identity')
         registry = host.command(session, 'list')['record']['reply']
         if not registry['accepted']: raise ValueError('App registry unavailable')
-        for scenario in ['compiler.smoke', 'compiler.diagnostics']:
+        observed_boot = None
+        for scenario in scenarios:
+            device = None
+            if hardware:
+                device = dict(device_address=args.device_address,device_id=args.device_id,device_board=args.device_board)
+                if scenario == 'device.console-binary':
+                    if not observed_boot: raise ValueError('No freshly inspected boot; no console probe can be sent')
+                    device.update(device_boot_id=observed_boot,console_probe=args.console_probe)
             run = str(uuid.uuid4()).upper()
-            result = host.command(session, 'run', run=run, scenario=scenario, build=args.build_id)
+            result = host.command(session, 'run', run=run, scenario=scenario, build=args.build_id, device=device)
             end = time.monotonic() + 120
             while result['record']['reply']['state']['isRunning']:
                 if time.monotonic() >= end: raise TimeoutError('Run observation exceeded bound; no replay permitted')
                 time.sleep(2)
                 result = host.command(session, 'status', run=run)
-            result = host.command(session, 'report', run=run, scenario=scenario, build=args.build_id)
+            result = host.command(session, 'report', run=run, scenario=scenario, build=args.build_id, device=device)
             report = result['record']['reply']['report']
             if not result.get('validatedReport') or result['scenarioCompletion'] != 'passed': raise ValueError('No validated scenario pass')
             if report['processID'] != pairing['processID']: raise ValueError('Report process differs from selected iPhone')
+            if scenario == 'device.inspect': observed_boot = report['deviceEvidence']['snapshot']['bootID']
             private_write(args.output / (scenario + '.json'), result)
             summary.append(dict(scenarioID=scenario, runID=run, processID=report['processID'], status=report['status'],
                 reportCommandID=result['commandID'], evidence=result.get('evidence', [])))

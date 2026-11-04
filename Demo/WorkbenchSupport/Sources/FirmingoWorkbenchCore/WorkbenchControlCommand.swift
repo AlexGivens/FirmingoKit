@@ -1,6 +1,6 @@
 import Foundation
 
-/// Closed paired-controller actions. No path, source, service URL, scene injection, device write or shell operation exists.
+/// Closed paired-controller actions; selected device probes belong only to checked version-two run requests.
 public struct WorkbenchControlCommand: Codable, Sendable {
     /// Transport command schema, independent of the embedded run request schema.
     public let schema: Int
@@ -12,7 +12,7 @@ public struct WorkbenchControlCommand: Codable, Sendable {
     public let runID: UUID?
     /// Existing checked Workbench request, present only for run admission.
     public let request: WorkbenchRequest?
-    /// Scope remains offline compiler scenarios and read-only evidence.
+    /// The shared engine implements compiler, scene and explicitly selected device scenarios.
     public enum Action: String, Codable, Sendable {
         /// Return the registry and current SDK catalogue.
         case list

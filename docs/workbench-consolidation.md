@@ -38,6 +38,12 @@ Apple platforms. No network control listener is added in this increment.
 
 ## Follow-through
 
+The [device scenario increment](workbench-device-scenarios.md) now implements
+inspection and fixed binary console through the shared engine and MCP, with
+explicit schema-two hardware selection. The version-one offline contract and
+historical first-increment results below retain their original scope. Fresh Nano
+qualification and guarded upload/ROM migration remain separate steps.
+
 Compiler busy/deadline/lifecycle/stress migration is tracked in
 [the compiler-scenario work log](workbench-compiler-scenarios.md). Next migrate read-only device and
 binary-console cases, then guarded upload/ROM recovery. The paired iPad/build-8 and iPhone/build-9 compiler, resume and revocation

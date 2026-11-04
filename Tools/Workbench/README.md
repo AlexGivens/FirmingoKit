@@ -24,6 +24,12 @@ Normal offline coverage is `python3 -I -S -B Tools/Workbench/test-mcp.py`;
 `check-mcp-interop.mjs --help` describes the separate opt-in official-client check.
 The adapter connects only to an operator-selected existing controller.
 
+[Device inspection and exact binary console](../../docs/workbench-device-scenarios.md)
+use the same engine with explicitly selected version-two hardware requests.
+Compiler version-one requests remain offline. Normal fixtures do not connect to
+hardware. `check-device-coordination.py` exercises the real demo operation guards
+after the SDK is built, without opening a socket or loading compiler assets.
+
 
 `check-codex-device.py --help` describes the explicitly selected live native-Codex
 host/iPhone check (Python 3.11+). It uses the registered MCP server and a fresh

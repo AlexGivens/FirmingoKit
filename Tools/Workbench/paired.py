@@ -27,6 +27,12 @@ BUNDLE = 'com.firmingokit.demo'
 ACTIONS = ('list', 'run', 'status', 'cancel', 'beginLifecycle', 'report')
 
 
+def request_checker():
+    """Reuse the existing CLI's closed request/report validation without a second hardware parser."""
+    spec=importlib.util.spec_from_file_location('workbench_requests',Path(__file__).with_name('workbench.py'))
+    checker=importlib.util.module_from_spec(spec);spec.loader.exec_module(checker);return checker
+
+
 def identifier(value):
     """Canonical uppercase UUID, with no path semantics."""
     return str(uuid.UUID(value)).upper()
@@ -165,9 +171,10 @@ class Broker:
         elif action == 'run':
             request = command.get('request')
             if (command.get('runID') is not None or not isinstance(request,dict)
-                    or set(request)-{'schema','requestID','operation','scenarioID','firmwareBuildID'}
-                    or request.get('schema') != 1 or request.get('operation') != 'run'):
+                    or set(request)-{'schema','requestID','operation','scenarioID','firmwareBuildID','device'}
+                    or request.get('schema') not in (1,2) or request.get('operation') != 'run'):
                 raise ValueError('invalid run request')
+            request_checker().validate_request(request)
             identifier(request['requestID'])
         elif command.get('request') is not None or not command.get('runID'):
             raise ValueError('select exact run UUID')
@@ -328,7 +335,7 @@ def issue(directory, session, command, timeout):
     raise TimeoutError('response not observed; query this exact command ID without replay: '+command['commandID'])
 
 
-def export_report(reply, run_id, scenario, build_id):
+def export_report(reply, run_id, scenario, build_id, device=None):
     """Independently validate current paired-app report identity and real artifacts before export can count as a pass."""
     spec=importlib.util.spec_from_file_location('workbench_export',Path(__file__).with_name('workbench.py'))
     checker=importlib.util.module_from_spec(spec);spec.loader.exec_module(checker)
@@ -336,6 +343,7 @@ def export_report(reply, run_id, scenario, build_id):
     if not scenario or not isinstance(report,dict): raise ValueError('select the expected scenario when exporting its terminal report')
     request=dict(schema=1,requestID=identifier(run_id),operation='run',scenarioID=scenario)
     if build_id: request['firmwareBuildID']=build_id
+    if device is not None: request.update(schema=2,device=device)
     envelope=dict(schema=1,request=request,processID=reply['processID'],scenarios=[],report=report)
     checker.decode_response(checker.PREFIX+base64.b64encode(encode(envelope)),request,reply['processID'],interactive=True)
     return report
@@ -349,6 +357,9 @@ def send(args):
         if not args.scenario: raise ValueError('select an exact scenario')
         request=dict(schema=1,requestID=identifier(args.run_id or str(uuid.uuid4())),operation='run',scenarioID=args.scenario)
         if args.build_id: request['firmwareBuildID']=args.build_id
+        device=request_checker().selected_device(vars(args),args.scenario)
+        if device: request.update(schema=2,device=device)
+        request_checker().validate_request(request)
         command['request']=request
     elif args.action!='list':
         if not args.run_id: raise ValueError('select exact run UUID')
@@ -376,7 +387,7 @@ def send(args):
     else:run_id=args.run_id
     report=None
     if reply.get('report') is not None:
-        report=export_report(reply,run_id,args.scenario,args.build_id)
+        report=export_report(reply,run_id,args.scenario,args.build_id,request_checker().selected_device(vars(args),args.scenario))
     if args.output:
         private_write(args.output/'reply.json',encode(reply))
         if report is not None:
@@ -385,7 +396,7 @@ def send(args):
                 private_write(args.output/artifact['name'],base64.b64decode(artifact['bytes'],validate=True))
     if report is not None:
         print(json.dumps(dict(accepted=reply['accepted'],runID=report['id'],status=report['status'],scenarioID=report['scenarioID'],
-            processID=reply['processID'],instanceID=reply['instanceID'],output=str(args.output) if args.output else None,deviceOperations=False),indent=2))
+            processID=reply['processID'],instanceID=reply['instanceID'],output=str(args.output) if args.output else None,deviceOperations=report['deviceOperations']),indent=2))
         return {'passed':0,'blocked':3,'cancelled':4,'failed':1,'outcomeUnknown':1}[report['status']]
     print(json.dumps(reply,indent=2))
     return 0 if reply['accepted'] else 2
@@ -458,6 +469,8 @@ def main():
         if name=='pair-device':sub.add_argument('--device',required=True)
         if name=='command':
             sub.add_argument('--action',choices=ACTIONS,required=True);sub.add_argument('--run-id');sub.add_argument('--scenario');sub.add_argument('--build-id');sub.add_argument('--command-id')
+
+            for field in request_checker().DEVICE_FIELDS: sub.add_argument('--'+field.replace('_','-'))
             sub.add_argument('--timeout',type=float,default=180);sub.add_argument('--output',type=Path);sub.add_argument('--wait',action='store_true')
     args=parser.parse_args()
     if args.operation=='serve':serve(args);return 0

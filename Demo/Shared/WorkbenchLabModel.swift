@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import FirmingoWorkbenchCore
+import FirmingoKit
 #if os(macOS)
 import AppKit
 #elseif os(iOS)
@@ -19,6 +20,18 @@ import UIKit
     var pairingText = ""
     /// Explicit descriptor selected by the developer; never defaults to the first choice.
     var selectedBuildID = ""
+    /// Explicit test-only device selection; no board is contacted when editing these fields.
+    var deviceAddress = "192.168.77.1"
+    /// Stable device identity must be supplied by the developer, never defaulted from an address.
+    var deviceID = ""
+    /// Exact board selection; hardware qualification remains per board/host/image.
+    var deviceBoard = FirmingoBoard.nanoRP2040Connect.rawValue
+    /// Boot copied only after a successful explicit inspection of the same selection.
+    var deviceBootID = ""
+    /// Fixed application probe selected independently of compiler/firmware installation.
+    var consoleProbe = "raw-256-v1"
+    /// Explicit manual consent to send the fixed binary probe; MCP requests carry their own explicit mode.
+    var allowConsoleProbe = false
     /// Host error outside a scenario, separate from assertions inside its report.
     var error: String?
     /// Read-only historical context; loading history never restarts a run.
@@ -42,7 +55,10 @@ import UIKit
         #else
         let scenes = false
         #endif
-        engine = WorkbenchScenarioEngine(backend: SDKWorkbenchCompiler(), store: store, supportsSceneTransitions: scenes)
+        engine = WorkbenchScenarioEngine(backend: SDKWorkbenchCompiler(), store: store, supportsSceneTransitions: scenes,
+            deviceBackend: SDKWorkbenchDevice(acquire: { console in
+                try await InstallationRecordStore.shared.beginWorkbenchDeviceOperation(console: console)
+            }, release: { id in await InstallationRecordStore.shared.finishDeviceOperation(id) }))
         pairing = WorkbenchPairedClient(host: WorkbenchControlHost(engine: engine, store: store),
             diagnosticURL: store.directory.deletingLastPathComponent().appendingPathComponent("controller.json"))
     }
@@ -62,12 +78,26 @@ import UIKit
             defer { task = nil }
             do {
                 let request = try WorkbenchRequest(operation: .run, scenarioID: scenario.id,
-                    firmwareBuildID: scenario.requiresBuild && !selectedBuildID.isEmpty ? selectedBuildID : nil)
-                _ = try await engine.run(request); error = nil
+                    firmwareBuildID: scenario.requiresBuild && !selectedBuildID.isEmpty ? selectedBuildID : nil,
+                    device: try scenario.requiresDevice ? selectedDevice(console: scenario.id == "device.console-binary") : nil)
+                let result = try await engine.run(request); error = nil
+                if result.scenarioID == "device.inspect", result.status == .passed,
+                   let value = result.deviceEvidence, value.selection.address == deviceAddress,
+                   value.selection.deviceID == deviceID, value.selection.boardID == deviceBoard {
+                    deviceBootID = value.snapshot?.bootID ?? ""; allowConsoleProbe = false
+                }
                 history = try store.history()
             } catch { self.error = error.localizedDescription }
         }
     }
+    /// Explicit fields become one immutable request; inspection never acquires console permission.
+    private func selectedDevice(console: Bool) throws -> WorkbenchDeviceSelection {
+        guard !console || allowConsoleProbe else { throw WorkbenchFailure("Authorize the fixed binary probe after inspecting the device.") }
+        return try .init(address: deviceAddress, boardID: deviceBoard, deviceID: deviceID,
+            bootID: console ? deviceBootID : nil, consoleProbe: console ? consoleProbe : nil)
+    }
+    /// Selection edits expire the observed boot and local console consent.
+    func expireDeviceSelection() { deviceBootID = ""; allowConsoleProbe = false }
     /// Cancels only the currently displayed run, without clearing its evidence or starting another action.
     func cancel() { if let id = engine.report?.id { engine.cancel(requestID: id) } }
     /// Routes real aggregate scene delivery, never an agent-authored synthetic transition.

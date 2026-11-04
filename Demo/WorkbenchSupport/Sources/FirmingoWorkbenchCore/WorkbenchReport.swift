@@ -32,7 +32,9 @@ public struct WorkbenchReport: Codable, Sendable, Identifiable {
     public var diagnosticsOmitted: Int?
     /// Optional bounded compiler exercise extension; absent in earlier schema-one reports.
     public var exercise: WorkbenchExerciseEvidence?
-    /// This first protocol has no device-changing or connecting operation.
+    /// Bounded selected device/console observations, present only in report schema two.
+    public var deviceEvidence: WorkbenchDeviceEvidence?
+    /// Whether this report describes an explicitly selected hardware operation; not flash authority.
     public var deviceOperations = false
     /// Closed statuses; blocked/cancelled/incomplete can never be counted as passed.
     public enum Status: String, Codable, Sendable {
@@ -86,8 +88,25 @@ public struct WorkbenchReport: Codable, Sendable, Identifiable {
         /// One-based UTF-8 byte column when supplied.
         public var column: Int?
     }
+    /// Rejects ambiguous history/export scope while preserving partial failed observations.
+    func validateScope() throws {
+        guard schema == 1 || schema == 2, deviceOperations == (schema == 2) else { throw WorkbenchFailure("Invalid report scope.") }
+        if schema == 1 {
+            guard deviceEvidence == nil else { throw WorkbenchFailure("Offline report contains hardware evidence.") }
+        } else {
+            guard let deviceEvidence, ["device.inspect", "device.console-binary"].contains(scenarioID),
+                  firmwareBuildID == nil, catalogueSHA256 == nil, artifacts.isEmpty, exercise == nil,
+                  deviceEvidence.received.count <= 257, (0...257).contains(deviceEvidence.sentBytes) else {
+                throw WorkbenchFailure("Invalid hardware report scope.")
+            }
+            _ = try WorkbenchRequest(operation: .run, scenarioID: scenarioID, device: deviceEvidence.selection)
+            if status == .passed { try deviceEvidence.validate(console: scenarioID == "device.console-binary") }
+        }
+    }
     /// Creates only a running snapshot, before the journal gate or SDK operation.
     public init(request: WorkbenchRequest) {
+        schema = request.schema; deviceOperations = request.device != nil
+        deviceEvidence = request.device.map { .init(selection: $0) }
         id = request.requestID; scenarioID = request.scenarioID ?? ""
         status = .running; firmwareBuildID = request.firmwareBuildID
         operatingSystem = ProcessInfo.processInfo.operatingSystemVersionString

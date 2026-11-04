@@ -89,8 +89,11 @@ Example submission arguments, after choosing UUIDs and a compatible descriptor:
 
 The placeholders are explanatory; runtime UUID and digest validation is strict.
 Unknown fields, nested request overrides, arbitrary source/service URLs, shell,
-file paths, scene injection and device-writing commands reject before controller
-access. The app remains the authority for scenario availability and prerequisites.
+file paths, scene injection and upload/reset/flash commands reject before controller
+access. [Selected device inspection and fixed binary console](workbench-device-scenarios.md)
+now accept explicit device fields through request/report schema two. Console bytes
+require a separately inspected boot and explicit fixed-probe selection. The app
+remains the authority for scenario availability and prerequisites.
 
 ## Uncertainty, cancellation and evidence
 
@@ -129,7 +132,7 @@ annotated as potentially writing evidence, even for an otherwise read-only query
 
 ## Reproduce validation
 
-The normal SDK entry point runs sixteen MCP fixtures without sockets or devices:
+The normal SDK entry point runs seventeen MCP fixtures without sockets or devices:
 
 ```sh
 python3 -I -S -B Tools/Workbench/test-mcp.py

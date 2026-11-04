@@ -34,6 +34,8 @@ import Foundation
             return winners
         }
         guard winners.count == 1, let winner = winners.first else { throw Failure("competing Runs were not exclusive") }
+        try await expect(.busy) { _ = try await store.beginWorkbenchDeviceOperation(console: false) }
+        try await expect(.busy) { _ = try await store.beginWorkbenchDeviceOperation(console: true) }
         try await expect(.busy) { _ = try await store.beginFirmwareInstallation() }
         try await expect(.busy) { _ = try await store.beginManagedReview(first) }
         try await expect(.busy) { try await store.clearManaged(expected: nil) }
@@ -66,6 +68,10 @@ import Foundation
         await store.finishDeviceOperation(operation)
         try await expect(.pendingManagedTransaction) { _ = try await store.beginManagedRun() }
         try await expect(.pendingManagedTransaction) { _ = try await store.beginFirmwareInstallation() }
+        let inspection = try await store.beginWorkbenchDeviceOperation(console: false)
+        try await expect(.busy) { _ = try await store.beginWorkbenchDeviceOperation(console: true) }
+        await store.finishDeviceOperation(inspection)
+        try await expect(.pendingManagedTransaction) { _ = try await store.beginWorkbenchDeviceOperation(console: true) }
         try await expect(.contextChanged) { try await store.clearManaged(expected: nil) }
         try await expect(.contextChanged) { _ = try await store.beginManagedReview(second) }
         let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: 1, filename: "Test.ino",

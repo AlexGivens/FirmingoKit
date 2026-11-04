@@ -794,3 +794,27 @@ The [MCP guide](workbench-mcp.md) documents registration and rerun commands,
 including runtime-controller rotation and preservation of unrelated settings.
 Normal CI adds a sixteenth offline MCP fixture over the archived live envelopes
 and syntax-checks this helper; it never executes the live Codex/iPhone path.
+
+
+## Workbench device scenarios — 2026-11-04
+
+[Device scenario scope and operator guide](workbench-device-scenarios.md) records
+inspection and one-shot binary console migration through Test Lab, CLI and MCP.
+Hardware uses explicit request/report schema two, while compiler schema one stays
+offline. The SDK owns transport/identity/channel lifetime; the app retains its
+shared deployment guards and bounded actual-byte reports. No public SDK API,
+compiler asset or firmware source changed.
+
+Local `node Tools/ManagedWASM/run-validation.mjs` passed with 166 SDK tests
+discovered (ten opt-in runtime skips), eight ROM-host tests and 30 Workbench tests
+(one opt-in TLS skip). CLI / paired / MCP fixtures passed 17 / 11 / 17 cases.
+The subsequently integrated `python3 -I -S -B
+Tools/Workbench/check-device-coordination.py` passed separately, compiling and
+running the real demo guard harness with warnings as errors and isolated journals.
+Unsigned Release Workbench builds passed on macOS, generic iOS device and generic
+iOS Simulator. Official modern/legacy MCP clients passed archived-report
+interoperability against adapter 0.2.0 through the local Unix fixture. Successful
+Xcode/macro/socket checks used the normal local environment after sandbox-only
+attempts failed. Ordinary CI executes the fixtures and coordination harness,
+never a hardware check. Remote CI, UI/accessibility, minimum OS and fresh Nano
+qualification remain unclaimed; legacy hardware hosts are retained.

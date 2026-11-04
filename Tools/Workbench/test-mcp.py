@@ -337,5 +337,21 @@ class MCPAdapter(unittest.TestCase):
         self.assertTrue(ledger['revocation']['confirmedByNativeMCP'])
         self.assertFalse(ledger['revocation']['appDiagnostic']['isPaired'])
 
+    def test_hardware_selection_is_explicit_version_two_and_never_an_upload_command(self):
+        selected=self.selection(action='run',run_id=fresh(),scenario_id='device.inspect',device_address='192.168.77.1',
+            device_board='nano_rp2040_connect',device_id='5031503337360009')
+        malformed=[dict(selected,scenario_id='device.console-binary'),dict(selected,device_address='8.8.8.8'),
+            dict(selected,device_address='192.168.77.1:22'),dict(selected,firmware_build_id='a'*64),dict(selected,action='commit')]
+        for args in malformed:self.assertTrue(self.call('workbench_submit',args)['result']['isError'])
+        self.assertEqual(self.calls,[])
+        result=self.call('workbench_submit',selected)['result'];self.assertFalse(result['isError'])
+        sent=self.calls[-1]['command']['request']
+        self.assertEqual(sent['schema'],2)
+        self.assertEqual(sent['device'],dict(address='192.168.77.1',boardID='nano_rp2040_connect',deviceID='5031503337360009'))
+        self.assertEqual(result['structuredContent']['scenarioCompletion'],'not_observed')
+        console=dict(selected,command_id=fresh(),run_id=fresh(),scenario_id='device.console-binary',
+            device_boot_id='0123456789abcdef',console_probe='raw-256-v1')
+        self.assertFalse(self.call('workbench_submit',console)['result']['isError'])
+
 
 if __name__ == '__main__': unittest.main()

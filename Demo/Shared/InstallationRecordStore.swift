@@ -101,6 +101,14 @@ actor InstallationRecordStore {
         return id
     }
 
+    /// Workbench inspection never resolves a saved transaction; console probes use the existing unresolved-run guard.
+    func beginWorkbenchDeviceOperation(console: Bool) throws -> UUID {
+        if console { return try beginDeployment(managedRun: false) }
+        try Task.checkCancellation()
+        guard activeOperation == nil else { throw DemoOperationError.busy }
+        let id = UUID(); activeOperation = (id, false); return id
+    }
+
     /// Releases only the owning action; an old completion can never release a newer window's reservation.
     func finishDeviceOperation(_ id: UUID) {
         if activeOperation?.id == id { activeOperation = nil }

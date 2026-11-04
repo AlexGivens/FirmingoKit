@@ -24,6 +24,7 @@ import Darwin
     }
     /// Synchronizes contents and directory metadata; any error prevents a later passed report.
     public func save(_ report: WorkbenchReport) throws {
+        try report.validateScope()
         guard report.events.count <= 64, report.artifacts.count <= 3 else { throw WorkbenchFailure("Run evidence bound exceeded.") }
         if let exercise = report.exercise {
             guard exercise.builds.count <= 40, exercise.progress.count <= 8, exercise.scenes.count <= 32,
@@ -62,9 +63,10 @@ import Darwin
         let bytes = try Data(contentsOf: file)
         guard bytes.count <= 65536 else { throw WorkbenchFailure("Saved run exceeds its bound.") }
         var result = try JSONDecoder().decode(WorkbenchReport.self, from: bytes)
-        guard result.schema == 1, result.id == id, !result.deviceOperations, result.events.count <= 64, result.artifacts.count <= 3 else {
+        guard (result.schema == 1 || result.schema == 2), result.id == id, result.deviceOperations == (result.schema == 2), result.events.count <= 64, result.artifacts.count <= 3 else {
             throw WorkbenchFailure("Invalid saved run identity.")
         }
+        try result.validateScope()
         if result.status == .running { result.status = .outcomeUnknown }
         return result
     }
@@ -87,7 +89,8 @@ import Darwin
             let bytes = try Data(contentsOf: file)
             guard bytes.count <= 65536 else { throw WorkbenchFailure("Invalid saved run size.") }
             var record = try JSONDecoder().decode(WorkbenchReport.self, from: bytes)
-            guard record.schema == 1, !record.deviceOperations, record.events.count <= 64, record.artifacts.count <= 3, record.id.uuidString == run.lastPathComponent else { throw WorkbenchFailure("Invalid saved run identity.") }
+            guard (record.schema == 1 || record.schema == 2), record.deviceOperations == (record.schema == 2), record.events.count <= 64, record.artifacts.count <= 3, record.id.uuidString == run.lastPathComponent else { throw WorkbenchFailure("Invalid saved run identity.") }
+            try record.validateScope()
             if record.status == .running { record.status = .outcomeUnknown }
             records.append(record)
         }

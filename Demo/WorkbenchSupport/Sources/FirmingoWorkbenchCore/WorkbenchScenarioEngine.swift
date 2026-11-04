@@ -12,6 +12,8 @@ import FirmingoKit
     public private(set) var catalogue: WorkbenchCatalogue?
     /// Owned SDK boundary, injectable only for deterministic orchestration tests.
     private let backend: any WorkbenchCompilerBackend
+    /// Optional host-owned SDK device boundary; absence blocks hardware without compiler work.
+    private let deviceBackend: (any WorkbenchDeviceBackend)?
     /// Durable per-request admission and history boundary.
     private let store: any WorkbenchRunStore
     /// Current owned asynchronous work; restoration never recreates this value.
@@ -29,8 +31,8 @@ import FirmingoKit
     /// Optional bounded progress observer, invoked only after persistence succeeds.
     public var observation: ((WorkbenchReport) -> Void)?
     /// Captures boundaries without SDK I/O or automatic work.
-    public init(backend: any WorkbenchCompilerBackend, store: any WorkbenchRunStore, supportsSceneTransitions: Bool = false) {
-        self.backend = backend; self.store = store; self.supportsSceneTransitions = supportsSceneTransitions
+    public init(backend: any WorkbenchCompilerBackend, store: any WorkbenchRunStore, supportsSceneTransitions: Bool = false, deviceBackend: (any WorkbenchDeviceBackend)? = nil) {
+        self.backend = backend; self.deviceBackend = deviceBackend; self.store = store; self.supportsSceneTransitions = supportsSceneTransitions
     }
     /// Loads metadata for UI/CLI selection; no descriptor is automatically chosen.
     public func inspectCatalogue() async throws -> WorkbenchCatalogue {
@@ -66,6 +68,7 @@ import FirmingoKit
     public func recordScene(_ phase: String) {
         guard supportsSceneTransitions, ["active", "inactive", "background"].contains(phase) else { return }
         scene = phase; exercise?.recordScene(phase)
+        if phase == "background", report?.deviceOperations == true, isRunning { task?.cancel() }
     }
     /// Explicit second action after lifecycle calibration; failures remain visible in the owning run.
     public func beginLifecycleInterruption(origin: WorkbenchExerciseEvidence.StartOrigin = .manualUI) throws {
@@ -92,6 +95,19 @@ import FirmingoKit
                 try record("prerequisites", "Requires interactive iOS/iPadOS scene delivery; CLI cannot synthesize lifecycle events.", status: .blocked)
             } else if scenario.requiresBuild && request.firmwareBuildID != WorkbenchCompilerInput.buildID {
                 try record("prerequisites", "Select the exact migrated compiler-vector descriptor; no latest or default build is assumed.", status: .blocked)
+            } else if scenario.requiresDevice {
+                guard let selected = request.device else { throw WorkbenchFailure("Missing device selection.") }
+                if let deviceBackend {
+                    try record("device-start", "Selected SDK device operation; no compiler or upload prerequisite.")
+                    try await deviceBackend.run(selected, console: scenario.id == "device.console-binary") { value in
+                        guard var next = self.report else { throw WorkbenchFailure("Missing hardware run context.") }
+                        next.deviceEvidence = value; try self.store.save(next); self.report = next; self.observation?(next)
+                    }
+                    try Task.checkCancellation()
+                    guard let observed = report?.deviceEvidence, observed.selection == selected else { throw WorkbenchFailure("Missing selected device evidence.") }
+                    try observed.validate(console: scenario.id == "device.console-binary")
+                    try record("complete", "Selected device assertions and SDK cleanup completed.", status: .passed)
+                } else { try record("prerequisites", "This host has no device backend.", status: .blocked) }
             } else {
                 try Task.checkCancellation()
                 try record("catalogue", "Loading actual SDK-verified catalogue metadata.")

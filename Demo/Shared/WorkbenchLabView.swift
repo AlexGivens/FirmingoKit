@@ -1,5 +1,6 @@
 import SwiftUI
 import FirmingoWorkbenchCore
+import FirmingoKit
 import UniformTypeIdentifiers
 
 /// Manual presentation of the same registry, request engine and reports used by the CLI.
@@ -11,7 +12,7 @@ import UniformTypeIdentifiers
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Compiler and device scenarios use public FirmingoKit APIs. Compiler checks are offline; lifecycle checks require this app on iOS/iPadOS.")
+                    Text("Compiler and device scenarios use public FirmingoKit APIs. Compiler checks are offline. Device checks connect to the explicitly selected board; the binary check sends its selected fixed probe. Lifecycle checks require iOS/iPadOS.")
                     #if os(iOS)
                     Text("The screen stays awake during foreground test runs. Going Home still pauses the controller and exercises real lifecycle behavior.").font(.caption)
                     #endif
@@ -28,8 +29,28 @@ import UniformTypeIdentifiers
                                 Button("Disconnect controller") { model.pairing.disconnect() }
                                     .disabled(model.pairing.sessionID == nil)
                             }
-                            Text("Explicit developer session; controller can run offline scenarios and export reports. Real scene transitions remain device actions. Pair again after app/controller restart.").font(.caption)
+                            Text("Explicit developer session; controller can run selected scenarios and export reports. Real scene transitions remain device actions. Pair again after app/controller restart.").font(.caption)
                         }.frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    GroupBox("Selected device test") {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Inspection reads hello only. Binary testing sends a fixed probe to an already running compatible application; it does not install a sketch.").font(.caption)
+                            TextField("Private IPv4 address · FMGO port 7420", text: $model.deviceAddress)
+                                .onChange(of: model.deviceAddress) { _, _ in model.expireDeviceSelection() }
+                            TextField("Expected device ID · 16 lowercase hex digits", text: $model.deviceID)
+                                .onChange(of: model.deviceID) { _, _ in model.expireDeviceSelection() }
+                            Picker("Expected board", selection: $model.deviceBoard) {
+                                ForEach(FirmingoBoard.allCases) { board in Text(board.displayName).tag(board.rawValue) }
+                            }.onChange(of: model.deviceBoard) { _, _ in model.expireDeviceSelection() }
+                            TextField("Expected boot ID · inspect first", text: $model.deviceBootID)
+                                .onChange(of: model.deviceBootID) { _, _ in model.allowConsoleProbe = false }
+                            Picker("Existing application's binary protocol", selection: $model.consoleProbe) {
+                                Text("Raw 256-byte echo").tag("raw-256-v1")
+                                Text("FMS2 qualification command 2").tag("fms2-command-2-v1")
+                            }.onChange(of: model.consoleProbe) { _, _ in model.allowConsoleProbe = false }
+                            Toggle("Authorize this fixed binary probe", isOn: $model.allowConsoleProbe)
+                            Text("Leave REC and upload-arm jumpers disconnected. Hello is self-reported identity; it does not attest installed firmware bytes.").font(.caption)
+                        }.disabled(model.engine.isRunning)
                     }
                     HStack {
                         Button("Load SDK Catalogue") { model.inspectCatalogue() }
@@ -56,8 +77,9 @@ import UniformTypeIdentifiers
                                 if scenario.requiresBuild && model.selectedBuildID.isEmpty {
                                     Text("Prerequisite: load the catalogue and select the exact supported descriptor.").foregroundStyle(.secondary)
                                 }
+                                if scenario.requiresDevice { Text("Prerequisite: select exact device fields; console also requires its observed boot and fixed-probe authorization.").font(.caption) }
                                 Button("Run " + scenario.title) { model.run(scenario) }
-                                    .disabled(model.engine.isRunning || scenario.unavailableReason != nil || (scenario.requiresSceneTransitions && !model.engine.supportsSceneTransitions) || (scenario.requiresBuild && model.selectedBuildID.isEmpty))
+                                    .disabled(model.engine.isRunning || scenario.unavailableReason != nil || (scenario.requiresSceneTransitions && !model.engine.supportsSceneTransitions) || (scenario.requiresBuild && model.selectedBuildID.isEmpty) || (scenario.requiresDevice && (model.deviceID.isEmpty || model.deviceAddress.isEmpty || (scenario.id == "device.console-binary" && (!model.allowConsoleProbe || model.deviceBootID.isEmpty)))))
                                     .accessibilityIdentifier("workbench.lab.run." + scenario.id)
                             }.frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -69,6 +91,15 @@ import UniformTypeIdentifiers
                         if model.engine.awaitingLifecycleStart {
                             Button("Start lifecycle interruption") { model.beginLifecycleInterruption() }
                                 .accessibilityIdentifier("workbench.lab.lifecycle.start")
+                        }
+                        if let device = report.deviceEvidence {
+                            Text("Device: \(device.selection.deviceID) · \(device.selection.address)").font(.caption.monospaced())
+                            if let observed = device.snapshot {
+                                Text("Observed board: \(observed.boardID) · firmware: \(observed.firmwareVersion) · boot: \(observed.bootID)").font(.caption.monospaced())
+                                Text("Channels: \(observed.channels.count) · advertised upload targets: \(observed.targets.count)").font(.caption)
+                            }
+                            Text("Probe attempted: \(device.probeAttempted ? "yes" : "no") · sent: \(device.sentBytes) · received: \(device.received.count) bytes").font(.caption)
+                            Text("Console close acknowledged: \(device.consoleClosed ? "yes" : "no") · disconnected: \(device.disconnected ? "yes" : "no")").font(.caption)
                         }
                         if let exercise = report.exercise {
                             Text("Completed builds: \(exercise.builds.count) · footprint samples: \(exercise.samples.count) · omitted: \(exercise.droppedSamples)")

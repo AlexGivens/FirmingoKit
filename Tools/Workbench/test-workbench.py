@@ -204,5 +204,32 @@ class WorkbenchCLI(unittest.TestCase):
                         scenario=row['scenarioID'],app_version=ledger['app']['appVersion'])
                     self.assertEqual(result['status'],'passed_mobile_workbench_report')
 
+    def test_version_two_device_selection_rejects_ambient_network_and_probe_authority(self):
+        selected=dict(address='192.168.77.1',boardID='nano_rp2040_connect',deviceID='5031503337360009')
+        request=dict(schema=2,requestID=str(uuid.uuid4()).upper(),operation='run',scenarioID='device.inspect',device=selected)
+        cli.validate_request(request)
+        for change in (lambda r:r.update(schema=1),lambda r:r.update(firmwareBuildID='a'*64),
+                       lambda r:r['device'].update(port=22),lambda r:r['device'].update(address='127.0.0.1'),
+                       lambda r:r['device'].update(address='8.8.8.8'),lambda r:r.update(scenarioID='device.console-binary')):
+            value=json.loads(json.dumps(request));change(value)
+            with self.assertRaises((ValueError,TypeError)):cli.validate_request(value)
+
+    def test_hardware_report_cannot_pass_without_exact_bytes_boot_and_cleanup(self):
+        request,value=self.fixture();request.update(schema=2,scenarioID='device.console-binary',device=dict(address='192.168.77.1',
+            boardID='nano_rp2040_connect',deviceID='5031503337360009',bootID='0123456789abcdef',consoleProbe='raw-256-v1'))
+        value['request']=request.copy();report=value['report'];report.update(schema=2,scenarioID=request['scenarioID'],deviceOperations=True)
+        report['deviceEvidence']=dict(selection=request['device'].copy(),connectionAttempted=True,disconnected=True,consoleOpened=True,
+            probeAttempted=True,sentBytes=256,received=base64.b64encode(bytes(range(256))).decode(),consoleClosed=True,
+            snapshot=dict(protocolMajor=1,firmwareVersion='fixture',maximumPayload=4096,authenticationMode='open-development',deviceID=request['device']['deviceID'],boardID=request['device']['boardID'],
+                bootID=request['device']['bootID'],channels=[dict(id=1,backend='application')],targets=[]))
+        self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['status'],'passed')
+        for change in (lambda e:e.update(received=base64.b64encode(bytes(256)).decode()),lambda e:e.update(consoleClosed=False),
+                       lambda e:e.update(disconnected=False),lambda e:e['snapshot'].update(bootID='1123456789abcdef'),
+                       lambda e:e.update(sentBytes=True)):
+            damaged=json.loads(json.dumps(value));change(damaged['report']['deviceEvidence'])
+            with self.assertRaises(ValueError):cli.decode_response(self.envelope(damaged),request,123)
+        report['status']='failed';report['deviceEvidence']['received']=''
+        self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['status'],'failed')
+
 
 if __name__ == '__main__': unittest.main()

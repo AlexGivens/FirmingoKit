@@ -16,8 +16,16 @@ public struct WorkbenchScenario: Codable, Sendable, Identifiable, Equatable {
     public let unavailableReason: String?
     /// Requires a real interactive iOS/iPadOS scene adapter; launch-only CLI cannot synthesize it.
     public var requiresSceneTransitions = false
-    /// Shared registry: real compiler/mobile scene cases and an explicitly blocked hardware migration.
+    /// Device selection is required independently of compiler resources.
+    public var requiresDevice = false
+    /// Shared registry: compiler, mobile scene and selected-device checks; upload/recovery stays explicitly blocked.
     public static let all: [Self] = [
+        .init(id: "device.inspect", title: "Inspect selected device", category: "Device",
+              detail: "SDK hello and capabilities only; no console ownership, resident association or upload.", requiresBuild: false,
+              unavailableReason: nil, requiresDevice: true),
+        .init(id: "device.console-binary", title: "Exact 256-byte binary console", category: "Device",
+              detail: "Check selected identity and boot, acquire application channel one, send one fixed probe and compare every byte. Requires an already running compatible echo application.", requiresBuild: false,
+              unavailableReason: nil, requiresDevice: true),
         .init(id: "compiler.catalogue", title: "Verify bundled catalogue", category: "Compiler",
               detail: "Load SDK-verified metadata. This does not execute WASM or inspect a board.", requiresBuild: false, unavailableReason: nil),
         .init(id: "compiler.resources", title: "Verify compiler resources", category: "Compiler",
@@ -28,7 +36,7 @@ public struct WorkbenchScenario: Codable, Sendable, Identifiable, Equatable {
               detail: "Require a real frontend rejection, then a known fresh artifact through the same compiler.", requiresBuild: true, unavailableReason: nil),
         .init(id: "device.upload-recovery", title: "Managed upload and recovery", category: "Device",
               detail: "Existing qualification guards remain in NanoHost until this migration is verified.", requiresBuild: true,
-              unavailableReason: "Not migrated. This runner has no device, staging, commit or ROM-write command."),
+              unavailableReason: "Not migrated. This runner has no staging, commit or ROM-write command."),
         .init(id: "compiler.cancellation", title: "SDK busy, cancellation and fresh build", category: "Compiler",
               detail: "Observe source compilation, require typed SDK busy, cancel that request and build fresh.", requiresBuild: true, unavailableReason: nil),
         .init(id: "compiler.deadline", title: "Production deadline and fresh build", category: "Compiler",
