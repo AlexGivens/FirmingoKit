@@ -129,7 +129,7 @@ annotated as potentially writing evidence, even for an otherwise read-only query
 
 ## Reproduce validation
 
-The normal SDK entry point runs fifteen MCP fixtures without sockets or devices:
+The normal SDK entry point runs sixteen MCP fixtures without sockets or devices:
 
 ```sh
 python3 -I -S -B Tools/Workbench/test-mcp.py
@@ -170,3 +170,72 @@ remains underlying controller evidence; this increment does not claim a fresh
 MCP-to-physical-device run or actual Codex/Claude host registration. No client
 settings have been edited. Hardware scenario migration, client-host registration
 and broader platform/UI qualification remain separately scoped work.
+
+## Codex registration and physical iPhone — 2026-11-03
+
+Codex is now registered with the `firmingo-workbench` stdio entry in the user's
+configuration. A fresh native Codex host discovers all four tools. Codex's
+[shared MCP configuration](https://learn.chatgpt.com/docs/extend/mcp?surface=cli)
+supports the CLI registration form below, or an explicitly edited
+`[mcp_servers.firmingo-workbench]` table in `config.toml`:
+
+```sh
+/path/to/current/codex mcp add firmingo-workbench -- \
+  /path/to/python3 -I -S -B /absolute/checkout/Tools/Workbench/mcp-server.py \
+  --directory /absolute/private/controller-state \
+  --evidence-directory /absolute/private/evidence
+/path/to/current/codex mcp get firmingo-workbench --json
+```
+
+On this machine, the working app-bundled CLI is `0.166.0-alpha.6`; the older
+standalone `0.92.0` process was killed on launch. Registration was verified
+against all original configuration values and text. This CLI build normalized an
+unrelated `node_repl.args` field; the original configuration was restored around
+the single new Workbench table. Future edits must preserve unrelated settings.
+No invitation token is in the Codex entry.
+
+The [fresh iPhone ledger](workbench-mcp-iphone.json) records native
+`mcpServer/tool/call` requests through that registered server, pinned TLS and the
+physical iPhone 15 Pro Max on iOS 27.0.1 (24A446). Build 9, PID 34038, passes
+`compiler.smoke` and `compiler.diagnostics`: real SDK/WASM execution returns the
+known GPIO/console capsules and recovers from a frontend diagnostic with a fresh
+successful build. Native MCP responses and exact RPC exports are retained with
+SHA-256s. The app's separate safe diagnostic confirms the later MCP revocation.
+No manual app interaction was needed.
+
+`Tools/Workbench/check-codex-device.py` makes this check repeatable with Python
+3.11+ and an explicitly selected working Codex executable. It starts a short-lived
+native app-server, uses an **ephemeral host context**, and sends no model turn.
+It does not create a saved chat or bind a second writer to the active desktop
+chat. Existing writer ownership was respected when probed. All scenario actions
+and report collection use the native Codex MCP tool API, not an alternate client
+or a direct broker call. Unrelated configured MCP servers are disabled only in
+that test host's configuration overrides. Its native host and MCP child close
+after collection.
+
+After explicitly starting a controller and pairing the selected installed app:
+
+```sh
+python3 -I -S -B Tools/Workbench/check-codex-device.py \
+  --codex /path/to/current/codex \
+  --pairing .build/explicit-phone-pair/pairing.json \
+  --build-id c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f \
+  --output .build/codex-phone-check-new --revoke
+```
+
+The helper captures caller command/run IDs before submission, polls only saved
+commands, and fails on uncertainty without replaying a run. Its two scenarios
+are fixed; it has no device write, app deployment or pairing implementation.
+It is an opt-in physical check, excluded from ordinary CI execution. Ordinary
+CI revalidates the archived native envelopes and report hashes and parses the
+helper's source without requiring a Codex installation or Python's `tomllib`.
+
+The registered controller remains running for developer MCP access; the tested
+iPhone pairing is revoked. The controller is not installed as an auto-starting
+service. Future tests explicitly pair again. If it is stopped or its ignored
+state directory is removed, start a new controller and update only the
+Workbench registration's directory argument. The active desktop chat's tool
+catalogue was not forcibly rebound; the persisted entry was loaded and tested
+in a fresh native host. These results cover the two recorded compiler cases;
+iPad MCP, broader MCP lifecycle/stress, hardware and minimum-OS claims remain
+separate.

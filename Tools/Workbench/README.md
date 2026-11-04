@@ -23,3 +23,9 @@ report collection. Run `python3 -I -S -B Tools/Workbench/mcp-server.py --help`.
 Normal offline coverage is `python3 -I -S -B Tools/Workbench/test-mcp.py`;
 `check-mcp-interop.mjs --help` describes the separate opt-in official-client check.
 The adapter connects only to an operator-selected existing controller.
+
+
+`check-codex-device.py --help` describes the explicitly selected live native-Codex
+host/iPhone check (Python 3.11+). It uses the registered MCP server and a fresh
+pairing, creates no model turn or saved chat, and is never executed by normal CI.
+[Measured registration/device result](../../docs/workbench-mcp-iphone.json).

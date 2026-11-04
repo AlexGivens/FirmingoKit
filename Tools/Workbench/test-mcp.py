@@ -299,5 +299,43 @@ class MCPAdapter(unittest.TestCase):
                 self.assertEqual(result.stdout, b'')
             self.assertEqual(self.calls, [])
 
+    def test_recorded_native_codex_iphone_requests_bind_fresh_runs_and_checked_reports(self):
+        """Replay the captured native host envelopes as parser data; no new host, app or hardware run occurs here."""
+        import hashlib
+        ledger = json.loads((DOCS / 'workbench-mcp-iphone.json').read_text())
+        self.assertTrue(ledger['registration']['unrelatedSettingsPreserved'])
+        self.assertEqual(ledger['codex']['modelTurnsStarted'], 0)
+        for row in ledger['runs']:
+            values = {}
+            for key in ('report', 'reply', 'nativeReportRequest', 'nativeReportResponse', 'nativeStartRequest', 'nativeStartResponse'):
+                raw = (DOCS / row[key]['path']).read_bytes()
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), row[key]['sha256'])
+                values[key] = json.loads(raw)
+            start = values['nativeStartRequest']
+            self.assertEqual(start['method'], 'mcpServer/tool/call')
+            self.assertEqual(start['params']['server'], ledger['registration']['server'])
+            self.assertEqual(start['params']['tool'], 'workbench_submit')
+            self.assertEqual(start['params']['arguments']['action'], 'run')
+            self.assertEqual(start['params']['arguments']['run_id'], row['runID'])
+            admission = values['nativeStartResponse']['result']['structuredContent']
+            self.assertEqual(admission['scenarioCompletion'], 'not_observed')
+            request = values['nativeReportRequest']; response = values['nativeReportResponse']
+            self.assertEqual(request['id'], response['id'])
+            self.assertEqual(request['params']['tool'], 'workbench_result')
+            selected = request['params']['arguments']
+            self.assertEqual(selected['session_id'], ledger['pairing']['sessionID'])
+            self.assertEqual(selected['command_id'], row['reportCommandID'])
+            self.assertFalse(response['result']['isError'])
+            result = response['result']['structuredContent']
+            self.assertTrue(result['validatedReport'])
+            self.assertEqual(result['record']['reply'], values['reply'])
+            self.assertEqual(result['record']['reply']['report'], values['report'])
+            self.assertEqual(values['reply']['processID'], ledger['pairing']['processID'])
+            self.assertEqual(values['reply']['instanceID'], ledger['pairing']['instanceID'])
+            checked = mcp.paired.export_report(values['reply'], row['runID'], selected['scenario_id'], selected['firmware_build_id'])
+            self.assertEqual(checked['status'], 'passed')
+        self.assertTrue(ledger['revocation']['confirmedByNativeMCP'])
+        self.assertFalse(ledger['revocation']['appDiagnostic']['isPaired'])
+
 
 if __name__ == '__main__': unittest.main()

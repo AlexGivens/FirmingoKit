@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "date": "2026-11-03",
+  "status": "passed",
+  "scope": "Fresh native Codex app-server MCP host to paired physical iPhone; real SDK/WASM compilation and validated report export",
+  "registration": {
+    "server": "firmingo-workbench",
+    "scope": "User Codex configuration",
+    "enabled": true,
+    "unrelatedSettingsPreserved": true,
+    "registrationMethod": "Bundled codex mcp add; original settings text restored around the new entry after unrelated CLI normalization",
+    "settingsSHA256": "a1db7859d242cf607ccf8e59ec12156879f1dd74a78a1d6cb0e941aefb947b7f"
+  },
+  "codex": {
+    "version": "0.166.0-alpha.6",
+    "binarySHA256": "508388df35319042107560d095b271a98a512f59a542848c908b23ed1bad4b44",
+    "userAgent": "Codex Desktop/0.166.0-alpha.6 (Mac OS 27.0.0; arm64) dumb (firmingo-workbench-qualification; 0.1.0)",
+    "context": "Ephemeral host-only test context, no saved chat or model turn",
+    "modelTurnsStarted": 0,
+    "hostStoppedAfterCollection": true,
+    "discovery": {
+      "path": "workbench-mcp-device-reports/iphone/discovery.native-response.json",
+      "sha256": "9800810dc03adc03199317f85e0b9a0ce8e54fb5a3ab15b8c27624e6a0af77b4"
+    }
+  },
+  "pairing": {
+    "appVersion": "9",
+    "expired": false,
+    "instanceID": "13C72624-2030-4689-8F4C-7753D1F87808",
+    "label": "iPhone-MCP",
+    "lastSeenSeconds": 0.22253374988213181,
+    "paired": true,
+    "processID": 34038,
+    "revoked": false,
+    "sessionID": "97B49612-2D2C-4CE6-A74A-92674EBD3826"
+  },
+  "app": {
+    "reportedBundle": "com.firmingokit.demo",
+    "reportedVersion": "9",
+    "previousSignedInput": {
+      "schema": 1,
+      "appVersion": "9",
+      "appIdentifier": "com.firmingokit.demo",
+      "sourceCommit": "8519d6beee40932710db0fe6caeab266d890fce3",
+      "executableSHA256": "70c4f7cf92bb29a5ac70c24bf6c2a2582ee05e21f2144845016018da11ba67c0",
+      "preparedInventorySHA256": "81a8c4cb6b7a71a859495fe14c9f15028917ad8d8824b4f336973243d9803bfc",
+      "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a"
+    },
+    "inputScope": "Previously installed reviewed build 9; not rebuilt/reinstalled or independently read back in this run"
+  },
+  "device": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "osVersion": "27.0.1",
+    "osBuild": "24A446",
+    "developmentTransport": "localNetwork"
+  },
+  "runs": [
+    {
+      "scenarioID": "compiler.smoke",
+      "runID": "D3DA1E66-0A32-48CC-B007-1F62178C79BA",
+      "processID": 34038,
+      "status": "passed",
+      "reportCommandID": "B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9",
+      "report": {
+        "path": "workbench-mcp-device-reports/iphone/smoke.report.json",
+        "sha256": "90506439f64f953d78e6ec2a0348c6111377036e163fb33b0cf9503cf67d2642"
+      },
+      "reply": {
+        "path": "workbench-mcp-device-reports/iphone/smoke.reply.json",
+        "sha256": "1676a898866c25869bca7a76ce865bbce2212cfa790b121ea6955c925e3760ce"
+      },
+      "nativeReportRequest": {
+        "path": "workbench-mcp-device-reports/iphone/smoke.native-report-request.json",
+        "sha256": "627f6e5467018b85d656930b2a1ad1d83cb3c195a62f06c9dbba56dfe687e63a"
+      },
+      "nativeReportResponse": {
+        "path": "workbench-mcp-device-reports/iphone/smoke.native-report-response.json",
+        "sha256": "c435c9757bf0f3af2fb80f58b972b5fe21e601766f6a9831003565e2465ba916"
+      },
+      "nativeStartRequest": {
+        "path": "workbench-mcp-device-reports/iphone/smoke.native-start-request.json",
+        "sha256": "a89f0ab5bcd07aa6f287b5da747d89d10fbd305baa664816ec329541774c6536"
+      },
+      "nativeStartResponse": {
+        "path": "workbench-mcp-device-reports/iphone/smoke.native-start-response.json",
+        "sha256": "afc2f95d3140d14a2d4b0696569abe17575c0e4cf57627cc44f13bab35779b2d"
+      },
+      "artifacts": [
+        {
+          "name": "gpio.fms",
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+        },
+        {
+          "name": "console.fms",
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+        }
+      ]
+    },
+    {
+      "scenarioID": "compiler.diagnostics",
+      "runID": "4C91FC78-48B9-4664-8012-DF4A55456231",
+      "processID": 34038,
+      "status": "passed",
+      "reportCommandID": "AA60969C-A847-4513-9E42-B3B025C66BEF",
+      "report": {
+        "path": "workbench-mcp-device-reports/iphone/diagnostics.report.json",
+        "sha256": "948265dd930a0d9ed22b3e02b903b0c9fb9a199227dc75e130eaad10337c0b25"
+      },
+      "reply": {
+        "path": "workbench-mcp-device-reports/iphone/diagnostics.reply.json",
+        "sha256": "cfbdff4d351f7a6dc5afe8d1d8e2eb93d90c50947de9d9f15cb46f535873b10b"
+      },
+      "nativeReportRequest": {
+        "path": "workbench-mcp-device-reports/iphone/diagnostics.native-report-request.json",
+        "sha256": "2d5914c215d793a4dd370ecf6629bbe8e1058bd8be36a33150c84d59f45099ab"
+      },
+      "nativeReportResponse": {
+        "path": "workbench-mcp-device-reports/iphone/diagnostics.native-report-response.json",
+        "sha256": "a7d2ee0d6f377607f1e4a985615d6d5335265ee74d93eebe7f0f06124ff577eb"
+      },
+      "nativeStartRequest": {
+        "path": "workbench-mcp-device-reports/iphone/diagnostics.native-start-request.json",
+        "sha256": "79f3a66264934b4d23012ce428a26dce0fbb66233e59eeb68329430ad9b712bf"
+      },
+      "nativeStartResponse": {
+        "path": "workbench-mcp-device-reports/iphone/diagnostics.native-start-response.json",
+        "sha256": "4ab78fcef4be529e4898ee224e063f313bd174ba42a81ea83cac4e68c9f1bdf7"
+      },
+      "artifacts": [
+        {
+          "name": "gpio.fms",
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+        }
+      ]
+    }
+  ],
+  "revocation": {
+    "confirmedByNativeMCP": true,
+    "response": {
+      "path": "workbench-mcp-device-reports/iphone/revocation.native-response.json",
+      "sha256": "71dcfd5200f0042eea9d72ee3e4f17a9b5d51225b90716a280c7636f7f14d012"
+    },
+    "appDiagnostic": {
+      "processID": 34038,
+      "status": "Pairing stopped: Controller rejected the paired request.",
+      "phase": "active",
+      "schema": 1,
+      "instanceID": "13C72624-2030-4689-8F4C-7753D1F87808",
+      "tls": "Pinned leaf trust evaluation passed",
+      "isPaired": false,
+      "acknowledged": 7,
+      "sessionID": "97B49612-2D2C-4CE6-A74A-92674EBD3826"
+    }
+  },
+  "controller": {
+    "state": "Running for registered developer MCP access; selected iPhone authority revoked",
+    "readyMetadataPath": ".build/workbench-mcp-codex-controller-r1/ready.json",
+    "automaticStartOrRestart": false
+  },
+  "source": {
+    "files": {
+      "Tools/Workbench/mcp-server.py": "8c3f202f83c6fed17f24eaac3e3e0e5dfe7eeb0990f77d93e7920c77a4f62c7b",
+      "Tools/Workbench/check-codex-device.py": "870ee49e765788191ea2a3ab725e068fc576e3aabe22659279977d701e1bff09",
+      "Tools/Workbench/paired.py": "70b8b4143e12bdfbe780bdae1b47888f200a2ca3f68ed086d72540d73bf5630e"
+    },
+    "adapterBaseCommit": "37733ada4f458d357568afae6ab01deb5c93daea",
+    "runnerState": "New opt-in helper, identified by exact SHA-256 before commit; existing signed iPhone app was not rebuilt"
+  },
+  "setupObservations": [
+    "Standalone /usr/local/bin/codex 0.92.0 was killed on launch; app-bundled 0.166.0-alpha.6 succeeded.",
+    "Existing chat writer ownership was respected; the test used an ephemeral host context with no model turn.",
+    "First runner startup failed on a scoped configuration override before any Workbench submission; corrected attempt used fresh scenario IDs."
+  ],
+  "limitations": [
+    "Representative compiler.smoke and compiler.diagnostics only; broader MCP lifecycle/deadline/stress and iPad MCP runs not repeated.",
+    "No board contact, upload, flash, UI inspection or minimum-OS qualification.",
+    "Current desktop chat tool catalogue was not modified in place; a fresh Codex host loaded the persisted registration."
+  ],
+  "validation": {
+    "normalCommand": "node Tools/ManagedWASM/run-validation.mjs",
+    "result": "passed",
+    "mcpOfflineFixtures": 16,
+    "pairedBrokerFixtures": 11,
+    "workbenchCLIFixtures": 15,
+    "workbenchNonNetworkTests": 24,
+    "workbenchLiveTLSSkips": 1,
+    "romHostTests": 8,
+    "sdkReportedTests": 166,
+    "missingRuntimeCases": "Explicitly skipped by normal source validation; live iPhone checks above supply the separately scoped actual compilation evidence",
+    "ci": "Workflow YAML parsed; optional native-host helper syntax checked only; remote CI not claimed"
+  }
+}

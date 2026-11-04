@@ -42,8 +42,13 @@ controller: explicit session/command/run selection, asynchronous submission,
 result/report validation and revocation. It starts no app/controller or device
 operation. Both current per-request MCP and legacy initialization are checked;
 normal fixtures use an in-memory broker, and opt-in official-client checks use
-archived bytes over a local Unix socket. No fresh MCP-to-physical-device or
-Codex/Claude registration claim follows. See `docs/workbench-mcp.md`. The second increment adds compiler
+archived bytes over a local Unix socket. On 2026-11-03, Codex registration and
+native Codex-host MCP calls to the physical iPhone pass fresh smoke and diagnostic
+recovery scenarios, with original native envelopes and checked RPC exports in
+`docs/workbench-mcp-iphone.json`. The app reports build 9/PID 34038, and the pairing
+is revoked afterward. The developer controller remains running for the registered
+adapter; no automatic service startup is configured. No model turn or saved chat
+is created by the opt-in native-host helper. See `docs/workbench-mcp.md`. The second increment adds compiler
 busy/cancellation, actual deadline, twenty-build stress and interactive mobile
 scene scenarios; see `docs/workbench-compiler-scenarios.md`. Legacy hosts remain
 until matching replacement qualification. Workbench build 4 now passes all three

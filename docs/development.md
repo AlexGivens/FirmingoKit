@@ -771,3 +771,26 @@ are never auto-installed by the server or CI. Fixture processes are stopped.
 [Validation ledger](workbench-mcp-validation.json) retains source/lock/export
 hashes and exact scope. These results are not a new app/compiler/device pass;
 actual agent-host registration and fresh MCP-to-mobile qualification remain open.
+
+
+## Codex registration and live MCP iPhone check — 2026-11-03
+
+`firmingo-workbench` is now registered in the user's Codex configuration.
+The working app-bundled CLI `0.166.0-alpha.6` discovers all four tools, and its
+native MCP host runs fresh `compiler.smoke` and `compiler.diagnostics` scenarios
+on the selected iPhone 15 Pro Max/iOS 27.0.1 (24A446), build 9/PID 34038. Both
+pass with expected capsule bytes, checked report exports and exact native RPC
+requests/responses. [iPhone ledger](workbench-mcp-iphone.json). No manual app
+interaction, model turn, saved chat, board contact or new app binary is needed.
+The registered controller stays available; the iPhone pairing is explicitly
+revoked and its own safe diagnostic confirms that authority was cleared.
+
+`Tools/Workbench/check-codex-device.py` is an opt-in Python 3.11+ helper over the
+actual native host API. It requires an explicitly selected executable, existing
+server registration, selected pairing metadata, exact descriptor and new output
+path. An ephemeral host context respects the active desktop chat's writer and
+closes after collection. Uncertain IDs are retained without automatic replay.
+The [MCP guide](workbench-mcp.md) documents registration and rerun commands,
+including runtime-controller rotation and preservation of unrelated settings.
+Normal CI adds a sixteenth offline MCP fixture over the archived live envelopes
+and syntax-checks this helper; it never executes the live Codex/iPhone path.

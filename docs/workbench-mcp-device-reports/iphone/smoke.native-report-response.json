@@ -1,0 +1,139 @@
+{
+  "id": 16,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"97B49612-2D2C-4CE6-A74A-92674EBD3826\",\"commandID\":\"B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9\",\"record\":{\"commandID\":\"B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9\",\"reply\":{\"accepted\":true,\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"9\",\"command\":{\"action\":\"report\",\"commandID\":\"B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9\",\"runID\":\"D3DA1E66-0A32-48CC-B007-1F62178C79BA\",\"schema\":1},\"instanceID\":\"13C72624-2030-4689-8F4C-7753D1F87808\",\"processID\":34038,\"report\":{\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"9\",\"artifacts\":[{\"bytes\":\"Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==\",\"name\":\"gpio.fms\",\"receiptJSON\":\"eyJkb2N1bWVudElEIjoiODFCNTU1OEEtMkZEMy00NTU0LUI5MUYtM0I5RjIyMUIxMUI3IiwiY2Fwc3VsZVNIQTI1NiI6Ijk1OGI4NjFiYmMxOGQ0NjY2ZWQwM2U2OTc2YjM5YjlmZWE0ODEyNDA5YWQ5MWEzNTAxYWJiYjk2ODVhODBkN2QiLCJ2ZXJzaW9uIjoxLCJwcm92ZW5hbmNlIjp7InJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCIsInJlY2lwZVNIQTI1NiI6ImI3ODY5ZjZmYzg2M2UxOTA1ZGViNjk3NDQwOGM2ZTdkYzYzOTQzYTFmYjNlMzQyYTM1N2ZkZjc1N2IxZTIzZDkiLCJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIn0sImJ1aWxkSW5wdXRTSEEyNTYiOiI5MGRlNjViMWI5ZjY2ZDliMWYzNzEyMTI1Njc0ODYwMmRmNzdjNmMzMTEyYzI3NTY2MWZjY2Y2YjFmMWEwYmVhIiwic291cmNlRmlsZW5hbWUiOiJXb3JrYmVuY2gtZ3Bpby5pbm8iLCJzb3VyY2VSZXZpc2lvbiI6MSwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsInNvdXJjZVNIQTI1NiI6ImZkYWQ4OGFhOGIyMGIwNDVmMzUzNjJjMTNlNTYwOTBiYTg1YjdiZDNlOGYwMjQ0NTJiM2IzOWY4N2MwZjI1NjgiLCJsaW5rZWRFTEZTSEEyNTYiOiJkNzI5YThiNmE4ZTM1M2IxZmRlMDExZWE2MjU5N2YwYmM1ZTE0NTAwNDk2ZTAxOGU3YzViZDVjMTUyNzYwNTBkIiwidHJhbnNsYXRpb25Vbml0U0hBMjU2IjoiMDkxMjM2YWVlYTFkMWI0ZGVkNDEwZGUzZWIxNTViMTk2NzM4YWU5ZDcyN2QxZDc0MTFkM2I5Y2EzYmNiZTRkZSIsImZpcm13YXJlQnVpbGRJRCI6ImM0NGQyNWVmZTc3NGViNDdiMTYzYmMwODI5MDZjZjQ4YjU5YjZlM2RkMWQwZTE5Yzc4MjI5MjVlNmJhODI3NWYiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjEifQ==\",\"sha256\":\"958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d\",\"wasmLinearMemoryBytes\":27983872},{\"bytes\":\"Rk1TMQEAQABOQU5PnCwCEAABIBCIAAAAAQEgEAkBIBB1Er8mbpcQeimvK3s+mRIaw5V5WZrf1lJWRLO0DsrZswAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Bv4gL3gtQGoAUkA8AP4jL2AASAQvLUBrAVKIoAA8Bz4BUYESAJoAiEgRpBHQBm8vQ0KAAC0LAIQHLUGTKBogEcAKAXUAaoQcCNoASEQRphHHL3ARrQsAhCAtQhGACFCXEkcACr70QJKEmhJHpBHgL20LAIQcmVhZHkA1NQ=\",\"name\":\"console.fms\",\"receiptJSON\":\"eyJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiI1M2IwYzBhNzMyYTExZmZmZjM0OTY3MjU2MzZhMGE2Yjk0NjYzMzQ0YjI3ZmUzYTRlMzBmODY5YTE2MmNlYTk1IiwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsImxpbmtlZEVMRlNIQTI1NiI6IjJmYmRkNjdlNGQ0NDRiMjBlNDUwZjNmN2U4MmNhYjAzYzg3YTk1NjM1ZTAxMmVlNDUxODFiZDFkMThlYzkwN2EiLCJkb2N1bWVudElEIjoiRDU0Q0UxRTEtODlGMy00MEE1LUE0OEQtMzdBMjE0QzEzQjU1IiwiYnVpbGRJbnB1dFNIQTI1NiI6ImVjOWU4ZDMwMTI4MmM4Yjk0YzNiMjZlNmM0NjNhODMyNjFlOTEzZWE3YjRjMmFhODQxMmM3ZGY1ZDczZGQ3MmMiLCJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwiY2Fwc3VsZVNIQTI1NiI6ImIzNzJjMDBlZGY0YjYwYzY2MmY3MzA1NTY4NWVkODc2NGU5Zjg3OThmZTllZmJiYWZhZDA0MzAyNTQ5MTc0YzAiLCJzb3VyY2VTSEEyNTYiOiI2OTdmOTU0N2Y3MmQ0NzgyMTBkZDI5YmQ2NmM2MjkzZTBhOWFlOTI2YTFiNGU4ZDU2OGIxMGFlZWFiMzdmNWEzIiwic291cmNlUmV2aXNpb24iOjEsInNvdXJjZUZpbGVuYW1lIjoiV29ya2JlbmNoLWNvbnNvbGUuaW5vIiwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MSIsInZlcnNpb24iOjEsInByb3ZlbmFuY2UiOnsiY29tcGlsZXIiOiJDbGFuZ1wvTExEIDIyLjEuOCBBQkktdHdvIFdBU0kgc2VydmljZSwgaXNvbGF0ZWQgV2ViS2l0IHdvcmtlciIsInJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSIsInRvb2xjaGFpblNIQTI1NiI6ImE0NGFmYTg0ZTc2YWU3YjE3NDJmZDVlY2ZlZWMyMDU1NjU2NDNiOTQ5NDhlMzRkOGM1NzAyOWFlM2NhZGE5ZmQifSwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QifQ==\",\"sha256\":\"b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0\",\"wasmLinearMemoryBytes\":27983872}],\"catalogueSHA256\":\"e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e\",\"deviceOperations\":false,\"events\":[{\"detail\":\"Loading actual SDK-verified catalogue metadata.\",\"phase\":\"catalogue\",\"seconds\":0.0011087083257734776,\"sequence\":0},{\"detail\":\"Verifying real bundled compiler/runtime resources.\",\"phase\":\"resources\",\"seconds\":0.01395487500121817,\"sequence\":1},{\"detail\":\"Executing actual WASM compile/link/package through the SDK.\",\"phase\":\"compile-gpio\",\"seconds\":0.13964895834214985,\"sequence\":2},{\"detail\":\"Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d\",\"phase\":\"artifact-gpio\",\"seconds\":0.9900797916925512,\"sequence\":3},{\"detail\":\"Executing actual WASM compile/link/package through the SDK.\",\"phase\":\"compile-console\",\"seconds\":0.9911612083087675,\"sequence\":4},{\"detail\":\"Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0\",\"phase\":\"artifact-console\",\"seconds\":1.6082519166520797,\"sequence\":5},{\"detail\":\"All assertions in the selected scenario completed.\",\"phase\":\"complete\",\"seconds\":1.6095379166654311,\"sequence\":6}],\"firmwareBuildID\":\"c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f\",\"id\":\"D3DA1E66-0A32-48CC-B007-1F62178C79BA\",\"operatingSystem\":\"Version 27.0.1 (Build 24A446)\",\"processID\":34038,\"scenarioID\":\"compiler.smoke\",\"schema\":1,\"status\":\"passed\"},\"schema\":1,\"state\":{\"awaitingLifecycleStart\":false,\"isRunning\":false,\"phase\":\"complete\",\"runID\":\"D3DA1E66-0A32-48CC-B007-1F62178C79BA\",\"status\":\"passed\"}},\"sequence\":4,\"state\":\"completed\"},\"scenarioCompletion\":\"passed\",\"validatedReport\":true,\"evidence\":[{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r1/97B49612-2D2C-4CE6-A74A-92674EBD3826/B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9/reply.json\",\"bytes\":6134,\"sha256\":\"1676a898866c25869bca7a76ce865bbce2212cfa790b121ea6955c925e3760ce\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r1/97B49612-2D2C-4CE6-A74A-92674EBD3826/B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9/report.json\",\"bytes\":6142,\"sha256\":\"90506439f64f953d78e6ec2a0348c6111377036e163fb33b0cf9503cf67d2642\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r1/97B49612-2D2C-4CE6-A74A-92674EBD3826/B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9/gpio.fms\",\"bytes\":316,\"sha256\":\"958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r1/97B49612-2D2C-4CE6-A74A-92674EBD3826/B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9/console.fms\",\"bytes\":392,\"sha256\":\"b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0\"}]}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "97B49612-2D2C-4CE6-A74A-92674EBD3826",
+      "commandID": "B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9",
+      "record": {
+        "commandID": "B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9",
+        "reply": {
+          "accepted": true,
+          "appIdentifier": "com.firmingokit.demo",
+          "appVersion": "9",
+          "command": {
+            "action": "report",
+            "commandID": "B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9",
+            "runID": "D3DA1E66-0A32-48CC-B007-1F62178C79BA",
+            "schema": 1
+          },
+          "instanceID": "13C72624-2030-4689-8F4C-7753D1F87808",
+          "processID": 34038,
+          "report": {
+            "appIdentifier": "com.firmingokit.demo",
+            "appVersion": "9",
+            "artifacts": [
+              {
+                "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+                "name": "gpio.fms",
+                "receiptJSON": "eyJkb2N1bWVudElEIjoiODFCNTU1OEEtMkZEMy00NTU0LUI5MUYtM0I5RjIyMUIxMUI3IiwiY2Fwc3VsZVNIQTI1NiI6Ijk1OGI4NjFiYmMxOGQ0NjY2ZWQwM2U2OTc2YjM5YjlmZWE0ODEyNDA5YWQ5MWEzNTAxYWJiYjk2ODVhODBkN2QiLCJ2ZXJzaW9uIjoxLCJwcm92ZW5hbmNlIjp7InJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCIsInJlY2lwZVNIQTI1NiI6ImI3ODY5ZjZmYzg2M2UxOTA1ZGViNjk3NDQwOGM2ZTdkYzYzOTQzYTFmYjNlMzQyYTM1N2ZkZjc1N2IxZTIzZDkiLCJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIn0sImJ1aWxkSW5wdXRTSEEyNTYiOiI5MGRlNjViMWI5ZjY2ZDliMWYzNzEyMTI1Njc0ODYwMmRmNzdjNmMzMTEyYzI3NTY2MWZjY2Y2YjFmMWEwYmVhIiwic291cmNlRmlsZW5hbWUiOiJXb3JrYmVuY2gtZ3Bpby5pbm8iLCJzb3VyY2VSZXZpc2lvbiI6MSwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsInNvdXJjZVNIQTI1NiI6ImZkYWQ4OGFhOGIyMGIwNDVmMzUzNjJjMTNlNTYwOTBiYTg1YjdiZDNlOGYwMjQ0NTJiM2IzOWY4N2MwZjI1NjgiLCJsaW5rZWRFTEZTSEEyNTYiOiJkNzI5YThiNmE4ZTM1M2IxZmRlMDExZWE2MjU5N2YwYmM1ZTE0NTAwNDk2ZTAxOGU3YzViZDVjMTUyNzYwNTBkIiwidHJhbnNsYXRpb25Vbml0U0hBMjU2IjoiMDkxMjM2YWVlYTFkMWI0ZGVkNDEwZGUzZWIxNTViMTk2NzM4YWU5ZDcyN2QxZDc0MTFkM2I5Y2EzYmNiZTRkZSIsImZpcm13YXJlQnVpbGRJRCI6ImM0NGQyNWVmZTc3NGViNDdiMTYzYmMwODI5MDZjZjQ4YjU5YjZlM2RkMWQwZTE5Yzc4MjI5MjVlNmJhODI3NWYiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjEifQ==",
+                "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+                "wasmLinearMemoryBytes": 27983872
+              },
+              {
+                "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBCIAAAAAQEgEAkBIBB1Er8mbpcQeimvK3s+mRIaw5V5WZrf1lJWRLO0DsrZswAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Bv4gL3gtQGoAUkA8AP4jL2AASAQvLUBrAVKIoAA8Bz4BUYESAJoAiEgRpBHQBm8vQ0KAAC0LAIQHLUGTKBogEcAKAXUAaoQcCNoASEQRphHHL3ARrQsAhCAtQhGACFCXEkcACr70QJKEmhJHpBHgL20LAIQcmVhZHkA1NQ=",
+                "name": "console.fms",
+                "receiptJSON": "eyJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiI1M2IwYzBhNzMyYTExZmZmZjM0OTY3MjU2MzZhMGE2Yjk0NjYzMzQ0YjI3ZmUzYTRlMzBmODY5YTE2MmNlYTk1IiwiY2F0YWxvZ3VlU0hBMjU2IjoiZTM0MWJmYzAzODVmZWE5YjJiMDI2ZGM2MjRkYWEyNmNkZWFjMzMyODZmNGJiMDcyNDNiMzdjMWMzMTgzN2QwZSIsImxpbmtlZEVMRlNIQTI1NiI6IjJmYmRkNjdlNGQ0NDRiMjBlNDUwZjNmN2U4MmNhYjAzYzg3YTk1NjM1ZTAxMmVlNDUxODFiZDFkMThlYzkwN2EiLCJkb2N1bWVudElEIjoiRDU0Q0UxRTEtODlGMy00MEE1LUE0OEQtMzdBMjE0QzEzQjU1IiwiYnVpbGRJbnB1dFNIQTI1NiI6ImVjOWU4ZDMwMTI4MmM4Yjk0YzNiMjZlNmM0NjNhODMyNjFlOTEzZWE3YjRjMmFhODQxMmM3ZGY1ZDczZGQ3MmMiLCJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwiY2Fwc3VsZVNIQTI1NiI6ImIzNzJjMDBlZGY0YjYwYzY2MmY3MzA1NTY4NWVkODc2NGU5Zjg3OThmZTllZmJiYWZhZDA0MzAyNTQ5MTc0YzAiLCJzb3VyY2VTSEEyNTYiOiI2OTdmOTU0N2Y3MmQ0NzgyMTBkZDI5YmQ2NmM2MjkzZTBhOWFlOTI2YTFiNGU4ZDU2OGIxMGFlZWFiMzdmNWEzIiwic291cmNlUmV2aXNpb24iOjEsInNvdXJjZUZpbGVuYW1lIjoiV29ya2JlbmNoLWNvbnNvbGUuaW5vIiwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MSIsInZlcnNpb24iOjEsInByb3ZlbmFuY2UiOnsiY29tcGlsZXIiOiJDbGFuZ1wvTExEIDIyLjEuOCBBQkktdHdvIFdBU0kgc2VydmljZSwgaXNvbGF0ZWQgV2ViS2l0IHdvcmtlciIsInJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSIsInRvb2xjaGFpblNIQTI1NiI6ImE0NGFmYTg0ZTc2YWU3YjE3NDJmZDVlY2ZlZWMyMDU1NjU2NDNiOTQ5NDhlMzRkOGM1NzAyOWFlM2NhZGE5ZmQifSwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QifQ==",
+                "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+                "wasmLinearMemoryBytes": 27983872
+              }
+            ],
+            "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+            "deviceOperations": false,
+            "events": [
+              {
+                "detail": "Loading actual SDK-verified catalogue metadata.",
+                "phase": "catalogue",
+                "seconds": 0.0011087083257734776,
+                "sequence": 0
+              },
+              {
+                "detail": "Verifying real bundled compiler/runtime resources.",
+                "phase": "resources",
+                "seconds": 0.01395487500121817,
+                "sequence": 1
+              },
+              {
+                "detail": "Executing actual WASM compile/link/package through the SDK.",
+                "phase": "compile-gpio",
+                "seconds": 0.13964895834214985,
+                "sequence": 2
+              },
+              {
+                "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+                "phase": "artifact-gpio",
+                "seconds": 0.9900797916925512,
+                "sequence": 3
+              },
+              {
+                "detail": "Executing actual WASM compile/link/package through the SDK.",
+                "phase": "compile-console",
+                "seconds": 0.9911612083087675,
+                "sequence": 4
+              },
+              {
+                "detail": "Expected and observed capsule SHA-256: b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+                "phase": "artifact-console",
+                "seconds": 1.6082519166520797,
+                "sequence": 5
+              },
+              {
+                "detail": "All assertions in the selected scenario completed.",
+                "phase": "complete",
+                "seconds": 1.6095379166654311,
+                "sequence": 6
+              }
+            ],
+            "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+            "id": "D3DA1E66-0A32-48CC-B007-1F62178C79BA",
+            "operatingSystem": "Version 27.0.1 (Build 24A446)",
+            "processID": 34038,
+            "scenarioID": "compiler.smoke",
+            "schema": 1,
+            "status": "passed"
+          },
+          "schema": 1,
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "D3DA1E66-0A32-48CC-B007-1F62178C79BA",
+            "status": "passed"
+          }
+        },
+        "sequence": 4,
+        "state": "completed"
+      },
+      "scenarioCompletion": "passed",
+      "validatedReport": true,
+      "evidence": [
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r1/97B49612-2D2C-4CE6-A74A-92674EBD3826/B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9/reply.json",
+          "bytes": 6134,
+          "sha256": "1676a898866c25869bca7a76ce865bbce2212cfa790b121ea6955c925e3760ce"
+        },
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r1/97B49612-2D2C-4CE6-A74A-92674EBD3826/B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9/report.json",
+          "bytes": 6142,
+          "sha256": "90506439f64f953d78e6ec2a0348c6111377036e163fb33b0cf9503cf67d2642"
+        },
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r1/97B49612-2D2C-4CE6-A74A-92674EBD3826/B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9/gpio.fms",
+          "bytes": 316,
+          "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d"
+        },
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r1/97B49612-2D2C-4CE6-A74A-92674EBD3826/B6ADE858-FEE5-416D-BEAE-7CC9441FA5F9/console.fms",
+          "bytes": 392,
+          "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0"
+        }
+      ]
+    },
+    "isError": false
+  }
+}
