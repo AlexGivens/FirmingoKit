@@ -43,8 +43,9 @@ inspection and fixed binary console through the shared engine and MCP, with
 explicit schema-two hardware selection. The version-one offline contract and
 historical first-increment results below retain their original scope. Selected
 Nano inspection/raw binary console now pass through native MCP on the physical
-iPhone ([ledger](workbench-device-qualification.json)); iPad/FMS2 mode and guarded
-upload/ROM migration remain separate steps.
+iPhone ([ledger](workbench-device-qualification.json)) and iPad
+([ledger](workbench-device-ipad-qualification.json)), using the identical signed
+build 10. FMS2 mode and guarded upload/ROM migration remain separate steps.
 
 Compiler busy/deadline/lifecycle/stress migration is tracked in
 [the compiler-scenario work log](workbench-compiler-scenarios.md). Next migrate read-only device and

@@ -1,0 +1,12 @@
+{
+  "id": 26,
+  "method": "mcpServer/tool/call",
+  "params": {
+    "threadId": "01a1a801-49f5-7681-a6af-33a5d61e04dc",
+    "server": "firmingo-workbench",
+    "tool": "workbench_revoke",
+    "arguments": {
+      "session_id": "A2A68551-4CC4-421F-8D4A-3FC5ECE407D3"
+    }
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "schema": 1,
+  "date": "2026-11-04",
+  "status": "passed",
+  "scope": "Fresh native Codex MCP host through pinned paired Workbench build 10 on physical iPad: selected Nano inspection and exact 256-byte raw application console",
+  "app": {
+    "schema": 1,
+    "sdkCommit": "fce04293111027983b8c00c1923b4784d92ffc90",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "preparedInventorySHA256": "bb68632357d4b41b1a2007a2f953cbd52cfb342e9f9fe468a20cd095ac2301bd",
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "10",
+    "executableSHA256": "f587aadf8492e1897b10e74aa476eb8192e690941eb4a33f634e55339f7ca7a1"
+  },
+  "pairing": {
+    "appVersion": "10",
+    "expired": false,
+    "instanceID": "3343278B-6FDE-4EB3-B48F-1ED46A528D9F",
+    "label": "iPad-device-build10",
+    "lastSeenSeconds": 0.007589167449623346,
+    "paired": true,
+    "processID": 6417,
+    "revoked": false,
+    "sessionID": "A2A68551-4CC4-421F-8D4A-3FC5ECE407D3"
+  },
+  "registration": {
+    "server": "firmingo-workbench",
+    "adapterVersion": "0.2.0",
+    "unrelatedSettingsPreserved": true,
+    "controllerRestartedWithFreshCertificate": true
+  },
+  "hostDevice": {
+    "model": "iPad Pro (11-inch) (3rd generation)",
+    "productType": "iPad13,4",
+    "osVersion": "27.0.1",
+    "osBuild": "24A446",
+    "developmentTransport": "localNetwork"
+  },
+  "nativeHost": {
+    "userAgent": "Codex Desktop/0.166.0-alpha.6 (Mac OS 27.0.0; arm64) dumb (firmingo-workbench-qualification; 0.1.0)",
+    "ephemeralHostContext": true,
+    "modelTurnsStarted": 0,
+    "stoppedAfterCollection": true,
+    "discoveryRequest": {
+      "path": "workbench-device-reports/ipad-build10/discovery.native-request.json",
+      "sha256": "586e20ce730c52a08ed4ed2d5bc6e42dab216183bca6d353713478ac61f0d59e",
+      "bytes": 198
+    },
+    "discoveryResponse": {
+      "path": "workbench-device-reports/ipad-build10/discovery.native-response.json",
+      "sha256": "1aca7cc4ca962b3057ac92f2299de9c67a63cb22df104fef64746093bdf93f92",
+      "bytes": 10734
+    }
+  },
+  "runs": [
+    {
+      "scenarioID": "device.inspect",
+      "runID": "75F38385-B7F9-457F-AA73-EC2145D14EF4",
+      "processID": 6417,
+      "status": "passed",
+      "reportCommandID": "8E0AA7B0-3B17-417D-8F10-98400C3BDD59",
+      "reply": {
+        "path": "workbench-device-reports/ipad-build10/device-inspect.reply.json",
+        "sha256": "1c6611e3064f98246f7b6b468e92cb94106583b25924a9cc3c0bfaf4f67bb9cd",
+        "bytes": 1610
+      },
+      "report": {
+        "path": "workbench-device-reports/ipad-build10/device-inspect.report.json",
+        "sha256": "c72237eec647fd6d0f973a205833bb492d8c73617250e4338ed855315e04acc7",
+        "bytes": 1561
+      },
+      "nativeStartRequest": {
+        "path": "workbench-device-reports/ipad-build10/device-inspect.nativeStart-request.json",
+        "sha256": "bdd6a550aa1422aacb0ccf1f8eadf86edad749db370e49d7310dc8b389e46500",
+        "bytes": 578
+      },
+      "nativeStartResponse": {
+        "path": "workbench-device-reports/ipad-build10/device-inspect.nativeStart-response.json",
+        "sha256": "741ee5f18923b6a155d5ddefbf17839575265e0f788cfc7bd4e7b003690e17e5",
+        "bytes": 1567
+      },
+      "nativeReportRequest": {
+        "path": "workbench-device-reports/ipad-build10/device-inspect.nativeReport-request.json",
+        "sha256": "e063c41a5171702d0faa6aeaf90f41f1a1e72d5ec310243ac6c44e8430869ded",
+        "bytes": 500
+      },
+      "nativeReportResponse": {
+        "path": "workbench-device-reports/ipad-build10/device-inspect.nativeReport-response.json",
+        "sha256": "6042bcfe912731a970ddf22d39549b40e9f9b540906e422e3648f7f7a7f25003",
+        "bytes": 6693
+      }
+    },
+    {
+      "scenarioID": "device.console-binary",
+      "runID": "3598E0FC-6F94-4BD5-A431-17A8064D0C12",
+      "processID": 6417,
+      "status": "passed",
+      "reportCommandID": "D6B205A4-A8C9-453E-82AC-CFAF5F8BC931",
+      "reply": {
+        "path": "workbench-device-reports/ipad-build10/device-console-binary.reply.json",
+        "sha256": "68fd8d07b91fb815c5094524df60497855d12a17e3955fda75357e449a874b87",
+        "bytes": 2017
+      },
+      "report": {
+        "path": "workbench-device-reports/ipad-build10/device-console-binary.report.json",
+        "sha256": "1255892a4904ae3e9eed76e2ac3eadaa70047f4455b8632dff8af6183aa93387",
+        "bytes": 1984
+      },
+      "nativeReportRequest": {
+        "path": "workbench-device-reports/ipad-build10/device-console-binary.nativeReport-request.json",
+        "sha256": "8ef5d825ada10369b4c3e32144ed5afc6444312973ca5592889457f36894aa8c",
+        "bytes": 588
+      },
+      "nativeReportResponse": {
+        "path": "workbench-device-reports/ipad-build10/device-console-binary.nativeReport-response.json",
+        "sha256": "ceaf3cc5c4fe00ac73108e416fcc7a2e1f9d9d552186f960f22814f4b171b322",
+        "bytes": 7551
+      },
+      "nativeStartRequest": {
+        "path": "workbench-device-reports/ipad-build10/device-console-binary.nativeStart-request.json",
+        "sha256": "2ad295f7d1cd24cce4fa67c4b030d75a46991c30803225efb4c01a00a67d804f",
+        "bytes": 667
+      },
+      "nativeStartResponse": {
+        "path": "workbench-device-reports/ipad-build10/device-console-binary.nativeStart-response.json",
+        "sha256": "9d3abb33ef2cdc40f058ea1f717b1fc40f7981b213348f9916ecf948552e5f4d",
+        "bytes": 1730
+      }
+    }
+  ],
+  "revocation": {
+    "confirmedByNativeMCP": true,
+    "noFurtherDeviceOperationRequired": true,
+    "nativeRequest": {
+      "path": "workbench-device-reports/ipad-build10/revoke.native-request.json",
+      "sha256": "01ae03d497a9c54d9286ac6b26250642e9b02afe2c5d53433e827ae76b116169",
+      "bytes": 277
+    },
+    "nativeResponse": {
+      "path": "workbench-device-reports/ipad-build10/revoke.native-response.json",
+      "sha256": "71dcfd5200f0042eea9d72ee3e4f17a9b5d51225b90716a280c7636f7f14d012",
+      "bytes": 212
+    },
+    "finalSafeControllerMetadata": {
+      "appVersion": "10",
+      "expired": false,
+      "instanceID": "3343278B-6FDE-4EB3-B48F-1ED46A528D9F",
+      "label": "iPad-device-build10",
+      "lastSeenSeconds": 50.90186900040135,
+      "paired": true,
+      "processID": 6417,
+      "revoked": true,
+      "sessionID": "A2A68551-4CC4-421F-8D4A-3FC5ECE407D3"
+    }
+  },
+  "nano": {
+    "boardID": "nano_rp2040_connect",
+    "deviceID": "5031503337360009",
+    "address": "192.168.77.1",
+    "bootID": "a748781e607366f1",
+    "firmwareVersionReported": "0.1.0",
+    "backend": "application",
+    "userConfirmedFirmwareUnchangedSinceIPhoneCheck": true,
+    "priorIPhoneEvidence": "workbench-device-qualification.json",
+    "priorRecoveryEvidence": "nano-rom-recovery.json",
+    "freshInstalledImageAttestation": false,
+    "transport": "USB to physical iPad; Mac controller over Wi-Fi",
+    "jumpers": "D2 and REC disconnected per requested procedure",
+    "probe": "raw-256-v1",
+    "sentBytes": 256,
+    "receivedBytes": 256,
+    "expectedBytesSHA256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+    "firstAttempt": true,
+    "automaticRetry": false,
+    "resetOrInstallationOrFlashPerformed": false
+  },
+  "limitations": [
+    "This result qualifies this selected Nano/application/iPad/model/OS only; prior iPhone evidence remains separate",
+    "No fresh installed-image readback or attestation; hello is self-reported",
+    "No first-authorization/cold-attachment, Internet coexistence, throughput, delayed trailing-byte, soak or electrical measurement claim",
+    "FMS2 command-2, Pico, physical busy/path-loss/background/deadline and upload/ROM migration remain separately unqualified",
+    "No new compiler/runtime, minimum-OS, UI/accessibility or remote CI qualification; the identical previously qualified app was reused"
+  ],
+  "toolSourceCommit": "dcc7e8bcb75f6ad0563585d80e7caff7f1ab328f",
+  "toolSourceSHA256": {
+    "Tools/Workbench/check-codex-device.py": "9cdbace60ed64ca866efea469207194c34594483abb878d309fe45303610dd64",
+    "Tools/Workbench/mcp-server.py": "a5da02d4035e1d668980c978df27596c3be0feb511632a1be9f35aa7214db695",
+    "Tools/Workbench/paired.py": "d6e5fae010d9d74d0a5c8ccf3d839cfd8150b324f52254bbe7df2194974c0480",
+    "Tools/Workbench/workbench.py": "8a1a4b858c0c9ab888e1589eea8f7d3df875fb5574a85092bf3d11b2a53b6a08"
+  },
+  "controller": {
+    "endpoint": "https://192.168.4.50:65305/",
+    "certificateSHA256": "6e5ed2e62a0f01eb934fb01a538001feec87a47a419b750578044bd13e43a85b",
+    "stopped": true,
+    "automaticServiceInstalled": false,
+    "futureRunRequiresFreshControllerAndPairing": true
+  },
+  "validation": {
+    "command": "python3 -I -S -B Tools/Workbench/test-mcp.py",
+    "tests": 18,
+    "passed": true,
+    "scope": "Deterministic MCP fixtures plus archived iPhone/iPad report/request correlation; no device during replay",
+    "ciEntryPointReviewed": "node Tools/ManagedWASM/run-validation.mjs -> Tools/Workbench/test-mcp.py",
+    "remoteCIPassClaimed": false,
+    "newAppBuildRequired": false,
+    "log": {
+      "path": ".build/workbench-device-ipad-corpus-final.log",
+      "sha256": "bd0d4ace4c934c1854f4d8089f1da80f536acc782fd98c6a47a623d53d7de33e"
+    }
+  }
+}

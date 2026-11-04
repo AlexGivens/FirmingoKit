@@ -35,3 +35,7 @@ after the SDK is built, without opening a socket or loading compiler assets.
 host/iPhone check (Python 3.11+). It uses the registered MCP server and a fresh
 pairing, creates no model turn or saved chat, and is never executed by normal CI.
 [Measured registration/device result](../../docs/workbench-mcp-iphone.json).
+The same helper now also records selected Nano inspection/raw binary console on
+[iPhone](../../docs/workbench-device-qualification.json) and
+[iPad](../../docs/workbench-device-ipad-qualification.json) with the identical
+signed build 10. Offline MCP fixtures revalidate both native request/report corpora.

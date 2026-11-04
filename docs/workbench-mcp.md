@@ -264,3 +264,21 @@ The active desktop tool catalogue was not rebound. Eighteen socket-free fixtures
 include the new versioned scope checks and original build-10 native corpus replay;
 replaying those bytes is not another physical run. iPad/Pico, command-2 FMS2 mode,
 upload/ROM recovery and broader hardware qualification remain separate work.
+
+
+## iPad device follow-up — 2026-11-04
+
+[The iPad ledger](workbench-device-ipad-qualification.json) now records fresh
+native Codex MCP inspection and exact raw binary console through the identical
+signed build 10 on iPad Pro (11-inch, 3rd generation)/iPadOS 27.0.1. The Nano
+remained on its unchanged 0.1.0 application. The fresh inspected boot was required
+before sending the one 256-byte probe; every reply byte matched, and console close,
+disconnect and native MCP revocation passed. Original request/report envelopes
+are retained and replayed as parser data in the same 18-test offline suite.
+This adds no fresh compiler, upload/ROM, FMS2-probe mode, minimum-OS or Pico claim.
+
+Registration now selects the r3 controller/evidence paths with unrelated Codex
+settings preserved. The owned controller is stopped after qualification; a future
+run requires explicit fresh controller startup and pairing. No automatic service
+or active-desktop tool-catalogue rebinding was added. The shared configuration
+procedure remains the [official OpenAI MCP configuration](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).

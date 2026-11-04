@@ -68,8 +68,12 @@ pass. The same signed build 10 now passes native MCP inspection and exact
 smoke/diagnostic regressions also pass in the same app/PID. Pairing is revoked
 and the controller is stopped at the user-requested pause. See
 `docs/workbench-device-qualification.json` and `docs/workbench-device-scenarios.md`.
-iPad/Pico, FMS2 command-2 mode and upload/recovery migration remain separate;
-preserve unmatched legacy hosts.
+The subsequent resumed iPad check also passes both device scenarios using the
+identical signed build 10, independent pairing/PID and fresh Nano boot. See
+`docs/workbench-device-ipad-qualification.json`; native report/request corpus
+checks cover both hosts. The iPad pairing is revoked and its controller is stopped.
+Pico, FMS2 command-2 mode and upload/recovery migration remain separate; preserve
+unmatched legacy hosts.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

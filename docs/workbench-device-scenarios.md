@@ -152,3 +152,40 @@ fixtures pass with archived native request/report scope and byte verification.
 iPad/Pico, the FMS2 command-2 mode and physical busy/path-loss/background/deadline
 cases are not qualified by this run. Guarded upload/ROM recovery migration and
 unmatched legacy-host retirement remain future work.
+
+
+## Physical iPad follow-up — 2026-11-04
+
+[Separate iPad ledger](workbench-device-ipad-qualification.json) records the
+resumed qualification using the identical previously signed build 10 executable
+`f587aadf8492e1897b10e74aa476eb8192e690941eb4a33f634e55339f7ca7a1`.
+Its clean source remains `fce04293111027983b8c00c1923b4784d92ffc90`; no rebuild,
+compiler asset change or firmware change was needed. The 11-inch iPad Pro
+(3rd generation), iPadOS 27.0.1 (24A446), was updated/launched over Wi-Fi and
+paired with a fresh pinned controller. An initial CoreDevice metadata query
+failed before deployment; after the user made the iPad ready, it succeeded.
+That host-availability failure was not a Nano test or a passed observation.
+
+The user connected the unchanged Nano with D2/REC disconnected. Native Codex MCP
+then ran both scenarios successfully on their first attempts in iPad PID 6417.
+Inspection matched stable device `5031503337360009`, protocol 1, application
+channel, self-reported firmware 0.1.0 and boot `a748781e607366f1`, with no
+advertised upload target. The separate console check required that newly observed
+boot, sent bytes 0–255 once, received all 256 exactly and acknowledged close before
+SDK disconnect. No Test Lab test buttons, reset, upload or installation were used.
+The reports retain the exact reply bytes, original native admission/report
+requests and responses, and independent session/run/producer identities.
+
+MCP revocation passed and the owned controller was stopped. The existing Codex
+registration now selects its r3 state/evidence paths, preserving all unrelated
+settings. Future runs need a fresh controller and pairing. The 18-test MCP suite
+passes with both iPhone and iPad corpora, including identical signed input and
+independent producer selection. CI already runs this suite through the normal
+entry point; no remote CI pass is claimed. No app/SDK source changed in this
+follow-up, so builds and unrelated runtime suites were not repeated.
+
+The raw application path now has separate iPhone and iPad evidence. FMS2 command-2
+mode, Pico, physical busy/path-loss/background/deadline cases and guarded
+upload/ROM migration remain open. Hello is not installed-image attestation;
+no fresh flash readback, first-authorization/cold-attachment matrix, Internet
+coexistence, throughput, soak, minimum-OS or UI/accessibility result is claimed.

@@ -832,3 +832,25 @@ bringing the MCP suite to 18 tests. The final normal validation entry point had
 also passed with the integrated coordination harness. The phone is released,
 the owned controller is stopped and work is paused at the user's request.
 iPad/Pico/FMS2-probe mode and guarded upload/ROM migration remain open.
+
+
+## Workbench MCP iPad device follow-up — 2026-11-04
+
+The identical signed Workbench build 10 now passes selected Nano inspection and
+exact 256-byte raw console through native Codex MCP on the physical 11-inch
+third-generation iPad Pro/iPadOS 27.0.1 (24A446). Wi-Fi deployment/pairing and
+report collection kept the iPad USB port available for the unchanged Nano.
+Both first attempts passed in one app process, using a fresh inspected boot
+before the single fixed probe; close/disconnect and native MCP revocation passed.
+The owned controller is stopped. [Exact original evidence](workbench-device-ipad-qualification.json)
+retains input identities and native request/report bytes alongside the separate
+[previous iPhone evidence](workbench-device-qualification.json).
+
+`python3 -I -S -B Tools/Workbench/test-mcp.py` passes all 18 cases, extending the
+existing native corpus fixture to both hosts and checking identical app input,
+independent session/instance identities, original correlation IDs and per-scenario
+request scope. The normal validation/CI entry point already invokes this suite.
+No app/SDK/firmware/compiler implementation changed, so no rebuild, broad suite
+rerun or firmware operation was needed. Remote CI, FMS2 command-2 mode, Pico,
+physical interruption/permission/routing matrices, minimum OS and UI inspection
+remain separate; legacy upload/recovery hosts are retained.
