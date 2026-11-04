@@ -1,0 +1,19 @@
+{
+  "id": 5,
+  "method": "mcpServer/tool/call",
+  "params": {
+    "threadId": "01a1a8c8-604f-7752-b64a-7f81c5f552c5",
+    "server": "firmingo-workbench",
+    "tool": "workbench_submit",
+    "arguments": {
+      "session_id": "D398C1C7-CFBB-49DE-A0B1-EFCFC0F3211C",
+      "command_id": "B6A1BF2B-8F61-4376-8578-AF2F15D3F98F",
+      "action": "run",
+      "run_id": "698266FE-D551-4314-939E-B7A5D47CD4A2",
+      "scenario_id": "device.inspect",
+      "device_address": "192.168.77.1",
+      "device_board": "nano_rp2040_connect",
+      "device_id": "5031503337360009"
+    }
+  }
+}

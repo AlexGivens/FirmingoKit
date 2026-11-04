@@ -1,0 +1,21 @@
+{
+  "id": 23,
+  "method": "mcpServer/tool/call",
+  "params": {
+    "threadId": "01a1a8c8-fe6e-7ed1-a063-1be3f587293d",
+    "server": "firmingo-workbench",
+    "tool": "workbench_result",
+    "arguments": {
+      "session_id": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84",
+      "command_id": "5E599329-847A-49F4-B208-02C523B24EC4",
+      "scenario_id": "managed.commit",
+      "device_address": "192.168.77.1",
+      "device_board": "nano_rp2040_connect",
+      "device_id": "5031503337360009",
+      "device_boot_id": "65593a752ffb8e8c",
+      "managed_operation_id": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+      "managed_record_sha256": "9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2",
+      "managed_authorization": "commit-once-d2-gnd"
+    }
+  }
+}

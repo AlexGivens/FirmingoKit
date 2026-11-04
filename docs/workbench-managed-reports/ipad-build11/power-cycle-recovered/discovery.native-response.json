@@ -1,0 +1,366 @@
+{
+  "id": 3,
+  "result": {
+    "data": [
+      {
+        "name": "firmingo-workbench",
+        "runtimeStatus": "connected",
+        "pluginId": null,
+        "httpOrigin": null,
+        "serverInfo": {
+          "name": "firmingo-workbench",
+          "title": null,
+          "version": "0.3.0",
+          "description": null,
+          "icons": null,
+          "websiteUrl": null
+        },
+        "serverCapabilities": {
+          "tools": {}
+        },
+        "toolListMeta": null,
+        "tools": {
+          "workbench_submit": {
+            "name": "workbench_submit",
+            "description": "Queue one existing controller command. Returns transport admission only, never scenario success. Choose command_id before calling; recover uncertainty with workbench_result using that ID. run requires a fresh run_id and scenario_id; list takes no run; other actions require an exact run_id. report expectations are supplied to workbench_result.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "string",
+                  "description": "Explicit UUID; never inferred from another operation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                },
+                "command_id": {
+                  "type": "string",
+                  "description": "Explicit UUID; never inferred from another operation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                },
+                "action": {
+                  "type": "string",
+                  "description": "Closed controller action.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "list",
+                    "run",
+                    "status",
+                    "cancel",
+                    "beginLifecycle",
+                    "report"
+                  ]
+                },
+                "run_id": {
+                  "type": "string",
+                  "description": "Explicit UUID; never inferred from another operation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                },
+                "scenario_id": {
+                  "type": "string",
+                  "description": "Exact scenario ID from the app registry, or expected scenario when collecting a report.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9.-]{0,95}$"
+                },
+                "firmware_build_id": {
+                  "type": "string",
+                  "description": "Exact firmware descriptor SHA-256; metadata selection does not attest installed firmware.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "device_address": {
+                  "type": "string",
+                  "description": "Canonical private IPv4; FMGO port is fixed at 7420.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "device_board": {
+                  "type": "string",
+                  "description": "Explicit SDK board identifier.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "nano_rp2040_connect",
+                    "raspberry_pi_pico"
+                  ]
+                },
+                "device_id": {
+                  "type": "string",
+                  "description": "Expected stable device ID.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{16}$"
+                },
+                "device_boot_id": {
+                  "type": "string",
+                  "description": "Boot from a separate successful inspection; required before console bytes.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{16}$"
+                },
+                "console_probe": {
+                  "type": "string",
+                  "description": "Explicit fixed binary probe for the already-running application.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "raw-256-v1",
+                    "fms2-command-2-v1"
+                  ]
+                },
+                "managed_operation_id": {
+                  "type": "string",
+                  "description": "Explicit UUID; never inferred from another operation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                },
+                "managed_sketch": {
+                  "type": "string",
+                  "description": "Fixed FMS2 qualification source; stage only.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "state-a",
+                    "state-b"
+                  ]
+                },
+                "resident_image_sha256": {
+                  "type": "string",
+                  "description": "Reviewed installed resident-only UF2 SHA-256; never hello attestation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "resident_evidence": {
+                  "type": "string",
+                  "description": "Reviewed installed-resident evidence; hello is not attestation.",
+                  "minLength": 8,
+                  "maxLength": 512
+                },
+                "managed_record_sha256": {
+                  "type": "string",
+                  "description": "Exact current SDK-record hash returned by managedEvidence.recordSHA256.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "managed_authorization": {
+                  "type": "string",
+                  "description": "Separate one-shot stage/commit selection.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "stage-d2-gnd",
+                    "commit-once-d2-gnd"
+                  ]
+                }
+              },
+              "required": [
+                "session_id",
+                "command_id",
+                "action"
+              ],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": false,
+              "destructiveHint": true,
+              "idempotentHint": false,
+              "openWorldHint": false
+            }
+          },
+          "workbench_revoke": {
+            "name": "workbench_revoke",
+            "description": "Explicitly revoke this pairing; the app cancels only controller-owned work on its next exchange. Does not terminate the app, flash a board or stop the controller.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "string",
+                  "description": "Explicit UUID; never inferred from another operation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                }
+              },
+              "required": [
+                "session_id"
+              ],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": false,
+              "destructiveHint": true,
+              "idempotentHint": false,
+              "openWorldHint": false
+            }
+          },
+          "workbench_result": {
+            "name": "workbench_result",
+            "description": "Read one command result without enqueueing anything. Pending/archived is not a pass. A report requires scenario_id and its exact firmware_build_id when applicable; validates identity, timeline and bytes through the existing CLI checker. Valid reports are also saved when an evidence directory is configured.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "session_id": {
+                  "type": "string",
+                  "description": "Explicit UUID; never inferred from another operation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                },
+                "command_id": {
+                  "type": "string",
+                  "description": "Explicit UUID; never inferred from another operation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                },
+                "scenario_id": {
+                  "type": "string",
+                  "description": "Exact scenario ID from the app registry, or expected scenario when collecting a report.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[a-z][a-z0-9.-]{0,95}$"
+                },
+                "firmware_build_id": {
+                  "type": "string",
+                  "description": "Exact firmware descriptor SHA-256; metadata selection does not attest installed firmware.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "device_address": {
+                  "type": "string",
+                  "description": "Canonical private IPv4; FMGO port is fixed at 7420.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "device_board": {
+                  "type": "string",
+                  "description": "Explicit SDK board identifier.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "nano_rp2040_connect",
+                    "raspberry_pi_pico"
+                  ]
+                },
+                "device_id": {
+                  "type": "string",
+                  "description": "Expected stable device ID.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{16}$"
+                },
+                "device_boot_id": {
+                  "type": "string",
+                  "description": "Boot from a separate successful inspection; required before console bytes.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{16}$"
+                },
+                "console_probe": {
+                  "type": "string",
+                  "description": "Explicit fixed binary probe for the already-running application.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "raw-256-v1",
+                    "fms2-command-2-v1"
+                  ]
+                },
+                "managed_operation_id": {
+                  "type": "string",
+                  "description": "Explicit UUID; never inferred from another operation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                },
+                "managed_sketch": {
+                  "type": "string",
+                  "description": "Fixed FMS2 qualification source; stage only.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "state-a",
+                    "state-b"
+                  ]
+                },
+                "resident_image_sha256": {
+                  "type": "string",
+                  "description": "Reviewed installed resident-only UF2 SHA-256; never hello attestation.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "resident_evidence": {
+                  "type": "string",
+                  "description": "Reviewed installed-resident evidence; hello is not attestation.",
+                  "minLength": 8,
+                  "maxLength": 512
+                },
+                "managed_record_sha256": {
+                  "type": "string",
+                  "description": "Exact current SDK-record hash returned by managedEvidence.recordSHA256.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "managed_authorization": {
+                  "type": "string",
+                  "description": "Separate one-shot stage/commit selection.",
+                  "minLength": 1,
+                  "maxLength": 128,
+                  "enum": [
+                    "stage-d2-gnd",
+                    "commit-once-d2-gnd"
+                  ]
+                }
+              },
+              "required": [
+                "session_id",
+                "command_id"
+              ],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": false,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            }
+          },
+          "workbench_sessions": {
+            "name": "workbench_sessions",
+            "description": "List safe pairing metadata from the selected controller; does not pair or start an app.",
+            "inputSchema": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            },
+            "annotations": {
+              "readOnlyHint": true,
+              "destructiveHint": false,
+              "idempotentHint": true,
+              "openWorldHint": false
+            }
+          }
+        },
+        "toolsError": null,
+        "resources": [],
+        "resourceTemplates": [],
+        "authStatus": "unsupported"
+      }
+    ],
+    "nextCursor": null
+  }
+}

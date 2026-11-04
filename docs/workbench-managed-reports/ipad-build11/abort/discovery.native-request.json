@@ -1,0 +1,9 @@
+{
+  "id": 3,
+  "method": "mcpServerStatus/list",
+  "params": {
+    "threadId": "01a1a8c0-0f86-7631-89af-42890470329a",
+    "serverName": "firmingo-workbench",
+    "detail": "toolsAndAuthOnly"
+  }
+}

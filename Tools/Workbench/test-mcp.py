@@ -385,6 +385,86 @@ class MCPAdapter(unittest.TestCase):
                 for field in mcp.paired.request_checker().DEVICE_FIELDS:
                     self.assertEqual(start.get(field), selected.get(field))
 
+    def test_recorded_build11_managed_reports_preserve_authority_and_unknown_outcomes(self):
+        """Validate actual iPad envelopes offline, including the refused commit and changed-boot uncertainty."""
+        import hashlib
+        ledger = json.loads((DOCS / 'workbench-managed-ipad-qualification.json').read_text())
+        self.assertEqual(ledger['status'], 'completed_with_scoped_expected_nonpasses')
+        self.assertTrue(ledger['revocation']['confirmedByNativeMCP'])
+        self.assertTrue(ledger['controller']['stoppedAfterQualification'])
+        self.assertEqual(ledger['app']['appVersion'], '11')
+        rows = [row for phase in ledger['phases'] for row in phase['runs']]
+        self.assertEqual(len(rows), 29)
+        self.assertEqual(sum(row['status'] == 'passed' for row in rows), 27)
+        seen, processes, operations = set(), set(), set()
+        for phase in ledger['phases']:
+            self.assertTrue(phase['allObservedStatusesAsExpected'])
+            self.assertEqual(phase['modelTurnsStarted'], 0)
+            for row in phase['runs']:
+                values = {}
+                for key in ('reply', 'report', 'nativeStartRequest', 'nativeStartResponse', 'nativeReportRequest', 'nativeReportResponse'):
+                    raw = (DOCS / row[key]['path']).read_bytes()
+                    self.assertEqual(len(raw), row[key]['bytes'])
+                    self.assertEqual(hashlib.sha256(raw).hexdigest(), row[key]['sha256'])
+                    values[key] = json.loads(raw)
+                start, selected = (values[key]['params']['arguments'] for key in ('nativeStartRequest', 'nativeReportRequest'))
+                self.assertEqual(values['nativeStartRequest']['params']['tool'], 'workbench_submit')
+                self.assertEqual(values['nativeStartRequest']['params']['server'], ledger['registration']['server'])
+                self.assertEqual(values['nativeReportRequest']['params']['tool'], 'workbench_result')
+                for kind in ('Start', 'Report'):
+                    self.assertEqual(values['native' + kind + 'Request']['id'], values['native' + kind + 'Response']['id'])
+                self.assertEqual(start['run_id'], row['runID'])
+                self.assertEqual(selected['session_id'], phase['pairing']['sessionID'])
+                self.assertEqual(selected['command_id'], row['reportCommandID'])
+                self.assertEqual(start['scenario_id'], selected['scenario_id'])
+                result = values['nativeReportResponse']['result']['structuredContent']
+                self.assertTrue(result['validatedReport'])
+                self.assertEqual(result['record']['reply'], values['reply'])
+                self.assertEqual(values['reply']['report'], values['report'])
+                self.assertEqual(values['reply']['processID'], phase['pairing']['processID'])
+                self.assertEqual(values['reply']['instanceID'], phase['pairing']['instanceID'])
+                self.assertEqual(row['status'], row['expectedStatus'])
+                checker = mcp.paired.request_checker()
+                device = checker.selected_device(selected, row['scenarioID'])
+                managed = checker.selected_managed(selected, row['scenarioID'])
+                report = mcp.paired.export_report(values['reply'], row['runID'], row['scenarioID'], None, device, managed)
+                self.assertEqual(report['schema'], 3 if managed else 2)
+                self.assertTrue(report['deviceOperations'])
+                for field in checker.DEVICE_FIELDS | checker.MANAGED_FIELDS:
+                    self.assertEqual(start.get(field), selected.get(field))
+                processes.add(report['processID']); seen.add(row['scenarioID'])
+                if managed:
+                    operations.add(managed['operationID'])
+                    wrong = dict(managed, operationID=fresh())
+                    with self.assertRaises(ValueError):
+                        mcp.paired.export_report(values['reply'], row['runID'], row['scenarioID'], None, device, wrong)
+                if row['status'] == 'outcomeUnknown':
+                    checkpoint = report['managedEvidence']['checkpoint']
+                    self.assertEqual(checkpoint['unknownReason'], 'bootChanged')
+                    self.assertFalse(checkpoint['commitIntent'])
+                    self.assertFalse(checkpoint['released'])
+                if row['status'] == 'failed':
+                    self.assertEqual(row['label'], 'managed.commit-refused-after-restart')
+                    self.assertIn('No live pre-commit capability', str(report['events']))
+        self.assertEqual(len(processes), 2)
+        self.assertEqual(len(operations), 5)
+        self.assertEqual(seen, {'device.inspect', 'device.console-binary', 'managed.stage', 'managed.commit',
+                               'managed.abort', 'managed.disconnect', 'managed.reconcile', 'managed.restore', 'managed.retire'})
+        for artifact in ledger['independentCapsuleChecks']['uniqueArtifacts']:
+            for item in artifact.values():
+                raw = (DOCS / item['path']).read_bytes()
+                self.assertEqual(len(raw), item['bytes'])
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), item['sha256'])
+        revocation = {}
+        for key in ('nativeRequest', 'nativeResponse'):
+            item = ledger['revocation'][key]
+            raw = (DOCS / item['path']).read_bytes()
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), item['sha256'])
+            revocation[key] = json.loads(raw)
+        self.assertEqual(revocation['nativeRequest']['params']['tool'], 'workbench_revoke')
+        self.assertEqual(revocation['nativeRequest']['id'], revocation['nativeResponse']['id'])
+        self.assertTrue(revocation['nativeResponse']['result']['structuredContent']['revoked'])
+
     def test_hardware_selection_is_explicit_version_two_and_never_an_upload_command(self):
         selected=self.selection(action='run',run_id=fresh(),scenario_id='device.inspect',device_address='192.168.77.1',
             device_board='nano_rp2040_connect',device_id='5031503337360009')

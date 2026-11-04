@@ -1,0 +1,34 @@
+{
+  "appIdentifier": "com.firmingokit.demo",
+  "appVersion": "11",
+  "artifacts": [],
+  "deviceOperations": true,
+  "events": [
+    {
+      "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+      "phase": "managed-start",
+      "seconds": 0.0008545833406969905,
+      "sequence": 0
+    },
+    {
+      "detail": "No live pre-commit capability. Restored context permits status queries only.",
+      "phase": "failed",
+      "seconds": 0.006103374995291233,
+      "sequence": 1
+    }
+  ],
+  "id": "47A10387-9FB0-4CE0-964B-4DA0653BAC7A",
+  "managedEvidence": {
+    "outcome": "not_observed",
+    "selection": {
+      "authorization": "commit-once-d2-gnd",
+      "operationID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+      "recordSHA256": "9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2"
+    }
+  },
+  "operatingSystem": "Version 27.0.1 (Build 24A446)",
+  "processID": 6617,
+  "scenarioID": "managed.commit",
+  "schema": 3,
+  "status": "failed"
+}

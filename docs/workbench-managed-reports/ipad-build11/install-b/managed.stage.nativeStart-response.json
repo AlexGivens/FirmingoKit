@@ -1,0 +1,46 @@
+{
+  "id": 17,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"D398C1C7-CFBB-49DE-A0B1-EFCFC0F3211C\",\"commandID\":\"5827873B-0AFA-424D-B2DF-F8FB9F4FFA86\",\"command\":{\"schema\":1,\"commandID\":\"5827873B-0AFA-424D-B2DF-F8FB9F4FFA86\",\"action\":\"run\",\"request\":{\"schema\":3,\"requestID\":\"2F855D55-AFBE-4010-9375-9B4262689AE3\",\"operation\":\"run\",\"scenarioID\":\"managed.stage\",\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\",\"bootID\":\"65593a752ffb8e8c\"},\"managed\":{\"operationID\":\"2F855D55-AFBE-4010-9375-9B4262689AE3\",\"sketch\":\"state-b\",\"residentImageSHA256\":\"1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f\",\"evidence\":\"Full ROM readback verified on Mac before reboot for Workbench build 11\",\"authorization\":\"stage-d2-gnd\"}}},\"admission\":{\"commandID\":\"5827873B-0AFA-424D-B2DF-F8FB9F4FFA86\",\"sequence\":23,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "D398C1C7-CFBB-49DE-A0B1-EFCFC0F3211C",
+      "commandID": "5827873B-0AFA-424D-B2DF-F8FB9F4FFA86",
+      "command": {
+        "schema": 1,
+        "commandID": "5827873B-0AFA-424D-B2DF-F8FB9F4FFA86",
+        "action": "run",
+        "request": {
+          "schema": 3,
+          "requestID": "2F855D55-AFBE-4010-9375-9B4262689AE3",
+          "operation": "run",
+          "scenarioID": "managed.stage",
+          "device": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "deviceID": "5031503337360009",
+            "bootID": "65593a752ffb8e8c"
+          },
+          "managed": {
+            "operationID": "2F855D55-AFBE-4010-9375-9B4262689AE3",
+            "sketch": "state-b",
+            "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+            "evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11",
+            "authorization": "stage-d2-gnd"
+          }
+        }
+      },
+      "admission": {
+        "commandID": "5827873B-0AFA-424D-B2DF-F8FB9F4FFA86",
+        "sequence": 23,
+        "state": "queued"
+      },
+      "scenarioCompletion": "not_observed"
+    },
+    "isError": false
+  }
+}

@@ -293,5 +293,9 @@ tools. The [managed guide](workbench-managed-scenarios.md) specifies each field,
 separate stage/commit authorization, saved record hash, restore/reconciliation,
 no replay and pending-owner guards. Schema 1/2 authority is unchanged. Normal
 fixtures and official-client checks do not execute a board workflow; fresh
-physical managed qualification is tracked separately. No ROM writer, arbitrary
+physical managed qualification is recorded separately: [build-11 iPad evidence](workbench-managed-ipad-qualification.json)
+now covers replacements, abort/disconnect, query-only app-restart recovery and
+RAM-only power-cycle uncertainty/host retirement through the native MCP host.
+Original expected refusal/unknown reports are retained; matching iPhone evidence
+and specialized fault/reply-loss/ROM migration remain open. No ROM writer, arbitrary
 artifact/source or automatic recovery is added.

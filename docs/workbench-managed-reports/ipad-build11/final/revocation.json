@@ -1,0 +1,25 @@
+{
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"revoked\":true}"
+      }
+    ],
+    "structuredContent": {
+      "revoked": true
+    },
+    "isError": false
+  },
+  "finalSafeControllerMetadata": {
+    "appVersion": "11",
+    "expired": false,
+    "instanceID": "7F32B363-F384-4D4A-AA63-57D3CE42BE94",
+    "label": "iPad-managed-build11-restarted",
+    "lastSeenSeconds": 0.38326654210686684,
+    "paired": true,
+    "processID": 6617,
+    "revoked": true,
+    "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84"
+  }
+}

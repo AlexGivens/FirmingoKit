@@ -1,0 +1,137 @@
+{
+  "id": 32,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"04918D19-BBD4-4C39-9EF6-EAB802CD0D84\",\"commandID\":\"C5331E72-2EC8-4723-9321-FA331814F76E\",\"record\":{\"commandID\":\"C5331E72-2EC8-4723-9321-FA331814F76E\",\"reply\":{\"accepted\":true,\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"command\":{\"action\":\"report\",\"commandID\":\"C5331E72-2EC8-4723-9321-FA331814F76E\",\"runID\":\"AB6F20CC-D3EB-466C-9936-9FB4C1CFB50D\",\"schema\":1},\"instanceID\":\"7F32B363-F384-4D4A-AA63-57D3CE42BE94\",\"processID\":6617,\"report\":{\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"artifacts\":[],\"deviceOperations\":true,\"events\":[{\"detail\":\"Executing one explicit managed phase; commit and reconciliation remain separate.\",\"phase\":\"managed-start\",\"seconds\":0.0006809583283029497,\"sequence\":0},{\"detail\":\"Managed phase: boot_confirmed. Commit acceptance is not startup or useful behavior.\",\"phase\":\"complete\",\"seconds\":0.04363879165612161,\"sequence\":1}],\"id\":\"AB6F20CC-D3EB-466C-9936-9FB4C1CFB50D\",\"managedEvidence\":{\"checkpoint\":{\"commitIntent\":true,\"record\":{\"boardID\":\"nano_rp2040_connect\",\"bootID\":\"65593a752ffb8e8c\",\"deviceID\":\"5031503337360009\",\"firmwareImageSHA256\":\"1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f\",\"format\":\"nano-managed-v2\",\"residentELFSHA256\":\"bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8\",\"sha256\":\"537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89\",\"size\":544,\"targetID\":2,\"uploadID\":3,\"version\":1},\"released\":true,\"request\":{\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"bootID\":\"65593a752ffb8e8c\",\"deviceID\":\"5031503337360009\"},\"managed\":{\"authorization\":\"stage-d2-gnd\",\"evidence\":\"Full ROM readback verified on Mac before reboot for Workbench build 11\",\"operationID\":\"9D46B7CA-DB41-499E-937A-F9FADCF9CCA9\",\"residentImageSHA256\":\"1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f\",\"sketch\":\"state-a\"},\"operation\":\"run\",\"requestID\":\"9D46B7CA-DB41-499E-937A-F9FADCF9CCA9\",\"scenarioID\":\"managed.stage\",\"schema\":3},\"schema\":1,\"snapshot\":{\"errorCode\":\"none\",\"received\":544,\"sha256\":\"537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89\",\"size\":544,\"slotTouched\":true,\"state\":\"boot_confirmed\",\"uploadID\":3},\"stageIntent\":true},\"outcome\":\"boot_confirmed\",\"recordSHA256\":\"9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2\",\"selection\":{\"operationID\":\"9D46B7CA-DB41-499E-937A-F9FADCF9CCA9\",\"recordSHA256\":\"9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2\"}},\"operatingSystem\":\"Version 27.0.1 (Build 24A446)\",\"processID\":6617,\"scenarioID\":\"managed.reconcile\",\"schema\":3,\"status\":\"passed\"},\"schema\":1,\"state\":{\"awaitingLifecycleStart\":false,\"isRunning\":false,\"phase\":\"complete\",\"runID\":\"AB6F20CC-D3EB-466C-9936-9FB4C1CFB50D\",\"status\":\"passed\"}},\"sequence\":9,\"state\":\"completed\"},\"scenarioCompletion\":\"passed\",\"validatedReport\":true,\"evidence\":[{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/04918D19-BBD4-4C39-9EF6-EAB802CD0D84/C5331E72-2EC8-4723-9321-FA331814F76E/reply.json\",\"bytes\":2563,\"sha256\":\"096cb27175da0c51169d252e0b1f17429eef287541d6df2863c74e4dac659a91\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/04918D19-BBD4-4C39-9EF6-EAB802CD0D84/C5331E72-2EC8-4723-9321-FA331814F76E/report.json\",\"bytes\":2750,\"sha256\":\"fd39da10e3b181ddde9df662c2e38db623b8bb3c95d4e343b5df49d76fedc0c4\"}]}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84",
+      "commandID": "C5331E72-2EC8-4723-9321-FA331814F76E",
+      "record": {
+        "commandID": "C5331E72-2EC8-4723-9321-FA331814F76E",
+        "reply": {
+          "accepted": true,
+          "appIdentifier": "com.firmingokit.demo",
+          "appVersion": "11",
+          "command": {
+            "action": "report",
+            "commandID": "C5331E72-2EC8-4723-9321-FA331814F76E",
+            "runID": "AB6F20CC-D3EB-466C-9936-9FB4C1CFB50D",
+            "schema": 1
+          },
+          "instanceID": "7F32B363-F384-4D4A-AA63-57D3CE42BE94",
+          "processID": 6617,
+          "report": {
+            "appIdentifier": "com.firmingokit.demo",
+            "appVersion": "11",
+            "artifacts": [],
+            "deviceOperations": true,
+            "events": [
+              {
+                "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+                "phase": "managed-start",
+                "seconds": 0.0006809583283029497,
+                "sequence": 0
+              },
+              {
+                "detail": "Managed phase: boot_confirmed. Commit acceptance is not startup or useful behavior.",
+                "phase": "complete",
+                "seconds": 0.04363879165612161,
+                "sequence": 1
+              }
+            ],
+            "id": "AB6F20CC-D3EB-466C-9936-9FB4C1CFB50D",
+            "managedEvidence": {
+              "checkpoint": {
+                "commitIntent": true,
+                "record": {
+                  "boardID": "nano_rp2040_connect",
+                  "bootID": "65593a752ffb8e8c",
+                  "deviceID": "5031503337360009",
+                  "firmwareImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+                  "format": "nano-managed-v2",
+                  "residentELFSHA256": "bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8",
+                  "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+                  "size": 544,
+                  "targetID": 2,
+                  "uploadID": 3,
+                  "version": 1
+                },
+                "released": true,
+                "request": {
+                  "device": {
+                    "address": "192.168.77.1",
+                    "boardID": "nano_rp2040_connect",
+                    "bootID": "65593a752ffb8e8c",
+                    "deviceID": "5031503337360009"
+                  },
+                  "managed": {
+                    "authorization": "stage-d2-gnd",
+                    "evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11",
+                    "operationID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+                    "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+                    "sketch": "state-a"
+                  },
+                  "operation": "run",
+                  "requestID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+                  "scenarioID": "managed.stage",
+                  "schema": 3
+                },
+                "schema": 1,
+                "snapshot": {
+                  "errorCode": "none",
+                  "received": 544,
+                  "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+                  "size": 544,
+                  "slotTouched": true,
+                  "state": "boot_confirmed",
+                  "uploadID": 3
+                },
+                "stageIntent": true
+              },
+              "outcome": "boot_confirmed",
+              "recordSHA256": "9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2",
+              "selection": {
+                "operationID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+                "recordSHA256": "9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2"
+              }
+            },
+            "operatingSystem": "Version 27.0.1 (Build 24A446)",
+            "processID": 6617,
+            "scenarioID": "managed.reconcile",
+            "schema": 3,
+            "status": "passed"
+          },
+          "schema": 1,
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "AB6F20CC-D3EB-466C-9936-9FB4C1CFB50D",
+            "status": "passed"
+          }
+        },
+        "sequence": 9,
+        "state": "completed"
+      },
+      "scenarioCompletion": "passed",
+      "validatedReport": true,
+      "evidence": [
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/04918D19-BBD4-4C39-9EF6-EAB802CD0D84/C5331E72-2EC8-4723-9321-FA331814F76E/reply.json",
+          "bytes": 2563,
+          "sha256": "096cb27175da0c51169d252e0b1f17429eef287541d6df2863c74e4dac659a91"
+        },
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/04918D19-BBD4-4C39-9EF6-EAB802CD0D84/C5331E72-2EC8-4723-9321-FA331814F76E/report.json",
+          "bytes": 2750,
+          "sha256": "fd39da10e3b181ddde9df662c2e38db623b8bb3c95d4e343b5df49d76fedc0c4"
+        }
+      ]
+    },
+    "isError": false
+  }
+}

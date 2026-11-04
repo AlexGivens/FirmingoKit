@@ -880,6 +880,22 @@ explicit Xcode 27.0 / Swift 6.4 runner pin remains unchanged and is not certifie
 by the newer local compiler. This follow-up records host differences rather than
 silently adopting a new CI baseline. The maintained normal validation entry point
 runs the new suites; the optional `WORKBENCH_MANAGED_RUNTIME=1` check requires an
-explicit prepared package and does not stage a device. Signed build 11 and fresh
-managed Nano qualification remain in preparation. Specialized fault/reply-loss
-and ROM hosts remain available; post-commit unknown state is not cleared silently.
+explicit prepared package and does not stage a device. This real driver test now
+passes both known vectors in 2.346 seconds from clean implementation `dd71846`;
+signed build 11 also passes strict/deep signature verification.
+
+The selected Nano and physical iPad now complete the first managed phase matrix
+through the registered native Codex MCP host: State B then State A installation,
+abort/disconnect with untouched slot, persisted commit-intent app restart with
+refused restored commit, and RAM-only power-cycle bootChanged/explicit host
+retirement. Twenty-seven reports pass, one expected local commit refusal remains
+failed, and one expected changed-boot report remains outcomeUnknown. Original
+request/reply envelopes and two independently checked actual SDK/WASM capsules
+are retained in [the ledger](workbench-managed-ipad-qualification.json). Exact
+command-2 echo and manual D13 lit/off observations are independent of startup;
+the initialized-state/counter probe is not migrated. The new archived schema-three
+corpus regression brings `python3 -I -S -B Tools/Workbench/test-mcp.py` to 20
+passing offline cases; CI's existing entry point runs it without hardware.
+Pairings are revoked, the controller is stopped and D2 is removed. The same
+build's iPhone, real reply-loss/flash-fault and SDK ROM migration remain open;
+specialized hosts are retained and post-commit unknown is not cleared silently.

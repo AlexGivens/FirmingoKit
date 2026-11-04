@@ -1,0 +1,11 @@
+{
+  "checkerSHA256": "803a617da0b1d55af2a869963b546de70f7316c401b5a5e5c04e052cf8de30d4",
+  "firmwareSourceCommit": "85009abaed0b58d124bdabb5bf5001328b235c38",
+  "capsuleSHA256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+  "apiAddress": 268578932,
+  "stateAddress": 536906044,
+  "stateCapacity": 4096,
+  "exitCode": 0,
+  "stdout": "FMS2 linked capsule: code=288 data=4 bss=20; guarded initialization, generation replacement and host boot dispatch passed; ARM NOT executed\n",
+  "ARMExecutionClaim": false
+}

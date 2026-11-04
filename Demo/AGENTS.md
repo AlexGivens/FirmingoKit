@@ -9,10 +9,16 @@ equivalent evidence exists. Selected inspection and fixed binary console scenari
 now use schema-two requests/reports and public SDK APIs; see
 [device scenario scope](../docs/workbench-device-scenarios.md). Upload/recovery
 migration now has separate schema-three managed phases; see
-[managed scope](../docs/workbench-managed-scenarios.md). Fresh physical managed
-qualification and fault/ROM migration remain pending. The identical signed build 10 passes selected Nano
+[managed scope](../docs/workbench-managed-scenarios.md). Signed build 11 now has
+scoped Nano/iPad managed replacement, abort/disconnect, saved-context restart and
+RAM-only power-cycle evidence in
+[the ledger](../docs/workbench-managed-ipad-qualification.json). Restored commit
+authority is refused; bootChanged remains unknown, and explicit retirement releases
+only the no-commit host context. Build-11 iPhone and real fault/reply-loss/ROM migration remain pending.
+The identical signed build 10 passes selected Nano
 inspection/raw binary console through MCP on the physical iPhone and iPad; broader
-combinations and FMS2 command-2 mode remain separately unqualified.
+combinations remain separately unqualified. FMS2 command-2 exact echo passes in
+the selected build-11 iPad managed workflow; this does not qualify the state probe.
 The canonical scheme/product is FirmingoWorkbench; preserve the stable app bundle
 identity instead of creating another binary identity for each phase.
 

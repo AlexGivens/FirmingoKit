@@ -1,0 +1,25 @@
+{
+  "id": 14,
+  "method": "mcpServer/tool/call",
+  "params": {
+    "threadId": "01a1a8c9-5eb3-7551-a6d9-0a00a7c7f0bc",
+    "server": "firmingo-workbench",
+    "tool": "workbench_submit",
+    "arguments": {
+      "session_id": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84",
+      "command_id": "5248A0D6-5BE0-420C-A2B1-454D600DFEF1",
+      "action": "run",
+      "run_id": "1CB6B893-7BF5-46AF-A2F9-F5B22CF37D02",
+      "scenario_id": "managed.stage",
+      "device_address": "192.168.77.1",
+      "device_board": "nano_rp2040_connect",
+      "device_id": "5031503337360009",
+      "device_boot_id": "65593a752ffb8e8c",
+      "managed_operation_id": "1CB6B893-7BF5-46AF-A2F9-F5B22CF37D02",
+      "managed_sketch": "state-b",
+      "resident_image_sha256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+      "resident_evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11",
+      "managed_authorization": "stage-d2-gnd"
+    }
+  }
+}

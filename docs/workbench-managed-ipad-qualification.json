@@ -1,0 +1,1530 @@
+{
+  "schema": 1,
+  "date": "2026-11-04",
+  "status": "completed_with_scoped_expected_nonpasses",
+  "app": {
+    "schema": 1,
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "11",
+    "sourceCommit": "dd718468f6d498a825c1fa760f9e644c78fcd43f",
+    "preparedInventorySHA256": "a9744e0ea658579f78b6f8b3a1a3391c0898ad7886687b090e742af1a448a907",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "executableSHA256": "05fa62fb44145c6dc6f66d075c5716770b8c5c24a56fdc136703e6023738181d",
+    "appPath": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-managed-signed-r1/Build/Products/Release-iphoneos/FirmingoWorkbench.app"
+  },
+  "registration": {
+    "server": "firmingo-workbench",
+    "adapterVersion": "0.3.0"
+  },
+  "hostDevice": {
+    "model": "iPad Pro (11-inch) (3rd generation)",
+    "productType": "iPad13,4",
+    "osVersion": "27.0.1",
+    "osBuild": "24A446",
+    "developmentTransport": "localNetwork"
+  },
+  "phases": [
+    {
+      "schema": 1,
+      "pairing": {
+        "appVersion": "11",
+        "expired": false,
+        "instanceID": "F7B0E05D-3CBD-47E5-A385-81E18A831780",
+        "label": "iPad-managed-build11",
+        "lastSeenSeconds": 0.21190200001001358,
+        "paired": true,
+        "processID": 6597,
+        "revoked": false,
+        "sessionID": "D398C1C7-CFBB-49DE-A0B1-EFCFC0F3211C"
+      },
+      "bootID": "65593a752ffb8e8c",
+      "operationID": "7238359D-04F0-4C07-B539-F47B20C4C12E",
+      "recordSHA256": "98ed7b716b7488f385848d2bd8fe89a7945659259453f4b840c93862d2aeb182",
+      "modelTurnsStarted": 0,
+      "ephemeralHostContext": true,
+      "name": "abort",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "E507991C-7C16-4335-8836-CBBB19A8EA15",
+          "status": "passed",
+          "reportCommandID": "4442B576-114C-4542-9009-2703B2D7129F",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.inspect.reply.json",
+            "bytes": 1738,
+            "sha256": "c1e6f169d0d834cce74a33fb568f204201918f8b1aaa6785983d49487505109b"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.inspect.report.json",
+            "bytes": 1774,
+            "sha256": "b321ffabd3eeb9b845ea364e1c7d3ee73be60e17cd5116917aea068c019ea37e"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.inspect.nativeStart-request.json",
+            "bytes": 578,
+            "sha256": "37567084b764b7813599cad5a44015bf06b265f173ff66ba5103ae65a10b1053"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.inspect.nativeStart-response.json",
+            "bytes": 1567,
+            "sha256": "92ad7bb7b9534b62165f632d4705a9eebbb79685456dcc4aed2f243d126ca9f0"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.inspect.nativeReport-request.json",
+            "bytes": 500,
+            "sha256": "4f3c946f634ffb358a9603f090c24dca9d7db97aa0be59fe3a67705ec56bfc91"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.inspect.nativeReport-response.json",
+            "bytes": 7128,
+            "sha256": "f853adcf3da3eeec281034d8d0fc405884984e14d1b4ac56d948c332f9cb1dc2"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "7238359D-04F0-4C07-B539-F47B20C4C12E",
+          "status": "passed",
+          "reportCommandID": "0E462C7C-415C-4EE2-A7E3-722248D45C40",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.stage.reply.json",
+            "bytes": 4869,
+            "sha256": "0b407b86dcb9a57c7903993758812836180351f8167439cb0e9c658e2058216f"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.stage.report.json",
+            "bytes": 5046,
+            "sha256": "20c3be1063aca45fdd3b90c18f940051b75ab32717f19e0bd6905a55795bbd61"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.stage.nativeStart-request.json",
+            "bytes": 974,
+            "sha256": "b321506ca0fbebcdba4ffc1407b4b80b1010c88b9aae0ba590e592b0f7698edc"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.stage.nativeStart-response.json",
+            "bytes": 2331,
+            "sha256": "f6b86c030e36a8f585204eb46f1444b15abaedf5311726c0abc25153eec7f201"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.stage.nativeReport-request.json",
+            "bytes": 895,
+            "sha256": "777e2fa7edbd3fb0085714707d69b18a46cd93b09d3d7d519d6d0205147e83b5"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.stage.nativeReport-response.json",
+            "bytes": 13737,
+            "sha256": "c4e84e469eaac4bae045d8d4d135ea39b089a653569de952f5729e88b244c02d"
+          }
+        },
+        {
+          "scenarioID": "managed.abort",
+          "runID": "5D92BB17-A87F-4514-9596-03E8AA16C190",
+          "status": "passed",
+          "reportCommandID": "9716F9EA-AE8D-4693-9451-4A8CDC8C03A2",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.abort.reply.json",
+            "bytes": 2541,
+            "sha256": "42e42ba1f12f70b21391fcef93b88d478a4157d3da4fede609d30e01b0925225"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.abort.report.json",
+            "bytes": 2728,
+            "sha256": "677d9b1916c9f5d66a8b430d483aaf255859c3c6856ba1d6ca9a4d012b7038f9"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.abort.nativeStart-request.json",
+            "bytes": 791,
+            "sha256": "84e9f14ddfb6c01e8fb6857779fa4b95523b7a39ed8ba48501af9417af4cefff"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.abort.nativeStart-response.json",
+            "bytes": 1997,
+            "sha256": "17aaa8569ece6f9e5a61a5f4c4aaa44e54a5fe82c9db79b96d671188ce94683c"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.abort.nativeReport-request.json",
+            "bytes": 712,
+            "sha256": "7434d5ecc3e678e7a68469f09d8356df38834ae24a6b442bc28a5b497652b998"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.abort.nativeReport-response.json",
+            "bytes": 9073,
+            "sha256": "d62251c57bc74869759d4cb29dc978c3e76a5c0f98080324c231ceaca54be02e"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "C6B5FBD2-F090-45AB-80CE-D8CA2F4692B6",
+          "status": "passed",
+          "reportCommandID": "336434A9-A770-46A6-8C04-E0AF0DF8DC60",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.reconcile.reply.json",
+            "bytes": 2544,
+            "sha256": "1493e98f5f1bf97a6410dee6246ecc95e08beb3c8623eddae6a76190286d65f9"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.reconcile.report.json",
+            "bytes": 2731,
+            "sha256": "437715fdbb142022607ac5e931d05eace677b3a3d5f3f084d4566381d75dbc82"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.reconcile.nativeStart-request.json",
+            "bytes": 795,
+            "sha256": "ab84a2fcf736d8dfb808ead036a14e56a6ba7c53275f5afe5a8e1cb2644a8f8f"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.reconcile.nativeStart-response.json",
+            "bytes": 2005,
+            "sha256": "64d2bea77d467aa94c3d269c0fc64a695c657df6e67f6f1a4554bcc2d0391c24"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.reconcile.nativeReport-request.json",
+            "bytes": 716,
+            "sha256": "c79e351ea20b74c3e94fabda7ebdd709a197205c1266eb5fa4ff96f54e069c0d"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/managed.reconcile.nativeReport-response.json",
+            "bytes": 9079,
+            "sha256": "70db1195be2c48a262660c9b0c5d42d58c0684c5fd60f39ed6c023b5ec722626"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "4B1C89B8-E9CA-4A2B-A778-1EEFFC8DFD4C",
+          "status": "passed",
+          "reportCommandID": "A3A20999-1246-4780-955D-E2E97FFCF8BD",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.console-binary.reply.json",
+            "bytes": 2150,
+            "sha256": "44fb497c9ade6c7dbe624bd6fe4502a0ba1f6192fb1243057adf4c4ab5ef0d33"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.console-binary.report.json",
+            "bytes": 2202,
+            "sha256": "ef5dafcd2d90d6759185687315a4c9714ac6cbb39cfc3b666ab8a35545cccf91"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.console-binary.nativeStart-request.json",
+            "bytes": 674,
+            "sha256": "6bec96e438fcb291a7aae2a2ff1a938aa461aaf7184c651d98b6d42aea0f2ca0"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.console-binary.nativeStart-response.json",
+            "bytes": 1746,
+            "sha256": "8bea1996ceab627e3e5ea17f804ce34732ec0cb4c3c969048c35f02691250c94"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.console-binary.nativeReport-request.json",
+            "bytes": 595,
+            "sha256": "5427df8182868b4f84020442639ce757b30b49b24704fc23ef0788374ac9750b"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/abort/device.console-binary.nativeReport-response.json",
+            "bytes": 7998,
+            "sha256": "f642352cddcf3fba1da43e4ac016511b1fabac26ef8500249d708f9759c0a3e8"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true,
+      "discoveryRequest": {
+        "path": "workbench-managed-reports/ipad-build11/abort/discovery.native-request.json",
+        "bytes": 198,
+        "sha256": "413a5bf663a86f23360d02b37d7826fb6a6db62da1ca1bcc52d5793a6ff54759"
+      },
+      "discoveryResponse": {
+        "path": "workbench-managed-reports/ipad-build11/abort/discovery.native-response.json",
+        "bytes": 14672,
+        "sha256": "a674f0884181a8f7450aee6073328f7e043d8ed3809f7058071cee4260ed9f0b"
+      }
+    },
+    {
+      "schema": 1,
+      "pairing": {
+        "appVersion": "11",
+        "expired": false,
+        "instanceID": "F7B0E05D-3CBD-47E5-A385-81E18A831780",
+        "label": "iPad-managed-build11",
+        "lastSeenSeconds": 0.21190200001001358,
+        "paired": true,
+        "processID": 6597,
+        "revoked": false,
+        "sessionID": "D398C1C7-CFBB-49DE-A0B1-EFCFC0F3211C"
+      },
+      "bootID": "65593a752ffb8e8c",
+      "operationID": "2F855D55-AFBE-4010-9375-9B4262689AE3",
+      "recordSHA256": "66f39522206bdcf39cb73b569e61af2f393f749627e19f781027b9a0c8399fd9",
+      "modelTurnsStarted": 0,
+      "ephemeralHostContext": true,
+      "name": "install-b",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "9F6B7761-2481-4B2C-945D-92C8F9E0D6B5",
+          "status": "passed",
+          "reportCommandID": "9DE07035-7E5F-4C7A-BB92-B91D940BC4B7",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.inspect.reply.json",
+            "bytes": 1739,
+            "sha256": "9e39d7d497e7da42c1ab13062a0bd99cb5cd7a67aa8c87455489aa66140b3583"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.inspect.report.json",
+            "bytes": 1775,
+            "sha256": "9322f83c039c8acaca62d8933835409488830e7d708906b2496cc0753b3ef04f"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.inspect.nativeStart-request.json",
+            "bytes": 578,
+            "sha256": "92492c5fcc89216b70eb906db80eee799a792d5cc18dcf874bbd15a00c5cb589"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.inspect.nativeStart-response.json",
+            "bytes": 1569,
+            "sha256": "eefd56d0e41d44dc3e03695ecb77a30451b7f1d757174d1297f4ecaacc8fe603"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.inspect.nativeReport-request.json",
+            "bytes": 500,
+            "sha256": "2d86fe6a8d704884b271c71808dd90ce1088aed87945c77645e5aee4a5f4d4d0"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.inspect.nativeReport-response.json",
+            "bytes": 7132,
+            "sha256": "1f19598b033dcdb393794e2a4e5d9df218da8c3333a6029dee8f27fdd35587e5"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "2F855D55-AFBE-4010-9375-9B4262689AE3",
+          "status": "passed",
+          "reportCommandID": "22838F98-7F13-4333-945A-6C2C95FBD6DA",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.stage.reply.json",
+            "bytes": 4869,
+            "sha256": "0d83cbc5314db0a449930d30d70e7d67d4a673e9aaceada0178610c4526c15b3"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.stage.report.json",
+            "bytes": 5046,
+            "sha256": "c6255173aeb129795ce34d39464b0ec2a0b09b457b9327fb1648c2fc1fb0a3f7"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.stage.nativeStart-request.json",
+            "bytes": 974,
+            "sha256": "bcef01c18ad6ba91272d71664ee66ce9aad6f5004662fd72de08baaf202b6db1"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.stage.nativeStart-response.json",
+            "bytes": 2333,
+            "sha256": "0cf8e58d558b66cfc4570c222244ef322a16b148d584b26afcb6449673d0048d"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.stage.nativeReport-request.json",
+            "bytes": 895,
+            "sha256": "4ecdf70c4d431c72560780e013eee074816fa1866a47a2d8d544c056df66dd0e"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.stage.nativeReport-response.json",
+            "bytes": 13739,
+            "sha256": "f3b521a4c9d3912fcd55dffa3e699aee381ae08d14a73cb16b2dbed4f34675f6"
+          }
+        },
+        {
+          "scenarioID": "managed.commit",
+          "runID": "DC03327F-ACCC-4005-9B4A-070B57F7B209",
+          "status": "passed",
+          "reportCommandID": "314FF803-683B-4F4D-8FA0-A9D6F4612277",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.commit.reply.json",
+            "bytes": 2597,
+            "sha256": "0b1111ff64eefa696f2094b588683ee9ce01a980b8c0ca3cdde7ce22adfd815f"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.commit.report.json",
+            "bytes": 2792,
+            "sha256": "d08cb13fe9f7cebecaefb45068b0b07b4942542687f4a728b0b0dd803177f085"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.commit.nativeStart-request.json",
+            "bytes": 845,
+            "sha256": "5f61c8fc7392c9e61fd2b9893e7e499f35d360dbfcb4191e05745386d7831e95"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.commit.nativeStart-response.json",
+            "bytes": 2091,
+            "sha256": "1a7b4719894cd96a593713f4da4587b8356a088b5a6efc128d17c8d1a5086888"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.commit.nativeReport-request.json",
+            "bytes": 766,
+            "sha256": "8865022a8796d9dbad29f63941e5dfa7c03d5ea9c175b037c9b82b5cec711fa2"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.commit.nativeReport-response.json",
+            "bytes": 9207,
+            "sha256": "3bf515217c105c88b015b429a6869792127c159fbd24e7e68122135c8cfe2735"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "1FC5EC4C-2F91-496B-BC2D-E173A44027FF",
+          "status": "passed",
+          "reportCommandID": "EB048C6A-932F-40F0-8DB4-0BB1C802237B",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.reconcile.reply.json",
+            "bytes": 2563,
+            "sha256": "fd648ab2139e638c0e24d03adf6ecfdf2f9cbb268ea8a387acf84d0dd9d8100d"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.reconcile.report.json",
+            "bytes": 2750,
+            "sha256": "19bc200823425d0154e6efa6c9631304e72b596397d6070ac600fcd96c1e49e8"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.reconcile.nativeStart-request.json",
+            "bytes": 795,
+            "sha256": "1ef1a2edc475b7fac53228dc20d1264a646e1f90104e56e11f917df4113c8854"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.reconcile.nativeStart-response.json",
+            "bytes": 2005,
+            "sha256": "ed1b6484205de28edd61f75c7ced073a48985f7b3c0b0acebee19ec17b7f334b"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.reconcile.nativeReport-request.json",
+            "bytes": 716,
+            "sha256": "058a4ebb801831008d63b78435a6013c1a2e4509d6cf6d095732790cdf813ff9"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/managed.reconcile.nativeReport-response.json",
+            "bytes": 9117,
+            "sha256": "5a2825a4fb1d77f96e77aa1d2bc0409f7f4b885146ce9ceca9d3a4caeef63f21"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "3FDA402F-A405-4549-AE76-369DE8AF34F4",
+          "status": "passed",
+          "reportCommandID": "C72DB00E-A3FD-46FB-AEDB-25EF2E1CD1D1",
+          "expectedStatus": "passed",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.console-binary.reply.json",
+            "bytes": 2151,
+            "sha256": "75fe4e2a16a799424f3bcff287bd56590c1c328c25284e42d296153a7d8be783"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.console-binary.report.json",
+            "bytes": 2203,
+            "sha256": "90b9a755094608420e9421525bd528228c6cacc32fe71c1b233446ae16919b87"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.console-binary.nativeStart-request.json",
+            "bytes": 674,
+            "sha256": "137980174649c64770a3f4081524664b95a577ff1f9f3bcb0afc801cabc13ba2"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.console-binary.nativeStart-response.json",
+            "bytes": 1746,
+            "sha256": "aa0271d5a3e638372e038111418fa4e006fa40e4a64bfacbecd5073db70b86c7"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.console-binary.nativeReport-request.json",
+            "bytes": 595,
+            "sha256": "b62bf7244c338b855fe778579013a4802dd574e4ad4607484fab2de0fd12552a"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-b/device.console-binary.nativeReport-response.json",
+            "bytes": 8000,
+            "sha256": "1bd38cd4a097be56b713f89a06621528cfe592ffed1a320e8708fde615b56eb9"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true,
+      "commitPhaseRequests": 1,
+      "discoveryRequest": {
+        "path": "workbench-managed-reports/ipad-build11/install-b/discovery.native-request.json",
+        "bytes": 198,
+        "sha256": "7d1adfbe2bbcc753bc1232d89a1c76eb60feef01ea55eea3c16cd750cb87fefa"
+      },
+      "discoveryResponse": {
+        "path": "workbench-managed-reports/ipad-build11/install-b/discovery.native-response.json",
+        "bytes": 14672,
+        "sha256": "d0f63668935a1440d7ee093ebe6d48c1f56452dd06915293192515f9fecd2c6a"
+      }
+    },
+    {
+      "schema": 1,
+      "pairing": {
+        "appVersion": "11",
+        "expired": false,
+        "instanceID": "F7B0E05D-3CBD-47E5-A385-81E18A831780",
+        "label": "iPad-managed-build11",
+        "lastSeenSeconds": 0.21190200001001358,
+        "paired": true,
+        "processID": 6597,
+        "revoked": false,
+        "sessionID": "D398C1C7-CFBB-49DE-A0B1-EFCFC0F3211C"
+      },
+      "bootID": "65593a752ffb8e8c",
+      "operationID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+      "recordSHA256": "9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2",
+      "modelTurnsStarted": 0,
+      "ephemeralHostContext": true,
+      "name": "install-a-before-restart",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "698266FE-D551-4314-939E-B7A5D47CD4A2",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "1AB3B138-771B-46CA-AF91-F416257CCA86",
+          "label": "device.inspect",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/device.inspect.reply.json",
+            "bytes": 1738,
+            "sha256": "ed5bc5640d8b2b6d2b5fedb3e3086078b9074344b0ec63ea6614a97ee5a92268"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/device.inspect.report.json",
+            "bytes": 1774,
+            "sha256": "39a8d90da638d1a5de30657edc48359d0bd791f1d231a62bc23f5b3593eaf167"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/device.inspect.nativeStart-request.json",
+            "bytes": 578,
+            "sha256": "7e0e5a3a82436f50f65aac84493054d3f9f333735d5952304ac9caee489ce435"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/device.inspect.nativeStart-response.json",
+            "bytes": 1569,
+            "sha256": "eacbf0bfef943541d7dd7ba0f480672f69ba9a1730832681265e2a467fb2c3ed"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/device.inspect.nativeReport-request.json",
+            "bytes": 500,
+            "sha256": "cc0a80394683e887823d05b02e13968c6c7712ddd0f25d7c13ef6478cac5d1c3"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/device.inspect.nativeReport-response.json",
+            "bytes": 7130,
+            "sha256": "8e7dda70a771bd9bdcca3a4e02194938f8aa9c18023642ca6c5ee81a3cc41a8f"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "7998D777-B16F-4DD2-B83D-CA121637EE19",
+          "label": "managed.stage",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.stage.reply.json",
+            "bytes": 4865,
+            "sha256": "07a1d6dce13551ea9ef5b91d1938375b9bc465996edb70dacd6299ec87cd10ac"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.stage.report.json",
+            "bytes": 5042,
+            "sha256": "a4387ec5e85ba520b3b53ae13fb2018e92ae8ab81f537e9d53c6d55483b98740"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.stage.nativeStart-request.json",
+            "bytes": 974,
+            "sha256": "d090bbb4d057f72934cca546ce769ba1dcecc9879aaf06a9500efdb5e9a0c485"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.stage.nativeStart-response.json",
+            "bytes": 2333,
+            "sha256": "b33cd5872a15897f6960d1a15547bcd0f897ed753b6d86d259f86d0667c302a4"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.stage.nativeReport-request.json",
+            "bytes": 895,
+            "sha256": "50860f53edeb69251f86f82786912cc6e95c09ddc2107dacf184d2862b5f03e6"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.stage.nativeReport-response.json",
+            "bytes": 13731,
+            "sha256": "0f85d159de72309f11280c7d94435435fba1f756f9bcbc5de930ca39297def6b"
+          }
+        },
+        {
+          "scenarioID": "managed.commit",
+          "runID": "AE9AFCA6-E34E-4F62-9F13-C343217E71C7",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "74236E1E-479D-4A22-B143-1A6E22AA51E3",
+          "label": "managed.commit",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.commit.reply.json",
+            "bytes": 2597,
+            "sha256": "db5ee9210534a1df4da64c04dff61bdc8fda632f74942ce7dcda2681051501d6"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.commit.report.json",
+            "bytes": 2792,
+            "sha256": "5044acc6f66e6f283f42c095b734de427e0f83c1547ed848ee634158a67b10c2"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.commit.nativeStart-request.json",
+            "bytes": 845,
+            "sha256": "086e347b84ed791c7091e0837a6e77662c2532ec2912c219fccae79d5c415bc3"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.commit.nativeStart-response.json",
+            "bytes": 2091,
+            "sha256": "a93a49526930a42cc13e3d08b3ecae130e6d57dd249ea0b9e3be2e51e2b13a62"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.commit.nativeReport-request.json",
+            "bytes": 766,
+            "sha256": "d9c1fb8f07c012da71c31d397b90bd37181a6b1fea72061e60175c080f308efb"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/managed.commit.nativeReport-response.json",
+            "bytes": 9207,
+            "sha256": "8eb957f405d662d5635f3b4092dca7b67ace91dd5dc89afdc282c45d93b87c33"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true,
+      "commitPhaseRequests": 1,
+      "discoveryRequest": {
+        "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/discovery.native-request.json",
+        "bytes": 198,
+        "sha256": "3b624374c9298d665dc09f4173499d9fc41f6aa68786d17df1c93a4271d0fc2d"
+      },
+      "discoveryResponse": {
+        "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/discovery.native-response.json",
+        "bytes": 14672,
+        "sha256": "7b4b303c05ec83e1ed1d334c102ba38b14088bff3877fd907f7dc10fb7ce63fb"
+      },
+      "revocation": {
+        "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/revocation.json",
+        "bytes": 162,
+        "sha256": "6aa87a8b15ada693bc7df30a9cedeace53d2237c8c263a8941e1b8566a333e6d"
+      },
+      "nativeRevocationRequest": {
+        "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/revocation.native-request.json",
+        "bytes": 277,
+        "sha256": "8f0d0e7b8b809506c46ef9c258d581607286e0d53e88632c9ee95ffec03c75a8"
+      },
+      "nativeRevocationResponse": {
+        "path": "workbench-managed-reports/ipad-build11/install-a-before-restart/revocation.native-response.json",
+        "bytes": 212,
+        "sha256": "1de93cadb3403200735989d30d1e70120fc52deec05a693df01205253f10f030"
+      }
+    },
+    {
+      "schema": 1,
+      "pairing": {
+        "appVersion": "11",
+        "expired": false,
+        "instanceID": "7F32B363-F384-4D4A-AA63-57D3CE42BE94",
+        "label": "iPad-managed-build11-restarted",
+        "lastSeenSeconds": 0.062307124957442284,
+        "paired": true,
+        "processID": 6617,
+        "revoked": false,
+        "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84"
+      },
+      "bootID": "65593a752ffb8e8c",
+      "operationID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+      "recordSHA256": "9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2",
+      "modelTurnsStarted": 0,
+      "ephemeralHostContext": true,
+      "name": "install-a-restored",
+      "runs": [
+        {
+          "scenarioID": "managed.restore",
+          "runID": "806A1311-8DC8-4720-9D58-72635E05F727",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "8349DCC2-4510-407E-8B11-FDC3869A17CB",
+          "label": "managed.restore",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.restore.reply.json",
+            "bytes": 2483,
+            "sha256": "7b4ec2fd3d2f8fcadfc91674560e5e8576c6db707836c81ea559218d78e16e8c"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.restore.report.json",
+            "bytes": 2662,
+            "sha256": "411dd80b42aa5ef6f45c4e89129e4b827d54dda26fef8bb7518975261df8dc5a"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.restore.nativeStart-request.json",
+            "bytes": 693,
+            "sha256": "f5336c9e27f25e8beb297a25e44b45522a969c368861309eb3806c0d4671fd98"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.restore.nativeStart-response.json",
+            "bytes": 1816,
+            "sha256": "e56ace8803966060fef8127eed64413c0f90e21c30919f350b844251961d7f5d"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.restore.nativeReport-request.json",
+            "bytes": 615,
+            "sha256": "0e46178ccf9f1c4bec9e49462a1203130962e27ed0bd833be1bc68c2cf95fd62"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.restore.nativeReport-response.json",
+            "bytes": 8933,
+            "sha256": "57ad9c4a75f6913d08b0669c49b0bbd6557107526298a26c659f3ba240b90705"
+          }
+        },
+        {
+          "scenarioID": "managed.commit",
+          "runID": "47A10387-9FB0-4CE0-964B-4DA0653BAC7A",
+          "status": "failed",
+          "expectedStatus": "failed",
+          "reportCommandID": "5E599329-847A-49F4-B208-02C523B24EC4",
+          "label": "managed.commit-refused-after-restart",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.commit-refused-after-restart.reply.json",
+            "bytes": 1267,
+            "sha256": "ff52e77f2959cdc14d904ecdefeb06af0d73762e69f48522e3c00c5ea72ff63c"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.commit-refused-after-restart.report.json",
+            "bytes": 1004,
+            "sha256": "8eea43ec16e7a15bf8b45b36c69bbf3ffe126498383fe9522c8bec50bae394b0"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.commit-refused-after-restart.nativeStart-request.json",
+            "bytes": 845,
+            "sha256": "1f36b299968d6b055f3c8693abb81c3d22d5d0711b185da1bfbe1f80288063f2"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.commit-refused-after-restart.nativeStart-response.json",
+            "bytes": 2089,
+            "sha256": "788db2e02b94dfa566c304d073a996638d584b979b62b348c5eec33b8aec9e19"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.commit-refused-after-restart.nativeReport-request.json",
+            "bytes": 766,
+            "sha256": "3368381840e9a076ffca13dbcdca12ba89c02b854cab4c521cb14912a72dd524"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.commit-refused-after-restart.nativeReport-response.json",
+            "bytes": 5474,
+            "sha256": "605274f426302cd5edd9179da89798ed5c9d4e18c6aafadb2d38b9522348405b"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "AB6F20CC-D3EB-466C-9936-9FB4C1CFB50D",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "C5331E72-2EC8-4723-9321-FA331814F76E",
+          "label": "managed.reconcile",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.reconcile.reply.json",
+            "bytes": 2563,
+            "sha256": "096cb27175da0c51169d252e0b1f17429eef287541d6df2863c74e4dac659a91"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.reconcile.report.json",
+            "bytes": 2750,
+            "sha256": "fd39da10e3b181ddde9df662c2e38db623b8bb3c95d4e343b5df49d76fedc0c4"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.reconcile.nativeStart-request.json",
+            "bytes": 795,
+            "sha256": "f1217bf7dbfeaea873d31918573b065e177cab385b5f1e2950658781ab3d4116"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.reconcile.nativeStart-response.json",
+            "bytes": 2003,
+            "sha256": "89abec8baa75e9e09d52a1b8db5ef6a4a670c50ff51adaf13d63c43bf8d250f4"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.reconcile.nativeReport-request.json",
+            "bytes": 716,
+            "sha256": "88eb473382c5d294393b33197261868dc8ad61db75feb93aaf3a163f88a8f801"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/managed.reconcile.nativeReport-response.json",
+            "bytes": 9115,
+            "sha256": "f99127d0767d2c0770319fc27a6f91ab95902e978ace6908b0ab087f771dfb0c"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "2057DEFD-98CD-42F8-A8F1-7049AC435E19",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "20F97F0B-993C-4708-AC33-69F318EF8138",
+          "label": "device.console-binary",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/device.console-binary.reply.json",
+            "bytes": 2150,
+            "sha256": "345a448074f455e360240bc4dc89862e0bf19d524083b4f4d795b53bd951990f"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/device.console-binary.report.json",
+            "bytes": 2202,
+            "sha256": "e86766e93ede5fa5ac507ae76529af8fd639436a44b493474e1592172ee42ae3"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/device.console-binary.nativeStart-request.json",
+            "bytes": 674,
+            "sha256": "7bb027649344f54195b901428a486511f870159414233c5b06fca77370ced729"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/device.console-binary.nativeStart-response.json",
+            "bytes": 1746,
+            "sha256": "62747328cb6d3c4b1b0bcf5efd386937209473c6f9b15d5d2a3986a9bc810fcf"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/device.console-binary.nativeReport-request.json",
+            "bytes": 595,
+            "sha256": "f605198ef0bd49727c6f9cb4cc452454a6300dab53cab673614c8d6bf768235b"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/install-a-restored/device.console-binary.nativeReport-response.json",
+            "bytes": 7998,
+            "sha256": "c723f4870bf77a976881f6256cdd666b484751beb459f6ed47de24ff1b133754"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true,
+      "commitPhaseRequests": 1,
+      "discoveryRequest": {
+        "path": "workbench-managed-reports/ipad-build11/install-a-restored/discovery.native-request.json",
+        "bytes": 198,
+        "sha256": "7ffac2b2cbe3523b108f2430de03c780818a68acc68a53bad4941f720bb7be90"
+      },
+      "discoveryResponse": {
+        "path": "workbench-managed-reports/ipad-build11/install-a-restored/discovery.native-response.json",
+        "bytes": 14672,
+        "sha256": "39bc4b58a0aa00bdd51b0cfdc8d16c6070e90f5afbedccec36d769e779326079"
+      }
+    },
+    {
+      "schema": 1,
+      "pairing": {
+        "appVersion": "11",
+        "expired": false,
+        "instanceID": "7F32B363-F384-4D4A-AA63-57D3CE42BE94",
+        "label": "iPad-managed-build11-restarted",
+        "lastSeenSeconds": 0.062307124957442284,
+        "paired": true,
+        "processID": 6617,
+        "revoked": false,
+        "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84"
+      },
+      "bootID": "65593a752ffb8e8c",
+      "operationID": "1CB6B893-7BF5-46AF-A2F9-F5B22CF37D02",
+      "recordSHA256": "e420ccaa65e1186232d4f1df7f26833212ec95faeb2e07341a872d3c347eb3d8",
+      "modelTurnsStarted": 0,
+      "ephemeralHostContext": true,
+      "name": "disconnect",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "9E5054FA-4AD5-4277-9C3A-6F1A8FA00865",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "D9CC93CB-6C74-41C1-8D34-7085535650F6",
+          "label": "device.inspect",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/device.inspect.reply.json",
+            "bytes": 1739,
+            "sha256": "95ca9be1f8a42377bebbdf7c3a250ad5039c685737fcf9edfcb3d006a362c26f"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/device.inspect.report.json",
+            "bytes": 1775,
+            "sha256": "d87a9142c0f05f1c69958eda7ad3384309332ec5fdc0cbe070c3e5a0272dc9b9"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/device.inspect.nativeStart-request.json",
+            "bytes": 578,
+            "sha256": "5f680df399b25ad8223a70b53b7064b4c2c435ae2f40f50d45ba1dae7488f088"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/device.inspect.nativeStart-response.json",
+            "bytes": 1569,
+            "sha256": "b550befcf4e2008dc46b8b8d462c601d7dad51e998b9c3433bab512db0836367"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/device.inspect.nativeReport-request.json",
+            "bytes": 500,
+            "sha256": "879cdf5567bbc5644f5704307c28f86700109189f547eaea16e43342b8067ada"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/device.inspect.nativeReport-response.json",
+            "bytes": 7132,
+            "sha256": "5020a7bbea0a071e3ee216ef9048478137d785822aa04d29a650b2844802d8f2"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "1CB6B893-7BF5-46AF-A2F9-F5B22CF37D02",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "2B7C43BA-A462-42C3-80B3-AD8322663B7F",
+          "label": "managed.stage",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.stage.reply.json",
+            "bytes": 4869,
+            "sha256": "bf1febb63e660746cb76b31ced882abdd422706ddc38f4b4025ff92daddea29a"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.stage.report.json",
+            "bytes": 5046,
+            "sha256": "840a810c795c8f218633b5dda52d35ee2e054a33dca6c9e13d1d76ba7321281d"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.stage.nativeStart-request.json",
+            "bytes": 974,
+            "sha256": "9583e63bc2196f523a6965133b584ba7085aaa743ae45ec7e78c4d582afb09ee"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.stage.nativeStart-response.json",
+            "bytes": 2333,
+            "sha256": "95915806a0614a013c5c9cdc80df4fe1b982824565e9e2892d26b4a8bc75d633"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.stage.nativeReport-request.json",
+            "bytes": 895,
+            "sha256": "1ea1ed9727d1dab48d0489b2659c6d933b449ba449088103611cb73ac36b8d9c"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.stage.nativeReport-response.json",
+            "bytes": 13739,
+            "sha256": "8e14b82fd28786e72bae9a326b311237df479018e07d184e2364156709d4d758"
+          }
+        },
+        {
+          "scenarioID": "managed.disconnect",
+          "runID": "9D5DE331-A6D8-4F4C-96DA-6BF0EF009565",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "C1A6180D-0AC5-45BB-BAD8-ED03324C8045",
+          "label": "managed.disconnect",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.disconnect.reply.json",
+            "bytes": 2372,
+            "sha256": "dbf756ac031dfa1e7eefbe56d647dc3e619448fdf4878c7536e374c484f166d6"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.disconnect.report.json",
+            "bytes": 2474,
+            "sha256": "c7b6e9c9237bc1afcddc5a822efb2cc79eaeff882a6cd4c4e5f5ea5175664368"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.disconnect.nativeStart-request.json",
+            "bytes": 796,
+            "sha256": "fecd346057da7fb892db61e4430394e9138c0ef63acfd4655c9c9d0e12101d2d"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.disconnect.nativeStart-response.json",
+            "bytes": 2007,
+            "sha256": "6a8b3db9e16da6495b92f100a71e730645783eb3e44ba2b8d51a033d38fb770b"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.disconnect.nativeReport-request.json",
+            "bytes": 717,
+            "sha256": "5f6a3491814dfb6f5007be56cad80a12284f8c68e3350313fd007e7d0dac37e1"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.disconnect.nativeReport-response.json",
+            "bytes": 8538,
+            "sha256": "d2a2118e75d7292ceacba37c728203bcd4959fd7258aa83c6d0b2f564c4a6af0"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "0ABB986E-B146-452E-AAD1-E04ECDEF87A4",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "636A92F2-3B33-48E7-89A6-0F399E80972F",
+          "label": "managed.reconcile",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.reconcile.reply.json",
+            "bytes": 2552,
+            "sha256": "1e95555c4ce341b60c2ebedbb535f447541e2bddbd4a5c6218cade90370c2244"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.reconcile.report.json",
+            "bytes": 2739,
+            "sha256": "a45d57d9289f5f32ff4b5ed9d50bb9b23cb38dedb1ce204f0850d86072835881"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.reconcile.nativeStart-request.json",
+            "bytes": 795,
+            "sha256": "cd17b029450be3ca0d6087703e1ff2df55914a7fb77601b296216f7fe1482201"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.reconcile.nativeStart-response.json",
+            "bytes": 2005,
+            "sha256": "858671ea6d058d9028a3f1d01034329d22bd93645c8b5955cb8ca8d55410316f"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.reconcile.nativeReport-request.json",
+            "bytes": 716,
+            "sha256": "4fdc607a1ccf584db0dd49b50b119f63d9417ad92584f98963618215f099a007"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/disconnect/managed.reconcile.nativeReport-response.json",
+            "bytes": 9095,
+            "sha256": "58a371da1e99a8d2c8213e0e2edf951049dfc192686b8841d184e2f6a78ef128"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true,
+      "commitPhaseRequests": 0,
+      "discoveryRequest": {
+        "path": "workbench-managed-reports/ipad-build11/disconnect/discovery.native-request.json",
+        "bytes": 198,
+        "sha256": "72ed8d715cedba4f1abb27d1b1542f7f98c8601bdb91e0a1e6858517b0c66ff1"
+      },
+      "discoveryResponse": {
+        "path": "workbench-managed-reports/ipad-build11/disconnect/discovery.native-response.json",
+        "bytes": 14672,
+        "sha256": "2e0db98391de59c0e648fba5e1fde9c497bae004781c7defb2087d4b5d06ba68"
+      }
+    },
+    {
+      "schema": 1,
+      "pairing": {
+        "appVersion": "11",
+        "expired": false,
+        "instanceID": "7F32B363-F384-4D4A-AA63-57D3CE42BE94",
+        "label": "iPad-managed-build11-restarted",
+        "lastSeenSeconds": 0.062307124957442284,
+        "paired": true,
+        "processID": 6617,
+        "revoked": false,
+        "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84"
+      },
+      "bootID": "65593a752ffb8e8c",
+      "operationID": "BB786472-6FE4-4C1B-8D01-9C8A213AA4B4",
+      "recordSHA256": "e28b8d27576926597934398587726a312cacb4c373c3db5b0337cea551eaa9cf",
+      "modelTurnsStarted": 0,
+      "ephemeralHostContext": true,
+      "name": "power-cycle-staged",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "4CA7566D-3E01-4E0E-8D48-4BC670F4CC94",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "B7C67AF9-51A6-47EF-8947-0FD96C3A3588",
+          "label": "device.inspect",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.inspect.reply.json",
+            "bytes": 1738,
+            "sha256": "36f429762bf543f973c73f7fb805779535f01c9bb0acf16c0d3e1062c18e1812"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.inspect.report.json",
+            "bytes": 1774,
+            "sha256": "4f02045ada0b10551decfccc219d15c881a52ad3421bed6f8c32c2f10263186e"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.inspect.nativeStart-request.json",
+            "bytes": 578,
+            "sha256": "bd1a6cc3fbf0b5a7eabe09827e1871239e940666895a25aa6ab7a6c09a688d78"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.inspect.nativeStart-response.json",
+            "bytes": 1569,
+            "sha256": "71fad7f9eec42991bbf04fca05a5683c977c0cff7df8ace20cad7c6f1a496815"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.inspect.nativeReport-request.json",
+            "bytes": 500,
+            "sha256": "ac5e066f06be4c35aaabe50b8dec82d363c8429d1d92c2cd9109d92bcea3b31e"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.inspect.nativeReport-response.json",
+            "bytes": 7130,
+            "sha256": "6849b5278c1ec421089eb3029875abc49141c2fcca692093e11d887ba6124787"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "A6B22542-45E0-4502-92A6-5F5342EED58B",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "74F40B40-3736-4E44-9982-47BEE6A60F2D",
+          "label": "device.console-binary",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.console-binary.reply.json",
+            "bytes": 2150,
+            "sha256": "4f420b3f06374343f56975d8b1c83c3d75e72b764ab6cb578a3faa56385c36ee"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.console-binary.report.json",
+            "bytes": 2202,
+            "sha256": "586cfc9e14ca8f6c1c834359365cb237278a4c9031c7a151abfb448e7348e733"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.console-binary.nativeStart-request.json",
+            "bytes": 674,
+            "sha256": "6b11a9f55cdccf09f5f3799256dc9d00eb9da0351a80d552498d1d3b4237e3cc"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.console-binary.nativeStart-response.json",
+            "bytes": 1746,
+            "sha256": "e6093988992354257e0d22bde8daaa8d838eadb2fe515d96f148bd97f1de7d3d"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.console-binary.nativeReport-request.json",
+            "bytes": 595,
+            "sha256": "c35f15a5787b2a40c935eb54c098c51b7de13eb910db34e2ff9cdb63c12baba1"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/device.console-binary.nativeReport-response.json",
+            "bytes": 7998,
+            "sha256": "321556f3b8d5982cfc494cd826909ffa17ef1915ad00afce2292fc5c721159c5"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "BB786472-6FE4-4C1B-8D01-9C8A213AA4B4",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "02EC8D04-D65B-4556-9941-6CD0B51E48B9",
+          "label": "managed.stage",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/managed.stage.reply.json",
+            "bytes": 4869,
+            "sha256": "79c0b632830894e48958ba153947513debda86af97b390949fc89896728fb48d"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/managed.stage.report.json",
+            "bytes": 5046,
+            "sha256": "f1b5ea15f780d5b9320aec05b9c1a6d8573ebd0840793efd3a9032c99e65e0cc"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/managed.stage.nativeStart-request.json",
+            "bytes": 974,
+            "sha256": "e3c496ebeb533069b0f205165b59718b8eb5fecd1b5e09508211004ff6a49bd5"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/managed.stage.nativeStart-response.json",
+            "bytes": 2333,
+            "sha256": "4b97c2bcb5a261269ccbaab833db9b6b2fe1fe89c05da68968b4ac74eaffd183"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/managed.stage.nativeReport-request.json",
+            "bytes": 895,
+            "sha256": "b75caf88e20385e6e378393206110e2a74b8ea56b48cacd2edb488e83352b2a8"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/managed.stage.nativeReport-response.json",
+            "bytes": 13739,
+            "sha256": "1aa59dcc08101e70ff1d48c78af7af838efe93f907760d6711211ba41e1b0c57"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true,
+      "commitPhaseRequests": 0,
+      "discoveryRequest": {
+        "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/discovery.native-request.json",
+        "bytes": 198,
+        "sha256": "517b06b477d22a404eb1aa83e88c09a04449d6d7792ba570520b23158680a79e"
+      },
+      "discoveryResponse": {
+        "path": "workbench-managed-reports/ipad-build11/power-cycle-staged/discovery.native-response.json",
+        "bytes": 14672,
+        "sha256": "57993c13c97552f7d4ae978e2df36437e494c59a56889701d90aa5b2cc27a476"
+      }
+    },
+    {
+      "schema": 1,
+      "pairing": {
+        "appVersion": "11",
+        "expired": false,
+        "instanceID": "7F32B363-F384-4D4A-AA63-57D3CE42BE94",
+        "label": "iPad-managed-build11-restarted",
+        "lastSeenSeconds": 0.062307124957442284,
+        "paired": true,
+        "processID": 6617,
+        "revoked": false,
+        "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84"
+      },
+      "bootID": "02175329e18b3043",
+      "operationID": "BB786472-6FE4-4C1B-8D01-9C8A213AA4B4",
+      "recordSHA256": "e28b8d27576926597934398587726a312cacb4c373c3db5b0337cea551eaa9cf",
+      "modelTurnsStarted": 0,
+      "ephemeralHostContext": true,
+      "name": "power-cycle-recovered",
+      "runs": [
+        {
+          "scenarioID": "managed.disconnect",
+          "runID": "4E793C72-58B9-40D5-ADEB-FA65C69BDCD2",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "3A0E2B29-13BE-40BB-83C1-59DB4DFE1622",
+          "label": "managed.disconnect",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.disconnect.reply.json",
+            "bytes": 2370,
+            "sha256": "63d798fd6936abdf696a0a50ba766126e4bb75516b24d863bb8f9f9dbd0c2f83"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.disconnect.report.json",
+            "bytes": 2472,
+            "sha256": "573207817eaf465acd8e121e0155d0bc4e05d6e41cb895c783b0ea91d85326c2"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.disconnect.nativeStart-request.json",
+            "bytes": 795,
+            "sha256": "e71629b844c4797d535c242e135ce296817fc6d3f39d082633da5a16b107fdee"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.disconnect.nativeStart-response.json",
+            "bytes": 2006,
+            "sha256": "fe5918c3e376c9222b90412c1f3a185201655f1cc0519a58aa417ae392a957e2"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.disconnect.nativeReport-request.json",
+            "bytes": 717,
+            "sha256": "28a699b02f9cdfb55b44994cd3d5f6794df7a201de1ff617708d48961b58ddf0"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.disconnect.nativeReport-response.json",
+            "bytes": 8534,
+            "sha256": "581b9815752b4f1f8acee67dbbfe53f2ba16e35062f43a8f0bf0f8d5ad885989"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "F4D289D2-A4BE-4A17-BF8A-248F5AE1761F",
+          "status": "outcomeUnknown",
+          "expectedStatus": "outcomeUnknown",
+          "reportCommandID": "574F069E-7844-4E3C-9030-2BD6D808914B",
+          "label": "managed.reconcile",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.reconcile.reply.json",
+            "bytes": 2417,
+            "sha256": "f3661ea48ee4fe63fba89a89c9e7d4bf7886ab916703ed29f39a2336cf43872c"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.reconcile.report.json",
+            "bytes": 2513,
+            "sha256": "1588d56b35dd607892acb14759b325e9baae03e081a0ff98b087cc51e7eaf9a6"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.reconcile.nativeStart-request.json",
+            "bytes": 795,
+            "sha256": "277d8626390ea06d4ec950acef67adf83289061f6deffc0aad47667c427321b9"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.reconcile.nativeStart-response.json",
+            "bytes": 2005,
+            "sha256": "11634cd356838fe08aa8f29010acb944212802edc4100c84326eea075dbe03c1"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.reconcile.nativeReport-request.json",
+            "bytes": 716,
+            "sha256": "a2c05cd64f69b4e7b2f22f430792f60cea54e5f306ae23462a402689f7aea081"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.reconcile.nativeReport-response.json",
+            "bytes": 8665,
+            "sha256": "dbdc85a3ff80780d7b2a3618d3873383d0fb555bdf170621250fc80839afadde"
+          }
+        },
+        {
+          "scenarioID": "managed.retire",
+          "runID": "BF5A5A73-E8F6-46E6-A2A8-3783B2BF0BFE",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "1F0E4360-0AC3-415F-B7EB-43317F4CEB9B",
+          "label": "managed.retire",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.retire.reply.json",
+            "bytes": 2407,
+            "sha256": "9a7ec61003ffb88670faf08f1657d90e7c48bd5827a458d2e2c6d4df4f11da30"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.retire.report.json",
+            "bytes": 2517,
+            "sha256": "bd472bfbac1de1b07cf42c23676b28977e055bd0c12f25741a1100f1fa4ad45d"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.retire.nativeStart-request.json",
+            "bytes": 792,
+            "sha256": "f99b782e2f10b77d48fa767dc53396d08c471a3b0a716ec2124077de834a9ac4"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.retire.nativeStart-response.json",
+            "bytes": 1999,
+            "sha256": "21ec6b631fb51b6e11657a5b63ca368485c199f7bcb493c5967aaec072f6ae16"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.retire.nativeReport-request.json",
+            "bytes": 713,
+            "sha256": "5c83ab1f9cdc631fc96d70f8f6b2d4aff054b7c59af72ad13ae67e877f4cad24"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/managed.retire.nativeReport-response.json",
+            "bytes": 8630,
+            "sha256": "0089755bb665636be16e7dbec13d49dfbcc68507ee1051f3b8cb74dc1e4e7c70"
+          }
+        },
+        {
+          "scenarioID": "device.inspect",
+          "runID": "34EF7D2E-25B2-4065-9DE3-1B1D24F73E87",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "DB03EA3E-C7DA-40B8-8DD8-06DA9ECF86EB",
+          "label": "device.inspect",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.inspect.reply.json",
+            "bytes": 1739,
+            "sha256": "3b6d03068baebce691f5b7cd8e265b286738bd7675c14c45f43e0236d352a260"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.inspect.report.json",
+            "bytes": 1775,
+            "sha256": "ad9c92d2856120738b26ea91fbcc525a020c6cb045a1f022f3d272a2db0de0a0"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.inspect.nativeStart-request.json",
+            "bytes": 579,
+            "sha256": "d1bf9f1ac92d9fe21b9dca774293da4447ad37da1623a4895a44d33e51039c67"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.inspect.nativeStart-response.json",
+            "bytes": 1570,
+            "sha256": "49d617ddb7a209c052a638a8b38a506fb36c252ad110bd4b00b2764168498f3a"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.inspect.nativeReport-request.json",
+            "bytes": 500,
+            "sha256": "54666883944a127f697ae7f82d12cdd8e980979f2872686d653f99f12e5ac294"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.inspect.nativeReport-response.json",
+            "bytes": 7132,
+            "sha256": "fe1f0debfb4c14fe0fc9c507b4a7553e50abf03c0a91ed3a2d3c88af0e4cd3e1"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "D102805F-0BC4-4FFC-AB1A-29501DFD2882",
+          "status": "passed",
+          "expectedStatus": "passed",
+          "reportCommandID": "78B4B214-AD3F-4170-8A22-B90FDCE01813",
+          "label": "device.console-binary",
+          "reply": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.console-binary.reply.json",
+            "bytes": 2150,
+            "sha256": "7decaf9cfe379f38a9ed1ab7c213cf3b161669413520602894b26ffe7403eec8"
+          },
+          "report": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.console-binary.report.json",
+            "bytes": 2202,
+            "sha256": "1675d37ae1f992f3dd7f627eb7a30b5b598db3201fe373f918548eb066103087"
+          },
+          "nativeStartRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.console-binary.nativeStart-request.json",
+            "bytes": 674,
+            "sha256": "eaa421f04d46f9c71aa34554205b9a6205174a9ca070a75eca8188b5c4553773"
+          },
+          "nativeStartResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.console-binary.nativeStart-response.json",
+            "bytes": 1746,
+            "sha256": "ca5190a6860b38adc1b9cfc631e0527bd210758833664ba19fc6c1e84e1f3d6a"
+          },
+          "nativeReportRequest": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.console-binary.nativeReport-request.json",
+            "bytes": 595,
+            "sha256": "0d1848767971356daee4f8ae3befa74df48e5cbcde58cb4f93302d6f3ef5e6b8"
+          },
+          "nativeReportResponse": {
+            "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/device.console-binary.nativeReport-response.json",
+            "bytes": 7998,
+            "sha256": "6ce05d7ee21a12ea96315bef692deb675bc1ee62882c5c557a185d1dcd2f9a43"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true,
+      "commitPhaseRequests": 0,
+      "discoveryRequest": {
+        "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/discovery.native-request.json",
+        "bytes": 198,
+        "sha256": "415ccec4767e8cbb7adbd37d4f57dc45f12d10d5469a048f835614acfa3620b5"
+      },
+      "discoveryResponse": {
+        "path": "workbench-managed-reports/ipad-build11/power-cycle-recovered/discovery.native-response.json",
+        "bytes": 14672,
+        "sha256": "4bf992c4ee403a3c85c413b21ade6dcc92ffdc7d5313b942fdf12d545258be99"
+      }
+    }
+  ],
+  "limitations": [
+    "Selected Nano 5031503337360009 and iPad13,4/iPadOS 27.0.1 only; no iPhone build-11 managed qualification yet.",
+    "Command-2 exact binary echo and manual D13 observations establish the stated behavior. Fresh initialized-state/counter probe is not migrated or claimed.",
+    "No commit-reply withholding, flash-write power loss, SDK ROM writing/recovery or automatic rollback was tested through Workbench. Retain the specialized Nano/ROM hosts and historical evidence.",
+    "The restarted app had an accepted commit reply saved before restart; this is not a lost-commit-reply test.",
+    "No UI/screenshots/VoiceOver, minimum-OS or production 1.0 support qualification; no remote CI claim."
+  ],
+  "manualObservations": [
+    {
+      "after": "install-b",
+      "source": "User report",
+      "D13": "lit",
+      "automaticMeasurement": false
+    },
+    {
+      "after": "install-a-restored",
+      "source": "User report",
+      "D13": "off",
+      "automaticMeasurement": false
+    },
+    {
+      "after": "ram-only-power-cycle",
+      "source": "User report",
+      "D13": "off",
+      "automaticMeasurement": false
+    }
+  ],
+  "notes": [
+    "Exactly two successful commit phases: State B, then State A. The restored-context commit request is an expected local refusal, not a firmware commit retry.",
+    "The disconnect trial stopped after a valid reconciliation report because an ad hoc assertion looked for error instead of errorCode. The original report remains; its errorCode=disconnected and slotTouched=false were checked before continuing. No phase was replayed."
+  ],
+  "revocation": {
+    "confirmedByNativeMCP": true,
+    "finalSafeControllerMetadata": {
+      "appVersion": "11",
+      "expired": false,
+      "instanceID": "7F32B363-F384-4D4A-AA63-57D3CE42BE94",
+      "label": "iPad-managed-build11-restarted",
+      "lastSeenSeconds": 0.38326654210686684,
+      "paired": true,
+      "processID": 6617,
+      "revoked": true,
+      "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84"
+    },
+    "nativeRequest": {
+      "path": "workbench-managed-reports/ipad-build11/final/revocation.native-request.json",
+      "bytes": 276,
+      "sha256": "e789c99ffba3b89eedf84d305a23243d5972bcfacb6bdecb197665dd1a70f887"
+    },
+    "nativeResponse": {
+      "path": "workbench-managed-reports/ipad-build11/final/revocation.native-response.json",
+      "bytes": 211,
+      "sha256": "ec74ecfd5d4e2405224bac5dcfee59cf2be8e3161be692f640454cb64b694661"
+    },
+    "summary": {
+      "path": "workbench-managed-reports/ipad-build11/final/revocation.json",
+      "bytes": 555,
+      "sha256": "c05ff76ce25b3a32a3d63b0f6b451bcd31e48aee5946396e7abeb3cc161f7a58"
+    }
+  },
+  "scope": "Fresh native Codex MCP host through paired Workbench build 11 on the physical iPad: fixed FMS2 State A/B stage, separate one-shot commit, abort/disconnect, pending-context app restart, no restored commit authority, fresh reconciliation, RAM-only power-cycle uncertainty and explicit pre-commit host retirement.",
+  "controller": {
+    "certificateSHA256": "f8f8b7e017da38467a82408f3f77f417ffdeae62d182a4c5f95aa8830f5dae35",
+    "processID": 32046,
+    "stoppedAfterQualification": true,
+    "automaticServiceInstalled": false
+  },
+  "setupEvidence": {
+    "repository": "Firmingo",
+    "path": "docs/evidence/workbench-fms2-initial.json",
+    "bytes": 4644,
+    "sha256": "4ff34396f14dccebe22affd64e1056104a53942438dcda99b9bd0069ba0706ae",
+    "scope": "Prerequisite ROM setup; no normal build or corpus-test dependency on sibling checkout",
+    "sourceCommit": "0eb5902f0d04b5c89ffb571df45454ff12e74a51"
+  },
+  "nativeHost": {
+    "ephemeralHostContext": true,
+    "modelTurnsStarted": 0,
+    "temporaryHostsStopped": true
+  },
+  "outcomes": {
+    "checkedReports": 29,
+    "passed": 27,
+    "expectedLocalRefusal": 1,
+    "expectedUnknown": 1,
+    "successfulCommitPhases": 2,
+    "firmwareCommitReplay": false,
+    "remainingInstalledSketch": "state-a",
+    "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f"
+  },
+  "finalBoardState": {
+    "installedSketch": "state-a",
+    "D2ToGND": "removed by user",
+    "RECToGND": "disconnected",
+    "connectedHost": "iPad",
+    "additionalActionsRequired": false
+  },
+  "independentCapsuleChecks": {
+    "stageOutputs": [
+      {
+        "runID": "7238359D-04F0-4C07-B539-F47B20C4C12E",
+        "name": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      },
+      {
+        "runID": "2F855D55-AFBE-4010-9375-9B4262689AE3",
+        "name": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      },
+      {
+        "runID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+        "name": "state-a.fms",
+        "bytes": 544,
+        "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89"
+      },
+      {
+        "runID": "1CB6B893-7BF5-46AF-A2F9-F5B22CF37D02",
+        "name": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      },
+      {
+        "runID": "BB786472-6FE4-4C1B-8D01-9C8A213AA4B4",
+        "name": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      }
+    ],
+    "uniqueArtifacts": [
+      {
+        "capsule": {
+          "path": "workbench-managed-reports/ipad-build11/artifacts/state-b.fms",
+          "bytes": 548,
+          "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+        },
+        "nativeCheck": {
+          "path": "workbench-managed-reports/ipad-build11/artifacts/state-b.fms.native-check.json",
+          "bytes": 532,
+          "sha256": "191a5871c8560d32c1c53214cb6105b4c80ced569ae3964725dea27d7501d34b"
+        }
+      },
+      {
+        "capsule": {
+          "path": "workbench-managed-reports/ipad-build11/artifacts/state-a.fms",
+          "bytes": 544,
+          "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89"
+        },
+        "nativeCheck": {
+          "path": "workbench-managed-reports/ipad-build11/artifacts/state-a.fms.native-check.json",
+          "bytes": 532,
+          "sha256": "61d4b2b9815fd325b06a71f65b0268151097c60eebcc323e53358752e977ac03"
+        }
+      }
+    ],
+    "description": "Actual default SDK/WASM outputs exported by the iPad, independently accepted by the firmware native FMS2 validator; native checking does not execute ARM code."
+  }
+}

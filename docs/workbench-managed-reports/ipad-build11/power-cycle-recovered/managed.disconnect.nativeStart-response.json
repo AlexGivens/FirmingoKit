@@ -1,0 +1,43 @@
+{
+  "id": 5,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"04918D19-BBD4-4C39-9EF6-EAB802CD0D84\",\"commandID\":\"C6D7151B-522F-4089-9EC1-6C1FF723D636\",\"command\":{\"schema\":1,\"commandID\":\"C6D7151B-522F-4089-9EC1-6C1FF723D636\",\"action\":\"run\",\"request\":{\"schema\":3,\"requestID\":\"4E793C72-58B9-40D5-ADEB-FA65C69BDCD2\",\"operation\":\"run\",\"scenarioID\":\"managed.disconnect\",\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\",\"bootID\":\"65593a752ffb8e8c\"},\"managed\":{\"operationID\":\"BB786472-6FE4-4C1B-8D01-9C8A213AA4B4\",\"recordSHA256\":\"e28b8d27576926597934398587726a312cacb4c373c3db5b0337cea551eaa9cf\"}}},\"admission\":{\"commandID\":\"C6D7151B-522F-4089-9EC1-6C1FF723D636\",\"sequence\":34,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84",
+      "commandID": "C6D7151B-522F-4089-9EC1-6C1FF723D636",
+      "command": {
+        "schema": 1,
+        "commandID": "C6D7151B-522F-4089-9EC1-6C1FF723D636",
+        "action": "run",
+        "request": {
+          "schema": 3,
+          "requestID": "4E793C72-58B9-40D5-ADEB-FA65C69BDCD2",
+          "operation": "run",
+          "scenarioID": "managed.disconnect",
+          "device": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "deviceID": "5031503337360009",
+            "bootID": "65593a752ffb8e8c"
+          },
+          "managed": {
+            "operationID": "BB786472-6FE4-4C1B-8D01-9C8A213AA4B4",
+            "recordSHA256": "e28b8d27576926597934398587726a312cacb4c373c3db5b0337cea551eaa9cf"
+          }
+        }
+      },
+      "admission": {
+        "commandID": "C6D7151B-522F-4089-9EC1-6C1FF723D636",
+        "sequence": 34,
+        "state": "queued"
+      },
+      "scenarioCompletion": "not_observed"
+    },
+    "isError": false
+  }
+}

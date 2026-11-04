@@ -1,0 +1,44 @@
+{
+  "id": 23,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"D398C1C7-CFBB-49DE-A0B1-EFCFC0F3211C\",\"commandID\":\"544F2E63-5369-4E11-B2A0-6F37D75AAB1D\",\"command\":{\"schema\":1,\"commandID\":\"544F2E63-5369-4E11-B2A0-6F37D75AAB1D\",\"action\":\"run\",\"request\":{\"schema\":3,\"requestID\":\"AE9AFCA6-E34E-4F62-9F13-C343217E71C7\",\"operation\":\"run\",\"scenarioID\":\"managed.commit\",\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\",\"bootID\":\"65593a752ffb8e8c\"},\"managed\":{\"operationID\":\"9D46B7CA-DB41-499E-937A-F9FADCF9CCA9\",\"recordSHA256\":\"9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2\",\"authorization\":\"commit-once-d2-gnd\"}}},\"admission\":{\"commandID\":\"544F2E63-5369-4E11-B2A0-6F37D75AAB1D\",\"sequence\":42,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "D398C1C7-CFBB-49DE-A0B1-EFCFC0F3211C",
+      "commandID": "544F2E63-5369-4E11-B2A0-6F37D75AAB1D",
+      "command": {
+        "schema": 1,
+        "commandID": "544F2E63-5369-4E11-B2A0-6F37D75AAB1D",
+        "action": "run",
+        "request": {
+          "schema": 3,
+          "requestID": "AE9AFCA6-E34E-4F62-9F13-C343217E71C7",
+          "operation": "run",
+          "scenarioID": "managed.commit",
+          "device": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "deviceID": "5031503337360009",
+            "bootID": "65593a752ffb8e8c"
+          },
+          "managed": {
+            "operationID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+            "recordSHA256": "9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2",
+            "authorization": "commit-once-d2-gnd"
+          }
+        }
+      },
+      "admission": {
+        "commandID": "544F2E63-5369-4E11-B2A0-6F37D75AAB1D",
+        "sequence": 42,
+        "state": "queued"
+      },
+      "scenarioCompletion": "not_observed"
+    },
+    "isError": false
+  }
+}

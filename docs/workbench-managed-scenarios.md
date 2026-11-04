@@ -115,7 +115,7 @@ startup is separate from useful console/state/GPIO behavior.
 
 The global guard deliberately stays closed on post-commit unknown/failed outcomes;
 those require separately reviewed recovery rather than automatic clearing. Real
-reply withholding, app termination/power-cycle matrices, flash fault injection,
+reply withholding, termination at additional stage/commit boundaries, flash fault injection,
 SDK ROM installation/recovery, initial resident setup and broader sketch/board
 support are not migrated by these seven phases. Keep the existing Nano/ROM hosts
 and their historical evidence until equivalent replacements pass.
@@ -138,6 +138,51 @@ tests skip it when unprovisioned. Fixtures exercise production coordination,
 versioned request/report scope, exact resident/record binding, intent/write gates,
 restart without commit restoration, uncertainty, pre-commit/unissued retirement,
 background disposal and failed success publication. The real demo-store harness
-checks pending-owner exclusion and preservation of history. These are not fresh
-physical qualification. Current raw-console iPhone/iPad results remain scoped to
+checks pending-owner exclusion and preservation of history. These source-only checks do not establish physical qualification. Previous
+raw-console iPhone/iPad results remain scoped to
 their original build 10 and ordinary application.
+
+
+The clean implementation checkpoint `dd718468f6d498a825c1fa760f9e644c78fcd43f`
+now passes the explicit real default-driver test from prepared inventory
+`a9744e0ea658579f78b6f8b3a1a3391c0898ad7886687b090e742af1a448a907`:
+both fixed vectors match in 2.346 seconds with no board connection. Development-
+signed build 11 passes strict/deep signature verification. The reviewed FMS2
+resident/initial State A composite has also been installed on the selected Nano
+and all 158,208 included bytes independently compared in ROM before reboot.
+[Preparation ledger](workbench-managed-preparation.json) retains exact identities;
+the setup is separate from the managed path qualified below.
+The older native checker cache referenced the removed macOS 27.0 SDK; an isolated
+sanitized checker was freshly configured/built with the installed SDK before the
+final image preflight. No firmware source or toolchain pin changed.
+
+
+Signed build 11 now completes the selected Nano/iPad managed workflow through the
+registered native Codex MCP host. [The qualification ledger](workbench-managed-ipad-qualification.json)
+retains 29 checked reports and original native submission/report envelopes:
+
+| Check | Observed result |
+| --- | --- |
+| State B RAM stage, explicit abort, fresh query | Aborted, slot untouched; State A exact echo retained |
+| New State B stage and one explicit commit | Fresh boot-confirmed status; exact echo; user observed D13 lit |
+| New State A stage and one explicit commit, then app restart | Saved commit intent restored; attempted commit from restored context refused locally; fresh boot-confirmed status and exact echo; user observed D13 off |
+| New State B RAM stage, disconnect without commit | Fresh aborted/disconnected status, slot untouched; State A exact echo retained |
+| New State B RAM stage, manual USB power cycle | Original transaction remains outcomeUnknown/bootChanged; explicit no-commit host retirement; fresh boot inspection and State A exact echo; user observed D13 off |
+
+The two successful commit phases are distinct from the expected refused request
+after restart: no firmware commit was replayed. Twenty-seven reports pass; the
+refusal remains failed, and the changed-boot reconciliation remains unknown.
+The restart followed an accepted commit reply, so it does not test reply loss.
+Both unique capsule exports match the pinned vectors and pass the firmware's
+independent native FMS2 checker; native validation does not execute ARM code.
+The archived schema-three corpus is checked by `test-mcp.py` (20 passing cases),
+including scope mismatches, the original refusal/unknown and final revocation.
+The existing normal CI entry point runs that offline regression; no remote CI
+result is claimed here. Pairings are revoked, the controller is stopped, and the
+user removed D2. The Nano remains on the iPad running State A.
+
+Next qualify the identical managed build on iPhone, then migrate the initialized-
+data/BSS/counter probe and specialized reply-loss/flash-fault/SDK ROM paths. Manual
+D13 observations are not electrical measurements, and command-2 echo does not
+replace the state probe. Broader models, minimum OS, UI/accessibility, arbitrary
+sketches and production 1.0 support remain outside this evidence.

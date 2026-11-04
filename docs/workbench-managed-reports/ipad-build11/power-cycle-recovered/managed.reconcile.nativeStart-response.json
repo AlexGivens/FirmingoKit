@@ -1,0 +1,43 @@
+{
+  "id": 14,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"04918D19-BBD4-4C39-9EF6-EAB802CD0D84\",\"commandID\":\"7A320B35-81C9-4DE1-A8FC-6D3D516BD5B2\",\"command\":{\"schema\":1,\"commandID\":\"7A320B35-81C9-4DE1-A8FC-6D3D516BD5B2\",\"action\":\"run\",\"request\":{\"schema\":3,\"requestID\":\"F4D289D2-A4BE-4A17-BF8A-248F5AE1761F\",\"operation\":\"run\",\"scenarioID\":\"managed.reconcile\",\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\",\"bootID\":\"65593a752ffb8e8c\"},\"managed\":{\"operationID\":\"BB786472-6FE4-4C1B-8D01-9C8A213AA4B4\",\"recordSHA256\":\"e28b8d27576926597934398587726a312cacb4c373c3db5b0337cea551eaa9cf\"}}},\"admission\":{\"commandID\":\"7A320B35-81C9-4DE1-A8FC-6D3D516BD5B2\",\"sequence\":37,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84",
+      "commandID": "7A320B35-81C9-4DE1-A8FC-6D3D516BD5B2",
+      "command": {
+        "schema": 1,
+        "commandID": "7A320B35-81C9-4DE1-A8FC-6D3D516BD5B2",
+        "action": "run",
+        "request": {
+          "schema": 3,
+          "requestID": "F4D289D2-A4BE-4A17-BF8A-248F5AE1761F",
+          "operation": "run",
+          "scenarioID": "managed.reconcile",
+          "device": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "deviceID": "5031503337360009",
+            "bootID": "65593a752ffb8e8c"
+          },
+          "managed": {
+            "operationID": "BB786472-6FE4-4C1B-8D01-9C8A213AA4B4",
+            "recordSHA256": "e28b8d27576926597934398587726a312cacb4c373c3db5b0337cea551eaa9cf"
+          }
+        }
+      },
+      "admission": {
+        "commandID": "7A320B35-81C9-4DE1-A8FC-6D3D516BD5B2",
+        "sequence": 37,
+        "state": "queued"
+      },
+      "scenarioCompletion": "not_observed"
+    },
+    "isError": false
+  }
+}

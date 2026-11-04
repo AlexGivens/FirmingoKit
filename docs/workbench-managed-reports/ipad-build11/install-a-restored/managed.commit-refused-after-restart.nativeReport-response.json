@@ -1,0 +1,90 @@
+{
+  "id": 23,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"04918D19-BBD4-4C39-9EF6-EAB802CD0D84\",\"commandID\":\"5E599329-847A-49F4-B208-02C523B24EC4\",\"record\":{\"commandID\":\"5E599329-847A-49F4-B208-02C523B24EC4\",\"reply\":{\"accepted\":true,\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"command\":{\"action\":\"report\",\"commandID\":\"5E599329-847A-49F4-B208-02C523B24EC4\",\"runID\":\"47A10387-9FB0-4CE0-964B-4DA0653BAC7A\",\"schema\":1},\"instanceID\":\"7F32B363-F384-4D4A-AA63-57D3CE42BE94\",\"processID\":6617,\"report\":{\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"artifacts\":[],\"deviceOperations\":true,\"events\":[{\"detail\":\"Executing one explicit managed phase; commit and reconciliation remain separate.\",\"phase\":\"managed-start\",\"seconds\":0.0008545833406969905,\"sequence\":0},{\"detail\":\"No live pre-commit capability. Restored context permits status queries only.\",\"phase\":\"failed\",\"seconds\":0.006103374995291233,\"sequence\":1}],\"id\":\"47A10387-9FB0-4CE0-964B-4DA0653BAC7A\",\"managedEvidence\":{\"outcome\":\"not_observed\",\"selection\":{\"authorization\":\"commit-once-d2-gnd\",\"operationID\":\"9D46B7CA-DB41-499E-937A-F9FADCF9CCA9\",\"recordSHA256\":\"9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2\"}},\"operatingSystem\":\"Version 27.0.1 (Build 24A446)\",\"processID\":6617,\"scenarioID\":\"managed.commit\",\"schema\":3,\"status\":\"failed\"},\"schema\":1,\"state\":{\"awaitingLifecycleStart\":false,\"isRunning\":false,\"phase\":\"failed\",\"runID\":\"47A10387-9FB0-4CE0-964B-4DA0653BAC7A\",\"status\":\"failed\"}},\"sequence\":6,\"state\":\"completed\"},\"scenarioCompletion\":\"failed\",\"validatedReport\":true,\"evidence\":[{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/04918D19-BBD4-4C39-9EF6-EAB802CD0D84/5E599329-847A-49F4-B208-02C523B24EC4/reply.json\",\"bytes\":1267,\"sha256\":\"ff52e77f2959cdc14d904ecdefeb06af0d73762e69f48522e3c00c5ea72ff63c\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/04918D19-BBD4-4C39-9EF6-EAB802CD0D84/5E599329-847A-49F4-B208-02C523B24EC4/report.json\",\"bytes\":1004,\"sha256\":\"8eea43ec16e7a15bf8b45b36c69bbf3ffe126498383fe9522c8bec50bae394b0\"}]}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "04918D19-BBD4-4C39-9EF6-EAB802CD0D84",
+      "commandID": "5E599329-847A-49F4-B208-02C523B24EC4",
+      "record": {
+        "commandID": "5E599329-847A-49F4-B208-02C523B24EC4",
+        "reply": {
+          "accepted": true,
+          "appIdentifier": "com.firmingokit.demo",
+          "appVersion": "11",
+          "command": {
+            "action": "report",
+            "commandID": "5E599329-847A-49F4-B208-02C523B24EC4",
+            "runID": "47A10387-9FB0-4CE0-964B-4DA0653BAC7A",
+            "schema": 1
+          },
+          "instanceID": "7F32B363-F384-4D4A-AA63-57D3CE42BE94",
+          "processID": 6617,
+          "report": {
+            "appIdentifier": "com.firmingokit.demo",
+            "appVersion": "11",
+            "artifacts": [],
+            "deviceOperations": true,
+            "events": [
+              {
+                "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+                "phase": "managed-start",
+                "seconds": 0.0008545833406969905,
+                "sequence": 0
+              },
+              {
+                "detail": "No live pre-commit capability. Restored context permits status queries only.",
+                "phase": "failed",
+                "seconds": 0.006103374995291233,
+                "sequence": 1
+              }
+            ],
+            "id": "47A10387-9FB0-4CE0-964B-4DA0653BAC7A",
+            "managedEvidence": {
+              "outcome": "not_observed",
+              "selection": {
+                "authorization": "commit-once-d2-gnd",
+                "operationID": "9D46B7CA-DB41-499E-937A-F9FADCF9CCA9",
+                "recordSHA256": "9dd94a63fdeb1036caf7b171ff87b17998bc297c23e8c63d39917256e248f7b2"
+              }
+            },
+            "operatingSystem": "Version 27.0.1 (Build 24A446)",
+            "processID": 6617,
+            "scenarioID": "managed.commit",
+            "schema": 3,
+            "status": "failed"
+          },
+          "schema": 1,
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "failed",
+            "runID": "47A10387-9FB0-4CE0-964B-4DA0653BAC7A",
+            "status": "failed"
+          }
+        },
+        "sequence": 6,
+        "state": "completed"
+      },
+      "scenarioCompletion": "failed",
+      "validatedReport": true,
+      "evidence": [
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/04918D19-BBD4-4C39-9EF6-EAB802CD0D84/5E599329-847A-49F4-B208-02C523B24EC4/reply.json",
+          "bytes": 1267,
+          "sha256": "ff52e77f2959cdc14d904ecdefeb06af0d73762e69f48522e3c00c5ea72ff63c"
+        },
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/04918D19-BBD4-4C39-9EF6-EAB802CD0D84/5E599329-847A-49F4-B208-02C523B24EC4/report.json",
+          "bytes": 1004,
+          "sha256": "8eea43ec16e7a15bf8b45b36c69bbf3ffe126498383fe9522c8bec50bae394b0"
+        }
+      ]
+    },
+    "isError": true
+  }
+}

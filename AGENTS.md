@@ -72,8 +72,8 @@ The subsequent resumed iPad check also passes both device scenarios using the
 identical signed build 10, independent pairing/PID and fresh Nano boot. See
 `docs/workbench-device-ipad-qualification.json`; native report/request corpus
 checks cover both hosts. The iPad pairing is revoked and its controller is stopped.
-Pico, FMS2 command-2 mode and upload/recovery migration remain separate; preserve
-unmatched legacy hosts.
+Those build-10 results do not qualify FMS2 command-2 or upload/recovery; the next
+increment below adds its own evidence. Preserve unmatched legacy hosts and Pico limits.
 
 The next Workbench increment implements explicit FMS2 managed phases under
 request/report schema three: stage, separate one-shot commit, abort/disconnect,
@@ -81,8 +81,15 @@ restore, fresh reconciliation and constrained pre-commit retirement. The shared
 engine and demo-wide durable owner prevent normal deployment or clearing across
 unresolved managed context. Restored records never recreate live commit authority.
 MCP adapter 0.3.0 and paired CLI expose the same fixed source/resident selections;
-see `docs/workbench-managed-scenarios.md`. Build 11 and fresh physical managed
-qualification are in preparation; retain specialized fault/reply-loss/ROM hosts.
+see `docs/workbench-managed-scenarios.md`. Signed build 11 now completes selected
+Nano/iPad managed replacement, abort/disconnect, persisted commit-intent restart
+with refused restored commit, and RAM-only power-cycle reconciliation/host
+retirement through native MCP. The 29 reports retain 27 passes, one expected local
+refusal and one expected bootChanged unknown; command-2 exact echo and manual D13
+observations remain separate from startup. Pairing is revoked, the controller is
+stopped, and D2 is removed. See `docs/workbench-managed-ipad-qualification.json`.
+The same build's iPhone, initialized-state probe and real reply-loss/flash-fault/
+SDK ROM migration remain unqualified; retain specialized hosts.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped
