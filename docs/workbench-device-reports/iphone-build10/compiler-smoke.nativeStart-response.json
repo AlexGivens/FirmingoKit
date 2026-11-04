@@ -1,0 +1,34 @@
+{
+  "id": 8,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"D71AB56F-89CA-4420-AAB0-95C38A8B3622\",\"commandID\":\"95CD45AC-D349-49C1-BB11-6F20546F5792\",\"command\":{\"schema\":1,\"commandID\":\"95CD45AC-D349-49C1-BB11-6F20546F5792\",\"action\":\"run\",\"request\":{\"schema\":1,\"requestID\":\"E959340C-CC33-4C9D-837D-B6A4D3AC6CFC\",\"operation\":\"run\",\"scenarioID\":\"compiler.smoke\",\"firmwareBuildID\":\"c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f\"}},\"admission\":{\"commandID\":\"95CD45AC-D349-49C1-BB11-6F20546F5792\",\"sequence\":2,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "D71AB56F-89CA-4420-AAB0-95C38A8B3622",
+      "commandID": "95CD45AC-D349-49C1-BB11-6F20546F5792",
+      "command": {
+        "schema": 1,
+        "commandID": "95CD45AC-D349-49C1-BB11-6F20546F5792",
+        "action": "run",
+        "request": {
+          "schema": 1,
+          "requestID": "E959340C-CC33-4C9D-837D-B6A4D3AC6CFC",
+          "operation": "run",
+          "scenarioID": "compiler.smoke",
+          "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f"
+        }
+      },
+      "admission": {
+        "commandID": "95CD45AC-D349-49C1-BB11-6F20546F5792",
+        "sequence": 2,
+        "state": "queued"
+      },
+      "scenarioCompletion": "not_observed"
+    },
+    "isError": false
+  }
+}

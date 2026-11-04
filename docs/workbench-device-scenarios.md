@@ -106,7 +106,8 @@ electrical behavior or qualify a reconnect/soak/USB-authorization matrix.
 The ordinary SDK validation passed locally: 166 SDK tests discovered (ten opt-in
 runtime cases skipped), eight ROM-host tests, and 30 Workbench tests discovered
 (one opt-in TLS case skipped). CLI, paired and MCP fixtures passed 17 / 11 / 17
-cases. Five new Swift cases cover closed versioned selection, compiler-independent
+cases at the implementation checkpoint; a subsequent native corpus fixture brings
+MCP coverage to 18 cases. Five new Swift cases cover closed versioned selection, compiler-independent
 execution, exact bytes/boot/cleanup, failed persistence and background cancellation.
 The real demo coordination harness passed active-operation exclusion, pending
 transaction inspection and blocked console writes alongside its existing guards.
@@ -117,7 +118,37 @@ Simulator. Pinned official modern/legacy MCP clients passed local Unix-socket
 interoperability using archived compiler reports with adapter 0.2.0. The initial
 sandboxed socket/build attempts were blocked; successful reruns used the normal
 local socket/Xcode environment. No compiler asset or firmware source changed.
-CI definitions cover the new fixtures/coordination entry point and platform builds;
+The final normal validation entry point, including the integrated coordination
+harness, also passed before hardware testing. CI definitions cover the new
+fixtures/coordination entry point and platform builds;
 no remote CI success is claimed. Native UI/accessibility inspection remains
-disabled. Fresh signed-app/Nano MCP qualification is pending, so historical Nano
-passes do not qualify this new path. Legacy hardware hosts remain available.
+disabled. Fresh signed-app/Nano MCP qualification is recorded below. Legacy hardware
+hosts remain available for unmatched scenarios.
+
+
+## Physical iPhone and Nano — 2026-11-04
+
+[Exact qualification ledger](workbench-device-qualification.json) retains the
+clean SDK commit `fce04293111027983b8c00c1923b4784d92ffc90`, reviewed package
+anchor, prepared inventory, signed executable identity and original native MCP
+admission/report envelopes. One Workbench build 10 process (PID 36087) on iPhone
+15 Pro Max/iOS 27.0.1 (24A446) passed both compiler regressions, selected Nano
+inspection and the exact raw binary console check. Mac development/control used
+Wi-Fi while the selected Nano occupied the phone's USB port. No Test Lab test
+buttons were needed. The user confirmed firmware was unchanged since recovery.
+
+Inspection matched device `5031503337360009`, Nano board ID, protocol 1,
+self-reported firmware 0.1.0, application channel, boot `97cff0c9de0cee5f` and no
+upload targets. It acquired no console and sent no probe bytes. The separate
+console run rechecked that boot, sent 256 bytes once and received every expected
+byte exactly, including NUL and values above 0x7f. Close was acknowledged and
+SDK disconnect completed. Both first attempts passed without reset, retry,
+installation or firmware changes. Prior ROM recovery evidence remains separate;
+this hello does not establish a new installed-image hash or attestation.
+
+Native MCP revocation passed afterward, and the owned controller was stopped.
+The phone is released and work is paused at the user's request. Eighteen MCP
+fixtures pass with archived native request/report scope and byte verification.
+iPad/Pico, the FMS2 command-2 mode and physical busy/path-loss/background/deadline
+cases are not qualified by this run. Guarded upload/ROM recovery migration and
+unmatched legacy-host retirement remain future work.

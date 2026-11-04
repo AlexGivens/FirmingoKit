@@ -132,7 +132,7 @@ annotated as potentially writing evidence, even for an otherwise read-only query
 
 ## Reproduce validation
 
-The normal SDK entry point runs seventeen MCP fixtures without sockets or devices:
+The normal SDK entry point runs eighteen MCP fixtures without sockets or devices:
 
 ```sh
 python3 -I -S -B Tools/Workbench/test-mcp.py
@@ -227,8 +227,9 @@ python3 -I -S -B Tools/Workbench/check-codex-device.py \
 ```
 
 The helper captures caller command/run IDs before submission, polls only saved
-commands, and fails on uncertainty without replaying a run. Its two scenarios
-are fixed; it has no device write, app deployment or pairing implementation.
+commands, and fails on uncertainty without replaying a run. Its compiler mode runs two fixed compiler cases. Explicit device mode runs
+inspection and, when a fixed probe is selected, binary console through the same
+engine. It has no arbitrary payload, upload, app deployment or pairing command.
 It is an opt-in physical check, excluded from ordinary CI execution. Ordinary
 CI revalidates the archived native envelopes and report hashes and parses the
 helper's source without requiring a Codex installation or Python's `tomllib`.
@@ -242,3 +243,24 @@ catalogue was not forcibly rebound; the persisted entry was loaded and tested
 in a fresh native host. These results cover the two recorded compiler cases;
 iPad MCP, broader MCP lifecycle/stress, hardware and minimum-OS claims remain
 separate.
+
+
+## Selected Nano through iPhone — 2026-11-04
+
+[Device scenario guide](workbench-device-scenarios.md) documents the new closed
+hardware selection. Adapter 0.2.0 carries explicit request/report schema two,
+without changing compiler schema one. [Exact ledger](workbench-device-qualification.json)
+retains build-10 native Codex admission/report envelopes, the actual SDK hello,
+all 256 echo bytes and confirmed MCP revocation. Both compiler regressions also
+pass on that same signed app/PID. No manual app test buttons, installation, reset
+or firmware write were used. The user confirmed the prior recovered 0.1.0
+application was unchanged; hello is not fresh image attestation.
+
+The registered entry now selects the fresh r2 controller/evidence directories;
+all unrelated settings were preserved. Work is paused at the user's request and
+the owned controller is stopped. A future test needs a fresh controller certificate,
+scoped registration-path update and new pairing; no service auto-start is installed.
+The active desktop tool catalogue was not rebound. Eighteen socket-free fixtures
+include the new versioned scope checks and original build-10 native corpus replay;
+replaying those bytes is not another physical run. iPad/Pico, command-2 FMS2 mode,
+upload/ROM recovery and broader hardware qualification remain separate work.

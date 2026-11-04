@@ -1,0 +1,38 @@
+{
+  "id": 8,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"D71AB56F-89CA-4420-AAB0-95C38A8B3622\",\"commandID\":\"DC22BD71-35BE-4024-B2BF-0D7929663BC0\",\"command\":{\"schema\":1,\"commandID\":\"DC22BD71-35BE-4024-B2BF-0D7929663BC0\",\"action\":\"run\",\"request\":{\"schema\":2,\"requestID\":\"1A7F99BB-21D3-4D68-BA76-8DF2130CF69F\",\"operation\":\"run\",\"scenarioID\":\"device.inspect\",\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\"}}},\"admission\":{\"commandID\":\"DC22BD71-35BE-4024-B2BF-0D7929663BC0\",\"sequence\":9,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "D71AB56F-89CA-4420-AAB0-95C38A8B3622",
+      "commandID": "DC22BD71-35BE-4024-B2BF-0D7929663BC0",
+      "command": {
+        "schema": 1,
+        "commandID": "DC22BD71-35BE-4024-B2BF-0D7929663BC0",
+        "action": "run",
+        "request": {
+          "schema": 2,
+          "requestID": "1A7F99BB-21D3-4D68-BA76-8DF2130CF69F",
+          "operation": "run",
+          "scenarioID": "device.inspect",
+          "device": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "deviceID": "5031503337360009"
+          }
+        }
+      },
+      "admission": {
+        "commandID": "DC22BD71-35BE-4024-B2BF-0D7929663BC0",
+        "sequence": 9,
+        "state": "queued"
+      },
+      "scenarioCompletion": "not_observed"
+    },
+    "isError": false
+  }
+}

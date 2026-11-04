@@ -1,0 +1,116 @@
+{
+  "id": 15,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"sessionID\":\"D71AB56F-89CA-4420-AAB0-95C38A8B3622\",\"commandID\":\"55BDA02D-AF40-4743-B04F-345E4C53BF26\",\"record\":{\"commandID\":\"55BDA02D-AF40-4743-B04F-345E4C53BF26\",\"reply\":{\"accepted\":true,\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"10\",\"command\":{\"action\":\"report\",\"commandID\":\"55BDA02D-AF40-4743-B04F-345E4C53BF26\",\"runID\":\"1A7F99BB-21D3-4D68-BA76-8DF2130CF69F\",\"schema\":1},\"instanceID\":\"2AB15C9E-E7F0-43AA-B403-C01CBB58E358\",\"processID\":36087,\"report\":{\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"10\",\"artifacts\":[],\"deviceEvidence\":{\"connectionAttempted\":true,\"consoleClosed\":false,\"consoleOpened\":false,\"disconnected\":true,\"probeAttempted\":false,\"received\":\"\",\"selection\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\"},\"sentBytes\":0,\"snapshot\":{\"authenticationMode\":\"open-development\",\"boardID\":\"nano_rp2040_connect\",\"bootID\":\"97cff0c9de0cee5f\",\"channels\":[{\"backend\":\"application\",\"controls\":[],\"id\":1,\"isOwned\":false,\"receiveQueueBytes\":256,\"transmitQueueBytes\":256}],\"deviceID\":\"5031503337360009\",\"firmwareVersion\":\"0.1.0\",\"maximumPayload\":4096,\"protocolMajor\":1,\"targets\":[]}},\"deviceOperations\":true,\"events\":[{\"detail\":\"Selected SDK device operation; no compiler or upload prerequisite.\",\"phase\":\"device-start\",\"seconds\":0.0009007917251437902,\"sequence\":0},{\"detail\":\"Selected device assertions and SDK cleanup completed.\",\"phase\":\"complete\",\"seconds\":0.020262125064618886,\"sequence\":1}],\"id\":\"1A7F99BB-21D3-4D68-BA76-8DF2130CF69F\",\"operatingSystem\":\"Version 27.0.1 (Build 24A446)\",\"processID\":36087,\"scenarioID\":\"device.inspect\",\"schema\":2,\"status\":\"passed\"},\"schema\":1,\"state\":{\"awaitingLifecycleStart\":false,\"isRunning\":false,\"phase\":\"complete\",\"runID\":\"1A7F99BB-21D3-4D68-BA76-8DF2130CF69F\",\"status\":\"passed\"}},\"sequence\":11,\"state\":\"completed\"},\"scenarioCompletion\":\"passed\",\"validatedReport\":true,\"evidence\":[{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r2/D71AB56F-89CA-4420-AAB0-95C38A8B3622/55BDA02D-AF40-4743-B04F-345E4C53BF26/reply.json\",\"bytes\":1613,\"sha256\":\"d45a52a5383d28152c55a0d4ac6e131208897ae36baeb63046a9b7bce8d690c2\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r2/D71AB56F-89CA-4420-AAB0-95C38A8B3622/55BDA02D-AF40-4743-B04F-345E4C53BF26/report.json\",\"bytes\":1563,\"sha256\":\"f3901cf577ff5723042e2c4ab9ac5d76b6f2aff1647a2b22de7a2dbc47f39ed4\"}]}"
+      }
+    ],
+    "structuredContent": {
+      "sessionID": "D71AB56F-89CA-4420-AAB0-95C38A8B3622",
+      "commandID": "55BDA02D-AF40-4743-B04F-345E4C53BF26",
+      "record": {
+        "commandID": "55BDA02D-AF40-4743-B04F-345E4C53BF26",
+        "reply": {
+          "accepted": true,
+          "appIdentifier": "com.firmingokit.demo",
+          "appVersion": "10",
+          "command": {
+            "action": "report",
+            "commandID": "55BDA02D-AF40-4743-B04F-345E4C53BF26",
+            "runID": "1A7F99BB-21D3-4D68-BA76-8DF2130CF69F",
+            "schema": 1
+          },
+          "instanceID": "2AB15C9E-E7F0-43AA-B403-C01CBB58E358",
+          "processID": 36087,
+          "report": {
+            "appIdentifier": "com.firmingokit.demo",
+            "appVersion": "10",
+            "artifacts": [],
+            "deviceEvidence": {
+              "connectionAttempted": true,
+              "consoleClosed": false,
+              "consoleOpened": false,
+              "disconnected": true,
+              "probeAttempted": false,
+              "received": "",
+              "selection": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "deviceID": "5031503337360009"
+              },
+              "sentBytes": 0,
+              "snapshot": {
+                "authenticationMode": "open-development",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "97cff0c9de0cee5f",
+                "channels": [
+                  {
+                    "backend": "application",
+                    "controls": [],
+                    "id": 1,
+                    "isOwned": false,
+                    "receiveQueueBytes": 256,
+                    "transmitQueueBytes": 256
+                  }
+                ],
+                "deviceID": "5031503337360009",
+                "firmwareVersion": "0.1.0",
+                "maximumPayload": 4096,
+                "protocolMajor": 1,
+                "targets": []
+              }
+            },
+            "deviceOperations": true,
+            "events": [
+              {
+                "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+                "phase": "device-start",
+                "seconds": 0.0009007917251437902,
+                "sequence": 0
+              },
+              {
+                "detail": "Selected device assertions and SDK cleanup completed.",
+                "phase": "complete",
+                "seconds": 0.020262125064618886,
+                "sequence": 1
+              }
+            ],
+            "id": "1A7F99BB-21D3-4D68-BA76-8DF2130CF69F",
+            "operatingSystem": "Version 27.0.1 (Build 24A446)",
+            "processID": 36087,
+            "scenarioID": "device.inspect",
+            "schema": 2,
+            "status": "passed"
+          },
+          "schema": 1,
+          "state": {
+            "awaitingLifecycleStart": false,
+            "isRunning": false,
+            "phase": "complete",
+            "runID": "1A7F99BB-21D3-4D68-BA76-8DF2130CF69F",
+            "status": "passed"
+          }
+        },
+        "sequence": 11,
+        "state": "completed"
+      },
+      "scenarioCompletion": "passed",
+      "validatedReport": true,
+      "evidence": [
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r2/D71AB56F-89CA-4420-AAB0-95C38A8B3622/55BDA02D-AF40-4743-B04F-345E4C53BF26/reply.json",
+          "bytes": 1613,
+          "sha256": "d45a52a5383d28152c55a0d4ac6e131208897ae36baeb63046a9b7bce8d690c2"
+        },
+        {
+          "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r2/D71AB56F-89CA-4420-AAB0-95C38A8B3622/55BDA02D-AF40-4743-B04F-345E4C53BF26/report.json",
+          "bytes": 1563,
+          "sha256": "f3901cf577ff5723042e2c4ab9ac5d76b6f2aff1647a2b22de7a2dbc47f39ed4"
+        }
+      ]
+    },
+    "isError": false
+  }
+}

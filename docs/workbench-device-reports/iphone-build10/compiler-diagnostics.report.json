@@ -1,0 +1,84 @@
+{
+  "appIdentifier": "com.firmingokit.demo",
+  "appVersion": "10",
+  "artifacts": [
+    {
+      "bytes": "Rk1TMQEAQABOQU5PnCwCEAABIBA8AAAAAQEgEAkBIBAi8Wb3sOq0mm0Zb+HcAODGyTyIaaPAQVDV47Z9QLONagAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAF+IC9gLUA8Av4gL2AtQNIAmgGIAEhkEeAvcBGpCwCEBC1BEwiaAYgASGQR6FoCiCIRxC9qCwCEA==",
+      "name": "gpio.fms",
+      "receiptJSON": "eyJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsInNvdXJjZVNIQTI1NiI6ImZkYWQ4OGFhOGIyMGIwNDVmMzUzNjJjMTNlNTYwOTBiYTg1YjdiZDNlOGYwMjQ0NTJiM2IzOWY4N2MwZjI1NjgiLCJidWlsZElucHV0U0hBMjU2IjoiNTgzNjBiNmJmMDYzNDRiMWM4ZTdjZmU2OWMzNDM2MjI1MTM0M2IyNTM5NTA3ZTI4ZmNhZDBhZGY0NTk0MTIzNyIsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjEiLCJzb3VyY2VGaWxlbmFtZSI6IldvcmtiZW5jaC1ncGlvLmlubyIsImNhcHN1bGVTSEEyNTYiOiI5NThiODYxYmJjMThkNDY2NmVkMDNlNjk3NmIzOWI5ZmVhNDgxMjQwOWFkOTFhMzUwMWFiYmI5Njg1YTgwZDdkIiwic291cmNlUmV2aXNpb24iOjEsImRvY3VtZW50SUQiOiJFN0Q3NTlDRC0zRDg2LTRGQzEtODI1Qy05NjRBMjMxRDJEMEIiLCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiIwOTEyMzZhZWVhMWQxYjRkZWQ0MTBkZTNlYjE1NWIxOTY3MzhhZTlkNzI3ZDFkNzQxMWQzYjljYTNiY2JlNGRlIiwibGlua2VkRUxGU0hBMjU2IjoiZDcyOWE4YjZhOGUzNTNiMWZkZTAxMWVhNjI1OTdmMGJjNWUxNDUwMDQ5NmUwMThlN2M1YmQ1YzE1Mjc2MDUwZCIsImNhdGFsb2d1ZVNIQTI1NiI6ImUzNDFiZmMwMzg1ZmVhOWIyYjAyNmRjNjI0ZGFhMjZjZGVhYzMzMjg2ZjRiYjA3MjQzYjM3YzFjMzE4MzdkMGUiLCJmaXJtd2FyZUJ1aWxkSUQiOiJjNDRkMjVlZmU3NzRlYjQ3YjE2M2JjMDgyOTA2Y2Y0OGI1OWI2ZTNkZDFkMGUxOWM3ODIyOTI1ZTZiYTgyNzVmIiwicHJvdmVuYW5jZSI6eyJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIiwicmVjaXBlU0hBMjU2IjoiYjc4NjlmNmZjODYzZTE5MDVkZWI2OTc0NDA4YzZlN2RjNjM5NDNhMWZiM2UzNDJhMzU3ZmRmNzU3YjFlMjNkOSIsInJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlbGVzcy1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCJ9LCJ2ZXJzaW9uIjoxfQ==",
+      "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "wasmLinearMemoryBytes": 27983872
+    }
+  ],
+  "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
+  "deviceOperations": false,
+  "diagnostics": [
+    {
+      "column": 16,
+      "filename": "Workbench-invalid.ino",
+      "line": 1,
+      "message": "use of undeclared identifier 'missingFunction'",
+      "severity": "error"
+    },
+    {
+      "message": "    1 | void setup() { missingFunction(); }",
+      "severity": "note"
+    },
+    {
+      "message": "      |                ^~~~~~~~~~~~~~~",
+      "severity": "note"
+    }
+  ],
+  "diagnosticsOmitted": 0,
+  "events": [
+    {
+      "detail": "Loading actual SDK-verified catalogue metadata.",
+      "phase": "catalogue",
+      "seconds": 0.0011819165665656328,
+      "sequence": 0
+    },
+    {
+      "detail": "Verifying real bundled compiler/runtime resources.",
+      "phase": "resources",
+      "seconds": 0.014441458275541663,
+      "sequence": 1
+    },
+    {
+      "detail": "Requiring typed compiler rejection and nonempty diagnostics.",
+      "phase": "frontend-error",
+      "seconds": 0.08159574994351715,
+      "sequence": 2
+    },
+    {
+      "detail": "Observed 3 source diagnostics.",
+      "phase": "frontend-rejected",
+      "seconds": 0.5000688332365826,
+      "sequence": 3
+    },
+    {
+      "detail": "Executing actual WASM compile/link/package through the SDK.",
+      "phase": "compile-gpio",
+      "seconds": 0.5007307082414627,
+      "sequence": 4
+    },
+    {
+      "detail": "Expected and observed capsule SHA-256: 958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+      "phase": "artifact-gpio",
+      "seconds": 1.0475293332710862,
+      "sequence": 5
+    },
+    {
+      "detail": "All assertions in the selected scenario completed.",
+      "phase": "complete",
+      "seconds": 1.0487874583341181,
+      "sequence": 6
+    }
+  ],
+  "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+  "id": "70E047B0-3A71-4AF8-946B-52CBFD12A9B8",
+  "operatingSystem": "Version 27.0.1 (Build 24A446)",
+  "processID": 36087,
+  "scenarioID": "compiler.diagnostics",
+  "schema": 1,
+  "status": "passed"
+}

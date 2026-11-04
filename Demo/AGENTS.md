@@ -8,7 +8,9 @@ engine; launch-only CLI cannot synthesize them. Preserve the legacy hosts until
 equivalent evidence exists. Selected inspection and fixed binary console scenarios
 now use schema-two requests/reports and public SDK APIs; see
 [device scenario scope](../docs/workbench-device-scenarios.md). Upload/recovery
-migration and fresh Workbench hardware qualification remain pending.
+migration remains pending. Signed build 10 passes selected Nano inspection/raw
+binary console through MCP on the physical iPhone; broader combinations and
+FMS2 command-2 mode remain separately unqualified.
 The canonical scheme/product is FirmingoWorkbench; preserve the stable app bundle
 identity instead of creating another binary identity for each phase.
 

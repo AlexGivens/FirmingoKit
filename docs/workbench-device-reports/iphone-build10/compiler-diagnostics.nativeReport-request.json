@@ -1,0 +1,15 @@
+{
+  "id": 25,
+  "method": "mcpServer/tool/call",
+  "params": {
+    "threadId": "01a1a7c6-583e-7452-9b75-0cc3b2625d7b",
+    "server": "firmingo-workbench",
+    "tool": "workbench_result",
+    "arguments": {
+      "session_id": "D71AB56F-89CA-4420-AAB0-95C38A8B3622",
+      "command_id": "791C39B4-7327-46FE-B2A7-3DE7CFBBB9EF",
+      "scenario_id": "compiler.diagnostics",
+      "firmware_build_id": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f"
+    }
+  }
+}

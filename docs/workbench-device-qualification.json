@@ -1,0 +1,317 @@
+{
+  "schema": 1,
+  "date": "2026-11-04",
+  "status": "passed",
+  "scope": "Fresh native Codex MCP host through pinned paired Workbench build 10 on physical iPhone: SDK inspection and exact 256-byte application console plus compiler smoke/diagnostic regressions",
+  "app": {
+    "schema": 1,
+    "sdkCommit": "fce04293111027983b8c00c1923b4784d92ffc90",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "preparedInventorySHA256": "bb68632357d4b41b1a2007a2f953cbd52cfb342e9f9fe468a20cd095ac2301bd",
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "10",
+    "executableSHA256": "f587aadf8492e1897b10e74aa476eb8192e690941eb4a33f634e55339f7ca7a1"
+  },
+  "pairing": {
+    "appVersion": "10",
+    "expired": false,
+    "instanceID": "2AB15C9E-E7F0-43AA-B403-C01CBB58E358",
+    "label": "iPhone-device-build10",
+    "lastSeenSeconds": 0.026278375182300806,
+    "paired": true,
+    "processID": 36087,
+    "revoked": false,
+    "sessionID": "D71AB56F-89CA-4420-AAB0-95C38A8B3622"
+  },
+  "registration": {
+    "server": "firmingo-workbench",
+    "adapterVersion": "0.2.0",
+    "unrelatedSettingsPreserved": true,
+    "controllerRestartedWithFreshCertificate": true
+  },
+  "runs": [
+    {
+      "scenarioID": "compiler.smoke",
+      "runID": "E959340C-CC33-4C9D-837D-B6A4D3AC6CFC",
+      "processID": 36087,
+      "status": "passed",
+      "reportCommandID": "519113B5-4638-4F2D-A407-386C4696610A",
+      "reply": {
+        "path": "workbench-device-reports/iphone-build10/compiler-smoke.reply.json",
+        "sha256": "5fc641ca1273c3778c1218389fd561ad74aaabeb827442890bfda34ca1e255f0",
+        "bytes": 6137
+      },
+      "report": {
+        "path": "workbench-device-reports/iphone-build10/compiler-smoke.report.json",
+        "sha256": "3eafbdc756cb41524a17eaaecc4408432b3b88fadf159236b3c10ed336ec3e4a",
+        "bytes": 6144
+      },
+      "gpio.fms": {
+        "path": "workbench-device-reports/iphone-build10/compiler-smoke.gpio.fms",
+        "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "bytes": 316
+      },
+      "console.fms": {
+        "path": "workbench-device-reports/iphone-build10/compiler-smoke.console.fms",
+        "sha256": "b372c00edf4b60c662f73055685ed8764e9f8798fe9efbbafad04302549174c0",
+        "bytes": 392
+      },
+      "nativeStartRequest": {
+        "path": "workbench-device-reports/iphone-build10/compiler-smoke.nativeStart-request.json",
+        "sha256": "b065540fce5832f64178837e3c217cadd6101d648ce431fe371b4635632ba797",
+        "bytes": 549
+      },
+      "nativeStartResponse": {
+        "path": "workbench-device-reports/iphone-build10/compiler-smoke.nativeStart-response.json",
+        "sha256": "9a398f52d51243abe6fc71c485cfaa95b1a32bf759628eeaaf8b6c5307aa5766",
+        "bytes": 1478
+      },
+      "nativeReportRequest": {
+        "path": "workbench-device-reports/iphone-build10/compiler-smoke.nativeReport-request.json",
+        "sha256": "27f27a94108975bae0e0939d07ceb5cf84958c9b731072269e13b0b772e6c4e9",
+        "bytes": 471
+      },
+      "nativeReportResponse": {
+        "path": "workbench-device-reports/iphone-build10/compiler-smoke.nativeReport-response.json",
+        "sha256": "c89438e9a40f7ac9527a2ed6cec7c800ab3b884724fcf370318efe2461d3c014",
+        "bytes": 17140
+      }
+    },
+    {
+      "scenarioID": "compiler.diagnostics",
+      "runID": "70E047B0-3A71-4AF8-946B-52CBFD12A9B8",
+      "processID": 36087,
+      "status": "passed",
+      "reportCommandID": "791C39B4-7327-46FE-B2A7-3DE7CFBBB9EF",
+      "reply": {
+        "path": "workbench-device-reports/iphone-build10/compiler-diagnostics.reply.json",
+        "sha256": "a9fefc4ff4aaa4e700ba8a93b7bd44f10a344303f89d5591311d753a6f84d050",
+        "bytes": 4233
+      },
+      "report": {
+        "path": "workbench-device-reports/iphone-build10/compiler-diagnostics.report.json",
+        "sha256": "30f4723843bb9541fc0b29909e43bd48019961dea35a1cb5674efda9c9f1fe09",
+        "bytes": 4303
+      },
+      "gpio.fms": {
+        "path": "workbench-device-reports/iphone-build10/compiler-diagnostics.gpio.fms",
+        "sha256": "958b861bbc18d4666ed03e6976b39b9fea4812409ad91a3501abbb9685a80d7d",
+        "bytes": 316
+      },
+      "nativeReportRequest": {
+        "path": "workbench-device-reports/iphone-build10/compiler-diagnostics.nativeReport-request.json",
+        "sha256": "1855264e3a7bb9d1f4eb5f6c730be25f45170bbb534327c831a26a0652c40fbc",
+        "bytes": 477
+      },
+      "nativeReportResponse": {
+        "path": "workbench-device-reports/iphone-build10/compiler-diagnostics.nativeReport-response.json",
+        "sha256": "9af1592e38d42366e0d19a57a26f8795d9fd560a649bb999a9249678218867ea",
+        "bytes": 12931
+      },
+      "nativeStartRequest": {
+        "path": "workbench-device-reports/iphone-build10/compiler-diagnostics.nativeStart-request.json",
+        "sha256": "33a7b61963d5316299ae218ea0ec1af2ebebf4ec6e520e972b814d0b6bb03a96",
+        "bytes": 556
+      },
+      "nativeStartResponse": {
+        "path": "workbench-device-reports/iphone-build10/compiler-diagnostics.nativeStart-response.json",
+        "sha256": "0d27bd49eaf2067f3ad8bd34e78793e4c09375bd8d59cc1e18df112e878d66bd",
+        "bytes": 1491
+      }
+    },
+    {
+      "scenarioID": "device.inspect",
+      "runID": "1A7F99BB-21D3-4D68-BA76-8DF2130CF69F",
+      "processID": 36087,
+      "status": "passed",
+      "reportCommandID": "55BDA02D-AF40-4743-B04F-345E4C53BF26",
+      "reply": {
+        "path": "workbench-device-reports/iphone-build10/device-inspect.reply.json",
+        "sha256": "d45a52a5383d28152c55a0d4ac6e131208897ae36baeb63046a9b7bce8d690c2",
+        "bytes": 1613
+      },
+      "report": {
+        "path": "workbench-device-reports/iphone-build10/device-inspect.report.json",
+        "sha256": "f3901cf577ff5723042e2c4ab9ac5d76b6f2aff1647a2b22de7a2dbc47f39ed4",
+        "bytes": 1563
+      },
+      "nativeReportRequest": {
+        "path": "workbench-device-reports/iphone-build10/device-inspect.nativeReport-request.json",
+        "sha256": "9667dbc30228c759d20e755933e1dbe714f62f5eb60607816e0d064adea9cbde",
+        "bytes": 500
+      },
+      "nativeReportResponse": {
+        "path": "workbench-device-reports/iphone-build10/device-inspect.nativeReport-response.json",
+        "sha256": "4caefd19484afde42c463f239245fa40af62286265ddc7a7d4ceac7ae7b07612",
+        "bytes": 6701
+      },
+      "nativeStartRequest": {
+        "path": "workbench-device-reports/iphone-build10/device-inspect.nativeStart-request.json",
+        "sha256": "a65bf5ae51277fed12f3c78edf96288528bfe574a31926268b0aff0680404402",
+        "bytes": 578
+      },
+      "nativeStartResponse": {
+        "path": "workbench-device-reports/iphone-build10/device-inspect.nativeStart-response.json",
+        "sha256": "2d5217167d23326a864224e4886da79cc3085f3682dec09752e06768e56233d7",
+        "bytes": 1567
+      }
+    },
+    {
+      "scenarioID": "device.console-binary",
+      "runID": "798AA50E-B246-46B3-ACE4-F7CCD78295BD",
+      "processID": 36087,
+      "status": "passed",
+      "reportCommandID": "96BE02B0-90C3-4745-8117-2548C4E69F4F",
+      "reply": {
+        "path": "workbench-device-reports/iphone-build10/device-console-binary.reply.json",
+        "sha256": "f1cb3b6297d4113c4469f575daf82e7f8c51503643ab016413dd79aee3af8e84",
+        "bytes": 2018
+      },
+      "report": {
+        "path": "workbench-device-reports/iphone-build10/device-console-binary.report.json",
+        "sha256": "f3fdcaf6753ce8a0f6ebaf1223613235861dc13c9179e8fb9c88a31f60125fdf",
+        "bytes": 1984
+      },
+      "nativeReportRequest": {
+        "path": "workbench-device-reports/iphone-build10/device-console-binary.nativeReport-request.json",
+        "sha256": "fc98bf123a2e6db96a230963ce3c1c77ef097f55cc6f6d678eac5356f8d666c1",
+        "bytes": 588
+      },
+      "nativeReportResponse": {
+        "path": "workbench-device-reports/iphone-build10/device-console-binary.nativeReport-response.json",
+        "sha256": "72d54c579a06698c7a270cf5e3ebb7042f965645f767c935d78c165c1f40380a",
+        "bytes": 7555
+      },
+      "nativeStartRequest": {
+        "path": "workbench-device-reports/iphone-build10/device-console-binary.nativeStart-request.json",
+        "sha256": "209d158b0da6b77724f6ccd41be578203244d0b80db90a90263b544fde92de99",
+        "bytes": 667
+      },
+      "nativeStartResponse": {
+        "path": "workbench-device-reports/iphone-build10/device-console-binary.nativeStart-response.json",
+        "sha256": "4a4e27e3d2877d624e810fe5c5c7f83895d3e565c8f2da8dbfc6a54eba34757e",
+        "bytes": 1732
+      }
+    }
+  ],
+  "limitations": [
+    "Physical result covers this Nano/application/iPhone/model/OS only; iPad and Pico new path unqualified",
+    "No fresh installed-image readback or attestation; hello is self-reported and prior recovery evidence remains separate",
+    "FMS2 command-2 mode, busy-device, background/path-loss and deadline behavior are deterministic fixtures/SDK coverage, not fresh physical checks here",
+    "Short fixed echo does not qualify throughput, delayed trailing bytes, soak, USB authorization/routing matrix or electrical behavior",
+    "No UI/accessibility inspection, minimum-OS or remote CI qualification",
+    "No upload/reset/flash/ROM migration or legacy hardware host retirement"
+  ],
+  "hostDevice": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "osVersion": "27.0.1",
+    "osBuild": "24A446",
+    "developmentTransport": "localNetwork"
+  },
+  "nativeHost": {
+    "userAgent": "Codex Desktop/0.166.0-alpha.6 (Mac OS 27.0.0; arm64) dumb (firmingo-workbench-qualification; 0.1.0)",
+    "ephemeralHostContext": true,
+    "modelTurnsStarted": 0,
+    "stoppedAfterCollection": true,
+    "discoveryRequest": {
+      "path": "workbench-device-reports/iphone-build10/discovery.native-request.json",
+      "bytes": 198,
+      "sha256": "cc086d1553ab662ab5f454facf654b58450857f91a4126ef75de0c2a391bf89b"
+    },
+    "discoveryResponse": {
+      "path": "workbench-device-reports/iphone-build10/discovery.native-response.json",
+      "bytes": 10734,
+      "sha256": "5369a4ec8b4fab9c1447a24e94090051240f60b491ec6b9cdbca98d7f111a054"
+    }
+  },
+  "revocation": {
+    "confirmedByNativeMCP": true,
+    "noFurtherPhoneOperationRequired": true,
+    "nativeRequest": {
+      "path": "workbench-device-reports/iphone-build10/revoke.native-request.json",
+      "sha256": "68d6deb401bba3792b8503a11e42ee1912b4ee58ae9ee1e30d63305d16e84499",
+      "bytes": 277
+    },
+    "nativeResponse": {
+      "path": "workbench-device-reports/iphone-build10/revoke.native-response.json",
+      "sha256": "71dcfd5200f0042eea9d72ee3e4f17a9b5d51225b90716a280c7636f7f14d012",
+      "bytes": 212
+    },
+    "finalSafeControllerMetadata": {
+      "appVersion": "10",
+      "expired": false,
+      "instanceID": "2AB15C9E-E7F0-43AA-B403-C01CBB58E358",
+      "label": "iPhone-device-build10",
+      "lastSeenSeconds": 44.958921749610454,
+      "paired": true,
+      "processID": 36087,
+      "revoked": true,
+      "sessionID": "D71AB56F-89CA-4420-AAB0-95C38A8B3622"
+    }
+  },
+  "nano": {
+    "boardID": "nano_rp2040_connect",
+    "deviceID": "5031503337360009",
+    "address": "192.168.77.1",
+    "bootID": "97cff0c9de0cee5f",
+    "firmwareVersionReported": "0.1.0",
+    "backend": "application",
+    "userConfirmedFirmwareUnchangedSinceLastRecovery": true,
+    "priorRecoveryEvidence": "nano-rom-recovery.json",
+    "freshInstalledImageAttestation": false,
+    "transport": "USB to physical iPhone; Mac controller over Wi-Fi",
+    "jumpers": "D2 and REC disconnected per requested procedure",
+    "probe": "raw-256-v1",
+    "sentBytes": 256,
+    "receivedBytes": 256,
+    "expectedBytesSHA256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880",
+    "firstAttempt": true,
+    "automaticRetry": false,
+    "resetOrInstallationOrFlashPerformed": false
+  },
+  "workPausedAtUserRequest": true,
+  "controller": {
+    "stopped": true,
+    "automaticServiceInstalled": false,
+    "futureRunRequiresFreshControllerAndPairing": true
+  },
+  "validation": {
+    "normalEntryPoint": "node Tools/ManagedWASM/run-validation.mjs",
+    "normalEntryPointPassed": true,
+    "sdkTestsDiscovered": 166,
+    "optInSDKRuntimeSkips": 10,
+    "romHostTests": 8,
+    "workbenchTestsDiscovered": 30,
+    "optInWorkbenchTLSSkips": 1,
+    "cliTests": 17,
+    "pairedTests": 11,
+    "mcpTestsAfterNativeCorpus": 18,
+    "appPlatformsBuilt": [
+      "macOS Release unsigned",
+      "iOS device Release unsigned",
+      "iOS Simulator Release unsigned",
+      "iOS device Release Apple Development signed"
+    ],
+    "officialMCPClients": [
+      "@modelcontextprotocol/client 2.4.0",
+      "@modelcontextprotocol/sdk 1.32.2"
+    ],
+    "officialClientScope": "Unix fixture over archived compiler bytes; no hardware execution",
+    "remoteCIPassClaimed": false,
+    "logs": [
+      {
+        "path": ".build/workbench-device-validation-final.log",
+        "sha256": "14f1c8afb98bc8d18e30b015eb19f417eeb70ecb42ea47cb53007bbc5a3d007b"
+      },
+      {
+        "path": ".build/workbench-device-mcp-corpus-r2.log",
+        "sha256": "3a9f2e90158c6ad7830bab81abb534040e8f98e7d08fa8a940ee03fb4b52caab"
+      },
+      {
+        "path": ".build/workbench-device-signed-r1.log",
+        "sha256": "529156eb3a70d48fa94775c6f5d2598fa63a7ad548ae5e3478748cc1b73fff10"
+      }
+    ]
+  }
+}

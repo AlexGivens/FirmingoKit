@@ -337,6 +337,40 @@ class MCPAdapter(unittest.TestCase):
         self.assertTrue(ledger['revocation']['confirmedByNativeMCP'])
         self.assertFalse(ledger['revocation']['appDiagnostic']['isPaired'])
 
+    def test_recorded_workbench_build10_native_reports_remain_bound_to_their_request_scope(self):
+        """Replay exact native envelopes as parser data; this creates no app, model turn or hardware operation."""
+        import hashlib
+        ledger = json.loads((DOCS / 'workbench-device-qualification.json').read_text())
+        self.assertEqual(ledger['app']['appVersion'], '10')
+        self.assertEqual(ledger['nativeHost']['modelTurnsStarted'], 0)
+        for row in ledger['runs']:
+            values = {}
+            for key in ('report', 'reply', 'nativeReportRequest', 'nativeReportResponse', 'nativeStartRequest', 'nativeStartResponse'):
+                raw = (DOCS / row[key]['path']).read_bytes()
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), row[key]['sha256'])
+                values[key] = json.loads(raw)
+            start = values['nativeStartRequest']['params']['arguments']
+            selected = values['nativeReportRequest']['params']['arguments']
+            self.assertEqual(start['run_id'], row['runID'])
+            self.assertEqual(start['scenario_id'], row['scenarioID'])
+            self.assertEqual(selected['scenario_id'], row['scenarioID'])
+            self.assertEqual(selected['session_id'], ledger['pairing']['sessionID'])
+            self.assertEqual(selected['command_id'], row['reportCommandID'])
+            self.assertEqual(values['nativeStartResponse']['result']['structuredContent']['scenarioCompletion'], 'not_observed')
+            result = values['nativeReportResponse']['result']['structuredContent']
+            self.assertTrue(result['validatedReport'])
+            self.assertEqual(result['record']['reply'], values['reply'])
+            self.assertEqual(values['reply']['report'], values['report'])
+            self.assertEqual(values['reply']['processID'], ledger['pairing']['processID'])
+            self.assertEqual(values['reply']['instanceID'], ledger['pairing']['instanceID'])
+            device = mcp.paired.request_checker().selected_device(selected, row['scenarioID'])
+            checked = mcp.paired.export_report(values['reply'], row['runID'], selected['scenario_id'], selected.get('firmware_build_id'), device)
+            self.assertEqual(checked['status'], row['status'])
+            self.assertEqual(checked['schema'], 2 if device else 1)
+            self.assertIs(checked['deviceOperations'], device is not None)
+            for field in mcp.paired.request_checker().DEVICE_FIELDS:
+                self.assertEqual(start.get(field), selected.get(field))
+
     def test_hardware_selection_is_explicit_version_two_and_never_an_upload_command(self):
         selected=self.selection(action='run',run_id=fresh(),scenario_id='device.inspect',device_address='192.168.77.1',
             device_board='nano_rp2040_connect',device_id='5031503337360009')

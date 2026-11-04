@@ -817,4 +817,18 @@ interoperability against adapter 0.2.0 through the local Unix fixture. Successfu
 Xcode/macro/socket checks used the normal local environment after sandbox-only
 attempts failed. Ordinary CI executes the fixtures and coordination harness,
 never a hardware check. Remote CI, UI/accessibility, minimum OS and fresh Nano
-qualification remain unclaimed; legacy hardware hosts are retained.
+qualification were initially unclaimed; the subsequent selected Nano result is
+recorded below. Legacy hardware hosts are retained.
+
+
+The clean prepared SDK at `fce0429` now supplies the verified, development-signed
+iOS Workbench build 10. After Wi-Fi deployment and fresh pairing, native Codex
+MCP calls pass compiler smoke/diagnostic recovery, read-only Nano inspection and
+one exact 256-byte raw console check in the same PID. The selected Nano remains
+on its prior recovered 0.1.0 application; no firmware change/reset/upload occurred.
+[Exact identities and original envelopes](workbench-device-qualification.json)
+include confirmed MCP revocation. The added archived-corpus regression passes,
+bringing the MCP suite to 18 tests. The final normal validation entry point had
+also passed with the integrated coordination harness. The phone is released,
+the owned controller is stopped and work is paused at the user's request.
+iPad/Pico/FMS2-probe mode and guarded upload/ROM migration remain open.

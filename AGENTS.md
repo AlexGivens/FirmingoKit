@@ -63,9 +63,13 @@ schema two, explicit private endpoint/board/device selection and console-only
 boot/probe authorization; compiler schema one remains offline. They do not load
 compiler assets or grant upload/reset/flash authority. Test Lab, CLI and MCP share
 the engine and existing demo operation leases. Local regression/platform builds
-pass; fresh signed Nano qualification remains pending. See
-`docs/workbench-device-scenarios.md`; preserve legacy hosts until equivalent
-hardware evidence exists.
+pass. The same signed build 10 now passes native MCP inspection and exact
+256-byte raw console on the selected Nano through the physical iPhone; compiler
+smoke/diagnostic regressions also pass in the same app/PID. Pairing is revoked
+and the controller is stopped at the user-requested pause. See
+`docs/workbench-device-qualification.json` and `docs/workbench-device-scenarios.md`.
+iPad/Pico, FMS2 command-2 mode and upload/recovery migration remain separate;
+preserve unmatched legacy hosts.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped
