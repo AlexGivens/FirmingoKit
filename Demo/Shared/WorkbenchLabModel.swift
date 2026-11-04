@@ -21,17 +21,31 @@ import UIKit
     /// Explicit descriptor selected by the developer; never defaults to the first choice.
     var selectedBuildID = ""
     /// Explicit test-only device selection; no board is contacted when editing these fields.
-    var deviceAddress = "192.168.77.1"
+    var deviceAddress = "192.168.77.1" { didSet { if deviceAddress != oldValue { expireDeviceSelection() } } }
     /// Stable device identity must be supplied by the developer, never defaulted from an address.
-    var deviceID = ""
+    var deviceID = "" { didSet { if deviceID != oldValue { expireDeviceSelection() } } }
     /// Exact board selection; hardware qualification remains per board/host/image.
-    var deviceBoard = FirmingoBoard.nanoRP2040Connect.rawValue
+    var deviceBoard = FirmingoBoard.nanoRP2040Connect.rawValue { didSet { if deviceBoard != oldValue { expireDeviceSelection() } } }
     /// Boot copied only after a successful explicit inspection of the same selection.
     var deviceBootID = ""
     /// Fixed application probe selected independently of compiler/firmware installation.
     var consoleProbe = "raw-256-v1"
     /// Explicit manual consent to send the fixed binary probe; MCP requests carry their own explicit mode.
     var allowConsoleProbe = false
+    /// Original managed stage identity, explicitly selected for follow-up and restart recovery.
+    var managedOperationID = ""
+    /// Exact saved SDK record hash returned by staging, not a commit capability.
+    var managedRecordSHA256 = ""
+    /// Fixed FMS2 source vector for a new stage.
+    var managedSketch = "state-a"
+    /// Operator-reviewed installed resident digest; no default association is inferred.
+    var managedResidentImage = ""
+    /// Actual reviewed evidence for the installed resident.
+    var managedEvidenceNote = ""
+    /// Stage and flash commit have separate manual authorizations.
+    var allowManagedStage = false
+    /// Consumed after every explicit commit request, regardless of result.
+    var allowManagedCommit = false
     /// Host error outside a scenario, separate from assertions inside its report.
     var error: String?
     /// Read-only historical context; loading history never restarts a run.
@@ -58,7 +72,8 @@ import UIKit
         engine = WorkbenchScenarioEngine(backend: SDKWorkbenchCompiler(), store: store, supportsSceneTransitions: scenes,
             deviceBackend: SDKWorkbenchDevice(acquire: { console in
                 try await InstallationRecordStore.shared.beginWorkbenchDeviceOperation(console: console)
-            }, release: { id in await InstallationRecordStore.shared.finishDeviceOperation(id) }))
+            }, release: { id in await InstallationRecordStore.shared.finishDeviceOperation(id) }),
+            managedBackend: WorkbenchManagedCoordinator(driver: SDKWorkbenchManagedDriver(), store: WorkbenchManagedPersistence(records: .shared)))
         pairing = WorkbenchPairedClient(host: WorkbenchControlHost(engine: engine, store: store),
             diagnosticURL: store.directory.deletingLastPathComponent().appendingPathComponent("controller.json"))
     }
@@ -71,24 +86,74 @@ import UIKit
             catch { self.error = error.localizedDescription }
         }
     }
+    /// Presents action-specific prerequisites without treating a UI toggle as device authorization.
+    func canRun(_ scenario: WorkbenchScenario) -> Bool {
+        guard !engine.isRunning, scenario.unavailableReason == nil,
+              !scenario.requiresSceneTransitions || engine.supportsSceneTransitions,
+              !scenario.requiresBuild || !selectedBuildID.isEmpty else { return false }
+        guard scenario.requiresDevice else { return true }
+        guard !deviceID.isEmpty, !deviceAddress.isEmpty else { return false }
+        if scenario.id == "device.console-binary" { return allowConsoleProbe && !deviceBootID.isEmpty }
+        if WorkbenchManagedSelection.scenarios.contains(scenario.id) {
+            guard !deviceBootID.isEmpty else { return false }
+            if scenario.id == "managed.stage" { return allowManagedStage && !managedResidentImage.isEmpty && !managedEvidenceNote.isEmpty }
+            return !managedOperationID.isEmpty && (scenario.id == "managed.restore" || !managedRecordSHA256.isEmpty) && (scenario.id != "managed.commit" || allowManagedCommit)
+        }
+        return true
+    }
     /// Captures one fresh request and lets the shared engine handle all prerequisites/assertions.
     func run(_ scenario: WorkbenchScenario) {
         guard task == nil else { return }
         task = Task {
             defer { task = nil }
             do {
-                let request = try WorkbenchRequest(operation: .run, scenarioID: scenario.id,
+                let id = UUID()
+                let managed = try managedSelection(scenario: scenario.id, id: id)
+                let selected: WorkbenchDeviceSelection?
+                if managed != nil {
+                    selected = try .init(address: deviceAddress, boardID: deviceBoard, deviceID: deviceID, bootID: deviceBootID)
+                } else { selected = try scenario.requiresDevice ? selectedDevice(console: scenario.id == "device.console-binary") : nil }
+                let request = try WorkbenchRequest(requestID: id, operation: .run, scenarioID: scenario.id,
                     firmwareBuildID: scenario.requiresBuild && !selectedBuildID.isEmpty ? selectedBuildID : nil,
-                    device: try scenario.requiresDevice ? selectedDevice(console: scenario.id == "device.console-binary") : nil)
+                    device: selected, managed: managed)
+                if managed != nil { allowManagedStage = false; allowManagedCommit = false }
                 let result = try await engine.run(request); error = nil
                 if result.scenarioID == "device.inspect", result.status == .passed,
                    let value = result.deviceEvidence, value.selection.address == deviceAddress,
                    value.selection.deviceID == deviceID, value.selection.boardID == deviceBoard {
                     deviceBootID = value.snapshot?.bootID ?? ""; allowConsoleProbe = false
                 }
+                if let value = result.managedEvidence?.checkpoint, let digest = try value.recordSHA256 {
+                    managedOperationID = value.request.requestID.uuidString; managedRecordSHA256 = digest
+                }
                 history = try store.history()
             } catch { self.error = error.localizedDescription }
         }
+    }
+    /// Manual actions build exactly the same closed selections as MCP; restoring context grants no authority.
+    private func managedSelection(scenario: String, id: UUID) throws -> WorkbenchManagedSelection? {
+        guard WorkbenchManagedSelection.scenarios.contains(scenario) else { return nil }
+        if scenario == "managed.stage" {
+            guard allowManagedStage else { throw WorkbenchFailure("Review resident evidence and authorize RAM staging with D2 connected.") }
+            return .init(operationID: id, sketch: managedSketch, residentImageSHA256: managedResidentImage,
+                         evidence: managedEvidenceNote, authorization: "stage-d2-gnd")
+        }
+        guard let operation = UUID(uuidString: managedOperationID), scenario != "managed.commit" || allowManagedCommit else {
+            throw WorkbenchFailure("Select the saved operation and record hash; commit needs its separate explicit authorization.")
+        }
+        if scenario == "managed.restore" { return .init(operationID: operation) }
+        return .init(operationID: operation, recordSHA256: managedRecordSHA256,
+                     authorization: scenario == "managed.commit" ? "commit-once-d2-gnd" : nil)
+    }
+    /// Selects historical query context without opening a session or restoring commit permission.
+    func selectManagedContext(_ report: WorkbenchReport) {
+        do {
+            guard let checkpoint = report.managedEvidence?.checkpoint, let device = checkpoint.request.device,
+                  let digest = try checkpoint.recordSHA256 else { throw WorkbenchFailure("Saved report has no issued managed transaction.") }
+            deviceAddress = device.address; deviceBoard = device.boardID; deviceID = device.deviceID
+            deviceBootID = device.bootID ?? ""; managedOperationID = checkpoint.request.requestID.uuidString
+            managedRecordSHA256 = digest; allowManagedStage = false; allowManagedCommit = false
+        } catch { self.error = error.localizedDescription }
     }
     /// Explicit fields become one immutable request; inspection never acquires console permission.
     private func selectedDevice(console: Bool) throws -> WorkbenchDeviceSelection {
@@ -97,7 +162,7 @@ import UIKit
             bootID: console ? deviceBootID : nil, consoleProbe: console ? consoleProbe : nil)
     }
     /// Selection edits expire the observed boot and local console consent.
-    func expireDeviceSelection() { deviceBootID = ""; allowConsoleProbe = false }
+    func expireDeviceSelection() { deviceBootID = ""; allowConsoleProbe = false; allowManagedStage = false; allowManagedCommit = false }
     /// Cancels only the currently displayed run, without clearing its evidence or starting another action.
     func cancel() { if let id = engine.report?.id { engine.cancel(requestID: id) } }
     /// Routes real aggregate scene delivery, never an agent-authored synthetic transition.
@@ -170,6 +235,7 @@ import UIKit
             let request = try WorkbenchRequest.decode(data)
             let result: WorkbenchCommandResult
             do {
+                guard !["managed.stage", "managed.commit", "managed.abort", "managed.disconnect"].contains(request.scenarioID ?? "") else { throw WorkbenchFailure("Use Test Lab or paired CLI/MCP for phases that need a live app session.") }
                 if request.operation == .list {
                     let catalogue = try await engine.inspectCatalogue()
                     result = .init(request: request, catalogue: catalogue, report: nil)

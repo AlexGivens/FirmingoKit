@@ -89,8 +89,10 @@ Example submission arguments, after choosing UUIDs and a compatible descriptor:
 
 The placeholders are explanatory; runtime UUID and digest validation is strict.
 Unknown fields, nested request overrides, arbitrary source/service URLs, shell,
-file paths, scene injection and upload/reset/flash commands reject before controller
-access. [Selected device inspection and fixed binary console](workbench-device-scenarios.md)
+file paths, scene injection and arbitrary reset/ROM commands reject before controller
+access. Explicit fixed managed stage/one-shot commit now use schema three, with
+separate authorizations and the existing deployment guards; see
+[managed phases](workbench-managed-scenarios.md). [Selected device inspection and fixed binary console](workbench-device-scenarios.md)
 now accept explicit device fields through request/report schema two. Console bytes
 require a separately inspected boot and explicit fixed-probe selection. The app
 remains the authority for scenario availability and prerequisites.
@@ -132,7 +134,7 @@ annotated as potentially writing evidence, even for an otherwise read-only query
 
 ## Reproduce validation
 
-The normal SDK entry point runs eighteen MCP fixtures without sockets or devices:
+The normal SDK entry point runs nineteen MCP fixtures without sockets or devices:
 
 ```sh
 python3 -I -S -B Tools/Workbench/test-mcp.py
@@ -282,3 +284,14 @@ settings preserved. The owned controller is stopped after qualification; a futur
 run requires explicit fresh controller startup and pairing. No automatic service
 or active-desktop tool-catalogue rebinding was added. The shared configuration
 procedure remains the [official OpenAI MCP configuration](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
+
+
+## Managed phase extension — 2026-11-04
+
+Adapter 0.3.0 adds the closed schema-three managed selection to the same four
+tools. The [managed guide](workbench-managed-scenarios.md) specifies each field,
+separate stage/commit authorization, saved record hash, restore/reconciliation,
+no replay and pending-owner guards. Schema 1/2 authority is unchanged. Normal
+fixtures and official-client checks do not execute a board workflow; fresh
+physical managed qualification is tracked separately. No ROM writer, arbitrary
+artifact/source or automatic recovery is added.

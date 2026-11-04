@@ -24,6 +24,43 @@ DEVICE_FIELDS = {'device_address': 'address', 'device_board': 'boardID', 'device
                  'device_boot_id': 'bootID', 'console_probe': 'consoleProbe'}
 
 
+MANAGED_SCENARIOS = ('managed.stage','managed.commit','managed.abort','managed.disconnect','managed.reconcile','managed.retire','managed.restore')
+MANAGED_IMAGE = '1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f'
+MANAGED_PINS = {'state-a':'537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89',
+                'state-b':'505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0'}
+MANAGED_FIELDS = {'managed_operation_id':'operationID','managed_sketch':'sketch','resident_image_sha256':'residentImageSHA256',
+                  'resident_evidence':'evidence','managed_record_sha256':'recordSHA256','managed_authorization':'authorization'}
+
+
+def validate_managed_selection(value, scenario, run_id=None):
+    """Explicit separately authorized phases; no remote source, path, bytes or restored commit authority."""
+    if not isinstance(value,dict) or set(value)-set(MANAGED_FIELDS.values()) or scenario not in MANAGED_SCENARIOS:
+        raise ValueError('invalid managed phase selection')
+    operation = str(uuid.UUID(value['operationID'])).upper()
+    if operation != value['operationID']: raise ValueError('select canonical managed operation UUID')
+    if scenario=='managed.restore':
+        if set(value)!={'operationID'}: raise ValueError('restore accepts only original operation identity')
+        return value
+    if scenario=='managed.stage':
+        if (set(value)!={'operationID','sketch','residentImageSHA256','evidence','authorization'}
+                or (run_id is not None and operation!=run_id) or value['sketch'] not in MANAGED_PINS
+                or value['residentImageSHA256']!=MANAGED_IMAGE or not isinstance(value['evidence'],str)
+                or not 8<=len(value['evidence'].encode())<=512 or value['authorization']!='stage-d2-gnd'):
+            raise ValueError('stage requires fixed source, reviewed resident evidence and explicit D2 authorization')
+    else:
+        keys={'operationID','recordSHA256'} | ({'authorization'} if scenario=='managed.commit' else set())
+        if (set(value)!=keys or not re.fullmatch('[0-9a-f]{64}',value['recordSHA256'])
+                or (scenario=='managed.commit' and value['authorization']!='commit-once-d2-gnd')):
+            raise ValueError('select exact saved transaction and separate one-shot commit authorization')
+    return value
+
+
+def selected_managed(arguments,scenario):
+    """Use the same closed conversion for launch CLI, paired CLI and MCP expectations."""
+    value={target:arguments[key] for key,target in MANAGED_FIELDS.items() if arguments.get(key) is not None}
+    return validate_managed_selection(value,scenario) if value else None
+
+
 def validate_device_selection(value, scenario):
     """Version-two local FMGO selection; no hostname, arbitrary port, source or update authority."""
     if (not isinstance(value, dict) or set(value)-set(DEVICE_FIELDS.values())
@@ -40,6 +77,9 @@ def validate_device_selection(value, scenario):
         if (set(value) != set(DEVICE_FIELDS.values()) or not re.fullmatch('[0-9a-f]{16}',value['bootID'])
                 or value['consoleProbe'] not in ('raw-256-v1','fms2-command-2-v1')):
             raise ValueError('inspect first, then explicitly select that boot and fixed binary probe')
+    elif scenario in MANAGED_SCENARIOS:
+        if (set(value)!={'address','boardID','deviceID','bootID'} or value['boardID']!='nano_rp2040_connect'
+                or not re.fullmatch('[0-9a-f]{16}',value['bootID'])): raise ValueError('select original inspected Nano boot without console authority')
     else: raise ValueError('device selection is only for implemented hardware scenarios')
     return value
 
@@ -52,18 +92,23 @@ def selected_device(arguments, scenario):
 
 def validate_request(request):
     """Keep legacy offline requests closed and admit hardware only through the explicit version-two extension."""
-    if (not isinstance(request,dict) or set(request)-{'schema','requestID','operation','scenarioID','firmwareBuildID','device'}
-            or type(request.get('schema')) is not int or request['schema'] not in (1,2)):
+    if (not isinstance(request,dict) or set(request)-{'schema','requestID','operation','scenarioID','firmwareBuildID','device','managed'}
+            or type(request.get('schema')) is not int or request['schema'] not in (1,2,3)):
         raise ValueError('invalid request schema/options')
     uuid.UUID(request['requestID'])
     if request.get('operation') == 'list':
         if set(request) != {'schema','requestID','operation'} or request['schema'] != 1: raise ValueError('invalid discovery selection')
     elif request.get('operation') == 'run':
         if not isinstance(request.get('scenarioID'),str): raise ValueError('select an exact scenario')
-        if request['schema'] == 2:
+        if request['schema'] == 3:
+            validate_device_selection(request.get('device'),request['scenarioID'])
+            validate_managed_selection(request.get('managed'),request['scenarioID'],request['requestID'])
+            if 'firmwareBuildID' in request: raise ValueError('managed vectors accept no compiler override')
+        elif request['schema'] == 2:
+            if 'managed' in request or request['scenarioID'] in MANAGED_SCENARIOS: raise ValueError('managed workflow requires schema three')
             validate_device_selection(request.get('device'),request['scenarioID'])
             if 'firmwareBuildID' in request: raise ValueError('hardware checks need no compiler descriptor')
-        elif 'device' in request or request['scenarioID'] in DEVICE_SCENARIOS:
+        elif 'device' in request or 'managed' in request or request['scenarioID'] in DEVICE_SCENARIOS+MANAGED_SCENARIOS:
             raise ValueError('hardware scenarios require a version-two device selection')
     else: raise ValueError('unsupported request operation')
     return request
@@ -72,7 +117,7 @@ def validate_request(request):
 def validate_device_report(report, selection):
     """Check actual hardware observation scope and every binary reply byte; nonpass reports retain partial evidence."""
     value = report.get('deviceEvidence')
-    if not isinstance(value,dict) or value.get('selection') != selection or report.get('artifacts') or report.get('exercise') is not None:
+    if not isinstance(value,dict) or value.get('selection') != selection or report.get('artifacts') or report.get('exercise') is not None or report.get('managedEvidence') is not None:
         raise ValueError('missing or foreign hardware evidence')
     for key in ('connectionAttempted','consoleOpened','probeAttempted','consoleClosed','disconnected'):
         if type(value.get(key)) is not bool: raise ValueError('invalid hardware state flags')
@@ -100,6 +145,75 @@ def validate_device_report(report, selection):
             or value['sentBytes'] != (257 if selection['consoleProbe']=='fms2-command-2-v1' else 256)
             or received != bytes(range(256)) or mismatch is not None):
         raise ValueError('binary probe/boot/cleanup assertions did not pass')
+
+
+def validate_managed_report(report,request):
+    """Independently bind each phase to original device/build/record, keeping unknown/startup distinctions."""
+    value=report.get('managedEvidence');scenario=request['scenarioID'];selection=request['managed']
+    if (not isinstance(value,dict) or value.get('selection')!=selection or report.get('deviceEvidence') is not None
+            or report.get('artifacts') or report.get('exercise') is not None): raise ValueError('invalid managed report scope')
+    checkpoint=value.get('checkpoint')
+    if checkpoint is None:
+        if report['status']=='passed': raise ValueError('managed pass lacks checkpoint')
+        return
+    original=checkpoint['request'];validate_request(original)
+    if (original['scenarioID']!='managed.stage' or original['device']!=request['device']
+            or original['managed']['operationID']!=selection['operationID'] or checkpoint.get('schema')!=1):
+        raise ValueError('foreign managed checkpoint')
+    for key in ('stageIntent','commitIntent','released'):
+        if type(checkpoint.get(key)) is not bool: raise ValueError('invalid checkpoint intent')
+    record=checkpoint.get('record');snapshot=checkpoint.get('snapshot');unknown=checkpoint.get('unknownReason')
+    if record is not None:
+        required={'version','deviceID','bootID','boardID','targetID','format','uploadID','size','sha256','residentELFSHA256','firmwareImageSHA256'}
+        if (not isinstance(record,dict) or set(record)!=required or record['version']!=1 or not checkpoint['stageIntent']
+                or any(record[k]!=original['device'][k] for k in ('deviceID','bootID','boardID'))
+                or record['targetID']!=2 or record['format']!='nano-managed-v2' or record['firmwareImageSHA256']!=MANAGED_IMAGE
+                or type(record['uploadID']) is not int or not 1<=record['uploadID']<=4294967295
+                or type(record['size']) is not int or record['size']!=(544 if original['managed']['sketch']=='state-a' else 548)
+                or record['residentELFSHA256']!='bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8'
+                or record['sha256']!=MANAGED_PINS[original['managed']['sketch']]): raise ValueError('changed managed SDK record')
+    if scenario not in ('managed.stage','managed.restore'):
+        digest=hashlib.sha256(json.dumps(record,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+        if digest!=selection['recordSHA256']: raise ValueError('foreign saved-record hash')
+    current_digest=hashlib.sha256(json.dumps(record,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+    if value.get('recordSHA256')!=current_digest: raise ValueError('published record hash differs from checkpoint')
+    if checkpoint['commitIntent'] and record is None: raise ValueError('commit without record')
+    if snapshot is not None:
+        if (not isinstance(snapshot,dict) or record is None or any(snapshot.get(k)!=record[k] for k in ('uploadID','size','sha256'))
+                or type(snapshot.get('received')) is not int or not 0<=snapshot['received']<=record['size']
+                or type(snapshot.get('slotTouched')) is not bool or unknown is not None): raise ValueError('foreign or ambiguous snapshot')
+        state=snapshot.get('state');error=snapshot.get('errorCode');touched=snapshot['slotTouched'];complete=snapshot['received']==record['size']
+        if (state not in ('accepted','verified','committing','installed','boot_confirmed','aborted','failed')
+                or not isinstance(error,str) or not re.fullmatch('[a-z0-9_]{1,32}',error)
+                or (state in ('accepted','verified','aborted') and touched)
+                or (state in ('verified','committing','installed','boot_confirmed') and not complete)
+                or (state in ('installed','boot_confirmed') and not touched)
+                or (state in ('accepted','verified','committing','installed','boot_confirmed') and error!='none')
+                or (state=='failed' and error=='none')): raise ValueError('invalid transaction state facts')
+    if unknown is not None and unknown not in ('bootChanged','deviceChanged','targetUnavailable','recordMismatch','stageFailedNoCommit','recordNotIssued','recordUnavailable:wrong_target','recordUnavailable:unsupported','recordUnavailable:invalid_state'):
+        raise ValueError('invalid unknown reason')
+    if checkpoint['released'] and checkpoint['stageIntent'] and not ((snapshot or {}).get('state') in ('aborted','boot_confirmed') or (not checkpoint['commitIntent'] and (unknown=='bootChanged' or (record is None and unknown=='stageFailedNoCommit')))):
+        raise ValueError('unresolved managed context released')
+    artifact=value.get('artifact')
+    if artifact is not None:
+        data=base64.b64decode(artifact['bytes'],validate=True);receipt=base64.b64decode(artifact['receiptJSON'],validate=True)
+        if (scenario!='managed.stage' or len(data)>4096 or len(receipt)>16384
+                or hashlib.sha256(data).hexdigest()!=MANAGED_PINS[selection['sketch']] or artifact['sha256']!=MANAGED_PINS[selection['sketch']]): raise ValueError('changed fixed artifact')
+        facts=json.loads(receipt,object_pairs_hook=unique_object)
+        if (facts.get('firmwareBuildID')!='dacbf259b96de0e050514764253403f3ef1ef51d0f9efaf1f43a10d8654c0e18'
+                or facts.get('capsuleSHA256')!=artifact['sha256']): raise ValueError('foreign compiler receipt')
+    if report['status']!='passed': return
+    if scenario=='managed.restore' and value.get('outcome')=='context_restored': return
+    if scenario=='managed.retire' and value.get('outcome')=='retired_unissued' and record is None and not checkpoint['commitIntent'] and checkpoint['released'] and unknown=='stageFailedNoCommit': return
+    expected={'managed.stage':'ram_verified','managed.commit':'commit_accepted','managed.abort':'aborted','managed.disconnect':'disconnected','managed.reconcile':('boot_confirmed','aborted'),'managed.retire':'retired_precommit'}
+    allowed=expected[scenario];allowed=(allowed,) if isinstance(allowed,str) else allowed
+    if record is None or value['outcome'] not in allowed: raise ValueError('managed phase did not pass')
+    if scenario=='managed.stage' and (artifact is None or checkpoint['commitIntent'] or checkpoint['released']): raise ValueError('stage is not RAM-only')
+    if scenario=='managed.commit' and (not checkpoint['commitIntent'] or (snapshot or {}).get('state')!='committing' or snapshot['slotTouched']): raise ValueError('unconfirmed commit acceptance')
+    if scenario=='managed.abort' and (snapshot or {}).get('errorCode')!='none': raise ValueError('explicit abort was not acknowledged')
+    if scenario in ('managed.abort','managed.reconcile') and ((snapshot or {}).get('state')!=value['outcome'] or not checkpoint['released']): raise ValueError('unconfirmed disposal/startup')
+    if scenario in ('managed.abort','managed.disconnect','managed.retire') and checkpoint['commitIntent']: raise ValueError('pre-commit outcome after commit intent')
+    if scenario=='managed.retire' and (unknown!='bootChanged' or not checkpoint['released']): raise ValueError('invalid pre-commit retirement')
 
 
 def bounded_file(path, maximum):
@@ -279,7 +393,7 @@ def decode_response(raw, request, pid, *, interactive=False):
             or report.get('id') != request['requestID'] or report.get('scenarioID') != request['scenarioID']
             or report.get('firmwareBuildID') != request.get('firmwareBuildID')
             or report.get('processID') != pid or report.get('appIdentifier') != 'com.firmingokit.demo'
-            or report.get('deviceOperations') is not (request['schema'] == 2)
+            or report.get('deviceOperations') is not (request['schema'] >= 2)
             or report.get('status') not in ('passed', 'failed', 'blocked', 'cancelled', 'outcomeUnknown')
             or not isinstance(report.get('events'), list) or not 1 <= len(report['events']) <= 64
             or not isinstance(report.get('artifacts'), list) or len(report['artifacts']) > 3):
@@ -312,8 +426,10 @@ def decode_response(raw, request, pid, *, interactive=False):
         if not 260 <= len(data) <= 4096 or hashlib.sha256(data).hexdigest() != artifact.get('sha256') or len(receipt) > 16384:
             raise ValueError('artifact bytes differ from their report')
         json.loads(receipt, object_pairs_hook=unique_object)
-    if request['schema'] == 2: validate_device_report(report, request['device'])
+    if request['schema'] == 3: validate_managed_report(report,request)
+    elif request['schema'] == 2: validate_device_report(report, request['device'])
     else:
+        if report.get('managedEvidence') is not None: raise ValueError('managed evidence requires schema three')
         if report.get('deviceEvidence') is not None: raise ValueError('offline report cannot contain hardware evidence')
         validate_exercise(report, interactive=interactive)
     return value
@@ -404,7 +520,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True, help='new local result directory')
     parser.add_argument('--scenario')
     parser.add_argument('--build-id')
-    for field in DEVICE_FIELDS: parser.add_argument('--'+field.replace('_','-'))
+    for field in (DEVICE_FIELDS | MANAGED_FIELDS): parser.add_argument('--'+field.replace('_','-'))
     parser.add_argument('--request-id', default=None, help='fresh UUID; replay is rejected by the app journal')
     args = parser.parse_args()
     if ((args.operation == 'list' and (args.scenario or args.build_id))
@@ -418,6 +534,8 @@ def main():
         request['firmwareBuildID'] = args.build_id
     device = selected_device(vars(args),args.scenario)
     if device: request.update(schema=2,device=device)
+    managed=selected_managed(vars(args),args.scenario)
+    if managed: request.update(schema=3,managed=managed)
     validate_request(request)
     return launch(args.app.absolute(), args.team, args.output.absolute(), request)
 

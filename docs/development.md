@@ -854,3 +854,32 @@ No app/SDK/firmware/compiler implementation changed, so no rebuild, broad suite
 rerun or firmware operation was needed. Remote CI, FMS2 command-2 mode, Pico,
 physical interruption/permission/routing matrices, minimum OS and UI inspection
 remain separate; legacy upload/recovery hosts are retained.
+
+
+## Workbench managed phases — 2026-11-04
+
+[Managed scenario guide](workbench-managed-scenarios.md) describes schema-three
+fixed FMS2 staging, separate one-shot commit, disposal, host restore, read-only
+reconciliation and constrained retirement through the shared Test Lab/paired
+CLI/MCP engine. Normal SDK APIs and compiler/firmware assets are unchanged.
+App-owned metadata/source resources reuse the exact previously qualified inputs;
+actual runtime/physical qualification remains separate from local orchestration.
+
+`node Tools/ManagedWASM/run-validation.mjs` passed with 166 SDK cases discovered
+(ten optional runtime skips), eight ROM-host cases and 39 Workbench cases
+(two opt-in TLS/default-driver runtime skips). CLI / paired / MCP suites passed
+20 / 11 / 19 tests. The real demo-store executable additionally verifies durable
+pending-owner exclusion across ordinary Run, complete-firmware installation and
+context clearing; exact disposal retains history. Complete unsigned Release
+Workbench builds passed for macOS, generic iOS device and generic iOS Simulator.
+Pinned official modern/legacy MCP clients passed the Unix archived-report fixture
+against adapter 0.3.0. No board was contacted by these checks.
+
+The installed local toolchain is Xcode 27.2 (27B52), Apple Swift 6.4.2. CI's
+explicit Xcode 27.0 / Swift 6.4 runner pin remains unchanged and is not certified
+by the newer local compiler. This follow-up records host differences rather than
+silently adopting a new CI baseline. The maintained normal validation entry point
+runs the new suites; the optional `WORKBENCH_MANAGED_RUNTIME=1` check requires an
+explicit prepared package and does not stage a device. Signed build 11 and fresh
+managed Nano qualification remain in preparation. Specialized fault/reply-loss
+and ROM hosts remain available; post-commit unknown state is not cleared silently.

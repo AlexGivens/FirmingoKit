@@ -95,7 +95,7 @@ class CodexHost:
         if result.get('isError') and not allow_error: raise ValueError(json.dumps(result.get('structuredContent', {}))[:512])
         return result
 
-    def command(self, session, action, *, run=None, scenario=None, build=None, device=None):
+    def command(self, session, action, *, run=None, scenario=None, build=None, device=None, managed=None):
         """Submit once, then observe that exact controller command; no implicit run replay or latest-run selection."""
         command = str(uuid.uuid4()).upper()
         arguments = dict(session_id=session, command_id=command, action=action)
@@ -104,15 +104,18 @@ class CodexHost:
             arguments['scenario_id'] = scenario
             if build: arguments['firmware_build_id'] = build
             if device: arguments.update(device)
+            if managed: arguments.update(managed)
         self.tool('workbench_submit', arguments)
         selection = dict(session_id=session, command_id=command)
         if action == 'report':
             selection['scenario_id'] = scenario
             if build: selection['firmware_build_id'] = build
             if device: selection.update(device)
+            if managed: selection.update(managed)
         end = time.monotonic() + 30
         while time.monotonic() < end:
-            result = self.tool('workbench_result', selection)['structuredContent']
+            result = self.tool('workbench_result', selection, allow_error=True)['structuredContent']
+            if 'record' not in result: raise ValueError(json.dumps(result)[:512])
             if result['record']['state'] == 'completed': return result
             if result['record']['state'] == 'archived': raise ValueError('Command result archived; no replay permitted')
             time.sleep(.2)
@@ -139,15 +142,29 @@ def main():
     parser.add_argument('--device-address')
     parser.add_argument('--device-id')
     parser.add_argument('--device-board')
+    parser.add_argument('--device-boot-id')
+    parser.add_argument('--managed-action',choices=['stage','commit','abort','disconnect','reconcile','retire','restore'])
+    for name in ['managed-operation-id','managed-sketch','resident-image-sha256','resident-evidence','managed-record-sha256','managed-authorization']: parser.add_argument('--'+name)
     parser.add_argument('--console-probe', choices=['raw-256-v1','fms2-command-2-v1'])
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--revoke', action='store_true', help='Explicitly revoke the selected pairing after successful collection')
     args = parser.parse_args()
     hardware = any([args.device_address,args.device_id,args.device_board,args.console_probe])
-    if hardware:
+    if args.managed_action:
+        if not all([args.device_address,args.device_id,args.device_board]) or args.build_id or args.console_probe:
+            parser.error('Select exact managed device fields without a compiler descriptor or console probe')
+        if args.managed_action=='stage':
+            if args.revoke: parser.error('Do not revoke a staged live capability; select a later explicit disposal/reconciliation action')
+            if not all([args.managed_sketch,args.resident_image_sha256,args.resident_evidence,args.managed_authorization]): parser.error('Stage requires fixed sketch, reviewed resident and explicit stage authorization')
+            scenarios=['device.inspect','managed.stage']
+        else:
+            if not all([args.managed_operation_id,args.device_boot_id]): parser.error('Follow-up requires original operation and boot')
+            scenarios=['managed.'+args.managed_action]
+    elif hardware:
         if not all([args.device_address,args.device_id,args.device_board]) or args.build_id: parser.error('Select device address/ID/board without a compiler descriptor')
         scenarios = ['device.inspect'] + (['device.console-binary'] if args.console_probe else [])
     else:
+        if args.device_boot_id or any(getattr(args,name) for name in ['managed_operation_id','managed_sketch','resident_image_sha256','resident_evidence','managed_record_sha256','managed_authorization']): parser.error('Select an explicit managed action')
         if not args.build_id or not re.fullmatch('[0-9a-f]{64}', args.build_id): parser.error('Select an exact descriptor SHA-256')
         scenarios = ['compiler.smoke','compiler.diagnostics']
     if args.pairing.stat().st_size > 4096: parser.error('Pairing metadata is excessive')
@@ -156,7 +173,7 @@ def main():
     if type(pairing['processID']) is not int or not isinstance(pairing['instanceID'], str): parser.error('Invalid selected app identity')
     args.output.mkdir(mode=0o700)
     private_write(args.output / 'selection.json', dict(pairing=pairing, buildID=args.build_id, server=args.server,
-        scenarios=scenarios, deviceAddress=args.device_address, deviceID=args.device_id, deviceBoard=args.device_board, consoleProbe=args.console_probe, revokeAfter=args.revoke))
+        scenarios=scenarios, managedAction=args.managed_action, managedOperationID=args.managed_operation_id, originalBootID=args.device_boot_id, deviceAddress=args.device_address, deviceID=args.device_id, deviceBoard=args.device_board, consoleProbe=args.console_probe, revokeAfter=args.revoke))
     host = CodexHost(str(args.codex), args.output, args.server)
     summary = []
     try:
@@ -170,25 +187,33 @@ def main():
         if not registry['accepted']: raise ValueError('App registry unavailable')
         observed_boot = None
         for scenario in scenarios:
+            managed = None
             device = None
             if hardware:
                 device = dict(device_address=args.device_address,device_id=args.device_id,device_board=args.device_board)
+                if scenario.startswith('managed.'):
+                    device['device_boot_id']=observed_boot if scenario=='managed.stage' else args.device_boot_id
                 if scenario == 'device.console-binary':
                     if not observed_boot: raise ValueError('No freshly inspected boot; no console probe can be sent')
                     device.update(device_boot_id=observed_boot,console_probe=args.console_probe)
             run = str(uuid.uuid4()).upper()
-            result = host.command(session, 'run', run=run, scenario=scenario, build=args.build_id, device=device)
+            if scenario.startswith('managed.'):
+                managed={name:getattr(args,name) for name in ['managed_operation_id','managed_sketch','resident_image_sha256','resident_evidence','managed_record_sha256','managed_authorization'] if getattr(args,name) is not None}
+                if scenario=='managed.stage':
+                    run=str(uuid.UUID(args.managed_operation_id)).upper() if args.managed_operation_id else run
+                    managed['managed_operation_id']=run
+            result = host.command(session, 'run', run=run, scenario=scenario, build=args.build_id, device=device, managed=managed)
             end = time.monotonic() + 120
             while result['record']['reply']['state']['isRunning']:
                 if time.monotonic() >= end: raise TimeoutError('Run observation exceeded bound; no replay permitted')
                 time.sleep(2)
                 result = host.command(session, 'status', run=run)
-            result = host.command(session, 'report', run=run, scenario=scenario, build=args.build_id, device=device)
+            result = host.command(session, 'report', run=run, scenario=scenario, build=args.build_id, device=device, managed=managed)
             report = result['record']['reply']['report']
-            if not result.get('validatedReport') or result['scenarioCompletion'] != 'passed': raise ValueError('No validated scenario pass')
-            if report['processID'] != pairing['processID']: raise ValueError('Report process differs from selected iPhone')
-            if scenario == 'device.inspect': observed_boot = report['deviceEvidence']['snapshot']['bootID']
             private_write(args.output / (scenario + '.json'), result)
+            if not result.get('validatedReport') or result['scenarioCompletion'] != 'passed': raise ValueError('Non-pass observation saved; inspect its explicit transaction outcome without replay')
+            if report['processID'] != pairing['processID']: raise ValueError('Report process differs from selected paired app')
+            if scenario == 'device.inspect': observed_boot = report['deviceEvidence']['snapshot']['bootID']
             summary.append(dict(scenarioID=scenario, runID=run, processID=report['processID'], status=report['status'],
                 reportCommandID=result['commandID'], evidence=result.get('evidence', [])))
             print(scenario + ': passed through native Codex MCP host, PID ' + str(report['processID']), flush=True)

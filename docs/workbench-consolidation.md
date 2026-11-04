@@ -45,7 +45,9 @@ historical first-increment results below retain their original scope. Selected
 Nano inspection/raw binary console now pass through native MCP on the physical
 iPhone ([ledger](workbench-device-qualification.json)) and iPad
 ([ledger](workbench-device-ipad-qualification.json)), using the identical signed
-build 10. FMS2 mode and guarded upload/ROM migration remain separate steps.
+build 10. The [managed phase increment](workbench-managed-scenarios.md) now implements guarded
+FMS2 upload/reconciliation and host-context recovery. Fresh managed hardware
+qualification and fault/ROM migration remain separate steps.
 
 Compiler busy/deadline/lifecycle/stress migration is tracked in
 [the compiler-scenario work log](workbench-compiler-scenarios.md). Next migrate read-only device and

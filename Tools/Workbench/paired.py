@@ -171,8 +171,8 @@ class Broker:
         elif action == 'run':
             request = command.get('request')
             if (command.get('runID') is not None or not isinstance(request,dict)
-                    or set(request)-{'schema','requestID','operation','scenarioID','firmwareBuildID','device'}
-                    or request.get('schema') not in (1,2) or request.get('operation') != 'run'):
+                    or set(request)-{'schema','requestID','operation','scenarioID','firmwareBuildID','device','managed'}
+                    or request.get('schema') not in (1,2,3) or request.get('operation') != 'run'):
                 raise ValueError('invalid run request')
             request_checker().validate_request(request)
             identifier(request['requestID'])
@@ -335,7 +335,7 @@ def issue(directory, session, command, timeout):
     raise TimeoutError('response not observed; query this exact command ID without replay: '+command['commandID'])
 
 
-def export_report(reply, run_id, scenario, build_id, device=None):
+def export_report(reply, run_id, scenario, build_id, device=None, managed=None):
     """Independently validate current paired-app report identity and real artifacts before export can count as a pass."""
     spec=importlib.util.spec_from_file_location('workbench_export',Path(__file__).with_name('workbench.py'))
     checker=importlib.util.module_from_spec(spec);spec.loader.exec_module(checker)
@@ -344,6 +344,7 @@ def export_report(reply, run_id, scenario, build_id, device=None):
     request=dict(schema=1,requestID=identifier(run_id),operation='run',scenarioID=scenario)
     if build_id: request['firmwareBuildID']=build_id
     if device is not None: request.update(schema=2,device=device)
+    if managed is not None: request.update(schema=3,managed=managed)
     envelope=dict(schema=1,request=request,processID=reply['processID'],scenarios=[],report=report)
     checker.decode_response(checker.PREFIX+base64.b64encode(encode(envelope)),request,reply['processID'],interactive=True)
     return report
@@ -359,6 +360,8 @@ def send(args):
         if args.build_id: request['firmwareBuildID']=args.build_id
         device=request_checker().selected_device(vars(args),args.scenario)
         if device: request.update(schema=2,device=device)
+        managed=request_checker().selected_managed(vars(args),args.scenario)
+        if managed: request.update(schema=3,managed=managed)
         request_checker().validate_request(request)
         command['request']=request
     elif args.action!='list':
@@ -387,7 +390,7 @@ def send(args):
     else:run_id=args.run_id
     report=None
     if reply.get('report') is not None:
-        report=export_report(reply,run_id,args.scenario,args.build_id,request_checker().selected_device(vars(args),args.scenario))
+        report=export_report(reply,run_id,args.scenario,args.build_id,request_checker().selected_device(vars(args),args.scenario),request_checker().selected_managed(vars(args),args.scenario))
     if args.output:
         private_write(args.output/'reply.json',encode(reply))
         if report is not None:
@@ -470,7 +473,7 @@ def main():
         if name=='command':
             sub.add_argument('--action',choices=ACTIONS,required=True);sub.add_argument('--run-id');sub.add_argument('--scenario');sub.add_argument('--build-id');sub.add_argument('--command-id')
 
-            for field in request_checker().DEVICE_FIELDS: sub.add_argument('--'+field.replace('_','-'))
+            for field in (request_checker().DEVICE_FIELDS | request_checker().MANAGED_FIELDS): sub.add_argument('--'+field.replace('_','-'))
             sub.add_argument('--timeout',type=float,default=180);sub.add_argument('--output',type=Path);sub.add_argument('--wait',action='store_true')
     args=parser.parse_args()
     if args.operation=='serve':serve(args);return 0

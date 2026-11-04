@@ -6,6 +6,7 @@ let package = Package(name: "FirmingoWorkbenchSupport", platforms: [.macOS(.v14)
     products: [.library(name: "FirmingoWorkbenchCore", targets: ["FirmingoWorkbenchCore"])],
     dependencies: [.package(name: "FirmingoKit", path: "../..")], targets: [
         .target(name: "FirmingoWorkbenchCore", dependencies: [.product(name: "FirmingoKit", package: "FirmingoKit")],
+            resources: [.copy("Resources/ManagedQualification")],
             swiftSettings: [.enableUpcomingFeature("ApproachableConcurrency")]),
         .testTarget(name: "FirmingoWorkbenchCoreTests", dependencies: ["FirmingoWorkbenchCore"])
     ])

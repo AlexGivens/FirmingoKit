@@ -34,6 +34,8 @@ public struct WorkbenchReport: Codable, Sendable, Identifiable {
     public var exercise: WorkbenchExerciseEvidence?
     /// Bounded selected device/console observations, present only in report schema two.
     public var deviceEvidence: WorkbenchDeviceEvidence?
+    /// Managed action observations belong only to schema three.
+    public var managedEvidence: WorkbenchManagedEvidence?
     /// Whether this report describes an explicitly selected hardware operation; not flash authority.
     public var deviceOperations = false
     /// Closed statuses; blocked/cancelled/incomplete can never be counted as passed.
@@ -90,7 +92,14 @@ public struct WorkbenchReport: Codable, Sendable, Identifiable {
     }
     /// Rejects ambiguous history/export scope while preserving partial failed observations.
     func validateScope() throws {
-        guard schema == 1 || schema == 2, deviceOperations == (schema == 2) else { throw WorkbenchFailure("Invalid report scope.") }
+        guard (1...3).contains(schema), deviceOperations == (schema >= 2) else { throw WorkbenchFailure("Invalid report scope.") }
+        if schema == 3 {
+            guard let managedEvidence, deviceEvidence == nil, WorkbenchManagedSelection.scenarios.contains(scenarioID),
+                  firmwareBuildID == nil, catalogueSHA256 == nil, artifacts.isEmpty, exercise == nil else { throw WorkbenchFailure("Invalid managed report scope.") }
+            try managedEvidence.validate(scenario: scenarioID, runID: id, passed: status == .passed)
+            return
+        }
+        guard managedEvidence == nil else { throw WorkbenchFailure("Managed evidence requires schema three.") }
         if schema == 1 {
             guard deviceEvidence == nil else { throw WorkbenchFailure("Offline report contains hardware evidence.") }
         } else {
@@ -106,7 +115,15 @@ public struct WorkbenchReport: Codable, Sendable, Identifiable {
     /// Creates only a running snapshot, before the journal gate or SDK operation.
     public init(request: WorkbenchRequest) {
         schema = request.schema; deviceOperations = request.device != nil
-        deviceEvidence = request.device.map { .init(selection: $0) }
+        deviceEvidence = request.managed == nil ? request.device.map { .init(selection: $0) } : nil
+        managedEvidence = request.managed.map {
+            var value = WorkbenchManagedEvidence(selection: $0)
+            if request.scenarioID == "managed.stage" {
+                value.checkpoint = .init(request: request)
+                value.recordSHA256 = WorkbenchManagedCheckpoint.digest(Data("null".utf8))
+            }
+            return value
+        }
         id = request.requestID; scenarioID = request.scenarioID ?? ""
         status = .running; firmwareBuildID = request.firmwareBuildID
         operatingSystem = ProcessInfo.processInfo.operatingSystemVersionString

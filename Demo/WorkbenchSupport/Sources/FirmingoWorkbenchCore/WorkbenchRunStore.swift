@@ -63,7 +63,7 @@ import Darwin
         let bytes = try Data(contentsOf: file)
         guard bytes.count <= 65536 else { throw WorkbenchFailure("Saved run exceeds its bound.") }
         var result = try JSONDecoder().decode(WorkbenchReport.self, from: bytes)
-        guard (result.schema == 1 || result.schema == 2), result.id == id, result.deviceOperations == (result.schema == 2), result.events.count <= 64, result.artifacts.count <= 3 else {
+        guard (1...3).contains(result.schema), result.id == id, result.deviceOperations == (result.schema >= 2), result.events.count <= 64, result.artifacts.count <= 3 else {
             throw WorkbenchFailure("Invalid saved run identity.")
         }
         try result.validateScope()
@@ -89,7 +89,7 @@ import Darwin
             let bytes = try Data(contentsOf: file)
             guard bytes.count <= 65536 else { throw WorkbenchFailure("Invalid saved run size.") }
             var record = try JSONDecoder().decode(WorkbenchReport.self, from: bytes)
-            guard (record.schema == 1 || record.schema == 2), record.deviceOperations == (record.schema == 2), record.events.count <= 64, record.artifacts.count <= 3, record.id.uuidString == run.lastPathComponent else { throw WorkbenchFailure("Invalid saved run identity.") }
+            guard (1...3).contains(record.schema), record.deviceOperations == (record.schema >= 2), record.events.count <= 64, record.artifacts.count <= 3, record.id.uuidString == run.lastPathComponent else { throw WorkbenchFailure("Invalid saved run identity.") }
             try record.validateScope()
             if record.status == .running { record.status = .outcomeUnknown }
             records.append(record)

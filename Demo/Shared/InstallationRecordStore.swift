@@ -109,6 +109,66 @@ actor InstallationRecordStore {
         let id = UUID(); activeOperation = (id, false); return id
     }
 
+    /// Original stage reserves the normal deployment gate and persists an owner before device I/O.
+    func beginWorkbenchManaged(id: UUID, checkpoint: Data) throws -> UUID {
+        let lease = try beginManagedRun()
+        do {
+            let file = try directory().appendingPathComponent("workbench-managed-" + id.uuidString + ".json")
+            guard !FileManager.default.fileExists(atPath: file.path), checkpoint.count <= 16384 else { throw DemoOperationError.contextChanged }
+            try durableWrite(checkpoint, to: file)
+            try durableWrite(Data(id.uuidString.utf8), to: directory().appendingPathComponent("workbench-managed-owner"))
+            return lease
+        } catch { finishDeviceOperation(lease); throw error }
+    }
+
+    /// Follow-up reservation permits status of historical released contexts without granting staging/commit.
+    func acquireWorkbenchManaged(id: UUID) throws -> UUID {
+        try Task.checkCancellation()
+        guard activeOperation == nil else { throw DemoOperationError.busy }
+        let owner = try workbenchManagedOwner()
+        guard owner == nil || owner == id else { throw DemoOperationError.contextChanged }
+        _ = try loadWorkbenchManaged(id: id)
+        let lease = UUID(); activeOperation = (lease, true); return lease
+    }
+
+    /// Restores bounded context only; decoding/intent validation belongs to the shared scenario coordinator.
+    func loadWorkbenchManaged(id: UUID) throws -> Data {
+        try readBoundedRecord(directory().appendingPathComponent("workbench-managed-" + id.uuidString + ".json"))
+    }
+
+    /// Synchronizes intent first, then the shared SDK record; any partial failure leaves the owner blocking writes.
+    func saveWorkbenchManaged(id: UUID, checkpoint: Data, record: ManagedUploadRecord?, lease: UUID) throws {
+        guard activeOperation?.id == lease, activeOperation?.managedRun == true, checkpoint.count <= 16384 else { throw DemoOperationError.invalidReservation }
+        let owner = try workbenchManagedOwner()
+        guard owner == nil || owner == id else { throw DemoOperationError.contextChanged }
+        try durableWrite(checkpoint, to: directory().appendingPathComponent("workbench-managed-" + id.uuidString + ".json"))
+        if owner == id, let record { try saveManaged(record, operation: lease) }
+    }
+
+    /// Removes only the matching pending pointer after validated terminal/disposal evidence; history remains.
+    func closeWorkbenchManaged(id: UUID, record: ManagedUploadRecord?, lease: UUID) throws {
+        guard activeOperation?.id == lease else { throw DemoOperationError.invalidReservation }
+        let owner = try workbenchManagedOwner()
+        guard owner == nil || owner == id else { throw DemoOperationError.contextChanged }
+        guard owner == id else { return }
+        if let saved = try loadManaged() {
+            guard saved == record else { throw DemoOperationError.contextChanged }
+            try FileManager.default.removeItem(at: directory().appendingPathComponent("managed-latest.json"))
+            try synchronizeDirectory(directory())
+        }
+        try FileManager.default.removeItem(at: directory().appendingPathComponent("workbench-managed-owner"))
+        try synchronizeDirectory(directory())
+    }
+
+    /// A corrupt owner is a hard error; no path is interpreted as authority or silently discarded.
+    private func workbenchManagedOwner() throws -> UUID? {
+        let file = try directory().appendingPathComponent("workbench-managed-owner")
+        guard FileManager.default.fileExists(atPath: file.path) else { return nil }
+        let text = String(decoding: try readBoundedRecord(file), as: UTF8.self)
+        guard let id = UUID(uuidString: text), id.uuidString == text else { throw DemoOperationError.contextChanged }
+        return id
+    }
+
     /// Releases only the owning action; an old completion can never release a newer window's reservation.
     func finishDeviceOperation(_ id: UUID) {
         if activeOperation?.id == id { activeOperation = nil }
@@ -118,6 +178,7 @@ actor InstallationRecordStore {
     private func beginDeployment(managedRun: Bool) throws -> UUID {
         try Task.checkCancellation()
         guard activeOperation == nil else { throw DemoOperationError.busy }
+        guard try workbenchManagedOwner() == nil else { throw DemoOperationError.pendingManagedTransaction }
         guard try loadManaged() == nil else { throw DemoOperationError.pendingManagedTransaction }
         let id = UUID()
         activeOperation = (id, managedRun)
@@ -163,6 +224,7 @@ actor InstallationRecordStore {
     func clearManaged(expected: ManagedUploadRecord?) throws {
         try Task.checkCancellation()
         guard activeOperation == nil else { throw DemoOperationError.busy }
+        guard try workbenchManagedOwner() == nil else { throw DemoOperationError.pendingManagedTransaction }
         let current: ManagedUploadRecord?
         do { current = try loadManaged() }
         catch is DecodingError {

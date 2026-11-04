@@ -1,5 +1,6 @@
 """CLI result fixtures are non-executable protocol data; no app, socket or device is launched."""
 import base64
+import copy
 import importlib.util
 import hashlib
 import contextlib
@@ -16,6 +17,74 @@ cli = importlib.util.module_from_spec(spec); spec.loader.exec_module(cli)
 
 
 class WorkbenchCLI(unittest.TestCase):
+    def managed_fixture(self, state='boot_confirmed'):
+        """Typed parser data only; this reports no actual compilation, transaction or hardware observation."""
+        operation=str(uuid.uuid4()).upper()
+        device=dict(address='192.168.77.1',boardID='nano_rp2040_connect',deviceID='5031503337360009',bootID='0123456789abcdef')
+        original=dict(schema=3,requestID=operation,operation='run',scenarioID='managed.stage',device=device,
+            managed=dict(operationID=operation,sketch='state-a',residentImageSHA256=cli.MANAGED_IMAGE,
+                         evidence='Parser fixture only; no installed-image claim',authorization='stage-d2-gnd'))
+        record=dict(version=1,deviceID=device['deviceID'],bootID=device['bootID'],boardID=device['boardID'],targetID=2,
+            format='nano-managed-v2',uploadID=7,size=544,sha256=cli.MANAGED_PINS['state-a'],
+            residentELFSHA256='bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8',firmwareImageSHA256=cli.MANAGED_IMAGE)
+        digest=hashlib.sha256(json.dumps(record,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+        request=dict(schema=3,requestID=str(uuid.uuid4()).upper(),operation='run',scenarioID='managed.reconcile',device=device,
+            managed=dict(operationID=operation,recordSHA256=digest))
+        checkpoint=dict(schema=1,request=original,stageIntent=True,record=record,commitIntent=True,released=state in ('boot_confirmed','aborted'),
+            snapshot=dict(uploadID=7,size=544,received=544,sha256=record['sha256'],state=state,
+                          slotTouched=state in ('boot_confirmed','installed','failed'),errorCode='install_failed' if state=='failed' else 'none'))
+        report=dict(schema=3,id=request['requestID'],scenarioID=request['scenarioID'],status='passed',processID=123,
+            appIdentifier='com.firmingokit.demo',deviceOperations=True,artifacts=[],
+            events=[dict(sequence=0,seconds=.1,phase='complete',detail='Parser fixture')],
+            managedEvidence=dict(selection=request['managed'],checkpoint=checkpoint,outcome=state,recordSHA256=digest))
+        return request,dict(schema=1,request=request,processID=123,scenarios=[],report=report)
+
+    def test_managed_saved_record_scope_and_terminal_outcomes_are_independent(self):
+        """The actual controller checker rejects foreign records and false startup/release claims."""
+        request,value=self.managed_fixture()
+        self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['managedEvidence']['outcome'],'boot_confirmed')
+        for fault in ('record','boot','release','slot','compiler','device-probe','selection'):
+            broken=copy.deepcopy(value);e=broken['report']['managedEvidence'];checkpoint=e['checkpoint']
+            if fault=='record':checkpoint['record']['uploadID']=8
+            if fault=='boot':checkpoint['request']['device']['bootID']='f'*16
+            if fault=='release':checkpoint['released']=False
+            if fault=='slot':checkpoint['snapshot']['slotTouched']=False
+            if fault=='compiler':broken['report']['firmwareBuildID']='a'*64
+            if fault=='device-probe':broken['report']['deviceEvidence']={}
+            if fault=='selection':e['selection']['recordSHA256']='a'*64
+            with self.subTest(fault=fault),self.assertRaises((ValueError,KeyError)):
+                cli.decode_response(self.envelope(broken),request,123)
+        for state in ('committing','installed','failed'):
+            request,value=self.managed_fixture(state)
+            with self.assertRaises(ValueError):cli.decode_response(self.envelope(value),request,123)
+            value['report']['status']='failed' if state=='failed' else 'outcomeUnknown'
+            self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['status'],value['report']['status'])
+
+    def test_managed_boot_change_never_licenses_postcommit_retirement(self):
+        """Only a durable no-commit intent and bootChanged observation permit releasing host context."""
+        request,value=self.managed_fixture()
+        request['scenarioID']='managed.retire';value['report']['scenarioID']='managed.retire'
+        evidence=value['report']['managedEvidence'];checkpoint=evidence['checkpoint'];checkpoint.pop('snapshot')
+        checkpoint['unknownReason']='bootChanged';evidence['outcome']='retired_precommit'
+        with self.assertRaises(ValueError):cli.decode_response(self.envelope(value),request,123)
+        checkpoint['commitIntent']=False
+        self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['status'],'passed')
+
+    def test_managed_restore_and_unissued_retirement_do_not_invent_transaction_success(self):
+        """A saved pre-record checkpoint exposes a null-record hash and permits explicit host disposal only."""
+        request,value=self.managed_fixture();evidence=value['report']['managedEvidence'];checkpoint=evidence['checkpoint']
+        checkpoint.pop('record');checkpoint.pop('snapshot');checkpoint['commitIntent']=False;checkpoint['released']=False
+        request['scenarioID']='managed.restore';request['managed']={'operationID':checkpoint['request']['requestID']}
+        value['report']['scenarioID']='managed.restore';evidence['selection']=request['managed'];evidence['outcome']='context_restored'
+        evidence['recordSHA256']=hashlib.sha256(b'null').hexdigest()
+        self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['status'],'passed')
+        request['scenarioID']='managed.retire';value['report']['scenarioID']='managed.retire'
+        request['managed']['recordSHA256']=evidence['recordSHA256'];checkpoint['unknownReason']='stageFailedNoCommit'
+        checkpoint['released']=True;evidence['outcome']='retired_unissued'
+        self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['managedEvidence']['outcome'],'retired_unissued')
+        checkpoint['commitIntent']=True
+        with self.assertRaises(ValueError):cli.decode_response(self.envelope(value),request,123)
+
     def fixture(self):
         request = dict(schema=1, requestID=str(uuid.uuid4()).upper(), operation='run', scenarioID='compiler.catalogue')
         report = dict(schema=1, id=request['requestID'], scenarioID=request['scenarioID'], status='passed',

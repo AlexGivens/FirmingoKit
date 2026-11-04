@@ -39,3 +39,11 @@ The same helper now also records selected Nano inspection/raw binary console on
 [iPhone](../../docs/workbench-device-qualification.json) and
 [iPad](../../docs/workbench-device-ipad-qualification.json) with the identical
 signed build 10. Offline MCP fixtures revalidate both native request/report corpora.
+
+
+[Managed FMS2 phases](../../docs/workbench-managed-scenarios.md) use closed
+schema-three selections and separate staging, one-shot flash commit and fresh
+reconciliation. Use the persistent paired CLI/MCP path for live staging phases;
+launch-and-exit automation cannot preserve their session. `managed.restore` reads
+saved host context only. The opt-in native helper accepts `--managed-action` and
+records non-pass results without replay. Fault/ROM workflows remain specialized.

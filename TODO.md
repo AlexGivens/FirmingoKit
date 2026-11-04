@@ -409,3 +409,10 @@ See [delivery integration](docs/compiler-delivery.md) for exact identities and c
 - [x] Add a tools-only thin MCP stdio adapter over the verified controller, preserving explicit UUIDs, asynchronous no-replay submission, independent report checks and revocation. Fifteen offline fixtures and pinned official modern/legacy client checks pass; see [the MCP guide](docs/workbench-mcp.md).
 - [x] Register the adapter in Codex and record fresh native Codex-host MCP smoke/diagnostic recovery on the physical iPhone. Preserve native requests/replies, exact exports and safe post-revocation evidence in [the iPhone ledger](docs/workbench-mcp-iphone.json). The helper uses an ephemeral host context with no model turn or saved chat; ordinary CI replays the archived evidence.
 - [ ] Retire phase-specific app generators only after equivalent Workbench scenario qualification; preserve historical identities/results.
+
+
+### Workbench managed phases — 2026-11-04
+
+- [x] Implement fixed FMS2 stage, one-shot commit, abort/disconnect, saved-context restore, reconciliation and constrained retirement through shared Test Lab/paired CLI/MCP. Preserve exact resident/record binding, durable global pending guards and query-only restart semantics. [Scope](docs/workbench-managed-scenarios.md).
+- [ ] Complete prepared-package actual driver checks and signed build-11 deployment; qualify normal managed replacement, explicit disposal and restart recovery through native MCP, starting with the iPad.
+- [ ] Migrate real lost-reply proxy, power/fault and SDK ROM recovery only with matching replacement evidence; preserve specialized hosts and post-commit unknown outcomes.

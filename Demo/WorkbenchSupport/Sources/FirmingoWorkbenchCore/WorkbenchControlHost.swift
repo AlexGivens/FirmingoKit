@@ -12,10 +12,13 @@ import Foundation
     private var runTask: Task<Void, Never>?
     /// Exact owned identity protects a later manual run from stale disconnect/cancel.
     private var ownedRunID: UUID?
+    /// Remembers only this controller's managed stage for scoped unpair disposal.
+    private var managedOperationID: UUID?
     /// Captures shared boundaries without executing anything.
     public init(engine: WorkbenchScenarioEngine, store: WorkbenchFileRunStore) { self.engine = engine; self.store = store }
     /// Revocation cancels only a still-active controller-owned request and retains its durable evidence.
     public func disconnect() {
+        if let managedOperationID { engine.disconnectManaged(operationID: managedOperationID) }
         runTask?.cancel()
         if let ownedRunID { engine.cancel(requestID: ownedRunID) }
     }
@@ -34,6 +37,7 @@ import Foundation
                         defer { runTask = nil; ownedRunID = nil }
                         do {
                             _ = try await engine.run(request, onAdmission: {
+                                if request.scenarioID == "managed.stage" { self.managedOperationID = request.managed?.operationID }
                                 admitted = true; self.ownedRunID = request.requestID
                                 continuation.resume(returning: self.reply(command))
                             })

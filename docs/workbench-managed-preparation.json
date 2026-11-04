@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "date": "2026-11-04",
+  "status": "source_and_fixture_checks_passed",
+  "scope": "App-owned managed workflow implementation; no physical qualification in this preparation record",
+  "toolchain": {
+    "xcode": "27.2",
+    "xcodeBuild": "27B52",
+    "appleSwift": "6.4.2",
+    "ciBaselineUnchanged": true
+  },
+  "cases": {
+    "sdkDiscovered": 166,
+    "sdkRuntimeSkips": 10,
+    "romHost": 8,
+    "workbenchDiscovered": 39,
+    "workbenchOptInSkips": 2,
+    "cli": 20,
+    "paired": 11,
+    "mcp": 19
+  },
+  "builds": [
+    "unsigned Release macOS",
+    "unsigned Release iOS device",
+    "unsigned Release iOS Simulator"
+  ],
+  "compilerAssetsChanged": false,
+  "firmwareSourceChanged": false,
+  "boardOperations": false,
+  "remoteCIPassClaimed": false,
+  "preparedDefaultDriverRuntime": "pending",
+  "signedAppAndHardware": "pending",
+  "logs": [
+    {
+      "path": ".build/workbench-managed-validation-final.log",
+      "sha256": "23e18c6b8cfa4795ddb2f143fc1bc7641f3d423f7b8157f5b4c80aa255d158f4"
+    },
+    {
+      "path": ".build/workbench-managed-core-final.log",
+      "sha256": "db0179c63efb263eae8ccbb56eca37dd00b4b35a917b775174407a5063f19926"
+    },
+    {
+      "path": ".build/workbench-managed-cli-final.log",
+      "sha256": "afafaa0edb5c204d61f354db06245500661aa6c1bdf0434e65c3173ee3f4d2cd"
+    },
+    {
+      "path": ".build/workbench-managed-mcp-final.log",
+      "sha256": "ff08ff0db46af10ba6548b03b5e26b13903fc05e6efc3a6e2419c2e688b5715d"
+    },
+    {
+      "path": ".build/workbench-managed-macos-final.log",
+      "sha256": "4aea2f45248a70a240a091401149e04bfa79600e3c14e7c7aed6cf555f8b063a"
+    },
+    {
+      "path": ".build/workbench-managed-ios-final.log",
+      "sha256": "525ac6785035c92450f35c84b78b4a1ba57527e7684eb5fc00faf888790d9c2d"
+    },
+    {
+      "path": ".build/workbench-managed-simulator-final.log",
+      "sha256": "2f70f4cd623199da889746d2ebf24fd3b948273b48692011c68f9a31e8331a8b"
+    },
+    {
+      "path": ".build/workbench-managed-engine-review.log",
+      "sha256": "d99cdcb57d9c52671a4d2395d36801b13223c56b5468e66a961cc4c741043a32"
+    }
+  ]
+}

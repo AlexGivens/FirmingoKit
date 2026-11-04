@@ -8,7 +8,9 @@ engine; launch-only CLI cannot synthesize them. Preserve the legacy hosts until
 equivalent evidence exists. Selected inspection and fixed binary console scenarios
 now use schema-two requests/reports and public SDK APIs; see
 [device scenario scope](../docs/workbench-device-scenarios.md). Upload/recovery
-migration remains pending. The identical signed build 10 passes selected Nano
+migration now has separate schema-three managed phases; see
+[managed scope](../docs/workbench-managed-scenarios.md). Fresh physical managed
+qualification and fault/ROM migration remain pending. The identical signed build 10 passes selected Nano
 inspection/raw binary console through MCP on the physical iPhone and iPad; broader
 combinations and FMS2 command-2 mode remain separately unqualified.
 The canonical scheme/product is FirmingoWorkbench; preserve the stable app bundle
@@ -74,7 +76,8 @@ Paired control uses the app-owned dispatcher/engine and explicit outbound pinned
 TLS invitations; normal launch stays disconnected. Keep sequence deduplication,
 producer/run correlation, foreground admission and a visible disconnect control.
 No paired command may inject scenes, arbitrary paths/source/service URLs or device
-write authority beyond an explicitly selected fixed binary probe. Device checks
+write authority beyond an explicitly selected fixed binary probe or separately
+authorized schema-three managed stage/one-shot commit. Device checks
 require exact endpoint/board/identity; console additionally checks a separately
 observed boot before any byte write. Preserve shared deployment leases and no
 automatic retries. See [paired controller](../docs/workbench-paired-controller.md).

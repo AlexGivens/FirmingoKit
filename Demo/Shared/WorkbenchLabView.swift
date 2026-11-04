@@ -36,14 +36,12 @@ import UniformTypeIdentifiers
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Inspection reads hello only. Binary testing sends a fixed probe to an already running compatible application; it does not install a sketch.").font(.caption)
                             TextField("Private IPv4 address · FMGO port 7420", text: $model.deviceAddress)
-                                .onChange(of: model.deviceAddress) { _, _ in model.expireDeviceSelection() }
                             TextField("Expected device ID · 16 lowercase hex digits", text: $model.deviceID)
-                                .onChange(of: model.deviceID) { _, _ in model.expireDeviceSelection() }
                             Picker("Expected board", selection: $model.deviceBoard) {
                                 ForEach(FirmingoBoard.allCases) { board in Text(board.displayName).tag(board.rawValue) }
-                            }.onChange(of: model.deviceBoard) { _, _ in model.expireDeviceSelection() }
+                            }
                             TextField("Expected boot ID · inspect first", text: $model.deviceBootID)
-                                .onChange(of: model.deviceBootID) { _, _ in model.allowConsoleProbe = false }
+                                .onChange(of: model.deviceBootID) { _, _ in model.allowConsoleProbe = false; model.allowManagedStage = false; model.allowManagedCommit = false }
                             Picker("Existing application's binary protocol", selection: $model.consoleProbe) {
                                 Text("Raw 256-byte echo").tag("raw-256-v1")
                                 Text("FMS2 qualification command 2").tag("fms2-command-2-v1")
@@ -51,6 +49,27 @@ import UniformTypeIdentifiers
                             Toggle("Authorize this fixed binary probe", isOn: $model.allowConsoleProbe)
                             Text("Leave REC and upload-arm jumpers disconnected. Hello is self-reported identity; it does not attest installed firmware bytes.").font(.caption)
                         }.disabled(model.engine.isRunning)
+                    }
+                    GroupBox("Managed FMS2 upload and recovery") {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Requires the separately installed reviewed FMS2 resident. RAM staging, flash commit and read-only startup reconciliation are separate actions. A restarted app can query saved context but cannot commit it.").font(.caption)
+                            Picker("Fixed test sketch", selection: $model.managedSketch) {
+                                Text("State A · seed 7 / D13 low").tag("state-a")
+                                Text("State B · seed 23 / D13 high").tag("state-b")
+                            }
+                            TextField("Reviewed installed resident-only UF2 SHA-256", text: $model.managedResidentImage)
+                            TextField("How the installed resident was established", text: $model.managedEvidenceNote)
+                            Toggle("Authorize RAM stage with D2 connected to GND", isOn: $model.allowManagedStage)
+                            TextField("Original stage operation UUID", text: $model.managedOperationID)
+                                .onChange(of: model.managedOperationID) { _, _ in model.allowManagedCommit = false }
+                            TextField("Exact saved SDK record SHA-256", text: $model.managedRecordSHA256)
+                                .onChange(of: model.managedRecordSHA256) { _, _ in model.allowManagedCommit = false }
+                            Toggle("Authorize one flash commit of this live stage", isOn: $model.allowManagedCommit)
+                            Text("Commit replaces the managed sketch. Keep REC disconnected. After upload testing, remove D2-to-GND. A missing commit reply remains uncertain; query the saved transaction without retrying commit.").font(.caption)
+                        }.disabled(model.engine.isRunning)
+                        .onChange(of: model.managedSketch) { _, _ in model.allowManagedStage = false }
+                        .onChange(of: model.managedResidentImage) { _, _ in model.allowManagedStage = false }
+                        .onChange(of: model.managedEvidenceNote) { _, _ in model.allowManagedStage = false }
                     }
                     HStack {
                         Button("Load SDK Catalogue") { model.inspectCatalogue() }
@@ -77,9 +96,9 @@ import UniformTypeIdentifiers
                                 if scenario.requiresBuild && model.selectedBuildID.isEmpty {
                                     Text("Prerequisite: load the catalogue and select the exact supported descriptor.").foregroundStyle(.secondary)
                                 }
-                                if scenario.requiresDevice { Text("Prerequisite: select exact device fields; console also requires its observed boot and fixed-probe authorization.").font(.caption) }
+                                if scenario.requiresDevice { Text(scenario.id.hasPrefix("managed.") ? "Prerequisite: select the original Nano boot and action-specific managed fields above; stage and commit have separate authorizations." : "Prerequisite: select exact device fields; console also requires its observed boot and fixed-probe authorization.").font(.caption) }
                                 Button("Run " + scenario.title) { model.run(scenario) }
-                                    .disabled(model.engine.isRunning || scenario.unavailableReason != nil || (scenario.requiresSceneTransitions && !model.engine.supportsSceneTransitions) || (scenario.requiresBuild && model.selectedBuildID.isEmpty) || (scenario.requiresDevice && (model.deviceID.isEmpty || model.deviceAddress.isEmpty || (scenario.id == "device.console-binary" && (!model.allowConsoleProbe || model.deviceBootID.isEmpty)))))
+                                    .disabled(!model.canRun(scenario))
                                     .accessibilityIdentifier("workbench.lab.run." + scenario.id)
                             }.frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -100,6 +119,16 @@ import UniformTypeIdentifiers
                             }
                             Text("Probe attempted: \(device.probeAttempted ? "yes" : "no") · sent: \(device.sentBytes) · received: \(device.received.count) bytes").font(.caption)
                             Text("Console close acknowledged: \(device.consoleClosed ? "yes" : "no") · disconnected: \(device.disconnected ? "yes" : "no")").font(.caption)
+                        }
+                        if let managed = report.managedEvidence {
+                            Text("Managed action: " + managed.outcome).font(.headline)
+                            Text("Operation: " + managed.selection.operationID.uuidString).font(.caption.monospaced()).textSelection(.enabled)
+                            if let checkpoint = managed.checkpoint {
+                                Text("Commit intent saved: \(checkpoint.commitIntent ? "yes" : "no") · pending guard released: \(checkpoint.released ? "yes" : "no")").font(.caption)
+                                if let snapshot = checkpoint.snapshot { Text("Transaction: " + snapshot.state + " · " + snapshot.errorCode + " · slot touched: " + String(snapshot.slotTouched)) }
+                                if let reason = checkpoint.unknownReason { Text("Saved context reason: " + reason) }
+                                Button("Select saved managed context") { model.selectManagedContext(report) }.disabled(model.engine.isRunning)
+                            }
                         }
                         if let exercise = report.exercise {
                             Text("Completed builds: \(exercise.builds.count) · footprint samples: \(exercise.samples.count) · omitted: \(exercise.droppedSamples)")
@@ -134,6 +163,7 @@ import UniformTypeIdentifiers
                         Divider()
                         Text("Saved context — no automatic replay").font(.headline)
                         ForEach(model.history) { report in
+                            if report.managedEvidence?.checkpoint != nil { Button("Select context · " + String(report.id.uuidString.prefix(8))) { model.selectManagedContext(report) }.disabled(model.engine.isRunning) }
                             Text(report.scenarioID + " · " + report.status.rawValue + " · " + String(report.id.uuidString.prefix(8)))
                                 .font(.caption.monospaced())
                         }

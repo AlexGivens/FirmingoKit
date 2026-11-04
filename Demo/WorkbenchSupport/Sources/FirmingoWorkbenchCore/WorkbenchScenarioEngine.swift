@@ -14,6 +14,8 @@ import FirmingoKit
     private let backend: any WorkbenchCompilerBackend
     /// Optional host-owned SDK device boundary; absence blocks hardware without compiler work.
     private let deviceBackend: (any WorkbenchDeviceBackend)?
+    /// Shared managed coordinator; restored context never recreates live commit authority.
+    private let managedBackend: (any WorkbenchManagedBackend)?
     /// Durable per-request admission and history boundary.
     private let store: any WorkbenchRunStore
     /// Current owned asynchronous work; restoration never recreates this value.
@@ -31,9 +33,11 @@ import FirmingoKit
     /// Optional bounded progress observer, invoked only after persistence succeeds.
     public var observation: ((WorkbenchReport) -> Void)?
     /// Captures boundaries without SDK I/O or automatic work.
-    public init(backend: any WorkbenchCompilerBackend, store: any WorkbenchRunStore, supportsSceneTransitions: Bool = false, deviceBackend: (any WorkbenchDeviceBackend)? = nil) {
-        self.backend = backend; self.deviceBackend = deviceBackend; self.store = store; self.supportsSceneTransitions = supportsSceneTransitions
+    public init(backend: any WorkbenchCompilerBackend, store: any WorkbenchRunStore, supportsSceneTransitions: Bool = false, deviceBackend: (any WorkbenchDeviceBackend)? = nil, managedBackend: (any WorkbenchManagedBackend)? = nil) {
+        self.backend = backend; self.deviceBackend = deviceBackend; self.managedBackend = managedBackend; self.store = store; self.supportsSceneTransitions = supportsSceneTransitions
     }
+    /// Unpairing invalidates only the controller's selected live managed operation.
+    public func disconnectManaged(operationID: UUID) { Task { await managedBackend?.disconnect(operationID: operationID) } }
     /// Loads metadata for UI/CLI selection; no descriptor is automatically chosen.
     public func inspectCatalogue() async throws -> WorkbenchCatalogue {
         guard !isRunning else { throw WorkbenchFailure("A Workbench scenario is already running.") }
@@ -68,7 +72,10 @@ import FirmingoKit
     public func recordScene(_ phase: String) {
         guard supportsSceneTransitions, ["active", "inactive", "background"].contains(phase) else { return }
         scene = phase; exercise?.recordScene(phase)
-        if phase == "background", report?.deviceOperations == true, isRunning { task?.cancel() }
+        if phase == "background" {
+            if report?.deviceOperations == true, isRunning { task?.cancel() }
+            Task { await managedBackend?.disconnect(operationID: nil) }
+        }
     }
     /// Explicit second action after lifecycle calibration; failures remain visible in the owning run.
     public func beginLifecycleInterruption(origin: WorkbenchExerciseEvidence.StartOrigin = .manualUI) throws {
@@ -87,6 +94,7 @@ import FirmingoKit
     }
     /// Executes only the closed registry; missing resources and unmigrated cases never pass.
     private func perform(_ request: WorkbenchRequest) async throws -> WorkbenchReport {
+        var managedStageCompleted = false
         do {
             guard let scenario = WorkbenchScenario.all.first(where: { $0.id == request.scenarioID }) else { throw WorkbenchFailure("Unknown scenario.") }
             if let reason = scenario.unavailableReason {
@@ -95,6 +103,18 @@ import FirmingoKit
                 try record("prerequisites", "Requires interactive iOS/iPadOS scene delivery; CLI cannot synthesize lifecycle events.", status: .blocked)
             } else if scenario.requiresBuild && request.firmwareBuildID != WorkbenchCompilerInput.buildID {
                 try record("prerequisites", "Select the exact migrated compiler-vector descriptor; no latest or default build is assumed.", status: .blocked)
+            } else if request.managed != nil {
+                if let managedBackend {
+                    try record("managed-start", "Executing one explicit managed phase; commit and reconciliation remain separate.")
+                    try await managedBackend.run(request) { value in
+                        guard var next = self.report else { throw WorkbenchFailure("Missing managed run context.") }
+                        next.managedEvidence = value; try self.store.save(next); self.report = next; self.observation?(next)
+                    }
+                    managedStageCompleted = request.scenarioID == "managed.stage"
+                    let outcome = report?.managedEvidence?.outcome ?? "not_observed"
+                    let status: WorkbenchReport.Status = ["ram_verified", "commit_accepted", "aborted", "disconnected", "boot_confirmed", "retired_precommit", "retired_unissued", "context_restored"].contains(outcome) ? .passed : (outcome == "failed" ? .failed : .outcomeUnknown)
+                    try record(status == .passed ? "complete" : "managed-result", "Managed phase: " + outcome + ". Commit acceptance is not startup or useful behavior.", status: status)
+                } else { try record("prerequisites", "This host has no managed workflow backend.", status: .blocked) }
             } else if scenario.requiresDevice {
                 guard let selected = request.device else { throw WorkbenchFailure("Missing device selection.") }
                 if let deviceBackend {
@@ -153,8 +173,10 @@ import FirmingoKit
                     try record("complete", scenario.id == "compiler.catalogue" ? "Catalogue verified; no WASM or hardware execution claimed." : "All assertions in the selected scenario completed.", status: .passed)
                 }
             }
+        } catch let error as ManagedUploadError {
+            try record("managed-error", error.localizedDescription, status: report?.managedEvidence?.checkpoint?.commitIntent == true ? .outcomeUnknown : .failed)
         } catch is CancellationError {
-            try record("cancelled", "Cancellation settled; no fallback artifact or replay.", status: .cancelled)
+            try record("cancelled", "Cancellation settled; no fallback artifact or replay.", status: report?.managedEvidence?.checkpoint?.commitIntent == true ? .outcomeUnknown : .cancelled)
         } catch ManagedCompilerError.compilationFailed(let diagnostics) {
             try recordDiagnostics(diagnostics)
             try record("failed", "Unexpected compiler rejection; inspect source diagnostics.", status: .failed)
@@ -163,7 +185,8 @@ import FirmingoKit
             switch error { case .missingBundle, .invalidFile, .serviceApprovalPending: blocked = true; default: blocked = false }
             try record("resources-unavailable", error.localizedDescription, status: blocked ? .blocked : .failed)
         } catch {
-            try record("failed", error.localizedDescription, status: .failed)
+            if managedStageCompleted, let operationID = request.managed?.operationID { await managedBackend?.disconnect(operationID: operationID) }
+            try record("failed", error.localizedDescription, status: report?.managedEvidence?.checkpoint?.commitIntent == true ? .outcomeUnknown : .failed)
         }
         guard let report, report.status != .running else { throw WorkbenchFailure("Scenario ended without a terminal result.") }
         return report

@@ -139,6 +139,23 @@ import Foundation
             _ = try await InstallationRecordStore(directory: blocked).beginManagedRun()
             throw Failure("storage failure allowed deployment")
         } catch is CocoaError { /* Unreadable context must fail closed without granting device access. */ }
+        let managedID = UUID()
+        let managedLease = try await store.beginWorkbenchManaged(id: managedID, checkpoint: Data("{}".utf8))
+        try await expect(.busy) { _ = try await store.beginFirmwareInstallation() }
+        await store.finishDeviceOperation(managedLease)
+        try await expect(.pendingManagedTransaction) { _ = try await store.beginManagedRun() }
+        try await expect(.pendingManagedTransaction) { try await store.clearManaged(expected: nil) }
+        try await expect(.contextChanged) { _ = try await store.acquireWorkbenchManaged(id: UUID()) }
+        let reviewLease = try await store.acquireWorkbenchManaged(id: managedID)
+        try await store.saveWorkbenchManaged(id: managedID, checkpoint: Data("{}".utf8), record: first, lease: reviewLease)
+        await store.finishDeviceOperation(reviewLease)
+        let closeLease = try await store.acquireWorkbenchManaged(id: managedID)
+        try await expect(.contextChanged) { try await store.closeWorkbenchManaged(id: managedID, record: second, lease: closeLease) }
+        try await store.closeWorkbenchManaged(id: managedID, record: first, lease: closeLease)
+        await store.finishDeviceOperation(closeLease)
+        let freshLease = try await store.beginManagedRun(); await store.finishDeviceOperation(freshLease)
+        guard try await store.loadWorkbenchManaged(id: managedID) == Data("{}".utf8) else { throw Failure("managed history was erased") }
+        print("Workbench managed guard: pending stage blocks normal writes/clear; exact disposal preserves history")
         stale.stop(); old.stop(); corrupt.stop()
         print("Cancelled requests/storage failure: no reservation granted; subsequent explicit action remains available")
     }

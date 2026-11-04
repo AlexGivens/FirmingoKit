@@ -401,5 +401,28 @@ class MCPAdapter(unittest.TestCase):
             device_boot_id='0123456789abcdef',console_probe='raw-256-v1')
         self.assertFalse(self.call('workbench_submit',console)['result']['isError'])
 
+    def test_managed_stage_and_commit_require_distinct_closed_selections_before_broker_access(self):
+        """Queue inert schema-three requests only; no app, source compilation or device operation runs."""
+        run=fresh()
+        stage=self.selection(action='run',run_id=run,scenario_id='managed.stage',device_address='192.168.77.1',
+            device_board='nano_rp2040_connect',device_id='5031503337360009',device_boot_id='0123456789abcdef',
+            managed_operation_id=run,managed_sketch='state-a',resident_image_sha256=mcp.paired.request_checker().MANAGED_IMAGE,
+            resident_evidence='Parser fixture only; no installed-image claim',managed_authorization='stage-d2-gnd')
+        for bad in [dict(stage,managed_authorization='commit-once-d2-gnd'),dict(stage,managed_operation_id=fresh()),
+                    dict(stage,console_probe='raw-256-v1'),dict(stage,firmware_build_id='a'*64),dict(stage,device_board='raspberry_pi_pico')]:
+            self.assertTrue(self.call('workbench_submit',bad)['result']['isError'])
+        self.assertEqual(self.calls,[])
+        admitted=self.call('workbench_submit',stage)['result'];self.assertFalse(admitted['isError'])
+        self.assertEqual(self.calls[-1]['command']['request']['schema'],3)
+        self.assertEqual(self.calls[-1]['command']['request']['managed']['operationID'],run)
+        commit=self.selection(action='run',run_id=fresh(),scenario_id='managed.commit',device_address='192.168.77.1',
+            device_board='nano_rp2040_connect',device_id='5031503337360009',device_boot_id='0123456789abcdef',
+            managed_operation_id=run,managed_record_sha256='b'*64)
+        count=len(self.calls)
+        self.assertTrue(self.call('workbench_submit',commit)['result']['isError']);self.assertEqual(len(self.calls),count)
+        commit['managed_authorization']='commit-once-d2-gnd'
+        self.assertFalse(self.call('workbench_submit',commit)['result']['isError'])
+        self.assertEqual(self.calls[-1]['command']['request']['managed']['recordSHA256'],'b'*64)
+
 
 if __name__ == '__main__': unittest.main()
