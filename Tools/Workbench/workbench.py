@@ -148,13 +148,15 @@ def validate_device_report(report, selection):
 
 
 def validate_managed_report(report,request):
-    """Independently bind each phase to original device/build/record, keeping unknown/startup distinctions."""
+    """Bind observed checkpoints to device/build/record; early local refusals supply no device facts."""
     value=report.get('managedEvidence');scenario=request['scenarioID'];selection=request['managed']
     if (not isinstance(value,dict) or value.get('selection')!=selection or report.get('deviceEvidence') is not None
             or report.get('artifacts') or report.get('exercise') is not None): raise ValueError('invalid managed report scope')
     checkpoint=value.get('checkpoint')
     if checkpoint is None:
-        if report['status']=='passed': raise ValueError('managed pass lacks checkpoint')
+        if (report['status']=='passed' or value.get('outcome')!='not_observed'
+                or value.get('recordSHA256') is not None or value.get('artifact') is not None):
+            raise ValueError('managed report without checkpoint cannot claim a device outcome, record or artifact')
         return
     original=checkpoint['request'];validate_request(original)
     if (original['scenarioID']!='managed.stage' or original['device']!=request['device']

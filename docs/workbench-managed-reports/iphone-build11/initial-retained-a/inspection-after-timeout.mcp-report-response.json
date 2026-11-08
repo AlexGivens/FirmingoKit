@@ -1,0 +1,93 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"sessionID\":\"A4C07CC8-0734-49F3-B727-8234D1B2C929\",\"commandID\":\"45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009\",\"record\":{\"commandID\":\"45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009\",\"reply\":{\"accepted\":true,\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"command\":{\"action\":\"report\",\"commandID\":\"45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009\",\"runID\":\"AF498084-A92A-47F4-A59C-8D6FDEE88BD0\",\"schema\":1},\"instanceID\":\"948738E6-1A1C-48BD-9944-AEBE1861FCE6\",\"processID\":51154,\"report\":{\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"artifacts\":[],\"deviceEvidence\":{\"connectionAttempted\":true,\"consoleClosed\":false,\"consoleOpened\":false,\"disconnected\":false,\"probeAttempted\":false,\"received\":\"\",\"selection\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\"},\"sentBytes\":0},\"deviceOperations\":true,\"events\":[{\"detail\":\"Selected SDK device operation; no compiler or upload prerequisite.\",\"phase\":\"device-start\",\"seconds\":0.0012830833438783884,\"sequence\":0},{\"detail\":\"The Firmingo operation exceeded its SDK deadline.\",\"phase\":\"failed\",\"seconds\":5.02808045828715,\"sequence\":1}],\"id\":\"AF498084-A92A-47F4-A59C-8D6FDEE88BD0\",\"operatingSystem\":\"Version 27.0.1 (Build 24A446)\",\"processID\":51154,\"scenarioID\":\"device.inspect\",\"schema\":2,\"status\":\"failed\"},\"schema\":1,\"state\":{\"awaitingLifecycleStart\":false,\"isRunning\":false,\"phase\":\"failed\",\"runID\":\"AF498084-A92A-47F4-A59C-8D6FDEE88BD0\",\"status\":\"failed\"}},\"sequence\":8,\"state\":\"completed\"},\"scenarioCompletion\":\"failed\",\"validatedReport\":true,\"evidence\":[{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/A4C07CC8-0734-49F3-B727-8234D1B2C929/45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009/reply.json\",\"bytes\":1255,\"sha256\":\"344ae407ae2854910cfd32520cf919ee6010a0f63d88bfb52bdac0f6a3c83a58\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/A4C07CC8-0734-49F3-B727-8234D1B2C929/45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009/report.json\",\"bytes\":1027,\"sha256\":\"79de11ba7ac97d8003c555f70c03b9437b53e9bba35c6cfd5df2833ea6aa93ad\"}]}"
+    }
+  ],
+  "structuredContent": {
+    "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+    "commandID": "45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009",
+    "record": {
+      "commandID": "45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009",
+      "reply": {
+        "accepted": true,
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "11",
+        "command": {
+          "action": "report",
+          "commandID": "45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009",
+          "runID": "AF498084-A92A-47F4-A59C-8D6FDEE88BD0",
+          "schema": 1
+        },
+        "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+        "processID": 51154,
+        "report": {
+          "appIdentifier": "com.firmingokit.demo",
+          "appVersion": "11",
+          "artifacts": [],
+          "deviceEvidence": {
+            "connectionAttempted": true,
+            "consoleClosed": false,
+            "consoleOpened": false,
+            "disconnected": false,
+            "probeAttempted": false,
+            "received": "",
+            "selection": {
+              "address": "192.168.77.1",
+              "boardID": "nano_rp2040_connect",
+              "deviceID": "5031503337360009"
+            },
+            "sentBytes": 0
+          },
+          "deviceOperations": true,
+          "events": [
+            {
+              "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+              "phase": "device-start",
+              "seconds": 0.0012830833438783884,
+              "sequence": 0
+            },
+            {
+              "detail": "The Firmingo operation exceeded its SDK deadline.",
+              "phase": "failed",
+              "seconds": 5.02808045828715,
+              "sequence": 1
+            }
+          ],
+          "id": "AF498084-A92A-47F4-A59C-8D6FDEE88BD0",
+          "operatingSystem": "Version 27.0.1 (Build 24A446)",
+          "processID": 51154,
+          "scenarioID": "device.inspect",
+          "schema": 2,
+          "status": "failed"
+        },
+        "schema": 1,
+        "state": {
+          "awaitingLifecycleStart": false,
+          "isRunning": false,
+          "phase": "failed",
+          "runID": "AF498084-A92A-47F4-A59C-8D6FDEE88BD0",
+          "status": "failed"
+        }
+      },
+      "sequence": 8,
+      "state": "completed"
+    },
+    "scenarioCompletion": "failed",
+    "validatedReport": true,
+    "evidence": [
+      {
+        "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/A4C07CC8-0734-49F3-B727-8234D1B2C929/45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009/reply.json",
+        "bytes": 1255,
+        "sha256": "344ae407ae2854910cfd32520cf919ee6010a0f63d88bfb52bdac0f6a3c83a58"
+      },
+      {
+        "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/A4C07CC8-0734-49F3-B727-8234D1B2C929/45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009/report.json",
+        "bytes": 1027,
+        "sha256": "79de11ba7ac97d8003c555f70c03b9437b53e9bba35c6cfd5df2833ea6aa93ad"
+      }
+    ]
+  },
+  "isError": true
+}

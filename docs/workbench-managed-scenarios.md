@@ -181,8 +181,34 @@ The existing normal CI entry point runs that offline regression; no remote CI
 result is claimed here. Pairings are revoked, the controller is stopped, and the
 user removed D2. The Nano remains on the iPad running State A.
 
-Next qualify the identical managed build on iPhone, then migrate the initialized-
-data/BSS/counter probe and specialized reply-loss/flash-fault/SDK ROM paths. Manual
+On 2026-11-08 the identical signed build completes the matching iPhone matrix
+through the connected desktop MCP tools. [The iPhone ledger](workbench-managed-iphone-qualification.json)
+retains 33 reports: the matching matrix's 27 passes, expected local refusal and
+bootChanged unknown, plus two real initial inspection failures and two successful
+post-reconnect inspection/console checks. The first two inspections exceeded the
+five-second SDK deadline; the user saw no Ethernet entry until a separately
+requested unplug/reconnect exposed `192.168.77.16`. No RESET or firmware change
+was used to address that attachment incident. This is not a clean cold-attachment
+pass or evidence of a firmware fix. Router/DNS/subnet/assignment mode were not
+reported and no Internet coexistence result is inferred.
+
+Both replacements have separate boot-confirmed status, exact command-2 echo and
+manual D13 lit/off observations. The app restart uses a new producer identity;
+restored commit is refused, and the RAM-only power cycle preserves bootChanged
+until explicit host retirement. Two actual iPhone capsule exports also pass the
+independent firmware native validator. No ARM execution is claimed by that
+validator. D2 is removed, pairings revoked and the controller stopped.
+
+The iPhone corpus preserves original direct MCP tool arguments/results, rather
+than reconstructed native app-server messages. CLI / paired / MCP offline suites
+pass 21 / 11 / 21 cases. The checker now rejects invented outcome, issued-record
+hash or artifact claims on a managed nonpass without a checkpoint. Such a local
+refusal binds the operation/record selection only and makes no device observation;
+its context comes from the original submission and the transaction's other
+checkpoint-bearing reports. It cannot qualify device behavior.
+
+Next investigate clean iPhone attachment and migrate the initialized-data/BSS/
+counter probe and specialized reply-loss/flash-fault/SDK ROM paths. Manual
 D13 observations are not electrical measurements, and command-2 echo does not
 replace the state probe. Broader models, minimum OS, UI/accessibility, arbitrary
 sketches and production 1.0 support remain outside this evidence.

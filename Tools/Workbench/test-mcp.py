@@ -465,6 +465,113 @@ class MCPAdapter(unittest.TestCase):
         self.assertEqual(revocation['nativeRequest']['id'], revocation['nativeResponse']['id'])
         self.assertTrue(revocation['nativeResponse']['result']['structuredContent']['revoked'])
 
+    def test_recorded_iphone_managed_matrix_preserves_attachment_failures_and_direct_mcp_scope(self):
+        """Replay real desktop tool envelopes offline; retain USB failures separately from the managed matrix."""
+        import hashlib
+        ledger = json.loads((DOCS / 'workbench-managed-iphone-qualification.json').read_text())
+        ipad = json.loads((DOCS / 'workbench-managed-ipad-qualification.json').read_text())
+        for key in ('sourceCommit', 'appVersion', 'executableSHA256', 'consumerManifestSHA256', 'preparedInventorySHA256'):
+            self.assertEqual(ledger['app'][key], ipad['app'][key])
+        self.assertEqual(ledger['hostDevice']['productType'], 'iPhone16,2')
+        self.assertEqual(ledger['status'], 'completed_managed_matrix_with_retained_attachment_failures')
+        self.assertTrue(ledger['controller']['stoppedAfterQualification'])
+        self.assertTrue(ledger['revocation']['confirmedByDesktopMCP'])
+
+        def read(item):
+            """Check the original bytes before interpreting each immutable export or tool envelope."""
+            raw = (DOCS / item['path']).read_bytes()
+            self.assertEqual(len(raw), item['bytes'])
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), item['sha256'])
+            return json.loads(raw)
+
+        rows = [row for phase in ledger['phases'] for row in phase['runs']]
+        self.assertEqual(len(rows), 33)
+        self.assertEqual(sum(row['status'] == 'passed' for row in rows), 29)
+        self.assertEqual(sum(row.get('unexpectedFailure', False) for row in rows), 2)
+        for phase in ledger['phases']:
+            self.assertEqual(phase['allObservedStatusesAsExpected'], phase['name'] != 'initial-retained-a')
+        processes, operations, accepted_commits, phases = set(), set(), 0, set()
+        for row in rows:
+            values = {key: read(row[key]) for key in ('reply', 'report', 'startRequest', 'startResponse', 'reportRequest', 'reportResponse')}
+            start = values['startRequest']['arguments']
+            selected = values['reportRequest']['arguments']
+            self.assertEqual(values['startRequest']['tool'], 'mcp__firmingo_workbench__workbench_submit')
+            self.assertEqual(values['reportRequest']['tool'], 'mcp__firmingo_workbench__workbench_result')
+            self.assertEqual(start['action'], 'run')
+            self.assertEqual(start['run_id'], row['runID'])
+            self.assertEqual(start['command_id'], row['startCommandID'])
+            self.assertEqual(selected['command_id'], row['reportCommandID'])
+            self.assertEqual(start['session_id'], selected['session_id'])
+            self.assertEqual(selected['session_id'], row['sessionID'])
+            self.assertEqual(start['scenario_id'], row['scenarioID'])
+            self.assertEqual(selected['scenario_id'], row['scenarioID'])
+            self.assertEqual(values['startResponse']['structuredContent']['scenarioCompletion'], 'not_observed')
+            result = values['reportResponse']['structuredContent']
+            self.assertTrue(result['validatedReport'])
+            self.assertEqual(result['record']['reply'], values['reply'])
+            self.assertEqual(values['reply']['report'], values['report'])
+            self.assertEqual(values['reply']['processID'], row['processID'])
+            self.assertEqual(values['reply']['instanceID'], row['instanceID'])
+            checker = mcp.paired.request_checker()
+            device = checker.selected_device(selected, row['scenarioID'])
+            managed = checker.selected_managed(selected, row['scenarioID'])
+            report = mcp.paired.export_report(values['reply'], row['runID'], row['scenarioID'], None, device, managed)
+            self.assertEqual(report['schema'], 3 if managed else 2)
+            self.assertEqual(report['status'], row['status'])
+            for key in checker.DEVICE_FIELDS | checker.MANAGED_FIELDS:
+                self.assertEqual(start.get(key), selected.get(key))
+            if managed is None or report['managedEvidence'].get('checkpoint') is not None:
+                with self.assertRaises(ValueError):
+                    mcp.paired.export_report(values['reply'], row['runID'], row['scenarioID'], None,
+                                             dict(device, deviceID='5031503337360008'), managed)
+            else:
+                # Early local rejection binds operation selection but makes no device observation.
+                self.assertEqual(report['managedEvidence']['outcome'], 'not_observed')
+                self.assertNotIn('artifact', report['managedEvidence'])
+                self.assertNotIn('recordSHA256', report['managedEvidence'])
+            processes.add(report['processID']); phases.add(row['scenarioID'])
+            if managed:
+                operations.add(managed['operationID'])
+                with self.assertRaises(ValueError):
+                    mcp.paired.export_report(values['reply'], row['runID'], row['scenarioID'], None, device,
+                                             dict(managed, operationID=fresh()))
+                evidence = report['managedEvidence']
+                accepted_commits += evidence['outcome'] == 'commit_accepted'
+                if row['scenarioID'] == 'managed.retire':
+                    self.assertTrue(evidence['checkpoint']['released'])
+                    self.assertFalse(evidence['checkpoint']['commitIntent'])
+                    self.assertEqual(evidence['checkpoint']['unknownReason'], 'bootChanged')
+            if row.get('unexpectedFailure'):
+                self.assertEqual(row['scenarioID'], 'device.inspect')
+                self.assertEqual(report['status'], 'failed')
+                self.assertNotIn('snapshot', report['deviceEvidence'])
+                self.assertFalse(report['deviceEvidence']['probeAttempted'])
+                self.assertEqual(report['deviceEvidence']['sentBytes'], 0)
+                self.assertIn('exceeded its SDK deadline', str(report['events']))
+            else:
+                self.assertEqual(row['status'], row['expectedStatus'])
+            if row['status'] == 'outcomeUnknown':
+                checkpoint = report['managedEvidence']['checkpoint']
+                self.assertEqual(checkpoint['unknownReason'], 'bootChanged')
+                self.assertFalse(checkpoint['released'])
+                self.assertFalse(checkpoint['commitIntent'])
+            if row['label'] == 'managed.commit-refused-after-restart':
+                self.assertEqual(report['status'], 'failed')
+                self.assertIn('No live pre-commit capability', str(report['events']))
+        self.assertEqual((len(processes), len(operations), accepted_commits), (2, 5, 2))
+        self.assertEqual(phases, {'device.inspect', 'device.console-binary', 'managed.stage', 'managed.commit',
+                                 'managed.abort', 'managed.disconnect', 'managed.reconcile', 'managed.restore', 'managed.retire'})
+        for name in ('preRestart', 'final'):
+            request, response = (read(ledger['revocation'][name][key]) for key in ('request', 'response'))
+            self.assertEqual(request['tool'], 'mcp__firmingo_workbench__workbench_revoke')
+            self.assertTrue(response['structuredContent']['revoked'])
+        for artifact in ledger['independentCapsuleChecks']['uniqueArtifacts']:
+            check = read(artifact['nativeCheck'])
+            raw = (DOCS / artifact['capsule']['path']).read_bytes()
+            self.assertEqual(hashlib.sha256(raw).hexdigest(), check['capsuleSHA256'])
+            self.assertFalse(check['ARMExecutionClaim'])
+            self.assertEqual(check['exitCode'], 0)
+
     def test_hardware_selection_is_explicit_version_two_and_never_an_upload_command(self):
         selected=self.selection(action='run',run_id=fresh(),scenario_id='device.inspect',device_address='192.168.77.1',
             device_board='nano_rp2040_connect',device_id='5031503337360009')

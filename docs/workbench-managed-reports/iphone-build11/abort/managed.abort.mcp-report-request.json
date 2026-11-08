@@ -1,0 +1,14 @@
+{
+  "tool": "mcp__firmingo_workbench__workbench_result",
+  "arguments": {
+    "session_id": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+    "command_id": "BBA64AD0-E0BB-4CEE-B626-B308E29A10E6",
+    "scenario_id": "managed.abort",
+    "device_address": "192.168.77.1",
+    "device_board": "nano_rp2040_connect",
+    "device_id": "5031503337360009",
+    "device_boot_id": "2c5ef0109ed07b7f",
+    "managed_operation_id": "31544792-E579-4933-99F3-ECCC8FBAE72D",
+    "managed_record_sha256": "10c0454bc31525b15a69d8e2f61d0815bab02115fee6dc02559c03a8e6031230"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "tool": "mcp__firmingo_workbench__workbench_submit",
+  "arguments": {
+    "session_id": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+    "command_id": "9A053F9A-F6D1-46CB-A7AD-491C27255072",
+    "action": "run",
+    "run_id": "E53A9095-3F4B-4669-A3CC-AC0EC2DE7243",
+    "scenario_id": "device.console-binary",
+    "device_address": "192.168.77.1",
+    "device_board": "nano_rp2040_connect",
+    "device_id": "5031503337360009",
+    "device_boot_id": "2c5ef0109ed07b7f",
+    "console_probe": "fms2-command-2-v1"
+  }
+}

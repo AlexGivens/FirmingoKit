@@ -14,11 +14,15 @@ scoped Nano/iPad managed replacement, abort/disconnect, saved-context restart an
 RAM-only power-cycle evidence in
 [the ledger](../docs/workbench-managed-ipad-qualification.json). Restored commit
 authority is refused; bootChanged remains unknown, and explicit retirement releases
-only the no-commit host context. Build-11 iPhone and real fault/reply-loss/ROM migration remain pending.
+only the no-commit host context. The matching iPhone build-11 matrix now completes through direct desktop MCP;
+[its ledger](../docs/workbench-managed-iphone-qualification.json) retains two initial
+inspection failures and the explicit reconnect needed to expose Ethernet, alongside
+the later managed results. Clean attachment and real fault/reply-loss/ROM migration
+remain unqualified.
 The identical signed build 10 passes selected Nano
 inspection/raw binary console through MCP on the physical iPhone and iPad; broader
 combinations remain separately unqualified. FMS2 command-2 exact echo passes in
-the selected build-11 iPad managed workflow; this does not qualify the state probe.
+the selected build-11 iPad and iPhone managed workflows; this does not qualify the state probe.
 The canonical scheme/product is FirmingoWorkbench; preserve the stable app bundle
 identity instead of creating another binary identity for each phase.
 

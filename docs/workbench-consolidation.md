@@ -49,12 +49,14 @@ build 10. The [managed phase increment](workbench-managed-scenarios.md) now impl
 FMS2 upload/reconciliation and host-context recovery. Signed build 11 completes
 selected Nano/iPad replacement, disposal, app-restart and RAM-only power-cycle
 checks through native MCP, including preserved expected refusal/unknown outcomes;
-see [the managed ledger](workbench-managed-ipad-qualification.json). Matching
-iPhone and real reply-loss/flash-fault/ROM migration remain separate steps.
+see [the managed ledger](workbench-managed-ipad-qualification.json). The identical build now completes the matching iPhone matrix through direct
+desktop MCP; [the iPhone ledger](workbench-managed-iphone-qualification.json)
+retains the two initial attachment failures and later successful managed phases.
+Real reply-loss/flash-fault/ROM migration remain separate steps.
 
 Compiler busy/deadline/lifecycle/stress migration is tracked in
 [the compiler-scenario work log](workbench-compiler-scenarios.md). Continue with
-matching managed iPhone evidence, the state probe and specialized recovery cases.
+the state probe, the observed iPhone attachment failure and specialized recovery cases.
 The paired iPad/build-8 and iPhone/build-9 compiler, resume and revocation
 qualification is recorded in the controller ledger. The [thin MCP adapter](workbench-mcp.md) now wraps the versioned controller API; Codex registration and two fresh native-host iPhone compiler scenarios now pass; see [the iPhone MCP ledger](workbench-mcp-iphone.json). Broader MCP/device qualification remains separate. Retire legacy generators
 only after matching scenario evidence; preserve previous reports and unresolved

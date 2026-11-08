@@ -1,0 +1,68 @@
+{
+  "appIdentifier": "com.firmingokit.demo",
+  "appVersion": "11",
+  "artifacts": [],
+  "deviceEvidence": {
+    "connectionAttempted": true,
+    "consoleClosed": false,
+    "consoleOpened": false,
+    "disconnected": true,
+    "probeAttempted": false,
+    "received": "",
+    "selection": {
+      "address": "192.168.77.1",
+      "boardID": "nano_rp2040_connect",
+      "deviceID": "5031503337360009"
+    },
+    "sentBytes": 0,
+    "snapshot": {
+      "authenticationMode": "open-development",
+      "boardID": "nano_rp2040_connect",
+      "bootID": "2c5ef0109ed07b7f",
+      "channels": [
+        {
+          "backend": "application",
+          "controls": [],
+          "id": 1,
+          "isOwned": false,
+          "receiveQueueBytes": 256,
+          "transmitQueueBytes": 256
+        }
+      ],
+      "deviceID": "5031503337360009",
+      "firmwareVersion": "0.1.0-statefulupload-exp1",
+      "maximumPayload": 4096,
+      "protocolMajor": 1,
+      "targets": [
+        {
+          "authorization": "physical-d2-gnd",
+          "format": "nano-managed-v2",
+          "id": 2,
+          "maximumChunk": 1024,
+          "maximumSize": 4096
+        }
+      ]
+    }
+  },
+  "deviceOperations": true,
+  "events": [
+    {
+      "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+      "phase": "device-start",
+      "seconds": 0.0012461249716579914,
+      "sequence": 0
+    },
+    {
+      "detail": "Selected device assertions and SDK cleanup completed.",
+      "phase": "complete",
+      "seconds": 0.01768258330412209,
+      "sequence": 1
+    }
+  ],
+  "id": "AB13E4E0-8C7E-4921-A2E9-311BC92139C0",
+  "operatingSystem": "Version 27.0.1 (Build 24A446)",
+  "processID": 51154,
+  "scenarioID": "device.inspect",
+  "schema": 2,
+  "status": "passed"
+}

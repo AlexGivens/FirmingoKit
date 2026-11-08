@@ -1,0 +1,41 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"sessionID\":\"A4C07CC8-0734-49F3-B727-8234D1B2C929\",\"commandID\":\"035517E1-F04E-4CDA-87EA-AE7BA199EEE9\",\"command\":{\"schema\":1,\"commandID\":\"035517E1-F04E-4CDA-87EA-AE7BA199EEE9\",\"action\":\"run\",\"request\":{\"schema\":3,\"requestID\":\"3DBBA5EE-B910-4343-B3BB-7FDC70575AE2\",\"operation\":\"run\",\"scenarioID\":\"managed.commit\",\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\",\"bootID\":\"2c5ef0109ed07b7f\"},\"managed\":{\"operationID\":\"DA8A8B92-B0E8-4205-B3EB-1BF6625C5D72\",\"recordSHA256\":\"bc5645cdd99b3ad62aecb80b0b23356548b7c6889f130536f42966b3d666a8a2\",\"authorization\":\"commit-once-d2-gnd\"}}},\"admission\":{\"commandID\":\"035517E1-F04E-4CDA-87EA-AE7BA199EEE9\",\"sequence\":51,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+    }
+  ],
+  "structuredContent": {
+    "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+    "commandID": "035517E1-F04E-4CDA-87EA-AE7BA199EEE9",
+    "command": {
+      "schema": 1,
+      "commandID": "035517E1-F04E-4CDA-87EA-AE7BA199EEE9",
+      "action": "run",
+      "request": {
+        "schema": 3,
+        "requestID": "3DBBA5EE-B910-4343-B3BB-7FDC70575AE2",
+        "operation": "run",
+        "scenarioID": "managed.commit",
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "deviceID": "5031503337360009",
+          "bootID": "2c5ef0109ed07b7f"
+        },
+        "managed": {
+          "operationID": "DA8A8B92-B0E8-4205-B3EB-1BF6625C5D72",
+          "recordSHA256": "bc5645cdd99b3ad62aecb80b0b23356548b7c6889f130536f42966b3d666a8a2",
+          "authorization": "commit-once-d2-gnd"
+        }
+      }
+    },
+    "admission": {
+      "commandID": "035517E1-F04E-4CDA-87EA-AE7BA199EEE9",
+      "sequence": 51,
+      "state": "queued"
+    },
+    "scenarioCompletion": "not_observed"
+  },
+  "isError": false
+}

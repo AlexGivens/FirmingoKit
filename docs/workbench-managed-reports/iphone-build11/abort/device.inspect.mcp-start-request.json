@@ -1,0 +1,13 @@
+{
+  "tool": "mcp__firmingo_workbench__workbench_submit",
+  "arguments": {
+    "session_id": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+    "command_id": "FB427114-27C8-4006-B62A-89268839D478",
+    "action": "run",
+    "run_id": "A8010D90-5DAA-4130-BB42-00CE3562D39D",
+    "scenario_id": "device.inspect",
+    "device_address": "192.168.77.1",
+    "device_board": "nano_rp2040_connect",
+    "device_id": "5031503337360009"
+  }
+}

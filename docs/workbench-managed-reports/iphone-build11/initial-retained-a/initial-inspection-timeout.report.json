@@ -1,0 +1,40 @@
+{
+  "appIdentifier": "com.firmingokit.demo",
+  "appVersion": "11",
+  "artifacts": [],
+  "deviceEvidence": {
+    "connectionAttempted": true,
+    "consoleClosed": false,
+    "consoleOpened": false,
+    "disconnected": false,
+    "probeAttempted": false,
+    "received": "",
+    "selection": {
+      "address": "192.168.77.1",
+      "boardID": "nano_rp2040_connect",
+      "deviceID": "5031503337360009"
+    },
+    "sentBytes": 0
+  },
+  "deviceOperations": true,
+  "events": [
+    {
+      "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+      "phase": "device-start",
+      "seconds": 0.001627958263270557,
+      "sequence": 0
+    },
+    {
+      "detail": "The Firmingo operation exceeded its SDK deadline.",
+      "phase": "failed",
+      "seconds": 5.161355083342642,
+      "sequence": 1
+    }
+  ],
+  "id": "E95515D1-9906-4599-B0F4-16523EF7E008",
+  "operatingSystem": "Version 27.0.1 (Build 24A446)",
+  "processID": 51154,
+  "scenarioID": "device.inspect",
+  "schema": 2,
+  "status": "failed"
+}

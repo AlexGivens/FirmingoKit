@@ -1,0 +1,82 @@
+{
+  "appIdentifier": "com.firmingokit.demo",
+  "appVersion": "11",
+  "artifacts": [],
+  "deviceOperations": true,
+  "events": [
+    {
+      "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+      "phase": "managed-start",
+      "seconds": 0.0006657916819676757,
+      "sequence": 0
+    },
+    {
+      "detail": "Managed phase: ram_verified. Commit acceptance is not startup or useful behavior.",
+      "phase": "complete",
+      "seconds": 0.8087320833001286,
+      "sequence": 1
+    }
+  ],
+  "id": "02C443AD-1CA7-46E3-9BA8-84A39AEA52B0",
+  "managedEvidence": {
+    "artifact": {
+      "bytes": "Rk1TMgIAgABOQU5PdDACEAABIBAgAQAAAQEgEAkBIBA8iQAgBAAAAECJACAUAAAAIAIAACQCAAAAAAAAAAAAAP/deg7WtKttFDcRkJixZ1rurTwKsOf2ZMhPweuxx0xIrgSQpZRRlsNaOU9Qlyr5FNvbcppbeRUuMA5hIfK7Lh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAP+IC9gLUA8CX4gL0AIiAqBdALRtNAA3BAHAgy9+dwR3C1CUgAaAlJCmhIYIpgCE4yaAYkASUgRilGkEdyaCBGKUaQR3C9wEY8iQAgQIkAIHwwAhDwtYewLE84aEAcOGArTjBoQBwwYCpNqGiARxgoO9voaIBHACg31AFG8GgCKCXQASg20QGsQiDgcDIgoHBRIGBwRiAgcCAdH0qQR3FoIEYIMBxKkEexaCBGDDAaSpBHOWggRhAwF0+4RzFoIEYUMLhHamgYISBGkEcL4AGoAXBqaAEkIUaQRzBpQBwwYSECiEIB0QAg8GApaAEgiEcHsPC9AikD0AEp9tEBIPPnACACIfFgMGHv58BGPIkAIECJACCIMAIQEQEgEBcAAAA=",
+      "name": "state-b.fms",
+      "receiptJSON": "eyJmaXJtd2FyZUJ1aWxkSUQiOiJkYWNiZjI1OWI5NmRlMGUwNTA1MTQ3NjQyNTM0MDNmM2VmMWVmNTFkMGY5ZWZhZjFmNDNhMTBkODY1NGMwZTE4IiwiYnVpbGRJbnB1dFNIQTI1NiI6ImMxODE1YzdlMzMwYThiZDFlN2RkNjVkZGYxYzRmMmQ1YmMyM2FjMzRjODZmMmQ0MmE3Yzk0ZjlkMGYxZDVhZTAiLCJ2ZXJzaW9uIjoxLCJsaW5rZWRFTEZTSEEyNTYiOiJhMzI1ZTEyZjNmMDI3ZTIyNWNjNmU2MDgxMjRiZGFjOTdkZjUyYjIwNTFmNWFhZjg5OTE5YjE4NzYwZDBhYTg0IiwiY2F0YWxvZ3VlU0hBMjU2IjoiOGI4ZjE0MzJkNDBiNDI1MDJhY2NhNzI4MDgzZTUwNDVmMDllZDQ5MzAxNGJiZGUxNzg2ZDNmYThhZWVkMTNjZCIsInNvdXJjZUZpbGVuYW1lIjoic3RhdGUtYi5pbm8iLCJzb3VyY2VTSEEyNTYiOiI5NTc2ODA0OTcwNTY5YTdkZjU3ZTQwYTA3MWQ0YzI2ZmNlMDkwN2ZiZTNmMzEyYWY4MWVjZjE0NjQ2Njk3MWYwIiwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MiIsInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjlhY2M2M2YxYTQ5MGQ3Y2FjNWU0ZDFhNDRkMmU3Y2IyZTI0YjNiNWQ5OTFmNzE4ZmRlNmM4MzQ0NjVmYjZlODAiLCJzb3VyY2VSZXZpc2lvbiI6MSwicHJvdmVuYW5jZSI6eyJyZWNpcGVJZGVudGlmaWVyIjoibmFuby1zdGF0ZWZ1bC1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwiY29tcGlsZXIiOiJDbGFuZ1wvTExEIDIyLjEuOCBBQkktdHdvIFdBU0kgc2VydmljZSwgaXNvbGF0ZWQgV2ViS2l0IHdvcmtlciIsInJlY2lwZVNIQTI1NiI6IjI1ZGVmMzZjNzAxZGQ1ZTUyN2JhMTI4MjE1ZGViM2Y4N2MxNThlMWM2ZWI2ZWIyZmE3ZmQxMDZiNWY1NDM4NjgiLCJ0b29sY2hhaW5TSEEyNTYiOiJhNDRhZmE4NGU3NmFlN2IxNzQyZmQ1ZWNmZWVjMjA1NTY1NjQzYjk0OTQ4ZTM0ZDhjNTcwMjlhZTNjYWRhOWZkIn0sImJvYXJkSUQiOiJuYW5vX3JwMjA0MF9jb25uZWN0IiwiZG9jdW1lbnRJRCI6IkNBNUI1N0I1LUE3RjYtNDE5QS1CNjc4LTFBMURBQjdFODQ4RSIsImNhcHN1bGVTSEEyNTYiOiI1MDVjNzIzODA0YWRkZjIxOGU5MDE4Mzc1YzFmNjNmZDAzNmMyZTBiZjE5ZDAxNzNhZTE4OWIwNDQxOGFhOWIwIn0=",
+      "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+      "wasmLinearMemoryBytes": 27983872
+    },
+    "checkpoint": {
+      "commitIntent": false,
+      "record": {
+        "boardID": "nano_rp2040_connect",
+        "bootID": "2c5ef0109ed07b7f",
+        "deviceID": "5031503337360009",
+        "firmwareImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+        "format": "nano-managed-v2",
+        "residentELFSHA256": "bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8",
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+        "size": 548,
+        "targetID": 2,
+        "uploadID": 4,
+        "version": 1
+      },
+      "released": false,
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "2c5ef0109ed07b7f",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "stage-d2-gnd",
+          "evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests",
+          "operationID": "02C443AD-1CA7-46E3-9BA8-84A39AEA52B0",
+          "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+          "sketch": "state-b"
+        },
+        "operation": "run",
+        "requestID": "02C443AD-1CA7-46E3-9BA8-84A39AEA52B0",
+        "scenarioID": "managed.stage",
+        "schema": 3
+      },
+      "schema": 1,
+      "stageIntent": true
+    },
+    "outcome": "ram_verified",
+    "recordSHA256": "74531e98ab029b0787eeab1cd69bcec6cfcd656721f85274df81fe9a57c407d9",
+    "selection": {
+      "authorization": "stage-d2-gnd",
+      "evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests",
+      "operationID": "02C443AD-1CA7-46E3-9BA8-84A39AEA52B0",
+      "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+      "sketch": "state-b"
+    }
+  },
+  "operatingSystem": "Version 27.0.1 (Build 24A446)",
+  "processID": 51232,
+  "scenarioID": "managed.stage",
+  "schema": 3,
+  "status": "passed"
+}

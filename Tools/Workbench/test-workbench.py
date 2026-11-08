@@ -85,6 +85,21 @@ class WorkbenchCLI(unittest.TestCase):
         checkpoint['commitIntent']=True
         with self.assertRaises(ValueError):cli.decode_response(self.envelope(value),request,123)
 
+    def test_managed_early_rejection_cannot_invent_device_facts_without_checkpoint(self):
+        """A local nonpass may retain selection, but cannot claim a transaction, artifact or device outcome."""
+        request, value = self.managed_fixture()
+        value['report']['status'] = 'failed'
+        value['report']['managedEvidence'] = dict(selection=request['managed'], outcome='not_observed')
+        self.assertEqual(cli.decode_response(self.envelope(value), request, 123)['report']['status'], 'failed')
+        for field, claim in [('outcome', 'boot_confirmed'), ('recordSHA256', 'a' * 64), ('artifact', {})]:
+            broken = copy.deepcopy(value)
+            broken['report']['managedEvidence'][field] = claim
+            with self.subTest(field=field), self.assertRaises(ValueError):
+                cli.decode_response(self.envelope(broken), request, 123)
+        value['report']['status'] = 'passed'
+        with self.assertRaises(ValueError):
+            cli.decode_response(self.envelope(value), request, 123)
+
     def fixture(self):
         request = dict(schema=1, requestID=str(uuid.uuid4()).upper(), operation='run', scenarioID='compiler.catalogue')
         report = dict(schema=1, id=request['requestID'], scenarioID=request['scenarioID'], status='passed',

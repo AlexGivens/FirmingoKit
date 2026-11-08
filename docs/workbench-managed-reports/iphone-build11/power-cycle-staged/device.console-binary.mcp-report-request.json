@@ -1,0 +1,13 @@
+{
+  "tool": "mcp__firmingo_workbench__workbench_result",
+  "arguments": {
+    "session_id": "00048089-D584-4EB0-8F76-033CAAB117BD",
+    "command_id": "1D981249-D6BC-405C-9860-B4BD7386C873",
+    "scenario_id": "device.console-binary",
+    "device_address": "192.168.77.1",
+    "device_board": "nano_rp2040_connect",
+    "device_id": "5031503337360009",
+    "device_boot_id": "2c5ef0109ed07b7f",
+    "console_probe": "fms2-command-2-v1"
+  }
+}

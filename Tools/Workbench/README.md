@@ -47,3 +47,12 @@ reconciliation. Use the persistent paired CLI/MCP path for live staging phases;
 launch-and-exit automation cannot preserve their session. `managed.restore` reads
 saved host context only. The opt-in native helper accepts `--managed-action` and
 records non-pass results without replay. Fault/ROM workflows remain specialized.
+
+Matching managed build-11 evidence now exists for the
+[iPad](../../docs/workbench-managed-ipad-qualification.json) and
+[iPhone](../../docs/workbench-managed-iphone-qualification.json). The iPhone uses
+the connected desktop MCP tools directly and preserves two initial inspection
+failures before an explicit USB reconnect. A local refusal without checkpoint
+makes no device observation and cannot carry outcome/record/artifact claims;
+original submission scope and other transaction reports establish context.
+Specialized state/reply-loss/flash-fault/ROM migration remains separate.

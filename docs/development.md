@@ -899,3 +899,40 @@ passing offline cases; CI's existing entry point runs it without hardware.
 Pairings are revoked, the controller is stopped and D2 is removed. The same
 build's iPhone, real reply-loss/flash-fault and SDK ROM migration remain open;
 specialized hosts are retained and post-commit unknown is not cleared silently.
+
+
+## Matching Workbench managed iPhone checks — 2026-11-08
+
+The existing signed build 11 from `dd71846` now completes the same selected Nano
+managed matrix on iPhone 15 Pro Max/iOS 27.0.1 (24A446), with wireless deployment
+and independent producer/run/boot identities. [The ledger](workbench-managed-iphone-qualification.json)
+contains 33 original reports and direct desktop MCP tool arguments/results.
+Twenty-seven matching-matrix reports pass, the restored-context commit remains
+an expected failed local refusal, and the RAM-stage power-cycle reconciliation
+remains outcomeUnknown/bootChanged. Two initial inspection timeouts are also
+retained: the user saw no Ethernet entry until explicit USB reconnect, followed
+by successful inspection and exact echo. The eventual managed passes do not
+qualify clean attachment or demonstrate a firmware fix.
+
+Actual State A/B SDK/WASM exports match the pinned bytes and pass Firmware's
+independent native FMS2 checker, which does not execute ARM code. Exact command-2
+echo and manual D13 observations are separate from startup and the unimplemented
+state/counter probe. The app restart followed accepted commit, not reply loss.
+Both pairings are revoked, the controller is stopped, D2 removed, and State A
+remains installed on the Nano connected to iPhone.
+
+The new real-report corpus also exposed the need to state the scope of an early
+local refusal explicitly: without a checkpoint it contains no device observation.
+The host checker now requires outcome not_observed and no issued-record hash or
+artifact in that case. Other device/checkpoint-bearing reports reject changed
+device expectations. Added parser mutations reject fabricated partial claims;
+no app/SDK/firmware source or signed input was changed.
+
+These actual commands pass locally: `python3 -I -S -B
+Tools/Workbench/test-workbench.py` (21), `python3 -I -S -B
+Tools/Workbench/test-paired.py` (11), and `python3 -I -S -B
+Tools/Workbench/test-mcp.py` (21). CI's maintained normal entry point runs them
+without hardware; its explanatory scope was updated. Swift/platform builds were
+not repeated for this host-Python/evidence follow-up, and no remote CI result is
+claimed. Specialized reply-loss/flash-fault/ROM hosts remain until matching
+Workbench replacements are qualified.

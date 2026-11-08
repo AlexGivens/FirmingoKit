@@ -18,3 +18,13 @@ checker did not execute ARM code. See the ledger for physical behavior evidence.
 
 Historical failures, reports and host identities are immutable data. Add new run
 files and ledger entries for fresh qualification instead of overwriting them.
+
+The [iPhone follow-up](../workbench-managed-iphone-qualification.json) uses the
+identical signed build 11 and the connected desktop MCP tools directly. Its
+`mcp-*-request/response.json` files preserve real tool arguments/results; they are
+not reconstructed native app-server RPC messages. All 33 reports remain, including
+two actual inspection timeouts before Ethernet appeared after explicit reconnect.
+The local refused commit has no checkpoint or device observation; original
+submission scope and the transaction's other device-bound reports establish its
+context. No nonpass is relabeled as a hardware pass. The checker rejects invented
+outcome/record/artifact claims on checkpoint-free managed reports.

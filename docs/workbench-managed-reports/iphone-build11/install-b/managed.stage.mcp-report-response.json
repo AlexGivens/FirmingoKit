@@ -1,0 +1,135 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"sessionID\":\"A4C07CC8-0734-49F3-B727-8234D1B2C929\",\"commandID\":\"72C7F9E8-1DD6-4209-AC63-936F8973EBE1\",\"record\":{\"commandID\":\"72C7F9E8-1DD6-4209-AC63-936F8973EBE1\",\"reply\":{\"accepted\":true,\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"command\":{\"action\":\"report\",\"commandID\":\"72C7F9E8-1DD6-4209-AC63-936F8973EBE1\",\"runID\":\"C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C\",\"schema\":1},\"instanceID\":\"948738E6-1A1C-48BD-9944-AEBE1861FCE6\",\"processID\":51154,\"report\":{\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"artifacts\":[],\"deviceOperations\":true,\"events\":[{\"detail\":\"Executing one explicit managed phase; commit and reconciliation remain separate.\",\"phase\":\"managed-start\",\"seconds\":0.000661708414554596,\"sequence\":0},{\"detail\":\"Managed phase: ram_verified. Commit acceptance is not startup or useful behavior.\",\"phase\":\"complete\",\"seconds\":0.7677302916999906,\"sequence\":1}],\"id\":\"C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C\",\"managedEvidence\":{\"artifact\":{\"bytes\":\"Rk1TMgIAgABOQU5PdDACEAABIBAgAQAAAQEgEAkBIBA8iQAgBAAAAECJACAUAAAAIAIAACQCAAAAAAAAAAAAAP/deg7WtKttFDcRkJixZ1rurTwKsOf2ZMhPweuxx0xIrgSQpZRRlsNaOU9Qlyr5FNvbcppbeRUuMA5hIfK7Lh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAP+IC9gLUA8CX4gL0AIiAqBdALRtNAA3BAHAgy9+dwR3C1CUgAaAlJCmhIYIpgCE4yaAYkASUgRilGkEdyaCBGKUaQR3C9wEY8iQAgQIkAIHwwAhDwtYewLE84aEAcOGArTjBoQBwwYCpNqGiARxgoO9voaIBHACg31AFG8GgCKCXQASg20QGsQiDgcDIgoHBRIGBwRiAgcCAdH0qQR3FoIEYIMBxKkEexaCBGDDAaSpBHOWggRhAwF0+4RzFoIEYUMLhHamgYISBGkEcL4AGoAXBqaAEkIUaQRzBpQBwwYSECiEIB0QAg8GApaAEgiEcHsPC9AikD0AEp9tEBIPPnACACIfFgMGHv58BGPIkAIECJACCIMAIQEQEgEBcAAAA=\",\"name\":\"state-b.fms\",\"receiptJSON\":\"eyJjYXRhbG9ndWVTSEEyNTYiOiI4YjhmMTQzMmQ0MGI0MjUwMmFjY2E3MjgwODNlNTA0NWYwOWVkNDkzMDE0YmJkZTE3ODZkM2ZhOGFlZWQxM2NkIiwiYnVpbGRJbnB1dFNIQTI1NiI6IjAxYTEyNTZjODQ3NjQ5NDUzZjkyYWRjNzFjZGI1ZGJlZWM3M2YzNjViYzUwYzFmMDRiODhkMzUyZjBiYzM3OGUiLCJzb3VyY2VSZXZpc2lvbiI6MSwidmVyc2lvbiI6MSwiZmlybXdhcmVCdWlsZElEIjoiZGFjYmYyNTliOTZkZTBlMDUwNTE0NzY0MjUzNDAzZjNlZjFlZjUxZDBmOWVmYWYxZjQzYTEwZDg2NTRjMGUxOCIsInByb3ZlbmFuY2UiOnsicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVmdWwtY2xhbmctMjIuMS44LXYxLWV4cGVyaW1lbnRhbCIsImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIiLCJyZWNpcGVTSEEyNTYiOiIyNWRlZjM2YzcwMWRkNWU1MjdiYTEyODIxNWRlYjNmODdjMTU4ZTFjNmViNmViMmZhN2ZkMTA2YjVmNTQzODY4IiwidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCJ9LCJkb2N1bWVudElEIjoiM0UxMjFDNTktM0JENi00MTI4LUFDRUEtNTM1Njg4MjdDMzU5Iiwic291cmNlRmlsZW5hbWUiOiJzdGF0ZS1iLmlubyIsInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjlhY2M2M2YxYTQ5MGQ3Y2FjNWU0ZDFhNDRkMmU3Y2IyZTI0YjNiNWQ5OTFmNzE4ZmRlNmM4MzQ0NjVmYjZlODAiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjIiLCJjYXBzdWxlU0hBMjU2IjoiNTA1YzcyMzgwNGFkZGYyMThlOTAxODM3NWMxZjYzZmQwMzZjMmUwYmYxOWQwMTczYWUxODliMDQ0MThhYTliMCIsInNvdXJjZVNIQTI1NiI6Ijk1NzY4MDQ5NzA1NjlhN2RmNTdlNDBhMDcxZDRjMjZmY2UwOTA3ZmJlM2YzMTJhZjgxZWNmMTQ2NDY2OTcxZjAiLCJsaW5rZWRFTEZTSEEyNTYiOiJhMzI1ZTEyZjNmMDI3ZTIyNWNjNmU2MDgxMjRiZGFjOTdkZjUyYjIwNTFmNWFhZjg5OTE5YjE4NzYwZDBhYTg0In0=\",\"sha256\":\"505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0\",\"wasmLinearMemoryBytes\":27983872},\"checkpoint\":{\"commitIntent\":false,\"record\":{\"boardID\":\"nano_rp2040_connect\",\"bootID\":\"2c5ef0109ed07b7f\",\"deviceID\":\"5031503337360009\",\"firmwareImageSHA256\":\"1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f\",\"format\":\"nano-managed-v2\",\"residentELFSHA256\":\"bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8\",\"sha256\":\"505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0\",\"size\":548,\"targetID\":2,\"uploadID\":2,\"version\":1},\"released\":false,\"request\":{\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"bootID\":\"2c5ef0109ed07b7f\",\"deviceID\":\"5031503337360009\"},\"managed\":{\"authorization\":\"stage-d2-gnd\",\"evidence\":\"Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests\",\"operationID\":\"C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C\",\"residentImageSHA256\":\"1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f\",\"sketch\":\"state-b\"},\"operation\":\"run\",\"requestID\":\"C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C\",\"scenarioID\":\"managed.stage\",\"schema\":3},\"schema\":1,\"stageIntent\":true},\"outcome\":\"ram_verified\",\"recordSHA256\":\"d6925c01b984188ea2ff92db2ab4a45573ad5121c0dce7fd555ba6393380443d\",\"selection\":{\"authorization\":\"stage-d2-gnd\",\"evidence\":\"Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests\",\"operationID\":\"C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C\",\"residentImageSHA256\":\"1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f\",\"sketch\":\"state-b\"}},\"operatingSystem\":\"Version 27.0.1 (Build 24A446)\",\"processID\":51154,\"scenarioID\":\"managed.stage\",\"schema\":3,\"status\":\"passed\"},\"schema\":1,\"state\":{\"awaitingLifecycleStart\":false,\"isRunning\":false,\"phase\":\"complete\",\"runID\":\"C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C\",\"status\":\"passed\"}},\"sequence\":35,\"state\":\"completed\"},\"scenarioCompletion\":\"passed\",\"validatedReport\":true,\"evidence\":[{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/A4C07CC8-0734-49F3-B727-8234D1B2C929/72C7F9E8-1DD6-4209-AC63-936F8973EBE1/reply.json\",\"bytes\":4980,\"sha256\":\"f93b77851884c424ddc1d873a21f89f01296f7d01681efca7a8ba39be225b3a5\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/A4C07CC8-0734-49F3-B727-8234D1B2C929/72C7F9E8-1DD6-4209-AC63-936F8973EBE1/report.json\",\"bytes\":5156,\"sha256\":\"1205e13ebf9c9e1da2c9b3fc4ff2b73c775bc1934dbdf6b3ef73856e78304cb5\"}]}"
+    }
+  ],
+  "structuredContent": {
+    "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+    "commandID": "72C7F9E8-1DD6-4209-AC63-936F8973EBE1",
+    "record": {
+      "commandID": "72C7F9E8-1DD6-4209-AC63-936F8973EBE1",
+      "reply": {
+        "accepted": true,
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "11",
+        "command": {
+          "action": "report",
+          "commandID": "72C7F9E8-1DD6-4209-AC63-936F8973EBE1",
+          "runID": "C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C",
+          "schema": 1
+        },
+        "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+        "processID": 51154,
+        "report": {
+          "appIdentifier": "com.firmingokit.demo",
+          "appVersion": "11",
+          "artifacts": [],
+          "deviceOperations": true,
+          "events": [
+            {
+              "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+              "phase": "managed-start",
+              "seconds": 0.000661708414554596,
+              "sequence": 0
+            },
+            {
+              "detail": "Managed phase: ram_verified. Commit acceptance is not startup or useful behavior.",
+              "phase": "complete",
+              "seconds": 0.7677302916999906,
+              "sequence": 1
+            }
+          ],
+          "id": "C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C",
+          "managedEvidence": {
+            "artifact": {
+              "bytes": "Rk1TMgIAgABOQU5PdDACEAABIBAgAQAAAQEgEAkBIBA8iQAgBAAAAECJACAUAAAAIAIAACQCAAAAAAAAAAAAAP/deg7WtKttFDcRkJixZ1rurTwKsOf2ZMhPweuxx0xIrgSQpZRRlsNaOU9Qlyr5FNvbcppbeRUuMA5hIfK7Lh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAP+IC9gLUA8CX4gL0AIiAqBdALRtNAA3BAHAgy9+dwR3C1CUgAaAlJCmhIYIpgCE4yaAYkASUgRilGkEdyaCBGKUaQR3C9wEY8iQAgQIkAIHwwAhDwtYewLE84aEAcOGArTjBoQBwwYCpNqGiARxgoO9voaIBHACg31AFG8GgCKCXQASg20QGsQiDgcDIgoHBRIGBwRiAgcCAdH0qQR3FoIEYIMBxKkEexaCBGDDAaSpBHOWggRhAwF0+4RzFoIEYUMLhHamgYISBGkEcL4AGoAXBqaAEkIUaQRzBpQBwwYSECiEIB0QAg8GApaAEgiEcHsPC9AikD0AEp9tEBIPPnACACIfFgMGHv58BGPIkAIECJACCIMAIQEQEgEBcAAAA=",
+              "name": "state-b.fms",
+              "receiptJSON": "eyJjYXRhbG9ndWVTSEEyNTYiOiI4YjhmMTQzMmQ0MGI0MjUwMmFjY2E3MjgwODNlNTA0NWYwOWVkNDkzMDE0YmJkZTE3ODZkM2ZhOGFlZWQxM2NkIiwiYnVpbGRJbnB1dFNIQTI1NiI6IjAxYTEyNTZjODQ3NjQ5NDUzZjkyYWRjNzFjZGI1ZGJlZWM3M2YzNjViYzUwYzFmMDRiODhkMzUyZjBiYzM3OGUiLCJzb3VyY2VSZXZpc2lvbiI6MSwidmVyc2lvbiI6MSwiZmlybXdhcmVCdWlsZElEIjoiZGFjYmYyNTliOTZkZTBlMDUwNTE0NzY0MjUzNDAzZjNlZjFlZjUxZDBmOWVmYWYxZjQzYTEwZDg2NTRjMGUxOCIsInByb3ZlbmFuY2UiOnsicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVmdWwtY2xhbmctMjIuMS44LXYxLWV4cGVyaW1lbnRhbCIsImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIiLCJyZWNpcGVTSEEyNTYiOiIyNWRlZjM2YzcwMWRkNWU1MjdiYTEyODIxNWRlYjNmODdjMTU4ZTFjNmViNmViMmZhN2ZkMTA2YjVmNTQzODY4IiwidG9vbGNoYWluU0hBMjU2IjoiYTQ0YWZhODRlNzZhZTdiMTc0MmZkNWVjZmVlYzIwNTU2NTY0M2I5NDk0OGUzNGQ4YzU3MDI5YWUzY2FkYTlmZCJ9LCJkb2N1bWVudElEIjoiM0UxMjFDNTktM0JENi00MTI4LUFDRUEtNTM1Njg4MjdDMzU5Iiwic291cmNlRmlsZW5hbWUiOiJzdGF0ZS1iLmlubyIsInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjlhY2M2M2YxYTQ5MGQ3Y2FjNWU0ZDFhNDRkMmU3Y2IyZTI0YjNiNWQ5OTFmNzE4ZmRlNmM4MzQ0NjVmYjZlODAiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjIiLCJjYXBzdWxlU0hBMjU2IjoiNTA1YzcyMzgwNGFkZGYyMThlOTAxODM3NWMxZjYzZmQwMzZjMmUwYmYxOWQwMTczYWUxODliMDQ0MThhYTliMCIsInNvdXJjZVNIQTI1NiI6Ijk1NzY4MDQ5NzA1NjlhN2RmNTdlNDBhMDcxZDRjMjZmY2UwOTA3ZmJlM2YzMTJhZjgxZWNmMTQ2NDY2OTcxZjAiLCJsaW5rZWRFTEZTSEEyNTYiOiJhMzI1ZTEyZjNmMDI3ZTIyNWNjNmU2MDgxMjRiZGFjOTdkZjUyYjIwNTFmNWFhZjg5OTE5YjE4NzYwZDBhYTg0In0=",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "wasmLinearMemoryBytes": 27983872
+            },
+            "checkpoint": {
+              "commitIntent": false,
+              "record": {
+                "boardID": "nano_rp2040_connect",
+                "bootID": "2c5ef0109ed07b7f",
+                "deviceID": "5031503337360009",
+                "firmwareImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+                "format": "nano-managed-v2",
+                "residentELFSHA256": "bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8",
+                "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+                "size": 548,
+                "targetID": 2,
+                "uploadID": 2,
+                "version": 1
+              },
+              "released": false,
+              "request": {
+                "device": {
+                  "address": "192.168.77.1",
+                  "boardID": "nano_rp2040_connect",
+                  "bootID": "2c5ef0109ed07b7f",
+                  "deviceID": "5031503337360009"
+                },
+                "managed": {
+                  "authorization": "stage-d2-gnd",
+                  "evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests",
+                  "operationID": "C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C",
+                  "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+                  "sketch": "state-b"
+                },
+                "operation": "run",
+                "requestID": "C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C",
+                "scenarioID": "managed.stage",
+                "schema": 3
+              },
+              "schema": 1,
+              "stageIntent": true
+            },
+            "outcome": "ram_verified",
+            "recordSHA256": "d6925c01b984188ea2ff92db2ab4a45573ad5121c0dce7fd555ba6393380443d",
+            "selection": {
+              "authorization": "stage-d2-gnd",
+              "evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests",
+              "operationID": "C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C",
+              "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+              "sketch": "state-b"
+            }
+          },
+          "operatingSystem": "Version 27.0.1 (Build 24A446)",
+          "processID": 51154,
+          "scenarioID": "managed.stage",
+          "schema": 3,
+          "status": "passed"
+        },
+        "schema": 1,
+        "state": {
+          "awaitingLifecycleStart": false,
+          "isRunning": false,
+          "phase": "complete",
+          "runID": "C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C",
+          "status": "passed"
+        }
+      },
+      "sequence": 35,
+      "state": "completed"
+    },
+    "scenarioCompletion": "passed",
+    "validatedReport": true,
+    "evidence": [
+      {
+        "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/A4C07CC8-0734-49F3-B727-8234D1B2C929/72C7F9E8-1DD6-4209-AC63-936F8973EBE1/reply.json",
+        "bytes": 4980,
+        "sha256": "f93b77851884c424ddc1d873a21f89f01296f7d01681efca7a8ba39be225b3a5"
+      },
+      {
+        "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/A4C07CC8-0734-49F3-B727-8234D1B2C929/72C7F9E8-1DD6-4209-AC63-936F8973EBE1/report.json",
+        "bytes": 5156,
+        "sha256": "1205e13ebf9c9e1da2c9b3fc4ff2b73c775bc1934dbdf6b3ef73856e78304cb5"
+      }
+    ]
+  },
+  "isError": false
+}

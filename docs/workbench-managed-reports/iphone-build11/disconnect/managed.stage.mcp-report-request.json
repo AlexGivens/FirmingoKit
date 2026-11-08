@@ -1,0 +1,17 @@
+{
+  "tool": "mcp__firmingo_workbench__workbench_result",
+  "arguments": {
+    "session_id": "00048089-D584-4EB0-8F76-033CAAB117BD",
+    "command_id": "94BB0D9F-5774-43A1-808A-A8AE72F43A07",
+    "scenario_id": "managed.stage",
+    "device_address": "192.168.77.1",
+    "device_board": "nano_rp2040_connect",
+    "device_id": "5031503337360009",
+    "device_boot_id": "2c5ef0109ed07b7f",
+    "managed_operation_id": "02C443AD-1CA7-46E3-9BA8-84A39AEA52B0",
+    "managed_sketch": "state-b",
+    "resident_image_sha256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+    "resident_evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests",
+    "managed_authorization": "stage-d2-gnd"
+  }
+}

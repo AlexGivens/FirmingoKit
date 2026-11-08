@@ -1,0 +1,43 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"sessionID\":\"A4C07CC8-0734-49F3-B727-8234D1B2C929\",\"commandID\":\"765DA680-D95B-44E5-9788-FC6F3E6B7A0D\",\"command\":{\"schema\":1,\"commandID\":\"765DA680-D95B-44E5-9788-FC6F3E6B7A0D\",\"action\":\"run\",\"request\":{\"schema\":3,\"requestID\":\"31544792-E579-4933-99F3-ECCC8FBAE72D\",\"operation\":\"run\",\"scenarioID\":\"managed.stage\",\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\",\"bootID\":\"2c5ef0109ed07b7f\"},\"managed\":{\"operationID\":\"31544792-E579-4933-99F3-ECCC8FBAE72D\",\"sketch\":\"state-b\",\"residentImageSHA256\":\"1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f\",\"evidence\":\"Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests\",\"authorization\":\"stage-d2-gnd\"}}},\"admission\":{\"commandID\":\"765DA680-D95B-44E5-9788-FC6F3E6B7A0D\",\"sequence\":18,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+    }
+  ],
+  "structuredContent": {
+    "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+    "commandID": "765DA680-D95B-44E5-9788-FC6F3E6B7A0D",
+    "command": {
+      "schema": 1,
+      "commandID": "765DA680-D95B-44E5-9788-FC6F3E6B7A0D",
+      "action": "run",
+      "request": {
+        "schema": 3,
+        "requestID": "31544792-E579-4933-99F3-ECCC8FBAE72D",
+        "operation": "run",
+        "scenarioID": "managed.stage",
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "deviceID": "5031503337360009",
+          "bootID": "2c5ef0109ed07b7f"
+        },
+        "managed": {
+          "operationID": "31544792-E579-4933-99F3-ECCC8FBAE72D",
+          "sketch": "state-b",
+          "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+          "evidence": "Full ROM readback verified on Mac before reboot for Workbench build 11; user confirmed resident unchanged before iPhone tests",
+          "authorization": "stage-d2-gnd"
+        }
+      }
+    },
+    "admission": {
+      "commandID": "765DA680-D95B-44E5-9788-FC6F3E6B7A0D",
+      "sequence": 18,
+      "state": "queued"
+    },
+    "scenarioCompletion": "not_observed"
+  },
+  "isError": false
+}

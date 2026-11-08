@@ -88,8 +88,16 @@ retirement through native MCP. The 29 reports retain 27 passes, one expected loc
 refusal and one expected bootChanged unknown; command-2 exact echo and manual D13
 observations remain separate from startup. Pairing is revoked, the controller is
 stopped, and D2 is removed. See `docs/workbench-managed-ipad-qualification.json`.
-The same build's iPhone, initialized-state probe and real reply-loss/flash-fault/
-SDK ROM migration remain unqualified; retain specialized hosts.
+On 2026-11-08 the identical signed build 11 also completes the matching iPhone
+matrix through the connected desktop MCP tools. Its 33 reports retain 29 passes,
+the expected local refusal/bootChanged unknown, and two real initial inspection
+timeouts: Ethernet was absent until a separately requested USB reconnect. This
+is not a clean attachment pass or firmware fix. See
+`docs/workbench-managed-iphone-qualification.json`. Pairing/controller are closed
+and D2 removed. A checkpoint-free refusal makes no device observation; the
+independent checker rejects invented device-outcome/record/artifact claims on
+such partial reports. The initialized-state probe and real reply-loss/flash-fault/
+SDK ROM migration remain open; retain specialized hosts.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

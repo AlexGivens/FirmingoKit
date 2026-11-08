@@ -299,3 +299,28 @@ RAM-only power-cycle uncertainty/host retirement through the native MCP host.
 Original expected refusal/unknown reports are retained; matching iPhone evidence
 and specialized fault/reply-loss/ROM migration remain open. No ROM writer, arbitrary
 artifact/source or automatic recovery is added.
+
+
+## Matching managed iPhone matrix — 2026-11-08
+
+The connected desktop MCP tools now execute the matching build-11 iPhone managed
+matrix with the same signed app used on iPad. [The exact ledger](workbench-managed-iphone-qualification.json)
+retains real tool arguments/results and validated reports: 27 matrix passes,
+one expected refused restored commit and one expected bootChanged unknown.
+Four preceding reports retain two actual SDK inspection deadlines and the two
+post-reconnect inspection/echo passes. No Ethernet entry was visible until the
+user explicitly reconnected USB; clean attachment remains unqualified.
+
+The direct tool surface became available in this chat, so this follow-up starts
+no separate native app-server host or additional agent/chat. The registered
+controller path was reused with a fresh certificate, preserving the stopped
+controller state and all unrelated settings. Both iPhone pairings are revoked,
+the controller is stopped and D2 removed. Actual iPhone capsule bytes pass the
+firmware's independent native checker. The offline corpus replays tool data only.
+
+A checkpoint-free early refusal has no device observation; validation binds its
+operation/record selection and forbids invented outcome/record/artifact claims.
+Original submission scope and other transaction reports supply device context.
+This host-side validation tightening changes no app, signed input, SDK operation
+or wire schema. CLI / paired / MCP fixtures pass 21 / 11 / 21 cases. The state
+probe, real reply withholding, flash faults and SDK ROM migration remain open.

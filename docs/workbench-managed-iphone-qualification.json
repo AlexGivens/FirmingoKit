@@ -1,0 +1,1809 @@
+{
+  "schema": 1,
+  "date": "2026-11-08",
+  "status": "completed_managed_matrix_with_retained_attachment_failures",
+  "scope": "Matching fixed FMS2 managed phases on the physical iPhone through the connected Codex desktop MCP tools. Two initial inspection timeouts are retained; inspection succeeded only after an explicit USB reconnect.",
+  "app": {
+    "schema": 1,
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "11",
+    "sourceCommit": "dd718468f6d498a825c1fa760f9e644c78fcd43f",
+    "preparedInventorySHA256": "a9744e0ea658579f78b6f8b3a1a3391c0898ad7886687b090e742af1a448a907",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "executableSHA256": "05fa62fb44145c6dc6f66d075c5716770b8c5c24a56fdc136703e6023738181d",
+    "preparedInventoryHashMeaning": "Historical preparedInventorySHA256 hashes prepared-package.json, the prepared-package report, not the bundled compiler inventory.",
+    "bundledCompilerInventorySHA256": "bed0aecb48fdfa7734be8785f1619f0cc397488b03ff35758f6629c621b8bd14"
+  },
+  "qualificationCheckoutCommit": "e99d5193492a04c23082b79afdc101a1dea20c43",
+  "registration": {
+    "server": "firmingo-workbench",
+    "adapterVersion": "0.3.0",
+    "existingRegisteredPathReused": true,
+    "unrelatedSettingsChanged": false
+  },
+  "hostDevice": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "osVersion": "27.0.1",
+    "osBuild": "24A446",
+    "developmentTransport": "localNetwork"
+  },
+  "controlSurface": {
+    "kind": "Direct connected Codex desktop Workbench MCP tools",
+    "separateNativeAppServerHostStarted": false,
+    "additionalAgentsOrSavedChatsCreated": false,
+    "description": "Original tool arguments/results retained; direct tool envelopes, not reconstructed native app-server RPC messages."
+  },
+  "phases": [
+    {
+      "name": "initial-retained-a",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "E95515D1-9906-4599-B0F4-16523EF7E008",
+          "label": "initial-inspection-timeout",
+          "expectedStatus": "passed",
+          "status": "failed",
+          "unexpectedFailure": true,
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "3598E3F7-5974-4E72-9080-6ABCEEA08AE6",
+          "reportCommandID": "A4AFBD40-D430-4481-8300-82E911E4FDC2",
+          "startSubmissionCall": 1,
+          "reportResultCall": 8,
+          "group": "initial-retained-a",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/initial-inspection-timeout.reply.json",
+            "bytes": 1255,
+            "sha256": "66ca664c0c1c503324e85fc87822cbab5e71c5e2b839a9f1b3eca4f2c5025200"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/initial-inspection-timeout.report.json",
+            "bytes": 1027,
+            "sha256": "1d3fb78b6dfce820a9a04ad72607277a4f0f26d63124a3e7d3f48c832902fd11"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/initial-inspection-timeout.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "b6fdc973c8dcdb29b861f36096434629acd70a06acf2bb32c6d0b9312ac32275"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/initial-inspection-timeout.mcp-start-response.json",
+            "bytes": 1472,
+            "sha256": "df76067bbb4b7b0f7455f7956b8004cc24277f3d0ebd5f97acbb8bf323519229"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/initial-inspection-timeout.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "739703eb5e3abd873f343776ac49b1e705f33a2e10238569fc6fcff6bdc6c8a6"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/initial-inspection-timeout.mcp-report-response.json",
+            "bytes": 5346,
+            "sha256": "bf3babdefe605a04a0c20ecbe357b3936408991cc321da14e1672bdc245213b9"
+          }
+        },
+        {
+          "scenarioID": "device.inspect",
+          "runID": "AF498084-A92A-47F4-A59C-8D6FDEE88BD0",
+          "label": "inspection-after-timeout",
+          "expectedStatus": "passed",
+          "status": "failed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "FB421431-D058-41EF-94D5-3386D4D84730",
+          "reportCommandID": "45A5D6DE-4C1A-4B8F-BDC6-FDE36ED13009",
+          "startSubmissionCall": 9,
+          "reportResultCall": 16,
+          "group": "initial-retained-a",
+          "unexpectedFailure": true,
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-timeout.reply.json",
+            "bytes": 1255,
+            "sha256": "344ae407ae2854910cfd32520cf919ee6010a0f63d88bfb52bdac0f6a3c83a58"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-timeout.report.json",
+            "bytes": 1027,
+            "sha256": "79de11ba7ac97d8003c555f70c03b9437b53e9bba35c6cfd5df2833ea6aa93ad"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-timeout.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "b0f9482aa272367452d53ba1927c31777f8895bec6aa1078243141d0bae31b72"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-timeout.mcp-start-response.json",
+            "bytes": 1472,
+            "sha256": "06634a02f067ba8c4c654617c6098af378541309e1e4035d0f2a7c835605e776"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-timeout.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "9ccb2370c046d4382f3c252baf7d0697918dfd1f983457c227d7394dcee195a1"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-timeout.mcp-report-response.json",
+            "bytes": 5346,
+            "sha256": "2ec64d17599e0e07f623cbd8c8c089c790c07adf47f0b9fb7704c174d01b72d6"
+          }
+        },
+        {
+          "scenarioID": "device.inspect",
+          "runID": "60DAE832-BDED-4F91-89D1-543BB75DE5C8",
+          "label": "inspection-after-explicit-reconnect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "41893559-6A5C-48F5-939F-D39AE31DA770",
+          "reportCommandID": "EEDAAE48-8271-44D9-A753-E7B7F1AE4BA3",
+          "startSubmissionCall": 18,
+          "reportResultCall": 25,
+          "group": "initial-retained-a",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-explicit-reconnect.reply.json",
+            "bytes": 1741,
+            "sha256": "6189fd9cea5f58f996ce317d58e847a2e03abede4212ab33431866ddf888d73f"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-explicit-reconnect.report.json",
+            "bytes": 1776,
+            "sha256": "fec4a3ee1303f50ee214621ba553da6334cae9a2ebec30a4a9b668d0c7357fd8"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-explicit-reconnect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "f9ad081f68005d04afc83fe7432d456d6bbcc71ba29ab50c262a4374d8fc6b21"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-explicit-reconnect.mcp-start-response.json",
+            "bytes": 1472,
+            "sha256": "5e7c4d929d5510acc2f8174bc30b017354bfff999179c9f4729e6edd44310ad6"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-explicit-reconnect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "9751a2d01d1d2fb1407d46a9ba49e7ad797699b5571da7931b3eef4791aceb60"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/inspection-after-explicit-reconnect.mcp-report-response.json",
+            "bytes": 6868,
+            "sha256": "87249c520c5b3d27959e5aa4f64795d6a703b885947530ba1b2cd2dcbae91358"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "EAEFFF92-BEDE-4551-80DA-4D31BB48B703",
+          "label": "retained-a-console",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "70997662-B4CF-49FA-871B-09B3B63D6394",
+          "reportCommandID": "76F97A2F-2CD8-4CD8-BBEE-FB3D376CCA38",
+          "startSubmissionCall": 26,
+          "reportResultCall": 31,
+          "group": "initial-retained-a",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/retained-a-console.reply.json",
+            "bytes": 2153,
+            "sha256": "725d13eb0c13572dadf1f88fbc68484f55e4c3644c0990fafedd4166fe14145e"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/retained-a-console.report.json",
+            "bytes": 2204,
+            "sha256": "0a3568aa7012343e5fc7ccf85b6d44dc70685c03586d2fc3c5c1f8b9b3aeb7d7"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/retained-a-console.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "bcea94013fba87e37a23b5ae633b569991becbc00ab25d0c61a1b28e694ac97a"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/retained-a-console.mcp-start-response.json",
+            "bytes": 1646,
+            "sha256": "99dac35e34aefc97d36ef4cb3df6b1b26622d2a36ae9bb060a57155896ea4e98"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/retained-a-console.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "7d1f44dcfae477c5b1673734f2c7d89ec8a5b759e664e7d4c4b5660ebd403038"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/initial-retained-a/retained-a-console.mcp-report-response.json",
+            "bytes": 7732,
+            "sha256": "18f393f04e65ca2e2ca9d027ff1597f9858c0682d3a7dccf1b8563f0737e6b2f"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": false
+    },
+    {
+      "name": "abort",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "A8010D90-5DAA-4130-BB42-00CE3562D39D",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "FB427114-27C8-4006-B62A-89268839D478",
+          "reportCommandID": "0AD44373-34DB-49ED-A470-1C47AF6B3951",
+          "startSubmissionCall": 32,
+          "reportResultCall": 37,
+          "group": "abort",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.inspect.reply.json",
+            "bytes": 1741,
+            "sha256": "a24204f1d7ff613fd310d5357d0a150a56eb51d768a8e6afcaf63d35a1e603aa"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.inspect.report.json",
+            "bytes": 1776,
+            "sha256": "4cb5aaca7c448db1a1d74512d4de63eb6a66012833e318e620130dca388c1db9"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "ae3f6334ab195a351d60c6d32f833b2e681c6fbbb7ac607e730b75ddabecd873"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.inspect.mcp-start-response.json",
+            "bytes": 1474,
+            "sha256": "c2c38c850f8a2d3438425d9eb9090576c3ce1b6a4eccb40d5e12875a92b0a5bc"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "be7db64815834e73fe9630205c4cedcd4aa627ed6d8e44bb1e5876cc52553003"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.inspect.mcp-report-response.json",
+            "bytes": 6868,
+            "sha256": "9801f03a8556949c7fcd186416f575b9c24f0db798ecf4bee7fb4344525bfa6d"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "31544792-E579-4933-99F3-ECCC8FBAE72D",
+          "label": "managed.stage",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "765DA680-D95B-44E5-9788-FC6F3E6B7A0D",
+          "reportCommandID": "9950F703-DDA9-431A-AF7F-2E24B5BC91E4",
+          "startSubmissionCall": 38,
+          "reportResultCall": 43,
+          "group": "abort",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.stage.reply.json",
+            "bytes": 4980,
+            "sha256": "21a8b6652f3b70031a8b1be7fb48ce37b03671f80ee153016229b25661ea0d70"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.stage.report.json",
+            "bytes": 5156,
+            "sha256": "510480eb0ab2fad602b3251bd8f062343bfcb689a12164f95a8e040ecf8a1bd5"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.stage.mcp-start-request.json",
+            "bytes": 863,
+            "sha256": "5098d943edcc44ccb9b0bbd37706ffa8de51b81f10b4a9d934714a1ee8844425"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.stage.mcp-start-response.json",
+            "bytes": 2331,
+            "sha256": "15a144c31fb63a02eebe81d399e385288936ef75d38341d876c231aa8311394c"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.stage.mcp-report-request.json",
+            "bytes": 788,
+            "sha256": "6072cdadb663fb6059725758006cba6e699d22cd90ea6bfa7511fd1a26a7d145"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.stage.mcp-report-response.json",
+            "bytes": 13665,
+            "sha256": "9b687ec75f121f7d1df129da8e6c4dafe8c082c847d37ed801969e97ed12c8da"
+          }
+        },
+        {
+          "scenarioID": "managed.abort",
+          "runID": "EBDEE926-B908-4293-B679-12A9B871125B",
+          "label": "managed.abort",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "D34BB980-8E20-4DDC-94A3-C135CEABFCE4",
+          "reportCommandID": "BBA64AD0-E0BB-4CEE-B626-B308E29A10E6",
+          "startSubmissionCall": 44,
+          "reportResultCall": 50,
+          "group": "abort",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.abort.reply.json",
+            "bytes": 2598,
+            "sha256": "9e3c6a6a6d14d09d19f68ccde9f5525b61355f87663583a630021a706baf4e7d"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.abort.report.json",
+            "bytes": 2784,
+            "sha256": "b65510d471f54bba41b85c47831cc4628fb390232007b3bc32ddbffd9df2bbdb"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.abort.mcp-start-request.json",
+            "bytes": 631,
+            "sha256": "8f305a2e2594cb236c8c090cf00cbb4a5d7f04f68149c8196ecaaaa87af4305b"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.abort.mcp-start-response.json",
+            "bytes": 1891,
+            "sha256": "dff3c75aa32030af115a3247d36fbf0e935f628087e067b2f5bfdd76b3be68f4"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.abort.mcp-report-request.json",
+            "bytes": 556,
+            "sha256": "02924ed1137c5a17e072d7d8477eb069f91cab564911371d37c82e902813e8bd"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.abort.mcp-report-response.json",
+            "bytes": 8893,
+            "sha256": "a00e5c81b6bfe5c0822c93658fd6ed6cc4c1e1173b1b0265c0627169f0b1ae36"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "95846426-2A0E-4A0E-AF21-0CB2204012FD",
+          "label": "managed.reconcile",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "5FAE108C-83B5-4EDB-AFA8-2BDB3C671BDE",
+          "reportCommandID": "07DD4E23-35A6-4645-969D-FAE9FA7B64EB",
+          "startSubmissionCall": 51,
+          "reportResultCall": 56,
+          "group": "abort",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.reconcile.reply.json",
+            "bytes": 2601,
+            "sha256": "f7dab8b0cd6b7213082094f18435f7f64420ac65e7c166bfdbe740fc27f33074"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.reconcile.report.json",
+            "bytes": 2787,
+            "sha256": "3c17d764ff1e13739a4c431d3086918593f605f3b783e73503f0d07df803f204"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.reconcile.mcp-start-request.json",
+            "bytes": 635,
+            "sha256": "2b1e7eaa3158c1111f5dd2e3391f123b7f81ef2b482b1bad6f3cd0d0f14b8114"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.reconcile.mcp-start-response.json",
+            "bytes": 1899,
+            "sha256": "7d24cf2a9a05e7722884049cee40026f60766ef3f1526839ff9ea61053b09c67"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.reconcile.mcp-report-request.json",
+            "bytes": 560,
+            "sha256": "ff9862a352b89329810904382fa85a3aadfe00aba28a60fb301e1d80b34600d0"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/managed.reconcile.mcp-report-response.json",
+            "bytes": 8899,
+            "sha256": "ad7d820dde38d90adba08863b1304977ce7b79cc32d9e45775062d2cc34aa505"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "E53A9095-3F4B-4669-A3CC-AC0EC2DE7243",
+          "label": "device.console-binary",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "9A053F9A-F6D1-46CB-A7AD-491C27255072",
+          "reportCommandID": "2083F3C8-376F-4A32-AB90-82362AE45A35",
+          "startSubmissionCall": 57,
+          "reportResultCall": 62,
+          "group": "abort",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.console-binary.reply.json",
+            "bytes": 2153,
+            "sha256": "44b42f7fae17c82bd132dc27e96382bd923390e7e617c67efc7805b084fd53c0"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.console-binary.report.json",
+            "bytes": 2204,
+            "sha256": "bba33623c9c571a600ef1fa4a308fdea0c6f62d330c3cb0745f1caf6e1fed9d8"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.console-binary.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "4cefcfb42d2519b9d586b9f314a742db045eb50c225deff6b409ffbfdd605324"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.console-binary.mcp-start-response.json",
+            "bytes": 1646,
+            "sha256": "d4cc5738dac76b44edab0cd5163e4a105cc87d86101458745e009c2bc4823640"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.console-binary.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "0d520ae0992b3519e0b71b05263163f5d33a50d6fea8302b4ad69395494d776a"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/abort/device.console-binary.mcp-report-response.json",
+            "bytes": 7732,
+            "sha256": "cad7a8aa14979f87bef196b7baf3e5ff57ae2a629bcf41d9f692afef80afad89"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true
+    },
+    {
+      "name": "install-b",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "AB13E4E0-8C7E-4921-A2E9-311BC92139C0",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "38E5A4B5-25F1-417F-B21D-FD50F838A32A",
+          "reportCommandID": "A20A1EA3-E3DD-4794-BF74-C0765074B40B",
+          "startSubmissionCall": 63,
+          "reportResultCall": 70,
+          "group": "install-b",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.inspect.reply.json",
+            "bytes": 1740,
+            "sha256": "a1516d78acfaa8b6f72be8e262f94cf78eccba326b549059791b62196c68a8ab"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.inspect.report.json",
+            "bytes": 1775,
+            "sha256": "3d7ceeb4d4da6feb20b660444d15017ea3765386a94d0b1339cf2852f19166f6"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "40c576faa255acd07461739070311653b64d2b5ef7cf25c64e668ce074b1bc47"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.inspect.mcp-start-response.json",
+            "bytes": 1474,
+            "sha256": "26c6ad6cf4f1b20cd6908d1658875cce4842843ba89297a09e1fb81f53a0681f"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "3767a9145955d3e796536b784452a3abd88050b2224a54d943fd1458d7b17f81"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.inspect.mcp-report-response.json",
+            "bytes": 6866,
+            "sha256": "83787b538430ee11b9a4e0c705fea4835f994c79c0931fbf554cd8a7482a7bb2"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C",
+          "label": "managed.stage",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "FA156C34-9AE8-4E9B-926E-5D9E6ECBDC8E",
+          "reportCommandID": "72C7F9E8-1DD6-4209-AC63-936F8973EBE1",
+          "startSubmissionCall": 71,
+          "reportResultCall": 78,
+          "group": "install-b",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.stage.reply.json",
+            "bytes": 4980,
+            "sha256": "f93b77851884c424ddc1d873a21f89f01296f7d01681efca7a8ba39be225b3a5"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.stage.report.json",
+            "bytes": 5156,
+            "sha256": "1205e13ebf9c9e1da2c9b3fc4ff2b73c775bc1934dbdf6b3ef73856e78304cb5"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.stage.mcp-start-request.json",
+            "bytes": 863,
+            "sha256": "de58e92d7ff2fc266906b35bb7b7432afe0991d84eaa1119a36caaa1f5f39a88"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.stage.mcp-start-response.json",
+            "bytes": 2331,
+            "sha256": "1ea9216b2e3f4276138f7e2c0941191cf65e095fc4b3707167f68cbbb061b592"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.stage.mcp-report-request.json",
+            "bytes": 788,
+            "sha256": "a1c681f171ca853307ec4ffa95bf6ef9cb8e23d2bbd83803b669ba228e6e278a"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.stage.mcp-report-response.json",
+            "bytes": 13665,
+            "sha256": "3a1311b8fe5d6ea60b1ce3b1ab10bf21dd43b482b9cafc4042ff01b97706b458"
+          }
+        },
+        {
+          "scenarioID": "managed.commit",
+          "runID": "B23C64B2-9C02-4023-8642-4D30ACD5413B",
+          "label": "managed.commit",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "45701325-728E-4D28-9115-E38F568599CC",
+          "reportCommandID": "1E5A5A61-BD1B-403F-8401-F71B41163C30",
+          "startSubmissionCall": 79,
+          "reportResultCall": 84,
+          "group": "install-b",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.commit.reply.json",
+            "bytes": 2655,
+            "sha256": "b553d34c5d7ea6948e5fee513af56662f15a7421b922a8b9bd4764f8bc4ceefe"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.commit.report.json",
+            "bytes": 2849,
+            "sha256": "77d0f310161e81555bb2333c68773edb88f49a261030ef6fb4f22325b39d66e7"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.commit.mcp-start-request.json",
+            "bytes": 683,
+            "sha256": "ddfac0ecfca436954f02ebe9eefe84c825326166902cc7a47177185a5122f6c4"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.commit.mcp-start-response.json",
+            "bytes": 1983,
+            "sha256": "8c3714c79127c5ff932f6e91ba0fd0902794fbab1909a6a8c81be1e8b2cb6b45"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.commit.mcp-report-request.json",
+            "bytes": 608,
+            "sha256": "e5f972bf5a38469435dfd1b3620fbcd6d69950a7a4c366f5ec1b27aa7eb22075"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.commit.mcp-report-response.json",
+            "bytes": 9027,
+            "sha256": "874d00810185ab3607d110a1674cd53693525f6f20c8430116c9ae7273534fa6"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "1068AFFC-8E46-45A9-9163-C9BB48131AF0",
+          "label": "managed.reconcile",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "C03BF4C6-8B74-446F-990A-60745CB07867",
+          "reportCommandID": "0D49C8C5-55EA-4669-A1CC-E557DAFDE1F5",
+          "startSubmissionCall": 85,
+          "reportResultCall": 90,
+          "group": "install-b",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.reconcile.reply.json",
+            "bytes": 2620,
+            "sha256": "5f43b751f5acce0cd2ddd1e60cd082b4975b54b92a63b390218bc5269424bd48"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.reconcile.report.json",
+            "bytes": 2806,
+            "sha256": "9c3b5d2e39e666bf44e881ba70592fdd9a4d418446b08026efe0f59e22bd276e"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.reconcile.mcp-start-request.json",
+            "bytes": 635,
+            "sha256": "067c4ef1e341ddef2641ab33ac7a845e878433757c9bb906ec5c05b8be3a3ab2"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.reconcile.mcp-start-response.json",
+            "bytes": 1899,
+            "sha256": "7a85289b2dce0319f56ddba7ebfefe3e2e9003e49e64c9225e5169129e080308"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.reconcile.mcp-report-request.json",
+            "bytes": 560,
+            "sha256": "34d4b6f4ba4e81a1732e0bb7dc572e710720492fa1e26a5d8f3feedf36009b8e"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/managed.reconcile.mcp-report-response.json",
+            "bytes": 8937,
+            "sha256": "b61dc300948e66dc1adcd51e77329d7edf132bc2e39c9b561aedd1db02033ce7"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "6744D7A5-4E76-481F-A55F-6CA24D88E0BC",
+          "label": "device.console-binary",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "E6EA96ED-0AC0-4518-86A8-6F53005D79D2",
+          "reportCommandID": "07F7C930-462B-42DA-85AF-A2F02A7D2DFA",
+          "startSubmissionCall": 91,
+          "reportResultCall": 96,
+          "group": "install-b",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.console-binary.reply.json",
+            "bytes": 2153,
+            "sha256": "59f5edb37afa2d92903b615784138201f98c63b60fe75378ffff45eabbd5dece"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.console-binary.report.json",
+            "bytes": 2204,
+            "sha256": "5bc25583360f2ff55ed8de8ed2e493e14e6641c38c062254e385fe0a0a182fa0"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.console-binary.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "e1804e944bcbd7f631b1bfdaaff749fd877871969a05c09160de7104931ea16f"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.console-binary.mcp-start-response.json",
+            "bytes": 1646,
+            "sha256": "023060af2afb2028bd435348770a9ccba5d4666d7c6caefbb080adebd9dd5e29"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.console-binary.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "926e63beb011535b1fb90f9ff1dd689b48d30e9a8bd388cc06dd7059a64f90f2"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-b/device.console-binary.mcp-report-response.json",
+            "bytes": 7732,
+            "sha256": "8ef1cf76ac34b536081eec769e2f29c0aeaab7a8ddc248d66d01627d18dfe1e4"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true
+    },
+    {
+      "name": "install-a-before-restart",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "BB40DD84-644E-4EA8-8045-D1A62B5183FD",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "2FD9FBB2-95E9-4B06-BDA8-E95292B81718",
+          "reportCommandID": "FCFE017F-DF38-4B02-81E0-AC4E5EC6CF68",
+          "startSubmissionCall": 97,
+          "reportResultCall": 102,
+          "group": "install-a-before-restart",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/device.inspect.reply.json",
+            "bytes": 1741,
+            "sha256": "60b8e6f352079ab55e5425a5b68371a462fc33493016a5837870573afe41f264"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/device.inspect.report.json",
+            "bytes": 1776,
+            "sha256": "9db2c7b2f78d2d8f263c6d81eb1e7b1cc108203b5d2261d0f1226dc2adf4912d"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "232def837be494b9ae6727b5b78d402a1eb445d50220c3f0b1d4b6f9c2064b9b"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/device.inspect.mcp-start-response.json",
+            "bytes": 1474,
+            "sha256": "0be422aa8949de41cf89eaed6e4aa39c87ee121cbfdf51ce4d3d0ab53f5ccaa9"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "167943229f61342254fc831c4d2200daa79db6f5df339c6106f3a8b1e215a151"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/device.inspect.mcp-report-response.json",
+            "bytes": 6868,
+            "sha256": "a887e03ac393a8fef72fd6f9fa9b25a3ad60cb5207f04c591d31ec5679161bbb"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "DA8A8B92-B0E8-4205-B3EB-1BF6625C5D72",
+          "label": "managed.stage",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "095F0B18-4BFD-4ADF-B6B0-ABDDACEB5CD7",
+          "reportCommandID": "7DEC7D3C-925B-4A1E-9508-9A323517B775",
+          "startSubmissionCall": 103,
+          "reportResultCall": 108,
+          "group": "install-a-before-restart",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.stage.reply.json",
+            "bytes": 4977,
+            "sha256": "80288797dc2638892f67de3f8281fc11ff521dc6ef019971a50a54523ab01a4a"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.stage.report.json",
+            "bytes": 5153,
+            "sha256": "6b7b2b638217e8d26573797b39f56d4a45ebd528731693f9239e58b7d678b945"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.stage.mcp-start-request.json",
+            "bytes": 863,
+            "sha256": "84e4d2be962ed60fc4c545bf84e3da8237b1f08f4c91ff835022533f4c767c16"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.stage.mcp-start-response.json",
+            "bytes": 2331,
+            "sha256": "6b41ad3243cd70aaaf45563c32be74e3624493e3d23240e46100fff809b65142"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.stage.mcp-report-request.json",
+            "bytes": 788,
+            "sha256": "e32e8c9f7f27b0ba24e8a0ae79bdf4a236ff6dd321885b57d2b21b6ed873c029"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.stage.mcp-report-response.json",
+            "bytes": 13659,
+            "sha256": "a4357eb0d3f1316f5b0cc43ede534c870f97093b22ab20dc4bd9f44bec8310e6"
+          }
+        },
+        {
+          "scenarioID": "managed.commit",
+          "runID": "3DBBA5EE-B910-4343-B3BB-7FDC70575AE2",
+          "label": "managed.commit",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "A4C07CC8-0734-49F3-B727-8234D1B2C929",
+          "processID": 51154,
+          "instanceID": "948738E6-1A1C-48BD-9944-AEBE1861FCE6",
+          "startCommandID": "035517E1-F04E-4CDA-87EA-AE7BA199EEE9",
+          "reportCommandID": "3BEF237D-B68D-4C27-929B-6B0E8E6D889C",
+          "startSubmissionCall": 109,
+          "reportResultCall": 114,
+          "group": "install-a-before-restart",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.commit.reply.json",
+            "bytes": 2655,
+            "sha256": "0a868f5cb572a83ed1312cdbd3620ccb14bd738e16f81ac54772b5f5b633bb10"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.commit.report.json",
+            "bytes": 2849,
+            "sha256": "c2c9ad720f3fb8953c68e0ed491c2aec4b82e545d3779909ebc3218cb3a8030d"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.commit.mcp-start-request.json",
+            "bytes": 683,
+            "sha256": "cf72a8da547f62c7bc56e2d9f683cbe0399669c469b8ae1335cdbe7a2c071a2d"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.commit.mcp-start-response.json",
+            "bytes": 1983,
+            "sha256": "bbcf984d8a8d4c9839c21de502aa6175e9dd6ea0280711b9e2e927cb29dda800"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.commit.mcp-report-request.json",
+            "bytes": 608,
+            "sha256": "f1809c7fd4e0877f09768c4f3afd9a7899ff7c800ab07bebc6e8786846aa4d15"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-before-restart/managed.commit.mcp-report-response.json",
+            "bytes": 9027,
+            "sha256": "2cea4717c9333ac5f9928e9e279003a99133c4a28cadb51606159a3e1971d199"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true
+    },
+    {
+      "name": "install-a-restored",
+      "runs": [
+        {
+          "scenarioID": "managed.restore",
+          "runID": "8481E6DE-C040-46BB-8121-B328975E1684",
+          "label": "managed.restore",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "008085FA-014F-46B6-822B-8A863949AE3F",
+          "reportCommandID": "BBA861D4-5291-48BC-A9D2-A9AE7F455970",
+          "startSubmissionCall": 116,
+          "reportResultCall": 124,
+          "group": "install-a-restored",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.restore.reply.json",
+            "bytes": 2537,
+            "sha256": "881e1e4cd08ffb4e22cac5c48d34c423d4b2d3c729fc433d71ea7134a6fcfa94"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.restore.report.json",
+            "bytes": 2715,
+            "sha256": "8f9f08efe9f6bf8f82404ab38702ece476c8bde415bb93d7ff6d5dc34142681d"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.restore.mcp-start-request.json",
+            "bytes": 536,
+            "sha256": "3a4b2ceb8f7b9bd3674b123ac00b84ef7b35d1bc9e6015a18abfc5fb3b1fe23a"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.restore.mcp-start-response.json",
+            "bytes": 1713,
+            "sha256": "1d62249f5ff435d267bc766a97027ec39fffbb4bb970bc17f4de45b77827cf0a"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.restore.mcp-report-request.json",
+            "bytes": 461,
+            "sha256": "61f7730217298ddf46c2f7147e81619a73cc7b3ab4a30df2d3be47ff4e62c2bf"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.restore.mcp-report-response.json",
+            "bytes": 8749,
+            "sha256": "f343ef34e439a98a5ea5e692b2f5f701e259d169d574a62a489b30a80dcf754a"
+          }
+        },
+        {
+          "scenarioID": "managed.commit",
+          "runID": "CA4F5F3F-A66D-439F-B710-DE962CF311CF",
+          "label": "managed.commit-refused-after-restart",
+          "expectedStatus": "failed",
+          "status": "failed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "EB54059B-1D2E-417E-BE81-20DAB027701E",
+          "reportCommandID": "0F034B88-518B-4935-98F4-9947BFDB4D39",
+          "startSubmissionCall": 125,
+          "reportResultCall": 130,
+          "group": "install-a-restored",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.commit-refused-after-restart.reply.json",
+            "bytes": 1268,
+            "sha256": "509e05cc1f924756fee60edb055ca11990c083928dad22c9e85ab27b16f2abec"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.commit-refused-after-restart.report.json",
+            "bytes": 1004,
+            "sha256": "e4e1b012b415165e6af8b323d9fd1e04853d184038d4939f52f9d3fbac70596c"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.commit-refused-after-restart.mcp-start-request.json",
+            "bytes": 683,
+            "sha256": "2493ca803f4d3f4b34fd3c9a643080b017ca1021aac0e28bca2033c49acc1fbf"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.commit-refused-after-restart.mcp-start-response.json",
+            "bytes": 1981,
+            "sha256": "e6a025dc2785f0165971237672b66858271bf5e483e51403a105578cc4ddaa3b"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.commit-refused-after-restart.mcp-report-request.json",
+            "bytes": 608,
+            "sha256": "a404cdd9ce66d8460325ca2c3cfaffaf5928f2e099fee38d5120b18861a0eecb"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.commit-refused-after-restart.mcp-report-response.json",
+            "bytes": 5276,
+            "sha256": "5e8bda05bd49c60296babb8f646bb0545b6e49c4e8fd8722db91999cc169e0be"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "4EF16BEE-EA7C-4AAF-B452-C86D33635A59",
+          "label": "managed.reconcile",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "D7946534-D502-4B60-B29A-995C05940934",
+          "reportCommandID": "B939F785-5AC4-4B95-B6A5-DB5C8E50E462",
+          "startSubmissionCall": 131,
+          "reportResultCall": 136,
+          "group": "install-a-restored",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.reconcile.reply.json",
+            "bytes": 2620,
+            "sha256": "2e5edeb44382b17a15e0857003c3375a0d74d2f321bcf463b360e5e3eba96424"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.reconcile.report.json",
+            "bytes": 2806,
+            "sha256": "45f91181475f212c372b744b500237bf824889074af46c955988160e700a4733"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.reconcile.mcp-start-request.json",
+            "bytes": 635,
+            "sha256": "1f699845010918883090f2823e3cbffd70dd26c7827808b17b8dc91131835fd0"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.reconcile.mcp-start-response.json",
+            "bytes": 1897,
+            "sha256": "f96d9d64df82a9ee42690d955a471e4383b3fc5e4202c116f097f19741d2bba4"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.reconcile.mcp-report-request.json",
+            "bytes": 560,
+            "sha256": "0bd4df3eacfaae7c1e7d9880311d422319770e61203cf18768766cee1cedeb3d"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/managed.reconcile.mcp-report-response.json",
+            "bytes": 8935,
+            "sha256": "081bd024241274955397512f3c4385365073c53dd64d667efe84f385ac2a6739"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "040A298A-A680-4713-8A39-5F475BB3BD2D",
+          "label": "device.console-binary",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "2E4189C0-1B2E-4130-A312-031388C82B8D",
+          "reportCommandID": "FBBC2D3D-75FC-409F-B8C3-0FD7562E53CF",
+          "startSubmissionCall": 137,
+          "reportResultCall": 142,
+          "group": "install-a-restored",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/device.console-binary.reply.json",
+            "bytes": 2153,
+            "sha256": "ba7d31f35a8a0a96a38263fbe6cdb2e13b3c85455b61c0aaf2f7b2666022a66a"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/device.console-binary.report.json",
+            "bytes": 2204,
+            "sha256": "694070aed814a7d96d7ba04250a877dcdf44c97affbb5de0296685467915851b"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/device.console-binary.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "a6372bee10fa883c297b8c1e7f743184013e52d7e2f5f773f9e0d8820976c7e2"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/device.console-binary.mcp-start-response.json",
+            "bytes": 1646,
+            "sha256": "3d6f2816cc668ddb154a1e547c753c2fde100969fba6125831c29fdd2cb33bca"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/device.console-binary.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "64336728233a8d08a14e35765b7b7f84a6616c59db21bf55cffb91277a10790f"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/install-a-restored/device.console-binary.mcp-report-response.json",
+            "bytes": 7732,
+            "sha256": "852f2be768f3508865ca03382ce6cf9e63e1302611c65ceae7ca8bcbde9f5bc9"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true
+    },
+    {
+      "name": "disconnect",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "E0C11AE6-3FDA-4276-AE4D-E3B1B07DB947",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "5048EAC0-E85F-44C4-9904-C6462BA53210",
+          "reportCommandID": "F25A9A3A-FDCF-435C-9849-BC60DF6DF86C",
+          "startSubmissionCall": 143,
+          "reportResultCall": 148,
+          "group": "disconnect",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/device.inspect.reply.json",
+            "bytes": 1740,
+            "sha256": "5af7f9d2309fa6121a5c213412b94925b8d7f145d55aad29edab33e960987bf3"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/device.inspect.report.json",
+            "bytes": 1775,
+            "sha256": "aa06e79a836ffe659f2018fb4679f9676a8df923028c601f1fa3d0ee44602b57"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "841aaf2f40ac2174c2552357f9d74ee437b6e527ffd4232e73a8a0bdec5813ec"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/device.inspect.mcp-start-response.json",
+            "bytes": 1474,
+            "sha256": "455e6055b3596048aa64f9e249567298aac110ec36ad40702d8e4c5046edef01"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "e84f6b4e94e4fcefc3ae6639cd9e0f8034b1e4764af0fb5cedc8d2a26d0a2ab8"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/device.inspect.mcp-report-response.json",
+            "bytes": 6866,
+            "sha256": "e310c8b0c19ccd93eedb45488ed3a7cbb8f97f6c1bf19daaeac61266a1f449c1"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "02C443AD-1CA7-46E3-9BA8-84A39AEA52B0",
+          "label": "managed.stage",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "CC611C61-9610-489E-B8F0-6E9E3075A760",
+          "reportCommandID": "94BB0D9F-5774-43A1-808A-A8AE72F43A07",
+          "startSubmissionCall": 149,
+          "reportResultCall": 154,
+          "group": "disconnect",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.stage.reply.json",
+            "bytes": 4981,
+            "sha256": "471757f7e71111b28153c137c7a48be265466ce861a5f77b8629dbd17e17801e"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.stage.report.json",
+            "bytes": 5157,
+            "sha256": "c8561c8c50b2a121c4ccd9b2e101850a0593b65d374afeae8efb7faf3e0ffb17"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.stage.mcp-start-request.json",
+            "bytes": 863,
+            "sha256": "f1669d8ae0564901e53228a94b16a0e8b5f03b15f2bf04426aea3cc527dc8707"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.stage.mcp-start-response.json",
+            "bytes": 2331,
+            "sha256": "3d01cc82ae2a70083c726693703f5b43044172592dbee6369b1c79545da80f9b"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.stage.mcp-report-request.json",
+            "bytes": 788,
+            "sha256": "4679d276bd72afc3d9aa762ce1bd0ff688bacf12a7257cca64d77feef743fe51"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.stage.mcp-report-response.json",
+            "bytes": 13667,
+            "sha256": "d3ad31662f1328cce219c8420c5043dc8d4b22817a43e47ef2f0acea9abb5959"
+          }
+        },
+        {
+          "scenarioID": "managed.disconnect",
+          "runID": "9A548FE9-015D-4B1A-9EF3-5F86F190003A",
+          "label": "managed.disconnect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "FE21B284-8D95-4660-BB63-39612B962D96",
+          "reportCommandID": "7B2A16AD-C9FE-4FF8-8F6A-207054F00961",
+          "startSubmissionCall": 155,
+          "reportResultCall": 160,
+          "group": "disconnect",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.disconnect.reply.json",
+            "bytes": 2429,
+            "sha256": "1b6fca66730d74e543661c231f7b6a1f8fbda0ec4508a2ac9d5be31a8c66b886"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.disconnect.report.json",
+            "bytes": 2530,
+            "sha256": "094389fe9983eb45f87e8509665c7654a74369a50173f725cf0a49c7f8ab3e27"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.disconnect.mcp-start-request.json",
+            "bytes": 636,
+            "sha256": "846ed97e7b139e5be485d5c2b9f3cec5b2f08722e96f53d74b8266d5e550aae2"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.disconnect.mcp-start-response.json",
+            "bytes": 1901,
+            "sha256": "0d3a70584466ab7df20c26aa67b6a82bde4f040557d6a4455c2aa68b2427967d"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.disconnect.mcp-report-request.json",
+            "bytes": 561,
+            "sha256": "6bb331b694e6e1d1957944c9c99fe339f114c4adcc499152944f25cdee188014"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.disconnect.mcp-report-response.json",
+            "bytes": 8376,
+            "sha256": "e6e63f6219c86b549cc132876d7bcd7cac35026364230ae1ceabcf0b442a88b6"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "D1576164-220D-4703-A204-CD30889A0649",
+          "label": "managed.reconcile",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "AF80E0B8-718B-4B88-85E0-92FDD4829298",
+          "reportCommandID": "12C49C1E-4764-4095-9C23-AB9044756E2A",
+          "startSubmissionCall": 161,
+          "reportResultCall": 166,
+          "group": "disconnect",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.reconcile.reply.json",
+            "bytes": 2609,
+            "sha256": "e2c2b5ff4796b2844554d2f55a04e38e2fd0d22279055d6285ebc92162b43be9"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.reconcile.report.json",
+            "bytes": 2795,
+            "sha256": "2c054cbffc531b567156e9f1393fdae1d7a987755c3254226699865d83344a25"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.reconcile.mcp-start-request.json",
+            "bytes": 635,
+            "sha256": "5865746a596db6690726909abc66d99813da2f40e3c37774453a0ec9e9b9009d"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.reconcile.mcp-start-response.json",
+            "bytes": 1899,
+            "sha256": "7188c6471002e74e6fc9dd474b3a56662122a1b3b6feb77a20cbc40f3d872f8d"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.reconcile.mcp-report-request.json",
+            "bytes": 560,
+            "sha256": "2ad956fc43ea998265774bd890ad8c9d416c829a26d8c162255be50b9fb4f6ad"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/disconnect/managed.reconcile.mcp-report-response.json",
+            "bytes": 8915,
+            "sha256": "cf15912310db38dc427a80f4839451ef83f9a5bd00552ac8b968d39a88577355"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true
+    },
+    {
+      "name": "power-cycle-staged",
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "75AB2471-EF58-4A6C-820C-D3F5AC091DB5",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "931D9ED0-5A84-44D0-B445-58CE9B0A2569",
+          "reportCommandID": "01014615-F95C-49F5-8396-BC640DEFC1EC",
+          "startSubmissionCall": 167,
+          "reportResultCall": 172,
+          "group": "power-cycle-staged",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.inspect.reply.json",
+            "bytes": 1741,
+            "sha256": "d31c8928a7971f0fdd3607f2e4c06ddf030742d302f8102907c496780637c606"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.inspect.report.json",
+            "bytes": 1776,
+            "sha256": "d362ede2a3928b10e8b247298e3da3076b067e4a63b54924ddc317c4b26de2f4"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "7e232836e9eeccbc03bb01e54da6fdde2cdbc83cf67bf5e5d2e71af498e6be76"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.inspect.mcp-start-response.json",
+            "bytes": 1474,
+            "sha256": "7cb6136b08b5aedef761a3855a87524325afd5acf87bc4bec0f1f52c3b15fdab"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "a86a1189a82929346714f068294cdca721ff09d9bd5959177a5d44417649d915"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.inspect.mcp-report-response.json",
+            "bytes": 6868,
+            "sha256": "59196362522a3bb268dbcb678c147f6077e4707886ed781cfcf428c43d0aa227"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "1EFFD8D4-88B4-465D-87BC-3EAA175939F0",
+          "label": "device.console-binary",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "20BA3909-4CE3-4039-B07D-C6B1D6107A2D",
+          "reportCommandID": "1D981249-D6BC-405C-9860-B4BD7386C873",
+          "startSubmissionCall": 173,
+          "reportResultCall": 179,
+          "group": "power-cycle-staged",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.console-binary.reply.json",
+            "bytes": 2153,
+            "sha256": "777cd006c5c6c7809e22f1c85dd75892321f941954ee458c4b03e4a8a45b8d8a"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.console-binary.report.json",
+            "bytes": 2204,
+            "sha256": "ebf526de4c15aaeb9d4380961a924d6dc7dfbd5b37c39cfb795c824fb50d0d65"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.console-binary.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "dc0c7ad81e59c4c3b50f9c87efbc496aa5bdfa6d7754c30a0d56fc8e76e52ad2"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.console-binary.mcp-start-response.json",
+            "bytes": 1646,
+            "sha256": "159fbb341981bde887b5a40fac994b37f13dd896d3ec6f8bf375ac20efc13d82"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.console-binary.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "11b1a79de30ea535bd2e62e596054a4a0db6d036e787b5e2f8dece2feabefcf3"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/device.console-binary.mcp-report-response.json",
+            "bytes": 7732,
+            "sha256": "d3e6c0777eb7325c376d294b86d5752eee4099e3c6d188c93bc538df83004653"
+          }
+        },
+        {
+          "scenarioID": "managed.stage",
+          "runID": "643257E1-7C68-4497-9AB6-F983A31CB40A",
+          "label": "managed.stage",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "C4E2C8C8-ADF2-40B8-838B-EED472587A25",
+          "reportCommandID": "8799C3D4-8D5C-4B57-8FAE-857B35917998",
+          "startSubmissionCall": 180,
+          "reportResultCall": 186,
+          "group": "power-cycle-staged",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/managed.stage.reply.json",
+            "bytes": 4981,
+            "sha256": "14a1c5a39606892f199ac71fd06a9d79e325bce841d8516e51e1116be8a02663"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/managed.stage.report.json",
+            "bytes": 5157,
+            "sha256": "11fd1843fe8042961988af617322c40aba9ca6463f1c72b4f3775ff8d413ca7b"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/managed.stage.mcp-start-request.json",
+            "bytes": 863,
+            "sha256": "78c49ff878b680d4eada8bbb52586664baeef35f793e0458086d45a1e0c5bfaf"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/managed.stage.mcp-start-response.json",
+            "bytes": 2331,
+            "sha256": "5c025f60286ff1a3bab3fdc4bd55f2aff49e62afd3645123057e14ef66c16613"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/managed.stage.mcp-report-request.json",
+            "bytes": 788,
+            "sha256": "ddedb4ec42bfc2053d7701ebdc68855f2067fdc09522029a0152afbe12687251"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-staged/managed.stage.mcp-report-response.json",
+            "bytes": 13667,
+            "sha256": "535791c5d48a0dc4def74ce2f5c3a282240764217171d9f070680689f66a9e1d"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true
+    },
+    {
+      "name": "power-cycle-recovered",
+      "runs": [
+        {
+          "scenarioID": "managed.disconnect",
+          "runID": "0F7EACF7-6647-42C9-A546-2E469F1416C8",
+          "label": "managed.disconnect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "47524486-D88A-4FA0-B70E-691EDFA91576",
+          "reportCommandID": "6FAD9472-4A17-4F55-A25C-86DE195D1376",
+          "startSubmissionCall": 187,
+          "reportResultCall": 192,
+          "group": "power-cycle-recovered",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.disconnect.reply.json",
+            "bytes": 2428,
+            "sha256": "d5e84deecb10161340f2ce6dd86e702afa1cc9b542934166e1e1c6c0e2877ae8"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.disconnect.report.json",
+            "bytes": 2529,
+            "sha256": "442d12f7f8ab0e3517332be0dcb812517a478598f53484a5e9dcf4fe09afa0f0"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.disconnect.mcp-start-request.json",
+            "bytes": 636,
+            "sha256": "7704393758741fedc2897a475c474721305f34e4a8334eec81740c32b710371d"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.disconnect.mcp-start-response.json",
+            "bytes": 1901,
+            "sha256": "6cfa241edf7931242cda88927d447ee0d198a426dbcbb9c591c849f9234256e7"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.disconnect.mcp-report-request.json",
+            "bytes": 561,
+            "sha256": "f369eae9dfc1a6a013c713051a50a7c41732e4d90697abce85f0b4d917bbc7b1"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.disconnect.mcp-report-response.json",
+            "bytes": 8374,
+            "sha256": "dcfa0ef3715059eaf43c1ce77a58614129b8cba05940190cbc3fe419b41b5d3b"
+          }
+        },
+        {
+          "scenarioID": "managed.reconcile",
+          "runID": "FFA14CD2-B473-4B1E-9FA8-BE501C27D466",
+          "label": "managed.reconcile",
+          "expectedStatus": "outcomeUnknown",
+          "status": "outcomeUnknown",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "E3C3B02E-6647-43E7-9EAF-8ED4110B5F68",
+          "reportCommandID": "2932D5A9-9912-4899-9A7A-F1DAF205AAC9",
+          "startSubmissionCall": 193,
+          "reportResultCall": 198,
+          "group": "power-cycle-recovered",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.reconcile.reply.json",
+            "bytes": 2474,
+            "sha256": "ca92bc07ae084eb7a1b561f6529b1b7da13f6bb515f283e8d9a4a5fa7d67ee85"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.reconcile.report.json",
+            "bytes": 2569,
+            "sha256": "0f9c952688073a7acc2cf4027ed9980881d0266369964ae2b7af0fd128ed9562"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.reconcile.mcp-start-request.json",
+            "bytes": 635,
+            "sha256": "cd4e5cac8e61c6752bebc0e2d7702e5420be479be890669629a69fd9edb3f486"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.reconcile.mcp-start-response.json",
+            "bytes": 1899,
+            "sha256": "9bed4e4463cb9775ec06aaa51d363b76d83b9a149116204b2531e7c71c21e35b"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.reconcile.mcp-report-request.json",
+            "bytes": 560,
+            "sha256": "c6384a5219a0711816dc8287807b02c3070c6e8a8b8a7ae0404674a3d0ba597a"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.reconcile.mcp-report-response.json",
+            "bytes": 8501,
+            "sha256": "17a983a084796eaeafba676909a5baf9d22168f52b4dac935eb79f45399db21c"
+          }
+        },
+        {
+          "scenarioID": "managed.retire",
+          "runID": "848F87D1-3FE5-4CAE-B2D7-388977B05124",
+          "label": "managed.retire",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "AAD641DE-AEEE-4360-8E9D-3B08B5B7E022",
+          "reportCommandID": "1690AABE-02F2-4D08-AA8D-7E36E04D01C0",
+          "startSubmissionCall": 199,
+          "reportResultCall": 204,
+          "group": "power-cycle-recovered",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.retire.reply.json",
+            "bytes": 2463,
+            "sha256": "50e203f569536842c21db17d1d545dbb063cbc2d40fd3de8c822c6ff0c0ee327"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.retire.report.json",
+            "bytes": 2572,
+            "sha256": "a99b3a1bbd545dc52fe972cdaf0af9270248090c6f36cc3e8b39596088c631fe"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.retire.mcp-start-request.json",
+            "bytes": 632,
+            "sha256": "73d94eedba8589b86e15899a816ba4f03ae90b1ec9c67ae6a8149cb868c87efb"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.retire.mcp-start-response.json",
+            "bytes": 1893,
+            "sha256": "d45c4fc15a6e88bcbffd889dbfb2e52a77a547d6aad4629ef94d73df49249e00"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.retire.mcp-report-request.json",
+            "bytes": 557,
+            "sha256": "e24c04d4a3a7df3aab3f77e39025e10e96e7666e35d3f7a85cc5eba7e27822a0"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/managed.retire.mcp-report-response.json",
+            "bytes": 8464,
+            "sha256": "e307c4274aff513f0fadf1fda24c39aac9b8a27487bdb25e9006582a78fce592"
+          }
+        },
+        {
+          "scenarioID": "device.inspect",
+          "runID": "FAFACBE7-8E29-4967-8322-8E6548E9049B",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "05ED7DCD-5EB1-4992-82F5-F1C09C121428",
+          "reportCommandID": "2A7D3117-428F-44AA-A4D7-E62DA5EECA3B",
+          "startSubmissionCall": 205,
+          "reportResultCall": 210,
+          "group": "power-cycle-recovered",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.inspect.reply.json",
+            "bytes": 1741,
+            "sha256": "eb7780f1934f78b04452abf2e2e27938662c3eabf0978d7e48e0da7e0da0f6a3"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.inspect.report.json",
+            "bytes": 1776,
+            "sha256": "a96ae3bc54ac4c63022c534bb36c4cfc051764222ec98cdd7edce65cae87cc9c"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "8dcc8916eb8ffe82a70db4be7863eeca09b319a39fe2cfe05f055c8936563044"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.inspect.mcp-start-response.json",
+            "bytes": 1474,
+            "sha256": "c49242a821d2d2332fad6b5babe56b4be603c0cfac2e70c7aa84242c258a3e3f"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "9f91ba10f53351f4d5865519aa2ad792851af0cb338c5cd091846c03e01597bd"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.inspect.mcp-report-response.json",
+            "bytes": 6868,
+            "sha256": "917008aeb9c8513f4d87b6a3cd836d515da251f9c514c350e9d035a3d19a2483"
+          }
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "96991E0D-8AC8-431A-A329-7E28496D5B20",
+          "label": "device.console-binary",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD",
+          "processID": 51232,
+          "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+          "startCommandID": "7B372057-6B6F-4F30-A63D-4BC5BCF8B89E",
+          "reportCommandID": "4F747449-06E2-4A47-98FC-155CF2DDA9DE",
+          "startSubmissionCall": 211,
+          "reportResultCall": 216,
+          "group": "power-cycle-recovered",
+          "reply": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.console-binary.reply.json",
+            "bytes": 2153,
+            "sha256": "3b6a9534be9a9a24902aecf76983f627d35cb94d4e14c312e1a6b3c881106f30"
+          },
+          "report": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.console-binary.report.json",
+            "bytes": 2204,
+            "sha256": "8c42974e1060cac11e6bb113551851e7e8a8eaf126bc9369bb40ed1f62dda41a"
+          },
+          "startRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.console-binary.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "04fb8b70a19686d1139984f55589ad4af1bbf69f80a6623df0f108db46271abb"
+          },
+          "startResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.console-binary.mcp-start-response.json",
+            "bytes": 1646,
+            "sha256": "ff77ac9e5a264ff7fbf3b5bca5f08301d2dd47a1d925faea6f63d7dc725d72a8"
+          },
+          "reportRequest": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.console-binary.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "66d7c3777e50c7af48fb08506908553e0797d7d017262b1a79b8a00b2e3a0510"
+          },
+          "reportResponse": {
+            "path": "workbench-managed-reports/iphone-build11/power-cycle-recovered/device.console-binary.mcp-report-response.json",
+            "bytes": 7732,
+            "sha256": "36ce6116bc6c3815302e0acfc2611bfac4aa31a74728c032fa0ac1a7993a897f"
+          }
+        }
+      ],
+      "allObservedStatusesAsExpected": true
+    }
+  ],
+  "manualObservations": [
+    {
+      "after": "initial-connect",
+      "D13": "off",
+      "firmwareAndSketchUnchanged": true,
+      "source": "User report",
+      "automaticMeasurement": false
+    },
+    {
+      "after": "two-inspection-timeouts",
+      "EthernetSettingsEntry": "not visible",
+      "source": "User report",
+      "automaticMeasurement": false,
+      "D2ToGND": "disconnected",
+      "RECToGND": "disconnected"
+    },
+    {
+      "after": "explicit-unplug-five-seconds-reconnect",
+      "EthernetSettingsEntry": "visible",
+      "IPAddress": "192.168.77.16",
+      "source": "User report",
+      "automaticMeasurement": false
+    },
+    {
+      "after": "initial-retained-a",
+      "D2ToGND": "connected by user",
+      "RECToGND": "disconnected",
+      "source": "User report"
+    },
+    {
+      "after": "install-b",
+      "D13": "lit",
+      "source": "User report",
+      "automaticMeasurement": false
+    },
+    {
+      "after": "install-a-restored",
+      "D13": "off",
+      "source": "User report",
+      "automaticMeasurement": false
+    },
+    {
+      "after": "ram-only-power-cycle",
+      "D13": "off",
+      "source": "User report",
+      "automaticMeasurement": false
+    }
+  ],
+  "revocation": {
+    "preRestart": {
+      "request": {
+        "path": "workbench-managed-reports/iphone-build11/final/preRestart.mcp-revoke-request.json",
+        "bytes": 137,
+        "sha256": "11ab26ffa48ed0526d00d2d26bbd13d7d3094b56af7f6c57e7ce8505cf21301c"
+      },
+      "response": {
+        "path": "workbench-managed-reports/iphone-build11/final/preRestart.mcp-revoke-response.json",
+        "bytes": 162,
+        "sha256": "6aa87a8b15ada693bc7df30a9cedeace53d2237c8c263a8941e1b8566a333e6d"
+      }
+    },
+    "final": {
+      "request": {
+        "path": "workbench-managed-reports/iphone-build11/final/final.mcp-revoke-request.json",
+        "bytes": 137,
+        "sha256": "b53ff05b200afbe9f4a9827eeed3558038a102496cd94d1a21ded6699684c0a1"
+      },
+      "response": {
+        "path": "workbench-managed-reports/iphone-build11/final/final.mcp-revoke-response.json",
+        "bytes": 162,
+        "sha256": "6aa87a8b15ada693bc7df30a9cedeace53d2237c8c263a8941e1b8566a333e6d"
+      }
+    },
+    "finalMetadataResponse": {
+      "path": "workbench-managed-reports/iphone-build11/final/sessions.mcp-response.json",
+      "bytes": 1467,
+      "sha256": "2f9d5d6b09be37b4739f974361582be7cb42f4a10393c0df2b1a800633a2f0e8"
+    },
+    "confirmedByDesktopMCP": true,
+    "finalSafeControllerMetadata": {
+      "appVersion": "11",
+      "expired": false,
+      "instanceID": "4ABEBB34-B8F6-42D8-90B9-169E625BB25A",
+      "label": "iPhone-managed-build11-restarted",
+      "lastSeenSeconds": 0.45831200014799833,
+      "paired": true,
+      "processID": 51232,
+      "revoked": true,
+      "sessionID": "00048089-D584-4EB0-8F76-033CAAB117BD"
+    }
+  },
+  "controller": {
+    "certificateSHA256": "b6f2943798437258b1787a707d65585ddef40ed3aa8618fe1ac48ed079b11734",
+    "processID": 26759,
+    "stoppedAfterQualification": true,
+    "automaticServiceInstalled": false,
+    "ready": {
+      "path": "workbench-managed-reports/iphone-build11/final/controller-ready.json",
+      "bytes": 158,
+      "sha256": "c7fc04962e954f7e480b64be200ba264b5fc13ac89bf675e711c19df6c1f4649"
+    }
+  },
+  "outcomes": {
+    "checkedReports": 33,
+    "passed": 29,
+    "expectedLocalRefusal": 1,
+    "expectedUnknown": 1,
+    "unexpectedInspectionFailures": 2,
+    "matchingMatrixReports": 29,
+    "matchingMatrixPasses": 27,
+    "successfulCommitPhases": 2,
+    "firmwareCommitReplay": false,
+    "remainingInstalledSketch": "state-a",
+    "residentImageSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f"
+  },
+  "finalBoardState": {
+    "installedSketch": "state-a",
+    "D2ToGND": "removed by user",
+    "RECToGND": "disconnected",
+    "connectedHost": "iPhone",
+    "additionalActionsRequired": false
+  },
+  "setupEvidence": {
+    "repository": "Firmingo",
+    "path": "docs/evidence/workbench-fms2-initial.json",
+    "bytes": 4644,
+    "sha256": "4ff34396f14dccebe22affd64e1056104a53942438dcda99b9bd0069ba0706ae",
+    "scope": "Prerequisite ROM setup; no normal build or corpus-test dependency on sibling checkout",
+    "sourceCommit": "0eb5902f0d04b5c89ffb571df45454ff12e74a51"
+  },
+  "limitations": [
+    "First attachment failed: two five-second SDK deadlines, no Ethernet entry reported by the user, then an explicit unplug/reconnect exposed Ethernet at 192.168.77.16. This is not a clean cold-attachment pass or a firmware fix.",
+    "Router/DNS fields, subnet mask and assignment mode were not reported; no routing/lease/Internet coexistence qualification is inferred.",
+    "Command-2 exact binary echo and manual D13 lit/off observations are separate from startup; the initialized-data/BSS/counter probe is not migrated or claimed.",
+    "The app restart followed an accepted commit reply; this does not qualify actual lost-commit-reply recovery.",
+    "No flash-write power loss, SDK ROM programming/recovery, rollback, arbitrary sketch, Pico, minimum-OS or UI/accessibility qualification; no remote CI result claimed."
+  ],
+  "notes": [
+    "The matching matrix retains 27 passes, an expected refused restored commit and an expected bootChanged unknown. Four preceding inspection/console reports add two actual attachment failures and two post-reconnect passes.",
+    "Exactly two commit phases were accepted, State B then State A. The restored-context commit request was refused without live SDK authority; no commit was replayed.",
+    "The first observation script accessed a missing snapshot after exporting the failed inspection. Failed-result handling was corrected; original reports and both timeout attempts remain without replay."
+  ],
+  "independentCapsuleChecks": {
+    "stageOutputs": [
+      {
+        "runID": "31544792-E579-4933-99F3-ECCC8FBAE72D",
+        "name": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      },
+      {
+        "runID": "C3F2F269-AF57-4BAE-BB3D-BF3FDABCEA1C",
+        "name": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      },
+      {
+        "runID": "DA8A8B92-B0E8-4205-B3EB-1BF6625C5D72",
+        "name": "state-a.fms",
+        "bytes": 544,
+        "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89"
+      },
+      {
+        "runID": "02C443AD-1CA7-46E3-9BA8-84A39AEA52B0",
+        "name": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      },
+      {
+        "runID": "643257E1-7C68-4497-9AB6-F983A31CB40A",
+        "name": "state-b.fms",
+        "bytes": 548,
+        "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+      }
+    ],
+    "uniqueArtifacts": [
+      {
+        "capsule": {
+          "path": "workbench-managed-reports/iphone-build11/artifacts/state-b.fms",
+          "bytes": 548,
+          "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0"
+        },
+        "nativeCheck": {
+          "path": "workbench-managed-reports/iphone-build11/artifacts/state-b.fms.native-check.json",
+          "bytes": 532,
+          "sha256": "191a5871c8560d32c1c53214cb6105b4c80ced569ae3964725dea27d7501d34b"
+        }
+      },
+      {
+        "capsule": {
+          "path": "workbench-managed-reports/iphone-build11/artifacts/state-a.fms",
+          "bytes": 544,
+          "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89"
+        },
+        "nativeCheck": {
+          "path": "workbench-managed-reports/iphone-build11/artifacts/state-a.fms.native-check.json",
+          "bytes": 532,
+          "sha256": "61d4b2b9815fd325b06a71f65b0268151097c60eebcc323e53358752e977ac03"
+        }
+      }
+    ],
+    "description": "Actual iPhone default SDK/WASM exports independently accepted by the native firmware FMS2 validator; native checking does not execute ARM code."
+  },
+  "attachmentIncident": {
+    "inspectionRunIDs": [
+      "E95515D1-9906-4599-B0F4-16523EF7E008",
+      "AF498084-A92A-47F4-A59C-8D6FDEE88BD0"
+    ],
+    "observedHostState": "User reported Workbench remained foreground, no local-network prompt was seen, and no Nano button was pressed.",
+    "EthernetBeforeExplicitReconnect": "not visible in Settings, as reported by user",
+    "EthernetAfterExplicitReconnect": "visible at 192.168.77.16, as reported by user",
+    "boardResetButtonUsed": false,
+    "firmwareChangedToAddressIncident": false,
+    "cleanColdAttachmentPassed": false
+  },
+  "validationScopeNote": "A local refusal without a checkpoint binds only its explicit operation/record selection, not device observations. Its device context is established by the archived original submission and device-bound stage/restore/reconciliation reports. The offline checker now rejects invented outcome, record-hash or artifact claims on checkpoint-free reports.",
+  "offlineValidation": {
+    "commands": [
+      "python3 -I -S -B Tools/Workbench/test-workbench.py",
+      "python3 -I -S -B Tools/Workbench/test-paired.py",
+      "python3 -I -S -B Tools/Workbench/test-mcp.py"
+    ],
+    "cliCases": 21,
+    "pairedCases": 11,
+    "mcpCases": 21,
+    "appRebuilt": false,
+    "checkerHardening": "Checkpoint-free managed nonpasses must remain not_observed and contain no issued-record hash or artifact; they supply no device observation."
+  },
+  "checkerFollowUp": {
+    "source": "Tools/Workbench/workbench.py",
+    "sha256": "c1d255584a4f27de408a0d172ff8c0f6659a29e6c9d31899e7124124483d884b",
+    "hardwareRunsUsedEarlierUnmodifiedChecker": true,
+    "offlineCorpusRevalidatedAfterTightening": true,
+    "appOrWireSchemaChanged": false
+  }
+}
