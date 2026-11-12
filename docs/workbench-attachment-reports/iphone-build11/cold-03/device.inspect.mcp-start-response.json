@@ -1,0 +1,35 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"sessionID\":\"DFC23CE5-BF74-4A2D-A78B-4C714C9FB795\",\"commandID\":\"B9C9D5D1-30FB-4202-9333-5E184A0B8636\",\"command\":{\"schema\":1,\"commandID\":\"B9C9D5D1-30FB-4202-9333-5E184A0B8636\",\"action\":\"run\",\"request\":{\"schema\":2,\"requestID\":\"14FB77D4-049F-4531-A0DC-ED4C4E85DEB2\",\"operation\":\"run\",\"scenarioID\":\"device.inspect\",\"device\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"deviceID\":\"5031503337360009\"}}},\"admission\":{\"commandID\":\"B9C9D5D1-30FB-4202-9333-5E184A0B8636\",\"sequence\":13,\"state\":\"queued\"},\"scenarioCompletion\":\"not_observed\"}"
+    }
+  ],
+  "structuredContent": {
+    "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795",
+    "commandID": "B9C9D5D1-30FB-4202-9333-5E184A0B8636",
+    "command": {
+      "schema": 1,
+      "commandID": "B9C9D5D1-30FB-4202-9333-5E184A0B8636",
+      "action": "run",
+      "request": {
+        "schema": 2,
+        "requestID": "14FB77D4-049F-4531-A0DC-ED4C4E85DEB2",
+        "operation": "run",
+        "scenarioID": "device.inspect",
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "deviceID": "5031503337360009"
+        }
+      }
+    },
+    "admission": {
+      "commandID": "B9C9D5D1-30FB-4202-9333-5E184A0B8636",
+      "sequence": 13,
+      "state": "queued"
+    },
+    "scenarioCompletion": "not_observed"
+  },
+  "isError": false
+}

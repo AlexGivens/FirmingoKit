@@ -936,3 +936,31 @@ without hardware; its explanatory scope was updated. Swift/platform builds were
 not repeated for this host-Python/evidence follow-up, and no remote CI result is
 claimed. Specialized reply-loss/flash-fault/ROM hosts remain until matching
 Workbench replacements are qualified.
+
+## Workbench iPhone attachment follow-up — 2026-11-11
+
+The same selected Nano and Workbench build 11 passed three physical
+attachments on the iPhone 15 Pro Max running iOS 27.2 (24B119). Each trial
+produced one verified hello and one exact 256-byte command-2 echo through the
+connected desktop MCP tools. Each inspection reported a distinct boot ID. The
+first two trials checked Settings before inspection, and the third kept
+Workbench foreground during attachment. The second trial showed
+`192.168.77.16/24`, an empty Router field and Automatic DNS configuration.
+The original two SDK deadlines and missing Ethernet entry on iOS 27.0.1 remain
+unexplained. The change of OS and the small sample limit the result to this
+baseline. See the [ledger and original reports](workbench-iphone-attachment-qualification.json).
+
+The pinned FMS2 source prepares DHCP, NCM, the listener and the slot runtime
+before `USB.begin()`. The SDK inspection deadline covers TCP establishment
+and the validated hello. Diagnosing the earlier failure still requires layer
+observations during a failed attachment.
+
+The live controller produced two broken-pipe tracebacks during HTTP response
+header writes. The follow-up handles that close at the response boundary, so the
+broker retains the command for its existing sequence and acknowledgement logic.
+An offline regression reproduced the traceback before the change and verified
+that the same sequence remains available afterward. The paired and MCP suites
+passed 12 and 21 cases respectively with `python3 -I -S -B` on
+`Tools/Workbench/test-paired.py` and `Tools/Workbench/test-mcp.py`. The archived
+hardware reports were independently revalidated against their recorded selection.
+Pairing was revoked and the controller exited.

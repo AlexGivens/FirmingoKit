@@ -1,0 +1,450 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "Read-only FMS2 Nano cold attachment baseline on the previously authorized iPhone with Workbench build 11.",
+  "priorIncident": {
+    "path": "workbench-managed-iphone-qualification.json",
+    "osVersion": "27.0.1",
+    "sdkInspectionTimeouts": 2,
+    "EthernetVisibleBeforeExplicitReconnect": false
+  },
+  "hostDevice": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "osVersion": "27.2",
+    "osBuild": "24B119",
+    "developmentTransport": "localNetwork"
+  },
+  "app": {
+    "schema": 1,
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "11",
+    "sourceCommit": "dd718468f6d498a825c1fa760f9e644c78fcd43f",
+    "preparedInventorySHA256": "a9744e0ea658579f78b6f8b3a1a3391c0898ad7886687b090e742af1a448a907",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "executableSHA256": "05fa62fb44145c6dc6f66d075c5716770b8c5c24a56fdc136703e6023738181d",
+    "preparedInventoryHashMeaning": "Historical preparedInventorySHA256 hashes prepared-package.json, the prepared-package report, not the bundled compiler inventory.",
+    "bundledCompilerInventorySHA256": "bed0aecb48fdfa7734be8785f1619f0cc397488b03ff35758f6629c621b8bd14"
+  },
+  "selectedDevice": {
+    "deviceID": "5031503337360009",
+    "boardID": "nano_rp2040_connect",
+    "address": "192.168.77.1",
+    "residentSourceCommit": "97be7bbbe29ef1d18ec886ae6eea1a2d41905869",
+    "previouslyReviewedResidentSHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f",
+    "residentEvidence": "Prior ROM readback and FMS2 qualification; current hello validates the live identity and reported version."
+  },
+  "preparation": {
+    "initialCoreDeviceLaunch": {
+      "path": "workbench-attachment-reports/iphone-build11/preflight/launch-failure.json",
+      "bytes": 318,
+      "sha256": "4d1539db232cd1a061ead58fa591417268f94f75f7696c593417938ac4e9239a"
+    },
+    "pairing": {
+      "appVersion": "11",
+      "expired": false,
+      "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+      "label": "iPhone-attachment-build11",
+      "lastSeenSeconds": 2.019641624763608,
+      "paired": true,
+      "processID": 11175,
+      "revoked": false,
+      "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795"
+    },
+    "qualificationCheckoutCommit": "eecfe328b8bd11fcf9eca4dbaa53a5372452619c"
+  },
+  "cycles": [
+    {
+      "manual": {
+        "cycle": 1,
+        "ethernet": "appeared immediately",
+        "accessoryPrompt": "none observed in Settings or Workbench",
+        "addressReported": null,
+        "source": "User report"
+      },
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "CB6E49D5-EACC-457E-991E-E3A9268B550B",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795",
+          "processID": 11175,
+          "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+          "startCommandID": "226A0E6E-B925-47BC-82F3-23F84DB07F7C",
+          "reportCommandID": "05D876BB-83C4-4EDE-8CEC-09C7E47B365F",
+          "startSubmissionCall": 2,
+          "reportResultCall": 7,
+          "group": "cold-01",
+          "reply": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.inspect.reply.json",
+            "bytes": 1739,
+            "sha256": "96fe82dbe510d0eaca62e617a9c3db42fd87d2d6d37c29f7bccb6a7e4966576c"
+          },
+          "report": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.inspect.report.json",
+            "bytes": 1774,
+            "sha256": "4a90abbedc3f9396ed2467dd6e4eddf6aec0390aea6ea8a502b854fd809c0bdd"
+          },
+          "startRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "ba68ba97ff2b9a62d966d97174bc99f59df649db1d85e5afb965c6fc0368b924"
+          },
+          "startResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.inspect.mcp-start-response.json",
+            "bytes": 1472,
+            "sha256": "7c7ca60038d29495980ce0053a14f5ff9901f6dc9d31dcff60fc5b1bf4f72939"
+          },
+          "reportRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "4b633e35ee5c93496d41a68721cb3911bf09bae8122b43d8b741fc6304455b08"
+          },
+          "reportResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.inspect.mcp-report-response.json",
+            "bytes": 6862,
+            "sha256": "ad53816eab22c9c4c27c0c5ffd7a9a60c70ff887a4d0940c42faf3d1c0a5339d"
+          },
+          "sdkElapsedSeconds": 0.022657041670754552
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "1FE8DCE4-BA9E-41A6-92F0-BEB6B58C28EB",
+          "label": "device.console-binary",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795",
+          "processID": 11175,
+          "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+          "startCommandID": "DBD0DE83-D1F9-4D15-A69B-587ED579D1E3",
+          "reportCommandID": "4809132F-92A5-49D8-9E04-AACD3451229A",
+          "startSubmissionCall": 8,
+          "reportResultCall": 13,
+          "group": "cold-01",
+          "reply": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.console-binary.reply.json",
+            "bytes": 2151,
+            "sha256": "6f9380bedc2020486eb46ba4b4dc809dd59ec4e346871d79c3057affd40c0231"
+          },
+          "report": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.console-binary.report.json",
+            "bytes": 2202,
+            "sha256": "1659df5fd8d5bb123af2f2b66eeebe212723d1234c3c15b501c1b26cffa66f0d"
+          },
+          "startRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.console-binary.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "76abfffaa38fdb4421ee341903e25b3f8b9db94ddfd20acdb8bcbcdc6dbb4583"
+          },
+          "startResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.console-binary.mcp-start-response.json",
+            "bytes": 1644,
+            "sha256": "b4b6bc6ef1de02a2840c30d077173b3c766894dbf9b5c8fb7af9619992cd3044"
+          },
+          "reportRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.console-binary.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "1b95ac2d1c12334d42776148c979663ea6600a8e4d89380753cca7e8e24e52f7"
+          },
+          "reportResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-01/device.console-binary.mcp-report-response.json",
+            "bytes": 7726,
+            "sha256": "eef562b76d54c5c8e89ea96461e317779791507f4a136d7d8bf7a8bd7a71ac40"
+          },
+          "sdkElapsedSeconds": 0.32405041667516343
+        }
+      ],
+      "bootID": "659ddf198d4af2d6",
+      "functionalPass": true
+    },
+    {
+      "manual": {
+        "cycle": 2,
+        "ethernet": "reappeared after reconnect",
+        "address": "192.168.77.16",
+        "subnetMask": "255.255.255.0",
+        "router": "empty",
+        "dnsConfiguration": "Automatic",
+        "dnsServerValuesReported": null,
+        "source": "User report"
+      },
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "30D2AC1D-4597-407D-B288-41844CA67ECB",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795",
+          "processID": 11175,
+          "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+          "startCommandID": "28275627-EFE6-480E-974B-830096C1EFD7",
+          "reportCommandID": "68B91CB0-523E-45DE-BAB5-D66B43A71E38",
+          "startSubmissionCall": 14,
+          "reportResultCall": 19,
+          "group": "cold-02",
+          "reply": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.inspect.reply.json",
+            "bytes": 1738,
+            "sha256": "8b298e0852bebb3453618c0b48a887a2a4cde335679d4967cd1d49121436e360"
+          },
+          "report": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.inspect.report.json",
+            "bytes": 1773,
+            "sha256": "4aa8b3cbebc29bf9a2856cbb39e50cd609e3d9b6be3007b048aab471c7c1f5ed"
+          },
+          "startRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "9d61231a4ee99fa15843314ac6193cdc58968674ce373ae5945571a156b0efa5"
+          },
+          "startResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.inspect.mcp-start-response.json",
+            "bytes": 1472,
+            "sha256": "fe70f2ca80edc8a88f260387542d6cf7c643b4f9f2b3bd21882302fd2a7f46dd"
+          },
+          "reportRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "eb7d0bbb638e86bd3b7a44118f6810cdd41b5d1e9fb510f9c829a4de78691e93"
+          },
+          "reportResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.inspect.mcp-report-response.json",
+            "bytes": 6860,
+            "sha256": "5d5d9ebe0decdea6cbe100e1304df59a198cda5d25bc71f25467d7396f5845b5"
+          },
+          "sdkElapsedSeconds": 0.018902874988270923
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "6D4BC4A8-9114-4C56-A3A9-EF0CC8641D74",
+          "label": "device.console-binary",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795",
+          "processID": 11175,
+          "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+          "startCommandID": "FE32F23E-C40E-4AFE-B296-A82C697A3507",
+          "reportCommandID": "2FB75516-B38F-4318-A884-34364DF48479",
+          "startSubmissionCall": 20,
+          "reportResultCall": 25,
+          "group": "cold-02",
+          "reply": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.console-binary.reply.json",
+            "bytes": 2150,
+            "sha256": "3c2358c84dee4e3b86118f503c6dfba88a511da60d9fc9c3252bc1727da7f802"
+          },
+          "report": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.console-binary.report.json",
+            "bytes": 2201,
+            "sha256": "903366d27c0dd71b3ad6801586605d3c42f2309a1ea6622adccf99d1756b7476"
+          },
+          "startRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.console-binary.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "a3afbbbc6c9bddf1a716b83b3a9c5f44b73b8a1f217e121fc554566e31a2461a"
+          },
+          "startResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.console-binary.mcp-start-response.json",
+            "bytes": 1646,
+            "sha256": "ec2341db0c1081cc173bf3b61201c0666377609cece677fce0804457c4bef537"
+          },
+          "reportRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.console-binary.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "d656869df80b28f003f7030cdc615e3b2bb1e72622d6b823a557ffe84c345f97"
+          },
+          "reportResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-02/device.console-binary.mcp-report-response.json",
+            "bytes": 7726,
+            "sha256": "9ccea066afdccedc1756b786234dc18e8e0c03371b0560a6f2167a06f8aa057d"
+          },
+          "sdkElapsedSeconds": 0.3208969999977853
+        }
+      ],
+      "bootID": "545eb954f7ef055d",
+      "functionalPass": true
+    },
+    {
+      "manual": {
+        "cycle": 3,
+        "foregroundAtAttachment": "Workbench",
+        "physicalAction": "explicit reconnect",
+        "accessoryPrompt": "none observed",
+        "addressReported": null,
+        "source": "User report"
+      },
+      "runs": [
+        {
+          "scenarioID": "device.inspect",
+          "runID": "14FB77D4-049F-4531-A0DC-ED4C4E85DEB2",
+          "label": "device.inspect",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795",
+          "processID": 11175,
+          "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+          "startCommandID": "B9C9D5D1-30FB-4202-9333-5E184A0B8636",
+          "reportCommandID": "0D075921-1DD0-4CD9-B2AC-3CC277EB94F6",
+          "startSubmissionCall": 26,
+          "reportResultCall": 31,
+          "group": "cold-03",
+          "reply": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.inspect.reply.json",
+            "bytes": 1738,
+            "sha256": "2872d13a9fecaed3dfe746e31de47cab9d8c53265ba298841f3989c744e70933"
+          },
+          "report": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.inspect.report.json",
+            "bytes": 1773,
+            "sha256": "043cccd2b8e52ca268d1f6a1ee3d00b25bf3e4c7c970df1f38121a13134c0f7c"
+          },
+          "startRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.inspect.mcp-start-request.json",
+            "bytes": 425,
+            "sha256": "71cd297a8b3d530c761b6f8c88fd73892002deae04cde0a83d1d9f7a3a9d81a8"
+          },
+          "startResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.inspect.mcp-start-response.json",
+            "bytes": 1474,
+            "sha256": "44464e580f4f467766beab9742b0840d56159d072d213009c4c6173cfb1c906d"
+          },
+          "reportRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.inspect.mcp-report-request.json",
+            "bytes": 350,
+            "sha256": "bb495d98d946a5e816e4749018ce5a876b2d5c0cef727bedab8fe7bf885ce46c"
+          },
+          "reportResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.inspect.mcp-report-response.json",
+            "bytes": 6862,
+            "sha256": "07f5cc7890b13d3b1352dfaac42a4b6fbf87462dbaa14b7658d921bb38fa1b01"
+          },
+          "sdkElapsedSeconds": 0.020374958345200866
+        },
+        {
+          "scenarioID": "device.console-binary",
+          "runID": "475A520B-B7EC-401E-BC9D-D89D4F14A322",
+          "label": "device.console-binary",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795",
+          "processID": 11175,
+          "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+          "startCommandID": "B0B070A0-D28D-40CB-BC8D-F2B71C1CFE78",
+          "reportCommandID": "2616511A-472C-4E36-9F1F-B9D446F8E1BE",
+          "startSubmissionCall": 32,
+          "reportResultCall": 37,
+          "group": "cold-03",
+          "reply": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.console-binary.reply.json",
+            "bytes": 2151,
+            "sha256": "328be0be641d3ab02a89814838b8cc5f1c47259ce072519f9db725b7453d730c"
+          },
+          "report": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.console-binary.report.json",
+            "bytes": 2202,
+            "sha256": "eb7275508f2256908a883bafb206fa7350f02c1946df61e20740426a9b6da03b"
+          },
+          "startRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.console-binary.mcp-start-request.json",
+            "bytes": 516,
+            "sha256": "0e4e1d511b40b17cfd6e92cdf959a9954c563b8cd99b7d1b2353dd7c8651041b"
+          },
+          "startResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.console-binary.mcp-start-response.json",
+            "bytes": 1646,
+            "sha256": "5b9b8cec9b36a256399e74d1cb676c3b630df9bd96cf9c87bb6eac892147c1c9"
+          },
+          "reportRequest": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.console-binary.mcp-report-request.json",
+            "bytes": 441,
+            "sha256": "8e916589e5b1ec36d33a1da95a08f219bb1995c809a1113421b7817362d6ac87"
+          },
+          "reportResponse": {
+            "path": "workbench-attachment-reports/iphone-build11/cold-03/device.console-binary.mcp-report-response.json",
+            "bytes": 7728,
+            "sha256": "d9fae7da9bb97ead12455114fd6ed750a0c9d2eee7cd9dbd3b3c61b88aa3389c"
+          },
+          "sdkElapsedSeconds": 0.31766066668205895
+        }
+      ],
+      "bootID": "b49f0515dc7895dd",
+      "functionalPass": true
+    }
+  ],
+  "outcomes": {
+    "physicalTrials": 3,
+    "functionalPasses": 3,
+    "distinctObservedBoots": 3,
+    "inspectionAndEchoReports": 6,
+    "sdkInspectionTimeouts": 0,
+    "rootCauseOfPriorIncident": "unresolved"
+  },
+  "controller": {
+    "certificateSHA256": "ea3b2e197affacb1ee82ff7dbb7c4cab8f28233c266a7a52632ad8993a45f41c",
+    "processID": 80336,
+    "stoppedAfterQualification": true
+  },
+  "revocation": {
+    "revoke": {
+      "request": {
+        "path": "workbench-attachment-reports/iphone-build11/final/revoke.mcp-request.json",
+        "bytes": 137,
+        "sha256": "cd115bd8cdc8476d5f4a72974be309ca6e860b7b9abc20c4c40dd8516add24ff"
+      },
+      "response": {
+        "path": "workbench-attachment-reports/iphone-build11/final/revoke.mcp-response.json",
+        "bytes": 162,
+        "sha256": "6aa87a8b15ada693bc7df30a9cedeace53d2237c8c263a8941e1b8566a333e6d"
+      }
+    },
+    "sessions": {
+      "request": {
+        "path": "workbench-attachment-reports/iphone-build11/final/sessions.mcp-request.json",
+        "bytes": 79,
+        "sha256": "edf698443626ef066791841cfd1c6319d25b56f373f079d538584ca07ac965c6"
+      },
+      "response": {
+        "path": "workbench-attachment-reports/iphone-build11/final/sessions.mcp-response.json",
+        "bytes": 1357,
+        "sha256": "61c0b57f6578fcf956cdbe1b2fa40350fd1aac658be8d8d8beee1f78cf52a760"
+      }
+    },
+    "finalSafeControllerMetadata": {
+      "appVersion": "11",
+      "expired": false,
+      "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+      "label": "iPhone-attachment-build11",
+      "lastSeenSeconds": 0.816875709220767,
+      "paired": true,
+      "processID": 11175,
+      "revoked": true,
+      "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795"
+    }
+  },
+  "limitations": [
+    "The host OS changed since the prior incident. These trials describe this OS, host, known resident and cable setup.",
+    "The first two trials observed Settings before inspection. The third left Workbench in the foreground during attachment.",
+    "Cable insertion and Ethernet visibility are operator observations. SDK event times begin after run admission.",
+    "Router was empty on the reported Settings observation. DNS configuration was Automatic, with no server values reported.",
+    "USB packet timing, DHCP exchange timing, first authorization, locked attachment and Internet coexistence remain unmeasured.",
+    "The requested five-second detach interval was manual. Distinct boot IDs confirm fresh resident boots for successful inspections."
+  ],
+  "sourceReview": {
+    "resident": "Pinned FMS2 setup prepares DHCP, configures NCM, binds DHCP to that interface, starts the FMGO listener, then attempts slot runtime initialization before USB.begin.",
+    "sdk": "One five-second deadline covers opening the TCP connection and obtaining a validated hello.",
+    "priorIncidentInference": "The timeout reports leave TCP readiness and hello unconfirmed. The absent Ethernet entry was a separate iPhone Settings observation. USB enumeration, NCM configuration, authorization and packet timing were not captured."
+  },
+  "controllerFollowUp": {
+    "observed": "Two BrokenPipeError tracebacks while flushing HTTP response headers. The six reports and final revocation were collected.",
+    "change": "Treat failed response header and body writes as a closed connection. The broker retains its delivery and acknowledgement state.",
+    "physicalRunsUsedPreChangeController": true,
+    "sourceSHA256": "abab291a27c701c2ae0139b6d954b1711297c0a3f981b6a8d63d95a633bfe282",
+    "offlineTests": {
+      "paired": 12,
+      "mcp": 21
+    }
+  }
+}

@@ -116,7 +116,7 @@ local-network access and perform actual Home/return transitions.
   admission before remote acknowledgement, selected-run cancellation, export and
   replay rejection. Existing engine/CLI/mobile-report corpus tests remain active.
 - Broker fixtures cover consumed/expired invitations, credential rotation, lost
-  delivery/ack deduplication, mismatched producer replies, revocation, queue bounds,
+  delivery/ack deduplication, a peer disconnect during response headers, mismatched producer replies, revocation, queue bounds,
   unknown/device commands, ambiguous JSON and no restoration after restart.
 - Ordinary validation starts no listener and contacts no device. Signed actual
   TLS pairing, real WASM scenario/export, wrong-pin/revocation and foreground

@@ -3,6 +3,7 @@ import copy
 import base64
 import contextlib
 import hashlib
+from http.client import HTTPMessage
 import io
 import tempfile
 from types import SimpleNamespace
@@ -57,6 +58,31 @@ class PairedController(unittest.TestCase):
         self.assertEqual(self.broker.command(self.session['sessionID'],one)['sequence'],1)
         self.exchange(2,self.reply(two))
         with self.assertRaises(ValueError):self.exchange(1,reply)
+
+    def test_mobile_peer_closed_during_response_headers_preserves_delivery(self):
+        """A header write can lose the delivery while its queued command stays available."""
+        command = self.command()
+        self.broker.command(self.session['sessionID'], command)
+        body = paired.encode(dict(schema=1, sessionID=self.session['sessionID'],
+                                  instanceID=self.instance, ack=0, reply=None))
+        handler = paired.MobileHandler.__new__(paired.MobileHandler)
+        handler.server = SimpleNamespace(broker=self.broker)
+        handler.path = '/v1/exchange'
+        handler.requestline = 'POST /v1/exchange HTTP/1.1'
+        handler.request_version = 'HTTP/1.1'
+        handler.close_connection = False
+        handler.headers = HTTPMessage()
+        handler.headers['Content-Type'] = 'application/json'
+        handler.headers['Content-Length'] = str(len(body))
+        handler.headers['Authorization'] = 'Bearer ' + self.session['token']
+        handler.rfile = io.BytesIO(body)
+        handler.wfile = io.BytesIO()
+        with patch.object(handler.wfile, 'write', side_effect=BrokenPipeError):
+            handler.do_POST()
+        self.assertTrue(handler.close_connection)
+        delivery = self.exchange()
+        self.assertEqual(delivery['command'], command)
+        self.assertEqual(delivery['sequence'], 1)
 
     def test_replayed_reply_cannot_change_pid_command_instance_or_payload(self):
         one=self.command();self.broker.command(self.session['sessionID'],one);self.exchange()

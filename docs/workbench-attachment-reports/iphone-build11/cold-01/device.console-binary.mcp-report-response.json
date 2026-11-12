@@ -1,0 +1,123 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"sessionID\":\"DFC23CE5-BF74-4A2D-A78B-4C714C9FB795\",\"commandID\":\"4809132F-92A5-49D8-9E04-AACD3451229A\",\"record\":{\"commandID\":\"4809132F-92A5-49D8-9E04-AACD3451229A\",\"reply\":{\"accepted\":true,\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"command\":{\"action\":\"report\",\"commandID\":\"4809132F-92A5-49D8-9E04-AACD3451229A\",\"runID\":\"1FE8DCE4-BA9E-41A6-92F0-BEB6B58C28EB\",\"schema\":1},\"instanceID\":\"1C0E7217-F5DD-4738-88C2-FD163BB6C4EA\",\"processID\":11175,\"report\":{\"appIdentifier\":\"com.firmingokit.demo\",\"appVersion\":\"11\",\"artifacts\":[],\"deviceEvidence\":{\"connectionAttempted\":true,\"consoleClosed\":true,\"consoleOpened\":true,\"disconnected\":true,\"probeAttempted\":true,\"received\":\"AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==\",\"selection\":{\"address\":\"192.168.77.1\",\"boardID\":\"nano_rp2040_connect\",\"bootID\":\"659ddf198d4af2d6\",\"consoleProbe\":\"fms2-command-2-v1\",\"deviceID\":\"5031503337360009\"},\"sentBytes\":257,\"snapshot\":{\"authenticationMode\":\"open-development\",\"boardID\":\"nano_rp2040_connect\",\"bootID\":\"659ddf198d4af2d6\",\"channels\":[{\"backend\":\"application\",\"controls\":[],\"id\":1,\"isOwned\":false,\"receiveQueueBytes\":256,\"transmitQueueBytes\":256}],\"deviceID\":\"5031503337360009\",\"firmwareVersion\":\"0.1.0-statefulupload-exp1\",\"maximumPayload\":4096,\"protocolMajor\":1,\"targets\":[{\"authorization\":\"physical-d2-gnd\",\"format\":\"nano-managed-v2\",\"id\":2,\"maximumChunk\":1024,\"maximumSize\":4096}]}},\"deviceOperations\":true,\"events\":[{\"detail\":\"Selected SDK device operation; no compiler or upload prerequisite.\",\"phase\":\"device-start\",\"seconds\":0.0011073333444073796,\"sequence\":0},{\"detail\":\"Selected device assertions and SDK cleanup completed.\",\"phase\":\"complete\",\"seconds\":0.32405041667516343,\"sequence\":1}],\"id\":\"1FE8DCE4-BA9E-41A6-92F0-BEB6B58C28EB\",\"operatingSystem\":\"Version 27.2 (Build 24B119)\",\"processID\":11175,\"scenarioID\":\"device.console-binary\",\"schema\":2,\"status\":\"passed\"},\"schema\":1,\"state\":{\"awaitingLifecycleStart\":false,\"isRunning\":false,\"phase\":\"complete\",\"runID\":\"1FE8DCE4-BA9E-41A6-92F0-BEB6B58C28EB\",\"status\":\"passed\"}},\"sequence\":6,\"state\":\"completed\"},\"scenarioCompletion\":\"passed\",\"validatedReport\":true,\"evidence\":[{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/DFC23CE5-BF74-4A2D-A78B-4C714C9FB795/4809132F-92A5-49D8-9E04-AACD3451229A/reply.json\",\"bytes\":2151,\"sha256\":\"6f9380bedc2020486eb46ba4b4dc809dd59ec4e346871d79c3057affd40c0231\"},{\"path\":\"/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/DFC23CE5-BF74-4A2D-A78B-4C714C9FB795/4809132F-92A5-49D8-9E04-AACD3451229A/report.json\",\"bytes\":2202,\"sha256\":\"1659df5fd8d5bb123af2f2b66eeebe212723d1234c3c15b501c1b26cffa66f0d\"}]}"
+    }
+  ],
+  "structuredContent": {
+    "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795",
+    "commandID": "4809132F-92A5-49D8-9E04-AACD3451229A",
+    "record": {
+      "commandID": "4809132F-92A5-49D8-9E04-AACD3451229A",
+      "reply": {
+        "accepted": true,
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "11",
+        "command": {
+          "action": "report",
+          "commandID": "4809132F-92A5-49D8-9E04-AACD3451229A",
+          "runID": "1FE8DCE4-BA9E-41A6-92F0-BEB6B58C28EB",
+          "schema": 1
+        },
+        "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+        "processID": 11175,
+        "report": {
+          "appIdentifier": "com.firmingokit.demo",
+          "appVersion": "11",
+          "artifacts": [],
+          "deviceEvidence": {
+            "connectionAttempted": true,
+            "consoleClosed": true,
+            "consoleOpened": true,
+            "disconnected": true,
+            "probeAttempted": true,
+            "received": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==",
+            "selection": {
+              "address": "192.168.77.1",
+              "boardID": "nano_rp2040_connect",
+              "bootID": "659ddf198d4af2d6",
+              "consoleProbe": "fms2-command-2-v1",
+              "deviceID": "5031503337360009"
+            },
+            "sentBytes": 257,
+            "snapshot": {
+              "authenticationMode": "open-development",
+              "boardID": "nano_rp2040_connect",
+              "bootID": "659ddf198d4af2d6",
+              "channels": [
+                {
+                  "backend": "application",
+                  "controls": [],
+                  "id": 1,
+                  "isOwned": false,
+                  "receiveQueueBytes": 256,
+                  "transmitQueueBytes": 256
+                }
+              ],
+              "deviceID": "5031503337360009",
+              "firmwareVersion": "0.1.0-statefulupload-exp1",
+              "maximumPayload": 4096,
+              "protocolMajor": 1,
+              "targets": [
+                {
+                  "authorization": "physical-d2-gnd",
+                  "format": "nano-managed-v2",
+                  "id": 2,
+                  "maximumChunk": 1024,
+                  "maximumSize": 4096
+                }
+              ]
+            }
+          },
+          "deviceOperations": true,
+          "events": [
+            {
+              "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+              "phase": "device-start",
+              "seconds": 0.0011073333444073796,
+              "sequence": 0
+            },
+            {
+              "detail": "Selected device assertions and SDK cleanup completed.",
+              "phase": "complete",
+              "seconds": 0.32405041667516343,
+              "sequence": 1
+            }
+          ],
+          "id": "1FE8DCE4-BA9E-41A6-92F0-BEB6B58C28EB",
+          "operatingSystem": "Version 27.2 (Build 24B119)",
+          "processID": 11175,
+          "scenarioID": "device.console-binary",
+          "schema": 2,
+          "status": "passed"
+        },
+        "schema": 1,
+        "state": {
+          "awaitingLifecycleStart": false,
+          "isRunning": false,
+          "phase": "complete",
+          "runID": "1FE8DCE4-BA9E-41A6-92F0-BEB6B58C28EB",
+          "status": "passed"
+        }
+      },
+      "sequence": 6,
+      "state": "completed"
+    },
+    "scenarioCompletion": "passed",
+    "validatedReport": true,
+    "evidence": [
+      {
+        "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/DFC23CE5-BF74-4A2D-A78B-4C714C9FB795/4809132F-92A5-49D8-9E04-AACD3451229A/reply.json",
+        "bytes": 2151,
+        "sha256": "6f9380bedc2020486eb46ba4b4dc809dd59ec4e346871d79c3057affd40c0231"
+      },
+      {
+        "path": "/Users/alexgivens/Developer/FirmingoKit/.build/workbench-mcp-codex-evidence-r4/DFC23CE5-BF74-4A2D-A78B-4C714C9FB795/4809132F-92A5-49D8-9E04-AACD3451229A/report.json",
+        "bytes": 2202,
+        "sha256": "1659df5fd8d5bb123af2f2b66eeebe212723d1234c3c15b501c1b26cffa66f0d"
+      }
+    ]
+  },
+  "isError": false
+}

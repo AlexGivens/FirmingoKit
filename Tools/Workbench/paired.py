@@ -253,8 +253,12 @@ class MobileHandler(http.server.BaseHTTPRequestHandler):
         except (ValueError,KeyError,TypeError,OSError):
             raw=b'{"error":"paired request rejected"}'; self.send_response(403); self.close_connection=True
         self.send_header('Content-Type','application/json');self.send_header('Content-Length',str(len(raw)))
-        self.send_header('Cache-Control','no-store');self.end_headers()
-        with contextlib.suppress(OSError): self.wfile.write(raw)
+        self.send_header('Cache-Control','no-store')
+        try:
+            self.end_headers()
+            self.wfile.write(raw)
+        except OSError:
+            self.close_connection=True
 
 
 class MobileServer(http.server.ThreadingHTTPServer):

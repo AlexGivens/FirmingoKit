@@ -1,0 +1,35 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"sessions\":[{\"appVersion\":null,\"expired\":true,\"instanceID\":null,\"label\":\"iPhone-attachment-build11\",\"lastSeenSeconds\":null,\"paired\":false,\"processID\":null,\"revoked\":false,\"sessionID\":\"53A04C99-CF71-4B4A-9A0F-D9EC2C00A3FE\"},{\"appVersion\":\"11\",\"expired\":false,\"instanceID\":\"1C0E7217-F5DD-4738-88C2-FD163BB6C4EA\",\"label\":\"iPhone-attachment-build11\",\"lastSeenSeconds\":0.816875709220767,\"paired\":true,\"processID\":11175,\"revoked\":true,\"sessionID\":\"DFC23CE5-BF74-4A2D-A78B-4C714C9FB795\"}]}"
+    }
+  ],
+  "structuredContent": {
+    "sessions": [
+      {
+        "appVersion": null,
+        "expired": true,
+        "instanceID": null,
+        "label": "iPhone-attachment-build11",
+        "lastSeenSeconds": null,
+        "paired": false,
+        "processID": null,
+        "revoked": false,
+        "sessionID": "53A04C99-CF71-4B4A-9A0F-D9EC2C00A3FE"
+      },
+      {
+        "appVersion": "11",
+        "expired": false,
+        "instanceID": "1C0E7217-F5DD-4738-88C2-FD163BB6C4EA",
+        "label": "iPhone-attachment-build11",
+        "lastSeenSeconds": 0.816875709220767,
+        "paired": true,
+        "processID": 11175,
+        "revoked": true,
+        "sessionID": "DFC23CE5-BF74-4A2D-A78B-4C714C9FB795"
+      }
+    ]
+  },
+  "isError": false
+}

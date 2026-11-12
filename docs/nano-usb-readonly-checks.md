@@ -6,11 +6,42 @@ disconnected. Select the same physical Nano by its recorded identity and exact
 resident evidence; an address or generic RP2040 bootloader name is insufficient.
 Keep development deployment/report collection over the already paired network.
 
-For connection-only checks, use the separately identified NanoPermission host
-from [connection readiness](connection-readiness.md). Prepare once offline, select
-the real numeric endpoint/device ID, then inspect explicitly. Record actual user
-actions, displayed result, own-run journal, app/SDK/resident identities, host model/
-OS and cable/hub details. A prompt approval is separate from successful hello.
+Use the separately identified NanoPermission host for first-app-access and denial
+checks. Follow [connection readiness](connection-readiness.md) to prepare it offline,
+select the numeric endpoint and device ID, and inspect explicitly. Record actual
+user actions, displayed result, own-run journal, app/SDK/resident identities, host
+model and OS, and cable or hub details. Record prompt approval and hello separately.
+
+## Cold attachment with Workbench
+
+The previously authorized iPhone can use the installed Workbench app for an
+attachment baseline on the pinned FMS2 resident. Pair over Wi-Fi before the
+physical trial. Use the same cable, direct connection, and unlocked host for each
+trial in a series. Note the OS build and any change from the incident under review.
+
+1. Disconnect USB power for five seconds with D2 and REC disconnected. Attach
+   once and observe Ethernet in Settings for about 15 seconds. Record the address
+   if visible, any prompt and approval, and approximate time to visible Ethernet.
+   Collect subnet, router, DNS and assignment mode when those fields are available.
+2. Return Workbench to the foreground with the Nano still connected. Submit one
+   `device.inspect` run for the selected endpoint, board and device ID. Archive
+   the terminal report, including a timeout or other failure. A failed inspection
+   ends that trial. A later reconnect gets a new trial and run ID.
+3. After successful inspection, run `device.console-binary` once using that boot
+   ID and `fms2-command-2-v1` on the known compatible sketch. Save the exact report
+   and check that the boot differs from the prior trial's boot when both were
+   observed. Record any RESET, replug or address edit as part of the outcome.
+
+The Settings window measures operator-observed readiness. Report event times
+measure the SDK operations after Workbench returns to the foreground. Exact USB
+configuration and lease timing require instrumentation at those layers.
+
+The 2026-11-11 iOS 27.2 baseline passed three attachments on three distinct
+boots. The first two used Settings before inspection. The third left Workbench
+in the foreground during the reconnect, as in the earlier incident. The second
+trial showed `192.168.77.16/24`, an empty Router field, and Automatic DNS
+configuration. DNS server values were unreported. The earlier iOS 27.0.1
+timeouts remain unresolved. See the [attachment ledger](workbench-iphone-attachment-qualification.json).
 
 | Check | Procedure and required observation |
 | --- | --- |
