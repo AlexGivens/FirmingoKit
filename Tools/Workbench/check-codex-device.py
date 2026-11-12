@@ -2,6 +2,7 @@
 """Explicit live Codex-host/MCP compiler or selected-device checks; never builds, pairs, flashes or starts a model turn."""
 import argparse
 import hashlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -135,6 +136,9 @@ class CodexHost:
 def main():
     """Require explicit registered host, reviewed pairing/build and a new private evidence directory."""
     parser = argparse.ArgumentParser(description=__doc__)
+    spec = importlib.util.spec_from_file_location('workbench_request', Path(__file__).with_name('workbench.py'))
+    checker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(checker)
     parser.add_argument('--codex', required=True, type=Path)
     parser.add_argument('--server', default='firmingo-workbench')
     parser.add_argument('--pairing', required=True, type=Path)
@@ -145,7 +149,7 @@ def main():
     parser.add_argument('--device-boot-id')
     parser.add_argument('--managed-action',choices=['stage','commit','abort','disconnect','reconcile','retire','restore'])
     for name in ['managed-operation-id','managed-sketch','resident-image-sha256','resident-evidence','managed-record-sha256','managed-authorization']: parser.add_argument('--'+name)
-    parser.add_argument('--console-probe', choices=['raw-256-v1','fms2-command-2-v1'])
+    parser.add_argument('--console-probe', choices=[*checker.ECHO_PROBES, *checker.STATE_PROBES])
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--revoke', action='store_true', help='Explicitly revoke the selected pairing after successful collection')
     args = parser.parse_args()
@@ -162,7 +166,9 @@ def main():
             scenarios=['managed.'+args.managed_action]
     elif hardware:
         if not all([args.device_address,args.device_id,args.device_board]) or args.build_id: parser.error('Select device address/ID/board without a compiler descriptor')
-        scenarios = ['device.inspect'] + (['device.console-binary'] if args.console_probe else [])
+        scenarios = ['device.inspect']
+        if args.console_probe:
+            scenarios.append('device.state-counters' if args.console_probe in checker.STATE_PROBES else 'device.console-binary')
     else:
         if args.device_boot_id or any(getattr(args,name) for name in ['managed_operation_id','managed_sketch','resident_image_sha256','resident_evidence','managed_record_sha256','managed_authorization']): parser.error('Select an explicit managed action')
         if not args.build_id or not re.fullmatch('[0-9a-f]{64}', args.build_id): parser.error('Select an exact descriptor SHA-256')
@@ -193,7 +199,7 @@ def main():
                 device = dict(device_address=args.device_address,device_id=args.device_id,device_board=args.device_board)
                 if scenario.startswith('managed.'):
                     device['device_boot_id']=observed_boot if scenario=='managed.stage' else args.device_boot_id
-                if scenario == 'device.console-binary':
+                if scenario in ('device.console-binary', 'device.state-counters'):
                     if not observed_boot: raise ValueError('No freshly inspected boot; no console probe can be sent')
                     device.update(device_boot_id=observed_boot,console_probe=args.console_probe)
             run = str(uuid.uuid4()).upper()

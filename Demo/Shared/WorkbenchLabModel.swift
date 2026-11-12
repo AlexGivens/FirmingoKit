@@ -93,7 +93,10 @@ import UIKit
               !scenario.requiresBuild || !selectedBuildID.isEmpty else { return false }
         guard scenario.requiresDevice else { return true }
         guard !deviceID.isEmpty, !deviceAddress.isEmpty else { return false }
-        if scenario.id == "device.console-binary" { return allowConsoleProbe && !deviceBootID.isEmpty }
+        if scenario.usesConsole {
+            return allowConsoleProbe && !deviceBootID.isEmpty &&
+                WorkbenchDeviceSelection.acceptsProbe(consoleProbe, for: scenario.id, boardID: deviceBoard)
+        }
         if WorkbenchManagedSelection.scenarios.contains(scenario.id) {
             guard !deviceBootID.isEmpty else { return false }
             if scenario.id == "managed.stage" { return allowManagedStage && !managedResidentImage.isEmpty && !managedEvidenceNote.isEmpty }
@@ -112,7 +115,7 @@ import UIKit
                 let selected: WorkbenchDeviceSelection?
                 if managed != nil {
                     selected = try .init(address: deviceAddress, boardID: deviceBoard, deviceID: deviceID, bootID: deviceBootID)
-                } else { selected = try scenario.requiresDevice ? selectedDevice(console: scenario.id == "device.console-binary") : nil }
+                } else { selected = try scenario.requiresDevice ? selectedDevice(console: scenario.usesConsole) : nil }
                 let request = try WorkbenchRequest(requestID: id, operation: .run, scenarioID: scenario.id,
                     firmwareBuildID: scenario.requiresBuild && !selectedBuildID.isEmpty ? selectedBuildID : nil,
                     device: selected, managed: managed)

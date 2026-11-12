@@ -18,6 +18,8 @@ public struct WorkbenchScenario: Codable, Sendable, Identifiable, Equatable {
     public var requiresSceneTransitions = false
     /// Device selection is required independently of compiler resources.
     public var requiresDevice = false
+    /// Whether the scenario opens the application console and sends its selected fixed probe.
+    public var usesConsole: Bool { id == "device.console-binary" || id == "device.state-counters" }
     /// Shared registry: compiler, mobile scene and selected-device checks; upload/recovery stays explicitly blocked.
     public static let all: [Self] = [
         .init(id: "device.inspect", title: "Inspect selected device", category: "Device",
@@ -26,6 +28,9 @@ public struct WorkbenchScenario: Codable, Sendable, Identifiable, Equatable {
         .init(id: "device.console-binary", title: "Exact 256-byte binary console", category: "Device",
               detail: "Check selected identity and boot, acquire application channel one, send one fixed probe and compare every byte. Requires an already running compatible echo application.", requiresBuild: false,
               unavailableReason: nil, requiresDevice: true),
+        .init(id: "device.state-counters", title: "FMS2 initialized state and counters", category: "Device",
+              detail: "Sample the selected running State A or State B sketch twice. Verify its startup data, zeroed BSS and advancing counters.",
+              requiresBuild: false, unavailableReason: nil, requiresDevice: true),
         .init(id: "compiler.catalogue", title: "Verify bundled catalogue", category: "Compiler",
               detail: "Load SDK-verified metadata. This does not execute WASM or inspect a board.", requiresBuild: false, unavailableReason: nil),
         .init(id: "compiler.resources", title: "Verify compiler resources", category: "Compiler",

@@ -28,7 +28,7 @@ def main():
                "-module-cache-path", str(cache), "-I", str(path), "-I", str(path / "Modules"),
                str(root / "Validation/NanoHost/NanoGate.swift"),
                str(root / "Validation/NanoHost/NanoCandidate.swift"),
-               str(root / "Validation/NanoHost/NanoStateProbe.swift"),
+               str(root / "Demo/WorkbenchSupport/Sources/FirmingoWorkbenchCore/NanoStateProbe.swift"),
                str(root / "Validation/NanoHost/NanoRecoveryIntent.swift"),
                str(root / "Validation/NanoHost/NanoRecoveryCheckpoint.swift"),
                str(root / "Validation/NanoHost/NanoReplyLossGate.swift"),

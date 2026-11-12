@@ -119,14 +119,16 @@ import FirmingoKit
                 guard let selected = request.device else { throw WorkbenchFailure("Missing device selection.") }
                 if let deviceBackend {
                     try record("device-start", "Selected SDK device operation; no compiler or upload prerequisite.")
-                    try await deviceBackend.run(selected, console: scenario.id == "device.console-binary") { value in
+                    try await deviceBackend.run(selected, console: scenario.usesConsole) { value in
                         guard var next = self.report else { throw WorkbenchFailure("Missing hardware run context.") }
                         next.deviceEvidence = value; try self.store.save(next); self.report = next; self.observation?(next)
                     }
                     try Task.checkCancellation()
                     guard let observed = report?.deviceEvidence, observed.selection == selected else { throw WorkbenchFailure("Missing selected device evidence.") }
-                    try observed.validate(console: scenario.id == "device.console-binary")
-                    try record("complete", "Selected device assertions and SDK cleanup completed.", status: .passed)
+                    try observed.validate(console: scenario.usesConsole)
+                    let detail = selected.stateSketch.map { "\($0) startup data, zero BSS and advancing counters verified. Console closed and disconnected." }
+                        ?? "Selected device assertions and SDK cleanup completed."
+                    try record("complete", detail, status: .passed)
                 } else { try record("prerequisites", "This host has no device backend.", status: .blocked) }
             } else {
                 try Task.checkCancellation()

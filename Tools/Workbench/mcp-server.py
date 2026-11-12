@@ -19,7 +19,7 @@ spec.loader.exec_module(paired)
 
 MODERN = '2026-07-28'
 LEGACY = ('2025-11-25', '2025-06-18', '2025-03-26', '2024-11-05')
-INFO = dict(name='firmingo-workbench', version='0.3.0')  # Adapter version, not a product release.
+INFO = dict(name='firmingo-workbench', version='0.4.0')  # Adapter version, not a product release.
 META = 'io.modelcontextprotocol/'
 INPUT_LIMIT, OUTPUT_LIMIT = 16384, 524288
 INSTRUCTIONS = ('Use an explicitly paired session. Submit once with caller-chosen command/run UUIDs; '
@@ -56,7 +56,8 @@ HARDWARE = dict(device_address=field('Canonical private IPv4; FMGO port is fixed
     device_board=field('Explicit SDK board identifier.',enum=list(paired.request_checker().DEVICE_BOARDS)),
     device_id=field('Expected stable device ID.',pattern=r'^[0-9a-f]{16}$'),
     device_boot_id=field('Boot from a separate successful inspection; required before console bytes.',pattern=r'^[0-9a-f]{16}$'),
-    console_probe=field('Explicit fixed binary probe for the already-running application.',enum=['raw-256-v1','fms2-command-2-v1']))
+    console_probe=field('Explicit fixed echo or FMS2 state probe for the running application.',
+                        enum=[*paired.request_checker().ECHO_PROBES, *paired.request_checker().STATE_PROBES]))
 
 
 MANAGED = dict(managed_operation_id=UUID,

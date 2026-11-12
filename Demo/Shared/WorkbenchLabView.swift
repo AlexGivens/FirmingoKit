@@ -45,6 +45,8 @@ import UniformTypeIdentifiers
                             Picker("Existing application's binary protocol", selection: $model.consoleProbe) {
                                 Text("Raw 256-byte echo").tag("raw-256-v1")
                                 Text("FMS2 qualification command 2").tag("fms2-command-2-v1")
+                                Text("FMS2 State A counters").tag("fms2-state-a-v1")
+                                Text("FMS2 State B counters").tag("fms2-state-b-v1")
                             }.onChange(of: model.consoleProbe) { _, _ in model.allowConsoleProbe = false }
                             Toggle("Authorize this fixed binary probe", isOn: $model.allowConsoleProbe)
                             Text("Leave REC and upload-arm jumpers disconnected. Hello is self-reported identity; it does not attest installed firmware bytes.").font(.caption)

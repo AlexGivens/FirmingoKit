@@ -10,6 +10,7 @@ import stat
 from pathlib import Path
 import plistlib
 import re
+import struct
 import subprocess
 import time
 import uuid
@@ -19,7 +20,9 @@ MAX_CAPTURE = 1024 * 1024
 
 
 DEVICE_BOARDS = ('nano_rp2040_connect', 'raspberry_pi_pico')
-DEVICE_SCENARIOS = ('device.inspect', 'device.console-binary')
+DEVICE_SCENARIOS = ('device.inspect', 'device.console-binary', 'device.state-counters')
+ECHO_PROBES = ('raw-256-v1', 'fms2-command-2-v1')
+STATE_PROBES = {'fms2-state-a-v1': (b'FQ2A', 7), 'fms2-state-b-v1': (b'FQ2B', 23)}
 DEVICE_FIELDS = {'device_address': 'address', 'device_board': 'boardID', 'device_id': 'deviceID',
                  'device_boot_id': 'bootID', 'console_probe': 'consoleProbe'}
 
@@ -73,10 +76,12 @@ def validate_device_selection(value, scenario):
         raise ValueError('select an exact SDK board/device identity')
     if scenario == 'device.inspect':
         if set(value) != {'address','boardID','deviceID'}: raise ValueError('inspection accepts no boot assumption or probe')
-    elif scenario == 'device.console-binary':
+    elif scenario in ('device.console-binary', 'device.state-counters'):
+        probes = ECHO_PROBES if scenario == 'device.console-binary' else STATE_PROBES
         if (set(value) != set(DEVICE_FIELDS.values()) or not re.fullmatch('[0-9a-f]{16}',value['bootID'])
-                or value['consoleProbe'] not in ('raw-256-v1','fms2-command-2-v1')):
-            raise ValueError('inspect first, then explicitly select that boot and fixed binary probe')
+                or value['consoleProbe'] not in probes
+                or (scenario == 'device.state-counters' and value['boardID'] != 'nano_rp2040_connect')):
+            raise ValueError('inspect first, then select that boot and a fixed probe for this scenario and board')
     elif scenario in MANAGED_SCENARIOS:
         if (set(value)!={'address','boardID','deviceID','bootID'} or value['boardID']!='nano_rp2040_connect'
                 or not re.fullmatch('[0-9a-f]{16}',value['bootID'])): raise ValueError('select original inspected Nano boot without console authority')
@@ -114,6 +119,24 @@ def validate_request(request):
     return request
 
 
+def validate_state_replies(received, probe):
+    """Check the two original command-1 replies independently of the app's Swift parser."""
+    tag, seed = STATE_PROBES[probe]
+    sample = struct.Struct('<4s5I')
+    if len(received) != 2 * sample.size:
+        raise ValueError('state probe requires two exact 24-byte replies')
+    first, second = sample.iter_unpack(received)
+    mask = 0xffffffff
+    for observation, expected_nonce in zip((first, second), (49, 115)):
+        observed_tag, nonce, initial_data, initial_bss, counter, loops = observation
+        if (observed_tag != tag or nonce != expected_nonce or initial_data != seed or initial_bss != 0
+                or loops == 0 or counter != (seed + loops) & mask):
+            raise ValueError('state reply did not match variant, nonce or startup values')
+    delta = (second[5] - first[5]) & mask
+    if not 0 < delta < 0x80000000 or ((second[4] - first[4]) & mask) != delta:
+        raise ValueError('state counters did not advance together')
+
+
 def validate_device_report(report, selection):
     """Check actual hardware observation scope and every binary reply byte; nonpass reports retain partial evidence."""
     value = report.get('deviceEvidence')
@@ -126,6 +149,9 @@ def validate_device_report(report, selection):
     if len(received)>257: raise ValueError('excessive probe evidence')
     mismatch = value.get('firstMismatchOffset')
     if mismatch is not None and (type(mismatch) is not int or not 0<=mismatch<=256): raise ValueError('invalid mismatch offset')
+    state_probe = report['scenarioID'] == 'device.state-counters'
+    if state_probe and (len(received) > 49 or value['sentBytes'] not in (0, 2, 4) or mismatch is not None):
+        raise ValueError('invalid state probe evidence bounds')
     if report['status'] != 'passed': return
     snapshot = value.get('snapshot')
     if (not value['connectionAttempted'] or not value['disconnected'] or not isinstance(snapshot,dict)
@@ -140,11 +166,17 @@ def validate_device_report(report, selection):
     if report['scenarioID']=='device.inspect':
         if value['consoleOpened'] or value['probeAttempted'] or value['consoleClosed'] or value['sentBytes'] or received or mismatch is not None:
             raise ValueError('inspection cannot qualify console writes')
-    elif (not value['consoleOpened'] or not value['probeAttempted'] or not value['consoleClosed']
+        return
+    if (not value['consoleOpened'] or not value['probeAttempted'] or not value['consoleClosed']
             or snapshot['bootID'] != selection['bootID'] or not any(c.get('id')==1 and c.get('backend')=='application' for c in snapshot['channels'])
-            or value['sentBytes'] != (257 if selection['consoleProbe']=='fms2-command-2-v1' else 256)
-            or received != bytes(range(256)) or mismatch is not None):
-        raise ValueError('binary probe/boot/cleanup assertions did not pass')
+            or mismatch is not None):
+        raise ValueError('console boot or cleanup assertions did not pass')
+    if state_probe:
+        if value['sentBytes'] != 4 or not any(t.get('id') == 2 and t.get('format') == 'nano-managed-v2' for t in snapshot['targets']):
+            raise ValueError('state probe requires two fixed requests on the selected FMS2 target')
+        validate_state_replies(received, selection['consoleProbe'])
+    elif value['sentBytes'] != (257 if selection['consoleProbe']=='fms2-command-2-v1' else 256) or received != bytes(range(256)):
+        raise ValueError('exact binary echo assertions did not pass')
 
 
 def validate_managed_report(report,request):

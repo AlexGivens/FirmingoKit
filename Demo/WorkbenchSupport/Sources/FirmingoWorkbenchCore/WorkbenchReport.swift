@@ -103,13 +103,14 @@ public struct WorkbenchReport: Codable, Sendable, Identifiable {
         if schema == 1 {
             guard deviceEvidence == nil else { throw WorkbenchFailure("Offline report contains hardware evidence.") }
         } else {
-            guard let deviceEvidence, ["device.inspect", "device.console-binary"].contains(scenarioID),
-                  firmwareBuildID == nil, catalogueSHA256 == nil, artifacts.isEmpty, exercise == nil,
-                  deviceEvidence.received.count <= 257, (0...257).contains(deviceEvidence.sentBytes) else {
+            guard let deviceEvidence, let scenario = WorkbenchScenario.all.first(where: { $0.id == scenarioID }),
+                  scenarioID == "device.inspect" || scenario.usesConsole,
+                  firmwareBuildID == nil, catalogueSHA256 == nil, artifacts.isEmpty, exercise == nil else {
                 throw WorkbenchFailure("Invalid hardware report scope.")
             }
             _ = try WorkbenchRequest(operation: .run, scenarioID: scenarioID, device: deviceEvidence.selection)
-            if status == .passed { try deviceEvidence.validate(console: scenarioID == "device.console-binary") }
+            try deviceEvidence.validateBounds()
+            if status == .passed { try deviceEvidence.validate(console: scenario.usesConsole) }
         }
     }
     /// Creates only a running snapshot, before the journal gate or SDK operation.

@@ -9,6 +9,7 @@ import tempfile
 from unittest.mock import patch
 import json
 from pathlib import Path
+import struct
 import unittest
 import uuid
 
@@ -314,6 +315,45 @@ class WorkbenchCLI(unittest.TestCase):
             with self.assertRaises(ValueError):cli.decode_response(self.envelope(damaged),request,123)
         report['status']='failed';report['deviceEvidence']['received']=''
         self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['status'],'failed')
+
+
+    def test_state_probe_report_requires_two_matching_advancing_samples(self):
+        """Check independent raw FMS2 layouts, selection isolation and partial failures."""
+        for probe, tag, seed in [('fms2-state-a-v1', b'FQ2A', 7), ('fms2-state-b-v1', b'FQ2B', 23)]:
+            request, value = self.fixture()
+            selection = dict(address='192.168.77.1', boardID='nano_rp2040_connect', deviceID='5031503337360009',
+                             bootID='0123456789abcdef', consoleProbe=probe)
+            request.update(schema=2, scenarioID='device.state-counters', device=selection)
+            value['request'] = request
+            report = value['report']
+            report.update(schema=2, scenarioID=request['scenarioID'], deviceOperations=True)
+            samples = b''.join(struct.pack('<4s5I', tag, nonce, seed, 0, (seed + loops) & 0xffffffff, loops)
+                               for nonce, loops in [(49, 0xfffffffe), (115, 2)])
+            report['deviceEvidence'] = dict(selection=selection, connectionAttempted=True, disconnected=True,
+                consoleOpened=True, probeAttempted=True, sentBytes=4, received=base64.b64encode(samples).decode(),
+                consoleClosed=True, snapshot=dict(protocolMajor=1, firmwareVersion='fixture', maximumPayload=4096,
+                    authenticationMode='open-development', deviceID=selection['deviceID'], boardID=selection['boardID'],
+                    bootID=selection['bootID'], channels=[dict(id=1, backend='application')],
+                    targets=[dict(id=2, format='nano-managed-v2')]))
+            self.assertEqual(cli.decode_response(self.envelope(value), request, 123)['report']['status'], 'passed')
+            for other in [dict(selection, boardID='raspberry_pi_pico'), dict(selection, consoleProbe='raw-256-v1')]:
+                with self.assertRaises(ValueError):
+                    cli.validate_device_selection(other, request['scenarioID'])
+            with self.assertRaises(ValueError):
+                cli.validate_device_selection(selection, 'device.console-binary')
+            for offset in [3, 4, 8, 12, 16, 28, 44]:
+                altered = bytearray(samples)
+                altered[offset] ^= 1
+                report['deviceEvidence']['received'] = base64.b64encode(altered).decode()
+                with self.subTest(probe=probe, offset=offset), self.assertRaises(ValueError):
+                    cli.decode_response(self.envelope(value), request, 123)
+            stuck = samples[:24] + struct.pack('<4s5I', tag, 115, seed, 0, (seed - 2) & 0xffffffff, 0xfffffffe)
+            report['deviceEvidence']['received'] = base64.b64encode(stuck).decode()
+            with self.assertRaises(ValueError):
+                cli.decode_response(self.envelope(value), request, 123)
+            report['status'] = 'failed'
+            report['deviceEvidence'].update(sentBytes=2, received=base64.b64encode(samples[:24]).decode())
+            self.assertEqual(cli.decode_response(self.envelope(value), request, 123)['report']['status'], 'failed')
 
 
 if __name__ == '__main__': unittest.main()

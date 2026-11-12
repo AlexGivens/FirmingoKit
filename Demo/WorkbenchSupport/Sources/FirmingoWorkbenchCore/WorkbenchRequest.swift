@@ -52,7 +52,10 @@ public struct WorkbenchRequest: Codable, Sendable, Equatable {
                 if scenarioID == "device.inspect" {
                     guard device.bootID == nil, device.consoleProbe == nil else { throw WorkbenchFailure("Inspection accepts no console probe or boot assumption.") }
                 } else {
-                    guard device.bootID != nil, device.consoleProbe != nil else { throw WorkbenchFailure("Inspect first and explicitly select the boot and binary probe.") }
+                    guard device.bootID != nil, let probe = device.consoleProbe,
+                          WorkbenchDeviceSelection.acceptsProbe(probe, for: scenarioID, boardID: device.boardID) else {
+                        throw WorkbenchFailure("Inspect first and select the boot and fixed probe for this scenario.")
+                    }
                 }
             }
         }

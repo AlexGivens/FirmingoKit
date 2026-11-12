@@ -13,7 +13,7 @@ public struct WorkbenchDeviceEvidence: Codable, Sendable {
     public var consoleOpened = false
     /// Set and durably published before sending any probe bytes; cancellation cannot recall them.
     public var probeAttempted = false
-    /// Transport-accepted byte count; stateful mode includes its one-byte command prefix.
+    /// Transport-accepted byte count, including any fixed command prefixes and nonces.
     public var sentBytes = 0
     /// Exact bounded test reply, never text-decoded or stripped of startup bytes.
     public var received = Data()
@@ -25,6 +25,17 @@ public struct WorkbenchDeviceEvidence: Codable, Sendable {
     public var firstMismatchOffset: Int?
     /// Starts with no claimed hardware observation.
     public init(selection: WorkbenchDeviceSelection) { self.selection = selection }
+    /// Retains at most one extra byte for a failed fixed reply and bounds accepted sends.
+    func validateBounds() throws {
+        if selection.stateSketch != nil {
+            guard received.count <= 2 * NanoStateProbe.sampleBytes + 1, [0, 2, 4].contains(sentBytes),
+                  firstMismatchOffset == nil else { throw WorkbenchFailure("Invalid state probe evidence bounds.") }
+        } else {
+            guard received.count <= 257, (0...257).contains(sentBytes) else {
+                throw WorkbenchFailure("Invalid device evidence bounds.")
+            }
+        }
+    }
     /// Independent terminal assertions prevent an incomplete backend observation from publishing a pass.
     public func validate(console: Bool) throws {
         try selection.validate()
@@ -35,10 +46,18 @@ public struct WorkbenchDeviceEvidence: Codable, Sendable {
         }
         if console {
             guard snapshot.bootID == selection.bootID, snapshot.channels.contains(where: { $0.id == 1 && $0.backend == "application" }),
-                  consoleOpened, probeAttempted, consoleClosed, firstMismatchOffset == nil,
-                  sentBytes == (selection.consoleProbe == "fms2-command-2-v1" ? 257 : 256),
-                  received == Data((0...255).map(UInt8.init)) else {
-                throw WorkbenchFailure("Console evidence does not prove the selected exact binary probe and cleanup.")
+                  consoleOpened, probeAttempted, consoleClosed, firstMismatchOffset == nil else {
+                throw WorkbenchFailure("Console evidence does not prove the selected boot and cleanup.")
+            }
+            if let sketch = selection.stateSketch {
+                guard sentBytes == 4, snapshot.targets.contains(where: { $0.id == 2 && $0.format == "nano-managed-v2" }) else {
+                    throw WorkbenchFailure("State probe requires two fixed requests on the selected FMS2 target.")
+                }
+                try NanoStateProbe.validatePair(received, sketch: sketch)
+            } else {
+                guard sentBytes == (selection.consoleProbe == "fms2-command-2-v1" ? 257 : 256), received == Data(0...255) else {
+                    throw WorkbenchFailure("Console evidence does not prove the selected exact binary echo.")
+                }
             }
         } else {
             guard !consoleOpened, !probeAttempted, !consoleClosed, sentBytes == 0, received.isEmpty,

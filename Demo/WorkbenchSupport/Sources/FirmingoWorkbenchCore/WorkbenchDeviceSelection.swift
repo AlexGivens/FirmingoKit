@@ -14,7 +14,27 @@ public struct WorkbenchDeviceSelection: Codable, Sendable, Equatable {
     /// Explicit authorization for one bounded known application probe; absent for inspection.
     public let consoleProbe: String?
     /// Supported fixed application protocols; never arbitrary data or firmware commands.
-    public static let probes = ["raw-256-v1", "fms2-command-2-v1"]
+    public static let probes = echoProbes + stateProbes
+    /// Protocols accepted by the exact binary echo scenario.
+    private static let echoProbes = ["raw-256-v1", "fms2-command-2-v1"]
+    /// Command-1 variants explicitly selected by the state scenario.
+    private static let stateProbes = ["fms2-state-a-v1", "fms2-state-b-v1"]
+    /// The fixed qualification sketch expected to respond to command 1.
+    var stateSketch: String? {
+        switch consoleProbe {
+        case "fms2-state-a-v1": "state-a"
+        case "fms2-state-b-v1": "state-b"
+        default: nil
+        }
+    }
+    /// Accepts only the selected scenario's fixed protocol and supported board.
+    public static func acceptsProbe(_ probe: String, for scenario: String, boardID: String) -> Bool {
+        switch scenario {
+        case "device.console-binary": echoProbes.contains(probe)
+        case "device.state-counters": boardID == "nano_rp2040_connect" && stateProbes.contains(probe)
+        default: false
+        }
+    }
     /// Construction validates selection only and performs no I/O.
     public init(address: String, boardID: String, deviceID: String, bootID: String? = nil, consoleProbe: String? = nil) throws {
         self.address = address; self.boardID = boardID; self.deviceID = deviceID
@@ -28,7 +48,8 @@ public struct WorkbenchDeviceSelection: Codable, Sendable, Equatable {
         guard parts.count == 4, bytes.count == 4, zip(parts, bytes).allSatisfy({ String($0.1) == $0.0 }),
               bytes[0] == 10 || (bytes[0] == 172 && (16...31).contains(bytes[1])) || (bytes[0] == 192 && bytes[1] == 168),
               FirmingoBoard(rawValue: boardID) != nil, Self.isID(deviceID), bootID == nil || Self.isID(bootID ?? ""),
-              consoleProbe == nil || Self.probes.contains(consoleProbe ?? "") else {
+              consoleProbe == nil || Self.probes.contains(consoleProbe ?? ""),
+              stateSketch == nil || boardID == "nano_rp2040_connect" else {
             throw WorkbenchFailure("Select a private IPv4 endpoint, exact board/device identity and a supported probe.")
         }
     }

@@ -4,7 +4,7 @@ import Foundation
 @main struct CheckNanoState {
     /// Requires the policy rejection so malformed observations cannot count as hardware evidence.
     static func rejected(_ action: () throws -> Void) throws {
-        do { try action() } catch is NanoGate.Rejected { return }
+        do { try action() } catch is NanoStateProbe.Rejected { return }
         throw NSError(domain: "NanoStateChecks", code: 1)
     }
 

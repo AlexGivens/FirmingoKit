@@ -19,8 +19,16 @@ import Testing
         if console {
             evidence.consoleOpened = true; evidence.probeAttempted = true
             evidence.consoleClosed = !incomplete
-            evidence.sentBytes = selection.consoleProbe == "fms2-command-2-v1" ? 257 : 256
-            evidence.received = Data((0...255).map(UInt8.init))
+            if selection.stateSketch != nil {
+                evidence.sentBytes = 4
+                evidence.received = Data([
+                    70, 81, 50, 65, 49, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 6, 1, 0, 0, 255, 0, 0, 0,
+                    70, 81, 50, 65, 115, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 10, 1, 0, 0, 3, 1, 0, 0,
+                ])
+            } else {
+                evidence.sentBytes = selection.consoleProbe == "fms2-command-2-v1" ? 257 : 256
+                evidence.received = Data(0...255)
+            }
         }
         try save(evidence)
     }
@@ -68,9 +76,32 @@ private func fixtureSelection(console: Bool = false) throws -> WorkbenchDeviceSe
 private func fixtureEvidence(_ selection: WorkbenchDeviceSelection) throws -> WorkbenchDeviceEvidence {
     var evidence = WorkbenchDeviceEvidence(selection: selection)
     evidence.connectionAttempted = true; evidence.disconnected = true
-    let json = #"{"protocolMajor":1,"firmwareVersion":"fixture","deviceID":"5031503337360009","bootID":"0123456789abcdef","boardID":"nano_rp2040_connect","maximumPayload":4096,"authenticationMode":"open-development","channels":[{"id":1,"backend":"application","controls":[],"receiveQueueBytes":256,"transmitQueueBytes":256,"isOwned":false}],"targets":[]}"#
+    let json = #"{"protocolMajor":1,"firmwareVersion":"fixture","deviceID":"5031503337360009","bootID":"0123456789abcdef","boardID":"nano_rp2040_connect","maximumPayload":4096,"authenticationMode":"open-development","channels":[{"id":1,"backend":"application","controls":[],"receiveQueueBytes":256,"transmitQueueBytes":256,"isOwned":false}],"targets":[{"id":2,"format":"nano-managed-v2","maximumSize":4096,"maximumChunk":1024,"authorization":"physical-d2-gnd"}]}"#
     evidence.snapshot = try JSONDecoder().decode(WorkbenchDeviceEvidence.Snapshot.self, from: Data(json.utf8))
     return evidence
+}
+
+/// State reports require the selected variant, both replies and observed progress through the shared engine.
+@Test @MainActor func stateCounterEvidenceUsesTheConsoleAndRejectsChangedSamples() async throws {
+    let selection = try WorkbenchDeviceSelection(address: "192.168.77.1", boardID: "nano_rp2040_connect",
+        deviceID: "5031503337360009", bootID: "0123456789abcdef", consoleProbe: "fms2-state-a-v1")
+    let request = try WorkbenchRequest(operation: .run, scenarioID: "device.state-counters", device: selection)
+    #expect(try WorkbenchRequest.decode(JSONEncoder().encode(request)) == request)
+    #expect(throws: WorkbenchFailure.self) { try WorkbenchRequest(operation: .run, scenarioID: "device.console-binary", device: selection) }
+    let device = DeviceFixture(), compiler = DeviceCompilerFixture()
+    let engine = WorkbenchScenarioEngine(backend: compiler, store: DeviceStoreFixture(), deviceBackend: device)
+    let report = try await engine.run(request)
+    #expect(report.status == .passed && report.schema == 2 && device.calls == 1 && compiler.calls == 0)
+    let valid = try #require(report.deviceEvidence)
+    #expect(valid.received.count == 48 && valid.sentBytes == 4)
+    for offset in [3, 4, 8, 12, 16, 28] {
+        var altered = valid
+        altered.received[offset] ^= 1
+        #expect(throws: NanoStateProbe.Rejected.self) { try altered.validate(console: true) }
+    }
+    var nonAdvancing = valid
+    nonAdvancing.received.replaceSubrange(40..<48, with: valid.received[16..<24])
+    #expect(throws: NanoStateProbe.Rejected.self) { try nonAdvancing.validate(console: true) }
 }
 
 /// Version-one requests remain closed; only version two can carry a checked nested device selection.

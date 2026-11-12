@@ -103,9 +103,10 @@ def generate(sdk, sdk_anchor, test_root, plan_anchor, output, permission_check=F
         sources = output / 'Sources'
         for file in sources.iterdir():
             if file.name != 'qualification-context.json': file.unlink()
-        for name in ('NanoGate.swift', 'NanoCandidate.swift', 'NanoStateProbe.swift', 'NanoRecoveryIntent.swift',
+        for name in ('NanoGate.swift', 'NanoCandidate.swift', 'NanoRecoveryIntent.swift',
                      'NanoRecoveryCheckpoint.swift', 'NanoReplyLossGate.swift', 'NanoCommitProxy.swift', 'NanoModel.swift', 'NanoApp.swift'):
             shutil.copyfile(ROOT / 'Validation/NanoHost' / name, sources / name)
+        shutil.copyfile(ROOT / 'Demo/WorkbenchSupport/Sources/FirmingoWorkbenchCore/NanoStateProbe.swift', sources / 'NanoStateProbe.swift')
         if stateful:
             for name in ('state-a.ino', 'state-b.ino'): shutil.copyfile(ROOT / 'Validation/NanoHost' / name, sources / name)
             shutil.copyfile(test_root / 'catalogue.json', sources / 'fms2-catalogue.json')

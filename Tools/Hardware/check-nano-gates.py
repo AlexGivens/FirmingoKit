@@ -12,7 +12,7 @@ def main():
         executable = output / name
         subprocess.run(['xcrun', 'swiftc', '-parse-as-library', '-swift-version', '6', '-warnings-as-errors',
                     '-module-cache-path', str(output / 'cache'), str(root / 'Validation/NanoHost/NanoGate.swift'),
-                    str(root / 'Validation/NanoHost/NanoStateProbe.swift'),
+                    str(root / 'Demo/WorkbenchSupport/Sources/FirmingoWorkbenchCore/NanoStateProbe.swift'),
                     str(root / 'Validation/NanoHost/NanoRecoveryIntent.swift'),
                     str(root / 'Validation/NanoHost/NanoReplyLossGate.swift'),
                     str(root / 'Tools/Hardware' / (name + '.swift')), '-o', str(executable)], check=True, timeout=90)

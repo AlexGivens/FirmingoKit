@@ -189,3 +189,29 @@ mode, Pico, physical busy/path-loss/background/deadline cases and guarded
 upload/ROM migration remain open. Hello is not installed-image attestation;
 no fresh flash readback, first-authorization/cold-attachment matrix, Internet
 coexistence, throughput, soak, minimum-OS or UI/accessibility result is claimed.
+
+## FMS2 initialized state and advancing counters
+
+Workbench build 12 adds `device.state-counters` to Test Lab, CLI and MCP. Use
+the Nano with the reviewed FMS2 resident and either fixed qualification sketch
+already running. Leave D2 and REC disconnected. Run `device.inspect` first and
+select the returned boot with `fms2-state-a-v1` for State A or
+`fms2-state-b-v1` for State B. In Test Lab, choose the corresponding protocol
+and authorize the fixed probe. In MCP, supply the protocol as `console_probe`
+along with the selected address, board, device ID and boot.
+
+The engine verifies the selected boot and advertised target 2
+(`nano-managed-v2`) before opening application channel 1. It sends command 1
+with nonce 49, checks the first reply, then samples with nonce 115 after a
+50 ms interval. Each reply is 24 bytes. The four-byte `FQ2A` or `FQ2B` tag
+precedes five little-endian UInt32 words for nonce, startup data, startup BSS,
+current counter and loop count. The startup data must match the selected seed
+(7 or 23) and the startup BSS must be zero. The two counters must advance
+together under UInt32 wraparound.
+
+A passing schema-two report records four accepted request bytes, both original
+replies in `deviceEvidence.received`, the selected boot and acknowledged console
+cleanup. The CLI/MCP checker validates the raw replies independently. The
+legacy Nano qualification host compiles the same Swift parser from
+WorkbenchSupport. After a manual reboot, inspect the new boot and run a fresh
+scenario to check the startup observations again.

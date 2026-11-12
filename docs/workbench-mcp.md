@@ -324,3 +324,13 @@ Original submission scope and other transaction reports supply device context.
 This host-side validation tightening changes no app, signed input, SDK operation
 or wire schema. CLI / paired / MCP fixtures pass 21 / 11 / 21 cases. The state
 probe, real reply withholding, flash faults and SDK ROM migration remain open.
+
+## FMS2 state probe
+
+Adapter 0.4.0 exposes `device.state-counters` through the existing submit,
+status and report flow. Select `console_probe` as `fms2-state-a-v1` or
+`fms2-state-b-v1` and provide the Nano identity and separately inspected boot.
+Use the same selection when collecting the report. Start a fresh MCP client
+session if its tool schema predates the two state probe values. The independent
+checker verifies the two 24-byte replies, seed, zero BSS, counter progression
+and console cleanup. See the [device scenario guide](workbench-device-scenarios.md).
