@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "FMS2 State B after one explicit managed replacement and again after a manual Nano power cycle through Workbench 12 and the native Codex MCP host.",
+  "app": {
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "12",
+    "sourceCommit": "670af0f8997f2ff2dce0d4231f96c39fc5e4b33b",
+    "executableSHA256": "c8e42a55fd019672b2b364578bd1059b5c51c0ee7ea5fee319ae1bb2ea13b121",
+    "preparedPackageReportSHA256": "0e4734ed2dea8f5ee0d30d15aee9286f3cb01005e0a30037cb7760d1e7dc7f5e",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "codesignVerification": "strict and deep passed"
+  },
+  "hostDevice": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "osVersion": "27.2",
+    "osBuild": "24B119"
+  },
+  "selectedDevice": {
+    "address": "192.168.77.1",
+    "boardID": "nano_rp2040_connect",
+    "deviceID": "5031503337360009",
+    "priorResidentEvidence": "workbench-managed-iphone-qualification.json",
+    "residentOnlyUF2SHA256": "1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f"
+  },
+  "previousStateAQualification": "workbench-iphone-state-qualification.json",
+  "controller": {
+    "adapterVersion": "0.4.0",
+    "certificateSHA256": "18d382107d8509d5fa119c4628f1996f18cb3adb54675ebe0fa4e11115074f25",
+    "stopped": true,
+    "finalSession": {
+      "appVersion": "12",
+      "expired": false,
+      "instanceID": "AE380C9C-674D-453D-8A10-FEC604AF3F4D",
+      "label": "iPhone-state-b-build12",
+      "lastSeenSeconds": 0.22020258428528905,
+      "paired": true,
+      "processID": 11863,
+      "revoked": true,
+      "sessionID": "56DEF089-7D8F-4CC5-B7FC-B75869D9D9E2"
+    }
+  },
+  "controlSurface": "Fresh Codex app-server MCP context using the existing Workbench registration.",
+  "manualObservations": [
+    {
+      "action": "upload arm",
+      "observation": "User replied Armed after the D2-to-GND instruction."
+    },
+    {
+      "action": "reconnect",
+      "observation": "User reported reconnecting and D13 lit after the requested D2 removal and five-second unplug.",
+      "D13": "lit",
+      "automaticMeasurement": false
+    }
+  ],
+  "managedOperation": {
+    "operationID": "268EBD64-A4AB-4F9A-8C0B-E121BA728DE8",
+    "sketch": "state-b",
+    "bootID": "92ca7db9f8aac284",
+    "hostCommitAdmissions": 1,
+    "automaticRetry": false
+  },
+  "independentCapsuleCheck": {
+    "capsuleBytes": 548,
+    "capsuleSHA256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+    "validatorSHA256": "803a617da0b1d55af2a869963b546de70f7316c401b5a5e5c04e052cf8de30d4",
+    "validatorSourceCommit": "85009abaed0b58d124bdabb5bf5001328b235c38",
+    "apiAddress": 268578932,
+    "stateAddress": 536906044,
+    "stateCapacity": 4096,
+    "exitCode": 0,
+    "stdout": "FMS2 linked capsule: code=288 data=4 bss=20; guarded initialization, generation replacement and host boot dispatch passed; ARM NOT executed\n",
+    "ARMExecutionClaim": false
+  },
+  "runs": [
+    {
+      "phase": "install",
+      "schema": 1,
+      "pairing": {
+        "appVersion": "12",
+        "expired": false,
+        "instanceID": "AE380C9C-674D-453D-8A10-FEC604AF3F4D",
+        "label": "iPhone-state-b-build12",
+        "lastSeenSeconds": 0.22123887483030558,
+        "paired": true,
+        "processID": 11863,
+        "revoked": false,
+        "sessionID": "56DEF089-7D8F-4CC5-B7FC-B75869D9D9E2"
+      },
+      "bootID": "92ca7db9f8aac284",
+      "samples": [
+        {
+          "tag": "FQ2B",
+          "nonce": 49,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 1859,
+          "loops": 1836
+        },
+        {
+          "tag": "FQ2B",
+          "nonce": 115,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 1923,
+          "loops": 1900
+        }
+      ],
+      "runs": [
+        {
+          "label": "inspect",
+          "scenarioID": "device.inspect",
+          "runID": "13FC6C35-79B4-40FB-AACE-AE07F3179BFF",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "626153F3-836E-4652-B4E4-43430DDEC513",
+          "evidencePrefix": "install/inspect"
+        },
+        {
+          "label": "stage-b",
+          "scenarioID": "managed.stage",
+          "runID": "268EBD64-A4AB-4F9A-8C0B-E121BA728DE8",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "A3DCF756-CEED-4182-AB17-4E5185CC016E",
+          "evidencePrefix": "install/stage-b"
+        },
+        {
+          "label": "commit-b",
+          "scenarioID": "managed.commit",
+          "runID": "86C9BF5B-3970-4FFA-8868-FD29A029FB22",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "17301A93-12D0-41D9-BFFD-E738BC71D18F",
+          "evidencePrefix": "install/commit-b"
+        },
+        {
+          "label": "query-b",
+          "scenarioID": "managed.reconcile",
+          "runID": "311ED8DE-0AA1-4EF0-BEE4-0AC8F4D28EAD",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "54AD7CAB-3C77-4342-9EA3-B7CBF4DFF551",
+          "evidencePrefix": "install/query-b"
+        },
+        {
+          "label": "state-b",
+          "scenarioID": "device.state-counters",
+          "runID": "C94F806D-C08D-4BCC-858A-8B982F10C973",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "6F611B36-86D3-4DCE-AF31-D0CCE20D279A",
+          "evidencePrefix": "install/state-b"
+        },
+        {
+          "label": "echo-b",
+          "scenarioID": "device.console-binary",
+          "runID": "ED19DA76-0299-4114-871F-03B62716AFFA",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "938FEF4D-E0C5-4B5C-9EFC-A4F5638AD43B",
+          "evidencePrefix": "install/echo-b"
+        }
+      ],
+      "revoked": false
+    },
+    {
+      "phase": "after",
+      "schema": 1,
+      "pairing": {
+        "appVersion": "12",
+        "expired": false,
+        "instanceID": "AE380C9C-674D-453D-8A10-FEC604AF3F4D",
+        "label": "iPhone-state-b-build12",
+        "lastSeenSeconds": 0.22123887483030558,
+        "paired": true,
+        "processID": 11863,
+        "revoked": false,
+        "sessionID": "56DEF089-7D8F-4CC5-B7FC-B75869D9D9E2"
+      },
+      "bootID": "32421b8c86bdabd9",
+      "samples": [
+        {
+          "tag": "FQ2B",
+          "nonce": 49,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 22722,
+          "loops": 22699
+        },
+        {
+          "tag": "FQ2B",
+          "nonce": 115,
+          "initialData": 23,
+          "initialBSS": 0,
+          "counter": 22787,
+          "loops": 22764
+        }
+      ],
+      "runs": [
+        {
+          "label": "inspect",
+          "scenarioID": "device.inspect",
+          "runID": "36306A6E-462C-477A-A420-7E55966D6273",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "6D8EA4A2-330C-430F-AB8C-8ADA99F12334",
+          "evidencePrefix": "after/inspect"
+        },
+        {
+          "label": "state-b",
+          "scenarioID": "device.state-counters",
+          "runID": "36F055F2-03FE-425E-9D53-A5D85062FFF1",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "660EAA0B-509A-4803-BB26-AFEB6DEDC0AB",
+          "evidencePrefix": "after/state-b"
+        },
+        {
+          "label": "echo-b",
+          "scenarioID": "device.console-binary",
+          "runID": "DC5F2C3A-FFCF-4412-9511-E4125A80AF9F",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "1A6DB226-C835-4418-8780-786A9D8048A7",
+          "evidencePrefix": "after/echo-b"
+        }
+      ],
+      "revoked": true
+    }
+  ],
+  "outcomes": {
+    "reports": 9,
+    "passed": 9,
+    "physicalStateBPasses": 2,
+    "distinctBoots": 2,
+    "exactEchoPasses": 2,
+    "explicitCommitAdmissions": 1,
+    "repeatedCommit": false,
+    "pairingRevoked": true,
+    "remainingInstalledSketch": "State B"
+  },
+  "evidenceArchive": {
+    "path": "workbench-iphone-state-b-evidence.json",
+    "bytes": 213679,
+    "sha256": "1b859e7cf0b2723a65176ca78d428ca1b3531e6f9bb242a44b8e2cb8afab1444"
+  },
+  "validation": {
+    "mcpOfflineCases": 21,
+    "nativeCapsuleCheckerExitCode": 0,
+    "reportExportsIndependentlyChecked": 9
+  },
+  "limitations": [
+    "The observations cover the selected Nano, reviewed resident, signed build 12 and this iPhone OS build.",
+    "D13 is an operator observation. SDK samples measure counter progression between requests.",
+    "The native firmware capsule checker verifies structure and host dispatch. Physical execution is evidenced by the on-device state and console replies."
+  ]
+}

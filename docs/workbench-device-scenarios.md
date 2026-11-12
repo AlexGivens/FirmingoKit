@@ -219,5 +219,11 @@ scenario to check the startup observations again.
 The signed build 12 iPhone check passed State A before and after a manual Nano
 power cycle. A deliberately mismatched State B selection was rejected after
 one reply, and the subsequent exact echo passed. The archive keeps each raw
-sample and the original MCP observations. State B positive coverage is offline.
-See the [qualification ledger](workbench-iphone-state-qualification.json).
+sample and the original MCP observations. See the
+[State A qualification ledger](workbench-iphone-state-qualification.json).
+
+The same signed app passed State B after a single managed commit and again
+after a Nano power cycle. Both runs verified seed 23, zero BSS, matching counter
+progress and exact echo. The user reported D13 lit after reconnect. The two
+distinct boot IDs and nine reports are in the
+[State B qualification ledger](workbench-iphone-state-b-qualification.json).

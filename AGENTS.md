@@ -107,9 +107,11 @@ command delivery.
 Workbench build 12 adds the FMS2 state and counter probe through Test Lab,
 CLI and MCP. The iPhone State A check passed on two boots, rejected a selected
 State B variant on the running State A sketch, and passed echo after that
-rejection. See `docs/workbench-iphone-state-qualification.json`. State B has
-positive offline fixture coverage. The legacy Nano host uses the shared Swift
-parser and retains its specialized recovery workflow.
+rejection. See `docs/workbench-iphone-state-qualification.json`. The State B
+follow-up passed after one managed replacement and again after a Nano power
+cycle, with seed 23, zero BSS, advancing counters and exact echo on both
+boots. See `docs/workbench-iphone-state-b-qualification.json`. The legacy Nano
+host uses the shared Swift parser and retains its specialized recovery workflow.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

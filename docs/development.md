@@ -987,3 +987,19 @@ passed on the same boot. State B positive coverage is offline. The six reports,
 original tool envelopes, boot identities and revocation are recorded in the
 [qualification ledger](workbench-iphone-state-qualification.json). The
 controller exited after revocation.
+
+## Workbench State B physical follow-up — 2026-11-11
+
+The same signed build 12 staged and verified State B in RAM, submitted one
+commit, and obtained separate boot-confirmed status through MCP. The actual
+548-byte capsule matched its pinned SHA-256 and passed the independent native
+FMS2 checker.
+
+The iPhone then verified startup data 23 and zero BSS through command 1. Both
+counters advanced by 64 between the first two samples. After the user reconnected
+the Nano, a different boot returned the same startup values and both counters
+advanced by 65. Exact 256-byte echo passed on both boots. D13 was reported lit
+after reconnect. The nine reports passed independent selection and byte checks,
+and all 21 offline MCP tests passed. Pairing was revoked, the controller exited,
+and State B remained installed. See the
+[qualification ledger](workbench-iphone-state-b-qualification.json).

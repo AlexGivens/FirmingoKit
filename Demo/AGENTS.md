@@ -23,8 +23,9 @@ The identical signed build 10 passes selected Nano
 inspection/raw binary console through MCP on the physical iPhone and iPad; broader
 combinations remain separately unqualified. FMS2 command-2 exact echo passes in
 the selected build-11 iPad and iPhone managed workflows. Build 12 adds the
-initialized-state and counter probe, with physical State A results before and
-after a Nano power cycle in [the iPhone ledger](../docs/workbench-iphone-state-qualification.json).
+initialized-state and counter probe. The selected iPhone passed it on two boots
+per variant. See the [State A ledger](../docs/workbench-iphone-state-qualification.json)
+and [State B ledger](../docs/workbench-iphone-state-b-qualification.json).
 The canonical scheme/product is FirmingoWorkbench; preserve the stable app bundle
 identity instead of creating another binary identity for each phase.
 
