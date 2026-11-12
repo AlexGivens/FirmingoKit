@@ -207,8 +207,9 @@ refusal binds the operation/record selection only and makes no device observatio
 its context comes from the original submission and the transaction's other
 checkpoint-bearing reports. It cannot qualify device behavior.
 
-Next investigate clean iPhone attachment and migrate the initialized-data/BSS/
-counter probe and specialized reply-loss/flash-fault/SDK ROM paths. Manual
-D13 observations are not electrical measurements, and command-2 echo does not
-replace the state probe. Broader models, minimum OS, UI/accessibility, arbitrary
-sketches and production 1.0 support remain outside this evidence.
+Workbench build 12 adds the initialized-data, BSS and counter probe. The
+physical iPhone State A checks before and after a power cycle are recorded
+separately in the [state qualification ledger](workbench-iphone-state-qualification.json).
+Clean attachment, specialized reply-loss, flash faults, SDK ROM recovery,
+broader models, minimum OS, UI/accessibility, arbitrary sketches and production
+1.0 support retain their separate qualification scope.

@@ -215,3 +215,9 @@ cleanup. The CLI/MCP checker validates the raw replies independently. The
 legacy Nano qualification host compiles the same Swift parser from
 WorkbenchSupport. After a manual reboot, inspect the new boot and run a fresh
 scenario to check the startup observations again.
+
+The signed build 12 iPhone check passed State A before and after a manual Nano
+power cycle. A deliberately mismatched State B selection was rejected after
+one reply, and the subsequent exact echo passed. The archive keeps each raw
+sample and the original MCP observations. State B positive coverage is offline.
+See the [qualification ledger](workbench-iphone-state-qualification.json).

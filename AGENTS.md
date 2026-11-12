@@ -96,14 +96,20 @@ is not a clean attachment pass or firmware fix. See
 `docs/workbench-managed-iphone-qualification.json`. Pairing/controller are closed
 and D2 removed. A checkpoint-free refusal makes no device observation; the
 independent checker rejects invented device-outcome/record/artifact claims on
-such partial reports. The initialized-state probe and real reply-loss/flash-fault/
-SDK ROM migration remain open; retain specialized hosts.
+such partial reports. Real reply-loss, flash-fault and SDK ROM migration remain
+open. Retain the specialized hosts.
 On 2026-11-11 the iPhone on iOS 27.2 passes three physical attachments on three
 distinct boots with build 11. Identity and exact command-2 echo pass for each.
 The original iOS 27.0.1 attachment failure remains unresolved. See
 `docs/workbench-iphone-attachment-qualification.json`. The controller now handles
 closed connections during HTTP header writes, with a regression for preserved
 command delivery.
+Workbench build 12 adds the FMS2 state and counter probe through Test Lab,
+CLI and MCP. The iPhone State A check passed on two boots, rejected a selected
+State B variant on the running State A sketch, and passed echo after that
+rejection. See `docs/workbench-iphone-state-qualification.json`. State B has
+positive offline fixture coverage. The legacy Nano host uses the shared Swift
+parser and retains its specialized recovery workflow.
 
 
 On 2026-10-14 the exact reproduced Compiler service `a7648688…` passed scoped

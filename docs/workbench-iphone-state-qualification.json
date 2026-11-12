@@ -1,0 +1,216 @@
+{
+  "schema": 1,
+  "date": "2026-11-11",
+  "scope": "FMS2 State A before and after a manual Nano power cycle through signed Workbench 12 and the native Codex MCP host.",
+  "app": {
+    "appIdentifier": "com.firmingokit.demo",
+    "appVersion": "12",
+    "sourceCommit": "670af0f8997f2ff2dce0d4231f96c39fc5e4b33b",
+    "executableSHA256": "c8e42a55fd019672b2b364578bd1059b5c51c0ee7ea5fee319ae1bb2ea13b121",
+    "preparedPackageReportSHA256": "0e4734ed2dea8f5ee0d30d15aee9286f3cb01005e0a30037cb7760d1e7dc7f5e",
+    "consumerManifestSHA256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a",
+    "codesignVerification": "strict and deep passed"
+  },
+  "hostDevice": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "osVersion": "27.2",
+    "osBuild": "24B119"
+  },
+  "selectedDevice": {
+    "address": "192.168.77.1",
+    "boardID": "nano_rp2040_connect",
+    "deviceID": "5031503337360009",
+    "priorResidentEvidence": "workbench-managed-iphone-qualification.json",
+    "installedSketchBeforeTest": "State A, user confirmed unchanged"
+  },
+  "controller": {
+    "adapterVersion": "0.4.0",
+    "certificateSHA256": "091ed34c31649d46e1da0fbcc80232408f27f2a06af2df605f2f3587da28b38a",
+    "stopped": true,
+    "finalSession": {
+      "appVersion": "12",
+      "expired": false,
+      "instanceID": "FF65E11D-054A-43D5-AFF9-617B35C14485",
+      "label": "iPhone-state-build12",
+      "lastSeenSeconds": 0.25713533302769065,
+      "paired": true,
+      "processID": 11847,
+      "revoked": true,
+      "sessionID": "F906C6DE-097B-4A16-8ED9-7F9CC9E7319A"
+    }
+  },
+  "controlSurface": "Fresh Codex app-server MCP context using the existing registration. The desktop tool schema advertised the previous probe choices.",
+  "manualObservations": [
+    "The user confirmed the iPhone was unlocked, the Nano connected and the installed sketch unchanged.",
+    "The user reported reconnecting after the requested five-second USB power cycle."
+  ],
+  "runs": [
+    {
+      "phase": "before",
+      "schema": 1,
+      "pairing": {
+        "appVersion": "12",
+        "expired": false,
+        "instanceID": "FF65E11D-054A-43D5-AFF9-617B35C14485",
+        "label": "iPhone-state-build12",
+        "lastSeenSeconds": 0.02824487490579486,
+        "paired": true,
+        "processID": 11847,
+        "revoked": false,
+        "sessionID": "F906C6DE-097B-4A16-8ED9-7F9CC9E7319A"
+      },
+      "bootID": "e62bbf5e9b52edf1",
+      "samples": [
+        {
+          "tag": "FQ2A",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 78527,
+          "loops": 78520
+        },
+        {
+          "tag": "FQ2A",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 78597,
+          "loops": 78590
+        }
+      ],
+      "runs": [
+        {
+          "label": "inspect",
+          "scenarioID": "device.inspect",
+          "runID": "E0E85419-A04B-43B9-A0DD-5D829561F4B5",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "DD03B13A-B4E9-46A6-84BD-A13FD25105E3",
+          "evidencePrefix": "before/inspect"
+        },
+        {
+          "label": "state-a",
+          "scenarioID": "device.state-counters",
+          "runID": "EDBC9AC3-379E-43A3-8D3C-409E955311F5",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "F7F026BB-BFFA-476C-A991-EE980ED135BF",
+          "evidencePrefix": "before/state-a"
+        },
+        {
+          "label": "wrong-variant",
+          "scenarioID": "device.state-counters",
+          "runID": "7C0F66F9-E3BF-4489-BEF6-722D9EF3DE73",
+          "expectedStatus": "failed",
+          "status": "failed",
+          "reportCommandID": "E08C0B93-51FE-4C5D-939F-18B840D4AF33",
+          "evidencePrefix": "before/wrong-variant"
+        },
+        {
+          "label": "echo-after-rejection",
+          "scenarioID": "device.console-binary",
+          "runID": "B0A2D4B3-26A4-4670-B53B-FDA117D55468",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "DC0EA50E-C54C-45B8-9410-B77CCED916B7",
+          "evidencePrefix": "before/echo-after-rejection"
+        }
+      ],
+      "revoked": false
+    },
+    {
+      "phase": "after",
+      "schema": 1,
+      "pairing": {
+        "appVersion": "12",
+        "expired": false,
+        "instanceID": "FF65E11D-054A-43D5-AFF9-617B35C14485",
+        "label": "iPhone-state-build12",
+        "lastSeenSeconds": 0.02824487490579486,
+        "paired": true,
+        "processID": 11847,
+        "revoked": false,
+        "sessionID": "F906C6DE-097B-4A16-8ED9-7F9CC9E7319A"
+      },
+      "bootID": "92ca7db9f8aac284",
+      "samples": [
+        {
+          "tag": "FQ2A",
+          "nonce": 49,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 21414,
+          "loops": 21407
+        },
+        {
+          "tag": "FQ2A",
+          "nonce": 115,
+          "initialData": 7,
+          "initialBSS": 0,
+          "counter": 21478,
+          "loops": 21471
+        }
+      ],
+      "runs": [
+        {
+          "label": "inspect",
+          "scenarioID": "device.inspect",
+          "runID": "DDAF4C0F-0865-463F-8339-FEDB5891D115",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "47EDFF25-104E-48FA-9ECB-349208C3D681",
+          "evidencePrefix": "after/inspect"
+        },
+        {
+          "label": "state-a",
+          "scenarioID": "device.state-counters",
+          "runID": "A395059D-825D-4BF6-B96B-ECCCE945D9EF",
+          "expectedStatus": "passed",
+          "status": "passed",
+          "reportCommandID": "10DA32FF-07DC-454E-A7A4-FE58C7811999",
+          "evidencePrefix": "after/state-a"
+        }
+      ],
+      "revoked": true
+    }
+  ],
+  "outcomes": {
+    "reports": 6,
+    "passed": 5,
+    "expectedWrongVariantFailure": 1,
+    "physicalStateAPasses": 2,
+    "physicalStateBPasses": 0,
+    "distinctBoots": 2,
+    "binaryEchoAfterRejectionPassed": true,
+    "pairingRevoked": true,
+    "installOperations": 0
+  },
+  "evidenceArchive": {
+    "path": "workbench-iphone-state-evidence.json",
+    "bytes": 122013,
+    "sha256": "622b9e8699940f24dd5c329426cd7a4173abaf7255ae189fc2200bee5945fc9b"
+  },
+  "validation": {
+    "sdkEntryPoint": "node Tools/ManagedWASM/run-validation.mjs",
+    "swiftWorkbenchDiscovered": 40,
+    "swiftWorkbenchOptInSkips": 2,
+    "cliCases": 22,
+    "pairedCases": 12,
+    "mcpCases": 21,
+    "legacyNanoHostFixtures": 9,
+    "appleBuilds": [
+      "signed iOS Release",
+      "unsigned macOS Release"
+    ],
+    "legacyAppleSourceChecks": [
+      "abi-one and FMS2 macOS type-check",
+      "abi-one and FMS2 optimized iOS object compilation"
+    ]
+  },
+  "limitations": [
+    "State B positive replies were checked in offline fixtures. The physical wrong-variant case used the running State A sketch.",
+    "The two samples in each run establish startup observations and advancing counters. Their elapsed interval does not measure Nano boot time.",
+    "The hardware checks used MCP. Test Lab was validated by the shared engine tests and platform builds."
+  ]
+}

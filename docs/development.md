@@ -964,3 +964,26 @@ passed 12 and 21 cases respectively with `python3 -I -S -B` on
 `Tools/Workbench/test-paired.py` and `Tools/Workbench/test-mcp.py`. The archived
 hardware reports were independently revalidated against their recorded selection.
 Pairing was revoked and the controller exited.
+
+## Workbench FMS2 state and counter probe — 2026-11-11
+
+The maintained SDK validation entry point passed with 40 Workbench cases
+discovered (two opt-in skips), 22 CLI, 12 paired-controller, 21 MCP and nine
+legacy Nano-host fixture cases. The legacy admission, state and recovery checks
+also passed. The original state parser now lives in WorkbenchSupport and is
+compiled into the generated legacy host. Both legacy configurations passed
+macOS type checking and optimized iOS source compilation.
+
+The prepared source from `670af0f` built a development-signed iOS Release app
+and an unsigned macOS Release app with Xcode 27.2. Strict/deep signature
+verification passed for build 12. The iPhone 15 Pro Max on iOS 27.2 (24B119)
+ran the new scenario through a fresh native MCP context with adapter 0.4.0.
+
+State A returned seed 7 and zero BSS on both observed boots. The loop count
+advanced from 78,520 to 78,590 before the user reconnect and from 21,407 to
+21,471 afterward. The counter advanced by the same deltas. A State B selection
+on State A failed after its first 24-byte reply, then exact command-2 echo
+passed on the same boot. State B positive coverage is offline. The six reports,
+original tool envelopes, boot identities and revocation are recorded in the
+[qualification ledger](workbench-iphone-state-qualification.json). The
+controller exited after revocation.
