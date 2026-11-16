@@ -68,7 +68,8 @@ public actor ManagedSketchCompiler {
     }
 
     /// Compiles an exact verified catalogue selection without connecting or creating any physical-device identity.
-    /// Uses the same verified service, source restrictions, eight bounded progress notifications, 60-second
+    /// Uses the same verified service and 60-second deadline, with one extra progress event per helper translation unit.
+    /// FMS2 source bundles emit versioned input and receipt metadata while retaining original helper diagnostics.
     /// runtime deadline and cancellation cleanup as the legacy overload. Both overloads share one busy gate;
     /// a failed/cancelled build cannot return stale bytes. The receipt records source/catalogue/descriptor/
     /// recipe/toolchain identity. Bind its artifact explicitly before upload; build success is not hardware proof.

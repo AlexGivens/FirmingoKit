@@ -233,3 +233,22 @@ matching hello after recovery. First-page initial boot had one preserved TCP
 timeout before later separate read-only success; its cause remains unresolved.
 First installation from non-Firmingo firmware, sandbox, minimum OS and power
 loss inside a chip command remain unqualified.
+## Files-assisted Nano installation in Workbench
+
+Workbench build 14 has a Files-assisted setup and recovery path on iPhone and
+iPad for the pinned Nano FMS2 `1.0.0-rc.1` composite. Its SHA-256 is
+`5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af`.
+For a prepared app build, add `--mobile-rom-image REVIEWED_UF2` to
+`prepare-sdk-package.mjs`. Source builds can import those same verified bytes
+from Files. The composite contains the resident and known State A starter.
+
+In a Workbench document, open **Install or Recover Firmingo**. Prepare a new
+attempt, save the UF2 locally, enter ROM mode with REC, and copy the file to
+the root of `RPI-RP2` in Files. Leave D2 disconnected. Return to the sheet and
+report the copy after the Nano reboots. Workbench resumes the pending record
+across app launches and performs a bounded fresh hello, checks FMS2 capabilities,
+and probes the starter and binary console before you review the device association.
+Evidence consists of a verified source image, a user-reported copy and functional
+observations from the running device. The exact flash contents require separate
+readback. Pending records block Workbench deployments. Recovery starts a fresh
+explicit Files attempt from the verified cache and retains the previous journal.

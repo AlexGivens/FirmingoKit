@@ -6,8 +6,12 @@ import { fileURLToPath } from "node:url";
 import { verifyConsumerPackage, fileRecord } from "./consumer-package.mjs";
 
 // Creates a clean self-contained SDK source package outside Git; no downloader, device operation or publication.
-const [directory, expected, destination] = process.argv.slice(2);
-if (!directory || !expected || !destination || process.argv.length !== 5) throw new Error("Use prepare-sdk-package.mjs PACKAGE TRUSTED_MANIFEST_SHA256 NEW_OUTPUT");
+const [directory, expected, destination, ...options] = process.argv.slice(2);
+if (!directory || !expected || !destination || (options.length !== 0 && (options.length !== 2 || options[0] !== "--mobile-rom-image")))
+  throw new Error("Use prepare-sdk-package.mjs PACKAGE TRUSTED_MANIFEST_SHA256 NEW_OUTPUT [--mobile-rom-image REVIEWED_UF2]");
+const mobileImage = options[1] && resolve(options[1]);
+const mobilePath = "Demo/Shared/Firmingo-Nano-FMS2-1.0.0-rc.1.uf2";
+const mobileDigest = "5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af";
 const sdk = fileURLToPath(new URL("../../", import.meta.url));
 const git = args => {
   const result = spawnSync("git", ["--no-optional-locks", "-C", sdk, ...args], { encoding: "utf8", timeout: 15000 });
@@ -35,6 +39,11 @@ try {
   const copied = fileRecord(join(root, service.path), service.bytes, join(output, resource, "compiler.wasm"));
   if (copied.sha256 !== service.sha256 || copied.bytes !== service.bytes) throw new Error("Prepared service differs from reviewed package");
   records.push({ path: resource + "/compiler.wasm", ...copied });
+  if (mobileImage) {
+    const image = fileRecord(mobileImage, 316416, join(output, mobilePath));
+    if (image.bytes !== 316416 || image.sha256 !== mobileDigest) throw new Error("Select the exact reviewed Nano FMS2 composite image");
+    records.push({ path: mobilePath, ...image });
+  }
   // Carry the complete paired service/source/notice delivery with this SDK distribution, outside app resources.
   for (const file of manifest.files.filter(file => file.path.startsWith("service/"))) {
     const path = "CompilerDelivery/" + file.path.slice(8), target = join(output, path);

@@ -17,5 +17,8 @@ public struct ManagedOfflineBuildRequest: Equatable, Sendable {
         self.snapshot = snapshot
         catalogueSHA256 = catalogue.manifestSHA256
         firmwareBuild = try catalogue.build(id: firmwareBuildID)
+        guard snapshot.files.isEmpty || firmwareBuild.profile == .nanoManagedV2 else {
+            throw SketchBuildError.invalidInput("Source bundles require a managed FMS2 build")
+        }
     }
 }

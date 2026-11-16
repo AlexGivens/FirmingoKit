@@ -28,6 +28,10 @@ import AppKit
     private var progress: (@Sendable (ManagedCompilationPhase) -> Void)?
     /// Enforces the worker's finite ordered progress sequence.
     private var phaseIndex = 0
+    /// Exact phases and version for the versioned admitted portable request.
+    private var phases: [String] = []
+    /// Version for incoming progress correlation.
+    private var interfaceVersion: UInt32 = 1
     /// True only after native code dispatched the reviewed compiler call.
     private var compileDispatched = false
 
@@ -68,6 +72,7 @@ import AppKit
         bridgeFunction = function
         self.elfBase64 = elfBase64
         inputJSON = String(decoding: request.json, as: UTF8.self); buildID = request.buildID
+        phases = request.phases; interfaceVersion = request.interfaceVersion
         self.progress = progress
         let configuration = WKWebViewConfiguration()
         configuration.websiteDataStore = .nonPersistent()
@@ -127,10 +132,9 @@ import AppKit
                   let json = message.body as? String, json.utf8.count <= 512 else { throw WireJSON.invalid }
             let value = try WireJSON.parse(Data(json.utf8))
             guard Set(try value.object().keys) == Set(["interfaceVersion", "buildID", "sequence", "kind", "phase"].map { Data($0.utf8) }),
-                  try value.required("interfaceVersion").uint32() == 1, try value.required("buildID").string() == buildID,
+                  try value.required("interfaceVersion").uint32() == interfaceVersion, try value.required("buildID").string() == buildID,
                   try value.required("sequence").uint32() == sequence + 1,
                   try value.required("kind").string() == "progress" else { throw WireJSON.invalid }
-            let phases = ["verifying", "preprocessing", "compiling", "compiling", "linking", "validating", "packaging"]
             guard phaseIndex < phases.count, try value.required("phase").string() == phases[phaseIndex] else { throw WireJSON.invalid }
             let mapped: ManagedCompilationPhase? = switch phases[phaseIndex] {
             case "verifying": .verifying

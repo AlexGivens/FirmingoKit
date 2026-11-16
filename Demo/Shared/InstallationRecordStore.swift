@@ -91,6 +91,80 @@ actor InstallationRecordStore {
         try beginDeployment(managedRun: false)
     }
 
+    /// Restores the exact pending or completed mobile record without performing any operation.
+    func loadFilesInstallation() throws -> ManagedROMInstall.Record? {
+        let url = try directory().appendingPathComponent("files-installation.json")
+        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+        let record = try JSONDecoder().decode(ManagedROMInstall.Record.self, from: readBoundedRecord(url))
+        try record.validate()
+        return record
+    }
+
+    /// One app-owned cache path, always independently validated before the user receives the bytes.
+    func filesImageURL() throws -> URL {
+        try directory().appendingPathComponent(ManagedROMInstall.filename)
+    }
+
+    /// Persists verified bytes and a fresh pending attempt before the handoff can occur.
+    /// Recovery can replace the pending pointer while preserving the previous journal.
+    func beginFilesHandoff(_ record: ManagedROMInstall.Record, image: ManagedROMInstall,
+                           replacing previous: ManagedROMInstall.Record?) throws {
+        try Task.checkCancellation()
+        guard activeOperation == nil else { throw DemoOperationError.busy }
+        guard try workbenchManagedOwner() == nil, try loadManaged() == nil else {
+            throw DemoOperationError.pendingManagedTransaction
+        }
+        guard try loadFilesInstallation() == previous,
+              previous == nil || previous?.observedDeviceID != nil || record.recovery,
+              !record.copyReported, record.observedDeviceID == nil else { throw DemoOperationError.contextChanged }
+        try durableWrite(image.bytes, to: filesImageURL())
+        try saveFilesRecord(record)
+    }
+
+    /// Records the user-reported copy separately from system document export or post-boot success.
+    func reportFilesCopy(_ expected: ManagedROMInstall.Record) throws -> ManagedROMInstall.Record {
+        guard activeOperation == nil, try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
+        var updated = expected
+        try updated.reportCopy()
+        try saveFilesRecord(updated)
+        return updated
+    }
+
+    /// Reserves the normal device gate for one explicit verification attempt without creating a write token.
+    func beginFilesVerification(_ expected: ManagedROMInstall.Record) throws -> UUID {
+        try Task.checkCancellation()
+        guard activeOperation == nil else { throw DemoOperationError.busy }
+        guard expected.copyReported, expected.observedDeviceID == nil,
+              try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
+        let id = UUID()
+        activeOperation = (id, false)
+        return id
+    }
+
+    /// Updates the roster and then resolves the pending record; a failed final save still blocks deployment.
+    func associateFilesInstallation(_ expected: ManagedROMInstall.Record,
+                                    observation: ManagedROMInstall.Observation) throws -> ManagedROMInstall.Record {
+        try Task.checkCancellation()
+        guard activeOperation == nil, try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
+        var updated = expected
+        let association = try updated.associate(observation)
+        var roster = try loadAssociations()
+        roster.removeAll { $0.deviceID == association.deviceID }
+        roster.append(association)
+        _ = try writeAssociations(roster)
+        try saveFilesRecord(updated)
+        return updated
+    }
+
+    /// Keeps operation history and atomically advances the shared pointer.
+    private func saveFilesRecord(_ record: ManagedROMInstall.Record) throws {
+        try record.validate()
+        let bytes = try JSONEncoder().encode(record)
+        let folder = try directory()
+        try durableWrite(bytes, to: folder.appendingPathComponent("files-" + record.operationID.uuidString + ".json"))
+        try durableWrite(bytes, to: folder.appendingPathComponent("files-installation.json"))
+    }
+
     /// Requires the currently saved transaction before an explicit fresh read-only status connection.
     func beginManagedReview(_ expected: ManagedUploadRecord) throws -> UUID {
         try Task.checkCancellation()
@@ -180,6 +254,9 @@ actor InstallationRecordStore {
         guard activeOperation == nil else { throw DemoOperationError.busy }
         guard try workbenchManagedOwner() == nil else { throw DemoOperationError.pendingManagedTransaction }
         guard try loadManaged() == nil else { throw DemoOperationError.pendingManagedTransaction }
+        if let files = try loadFilesInstallation(), files.observedDeviceID == nil {
+            throw DemoOperationError.pendingFilesInstallation
+        }
         let id = UUID()
         activeOperation = (id, managedRun)
         return id

@@ -31,10 +31,11 @@ struct ManagedPortableOutput: Sendable {
         let root = try WireJSON.parse(Data(json.utf8), maximumBytes: 3_500_000, maximumTokens: 4096)
         let event = try root.required("event")
         guard try root.required("schema").uint32() == 1,
-              try event.required("interfaceVersion").uint32() == 1,
+              try event.required("interfaceVersion").uint32() == request.interfaceVersion,
               try event.required("kind").string() == "result",
               try event.required("buildID").string() == request.buildID else { throw WireJSON.invalid }
-        _ = try integer(event.required("sequence"), minimum: 1, maximum: 136)
+        let maximumSequence = request.phases.count + 129
+        _ = try integer(event.required("sequence"), minimum: 1, maximum: maximumSequence)
         let outcome = try event.required("outcome").string()
         let diagnostics = try diagnosticRecords(root.required("diagnostics"))
         if outcome != "succeeded" {
@@ -63,21 +64,23 @@ struct ManagedPortableOutput: Sendable {
         try fields(root, ["schema", "event", "diagnostics", "preparation", "memoryBytes", "linkedELFBase64"])
         try fields(event, ["interfaceVersion", "kind", "buildID", "sequence", "outcome", "artifact"])
         guard !diagnostics.contains(where: { $0.severity == .error }) else { throw WireJSON.invalid }
-        guard try integer(event.required("sequence"), minimum: 1, maximum: 136) == 8 + diagnostics.count else { throw WireJSON.invalid }
+        guard try integer(event.required("sequence"), minimum: 1, maximum: maximumSequence) ==
+                  request.phases.count + 1 + diagnostics.count else { throw WireJSON.invalid }
         let artifact = try event.required("artifact")
         try fields(artifact, ["format", "filename", "bytes", "sha256", "reportJSON", "receipt"])
         guard try artifact.required("format").string() == request.profile.rawValue,
               try artifact.required("filename").string() == String(request.snapshot.filename.dropLast(4)) + ".fms" else { throw WireJSON.invalid }
         let bytes = try binary(artifact.required("bytes"), minimum: 260, maximum: 4096)
         let receipt = try artifact.required("receipt")
-        let names = ["receiptSchema", "operation", "provenanceStatus", "requestSHA256", "buildID", "sourceRevision", "sourceFilename",
+        var names = ["receiptSchema", "operation", "provenanceStatus", "requestSHA256", "buildID", "sourceRevision", "sourceFilename",
             "sourceSHA256", "translationUnitSHA256", request.targetIdentityKey, "board", "profile", "provenance", "interfaceVersion",
             "service", "wasiShim", "toolchainManifest", "recipeAssets", "buildInputSHA256", "linkedELFSHA256", "capsuleSHA256", "capsuleBytes"]
+        if request.interfaceVersion == 2 { names += ["sourceFiles", "sourceBundleSHA256"] }
         try fields(receipt, names)
-        guard try receipt.required("receiptSchema").string() == "firmingo-compiler-build-v1",
+        guard try receipt.required("receiptSchema").string() == "firmingo-compiler-build-v" + String(request.interfaceVersion),
               try receipt.required("operation").string() == "wasm_compile_link_package",
               try receipt.required("provenanceStatus").string() == "pinned_assets_executed",
-              try receipt.required("interfaceVersion").uint32() == 1,
+              try receipt.required("interfaceVersion").uint32() == request.interfaceVersion,
               try receipt.required("buildID").string() == request.buildID,
               try receipt.required("sourceRevision").string() == request.revisionToken,
               try receipt.required("sourceFilename").string() == request.snapshot.filename,
@@ -139,9 +142,23 @@ struct ManagedPortableOutput: Sendable {
         let report = Data(try artifact.required("reportJSON").string().utf8)
         guard report.count <= 16384 else { throw WireJSON.invalid }
         let reportValue = try WireJSON.parse(report)
+        let sourceHashes = try reportValue.required("source_sha256")
         guard try reportValue.required("linked_elf_sha256").string() == linkedHash,
-              try reportValue.required("source_sha256").required("sketch/" + request.snapshot.filename).string() == sourceSHA256,
-              try reportValue.required("source_sha256").required("generated/Sketch.cpp").string() == unitSHA256 else { throw WireJSON.invalid }
+              try sourceHashes.required("sketch/" + request.snapshot.filename).string() == sourceSHA256,
+              try sourceHashes.required("generated/Sketch.cpp").string() == unitSHA256 else { throw WireJSON.invalid }
+        if request.interfaceVersion == 2 {
+            let helpers = ManagedOfflineSketchArtifact.Receipt.identities(request.snapshot)
+            let bundle = try ManagedOfflineSketchArtifact.Receipt.bundleDigest(
+                primary: .init(path: request.snapshot.filename, sha256: sourceSHA256), helpers: helpers)
+            let reported = try receipt.required("sourceFiles").array()
+            guard reported.count == helpers.count, try receipt.required("sourceBundleSHA256").string() == bundle else { throw WireJSON.invalid }
+            for (entry, expected) in zip(reported, helpers) {
+                try fields(entry, ["path", "sha256"])
+                guard try entry.required("path").string() == expected.path,
+                      try entry.required("sha256").string() == expected.sha256,
+                      try sourceHashes.required("sketch/" + expected.path).string() == expected.sha256 else { throw WireJSON.invalid }
+            }
+        }
         _ = try ManagedCapsulePayload(bytes: bytes, reportJSON: report, apiAddress: request.apiAddress, residentELFSHA256: request.residentELFSHA256, state: request.state)
         // Recompute receipt identity from parsed closed data rather than trusting its declared digest.
         var receiptObject = try dictionary(receipt)

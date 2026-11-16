@@ -6,6 +6,8 @@ enum DemoOperationError: Error, LocalizedError, Equatable {
     case busy
     /// A retained managed transaction requires a separate review or explicit clear.
     case pendingManagedTransaction
+    /// A Files-assisted installation needs explicit verification or recovery first.
+    case pendingFilesInstallation
     /// This window's reviewed journal no longer matches the current saved context.
     case contextChanged
     /// A journal update did not carry the current managed Run's reservation.
@@ -22,6 +24,7 @@ enum DemoOperationError: Error, LocalizedError, Equatable {
         switch self {
         case .busy: "Another window is performing a device operation. Wait for it to finish before requesting this action."
         case .pendingManagedTransaction: "A saved managed transaction requires review. Check or clear its context before requesting another deployment."
+        case .pendingFilesInstallation: "Finish or recover the pending Files installation before another deployment."
         case .contextChanged: "Saved run context changed in another window. Review the current context before requesting this action again."
         case .invalidReservation: "The device-operation reservation is no longer valid. No commit is authorized by this journal update."
         case .associationChanged: "Saved device associations changed. Reload and review the current evidence before requesting this action again."

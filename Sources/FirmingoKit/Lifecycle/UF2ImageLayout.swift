@@ -13,6 +13,33 @@ struct UF2ImageLayout {
     /// Only family-present, 256-byte payload, zero-padded, contiguous flash images are accepted.
     /// Blocks can arrive in any file order; block numbers must cover the entire sequence exactly.
     init(bytes: Data, board: FirmingoBoard) throws {
+        let count = try Self.validateBlocks(bytes: bytes, board: board) { number in
+            FirmwareReleaseContract.flashStart + number * 256
+        }
+        let end = FirmwareReleaseContract.flashStart + UInt32(count) * 256
+        let eraseEnd = (end + 4095) & ~UInt32(4095)
+        guard eraseEnd <= FirmwareReleaseContract.flashEnd(for: board) else {
+            throw FirmwareLifecycleError.invalidImage("erase extent enters reserved flash")
+        }
+        payloadRange = FirmwareReleaseContract.flashStart..<end
+        eraseRange = FirmwareReleaseContract.flashStart..<eraseEnd
+        blockCount = count
+    }
+
+    /// Validates a reviewed Nano composite whose only non-resident writes cover the first managed sector.
+    static func validateManagedInitial(bytes: Data, residentBlocks: UInt32) throws {
+        guard residentBlocks > 0, residentBlocks <= 8192, bytes.count / 512 == Int(residentBlocks) + 16 else {
+            throw FirmwareLifecycleError.invalidImage("invalid resident or managed-sector extent")
+        }
+        _ = try validateBlocks(bytes: bytes, board: .nanoRP2040Connect) { number in
+            number < residentBlocks ? FirmwareReleaseContract.flashStart + number * 256 :
+                0x10200000 + (number - residentBlocks) * 256
+        }
+    }
+
+    /// Applies the shared finite RP2040 header, sequence, padding and per-block flash bounds.
+    private static func validateBlocks(bytes: Data, board: FirmingoBoard,
+                                       addressForBlock: (UInt32) -> UInt32) throws -> Int {
         guard !bytes.isEmpty, bytes.count % 512 == 0,
               bytes.count <= FirmwareReleaseContract.maximumImageBytes else {
             throw FirmwareLifecycleError.invalidImage("incomplete or excessive UF2 blocks")
@@ -35,20 +62,13 @@ struct UF2ImageLayout {
                 throw FirmwareLifecycleError.invalidImage("invalid UF2 header, padding, or block sequence")
             }
             // The bounded block number makes multiplication/addition safe before address comparison.
-            guard address == FirmwareReleaseContract.flashStart + number * 256,
+            guard address == addressForBlock(number),
                   address < FirmwareReleaseContract.flashEnd(for: board),
                   FirmwareReleaseContract.flashEnd(for: board) - address >= 256 else {
                 throw FirmwareLifecycleError.invalidImage("unsupported flash address or image layout")
             }
         }
-        let end = FirmwareReleaseContract.flashStart + UInt32(count) * 256
-        let eraseEnd = (end + 4095) & ~UInt32(4095)
-        guard eraseEnd <= FirmwareReleaseContract.flashEnd(for: board) else {
-            throw FirmwareLifecycleError.invalidImage("erase extent enters reserved flash")
-        }
-        payloadRange = FirmwareReleaseContract.flashStart..<end
-        eraseRange = FirmwareReleaseContract.flashStart..<eraseEnd
-        blockCount = count
+        return count
     }
     /// Reads a little-endian u32 after the complete-block bounds check.
     private static func u32(_ bytes: [UInt8], at offset: Int) -> UInt32 {

@@ -393,6 +393,18 @@ See [delivery integration](docs/compiler-delivery.md) for exact identities and c
 
 ## Firmingo Workbench consolidation — 2026-11-02
 
+### Mobile installation and Swift source bundles
+
+- [x] Add Workbench's Files-assisted install and recovery flow for the exact Nano
+  FMS2 candidate, with a verified local image, durable pending context and
+  post-boot validation before an explicit association. See
+  [firmware lifecycle](docs/firmware-lifecycle.md#files-assisted-nano-installation-in-workbench).
+- [x] Pass FMS2 source bundles through Swift and Workbench with versioned receipts
+  and original helper diagnostics. See [Swift source bundles](docs/compiler.md#swift-source-bundles).
+- [ ] Qualify the Files installation and an interrupted-copy recovery on iPad
+  and iPhone, including first installation on a board running non-Firmingo
+  firmware and a subsequent offline multi-file compile/upload.
+
 - [x] First increment locally validated: app-owned shared scenario engine and versioned CLI, Test Lab in the existing demo, migrated compiler cases, bounded correlated evidence, local tests/builds and updated CI definitions. One signed macOS binary passed real WASM vectors and diagnostic recovery; remote CI and physical/UI qualification remain separate. [Work log and scope](docs/workbench-consolidation.md).
 - [x] Implement compiler lifecycle/deadline/stress consolidation: shared scenarios, real mobile scene adapter, bounded evidence and independent CLI checks. One signed macOS Workbench passes actual busy/cancellation, 60.633-second deadline expiry/fresh recovery and twenty exact repeated builds; all platform builds pass. [Work log](docs/workbench-compiler-scenarios.md). Physical lifecycle passes are recorded below; paired compiler evidence is tracked separately.
 - [x] Qualify the three Workbench lifecycle scenarios on the selected physical iPad using one signed build/PID; retain full reports and independent verification in [the iPad ledger](docs/workbench-ipad-qualification.json).

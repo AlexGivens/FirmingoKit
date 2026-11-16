@@ -18,7 +18,7 @@ struct SketchDocument: FileDocument {
     /// Rejects non-UTF-8 sources and files above 4 MiB instead of loading unbounded editor content.
     init(configuration: ReadConfiguration) throws {
         guard let data = configuration.file.regularFileContents, data.count <= 4 * 1024 * 1024,
-              let text = String(data: data, encoding: .utf8) else {
+              let text = String(validating: data, as: UTF8.self) else {
             throw CocoaError(.fileReadInapplicableStringEncoding)
         }
         source = text

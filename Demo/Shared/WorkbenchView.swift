@@ -27,6 +27,12 @@ struct WorkbenchView: View {
     @State private var showingInspection = false
     /// Presents SDK artifact preflight independently of a working device connection.
     @State private var showingInstallationReview = false
+    /// Explicit helper files captured from a folder selected for this window.
+    @State private var helpers: [SketchSourceSnapshot.File] = []
+    /// Controls the folder picker without taking ownership of the selected location.
+    @State private var choosingHelpers = false
+    /// Prevents a build from racing a pending helper import.
+    @State private var loadingHelpers = false
     /// Source revision incremented on every source/filename mutation and captured in immutable build receipts.
     @State private var revision: UInt64 = 0
     /// Scales monospaced editing text with accessibility text settings.
@@ -58,21 +64,31 @@ struct WorkbenchView: View {
                     .keyboardShortcut("i", modifiers: [.command, .shift])
             }
             ToolbarItem {
-                Button("Prepare Firmingo Installation", systemImage: "shippingbox") { showingInstallationReview = true }
+                Button("Install or Recover Firmingo", systemImage: "shippingbox") { showingInstallationReview = true }
             }
             ToolbarItemGroup {
                 Button("Build", systemImage: "hammer") { startBuild(run: false) }
-                    .disabled(!builds.canBuild || (builds.selectionMode == .legacy && model.board != .nanoRP2040Connect) || model.isProgrammingFirmware)
+                    .disabled(!builds.canBuild || !sourceModeReady || loadingHelpers ||
+                              (builds.selectionMode == .legacy && model.board != .nanoRP2040Connect) || model.isProgrammingFirmware)
                     .keyboardShortcut("b", modifiers: [.command])
                 Button("Run", systemImage: "play") { confirmingRun = true }
-                    .disabled(!builds.canRun(on: model))
+                    .disabled(loadingHelpers || !sourceModeReady || !builds.canRun(on: model))
                     .keyboardShortcut("r", modifiers: [.command])
                 if builds.isBusy { Button("Cancel Build/Run") { builds.cancel() } }
             }
         }
         .sheet(isPresented: $showingTestLab) { WorkbenchLabView(model: lab) }
         .sheet(isPresented: $showingInspection) { DeviceInspectionView(model: model) }
-        .sheet(isPresented: $showingInstallationReview) { InstallationReviewView(workbench: model) }
+        .sheet(isPresented: $showingInstallationReview) {
+            #if os(iOS)
+            FilesFirmwareView(workbench: model) { builds.reloadAssociations() }
+            #else
+            InstallationReviewView(workbench: model)
+            #endif
+        }
+        .fileImporter(isPresented: $choosingHelpers, allowedContentTypes: [.folder]) { result in
+            importHelpers(result)
+        }
         .onChange(of: document.source) { revision &+= 1; builds.sourceChanged(revision: revision) }
         .onChange(of: filename) { revision &+= 1; builds.sourceChanged(revision: revision) }
         .onChange(of: model.board) { builds.selectionChanged() }
@@ -98,12 +114,35 @@ struct WorkbenchView: View {
         #endif
     }
 
+    /// Bundles are compiled only with an explicit FMS2 catalogue selection.
+    private var sourceModeReady: Bool {
+        helpers.isEmpty || (builds.selectionMode == .catalogue && builds.firmwareBuild?.profile == .nanoManagedV2)
+    }
+
     /// Creates an immutable exact editor snapshot before invoking SDK compilation or explicit deployment.
     private func startBuild(run: Bool) {
         do {
-            let snapshot = try SketchSourceSnapshot(documentID: documentID, revision: revision, filename: filename, source: document.source)
+            let snapshot = try SketchSourceSnapshot(documentID: documentID, revision: revision, filename: filename,
+                                                    source: document.source, files: helpers)
             if run { builds.run(snapshot, workbench: model) } else { builds.build(snapshot) }
         } catch { builds.report(error) }
+    }
+
+    /// Captures helper contents once; later on-disk changes require another explicit import.
+    private func importHelpers(_ result: Result<URL, any Error>) {
+        guard !loadingHelpers else { return }
+        loadingHelpers = true
+        Task { @MainActor in
+            defer { loadingHelpers = false }
+            do {
+                let files = try await CompilerRecordReader.readHelpers(in: result.get())
+                _ = try SketchSourceSnapshot(documentID: documentID, revision: revision, filename: filename,
+                                             source: document.source, files: files)
+                helpers = files
+                revision &+= 1
+                builds.sourceChanged(revision: revision)
+            } catch { builds.report(error) }
+        }
     }
 
     /// Source-only editing with native undo and scalable monospaced text.
@@ -112,12 +151,25 @@ struct WorkbenchView: View {
             HStack {
                 Text("Sketch").font(.headline)
                 Spacer()
+                Menu("Helpers", systemImage: "folder") {
+                    Button("Choose Helper Folder…") { choosingHelpers = true }
+                    ForEach(helpers, id: \.path) { Text($0.path) }
+                    if !helpers.isEmpty {
+                        Button("Remove All Helpers") {
+                            helpers = []; revision &+= 1; builds.sourceChanged(revision: revision)
+                        }
+                    }
+                }
+                .disabled(loadingHelpers || builds.isBusy)
                 Text("Revision \(revision)").font(.caption).foregroundStyle(.secondary)
             }
             TextEditor(text: $document.source)
                 .font(.system(size: editorSize, design: .monospaced))
                 .autocorrectionDisabled()
                 .accessibilityLabel("Sketch source")
+            if !sourceModeReady {
+                Text("Choose a managed FMS2 firmware build to compile with helpers.").font(.caption)
+            }
         }
         .padding()
     }

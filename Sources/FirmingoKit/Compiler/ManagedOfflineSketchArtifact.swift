@@ -38,7 +38,7 @@ public struct ManagedOfflineSketchArtifact: Sendable {
         return try ManagedCapsule(bytes: bytes, reportJSON: reportJSON, resident: resident)
     }
 
-    /// Schema-one offline receipt, distinct from the legacy device-bound artifact receipt schema.
+    /// Versioned offline receipt, including all original source identities for interface-two bundles.
     public struct Receipt: Encodable, Equatable, Sendable {
         /// Local offline receipt version, independent of protocol/ABI and legacy receipt schemas.
         public let version: UInt32
@@ -50,6 +50,10 @@ public struct ManagedOfflineSketchArtifact: Sendable {
         public let sourceFilename: String
         /// Original UTF-8 source digest.
         public let sourceSHA256: String
+        /// Digest over the primary and ordered helper path/hash records for a bundle.
+        public let sourceBundleSHA256: String?
+        /// Original helper path/hash records. This field is absent for single-file builds.
+        public let sourceFiles: [SourceFile]?
         /// Complete generated compiler-input digest.
         public let translationUnitSHA256: String
         /// Exact verified catalogue bytes.
@@ -69,22 +73,54 @@ public struct ManagedOfflineSketchArtifact: Sendable {
         /// Complete FMS1/FMS2 digest, distinct from linked ELF and code digests.
         public let capsuleSHA256: String
 
+        /// Original immutable helper identity retained in a build receipt.
+        public struct SourceFile: Encodable, Equatable, Sendable {
+            /// Portable path used by diagnostics and receipt metadata.
+            public let path: String
+            /// SHA-256 over exact original UTF-8 bytes.
+            public let sha256: String
+
+            /// Forms the canonical representation used by the portable request/receipt contract.
+            var fields: [String: String] { ["path": path, "sha256": sha256] }
+        }
+
+        /// Hashes original helper bytes in the snapshot's portable order.
+        static func identities(_ snapshot: SketchSourceSnapshot) -> [SourceFile] {
+            snapshot.files.map { SourceFile(path: $0.path, sha256: NanoManagedContract.digest(Data($0.source.utf8))) }
+        }
+
+        /// Independently hashes the same path/hash array as the portable interface.
+        static func bundleDigest(primary: SourceFile, helpers: [SourceFile]) throws -> String {
+            let data = try JSONSerialization.data(withJSONObject: ([primary] + helpers).map(\.fields),
+                options: [.sortedKeys, .withoutEscapingSlashes])
+            return NanoManagedContract.digest(data)
+        }
+
         /// Records exact validated input/output fields, without inserting a device placeholder.
         init(prepared: PreparedManagedOfflineSketch, provenance: ManagedELFProvenance,
              linkedELFSHA256: String, capsuleSHA256: String) throws {
             let request = prepared.request
-            version = 1; documentID = request.snapshot.documentID; sourceRevision = request.snapshot.revision
+            let helpers = Self.identities(request.snapshot)
+            version = helpers.isEmpty ? 1 : 2
+            documentID = request.snapshot.documentID; sourceRevision = request.snapshot.revision
             sourceFilename = request.snapshot.filename; sourceSHA256 = prepared.sourceSHA256
+            sourceFiles = helpers.isEmpty ? nil : helpers
+            sourceBundleSHA256 = helpers.isEmpty ? nil :
+                try Self.bundleDigest(primary: .init(path: sourceFilename, sha256: sourceSHA256), helpers: helpers)
             translationUnitSHA256 = prepared.translationUnitSHA256; catalogueSHA256 = request.catalogueSHA256
             firmwareBuildID = request.firmwareBuild.id; boardID = request.firmwareBuild.board.rawValue
             profile = request.firmwareBuild.profile.rawValue; self.provenance = provenance
             self.linkedELFSHA256 = linkedELFSHA256; self.capsuleSHA256 = capsuleSHA256
-            let inputs: [String: Any] = ["version": version, "documentID": documentID.uuidString,
+            var inputs: [String: Any] = ["version": version, "documentID": documentID.uuidString,
                 "sourceRevision": sourceRevision, "sourceFilename": sourceFilename, "sourceSHA256": sourceSHA256,
                 "translationUnitSHA256": translationUnitSHA256, "catalogueSHA256": catalogueSHA256,
                 "firmwareBuildID": firmwareBuildID, "boardID": boardID, "profile": profile,
                 "provenance": ["compiler": provenance.compiler, "recipeIdentifier": provenance.recipeIdentifier,
                     "recipeSHA256": provenance.recipeSHA256, "toolchainSHA256": provenance.toolchainSHA256]]
+            if let sourceBundleSHA256, let sourceFiles {
+                inputs["sourceBundleSHA256"] = sourceBundleSHA256
+                inputs["sourceFiles"] = sourceFiles.map(\.fields)
+            }
             buildInputSHA256 = NanoManagedContract.digest(try JSONSerialization.data(withJSONObject: inputs,
                 options: [.sortedKeys, .withoutEscapingSlashes]))
         }

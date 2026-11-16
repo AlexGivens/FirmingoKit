@@ -8,6 +8,14 @@ struct ManagedPortableRequest: Sendable {
     let revisionToken: String
     /// Exact original source snapshot for independent output checks.
     let snapshot: SketchSourceSnapshot
+    /// Portable interface version chosen by the exact immutable source shape.
+    var interfaceVersion: UInt32 { snapshot.files.isEmpty ? 1 : 2 }
+    /// Ordered portable phase vocabulary, including one compile phase per helper translation unit.
+    var phases: [String] {
+        let helpers = snapshot.files.count { $0.path.hasSuffix(".cpp") }
+        return ["verifying", "preprocessing"] + Array(repeating: "compiling", count: 2 + helpers) +
+            ["linking", "validating", "packaging"]
+    }
     /// Canonical closed compiler request bytes, supplied as a JavaScript argument.
     let json: Data
     /// Hash of the exact portable input, independently compared to the execution receipt.
@@ -43,6 +51,9 @@ struct ManagedPortableRequest: Sendable {
     init(_ request: ManagedOfflineBuildRequest, provenance: ManagedELFProvenance? = nil) throws {
         let firmware = request.firmwareBuild
         if let provenance {
+            guard request.snapshot.files.isEmpty else {
+                throw SketchBuildError.invalidInput("Supplied-ELF conversion accepts a single source file")
+            }
             guard provenance.recipeIdentifier == firmware.recipeIdentifier, provenance.recipeSHA256 == firmware.recipeSHA256 else {
                 throw SketchBuildError.invalidProvenance
             }
@@ -70,8 +81,10 @@ struct ManagedPortableRequest: Sendable {
         buildID = UUID().uuidString; revisionToken = snapshot.documentID.uuidString + ":" + String(snapshot.revision)
         targetIdentityKey = key == "firmwareBuild" ? "firmwareBuildID" : "residentBindingID"
         targetIdentity = NanoManagedContract.digest(try Self.canonical(target))
-        var input: [String: Any] = ["interfaceVersion": 1, "kind": provenance == nil ? "build" : "package_elf", "buildID": buildID,
-            "source": ["filename": snapshot.filename, "revision": revisionToken, "text": snapshot.source],
+        var source: [String: Any] = ["filename": snapshot.filename, "revision": revisionToken, "text": snapshot.source]
+        if !snapshot.files.isEmpty { source["files"] = snapshot.files.map { ["path": $0.path, "text": $0.source] } }
+        var input: [String: Any] = ["interfaceVersion": snapshot.files.isEmpty ? 1 : 2, "kind": provenance == nil ? "build" : "package_elf", "buildID": buildID,
+            "source": source,
             "target": ["board": FirmingoBoard.nanoRP2040Connect.rawValue, "profile": profile.rawValue,
                 "recipeIdentifier": provenance?.recipeIdentifier ?? profile.recipeIdentifier,
                 "recipeSHA256": provenance?.recipeSHA256 ?? profile.recipeSHA256, key: target],

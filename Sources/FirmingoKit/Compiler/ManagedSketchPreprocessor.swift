@@ -20,6 +20,9 @@ public enum ManagedSketchPreprocessor {
     /// Prepares the same constrained source layout for an exact catalogue selection, with no device binding.
     /// Cancellation, diagnostics and source mapping match the legacy overload; this does not compile source.
     @concurrent public static func prepare(_ request: ManagedOfflineBuildRequest) async throws -> PreparedManagedOfflineSketch {
+        guard request.snapshot.files.isEmpty else {
+            throw SketchBuildError.invalidInput("Use the compiler build API to prepare and compile a source bundle")
+        }
         let source = try await prepareSource(ManagedPortableRequest(request))
         return PreparedManagedOfflineSketch(request: request, source: source)
     }

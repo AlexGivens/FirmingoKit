@@ -216,6 +216,43 @@ import Testing
         #expect(fresh.artifact.receipt.sourceRevision == 3)
         #expect(fresh.artifact.capsule.sha256 == "8d8ff53e0ab800a4f68eb6c62b00e001bc8304b2dee2fdf0f815b2e503c5aeff")
     }
+    /// Compiles the independently checked FMS2 bundle, then checks a helper diagnostic and fresh worker recovery.
+    @Test func sourceBundleThroughActualWebKit() async throws {
+        let catalogue = try await ManagedCompilerCatalogue.loadBundled()
+        let compiler = ManagedSketchCompiler(serviceURL: try serviceURL())
+        let files: [SketchSourceSnapshot.File] = [
+            try .init(path: "logic/counter.h", source: "#pragma once\nvoid initialize();\nvoid tick();\n"),
+            try .init(path: "logic/tick.cpp", source: "#include \"counter.h\"\n#include \"shared/state.h\"\nvoid tick() { ++initialized; ++zero; }\n"),
+            try .init(path: "logic/setup.cpp", source: "#include \"counter.h\"\n#include \"shared/state.h\"\n#include <Arduino.h>\nvolatile uint32_t initialized = 23;\nvolatile uint32_t zero;\nvoid initialize() { pinMode(6, OUTPUT); digitalWrite(6, initialized == 23 && zero == 0); }\n"),
+            try .init(path: "shared/state.h", source: "#pragma once\n#include <Arduino.h>\nextern volatile uint32_t initialized;\nextern volatile uint32_t zero;\n")
+        ]
+        let id = UUID()
+        let build = ManagedROMInstall.firmwareBuildID
+        let source = "#include \"logic/counter.h\"\nvoid setup() { initialize(); }\nvoid loop() { tick(); }\n"
+        func input(_ files: [SketchSourceSnapshot.File], revision: UInt64) throws -> ManagedOfflineBuildRequest {
+            let snapshot = try SketchSourceSnapshot(documentID: id, revision: revision, filename: "Counter.ino", source: source, files: files)
+            return try ManagedOfflineBuildRequest(snapshot: snapshot, catalogue: catalogue, firmwareBuildID: build)
+        }
+        let request = try input(files.reversed(), revision: 1)
+        let first = try await compiler.build(request)
+        #expect(first.artifact.sha256 == "3ccf8f048464482c799df2beacaa3eeb22b85ff18da0099b442249f746c31862")
+        #expect(first.artifact.receipt.version == 2)
+        #expect(first.artifact.receipt.sourceFiles?.map(\.path) == ["logic/counter.h", "logic/setup.cpp", "logic/tick.cpp", "shared/state.h"])
+        let execution = try WireJSON.parse(try #require(first.artifact.compilerReceiptJSON))
+        #expect(try first.artifact.receipt.sourceBundleSHA256 == execution.required("sourceBundleSHA256").string())
+        let bad = try files.map { file in file.path == "logic/tick.cpp" ?
+            try SketchSourceSnapshot.File(path: file.path, source: "\u{feff}void tick() { missing_symbol(); }\r\n") : file }
+        do {
+            _ = try await compiler.build(input(bad, revision: 2))
+            Issue.record("Expected helper compile failure")
+        } catch ManagedCompilerError.compilationFailed(let diagnostics) {
+            #expect(diagnostics.contains { $0.filename == "logic/tick.cpp" && $0.line == 1 && $0.column == 18 })
+        }
+        let again = try await compiler.build(input(files, revision: 3))
+        #expect(again.artifact.bytes == first.artifact.bytes)
+        #expect(again.artifact.receipt.buildInputSHA256 != first.artifact.receipt.buildInputSHA256)
+    }
+
     /// Actor reentrancy cannot admit a second source while the first build is suspended in real runtime startup.
     @Test func overlappingBuildIsRejected() async throws {
         let compiler = ManagedSketchCompiler(serviceURL:try serviceURL())

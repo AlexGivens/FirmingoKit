@@ -420,3 +420,19 @@ catalogue remain unchanged. The next SDK integration gate is deliberate import
 of a reviewed package followed by public API/private-scheme, packaged-consumer,
 signed/physical-host and selected device qualification. Ordinary SDK builds never
 read a firmware checkout or run the compiler inventory tool.
+
+## Swift source bundles
+
+Create a `SketchSourceSnapshot` with its primary `.ino` and an explicit array
+of `SketchSourceSnapshot.File` C++ sources and headers. Build through the offline
+catalogue API with an exact `nano-managed-v2` descriptor. A bundle accepts up to
+eight helpers and 256 KiB of total UTF-8. Receipts include the ordered original
+helper path/hash pairs and bundle digest. Diagnostics use the original relative
+paths and UTF-8 byte columns. An ordinary single-file build retains its existing
+request and receipt format.
+
+In Workbench choose **Helpers → Choose Helper Folder…** and select the folder
+containing the explicit helper tree. Workbench retains a bounded copy of those
+bytes for the current window. Re-import to pick up edits on disk. Choose the FMS2
+build before selecting Build or Run. The standalone preparation and supplied-ELF
+APIs continue to accept single files.

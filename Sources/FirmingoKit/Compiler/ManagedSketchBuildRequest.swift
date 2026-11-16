@@ -34,6 +34,9 @@ public struct ManagedSketchBuildRequest: Equatable, Sendable {
             throw SketchBuildError.unsupportedBoard
         }
         guard profile == resident.profile else { throw SketchBuildError.invalidProvenance }
+        guard snapshot.files.isEmpty else {
+            throw SketchBuildError.invalidInput("Build source bundles with the offline catalogue API")
+        }
         self.snapshot = snapshot
         self.board = board
         self.profile = profile
