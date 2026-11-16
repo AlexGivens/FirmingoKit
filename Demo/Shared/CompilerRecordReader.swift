@@ -68,7 +68,8 @@ enum CompilerRecordReader {
                 throw SketchBuildError.invalidInput("Choose a folder containing only up to eight .cpp and .h files")
             }
             let data = try await read(item, maximumBytes: 256 * 1024 - total, allowsEmpty: true)
-            guard let source = String(validating: data, as: UTF8.self) else {
+            let source = String(decoding: data, as: UTF8.self)
+            guard source.utf8.elementsEqual(data) else {
                 throw SketchBuildError.invalidInput("Helper files must contain UTF-8 source")
             }
             total += data.count
