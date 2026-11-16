@@ -76,6 +76,33 @@ class WorkbenchCLI(unittest.TestCase):
         evidence['recordSHA256'] = anchor
         self.assertEqual(cli.decode_response(self.envelope(value), request, 123)['report']['status'], 'passed')
 
+    def test_candidate_ipad_qualification_reports_replay_through_checker(self):
+        ledger = Path(__file__).resolve().parents[2] / 'docs/workbench-nano-fms2-rc1-managed-ipad.json'
+        data = json.loads(ledger.read_bytes(), object_pairs_hook=cli.unique_object)
+        reports = data['reports']
+        self.assertEqual(len(reports), 29)
+        self.assertEqual(len({row['commandID'] for row in reports.values()}), len(reports))
+        self.assertEqual(len({row['report']['id'] for row in reports.values()}), len(reports))
+        for label, row in reports.items():
+            with self.subTest(label=label):
+                request, report = row['request'], row['report']
+                pid = report['processID']
+                value = dict(schema=1, request=request, processID=pid, scenarios=[], report=report)
+                self.assertEqual(cli.decode_response(self.envelope(value), request, pid, interactive=True)['report'], report)
+                raw = (json.dumps(report, indent=2) + '\n').encode()
+                self.assertEqual(hashlib.sha256(raw).hexdigest(), row['rawReportSHA256'])
+        refusal = reports['restored-a-refusal']['report']
+        self.assertEqual(refusal['status'], 'failed')
+        self.assertEqual(refusal['managedEvidence']['outcome'], 'not_observed')
+        self.assertNotIn('checkpoint', refusal['managedEvidence'])
+        self.assertNotEqual(reports['install-a-commit']['report']['processID'], refusal['processID'])
+        self.assertNotEqual(data['originalBoot'], data['recoveredBoot'])
+        for label, released in [('power-cycle-status', False), ('power-cycle-retire', True)]:
+            checkpoint = reports[label]['report']['managedEvidence']['checkpoint']
+            self.assertEqual(checkpoint['unknownReason'], 'bootChanged')
+            self.assertIs(checkpoint['released'], released)
+            self.assertFalse(checkpoint['commitIntent'])
+
     def test_managed_boot_change_never_licenses_postcommit_retirement(self):
         """Only a durable no-commit intent and bootChanged observation permit releasing host context."""
         request,value=self.managed_fixture()

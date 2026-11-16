@@ -1,0 +1,2897 @@
+{
+  "schema": 1,
+  "date": "2026-11-16",
+  "scope": "Managed FMS2 RC on the selected Nano and physical iPad through paired Workbench CLI",
+  "host": {
+    "model": "iPad Pro (11-inch) (3rd generation)",
+    "os": "iPadOS 27.2.1",
+    "appBuild": "13",
+    "appExecutableSHA256": "d9a053c4205380e35827b2d8bbf9b75bbec72b4c097a8bb7602f7696324a7f66",
+    "preparedSDKCommit": "5106350ae039cc71a680ecb3d608b507fd5bee86"
+  },
+  "candidate": {
+    "firmwareVersion": "1.0.0-rc.1",
+    "firmwareBuildID": "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5",
+    "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+    "initialImageSHA256": "5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af",
+    "firmwareReadbackEvidenceSHA256": "6d46ea43b3e046795cee01229bfea2eb361157ce1ed325c966b18c2e4f393cc0"
+  },
+  "romEvidence": {
+    "file": "docs/evidence/nano-fms2-rc1-initial.json",
+    "sha256": "6d46ea43b3e046795cee01229bfea2eb361157ce1ed325c966b18c2e4f393cc0"
+  },
+  "originalBoot": "224cd98595e897f4",
+  "recoveredBoot": "cfef3c1c348a4204",
+  "sessions": [
+    {
+      "processID": 13978,
+      "instanceID": "44B2A16F-C071-4480-9164-72107C987E96",
+      "revoked": true
+    },
+    {
+      "processID": 14007,
+      "instanceID": "9EA001B0-C859-4294-9E9E-5572435404BE",
+      "revoked": true
+    }
+  ],
+  "outcomes": {
+    "passed": 27,
+    "expectedRestoredCommitRefusal": 1,
+    "expectedPrecommitBootChanged": 1,
+    "firmwareCommitAccepted": 2,
+    "commitReplayObserved": false
+  },
+  "stateSamples": {
+    "baseline-state-a": [
+      {
+        "tag": "FQ2A",
+        "nonce": 49,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 285618,
+        "loops": 285611
+      },
+      {
+        "tag": "FQ2A",
+        "nonce": 115,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 285681,
+        "loops": 285674
+      }
+    ],
+    "abort-retained-a": [
+      {
+        "tag": "FQ2A",
+        "nonce": 49,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 331997,
+        "loops": 331990
+      },
+      {
+        "tag": "FQ2A",
+        "nonce": 115,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 332063,
+        "loops": 332056
+      }
+    ],
+    "installed-state-b": [
+      {
+        "tag": "FQ2B",
+        "nonce": 49,
+        "initialData": 23,
+        "initialBSS": 0,
+        "counter": 15479,
+        "loops": 15456
+      },
+      {
+        "tag": "FQ2B",
+        "nonce": 115,
+        "initialData": 23,
+        "initialBSS": 0,
+        "counter": 15543,
+        "loops": 15520
+      }
+    ],
+    "restored-a-state": [
+      {
+        "tag": "FQ2A",
+        "nonce": 49,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 28928,
+        "loops": 28921
+      },
+      {
+        "tag": "FQ2A",
+        "nonce": 115,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 28995,
+        "loops": 28988
+      }
+    ],
+    "disconnect-retained-a": [
+      {
+        "tag": "FQ2A",
+        "nonce": 49,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 39822,
+        "loops": 39815
+      },
+      {
+        "tag": "FQ2A",
+        "nonce": 115,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 39889,
+        "loops": 39882
+      }
+    ],
+    "final-retained-a": [
+      {
+        "tag": "FQ2A",
+        "nonce": 49,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 39744,
+        "loops": 39737
+      },
+      {
+        "tag": "FQ2A",
+        "nonce": 115,
+        "initialData": 7,
+        "initialBSS": 0,
+        "counter": 39811,
+        "loops": 39804
+      }
+    ]
+  },
+  "manualD13": {
+    "installedB": "lit",
+    "afterPrecommitPowerCycle": "off"
+  },
+  "independentCapsuleChecks": {
+    "stateA": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+    "stateB": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+    "validatorSHA256": "803a617da0b1d55af2a869963b546de70f7316c401b5a5e5c04e052cf8de30d4",
+    "scope": "Byte comparison to pinned Compiler outputs and native guarded initialization checks"
+  },
+  "finalBoard": {
+    "sketch": "state-a",
+    "connectedHost": "iPad",
+    "D2": "disconnected",
+    "REC": "disconnected"
+  },
+  "controllerStopped": true,
+  "reports": {
+    "baseline-inspect": {
+      "commandID": "75E7A2E7-51C0-4FE8-9CA7-4CFE2499364C",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "6447E27D-E206-45F3-910F-22D2458B8BBC",
+        "scenarioID": "device.inspect",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": false,
+          "consoleOpened": false,
+          "disconnected": true,
+          "probeAttempted": false,
+          "received": "",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 0,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0013716249959543347,
+            "sequence": 0
+          },
+          {
+            "detail": "Selected device assertions and SDK cleanup completed.",
+            "phase": "complete",
+            "seconds": 0.020665541669586673,
+            "sequence": 1
+          }
+        ],
+        "id": "6447E27D-E206-45F3-910F-22D2458B8BBC",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "device.inspect",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "0c5cd6d2ecce8bf76043f1dc5b727da4ed6afd64fe5a796fefc1d900961f2188",
+      "pairedReplySHA256": "ba9a9d282a5939802584edb78dd38be9dc02e4bcc8570762ae84a8451ee1bbc0"
+    },
+    "baseline-state-a": {
+      "commandID": "3C2A3089-A3C4-4054-B090-4ADB15776F60",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "consoleProbe": "fms2-state-a-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "11E116C9-2FE2-41CE-A376-22599084AFD4",
+        "scenarioID": "device.state-counters",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "RlEyQTEAAAAHAAAAAAAAALJbBACrWwQARlEyQXMAAAAHAAAAAAAAAPFbBADqWwQA",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "consoleProbe": "fms2-state-a-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 4,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0007877916505094618,
+            "sequence": 0
+          },
+          {
+            "detail": "state-a startup data, zero BSS and advancing counters verified. Console closed and disconnected.",
+            "phase": "complete",
+            "seconds": 0.11269270832417533,
+            "sequence": 1
+          }
+        ],
+        "id": "11E116C9-2FE2-41CE-A376-22599084AFD4",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "device.state-counters",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "b1aba012a023da7037b2646c169705c0c867688697b06b40b8ba0a9d26fcb1ca",
+      "pairedReplySHA256": "86c33de65b487e63d3c930eafb8c428f1ba8f77e83e7c3f473576957b4d6fec9"
+    },
+    "baseline-echo-a": {
+      "commandID": "C016C7BF-7425-4AA3-8423-EC5ECC2E9A15",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "consoleProbe": "fms2-command-2-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "54B9E3F3-E973-4E01-9ECA-F86C833BE166",
+        "scenarioID": "device.console-binary",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "consoleProbe": "fms2-command-2-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 257,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0006831666687503457,
+            "sequence": 0
+          },
+          {
+            "detail": "Selected device assertions and SDK cleanup completed.",
+            "phase": "complete",
+            "seconds": 0.3142060416575987,
+            "sequence": 1
+          }
+        ],
+        "id": "54B9E3F3-E973-4E01-9ECA-F86C833BE166",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "device.console-binary",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "7e1ed3e8020dcc8e1cc7646a98647bf1a62084ffc8b72670b044d20d9320e3a0",
+      "pairedReplySHA256": "3b946e02840b339dc87a03b652078fa7b6d9283357fc45fc780b8f31d914b896"
+    },
+    "abort-stage": {
+      "commandID": "942B956D-7549-4956-9215-8A8B9EFCE2D8",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "stage-d2-gnd",
+          "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+          "operationID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+          "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+          "sketch": "state-b"
+        },
+        "operation": "run",
+        "requestID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+        "scenarioID": "managed.stage",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0010048749973066151,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: ram_verified. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.9106831249955576,
+            "sequence": 1
+          }
+        ],
+        "id": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+        "managedEvidence": {
+          "artifact": {
+            "bytes": "Rk1TMgIAgABOQU5PdDACEAABIBAgAQAAAQEgEAkBIBA8iQAgBAAAAECJACAUAAAAIAIAACQCAAAAAAAAAAAAAP/deg7WtKttFDcRkJixZ1rurTwKsOf2ZMhPweuxx0xIrgSQpZRRlsNaOU9Qlyr5FNvbcppbeRUuMA5hIfK7Lh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAP+IC9gLUA8CX4gL0AIiAqBdALRtNAA3BAHAgy9+dwR3C1CUgAaAlJCmhIYIpgCE4yaAYkASUgRilGkEdyaCBGKUaQR3C9wEY8iQAgQIkAIHwwAhDwtYewLE84aEAcOGArTjBoQBwwYCpNqGiARxgoO9voaIBHACg31AFG8GgCKCXQASg20QGsQiDgcDIgoHBRIGBwRiAgcCAdH0qQR3FoIEYIMBxKkEexaCBGDDAaSpBHOWggRhAwF0+4RzFoIEYUMLhHamgYISBGkEcL4AGoAXBqaAEkIUaQRzBpQBwwYSECiEIB0QAg8GApaAEgiEcHsPC9AikD0AEp9tEBIPPnACACIfFgMGHv58BGPIkAIECJACCIMAIQEQEgEBcAAAA=",
+            "name": "state-b.fms",
+            "receiptJSON": "eyJjYXRhbG9ndWVTSEEyNTYiOiJjMjgwN2YwZGQzMDE2MjEwZTQxOTRlZDMwOWM5YzBkZjdlNmNlOTU2MzU4NWI1ZDRkYjRkNWRjZWQwMWIyZGIwIiwiZmlybXdhcmVCdWlsZElEIjoiMzNhMGU4NjZjMjg3M2IyMGFhZjkzMDNkYzEwYzdhZjRkNjkyMGU5OWJiMWJhMmVlZTZiMGMwMDkwMzQ1MjNiNSIsInByb3ZlbmFuY2UiOnsicmVjaXBlU0hBMjU2IjoiMjVkZWYzNmM3MDFkZDVlNTI3YmExMjgyMTVkZWIzZjg3YzE1OGUxYzZlYjZlYjJmYTdmZDEwNmI1ZjU0Mzg2OCIsImNvbXBpbGVyIjoiQ2xhbmdcL0xMRCAyMi4xLjggQUJJLXR3byBXQVNJIHNlcnZpY2UsIGlzb2xhdGVkIFdlYktpdCB3b3JrZXIiLCJyZWNpcGVJZGVudGlmaWVyIjoibmFuby1zdGF0ZWZ1bC1jbGFuZy0yMi4xLjgtdjEtZXhwZXJpbWVudGFsIiwidG9vbGNoYWluU0hBMjU2IjoiYjQ2NTRiODAxMWNiMWU0YzNkMGFiZWM0MjE3YmQ3NTY4Zjc1NTBjNTI5MzhjYWVkZjg2MTY5NWIyYzMxMmIwNSJ9LCJkb2N1bWVudElEIjoiQkQyMDQzNDUtMTcxNy00Qzg3LUJDMzItMjlCQzRDMzQ5NTQyIiwic291cmNlU0hBMjU2IjoiOTU3NjgwNDk3MDU2OWE3ZGY1N2U0MGEwNzFkNGMyNmZjZTA5MDdmYmUzZjMxMmFmODFlY2YxNDY0NjY5NzFmMCIsInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjlhY2M2M2YxYTQ5MGQ3Y2FjNWU0ZDFhNDRkMmU3Y2IyZTI0YjNiNWQ5OTFmNzE4ZmRlNmM4MzQ0NjVmYjZlODAiLCJidWlsZElucHV0U0hBMjU2IjoiOTYxMDU3NTgxMGIxNDNmMjg5ZmRhY2M0OWFmZGE3NzYxY2MwMDgwNDA4ZmY1OWY5YWMzMmFiZjBlM2U3NmRlMyIsImJvYXJkSUQiOiJuYW5vX3JwMjA0MF9jb25uZWN0IiwiY2Fwc3VsZVNIQTI1NiI6IjUwNWM3MjM4MDRhZGRmMjE4ZTkwMTgzNzVjMWY2M2ZkMDM2YzJlMGJmMTlkMDE3M2FlMTg5YjA0NDE4YWE5YjAiLCJ2ZXJzaW9uIjoxLCJzb3VyY2VGaWxlbmFtZSI6InN0YXRlLWIuaW5vIiwic291cmNlUmV2aXNpb24iOjEsInByb2ZpbGUiOiJuYW5vLW1hbmFnZWQtdjIiLCJsaW5rZWRFTEZTSEEyNTYiOiJhMzI1ZTEyZjNmMDI3ZTIyNWNjNmU2MDgxMjRiZGFjOTdkZjUyYjIwNTFmNWFhZjg5OTE5YjE4NzYwZDBhYTg0In0=",
+            "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 1,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true
+          },
+          "outcome": "ram_verified",
+          "recordSHA256": "e345c12e3653032f3f3a65e2264e3961ed6582156842c47991d2844bd786408e",
+          "selection": {
+            "authorization": "stage-d2-gnd",
+            "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+            "operationID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+            "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+            "sketch": "state-b"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "managed.stage",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "79bdeb4c09467968bbb52d351fdf250053bb35ac4e540f08c46ec90c324a69fe",
+      "pairedReplySHA256": "15810ab84e27ae3d1809fc8c30bf3c19a65e40e57f8244a6ecf713ea6ecefa29"
+    },
+    "abort-confirmed": {
+      "commandID": "1FD2B454-9BC5-48BE-B7B3-E8FC15C6977D",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+          "recordSHA256": "e345c12e3653032f3f3a65e2264e3961ed6582156842c47991d2844bd786408e"
+        },
+        "operation": "run",
+        "requestID": "247529CB-587E-447D-809D-756DD22A8446",
+        "scenarioID": "managed.abort",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0007769583316985518,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: aborted. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.028777250001439825,
+            "sequence": 1
+          }
+        ],
+        "id": "247529CB-587E-447D-809D-756DD22A8446",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 1,
+              "version": 1
+            },
+            "released": true,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "snapshot": {
+              "errorCode": "none",
+              "received": 548,
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "slotTouched": false,
+              "state": "aborted",
+              "uploadID": 1
+            },
+            "stageIntent": true
+          },
+          "outcome": "aborted",
+          "recordSHA256": "e345c12e3653032f3f3a65e2264e3961ed6582156842c47991d2844bd786408e",
+          "selection": {
+            "operationID": "FC935F2D-E0F4-49D6-9561-6F5B0667A6E3",
+            "recordSHA256": "e345c12e3653032f3f3a65e2264e3961ed6582156842c47991d2844bd786408e"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "managed.abort",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "469140d1701a20c3fce6ba261584fdc8440faf2c86f5f458a9bc8e12f547ca32",
+      "pairedReplySHA256": "ecf6a7871efb56ec33716c58372a2a4e791d6742e3582732c35aed95e4db70c1"
+    },
+    "abort-retained-a": {
+      "commandID": "6F3CC2A6-B32E-4745-9A77-A1CDD9043323",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "consoleProbe": "fms2-state-a-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "0348B417-F6DE-4042-A27D-388A4EB5CDD7",
+        "scenarioID": "device.state-counters",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "RlEyQTEAAAAHAAAAAAAAAN0QBQDWEAUARlEyQXMAAAAHAAAAAAAAAB8RBQAYEQUA",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "consoleProbe": "fms2-state-a-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 4,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0007196666847448796,
+            "sequence": 0
+          },
+          {
+            "detail": "state-a startup data, zero BSS and advancing counters verified. Console closed and disconnected.",
+            "phase": "complete",
+            "seconds": 0.11386508334544487,
+            "sequence": 1
+          }
+        ],
+        "id": "0348B417-F6DE-4042-A27D-388A4EB5CDD7",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "device.state-counters",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "f35b145b1fba143beab21d4fe77d73a3d46d435944f67e64feac3b1ac58ab901",
+      "pairedReplySHA256": "34fc16f5a75bca36f36c07af3df65d0565de4e4f3c5cc40dc2e0dcda84e751b8"
+    },
+    "install-b-stage": {
+      "commandID": "5C3B3496-3139-4234-9EE2-7958DF7BCFA9",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "stage-d2-gnd",
+          "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+          "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+          "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+          "sketch": "state-b"
+        },
+        "operation": "run",
+        "requestID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+        "scenarioID": "managed.stage",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0008455000061076134,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: ram_verified. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.8289325833320618,
+            "sequence": 1
+          }
+        ],
+        "id": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+        "managedEvidence": {
+          "artifact": {
+            "bytes": "Rk1TMgIAgABOQU5PdDACEAABIBAgAQAAAQEgEAkBIBA8iQAgBAAAAECJACAUAAAAIAIAACQCAAAAAAAAAAAAAP/deg7WtKttFDcRkJixZ1rurTwKsOf2ZMhPweuxx0xIrgSQpZRRlsNaOU9Qlyr5FNvbcppbeRUuMA5hIfK7Lh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAP+IC9gLUA8CX4gL0AIiAqBdALRtNAA3BAHAgy9+dwR3C1CUgAaAlJCmhIYIpgCE4yaAYkASUgRilGkEdyaCBGKUaQR3C9wEY8iQAgQIkAIHwwAhDwtYewLE84aEAcOGArTjBoQBwwYCpNqGiARxgoO9voaIBHACg31AFG8GgCKCXQASg20QGsQiDgcDIgoHBRIGBwRiAgcCAdH0qQR3FoIEYIMBxKkEexaCBGDDAaSpBHOWggRhAwF0+4RzFoIEYUMLhHamgYISBGkEcL4AGoAXBqaAEkIUaQRzBpQBwwYSECiEIB0QAg8GApaAEgiEcHsPC9AikD0AEp9tEBIPPnACACIfFgMGHv58BGPIkAIECJACCIMAIQEQEgEBcAAAA=",
+            "name": "state-b.fms",
+            "receiptJSON": "eyJwcm9maWxlIjoibmFuby1tYW5hZ2VkLXYyIiwicHJvdmVuYW5jZSI6eyJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIiwicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVmdWwtY2xhbmctMjIuMS44LXYxLWV4cGVyaW1lbnRhbCIsInJlY2lwZVNIQTI1NiI6IjI1ZGVmMzZjNzAxZGQ1ZTUyN2JhMTI4MjE1ZGViM2Y4N2MxNThlMWM2ZWI2ZWIyZmE3ZmQxMDZiNWY1NDM4NjgiLCJ0b29sY2hhaW5TSEEyNTYiOiJiNDY1NGI4MDExY2IxZTRjM2QwYWJlYzQyMTdiZDc1NjhmNzU1MGM1MjkzOGNhZWRmODYxNjk1YjJjMzEyYjA1In0sImNhdGFsb2d1ZVNIQTI1NiI6ImMyODA3ZjBkZDMwMTYyMTBlNDE5NGVkMzA5YzljMGRmN2U2Y2U5NTYzNTg1YjVkNGRiNGQ1ZGNlZDAxYjJkYjAiLCJzb3VyY2VSZXZpc2lvbiI6MSwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJzb3VyY2VGaWxlbmFtZSI6InN0YXRlLWIuaW5vIiwiZG9jdW1lbnRJRCI6Ijg5Q0REODc1LTk5NUQtNEY1MC05MjJGLUFGNDQzRTY1OThGNyIsInZlcnNpb24iOjEsImNhcHN1bGVTSEEyNTYiOiI1MDVjNzIzODA0YWRkZjIxOGU5MDE4Mzc1YzFmNjNmZDAzNmMyZTBiZjE5ZDAxNzNhZTE4OWIwNDQxOGFhOWIwIiwibGlua2VkRUxGU0hBMjU2IjoiYTMyNWUxMmYzZjAyN2UyMjVjYzZlNjA4MTI0YmRhYzk3ZGY1MmIyMDUxZjVhYWY4OTkxOWIxODc2MGQwYWE4NCIsImJ1aWxkSW5wdXRTSEEyNTYiOiJhY2QxOTlkOTUyZTg0NDJhYjZmNjYwNTE2NWEwODU3ZGI5OTk0ZjQzZTM1OWQ2ZTRiOWM4OGIyNTU4NGRjZWUzIiwiZmlybXdhcmVCdWlsZElEIjoiMzNhMGU4NjZjMjg3M2IyMGFhZjkzMDNkYzEwYzdhZjRkNjkyMGU5OWJiMWJhMmVlZTZiMGMwMDkwMzQ1MjNiNSIsInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjlhY2M2M2YxYTQ5MGQ3Y2FjNWU0ZDFhNDRkMmU3Y2IyZTI0YjNiNWQ5OTFmNzE4ZmRlNmM4MzQ0NjVmYjZlODAiLCJzb3VyY2VTSEEyNTYiOiI5NTc2ODA0OTcwNTY5YTdkZjU3ZTQwYTA3MWQ0YzI2ZmNlMDkwN2ZiZTNmMzEyYWY4MWVjZjE0NjQ2Njk3MWYwIn0=",
+            "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 2,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true
+          },
+          "outcome": "ram_verified",
+          "recordSHA256": "ce639512403bf529754c4cac4c798965bd9e0569f0e31c523dfd524a0263bfa0",
+          "selection": {
+            "authorization": "stage-d2-gnd",
+            "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+            "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+            "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+            "sketch": "state-b"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "managed.stage",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "d030651d11aeaddd74d3c6bf6c13556e28b6464fa992ce5e0dfd302c8dc9caed",
+      "pairedReplySHA256": "9249ab1b5187e87c76158c6615bc457e297b8bc536f195f75ea70a513e09e562"
+    },
+    "install-b-commit": {
+      "commandID": "9A1E8BC2-A3C7-47AA-A129-96D2D2F0523F",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "commit-once-d2-gnd",
+          "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+          "recordSHA256": "ce639512403bf529754c4cac4c798965bd9e0569f0e31c523dfd524a0263bfa0"
+        },
+        "operation": "run",
+        "requestID": "2B14B539-4FAB-4ECF-9DC4-247BE21B2C83",
+        "scenarioID": "managed.commit",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0007792083197273314,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: commit_accepted. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.03204420831752941,
+            "sequence": 1
+          }
+        ],
+        "id": "2B14B539-4FAB-4ECF-9DC4-247BE21B2C83",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": true,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 2,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "snapshot": {
+              "errorCode": "none",
+              "received": 548,
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "slotTouched": false,
+              "state": "committing",
+              "uploadID": 2
+            },
+            "stageIntent": true
+          },
+          "outcome": "commit_accepted",
+          "recordSHA256": "ce639512403bf529754c4cac4c798965bd9e0569f0e31c523dfd524a0263bfa0",
+          "selection": {
+            "authorization": "commit-once-d2-gnd",
+            "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+            "recordSHA256": "ce639512403bf529754c4cac4c798965bd9e0569f0e31c523dfd524a0263bfa0"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "managed.commit",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "6e89b76de1d2215232a7ba9e1f2416bff3b471c4029258e89a661246c0dcf219",
+      "pairedReplySHA256": "1e21298ebd33e43b61f4dc1f485fb9338022e3acc8239257f01b935a8be66296"
+    },
+    "install-b-status": {
+      "commandID": "8A06E5F4-E5F3-4ED4-90A8-50954A71B1D4",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+          "recordSHA256": "ce639512403bf529754c4cac4c798965bd9e0569f0e31c523dfd524a0263bfa0"
+        },
+        "operation": "run",
+        "requestID": "67799757-16D4-4494-934E-80CCB2A7AD7D",
+        "scenarioID": "managed.reconcile",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0010202083503827453,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: boot_confirmed. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.0426839166902937,
+            "sequence": 1
+          }
+        ],
+        "id": "67799757-16D4-4494-934E-80CCB2A7AD7D",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": true,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 2,
+              "version": 1
+            },
+            "released": true,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "snapshot": {
+              "errorCode": "none",
+              "received": 548,
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "slotTouched": true,
+              "state": "boot_confirmed",
+              "uploadID": 2
+            },
+            "stageIntent": true
+          },
+          "outcome": "boot_confirmed",
+          "recordSHA256": "ce639512403bf529754c4cac4c798965bd9e0569f0e31c523dfd524a0263bfa0",
+          "selection": {
+            "operationID": "850E171B-FE47-4E47-AF7B-4341DEE9A2DB",
+            "recordSHA256": "ce639512403bf529754c4cac4c798965bd9e0569f0e31c523dfd524a0263bfa0"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "managed.reconcile",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "e3bffdf4036a705338af4d578d6eb56a15ee0537987aa0e4c0cefee06ab3f727",
+      "pairedReplySHA256": "f9ea6430263087c7648399d46e39389b5cd291dd1b49e361000a6764a9650f82"
+    },
+    "installed-state-b": {
+      "commandID": "392442AF-5A45-4042-9CA1-25EFCE69C443",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "consoleProbe": "fms2-state-b-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "36F32AB3-602C-45D5-8773-748084BBA622",
+        "scenarioID": "device.state-counters",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "RlEyQjEAAAAXAAAAAAAAAHc8AABgPAAARlEyQnMAAAAXAAAAAAAAALc8AACgPAAA",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "consoleProbe": "fms2-state-b-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 4,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.000908916670596227,
+            "sequence": 0
+          },
+          {
+            "detail": "state-b startup data, zero BSS and advancing counters verified. Console closed and disconnected.",
+            "phase": "complete",
+            "seconds": 0.11282895834301598,
+            "sequence": 1
+          }
+        ],
+        "id": "36F32AB3-602C-45D5-8773-748084BBA622",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "device.state-counters",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "b60dff7cec8215a409a344a9c8c140efa7e3bf908d26e9b4466402bafff448d3",
+      "pairedReplySHA256": "ecebd9a1054d0c9b980acbb56696f39668d6f74703f84c558384dc3e50c07edf"
+    },
+    "installed-echo-b": {
+      "commandID": "939BEA62-5ACD-40D8-A901-391602D8E700",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "consoleProbe": "fms2-command-2-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "7CD001BF-6196-4DFE-8E51-9A43C04D2D3F",
+        "scenarioID": "device.console-binary",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "consoleProbe": "fms2-command-2-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 257,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0006968333327677101,
+            "sequence": 0
+          },
+          {
+            "detail": "Selected device assertions and SDK cleanup completed.",
+            "phase": "complete",
+            "seconds": 0.3146484583267011,
+            "sequence": 1
+          }
+        ],
+        "id": "7CD001BF-6196-4DFE-8E51-9A43C04D2D3F",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "device.console-binary",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "f5b6d56dbd0fdd1ee038f986245efba0648091abec567761b5a4ccad6494609f",
+      "pairedReplySHA256": "46ce837e34fa07c7d05659a1ca06bf6edbe781f9deb4ca277ccf7fe51380c75b"
+    },
+    "install-a-stage": {
+      "commandID": "9E619906-B448-4BA4-A931-EF6A48E5C1AF",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "stage-d2-gnd",
+          "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+          "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+          "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+          "sketch": "state-a"
+        },
+        "operation": "run",
+        "requestID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+        "scenarioID": "managed.stage",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0008284583454951644,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: ram_verified. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.8434915000107139,
+            "sequence": 1
+          }
+        ],
+        "id": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+        "managedEvidence": {
+          "artifact": {
+            "bytes": "Rk1TMgIAgABOQU5PdDACEAABIBAcAQAAAQEgEAkBIBA8iQAgBAAAAECJACAUAAAAHAIAACACAAAAAAAAAAAAAMnXutgyHlYeDWXAuswBTKY/MfargxUwAkJk51qnHLWZ5tuSU/AwXfypqEwderP4zNpzd0tGvwtAZAAST+LRceYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAP+IC9gLUA8CP4gL0AIiAqBdALRtNAA3BAHAgy9+dwR7C1CEgAaAhJCmhIYIpgB00qaAYkASEgRpBHamgAISBGkEewvTyJACBAiQAgfDACEPC1h7AsTzhoQBw4YCtOMGhAHDBgKk2oaIBHGCg72+hogEcAKDfUAUbwaAIoJdABKDbRAaxBIOBwMiCgcFEgYHBGICBwIB0fSpBHcWggRggwHEqQR7FoIEYMMBpKkEc5aCBGEDAXT7hHMWggRhQwuEdqaBghIEaQRwvgAagBcGpoASQhRpBHMGlAHDBhIQKIQgHRACDwYCloASCIRwew8L0CKQPQASn20QEg8+cAIAIh8WAwYe/nwEY8iQAgQIkAIIgwAhARASAQBwAAAA==",
+            "name": "state-a.fms",
+            "receiptJSON": "eyJwcm9maWxlIjoibmFuby1tYW5hZ2VkLXYyIiwicHJvdmVuYW5jZSI6eyJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIiwicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVmdWwtY2xhbmctMjIuMS44LXYxLWV4cGVyaW1lbnRhbCIsInRvb2xjaGFpblNIQTI1NiI6ImI0NjU0YjgwMTFjYjFlNGMzZDBhYmVjNDIxN2JkNzU2OGY3NTUwYzUyOTM4Y2FlZGY4NjE2OTViMmMzMTJiMDUiLCJyZWNpcGVTSEEyNTYiOiIyNWRlZjM2YzcwMWRkNWU1MjdiYTEyODIxNWRlYjNmODdjMTU4ZTFjNmViNmViMmZhN2ZkMTA2YjVmNTQzODY4In0sImNhdGFsb2d1ZVNIQTI1NiI6ImMyODA3ZjBkZDMwMTYyMTBlNDE5NGVkMzA5YzljMGRmN2U2Y2U5NTYzNTg1YjVkNGRiNGQ1ZGNlZDAxYjJkYjAiLCJzb3VyY2VSZXZpc2lvbiI6MSwiYm9hcmRJRCI6Im5hbm9fcnAyMDQwX2Nvbm5lY3QiLCJzb3VyY2VGaWxlbmFtZSI6InN0YXRlLWEuaW5vIiwiZG9jdW1lbnRJRCI6IjM3MjlFODhELTg4Q0YtNEYxRi1BMDFBLTA4MjEwN0JCQ0U5NiIsInZlcnNpb24iOjEsImNhcHN1bGVTSEEyNTYiOiI1MzdjZTI2MGZjMzNkNGIyM2IyZjg4MjlhZWU2YTliMTI2NTMyMzZkYjZiYWFkNGMzMTcwNDBkYmYwODdmZDg5IiwibGlua2VkRUxGU0hBMjU2IjoiOGQzOTFiOWQ1NTQwN2FjOTBkY2RhOWQ3NWM3YTA0Y2I4OGY3NTkyYmY4OTRjMjg1NTExZThhYzQwOGJiZWZlZCIsImJ1aWxkSW5wdXRTSEEyNTYiOiIzY2Q4Y2Q0OTRjN2EyNGVlYTRhMDFkOGU5NWViMWUzOGI5YmJiZTBkZDJlYzEyOGRiNWZlNGZhNGJhMGRjODVhIiwiZmlybXdhcmVCdWlsZElEIjoiMzNhMGU4NjZjMjg3M2IyMGFhZjkzMDNkYzEwYzdhZjRkNjkyMGU5OWJiMWJhMmVlZTZiMGMwMDkwMzQ1MjNiNSIsInRyYW5zbGF0aW9uVW5pdFNIQTI1NiI6IjVmYmFjMDQ4ZjgxODFhYjgzMjE5ZGZlYzdjNDFjM2I0ZWJkMGY4NTg4ZjJmOWZlMjNiNTY4Yjg4ZDFkMmMxNDkiLCJzb3VyY2VTSEEyNTYiOiJkMjlmZDRhOGQ4MTMxNDBiODlhODAxZTI0NGJmODdjZDQwYjRlMTdiYTdhNzk1YTcwZGM2NGZlYzMwODRlMGUzIn0=",
+            "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+              "size": 544,
+              "targetID": 2,
+              "uploadID": 3,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-a"
+              },
+              "operation": "run",
+              "requestID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true
+          },
+          "outcome": "ram_verified",
+          "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809",
+          "selection": {
+            "authorization": "stage-d2-gnd",
+            "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+            "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+            "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+            "sketch": "state-a"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "managed.stage",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "c79bc89e9b7f86ebc7ed5b8167ca37130731671db228ba8ad08c05c6bed1621c",
+      "pairedReplySHA256": "542f1a6b08302a79cd099b29e95b33a1e28813e51b2003a9cda47c5a67d99b22"
+    },
+    "install-a-commit": {
+      "commandID": "A999439C-7326-409F-8A8F-C929DDE2E9DD",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "commit-once-d2-gnd",
+          "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+          "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809"
+        },
+        "operation": "run",
+        "requestID": "49F64004-29FB-4AA5-BF6D-049FBF6BFEE9",
+        "scenarioID": "managed.commit",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0008253749983850867,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: commit_accepted. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.03165995833114721,
+            "sequence": 1
+          }
+        ],
+        "id": "49F64004-29FB-4AA5-BF6D-049FBF6BFEE9",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": true,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+              "size": 544,
+              "targetID": 2,
+              "uploadID": 3,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-a"
+              },
+              "operation": "run",
+              "requestID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "snapshot": {
+              "errorCode": "none",
+              "received": 544,
+              "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+              "size": 544,
+              "slotTouched": false,
+              "state": "committing",
+              "uploadID": 3
+            },
+            "stageIntent": true
+          },
+          "outcome": "commit_accepted",
+          "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809",
+          "selection": {
+            "authorization": "commit-once-d2-gnd",
+            "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+            "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 13978,
+        "scenarioID": "managed.commit",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "65d96706efc6b0cbfa7f2f49cbdf6c2e78fed0dd00e4481034cb4c8ff3e61d53",
+      "pairedReplySHA256": "97529e00a9faef000db14566a0a41fad501e4e9bfb1d6765fae2d41e37217b00"
+    },
+    "restored-a-context": {
+      "commandID": "F97BD009-C3C0-4251-9404-4C6834718B87",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79"
+        },
+        "operation": "run",
+        "requestID": "6F4BDBC4-4230-49CD-9F60-8C16AF071709",
+        "scenarioID": "managed.restore",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0012166666856501251,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: context_restored. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.006672166666248813,
+            "sequence": 1
+          }
+        ],
+        "id": "6F4BDBC4-4230-49CD-9F60-8C16AF071709",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": true,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+              "size": 544,
+              "targetID": 2,
+              "uploadID": 3,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-a"
+              },
+              "operation": "run",
+              "requestID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "snapshot": {
+              "errorCode": "none",
+              "received": 544,
+              "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+              "size": 544,
+              "slotTouched": false,
+              "state": "committing",
+              "uploadID": 3
+            },
+            "stageIntent": true
+          },
+          "outcome": "context_restored",
+          "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809",
+          "selection": {
+            "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.restore",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "a9a35e5284ea9e9d530dda67bf01cd94ad90f175c11f4c7ce6b4ac5fc47b8baa",
+      "pairedReplySHA256": "0ca72f37c146c2156c195be15a65b6e477d72056e3da8231423c3dd661edeed7"
+    },
+    "restored-a-refusal": {
+      "commandID": "3C4EB750-823C-446F-A9CB-FC200D838CDC",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "commit-once-d2-gnd",
+          "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+          "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809"
+        },
+        "operation": "run",
+        "requestID": "8B54A49A-DE56-467E-850F-2F283B78699A",
+        "scenarioID": "managed.commit",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0007203749846667051,
+            "sequence": 0
+          },
+          {
+            "detail": "No live pre-commit capability. Restored context permits status queries only.",
+            "phase": "failed",
+            "seconds": 0.005806958331959322,
+            "sequence": 1
+          }
+        ],
+        "id": "8B54A49A-DE56-467E-850F-2F283B78699A",
+        "managedEvidence": {
+          "outcome": "not_observed",
+          "selection": {
+            "authorization": "commit-once-d2-gnd",
+            "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+            "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.commit",
+        "schema": 3,
+        "status": "failed"
+      },
+      "rawReportSHA256": "b36c60d61e028020eb93cbb58e9e99bb2cbe41b9f354618fe819cfef8ee54cc9",
+      "pairedReplySHA256": "d7cb8b0e4deba24217fbf50184bfd037bd123a8467bfff19bca0c8b236cb33a7"
+    },
+    "restored-a-status": {
+      "commandID": "80272BF3-4B53-4460-B511-23AFAA485D2B",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+          "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809"
+        },
+        "operation": "run",
+        "requestID": "E72A5B51-AE24-464F-A84A-9F8CA3DA300F",
+        "scenarioID": "managed.reconcile",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0006729583546984941,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: boot_confirmed. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.03987362500629388,
+            "sequence": 1
+          }
+        ],
+        "id": "E72A5B51-AE24-464F-A84A-9F8CA3DA300F",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": true,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+              "size": 544,
+              "targetID": 2,
+              "uploadID": 3,
+              "version": 1
+            },
+            "released": true,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-a"
+              },
+              "operation": "run",
+              "requestID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "snapshot": {
+              "errorCode": "none",
+              "received": 544,
+              "sha256": "537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89",
+              "size": 544,
+              "slotTouched": true,
+              "state": "boot_confirmed",
+              "uploadID": 3
+            },
+            "stageIntent": true
+          },
+          "outcome": "boot_confirmed",
+          "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809",
+          "selection": {
+            "operationID": "0B1A6216-6B74-41AF-9528-9989E9214B79",
+            "recordSHA256": "2e944b95985e9fc77ff9ac1e6423b81233e254438d8c973559f437502ab0d809"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.reconcile",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "df8d17902609468ca4fb566db459c36c9f85ee5f86848d3dc2b74a223d7100f5",
+      "pairedReplySHA256": "47e2a5846d9dfc16b21d53b02f8b213ef17adf727b642ba40904bbae3575c110"
+    },
+    "restored-a-state": {
+      "commandID": "2564A9F5-3F56-4422-9481-D1B0E040C5A0",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "consoleProbe": "fms2-state-a-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "1BAE1C70-16F5-4518-AEF6-90522B2DFA26",
+        "scenarioID": "device.state-counters",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "RlEyQTEAAAAHAAAAAAAAAABxAAD5cAAARlEyQXMAAAAHAAAAAAAAAENxAAA8cQAA",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "consoleProbe": "fms2-state-a-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 4,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0008803333330433816,
+            "sequence": 0
+          },
+          {
+            "detail": "state-a startup data, zero BSS and advancing counters verified. Console closed and disconnected.",
+            "phase": "complete",
+            "seconds": 0.11460025000269525,
+            "sequence": 1
+          }
+        ],
+        "id": "1BAE1C70-16F5-4518-AEF6-90522B2DFA26",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "device.state-counters",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "1aad37a2c4c37ae59fde5371297e55ae314c32b365e52a3b6e162bd6aff324a2",
+      "pairedReplySHA256": "a2f88d908b3d27ecbf5ddf0302a800c8d84c967775cef3e5f67f6d7c64635535"
+    },
+    "restored-a-echo": {
+      "commandID": "38AF46D5-093D-465E-B601-8C8E992D1B62",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "consoleProbe": "fms2-command-2-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "72121C3A-2D4F-4EC2-8EC7-1412689D8072",
+        "scenarioID": "device.console-binary",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "consoleProbe": "fms2-command-2-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 257,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0007594999915454537,
+            "sequence": 0
+          },
+          {
+            "detail": "Selected device assertions and SDK cleanup completed.",
+            "phase": "complete",
+            "seconds": 0.3191590833303053,
+            "sequence": 1
+          }
+        ],
+        "id": "72121C3A-2D4F-4EC2-8EC7-1412689D8072",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "device.console-binary",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "73e5eb29008a5505942d692b1b7aaf278fb0bee2f0e8ebba3b6ea132dd0e1c2e",
+      "pairedReplySHA256": "92fa9f318701d454ced8bcacd98d71918428ebfdc08d8b1b59cc8c7c701bd024"
+    },
+    "disconnect-stage": {
+      "commandID": "FD9FE2C1-716A-4205-8C33-18E09105C3A8",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "stage-d2-gnd",
+          "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+          "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+          "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+          "sketch": "state-b"
+        },
+        "operation": "run",
+        "requestID": "37714867-214B-4E29-857C-036CE58F6D4B",
+        "scenarioID": "managed.stage",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0007613333291374147,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: ram_verified. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.8446209999965504,
+            "sequence": 1
+          }
+        ],
+        "id": "37714867-214B-4E29-857C-036CE58F6D4B",
+        "managedEvidence": {
+          "artifact": {
+            "bytes": "Rk1TMgIAgABOQU5PdDACEAABIBAgAQAAAQEgEAkBIBA8iQAgBAAAAECJACAUAAAAIAIAACQCAAAAAAAAAAAAAP/deg7WtKttFDcRkJixZ1rurTwKsOf2ZMhPweuxx0xIrgSQpZRRlsNaOU9Qlyr5FNvbcppbeRUuMA5hIfK7Lh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAP+IC9gLUA8CX4gL0AIiAqBdALRtNAA3BAHAgy9+dwR3C1CUgAaAlJCmhIYIpgCE4yaAYkASUgRilGkEdyaCBGKUaQR3C9wEY8iQAgQIkAIHwwAhDwtYewLE84aEAcOGArTjBoQBwwYCpNqGiARxgoO9voaIBHACg31AFG8GgCKCXQASg20QGsQiDgcDIgoHBRIGBwRiAgcCAdH0qQR3FoIEYIMBxKkEexaCBGDDAaSpBHOWggRhAwF0+4RzFoIEYUMLhHamgYISBGkEcL4AGoAXBqaAEkIUaQRzBpQBwwYSECiEIB0QAg8GApaAEgiEcHsPC9AikD0AEp9tEBIPPnACACIfFgMGHv58BGPIkAIECJACCIMAIQEQEgEBcAAAA=",
+            "name": "state-b.fms",
+            "receiptJSON": "eyJzb3VyY2VGaWxlbmFtZSI6InN0YXRlLWIuaW5vIiwic291cmNlU0hBMjU2IjoiOTU3NjgwNDk3MDU2OWE3ZGY1N2U0MGEwNzFkNGMyNmZjZTA5MDdmYmUzZjMxMmFmODFlY2YxNDY0NjY5NzFmMCIsImZpcm13YXJlQnVpbGRJRCI6IjMzYTBlODY2YzI4NzNiMjBhYWY5MzAzZGMxMGM3YWY0ZDY5MjBlOTliYjFiYTJlZWU2YjBjMDA5MDM0NTIzYjUiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsImNhdGFsb2d1ZVNIQTI1NiI6ImMyODA3ZjBkZDMwMTYyMTBlNDE5NGVkMzA5YzljMGRmN2U2Y2U5NTYzNTg1YjVkNGRiNGQ1ZGNlZDAxYjJkYjAiLCJ2ZXJzaW9uIjoxLCJidWlsZElucHV0U0hBMjU2IjoiZWZmYjM3M2NmYzk1MGY0YzkzMTU2ZWIyMjM3MjZlNzhhZjgxMDgwNmJhNDVjMjM0ZGVlNmI5ZTZjZjVkOGEyMSIsImRvY3VtZW50SUQiOiJBODEyQzFBMy02RkVDLTQ2RkItQTRGRC03MDEyN0E2QjRBMEYiLCJzb3VyY2VSZXZpc2lvbiI6MSwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MiIsInByb3ZlbmFuY2UiOnsicmVjaXBlSWRlbnRpZmllciI6Im5hbm8tc3RhdGVmdWwtY2xhbmctMjIuMS44LXYxLWV4cGVyaW1lbnRhbCIsInJlY2lwZVNIQTI1NiI6IjI1ZGVmMzZjNzAxZGQ1ZTUyN2JhMTI4MjE1ZGViM2Y4N2MxNThlMWM2ZWI2ZWIyZmE3ZmQxMDZiNWY1NDM4NjgiLCJjb21waWxlciI6IkNsYW5nXC9MTEQgMjIuMS44IEFCSS10d28gV0FTSSBzZXJ2aWNlLCBpc29sYXRlZCBXZWJLaXQgd29ya2VyIiwidG9vbGNoYWluU0hBMjU2IjoiYjQ2NTRiODAxMWNiMWU0YzNkMGFiZWM0MjE3YmQ3NTY4Zjc1NTBjNTI5MzhjYWVkZjg2MTY5NWIyYzMxMmIwNSJ9LCJsaW5rZWRFTEZTSEEyNTYiOiJhMzI1ZTEyZjNmMDI3ZTIyNWNjNmU2MDgxMjRiZGFjOTdkZjUyYjIwNTFmNWFhZjg5OTE5YjE4NzYwZDBhYTg0IiwiY2Fwc3VsZVNIQTI1NiI6IjUwNWM3MjM4MDRhZGRmMjE4ZTkwMTgzNzVjMWY2M2ZkMDM2YzJlMGJmMTlkMDE3M2FlMTg5YjA0NDE4YWE5YjAiLCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiI5YWNjNjNmMWE0OTBkN2NhYzVlNGQxYTQ0ZDJlN2NiMmUyNGIzYjVkOTkxZjcxOGZkZTZjODM0NDY1ZmI2ZTgwIn0=",
+            "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 4,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "37714867-214B-4E29-857C-036CE58F6D4B",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true
+          },
+          "outcome": "ram_verified",
+          "recordSHA256": "47ff4385bc2562cabd66507659f443069767719f97bab48b6a2cef94be055c28",
+          "selection": {
+            "authorization": "stage-d2-gnd",
+            "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+            "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+            "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+            "sketch": "state-b"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.stage",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "457061e16a9029b8b32b682b225264cdd2349d421bd7a8aa02d05d6e5a83c07a",
+      "pairedReplySHA256": "ae58178fe919d35f16f77a464fb31fd49f51ee5c8ba1cefe45414c8e4eb373e4"
+    },
+    "disconnect-action": {
+      "commandID": "AA8CECC5-A981-4F73-9762-5B38AAF4724A",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+          "recordSHA256": "47ff4385bc2562cabd66507659f443069767719f97bab48b6a2cef94be055c28"
+        },
+        "operation": "run",
+        "requestID": "10DFC634-C730-480F-BAA7-F30CC19B91F9",
+        "scenarioID": "managed.disconnect",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0008604583272244781,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: disconnected. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.01570929164881818,
+            "sequence": 1
+          }
+        ],
+        "id": "10DFC634-C730-480F-BAA7-F30CC19B91F9",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 4,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "37714867-214B-4E29-857C-036CE58F6D4B",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true
+          },
+          "outcome": "disconnected",
+          "recordSHA256": "47ff4385bc2562cabd66507659f443069767719f97bab48b6a2cef94be055c28",
+          "selection": {
+            "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+            "recordSHA256": "47ff4385bc2562cabd66507659f443069767719f97bab48b6a2cef94be055c28"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.disconnect",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "f1560cb620c4b5c93f8cedec08e737d0431692f3ab0254faeec58deb1684d4ab",
+      "pairedReplySHA256": "40fff099288023332ce05262235308f33c118c66d64493fb82bacad64af0f6f0"
+    },
+    "disconnect-status": {
+      "commandID": "324C6A23-16D3-4DC8-94F0-73BD0843B5E9",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+          "recordSHA256": "47ff4385bc2562cabd66507659f443069767719f97bab48b6a2cef94be055c28"
+        },
+        "operation": "run",
+        "requestID": "20529F1C-5D48-4BB7-8794-C4A880445EB7",
+        "scenarioID": "managed.reconcile",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0009335000067949295,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: aborted. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.03664720832603052,
+            "sequence": 1
+          }
+        ],
+        "id": "20529F1C-5D48-4BB7-8794-C4A880445EB7",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 4,
+              "version": 1
+            },
+            "released": true,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "37714867-214B-4E29-857C-036CE58F6D4B",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "snapshot": {
+              "errorCode": "disconnected",
+              "received": 548,
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "slotTouched": false,
+              "state": "aborted",
+              "uploadID": 4
+            },
+            "stageIntent": true
+          },
+          "outcome": "aborted",
+          "recordSHA256": "47ff4385bc2562cabd66507659f443069767719f97bab48b6a2cef94be055c28",
+          "selection": {
+            "operationID": "37714867-214B-4E29-857C-036CE58F6D4B",
+            "recordSHA256": "47ff4385bc2562cabd66507659f443069767719f97bab48b6a2cef94be055c28"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.reconcile",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "fc9e7add12a3c2dfbc7d8cbe0556a43375cff71d9600cbaed11caedca547b43b",
+      "pairedReplySHA256": "b83e9660d8bff5268d935a126deb295e6ed5824908e3e2f398424966316d8283"
+    },
+    "disconnect-retained-a": {
+      "commandID": "65D1C27E-2EB0-459E-A66D-55C811FD4242",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "consoleProbe": "fms2-state-a-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "257B62C3-7B39-4137-9B64-848F330C15AC",
+        "scenarioID": "device.state-counters",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "RlEyQTEAAAAHAAAAAAAAAI6bAACHmwAARlEyQXMAAAAHAAAAAAAAANGbAADKmwAA",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "consoleProbe": "fms2-state-a-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 4,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "224cd98595e897f4",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.000875208352226764,
+            "sequence": 0
+          },
+          {
+            "detail": "state-a startup data, zero BSS and advancing counters verified. Console closed and disconnected.",
+            "phase": "complete",
+            "seconds": 0.11739237501751631,
+            "sequence": 1
+          }
+        ],
+        "id": "257B62C3-7B39-4137-9B64-848F330C15AC",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "device.state-counters",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "d85b285f5d244303394489ee984197f4c4b6e6525c8f9ad7d9669b58adf31e39",
+      "pairedReplySHA256": "6b6d5230c9680265c73218e726e1ace7ccafe9d1e7e64c5140a21364011d940f"
+    },
+    "power-cycle-stage": {
+      "commandID": "84AE173F-618B-4EE9-B190-3DBC26966EA9",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "authorization": "stage-d2-gnd",
+          "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+          "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+          "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+          "sketch": "state-b"
+        },
+        "operation": "run",
+        "requestID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+        "scenarioID": "managed.stage",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0006192916771396995,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: ram_verified. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.8253824999846984,
+            "sequence": 1
+          }
+        ],
+        "id": "9960E671-7168-416F-A7BD-776AB5E568D1",
+        "managedEvidence": {
+          "artifact": {
+            "bytes": "Rk1TMgIAgABOQU5PdDACEAABIBAgAQAAAQEgEAkBIBA8iQAgBAAAAECJACAUAAAAIAIAACQCAAAAAAAAAAAAAP/deg7WtKttFDcRkJixZ1rurTwKsOf2ZMhPweuxx0xIrgSQpZRRlsNaOU9Qlyr5FNvbcppbeRUuMA5hIfK7Lh8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC1APAP+IC9gLUA8CX4gL0AIiAqBdALRtNAA3BAHAgy9+dwR3C1CUgAaAlJCmhIYIpgCE4yaAYkASUgRilGkEdyaCBGKUaQR3C9wEY8iQAgQIkAIHwwAhDwtYewLE84aEAcOGArTjBoQBwwYCpNqGiARxgoO9voaIBHACg31AFG8GgCKCXQASg20QGsQiDgcDIgoHBRIGBwRiAgcCAdH0qQR3FoIEYIMBxKkEexaCBGDDAaSpBHOWggRhAwF0+4RzFoIEYUMLhHamgYISBGkEcL4AGoAXBqaAEkIUaQRzBpQBwwYSECiEIB0QAg8GApaAEgiEcHsPC9AikD0AEp9tEBIPPnACACIfFgMGHv58BGPIkAIECJACCIMAIQEQEgEBcAAAA=",
+            "name": "state-b.fms",
+            "receiptJSON": "eyJzb3VyY2VGaWxlbmFtZSI6InN0YXRlLWIuaW5vIiwic291cmNlU0hBMjU2IjoiOTU3NjgwNDk3MDU2OWE3ZGY1N2U0MGEwNzFkNGMyNmZjZTA5MDdmYmUzZjMxMmFmODFlY2YxNDY0NjY5NzFmMCIsImZpcm13YXJlQnVpbGRJRCI6IjMzYTBlODY2YzI4NzNiMjBhYWY5MzAzZGMxMGM3YWY0ZDY5MjBlOTliYjFiYTJlZWU2YjBjMDA5MDM0NTIzYjUiLCJib2FyZElEIjoibmFub19ycDIwNDBfY29ubmVjdCIsImNhdGFsb2d1ZVNIQTI1NiI6ImMyODA3ZjBkZDMwMTYyMTBlNDE5NGVkMzA5YzljMGRmN2U2Y2U5NTYzNTg1YjVkNGRiNGQ1ZGNlZDAxYjJkYjAiLCJ2ZXJzaW9uIjoxLCJidWlsZElucHV0U0hBMjU2IjoiZjNjMjAzNTFjMjA3ZDVkODRjM2Q2MjZmYzI0MDFjMTc2MDgzYThkM2IzZTkzZjQxNjI3OTUzNzliYTNhYTkzNiIsImRvY3VtZW50SUQiOiI4QzY4OTVGMi1DMkI1LTQ3NUQtQjcwNS04RERCOUI0NzRENjMiLCJzb3VyY2VSZXZpc2lvbiI6MSwicHJvZmlsZSI6Im5hbm8tbWFuYWdlZC12MiIsInByb3ZlbmFuY2UiOnsidG9vbGNoYWluU0hBMjU2IjoiYjQ2NTRiODAxMWNiMWU0YzNkMGFiZWM0MjE3YmQ3NTY4Zjc1NTBjNTI5MzhjYWVkZjg2MTY5NWIyYzMxMmIwNSIsInJlY2lwZUlkZW50aWZpZXIiOiJuYW5vLXN0YXRlZnVsLWNsYW5nLTIyLjEuOC12MS1leHBlcmltZW50YWwiLCJyZWNpcGVTSEEyNTYiOiIyNWRlZjM2YzcwMWRkNWU1MjdiYTEyODIxNWRlYjNmODdjMTU4ZTFjNmViNmViMmZhN2ZkMTA2YjVmNTQzODY4IiwiY29tcGlsZXIiOiJDbGFuZ1wvTExEIDIyLjEuOCBBQkktdHdvIFdBU0kgc2VydmljZSwgaXNvbGF0ZWQgV2ViS2l0IHdvcmtlciJ9LCJsaW5rZWRFTEZTSEEyNTYiOiJhMzI1ZTEyZjNmMDI3ZTIyNWNjNmU2MDgxMjRiZGFjOTdkZjUyYjIwNTFmNWFhZjg5OTE5YjE4NzYwZDBhYTg0IiwiY2Fwc3VsZVNIQTI1NiI6IjUwNWM3MjM4MDRhZGRmMjE4ZTkwMTgzNzVjMWY2M2ZkMDM2YzJlMGJmMTlkMDE3M2FlMTg5YjA0NDE4YWE5YjAiLCJ0cmFuc2xhdGlvblVuaXRTSEEyNTYiOiI5YWNjNjNmMWE0OTBkN2NhYzVlNGQxYTQ0ZDJlN2NiMmUyNGIzYjVkOTkxZjcxOGZkZTZjODM0NDY1ZmI2ZTgwIn0=",
+            "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+            "wasmLinearMemoryBytes": 27983872
+          },
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 5,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true
+          },
+          "outcome": "ram_verified",
+          "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d",
+          "selection": {
+            "authorization": "stage-d2-gnd",
+            "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+            "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+            "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+            "sketch": "state-b"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.stage",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "ad76d692fde9bb5bbd13e1b8164240806f12c9df44fe522c6c4926c49fda0981",
+      "pairedReplySHA256": "3a77ea9e789f72dc0a1fa5ab016cb33bb1288ecd7e378faf3b98ec8a8ac88ecb"
+    },
+    "power-cycle-disconnect": {
+      "commandID": "048985E9-1BB4-476E-9D1F-0191E0CC569E",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+          "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d"
+        },
+        "operation": "run",
+        "requestID": "1A2B8A42-2120-4559-A8CE-0857B1665E77",
+        "scenarioID": "managed.disconnect",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0007754166726954281,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: disconnected. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.01541566665400751,
+            "sequence": 1
+          }
+        ],
+        "id": "1A2B8A42-2120-4559-A8CE-0857B1665E77",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 5,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true
+          },
+          "outcome": "disconnected",
+          "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d",
+          "selection": {
+            "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+            "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.disconnect",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "8cc438d0056eee394b290748b52aebe5fca2a15c3186e7d49f468410a43905ee",
+      "pairedReplySHA256": "eb3d36684b62c5ccaf41c5bd16120e977771986b0ce0a02e2042fd3e79db70ce"
+    },
+    "power-cycle-status": {
+      "commandID": "443C5FC5-AD3D-490C-AE33-579D93D3E1D7",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+          "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d"
+        },
+        "operation": "run",
+        "requestID": "1D90A146-49F6-44DE-88F2-B3316810EBE7",
+        "scenarioID": "managed.reconcile",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.000742000003810972,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: unknown. Commit acceptance is not startup or useful behavior.",
+            "phase": "managed-result",
+            "seconds": 0.029121250001480803,
+            "sequence": 1
+          }
+        ],
+        "id": "1D90A146-49F6-44DE-88F2-B3316810EBE7",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 5,
+              "version": 1
+            },
+            "released": false,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true,
+            "unknownReason": "bootChanged"
+          },
+          "outcome": "unknown",
+          "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d",
+          "selection": {
+            "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+            "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.reconcile",
+        "schema": 3,
+        "status": "outcomeUnknown"
+      },
+      "rawReportSHA256": "8352484ff5fb2cbde68edc344e243791da36d14fd6afe63730ae87d839779c22",
+      "pairedReplySHA256": "4126408633bd0e66b8f9a19b866f70f4b68dc81d77411a462cde8e5961620005"
+    },
+    "power-cycle-retire": {
+      "commandID": "E05BA31C-CF7C-4E74-97D4-0FD21EB1FB51",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "224cd98595e897f4",
+          "deviceID": "5031503337360009"
+        },
+        "managed": {
+          "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+          "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d"
+        },
+        "operation": "run",
+        "requestID": "9842D341-CD64-4DCE-82B1-622EA3019755",
+        "scenarioID": "managed.retire",
+        "schema": 3
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Executing one explicit managed phase; commit and reconciliation remain separate.",
+            "phase": "managed-start",
+            "seconds": 0.0007703750161454082,
+            "sequence": 0
+          },
+          {
+            "detail": "Managed phase: retired_precommit. Commit acceptance is not startup or useful behavior.",
+            "phase": "complete",
+            "seconds": 0.01982583332573995,
+            "sequence": 1
+          }
+        ],
+        "id": "9842D341-CD64-4DCE-82B1-622EA3019755",
+        "managedEvidence": {
+          "checkpoint": {
+            "commitIntent": false,
+            "record": {
+              "boardID": "nano_rp2040_connect",
+              "bootID": "224cd98595e897f4",
+              "deviceID": "5031503337360009",
+              "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+              "format": "nano-managed-v2",
+              "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+              "sha256": "505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0",
+              "size": 548,
+              "targetID": 2,
+              "uploadID": 5,
+              "version": 1
+            },
+            "released": true,
+            "request": {
+              "device": {
+                "address": "192.168.77.1",
+                "boardID": "nano_rp2040_connect",
+                "bootID": "224cd98595e897f4",
+                "deviceID": "5031503337360009"
+              },
+              "managed": {
+                "authorization": "stage-d2-gnd",
+                "evidence": "Full ROM readback on Mac before boot; checked 158208 bytes against the 1.0.0-rc.1 initial image",
+                "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+                "residentImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+                "sketch": "state-b"
+              },
+              "operation": "run",
+              "requestID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+              "scenarioID": "managed.stage",
+              "schema": 3
+            },
+            "schema": 1,
+            "stageIntent": true,
+            "unknownReason": "bootChanged"
+          },
+          "outcome": "retired_precommit",
+          "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d",
+          "selection": {
+            "operationID": "9960E671-7168-416F-A7BD-776AB5E568D1",
+            "recordSHA256": "177da48368cfe85932375e15e8bfeb7b686de9b342dc0e45025deee7c171cd3d"
+          }
+        },
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "managed.retire",
+        "schema": 3,
+        "status": "passed"
+      },
+      "rawReportSHA256": "609c935743f108b52f9e9938f0ba06096747c7fd56f2b806ea3a1cffd74676c3",
+      "pairedReplySHA256": "1a40b9596ee46aeab35e3e19c5ffb3a0d5222b0899ead66fee4018b627e3cbb4"
+    },
+    "final-inspection": {
+      "commandID": "18A8356C-DEA2-4F8B-AB85-FC8E7D82096A",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "23EEAC2E-12C6-43BD-905A-725A30E6245C",
+        "scenarioID": "device.inspect",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": false,
+          "consoleOpened": false,
+          "disconnected": true,
+          "probeAttempted": false,
+          "received": "",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 0,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "cfef3c1c348a4204",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0007028750260360539,
+            "sequence": 0
+          },
+          {
+            "detail": "Selected device assertions and SDK cleanup completed.",
+            "phase": "complete",
+            "seconds": 0.0178404166654218,
+            "sequence": 1
+          }
+        ],
+        "id": "23EEAC2E-12C6-43BD-905A-725A30E6245C",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "device.inspect",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "4b7bba215f32ae5819177560a397720d1d4fb20167d65cfbb00e2e67aa7aae7c",
+      "pairedReplySHA256": "cd648a853d8596bb524b3c85f4c6b8521d13eaabda8a6708dab3e2de7c36f718"
+    },
+    "final-retained-a": {
+      "commandID": "776CC5C8-9233-47AB-833E-47C4D0A72025",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "cfef3c1c348a4204",
+          "consoleProbe": "fms2-state-a-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "1526C8DB-9CF3-4D8B-A236-624BBE5EF2D3",
+        "scenarioID": "device.state-counters",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "RlEyQTEAAAAHAAAAAAAAAECbAAA5mwAARlEyQXMAAAAHAAAAAAAAAIObAAB8mwAA",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "cfef3c1c348a4204",
+            "consoleProbe": "fms2-state-a-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 4,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "cfef3c1c348a4204",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.000652625021757558,
+            "sequence": 0
+          },
+          {
+            "detail": "state-a startup data, zero BSS and advancing counters verified. Console closed and disconnected.",
+            "phase": "complete",
+            "seconds": 0.11383666668552905,
+            "sequence": 1
+          }
+        ],
+        "id": "1526C8DB-9CF3-4D8B-A236-624BBE5EF2D3",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "device.state-counters",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "4623d4691a39cd5a576a50e0a9ca4489faed55b82627490e279a7d65959b443a",
+      "pairedReplySHA256": "4a48f5a1b4828dc6b9a313137031286d80a3b4b5a515a3dde250a3ded2046a66"
+    },
+    "final-echo-a": {
+      "commandID": "8F4480E0-5DA6-4B8D-A8B7-8B95BE5276D6",
+      "request": {
+        "device": {
+          "address": "192.168.77.1",
+          "boardID": "nano_rp2040_connect",
+          "bootID": "cfef3c1c348a4204",
+          "consoleProbe": "fms2-command-2-v1",
+          "deviceID": "5031503337360009"
+        },
+        "operation": "run",
+        "requestID": "BECC975E-27C5-471E-9CFA-D1D7B604ECE4",
+        "scenarioID": "device.console-binary",
+        "schema": 2
+      },
+      "report": {
+        "appIdentifier": "com.firmingokit.demo",
+        "appVersion": "13",
+        "artifacts": [],
+        "deviceEvidence": {
+          "connectionAttempted": true,
+          "consoleClosed": true,
+          "consoleOpened": true,
+          "disconnected": true,
+          "probeAttempted": true,
+          "received": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==",
+          "selection": {
+            "address": "192.168.77.1",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "cfef3c1c348a4204",
+            "consoleProbe": "fms2-command-2-v1",
+            "deviceID": "5031503337360009"
+          },
+          "sentBytes": 257,
+          "snapshot": {
+            "authenticationMode": "open-development",
+            "boardID": "nano_rp2040_connect",
+            "bootID": "cfef3c1c348a4204",
+            "channels": [
+              {
+                "backend": "application",
+                "controls": [],
+                "id": 1,
+                "isOwned": false,
+                "receiveQueueBytes": 256,
+                "transmitQueueBytes": 256
+              }
+            ],
+            "deviceID": "5031503337360009",
+            "firmwareVersion": "1.0.0-rc.1",
+            "maximumPayload": 4096,
+            "protocolMajor": 1,
+            "targets": [
+              {
+                "authorization": "physical-d2-gnd",
+                "format": "nano-managed-v2",
+                "id": 2,
+                "maximumChunk": 1024,
+                "maximumSize": 4096
+              }
+            ]
+          }
+        },
+        "deviceOperations": true,
+        "events": [
+          {
+            "detail": "Selected SDK device operation; no compiler or upload prerequisite.",
+            "phase": "device-start",
+            "seconds": 0.0007285416650120169,
+            "sequence": 0
+          },
+          {
+            "detail": "Selected device assertions and SDK cleanup completed.",
+            "phase": "complete",
+            "seconds": 0.32058229166432284,
+            "sequence": 1
+          }
+        ],
+        "id": "BECC975E-27C5-471E-9CFA-D1D7B604ECE4",
+        "operatingSystem": "Version 27.2.1 (Build 24B156)",
+        "processID": 14007,
+        "scenarioID": "device.console-binary",
+        "schema": 2,
+        "status": "passed"
+      },
+      "rawReportSHA256": "4c9c5f09e4cb23fa7296174e87f6ad3dfb5284c23608c9057de098682c5295e1",
+      "pairedReplySHA256": "56c92b4a833656f62d22afd1c3d3f4b9083d8681249fa23f1a135e3d2bb2072c"
+    }
+  }
+}

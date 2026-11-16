@@ -251,5 +251,20 @@ After the initial ROM image was verified on the Mac, the same iPad process
 confirmed candidate hello and managed target 2 on the selected Nano. State A
 reported initial data 7, zero BSS and a 64-loop increase. Its exact 256-byte
 console echo passed. D13 was reported off with D2 and REC disconnected.
-The pairing was revoked and the controller stopped. Candidate network
-upload and recovery qualification remains open. [iPad result ledger](workbench-nano-fms2-rc1-ipad.json)
+The pairing was revoked and the controller stopped. [iPad baseline ledger](workbench-nano-fms2-rc1-ipad.json)
+
+The same signed build and resident completed the selected iPad managed upload
+and recovery matrix on 2026-11-16. The 29 checked reports include 27 passes, the
+expected refusal to commit from a restored checkpoint, and the expected
+`bootChanged` uncertainty after a RAM-only power cycle. State B and State A
+each had one accepted commit and a separate boot-confirmed query. Explicit
+abort and pre-commit disconnect left the slot untouched. The app restart
+restored the saved State A transaction, and the later power cycle preserved
+State A with exact 256-byte echo and advancing counters on a fresh Nano boot.
+D13 was observed lit with State B and off after the power cycle. Both pairings
+were revoked, the private controller stopped, and D2 was removed.
+[Managed qualification ledger](workbench-nano-fms2-rc1-managed-ipad.json)
+
+The tested matrix covers app restart after an acknowledged commit and Nano
+power loss during RAM staging. Actual reply loss and power interruption during
+flash erase/programming on this exact candidate remain separately open.
