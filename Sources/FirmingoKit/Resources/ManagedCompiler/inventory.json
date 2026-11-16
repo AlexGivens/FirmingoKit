@@ -19,12 +19,12 @@
     {
       "path": "manifest.json",
       "bytes": 1212,
-      "sha256": "b4c51684947f7f0fdfd6c86496b964cd9cd23af76b9ad8f482f78697420fe566"
+      "sha256": "77fa725b70ed4e85b54f565f6f7f319ac8617ce55b2f0f1b53cbe6343b20f86f"
     },
     {
       "path": "host.html",
-      "bytes": 503992,
-      "sha256": "ad13077254c1a7fead761462b895be839df7eb723e6afc260353a79f8371afb3"
+      "bytes": 529256,
+      "sha256": "62fba739bc440421ce5e34228c8da6bce381e4269a1669f1f0fcb13ee4c198a5"
     },
     {
       "path": "LICENSE-MIT",
@@ -38,8 +38,8 @@
     },
     {
       "path": "catalogue.json",
-      "bytes": 890,
-      "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      "bytes": 1900,
+      "sha256": "c2807f0dd3016210e4194ed309c9c0df7e6ce9563585b5d4db4d5dced01b2db0"
     },
     {
       "path": "Firmingo-Compiler-LICENSE",
@@ -49,12 +49,12 @@
     {
       "path": "compiler-package.json",
       "bytes": 10896,
-      "sha256": "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639"
+      "sha256": "22de77c1b68c5d6edb4ae6bb87a6a6b775b7c3cff3283b674f985e7274fc7c7b"
     },
     {
       "path": "compiler-sources.json",
-      "bytes": 262643,
-      "sha256": "c517aeee62c380cf57d38c80a360cb239f74c3f350a7b9b0606cf972758caf9d"
+      "bytes": 272870,
+      "sha256": "9ab22f7e0e7493b260c1fb9d4bf4d0fbbf084a534ea135e0ca4472c1a3d66110"
     },
     {
       "path": "service-review.json",
@@ -78,8 +78,8 @@
     },
     {
       "path": "consumer-package.json",
-      "bytes": 6671,
-      "sha256": "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a"
+      "bytes": 13872,
+      "sha256": "d02bb505fb41cc54620aa7dec42bf1914f8eced06cacfc58583a0dece4fbc3e0"
     }
   ]
 }

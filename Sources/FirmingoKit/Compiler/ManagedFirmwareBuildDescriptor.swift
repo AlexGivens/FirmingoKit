@@ -76,8 +76,15 @@ public struct ManagedFirmwareBuildDescriptor: Equatable, Sendable, Identifiable 
             throw ManagedCatalogueError.invalidDescriptor
         }
         if stateful {
-            guard try value.required("compilerContractSHA256").string() == ManagedResidentState.compilerContractSHA256 else { throw ManagedCatalogueError.invalidDescriptor }
-            state = try ManagedResidentState(address: value.required("stateAddress").uint32(), capacityBytes: value.required("stateCapacityBytes").uint32())
+            let contract = try value.required("compilerContractSHA256").string()
+            if contract == ManagedResidentState.candidateContractSHA256 || version == ManagedResidentState.candidateFirmwareVersion
+                || commit == ManagedResidentState.candidateFirmwareCommit {
+                guard contract == ManagedResidentState.candidateContractSHA256,
+                      version == ManagedResidentState.candidateFirmwareVersion,
+                      commit == ManagedResidentState.candidateFirmwareCommit else { throw ManagedCatalogueError.invalidDescriptor }
+            }
+            state = try ManagedResidentState(address: value.required("stateAddress").uint32(),
+                capacityBytes: value.required("stateCapacityBytes").uint32(), contractSHA256: contract)
         } else { state = nil }
         board = .nanoRP2040Connect; profile = selectedProfile
         firmwareVersion = version; firmwareCommit = commit; residentELFSHA256 = elf
@@ -91,7 +98,7 @@ public struct ManagedFirmwareBuildDescriptor: Equatable, Sendable, Identifiable 
             "recipeSHA256": recipeHash, "qualification": qualification]
         if let state {
             fields["stateAddress"] = state.address; fields["stateCapacityBytes"] = state.capacityBytes
-            fields["compilerContractSHA256"] = ManagedResidentState.compilerContractSHA256
+            fields["compilerContractSHA256"] = state.contractSHA256
         }
         id = NanoManagedContract.digest(try JSONSerialization.data(withJSONObject: fields, options: [.sortedKeys, .withoutEscapingSlashes]))
     }

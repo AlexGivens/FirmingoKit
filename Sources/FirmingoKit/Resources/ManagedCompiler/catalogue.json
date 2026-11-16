@@ -18,6 +18,27 @@
       "recipeIdentifier": "nano-stateless-clang-22.1.8-v1-experimental",
       "recipeSHA256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
       "qualification": "experimental"
+    },
+    {
+      "schema": 2,
+      "board": "nano_rp2040_connect",
+      "profile": "nano-managed-v2",
+      "backend": "application",
+      "firmwareVersion": "1.0.0-rc.1",
+      "firmwareCommit": "7f9bb169436621aceea533fcab4231a1a8e14bc3",
+      "residentELFSHA256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+      "firmwareImageSHA256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069",
+      "buildReportSHA256": "47ff32631096bf86d87de49dc361ae661d012444cba900b742031bd8ab3876b3",
+      "apiAddress": 268578932,
+      "residentABI": 2,
+      "targetID": 2,
+      "maximumCapsuleBytes": 4096,
+      "recipeIdentifier": "nano-stateful-clang-22.1.8-v1-experimental",
+      "recipeSHA256": "25def36c701dd5e527ba128215deb3f87c158e1c6eb6eb2fa7fd106b5f543868",
+      "qualification": "experimental",
+      "stateAddress": 536906044,
+      "stateCapacityBytes": 4096,
+      "compilerContractSHA256": "e99938ce51b83a742bf2d1e7dd7269d6d5814b7cba3cb5699008aeda9db86350"
     }
   ]
 }

@@ -5,33 +5,43 @@ import FirmingoKit
 @MainActor public final class SDKWorkbenchManagedDriver: WorkbenchManagedDriver {
     /// Compiled and independently SDK-validated capsule, issued only by real compilation in this process.
     private var capsule: ManagedCapsule?
+    private var firmwareVersion: String?
     /// Verified RAM session; never reconstructed from a persisted upload record.
     private var session: FirmingoSession?
     /// Initializes no runtime or network activity.
     public init() {}
     /// Verifies the existing source/catalogue pins and real WASM output before device access.
-    public func compile(sketch: String, deviceID: String) async throws -> WorkbenchReport.Artifact {
-        guard ["state-a", "state-b"].contains(sketch) else { throw WorkbenchFailure("Unknown fixed sketch.") }
+    public func compile(sketch: String, deviceID: String, residentImageSHA256: String) async throws -> WorkbenchReport.Artifact {
+        guard ["state-a", "state-b"].contains(sketch),
+              let resident = WorkbenchManagedSelection.resident(residentImageSHA256) else { throw WorkbenchFailure("Unknown fixed sketch or resident.") }
         let sourceSHA = sketch == "state-a" ? "d29fd4a8d813140b89a801e244bf87cd40b4e17ba7a795a70dc64fec3084e0e3" : "9576804970569a7df57e40a071d4c26fce0907fbe3f312af81ecf146466971f0"
         let source = try resource(sketch + ".ino", maximum: 4096)
         guard WorkbenchManagedCheckpoint.digest(source) == sourceSHA, let text = String(data: source, encoding: .utf8) else { throw WorkbenchFailure("Changed fixed source.") }
-        let catalogue = try await ManagedCompilerCatalogue.load(manifestJSON: resource("catalogue.json", maximum: 16384),
-            expectedSHA256: "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd")
+        let catalogue: ManagedCompilerCatalogue
+        if resident.imageSHA256 == WorkbenchManagedSelection.candidateImageSHA256 {
+            catalogue = try await ManagedCompilerCatalogue.loadBundled()
+        } else {
+            catalogue = try await ManagedCompilerCatalogue.load(manifestJSON: resource("catalogue.json", maximum: 16384),
+                expectedSHA256: "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd")
+        }
         let snapshot = try SketchSourceSnapshot(documentID: UUID(), revision: 1, filename: sketch + ".ino", source: text)
-        let result = try await ManagedSketchCompiler().build(ManagedOfflineBuildRequest(snapshot: snapshot, catalogue: catalogue, firmwareBuildID: WorkbenchManagedSelection.buildID))
+        let result = try await ManagedSketchCompiler().build(ManagedOfflineBuildRequest(snapshot: snapshot, catalogue: catalogue, firmwareBuildID: resident.buildID))
         guard result.artifact.sha256 == WorkbenchManagedCheckpoint.capsuleSHA256(sketch), result.artifact.compilerReceiptJSON != nil,
-              result.artifact.firmwareBuild.firmwareImageSHA256 == WorkbenchManagedSelection.imageSHA256 else { throw WorkbenchFailure("Unexpected FMS2 build output.") }
-        let association = try ManagedDeviceAssociation(deviceID: deviceID, firmwareBuildID: WorkbenchManagedSelection.buildID, evidence: .hostConfirmedExistingFirmware)
+              result.artifact.firmwareBuild.firmwareImageSHA256 == resident.imageSHA256,
+              result.artifact.firmwareBuild.residentELFSHA256 == resident.elfSHA256,
+              result.artifact.firmwareBuild.firmwareVersion == resident.version else { throw WorkbenchFailure("Unexpected FMS2 build output.") }
+        let association = try ManagedDeviceAssociation(deviceID: deviceID, firmwareBuildID: resident.buildID, evidence: .hostConfirmedExistingFirmware)
         capsule = try result.artifact.bind(to: association)
+        firmwareVersion = resident.version
         return .init(name: sketch + ".fms", sha256: result.artifact.sha256, bytes: result.artifact.bytes,
             receiptJSON: try JSONEncoder().encode(result.artifact.receipt), wasmLinearMemoryBytes: result.linearMemoryBytes)
     }
     /// Rechecks exact hello and the separate inspection's boot before any stage call.
     public func stage(_ selection: WorkbenchDeviceSelection) async throws -> ManagedUploadRecord {
-        guard let capsule, session == nil else { throw WorkbenchFailure("Compile the selected fixed source first.") }
+        guard let capsule, let firmwareVersion, session == nil else { throw WorkbenchFailure("Compile the selected fixed source first.") }
         let connection = try await connect(selection); session = connection
         guard connection.device.bootID == selection.bootID,
-              connection.device.firmwareVersion == "0.1.0-statefulupload-exp1" else {
+              connection.device.firmwareVersion == firmwareVersion else {
             await disconnect(); throw WorkbenchFailure("Boot or upload-enabled resident changed; no stage was sent.")
         }
         return try await connection.stageManagedUpload(capsule)
@@ -48,7 +58,7 @@ import FirmingoKit
     }
     /// Invalidates local authority before cleanup suspension; normal completion never restores it.
     public func disconnect() async {
-        let old = session; session = nil; capsule = nil
+        let old = session; session = nil; capsule = nil; firmwareVersion = nil
         if let old { await old.disconnect() }
     }
     /// A new public SDK session queries the saved record; changed boots remain explicitly unknown.

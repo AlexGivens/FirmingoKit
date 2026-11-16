@@ -45,7 +45,7 @@ import Testing
         try bytes.write(to: root.appendingPathComponent("inventory.json"))
         let resources = try await VerifiedManagedResources.load(root: root, expectedSHA256: NanoManagedContract.digest(bytes))
         let toolchain = try await resources.toolchain()
-        #expect(toolchain.toolchainSHA256 == "a44afa84e76ae7b1742fd5ecfeec205565643b94948e34d8c57029ae3cada9fd")
+        #expect(toolchain.toolchainSHA256 == "b4654b8011cb1e4c3d0abec4217bd7568f7550c52938caedf861695b2c312b05")
         #expect(toolchain.recipeSHA256 == ManagedCompilerResourceInventory.recipeSHA256)
         let selected = try await OfflineCompilerFixtures.request(source: blink, revision: 1, filename: "Blink.ino")
         let portable = try ManagedPortableRequest(selected)

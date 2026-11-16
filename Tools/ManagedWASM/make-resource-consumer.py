@@ -36,7 +36,7 @@ import FirmingoKit
     static func main() async throws {
         let catalogue = try await ManagedCompilerCatalogue.loadBundled()
         let compiler = ManagedSketchCompiler()
-        guard catalogue.firmwareBuilds.count == 1,
+        guard catalogue.firmwareBuilds.count == 2,
               catalogue.firmwareBuilds.first?.id == "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f"
               else { throw CocoaError(.fileReadCorruptFile) }
         print("Verified bundled catalogue:", catalogue.manifestSHA256)

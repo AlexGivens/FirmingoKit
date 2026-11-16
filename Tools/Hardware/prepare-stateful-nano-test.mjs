@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync, rmSync, lstatSync, readFileSync } from "node:fs";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { verifyConsumerPackage, fileRecord, CONSUMER_SHA256 } from "../ManagedWASM/consumer-package.mjs";
+import { verifyConsumerPackage, fileRecord, HISTORICAL_CONSUMER_SHA256 as CONSUMER_SHA256 } from "../ManagedWASM/consumer-package.mjs";
 
 export const EXPORT_SHA = "90911f7d3684dab4123d36b9a018805cc36ae58cb197c318fe720cb18d434a65";
 export const CATALOGUE_SHA = "8b8f1432d40b42502acca728083e5045f09ed493014bbde1786d3fa8aeed13cd";

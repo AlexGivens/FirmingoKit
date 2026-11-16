@@ -38,10 +38,11 @@ public struct WorkbenchManagedCheckpoint: Codable, Sendable {
             throw WorkbenchFailure("Invalid managed checkpoint intent or release.")
         }
         if let record {
-            guard stageIntent, record.deviceID == request.device?.deviceID, record.bootID == request.device?.bootID,
-                  record.residentELFSHA256 == WorkbenchManagedSelection.residentELFSHA256, record.targetID == 2, record.format == "nano-managed-v2",
+            guard let resident = WorkbenchManagedSelection.resident(request.managed?.residentImageSHA256),
+                  stageIntent, record.deviceID == request.device?.deviceID, record.bootID == request.device?.bootID,
+                  record.residentELFSHA256 == resident.elfSHA256, record.targetID == 2, record.format == "nano-managed-v2",
                   record.size == (request.managed?.sketch == "state-a" ? 544 : 548),
-                  record.firmwareImageSHA256 == WorkbenchManagedSelection.imageSHA256,
+                  record.firmwareImageSHA256 == resident.imageSHA256,
                   record.sha256 == Self.capsuleSHA256(request.managed?.sketch ?? "") else {
                 throw WorkbenchFailure("Saved transaction differs from the original selected artifact/device/boot.")
             }

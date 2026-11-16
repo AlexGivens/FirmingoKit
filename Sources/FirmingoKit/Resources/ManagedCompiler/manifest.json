@@ -3,12 +3,12 @@
   "recipe": "nano-stateless-clang-22.1.8-v1-experimental",
   "serviceABI": 2,
   "recipeSHA256": "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
-  "compilerPackageSHA256": "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639",
+  "compilerPackageSHA256": "22de77c1b68c5d6edb4ae6bb87a6a6b775b7c3cff3283b674f985e7274fc7c7b",
   "files": [
     {
       "path": "host.html",
-      "bytes": 503992,
-      "sha256": "ad13077254c1a7fead761462b895be839df7eb723e6afc260353a79f8371afb3"
+      "bytes": 529256,
+      "sha256": "62fba739bc440421ce5e34228c8da6bce381e4269a1669f1f0fcb13ee4c198a5"
     },
     {
       "path": "LICENSE-MIT",
@@ -28,12 +28,12 @@
     {
       "path": "compiler-package.json",
       "bytes": 10896,
-      "sha256": "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639"
+      "sha256": "22de77c1b68c5d6edb4ae6bb87a6a6b775b7c3cff3283b674f985e7274fc7c7b"
     },
     {
       "path": "compiler-sources.json",
-      "bytes": 262643,
-      "sha256": "c517aeee62c380cf57d38c80a360cb239f74c3f350a7b9b0606cf972758caf9d"
+      "bytes": 272870,
+      "sha256": "9ab22f7e0e7493b260c1fb9d4bf4d0fbbf084a534ea135e0ca4472c1a3d66110"
     }
   ]
 }

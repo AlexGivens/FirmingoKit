@@ -26,7 +26,7 @@ import FirmingoKit
         actual.loadSDKResources(); try await wait(actual)
         let pending = ManagedCompilerResourceError.invalidFile("compiler.wasm").localizedDescription
         guard actual.catalogueSource == .bundled, actual.compilerSource == .bundled,
-              actual.catalogue?.firmwareBuilds.count == 1, actual.firmwareBuild == nil,
+              actual.catalogue?.firmwareBuilds.count == 2, actual.firmwareBuild == nil,
               !actual.bundledCompilerReady, actual.bundledCompilerReason == pending,
               !actual.canBuild, !actual.canRun(on: workbench), actual.association == nil,
               workbench.session == nil else { throw Failure("shipped startup: catalogue=\(actual.catalogue?.manifestSHA256 ?? "none"), reason=\(actual.bundledCompilerReason ?? "none"), ready=\(actual.bundledCompilerReady), status=\(actual.status)") }

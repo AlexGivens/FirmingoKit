@@ -29,6 +29,13 @@ DEVICE_FIELDS = {'device_address': 'address', 'device_board': 'boardID', 'device
 
 MANAGED_SCENARIOS = ('managed.stage','managed.commit','managed.abort','managed.disconnect','managed.reconcile','managed.retire','managed.restore')
 MANAGED_IMAGE = '1ef766226ce6a2c51c668562cd51a71ed0bfbe1634b76b54d704c7e710ca1b2f'
+MANAGED_RC_IMAGE = '2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069'
+MANAGED_RESIDENTS = {
+    MANAGED_IMAGE: ('bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8',
+                    'dacbf259b96de0e050514764253403f3ef1ef51d0f9efaf1f43a10d8654c0e18'),
+    MANAGED_RC_IMAGE: ('85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c',
+                       '33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5'),
+}
 MANAGED_PINS = {'state-a':'537ce260fc33d4b23b2f8829aee6a9b12653236db6baad4c317040dbf087fd89',
                 'state-b':'505c723804addf218e9018375c1f63fd036c2e0bf19d0173ae189b04418aa9b0'}
 MANAGED_FIELDS = {'managed_operation_id':'operationID','managed_sketch':'sketch','resident_image_sha256':'residentImageSHA256',
@@ -47,7 +54,7 @@ def validate_managed_selection(value, scenario, run_id=None):
     if scenario=='managed.stage':
         if (set(value)!={'operationID','sketch','residentImageSHA256','evidence','authorization'}
                 or (run_id is not None and operation!=run_id) or value['sketch'] not in MANAGED_PINS
-                or value['residentImageSHA256']!=MANAGED_IMAGE or not isinstance(value['evidence'],str)
+                or value['residentImageSHA256'] not in MANAGED_RESIDENTS or not isinstance(value['evidence'],str)
                 or not 8<=len(value['evidence'].encode())<=512 or value['authorization']!='stage-d2-gnd'):
             raise ValueError('stage requires fixed source, reviewed resident evidence and explicit D2 authorization')
     else:
@@ -192,19 +199,22 @@ def validate_managed_report(report,request):
         return
     original=checkpoint['request'];validate_request(original)
     if (original['scenarioID']!='managed.stage' or original['device']!=request['device']
-            or original['managed']['operationID']!=selection['operationID'] or checkpoint.get('schema')!=1):
+            or original['managed']['operationID']!=selection['operationID'] or checkpoint.get('schema')!=1
+            or (scenario=='managed.stage' and original['managed']!=selection)):
         raise ValueError('foreign managed checkpoint')
     for key in ('stageIntent','commitIntent','released'):
         if type(checkpoint.get(key)) is not bool: raise ValueError('invalid checkpoint intent')
+    image = original['managed']['residentImageSHA256']
+    resident_elf, firmware_build = MANAGED_RESIDENTS[image]
     record=checkpoint.get('record');snapshot=checkpoint.get('snapshot');unknown=checkpoint.get('unknownReason')
     if record is not None:
         required={'version','deviceID','bootID','boardID','targetID','format','uploadID','size','sha256','residentELFSHA256','firmwareImageSHA256'}
         if (not isinstance(record,dict) or set(record)!=required or record['version']!=1 or not checkpoint['stageIntent']
                 or any(record[k]!=original['device'][k] for k in ('deviceID','bootID','boardID'))
-                or record['targetID']!=2 or record['format']!='nano-managed-v2' or record['firmwareImageSHA256']!=MANAGED_IMAGE
+                or record['targetID']!=2 or record['format']!='nano-managed-v2' or record['firmwareImageSHA256']!=image
                 or type(record['uploadID']) is not int or not 1<=record['uploadID']<=4294967295
                 or type(record['size']) is not int or record['size']!=(544 if original['managed']['sketch']=='state-a' else 548)
-                or record['residentELFSHA256']!='bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8'
+                or record['residentELFSHA256']!=resident_elf
                 or record['sha256']!=MANAGED_PINS[original['managed']['sketch']]): raise ValueError('changed managed SDK record')
     if scenario not in ('managed.stage','managed.restore'):
         digest=hashlib.sha256(json.dumps(record,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
@@ -234,7 +244,7 @@ def validate_managed_report(report,request):
         if (scenario!='managed.stage' or len(data)>4096 or len(receipt)>16384
                 or hashlib.sha256(data).hexdigest()!=MANAGED_PINS[selection['sketch']] or artifact['sha256']!=MANAGED_PINS[selection['sketch']]): raise ValueError('changed fixed artifact')
         facts=json.loads(receipt,object_pairs_hook=unique_object)
-        if (facts.get('firmwareBuildID')!='dacbf259b96de0e050514764253403f3ef1ef51d0f9efaf1f43a10d8654c0e18'
+        if (facts.get('firmwareBuildID')!=firmware_build
                 or facts.get('capsuleSHA256')!=artifact['sha256']): raise ValueError('foreign compiler receipt')
     if report['status']!='passed': return
     if scenario=='managed.restore' and value.get('outcome')=='context_restored': return

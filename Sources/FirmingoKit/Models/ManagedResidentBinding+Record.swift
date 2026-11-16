@@ -15,8 +15,8 @@ extension ManagedResidentBinding {
               try value.required("profile").string() == (stateful ? "nano-managed-v2" : "nano-managed-v1") else { throw ManagedUploadError.invalidArtifact("Incompatible resident record") }
         var state: ManagedResidentState?
         if stateful {
-            guard try value.required("compilerContractSHA256").string() == ManagedResidentState.compilerContractSHA256 else { throw ManagedUploadError.invalidArtifact("Unsupported stateful contract") }
-            state = try ManagedResidentState(address: value.required("stateAddress").uint32(), capacityBytes: value.required("stateCapacityBytes").uint32())
+            state = try ManagedResidentState(address: value.required("stateAddress").uint32(),
+                capacityBytes: value.required("stateCapacityBytes").uint32(), contractSHA256: value.required("compilerContractSHA256").string())
         }
         try self.init(deviceID: value.required("deviceID").string(), residentELFSHA256: value.required("residentELFSHA256").string(),
                       firmwareImageSHA256: value.required("firmwareImageSHA256").string(), apiAddress: value.required("apiAddress").uint32(), state: state)

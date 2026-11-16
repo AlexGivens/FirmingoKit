@@ -44,7 +44,7 @@ const bridge = readFileSync("Tools/ManagedWASM/PortableHostBridge.js", "utf8");
 const script = `${files["compiler.js"].toString("utf8")}\nconst workerSource=${JSON.stringify(files["worker.js"].toString("utf8"))};\nconst preparationWorkerSource=${JSON.stringify(files["preparation-worker.js"].toString("utf8"))};\nconst recipeResources=${files["resources.json"].toString("utf8")};\n${bridge}`;
 new Script(script);
 const html = Buffer.from(`<!doctype html><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'wasm-unsafe-eval'; worker-src blob:; connect-src firmingo-compiler:;"><script>${script.replace(/<\/script/gi,"<\\/script")}</script>`);
-if (html.length > 524288) throw new Error("Excessive native host page");
+if (html.length > 576 * 1024) throw new Error("Excessive native host page");
 const destination = "Sources/FirmingoKit/Resources/ManagedCompiler";
 const output = { "host.html": html, "LICENSE-MIT": files["LICENSE-MIT"], "LICENSE-APACHE": files["LICENSE-APACHE"],
   "Firmingo-Compiler-LICENSE": files["Firmingo-Compiler-LICENSE"], "compiler-package.json": manifestData, "compiler-sources.json": files["sources.json"] };

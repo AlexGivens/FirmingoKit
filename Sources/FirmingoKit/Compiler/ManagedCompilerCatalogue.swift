@@ -10,7 +10,7 @@ public struct ManagedCompilerCatalogue: Sendable {
     public let firmwareBuilds: [ManagedFirmwareBuildDescriptor]
 
     /// Loads only SDK-owned, inventory/hash-verified descriptor resources off UI execution, without a device or service.
-    /// The current bundle contains one exact, explicitly experimental Nano descriptor from a reviewed firmware export.
+    /// The current bundle contains the reviewed ABI-one and FMS2 candidate Nano descriptors.
     /// Resource/schema/I/O errors propagate; cancellation remains CancellationError. No entry or latest build is
     /// synthesized, and successful metadata loading does not establish compiler availability or hardware support.
     @concurrent public static func loadBundled() async throws -> Self {

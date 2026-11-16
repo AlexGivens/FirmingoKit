@@ -33,7 +33,8 @@ import Foundation
                 var value = WorkbenchManagedCheckpoint(request: request)
                 lease = try await store.begin(value); checkpoint = value
                 evidence.checkpoint = value; try publish(evidence, to: save)
-                evidence.artifact = try await driver.compile(sketch: selection.sketch ?? "", deviceID: device.deviceID)
+                evidence.artifact = try await driver.compile(sketch: selection.sketch ?? "", deviceID: device.deviceID,
+                                                             residentImageSHA256: selection.residentImageSHA256 ?? "")
                 try Task.checkCancellation()
                 var checked = evidence; checked.recordSHA256 = try checked.checkpoint?.recordSHA256
                 try checked.validate(scenario: action, runID: request.requestID, passed: false); try publish(evidence, to: save)

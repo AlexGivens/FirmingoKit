@@ -34,7 +34,7 @@ struct ManagedPortableRequest: Sendable {
             "apiAddress": request.resident.apiAddress, "residentABI": request.profile == .nanoManagedV2 ? 2 : 1, "targetID": request.profile.targetID, "maximumCapsuleBytes": 4096]
         if let state = request.resident.state {
             binding["stateAddress"] = state.address; binding["stateCapacityBytes"] = state.capacityBytes
-            binding["compilerContractSHA256"] = ManagedResidentState.compilerContractSHA256
+            binding["compilerContractSHA256"] = state.contractSHA256
         }
         try self.init(snapshot: request.snapshot, profile: request.profile, state: request.resident.state, target: binding, key: "residentBinding", apiAddress: request.resident.apiAddress,
                       residentELFSHA256: request.resident.residentELFSHA256, provenance: provenance)
@@ -55,7 +55,7 @@ struct ManagedPortableRequest: Sendable {
             "recipeSHA256": firmware.recipeSHA256, "qualification": firmware.qualification]
         if let state = firmware.state {
             descriptor["stateAddress"] = state.address; descriptor["stateCapacityBytes"] = state.capacityBytes
-            descriptor["compilerContractSHA256"] = ManagedResidentState.compilerContractSHA256
+            descriptor["compilerContractSHA256"] = state.contractSHA256
         }
         try self.init(snapshot: request.snapshot, profile: firmware.profile, state: firmware.state, target: descriptor, key: "firmwareBuild", apiAddress: firmware.apiAddress,
                       residentELFSHA256: firmware.residentELFSHA256, provenance: provenance)

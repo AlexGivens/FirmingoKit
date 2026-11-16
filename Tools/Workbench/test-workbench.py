@@ -61,6 +61,21 @@ class WorkbenchCLI(unittest.TestCase):
             value['report']['status']='failed' if state=='failed' else 'outcomeUnknown'
             self.assertEqual(cli.decode_response(self.envelope(value),request,123)['report']['status'],value['report']['status'])
 
+    def test_candidate_checkpoint_rejects_crossed_resident_identities(self):
+        request, value = self.managed_fixture()
+        evidence = value['report']['managedEvidence']
+        checkpoint = evidence['checkpoint']
+        checkpoint['request']['managed']['residentImageSHA256'] = cli.MANAGED_RC_IMAGE
+        record = checkpoint['record']
+        record['firmwareImageSHA256'] = cli.MANAGED_RC_IMAGE
+        with self.assertRaisesRegex(ValueError, 'changed managed SDK record'):
+            cli.decode_response(self.envelope(value), request, 123)
+        record['residentELFSHA256'] = cli.MANAGED_RESIDENTS[cli.MANAGED_RC_IMAGE][0]
+        anchor = hashlib.sha256(json.dumps(record, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+        request['managed']['recordSHA256'] = anchor
+        evidence['recordSHA256'] = anchor
+        self.assertEqual(cli.decode_response(self.envelope(value), request, 123)['report']['status'], 'passed')
+
     def test_managed_boot_change_never_licenses_postcommit_retirement(self):
         """Only a durable no-commit intent and bootChanged observation permit releasing host context."""
         request,value=self.managed_fixture()

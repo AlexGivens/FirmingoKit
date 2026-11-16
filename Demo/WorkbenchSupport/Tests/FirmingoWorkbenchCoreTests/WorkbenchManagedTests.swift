@@ -44,7 +44,7 @@ import FirmingoKit
     /// Selects the next read-only result independently of command acceptance.
     var queryState = "boot_confirmed"
     /// Supplies original qualified bytes only to test report validation, not to claim compilation.
-    func compile(sketch: String, deviceID: String) async throws -> WorkbenchReport.Artifact {
+    func compile(sketch: String, deviceID: String, residentImageSHA256: String) async throws -> WorkbenchReport.Artifact {
         calls.append("compile")
         let data = try #require(Data(base64Encoded: managedFixtureCapsule))
         return .init(name: "state-a.fms", sha256: WorkbenchManagedCheckpoint.capsuleSHA256("state-a"), bytes: data,
@@ -267,11 +267,14 @@ private func managedFixtureSnapshot(_ state: String) throws -> WorkbenchManagedC
 @Test(.enabled(if: ProcessInfo.processInfo.environment["WORKBENCH_MANAGED_RUNTIME"] == "1"))
 @MainActor func managedFixedVectorsCompileThroughTheActualSDKDriver() async throws {
     let driver = SDKWorkbenchManagedDriver()
-    for sketch in ["state-a", "state-b"] {
-        let artifact = try await driver.compile(sketch: sketch, deviceID: "0102030405060708")
-        #expect(artifact.sha256 == WorkbenchManagedCheckpoint.capsuleSHA256(sketch))
-        #expect(WorkbenchManagedCheckpoint.digest(artifact.bytes) == artifact.sha256)
-        #expect(!artifact.receiptJSON.isEmpty)
+    for resident in [WorkbenchManagedSelection.imageSHA256, WorkbenchManagedSelection.candidateImageSHA256] {
+        for sketch in ["state-a", "state-b"] {
+            let artifact = try await driver.compile(sketch: sketch, deviceID: "0102030405060708", residentImageSHA256: resident)
+            #expect(artifact.sha256 == WorkbenchManagedCheckpoint.capsuleSHA256(sketch))
+            #expect(WorkbenchManagedCheckpoint.digest(artifact.bytes) == artifact.sha256)
+            let receipt = try #require(JSONSerialization.jsonObject(with: artifact.receiptJSON) as? [String: Any])
+            #expect(receipt["firmwareBuildID"] as? String == WorkbenchManagedSelection.resident(resident)?.buildID)
+        }
     }
     await driver.disconnect()
 }

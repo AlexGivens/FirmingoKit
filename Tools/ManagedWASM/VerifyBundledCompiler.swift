@@ -24,8 +24,8 @@ import FirmingoKit
         let output = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: true)
         try FileManager.default.createDirectory(at: output, withIntermediateDirectories: false)
         let catalogue = try await ManagedCompilerCatalogue.loadBundled()
-        guard catalogue.manifestSHA256 == "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e",
-              catalogue.firmwareBuilds.count == 1,
+        guard catalogue.manifestSHA256 == "c2807f0dd3016210e4194ed309c9c0df7e6ce9563585b5d4db4d5dced01b2db0",
+              catalogue.firmwareBuilds.count == 2,
               try catalogue.build(id: buildID).apiAddress == 0x10022c9c else { throw CocoaError(.fileReadCorruptFile) }
         let compiler = ManagedSketchCompiler()
         try await compiler.verifyResources()

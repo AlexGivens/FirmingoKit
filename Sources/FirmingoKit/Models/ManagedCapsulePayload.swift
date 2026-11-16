@@ -116,7 +116,7 @@ struct ManagedCapsulePayload: Sendable {
               try report.required("bss_bytes").uint32() == bss,
               try report.required("payload_sha256").string() == NanoManagedContract.digest(payload),
               try report.required("header_sha256").string() == NanoManagedContract.digest(header),
-              try report.required("compiler_contract_sha256").string() == ManagedResidentState.compilerContractSHA256 else {
+              try report.required("compiler_contract_sha256").string() == state.contractSHA256 else {
             throw ManagedUploadError.invalidArtifact("FMS2 header, payload or report digest mismatch")
         }
     }

@@ -28,7 +28,7 @@ public struct WorkbenchManagedSelection: Codable, Equatable, Sendable {
         }
         if scenario == "managed.stage" {
             guard operationID == runID, ["state-a", "state-b"].contains(sketch ?? ""),
-                  residentImageSHA256 == Self.imageSHA256, (8...512).contains(evidence?.utf8.count ?? 0),
+                  Self.resident(residentImageSHA256) != nil, (8...512).contains(evidence?.utf8.count ?? 0),
                   recordSHA256 == nil, authorization == "stage-d2-gnd" else {
                 throw WorkbenchFailure("Stage requires a fresh operation, fixed sketch and reviewed resident evidence plus explicit D2 authorization.")
             }
@@ -48,6 +48,27 @@ public struct WorkbenchManagedSelection: Codable, Equatable, Sendable {
     public static let residentELFSHA256 = "bf32639c7fc2181c9ff6f99aaf8c64e19bda4f83f9690321e2b098bc81e451a8"
     /// Independently pinned static descriptor accepted by the managed qualification driver.
     public static let buildID = "dacbf259b96de0e050514764253403f3ef1ef51d0f9efaf1f43a10d8654c0e18"
+    struct Resident: Sendable {
+        let imageSHA256: String
+        let elfSHA256: String
+        let buildID: String
+        let version: String
+    }
+    /// Exact Nano FMS2 release candidate, paired with the bundled Compiler catalogue.
+    public static let candidateImageSHA256 = "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069"
+    static let candidate = Resident(imageSHA256: candidateImageSHA256,
+        elfSHA256: "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c",
+        buildID: "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5", version: "1.0.0-rc.1")
+
+    static func resident(_ image: String?) -> Resident? {
+        switch image {
+        case imageSHA256: Resident(imageSHA256: imageSHA256, elfSHA256: residentELFSHA256, buildID: buildID,
+                                   version: "0.1.0-statefulupload-exp1")
+        case candidateImageSHA256: candidate
+        default: nil
+        }
+    }
+
     /// Strict nested parsing rejects extra authority before journal admission.
     public static func decode(_ bytes: Data) throws -> Self {
         let keys: Set<String> = ["operationID", "sketch", "residentImageSHA256", "evidence", "recordSHA256", "authorization"]

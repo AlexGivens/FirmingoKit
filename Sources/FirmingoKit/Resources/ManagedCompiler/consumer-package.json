@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "package": "firmingo-compiler-consumer",
-  "version": "0.1.0-nano-managed-experimental.2",
+  "version": "1.0.0-rc.1-nano-fms2",
   "interfaceVersion": 1,
   "serviceABI": 2,
   "qualification": "experimental-unqualified",
@@ -14,21 +14,221 @@
   },
   "review": {
     "schema": 1,
-    "version": "0.1.0-nano-managed-experimental.2",
-    "webManifestSHA256": "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639",
+    "version": "1.0.0-rc.1-nano-fms2",
+    "webManifestSHA256": "22de77c1b68c5d6edb4ae6bb87a6a6b775b7c3cff3283b674f985e7274fc7c7b",
     "deliveryManifestSHA256": "261dcdfd80b39c11d522289d8ac411b0882cdc36ec91f370b0f92f11f2957d39",
-    "firmwareManifestSHA256": "9246a7da31b3b4237d1783feb195a7e7719d65c6f4165f440d05de5daea876e4",
-    "firmwareCommit": "e0a79d1e47aa90d5dda02ccd284d40b9c2922c12",
-    "firmwareBuildID": "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f",
+    "firmwareManifestSHA256": "44489d5d035dd8a11eef8b05ffc2c9e628fb958b92d74f8450dfcba9434f4bb1",
+    "firmwareCommit": "7f9bb169436621aceea533fcab4231a1a8e14bc3",
+    "firmwareBuildID": "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5",
     "qualification": "experimental-unqualified",
-    "firmwareProvenance": "Exact project source contract and CI artifact identities verified; installed upstream core/toolchain inputs declared, not fully reproduced or inventoried",
-    "scope": "Offline Nano managed compilation only; no installed-image attestation, hardware qualification or firmware installation release"
+    "firmwareProvenance": "Exact resident/profile inputs checked against the committed blobs; independent ELF/UF2, FAPI, managed-target and state-arena validation",
+    "scope": "Offline Nano release-candidate pairing; legacy ABI-one catalogue entry retained; no installed-image attestation or hardware qualification"
   },
   "files": [
     {
       "path": "catalogue.json",
-      "bytes": 890,
-      "sha256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+      "bytes": 1900,
+      "sha256": "c2807f0dd3016210e4194ed309c9c0df7e6ce9563585b5d4db4d5dced01b2db0"
+    },
+    {
+      "path": "firmware-rc/build-report.json",
+      "bytes": 7706,
+      "sha256": "47ff32631096bf86d87de49dc361ae661d012444cba900b742031bd8ab3876b3"
+    },
+    {
+      "path": "firmware-rc/contract.json",
+      "bytes": 15344,
+      "sha256": "e99938ce51b83a742bf2d1e7dd7269d6d5814b7cba3cb5699008aeda9db86350"
+    },
+    {
+      "path": "firmware-rc/contract/LICENSE",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "firmware-rc/contract/abi.h",
+      "bytes": 814,
+      "sha256": "941fd824a765e1dc9efaa5c9bdd670d77bdb26fedef98c47d9c7969d5bb6ad2a"
+    },
+    {
+      "path": "firmware-rc/contract/facade_v2/Arduino.h",
+      "bytes": 2252,
+      "sha256": "51a64fc530129ce7f03ee49821eca983df50875d3b5fa953eb6df7767926fe9b"
+    },
+    {
+      "path": "firmware-rc/contract/image-layout.json",
+      "bytes": 6710,
+      "sha256": "7cb346d3881737b1840c0baead9de5edf05baa3bbb2c55ede947dc6cda38c0ca"
+    },
+    {
+      "path": "firmware-rc/contract/image.cpp",
+      "bytes": 5935,
+      "sha256": "b694ed15b5c6c84b819da31e14961e48cf4ab8338bb6e1fee538f964a3501ca5"
+    },
+    {
+      "path": "firmware-rc/contract/image.h",
+      "bytes": 1399,
+      "sha256": "658ceac8716a6a6709714f2b51e2e01684a06ba87db999ee0d75cff0b9e6ffd9"
+    },
+    {
+      "path": "firmware-rc/contract/module_entry.cpp",
+      "bytes": 248,
+      "sha256": "cf7458999069224ada262c13f40792c5cef3b6ed3e3760e11fa8062c3c9306df"
+    },
+    {
+      "path": "firmware-rc/contract/stateful_abi.h",
+      "bytes": 483,
+      "sha256": "ed946122c0dbc5f0258b285c37d1a0ae05354fcf702e1b02e911c2fd33044e02"
+    },
+    {
+      "path": "firmware-rc/contract/stateful_image.cpp",
+      "bytes": 5735,
+      "sha256": "9535033887eb51ad3cdc3d9098ffb4b8a0398f9106586106c0461a7f06257149"
+    },
+    {
+      "path": "firmware-rc/contract/stateful_image.h",
+      "bytes": 3004,
+      "sha256": "916fb47da2d8cc772f0e7c0620a092dcbad6bdd34356fcbd075b647730268974"
+    },
+    {
+      "path": "firmware-rc/contract/stateful_module.ld",
+      "bytes": 1310,
+      "sha256": "b9d97aa1fa0750036351adeaa7de48d5b56d8759e2cef9d72c2fbf90ac6c21e6"
+    },
+    {
+      "path": "firmware-rc/manifest.json",
+      "bytes": 6862,
+      "sha256": "44489d5d035dd8a11eef8b05ffc2c9e628fb958b92d74f8450dfcba9434f4bb1"
+    },
+    {
+      "path": "firmware-rc/resident-facts.json",
+      "bytes": 9263,
+      "sha256": "92fbeb85fd5b2b7e2f6a8737efdf36a1a034e142258093f6406e3a5a867c4e1c"
+    },
+    {
+      "path": "firmware-rc/resident.elf",
+      "bytes": 2888696,
+      "sha256": "85fc2a8534cf62b78250da59fef1163fc59e781c0f1cc5daf71e31cd8996047c"
+    },
+    {
+      "path": "firmware-rc/resident.uf2",
+      "bytes": 308224,
+      "sha256": "2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/README.md",
+      "bytes": 1174,
+      "sha256": "d38b88f176e0f43f565afd5e0b2153a075f94d60b22a558da8475a5645f3b95b"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/abort-request.hex",
+      "bytes": 192,
+      "sha256": "212cef02491cefd80c8c22ab06e5412f7dea3bebe044c46007f2ff44b7e2ee6a"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/aborted-response.hex",
+      "bytes": 624,
+      "sha256": "be85c11f2bca102ac2725e7c57692cd2cd5f1fe7e745ca07af3d341bf36fa7c5"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/accepted-response.hex",
+      "bytes": 621,
+      "sha256": "4665f42eeb6be8091a0c723ce5287a6739c4d3f2879e0ef20e013df0ebe8c352"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/begin-request.hex",
+      "bytes": 591,
+      "sha256": "be2f4a5bce2ff929de2fb7506f40496f122740646631a6dd0fd6c2d0dd255ef4"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/boot-confirmed-response.hex",
+      "bytes": 642,
+      "sha256": "147db4527788d2c3f15dda8e1368c7e0b1e80a671715dd64289ffdd97c24d131"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/chunk-response.hex",
+      "bytes": 627,
+      "sha256": "ea38116959bba8a81c720e2b7155b11821cb030cc6c89b2293745927bde79e00"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/chunk.hex",
+      "bytes": 888,
+      "sha256": "b15e4b5297c094437c168960f31e7862f9d35e98b078fdaba8fa9db468747b76"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/commit-request.hex",
+      "bytes": 195,
+      "sha256": "7213112d1f0d9380277addeb3db8079a449fa3be2757c443db08aa686e3363ee"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/committing-response.hex",
+      "bytes": 633,
+      "sha256": "1b558b5bd9e0e17806c32ea9cbe742d3e78496e19b5d6c9b3664bc0d29843be1"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/disconnected-response.hex",
+      "bytes": 648,
+      "sha256": "b504142b0decd74e02b2369a9d98eaf3d0ba28412f52acb207bc911ce4c8bb36"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/finish-request.hex",
+      "bytes": 195,
+      "sha256": "1f2de286dc3e933cd7dab9120d332ceae2090ff823b49c6f56125cda6bd62272"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/hello-request.hex",
+      "bytes": 90,
+      "sha256": "3ad3a44ce98bf9b9ca6529d303cc20fab72621484af3986b76d0f068ced05b99"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/hello-response.hex",
+      "bytes": 1398,
+      "sha256": "a60b8690a435af84c34e95cd2a6bbac3c1119f30a8caf0182d3d774f1e6b333c"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/install-failed-response.hex",
+      "bytes": 648,
+      "sha256": "7b18de88b1dde848d40c99cd78d155ca5cfc5736573bf0b4082bc18dd0d58e30"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/installed-response.hex",
+      "bytes": 627,
+      "sha256": "5c7b3b19c12858a75e3ed40fe1fc081d11b75d50a3afa17b4db99e2460819421"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/old-target-request.hex",
+      "bytes": 591,
+      "sha256": "8b379b142b1e4a5e453f793a94309ac5cdf46734625ec277b8bf5cbb0e200aac"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/status-request.hex",
+      "bytes": 195,
+      "sha256": "442b3d1caab9907211a9f7a5687e1660369122a01124135c0d3c39a6222aeada"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/unauthorized-response.hex",
+      "bytes": 255,
+      "sha256": "19be09548cf8aeb0ce9976edc88ceefaa1f382ab6d337db687def75836b74861"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/verified-response.hex",
+      "bytes": 627,
+      "sha256": "9092bc830565e6a139d1be96b220f557ff564c25880fd406538e679338b5023a"
+    },
+    {
+      "path": "firmware-rc/vectors/managed-upload-v2/wrong-target-response.hex",
+      "bytes": 255,
+      "sha256": "93b95d9e1369471860d51c863f961190c45a250ecaf98bca5407df45f4b27ac2"
+    },
+    {
+      "path": "firmware-rc/vectors/stateful-image/initialized.hex",
+      "bytes": 816,
+      "sha256": "9e8db927dbccec27a95fe31506e903d4d6bad615aa790c77f093612c77083e3b"
+    },
+    {
+      "path": "firmware-rc/vectors/stateful-image/provenance.json",
+      "bytes": 747,
+      "sha256": "6fcd7ebd2e4ede1f0db609acd01d0c1baeb497c32b5768e10253e10e2b7c2213"
     },
     {
       "path": "firmware/build-report.json",
@@ -92,8 +292,8 @@
     },
     {
       "path": "resident-import.json",
-      "bytes": 4607,
-      "sha256": "06e8bc1564dde0e25adfaa2446b3acb89d184b2b3c8eea8b264bedc5f32369b8"
+      "bytes": 13274,
+      "sha256": "fb7e3e8c232816d73addb0dbd679705d504ec2b9c48db34fed8c2f2b30f24cf6"
     },
     {
       "path": "service/BUILDING.md",
@@ -162,18 +362,18 @@
     },
     {
       "path": "web/compiler.js",
-      "bytes": 187507,
-      "sha256": "9a66e068953e6b6f78bb878c0b1463d64c4b9a1b249270c41767f0103a8d48b8"
+      "bytes": 197522,
+      "sha256": "5ed42681616bec08d662febf05695cc678dc1d2a7cba57c265b43e2e6be5b41f"
     },
     {
       "path": "web/manifest.json",
       "bytes": 10896,
-      "sha256": "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639"
+      "sha256": "22de77c1b68c5d6edb4ae6bb87a6a6b775b7c3cff3283b674f985e7274fc7c7b"
     },
     {
       "path": "web/preparation-worker.js",
-      "bytes": 59046,
-      "sha256": "df8299a8b83905d04b20e9731e5459fdf7827a4dcae549ce75514ed18f3f55de"
+      "bytes": 65265,
+      "sha256": "5a7f0def43d70f62107d4961269cb992b281c4660251eca17b8eed694115b760"
     },
     {
       "path": "web/resources.json",
@@ -182,14 +382,14 @@
     },
     {
       "path": "web/sources.json",
-      "bytes": 262643,
-      "sha256": "c517aeee62c380cf57d38c80a360cb239f74c3f350a7b9b0606cf972758caf9d"
+      "bytes": 272870,
+      "sha256": "9ab22f7e0e7493b260c1fb9d4bf4d0fbbf084a534ea135e0ca4472c1a3d66110"
     },
     {
       "path": "web/worker.js",
-      "bytes": 159175,
-      "sha256": "864be9f68255fb5daef075d24e2c392df414095a3ebfeb4f170fb121b16c352e"
+      "bytes": 167719,
+      "sha256": "864b079ac85c004eecc76c192afd4e1fdbf6290a740a589e6ad2ff5296dd4ea7"
     }
   ],
-  "catalogueSHA256": "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e"
+  "catalogueSHA256": "c2807f0dd3016210e4194ed309c9c0df7e6ce9563585b5d4db4d5dced01b2db0"
 }

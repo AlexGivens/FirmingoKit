@@ -16,7 +16,7 @@ struct VerifiedManagedToolchain: Sendable {
     /// Exact approved module size, checked before reading or instantiating bytes.
     static let serviceBytes = 101_194_565
     /// Runtime manifest anchor, refreshed only by deliberate reviewed SDK-local staging.
-    static let manifestSHA256 = "b4c51684947f7f0fdfd6c86496b964cd9cd23af76b9ad8f482f78697420fe566"
+    static let manifestSHA256 = "77fa725b70ed4e85b54f565f6f7f319ac8617ce55b2f0f1b53cbe6343b20f86f"
 
     /// Loads packaged independent resources and a host-selected service, hashing off the main actor.
     /// There is no default sibling path, download, compiler subprocess or board side effect.
@@ -33,13 +33,13 @@ struct VerifiedManagedToolchain: Sendable {
         guard manifest.schema == 1, manifest.serviceABI == 2,
               manifest.recipe == "nano-stateless-clang-22.1.8-v1-experimental",
               manifest.recipeSHA256 == "b7869f6fc863e1905deb6974408c6e7dc63943a1fb3e342a357fdf757b1e23d9",
-              manifest.compilerPackageSHA256 == "2324bff2f0db46b5c640998a607df85066a3bb3ddcf90938499a1c858ba81639",
+              manifest.compilerPackageSHA256 == "22de77c1b68c5d6edb4ae6bb87a6a6b775b7c3cff3283b674f985e7274fc7c7b",
               manifest.files.count == 6, Set(manifest.files.map(\.path)) == ["host.html", "LICENSE-MIT", "LICENSE-APACHE", "Firmingo-Compiler-LICENSE", "compiler-package.json", "compiler-sources.json"] else {
             throw ManagedCompilerError.unavailable("incompatible runtime recipe")
         }
         var page = Data()
         for file in manifest.files {
-            let data = try boundedRead(root.appendingPathComponent(file.path), maximum: 512 * 1024)
+            let data = try boundedRead(root.appendingPathComponent(file.path), maximum: ManagedCompilerResourceInventory.fileBounds[file.path] ?? 0)
             guard data.count == file.bytes, digest(data) == file.sha256 else {
                 throw ManagedCompilerError.unavailable("runtime resource integrity mismatch")
             }

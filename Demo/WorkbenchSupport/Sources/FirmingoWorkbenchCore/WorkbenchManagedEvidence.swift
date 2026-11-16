@@ -20,7 +20,8 @@ public struct WorkbenchManagedEvidence: Codable, Sendable {
         try selection.validate(scenario: scenario, runID: runID)
         if let checkpoint {
             try checkpoint.validate()
-            guard checkpoint.request.managed?.operationID == selection.operationID else { throw WorkbenchFailure("Foreign managed operation evidence.") }
+            guard checkpoint.request.managed?.operationID == selection.operationID,
+                  scenario != "managed.stage" || checkpoint.request.managed == selection else { throw WorkbenchFailure("Foreign managed operation evidence.") }
             guard try recordSHA256 == checkpoint.recordSHA256 else { throw WorkbenchFailure("Published record identity changed.") }
             if !["managed.stage", "managed.restore"].contains(scenario) {
                 guard try checkpoint.recordSHA256 == selection.recordSHA256 else { throw WorkbenchFailure("Foreign managed record evidence.") }

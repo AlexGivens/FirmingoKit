@@ -213,3 +213,19 @@ separately in the [state qualification ledger](workbench-iphone-state-qualificat
 Clean attachment, specialized reply-loss, flash faults, SDK ROM recovery,
 broader models, minimum OS, UI/accessibility, arbitrary sketches and production
 1.0 support retain their separate qualification scope.
+## Nano `1.0.0-rc.1` candidate pairing
+
+Workbench build 13 accepts the separately reviewed Nano FMS2 candidate through
+the bundled SDK catalogue. The stage request still requires an exact resident
+UF2 digest, a separately established installed-image record, and D2 authorization.
+Workbench rechecks the candidate's hello version and selected boot before stage.
+Historical selections and saved report validation remain available.
+
+- Resident UF2 SHA-256 `2c7acee46a85c66fe5abc1c1604cce78ccb6c160546e837583ded11edea04069`
+- Compiler descriptor ID `33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5`
+- Consumer manifest SHA-256 `d02bb505fb41cc54620aa7dec42bf1914f8eced06cacfc58583a0dece4fbc3e0`
+
+The source checkout still omits the WASM binary. Prepare a local SDK package
+using the exact consumer manifest before building the app. Workbench's State A
+and B scenarios continue through the single-file Swift API. The candidate's
+multi-file build was exercised through the Compiler CLI.

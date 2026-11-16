@@ -57,11 +57,16 @@ struct ManagedCompilerResourceTests {
     /// Exact reviewed firmware metadata supplies an experimental choice without inventing a binary or device identity.
     @Test func bundledCatalogueAndServiceAvailability() async throws {
         let catalogue = try await ManagedCompilerCatalogue.loadBundled()
-        #expect(catalogue.manifestSHA256 == "e341bfc0385fea9b2b026dc624daa26cdeac33286f4bb07243b37c1c31837d0e")
-        #expect(catalogue.firmwareBuilds.count == 1)
+        #expect(catalogue.manifestSHA256 == "c2807f0dd3016210e4194ed309c9c0df7e6ce9563585b5d4db4d5dced01b2db0")
+        #expect(catalogue.firmwareBuilds.count == 2)
         #expect(catalogue.firmwareBuilds.first?.id == "c44d25efe774eb47b163bc082906cf48b59b6e3dd1d0e19c7822925e6ba8275f")
         #expect(catalogue.firmwareBuilds.first?.firmwareCommit == "e0a79d1e47aa90d5dda02ccd284d40b9c2922c12")
         #expect(catalogue.firmwareBuilds.first?.apiAddress == 0x10022c9c)
+        let candidate = try #require(catalogue.firmwareBuilds.last)
+        #expect(candidate.id == "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5")
+        #expect(candidate.firmwareVersion == "1.0.0-rc.1")
+        #expect(candidate.state?.contractSHA256 == ManagedResidentState.candidateContractSHA256)
+        #expect(candidate.qualification == "experimental")
         #expect(catalogue.unavailableReason(for: .nanoRP2040Connect) == nil)
         #expect(catalogue.unavailableReason(for: .raspberryPiPico) != nil)
         let resources = try await VerifiedManagedResources.load()
@@ -208,7 +213,7 @@ struct ManagedCompilerResourceTests {
             return try await ManagedCompilerCatalogue.loadBundled()
         }
         await #expect(throws: CancellationError.self) { _ = try await cancelled.value }
-        #expect(try await ManagedCompilerCatalogue.loadBundled().firmwareBuilds.count == 1)
+        #expect(try await ManagedCompilerCatalogue.loadBundled().firmwareBuilds.count == 2)
         let compiler = ManagedSketchCompiler()
         let verification = Task {
             withUnsafeCurrentTask { $0?.cancel() }

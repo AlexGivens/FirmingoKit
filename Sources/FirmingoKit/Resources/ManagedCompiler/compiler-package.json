@@ -80,8 +80,8 @@
     },
     {
       "path": "runtime/ManagedService.js",
-      "bytes": 11016,
-      "sha256": "e0883d6595e2aa3722ff440203a844ae1443ec0a96ed9ed27a9612511165b09a"
+      "bytes": 11021,
+      "sha256": "4a40ab076b878d581a0022dbc6c715f0153be831b2e4fca0f43bc4cf8885d070"
     },
     {
       "path": "runtime/ModuleMemory.js",
@@ -100,18 +100,18 @@
     },
     {
       "path": "runtime/build.js",
-      "bytes": 8005,
-      "sha256": "e0cfc55d86c90069c4e9c3a16cada416044b192939087ba763797a8a188226f8"
+      "bytes": 8535,
+      "sha256": "345c15d365e44a2c17ad693513345a8be81a43400481b7c93467778bb595ae33"
     },
     {
       "path": "runtime/controller.js",
-      "bytes": 6998,
-      "sha256": "cf4ac3ee6b73f5cd60a71a48e0db9817722f04840bf869ed78d59c1ac598e9a4"
+      "bytes": 7147,
+      "sha256": "1578354e3a6a96f6ca876223949c892e1ab4c6234be6138b626a237ed7570fe3"
     },
     {
       "path": "runtime/messages.js",
-      "bytes": 6036,
-      "sha256": "a47bd3548845e8ff2e3a03bdb6c1bc51c1277ecdc65c3311654442a5dc5e52e2"
+      "bytes": 6987,
+      "sha256": "755f2f0d5445b40b36e291f13c9752113fd8ff057ec1ea114d55de075b9e489b"
     },
     {
       "path": "runtime/packaging-controller.js",
@@ -130,13 +130,13 @@
     },
     {
       "path": "runtime/preparation-controller.js",
-      "bytes": 5377,
-      "sha256": "36fe914edbc2614b0451172df472b6c1a0d59fc09b8f9a3cf6fefb594c3927fd"
+      "bytes": 5768,
+      "sha256": "afc5b4e302705990aed6d5952e6f11ada8f8fb28af6acc207aa0503a79f9a21f"
     },
     {
       "path": "runtime/preparation-worker-core.js",
-      "bytes": 1653,
-      "sha256": "2b38d83f02f7cdf89d1929948aa4181254c27a6366695ed59a7ffef2d165c783"
+      "bytes": 1686,
+      "sha256": "5521fe18b127d7b32b5ee9b0dc914899da43b52fd78dfdfb3cf25c44de6d1824"
     },
     {
       "path": "runtime/preparation-worker.js",
@@ -150,18 +150,18 @@
     },
     {
       "path": "runtime/worker-core.js",
-      "bytes": 1104,
-      "sha256": "9bf29421b045b2406cba7f2211e8217d2953db9c2a27e8ea69ff3ac525e3b17e"
+      "bytes": 1128,
+      "sha256": "b8ab5a07d7f081ec102ac2a8ca56fd9ecf38f650699cf6ab7e2bcd1f86b0cdb0"
     },
     {
       "path": "src/capsule.js",
-      "bytes": 8526,
-      "sha256": "1d0a5e8f2e2235fcccb1ac137233418d0a96e28411680fddaa1cacc45320e867"
+      "bytes": 8852,
+      "sha256": "200c727befef11521c6ae004aef9a931dda525a933bab7ee2b1f5e63cd435e85"
     },
     {
       "path": "src/contract.js",
-      "bytes": 13478,
-      "sha256": "e6287a4fa1b9dc03fe22e730d4493c4aa5d3b6c7afcd9075e1d9f2718bd03e37"
+      "bytes": 16918,
+      "sha256": "4182f2cf19280b3efc5454754142a9afbe4f9406b3a44723dcc197b58815f1ce"
     },
     {
       "path": "src/elf.js",
@@ -190,13 +190,13 @@
     },
     {
       "path": "src/limits.js",
-      "bytes": 1228,
-      "sha256": "a5cdb3f2d9cb40eb4847ec1dca43f4fecb20e5797c562f344733e7bd4481086d"
+      "bytes": 1470,
+      "sha256": "5f5a637332608ecaad3cd620fff6b578a08fccdcf2d11736903ff8c9498a330c"
     },
     {
       "path": "src/nano-recipe.js",
-      "bytes": 3756,
-      "sha256": "9252e1a653589a1eb1478ad83a01a591404f4fb22e49aa260c60ddd6a24bb889"
+      "bytes": 5494,
+      "sha256": "3175ec8a2adc389f3c07923737625cdefaab63af867a815ca3722be56d097695"
     },
     {
       "path": "src/pipeline-error.js",
@@ -205,8 +205,8 @@
     },
     {
       "path": "src/preprocess.js",
-      "bytes": 7023,
-      "sha256": "f6f466d7f2792cf3b8be0a37b80ea46cf2e2421338111294ba64033d5575607c"
+      "bytes": 9121,
+      "sha256": "f65e9ccdee5d198b2d050edf9d929fbc31dcb9bceee9abaddfc7d7adce93b9b5"
     },
     {
       "path": "src/stateful-capsule.js",
@@ -297,18 +297,18 @@
   "files": [
     {
       "path": "compiler.js",
-      "bytes": 187507,
-      "sha256": "9a66e068953e6b6f78bb878c0b1463d64c4b9a1b249270c41767f0103a8d48b8"
+      "bytes": 197522,
+      "sha256": "5ed42681616bec08d662febf05695cc678dc1d2a7cba57c265b43e2e6be5b41f"
     },
     {
       "path": "worker.js",
-      "bytes": 159175,
-      "sha256": "864be9f68255fb5daef075d24e2c392df414095a3ebfeb4f170fb121b16c352e"
+      "bytes": 167719,
+      "sha256": "864b079ac85c004eecc76c192afd4e1fdbf6290a740a589e6ad2ff5296dd4ea7"
     },
     {
       "path": "preparation-worker.js",
-      "bytes": 59046,
-      "sha256": "df8299a8b83905d04b20e9731e5459fdf7827a4dcae549ce75514ed18f3f55de"
+      "bytes": 65265,
+      "sha256": "5a7f0def43d70f62107d4961269cb992b281c4660251eca17b8eed694115b760"
     },
     {
       "path": "resources.json",
@@ -332,8 +332,8 @@
     },
     {
       "path": "sources.json",
-      "bytes": 262643,
-      "sha256": "c517aeee62c380cf57d38c80a360cb239f74c3f350a7b9b0606cf972758caf9d"
+      "bytes": 272870,
+      "sha256": "9ab22f7e0e7493b260c1fb9d4bf4d0fbbf084a534ea135e0ca4472c1a3d66110"
     }
   ]
 }

@@ -2,7 +2,7 @@
 import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { fileRecord, verifyConsumerPackage, CONSUMER_SHA256 } from '../ManagedWASM/consumer-package.mjs';
+import { fileRecord, verifyConsumerPackage, HISTORICAL_CONSUMER_SHA256 as CONSUMER_SHA256 } from '../ManagedWASM/consumer-package.mjs';
 
 /** Copy only independently anchored resident evidence; never connect, build firmware, compose an image or flash. */
 export function prepare(input, output) {

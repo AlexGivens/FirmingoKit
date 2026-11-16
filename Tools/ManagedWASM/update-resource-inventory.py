@@ -18,15 +18,17 @@ def main():
     if any(p.name not in allowed or p.is_symlink() or not p.is_file() for p in root.iterdir()):
         raise SystemExit("Unexpected or unsafe staged compiler resource")
     consumer_bytes = (root / "consumer-package.json").read_bytes()
-    if hashlib.sha256(consumer_bytes).hexdigest() != "1bbc0cc19d80490914799fbec5cb4bbc0a942a73fd3bbf6e09fff2c3856e660a":
+    if hashlib.sha256(consumer_bytes).hexdigest() != "d02bb505fb41cc54620aa7dec42bf1914f8eced06cacfc58583a0dece4fbc3e0":
         raise SystemExit("Consumer package differs from independently reviewed anchor")
     consumer = json.loads(consumer_bytes)
     catalogue = (root / "catalogue.json").read_bytes()
     if hashlib.sha256(catalogue).hexdigest() != consumer["catalogueSHA256"]:
         raise SystemExit("Catalogue differs from reviewed exact firmware export")
     builds = json.loads(catalogue)["firmwareBuilds"]
-    if len(builds) != 1 or builds[0]["firmwareCommit"] != consumer["review"]["firmwareCommit"] or builds[0]["qualification"] != "experimental":
-        raise SystemExit("Only the exact reviewed experimental Nano descriptor may be staged")
+    if (len(builds) != 2 or [build["profile"] for build in builds] != ["nano-managed-v1", "nano-managed-v2"]
+            or builds[1]["firmwareCommit"] != consumer["review"]["firmwareCommit"]
+            or any(build["qualification"] != "experimental" for build in builds)):
+        raise SystemExit("Only the exact reviewed Nano descriptors may be staged")
     runtime = json.loads((root / "manifest.json").read_bytes())
     if hashlib.sha256((root / "service-review.json").read_bytes()).hexdigest() != "2627a80ee5845929f030cfec6253f05e3cfc4f8c98bff69a0117b3d78114cb26":
         raise SystemExit("Service review differs from independently reviewed pair")

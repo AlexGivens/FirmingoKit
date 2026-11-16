@@ -3,7 +3,7 @@ import Foundation
 /// SDK-owned immutable verified runtime/catalogue capabilities, independent of device identity or deployment.
 struct VerifiedManagedResources: Sendable {
     /// Independently compiled-in anchor changed only with deliberate SDK resource review.
-    static let inventorySHA256 = "bed0aecb48fdfa7734be8785f1619f0cc397488b03ff35758f6629c621b8bd14"
+    static let inventorySHA256 = "bbb2e862fd593a3637d8b6745825bac29f9b6c279f085e1534e7717b3559cc82"
     /// Local resource directory; no sibling lookup, network fetch or environment override.
     private let root: URL
     /// Closed metadata verified before resource path construction.
@@ -42,8 +42,9 @@ struct VerifiedManagedResources: Sendable {
             if file.path == "catalogue.json" { catalogueBytes = bytes; catalogueHash = file.sha256 }
         }
         let catalogue = try await ManagedCompilerCatalogue.load(manifestJSON: catalogueBytes, expectedSHA256: catalogueHash)
-        guard catalogue.firmwareBuilds.allSatisfy({ $0.recipeIdentifier == ManagedCompilerResourceInventory.recipeIdentifier &&
-            $0.recipeSHA256 == ManagedCompilerResourceInventory.recipeSHA256 }) else {
+        guard catalogue.firmwareBuilds.allSatisfy({
+            $0.recipeIdentifier == $0.profile.recipeIdentifier && $0.recipeSHA256 == $0.profile.recipeSHA256
+        }) else {
             throw ManagedCompilerResourceError.incompatibleInventory
         }
         try Task.checkCancellation()
