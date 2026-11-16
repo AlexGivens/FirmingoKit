@@ -252,3 +252,11 @@ Evidence consists of a verified source image, a user-reported copy and functiona
 observations from the running device. The exact flash contents require separate
 readback. Pending records block Workbench deployments. Recovery starts a fresh
 explicit Files attempt from the verified cache and retains the previous journal.
+
+The signed build from SDK commit `a5d7575` installed over Wi-Fi on the
+11-inch iPad Pro (3rd generation) running iPadOS 27.2.1. Workbench saved the
+reviewed image to a local Files directory. The app-private cached copy matched
+the reviewed UF2 byte for byte, and its pending installation record carried the
+exact image and resident descriptor with no reported copy at that checkpoint.
+The prepared-package SHA-256 is
+`8ce9239ea6bc488880eb5fa92a6a72b36f9ae3250388d06683ee62c36398ec71`.
