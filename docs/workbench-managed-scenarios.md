@@ -229,3 +229,20 @@ The source checkout still omits the WASM binary. Prepare a local SDK package
 using the exact consumer manifest before building the app. Workbench's State A
 and B scenarios continue through the single-file Swift API. The candidate's
 multi-file build was exercised through the Compiler CLI.
+
+On 2026-11-16 the prepared SDK from commit
+`5106350ae039cc71a680ecb3d608b507fd5bee86` verified all 1024 files and produced
+a signed Release build 13. Its executable SHA-256 was
+`d9a053c4205380e35827b2d8bbf9b75bbec72b4c097a8bb7602f7696324a7f66`.
+The prepared SDK's macOS WebKit check compiled State A and State B for both
+historical and candidate resident identities and checked the SDK receipt's
+descriptor ID on each output. The SDK validation also passed its 166 SDK, eight
+ROM-host and 40 Workbench Swift tests.
+
+On the physical 11-inch iPad Pro (3rd generation), iPadOS 27.2.1, build 13
+installed and paired over Wi-Fi. One app process passed `compiler.catalogue` with
+the candidate catalogue and `compiler.smoke` with the retained ABI-one vectors.
+The local report SHA-256 values are
+`c761fd758a5300f8a23956e664643dfa7d944229ad7bcbd200b1449ba704b9dd` and
+`32ba26f7d57d0ec559f792d3f1f054beef013bf7d3da1e396f58593f76b19e5a`
+respectively. These checks were offline with respect to the Nano.
