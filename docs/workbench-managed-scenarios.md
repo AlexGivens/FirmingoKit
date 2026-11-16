@@ -246,3 +246,10 @@ The local report SHA-256 values are
 `c761fd758a5300f8a23956e664643dfa7d944229ad7bcbd200b1449ba704b9dd` and
 `32ba26f7d57d0ec559f792d3f1f054beef013bf7d3da1e396f58593f76b19e5a`
 respectively. These checks were offline with respect to the Nano.
+
+After the initial ROM image was verified on the Mac, the same iPad process
+confirmed candidate hello and managed target 2 on the selected Nano. State A
+reported initial data 7, zero BSS and a 64-loop increase. Its exact 256-byte
+console echo passed. D13 was reported off with D2 and REC disconnected.
+The pairing was revoked and the controller stopped. Candidate network
+upload and recovery qualification remains open. [iPad result ledger](workbench-nano-fms2-rc1-ipad.json)
