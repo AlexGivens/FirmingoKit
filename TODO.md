@@ -395,13 +395,13 @@ See [delivery integration](docs/compiler-delivery.md) for exact identities and c
 
 ### Mobile installation and Swift source bundles
 
-- [x] Add Workbench's Files-assisted install and recovery flow for the exact Nano
-  FMS2 candidate, with a verified local image, durable pending context and
-  post-boot validation before an explicit association. See
-  [firmware lifecycle](docs/firmware-lifecycle.md#files-assisted-nano-installation-in-workbench).
+- [x] Add the in-app boot-drive picker and FirmingoKit transfer for the exact
+  Nano FMS2 candidate, with durable write intent, ROM detach detection, and
+  automatic functional verification and association. See
+  [firmware lifecycle](docs/firmware-lifecycle.md#mobile-nano-installation-in-workbench).
 - [x] Pass FMS2 source bundles through Swift and Workbench with versioned receipts
   and original helper diagnostics. See [Swift source bundles](docs/compiler.md#swift-source-bundles).
-- [ ] Qualify the Files installation and an interrupted-copy recovery on iPad
+- [ ] Qualify in-app boot-drive installation and interrupted-transfer recovery on iPad
   and iPhone, including first installation on a board running non-Firmingo
   firmware and a subsequent offline multi-file compile/upload.
 

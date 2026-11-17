@@ -1,6 +1,6 @@
+import Darwin
 import Foundation
 #if os(macOS)
-import Darwin
 import DiskArbitration
 import IOKit
 #endif
@@ -179,8 +179,10 @@ public actor MacOSUF2ProgrammingBackend: FirmwareProgrammingBackend {
             throw FirmwareInstallationError.targetChanged
         }
     }
+    #endif
+
     /// Reads INFO_UF2.TXT through the pinned directory, excluding symlinks and excess data.
-    private static func readInfo(root: Int32) throws -> Data {
+    static func readInfo(root: Int32) throws -> Data {
         let file = openat(root, "INFO_UF2.TXT", O_RDONLY | O_NOFOLLOW | O_CLOEXEC)
         guard file >= 0 else { throw posixError() }
         let result: Data
@@ -215,5 +217,4 @@ public actor MacOSUF2ProgrammingBackend: FirmwareProgrammingBackend {
     }
     /// Captures errno immediately before another syscall can overwrite its cause.
     private static func posixError() -> NSError { NSError(domain: NSPOSIXErrorDomain, code: Int(errno)) }
-    #endif
 }

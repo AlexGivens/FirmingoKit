@@ -100,14 +100,14 @@ actor InstallationRecordStore {
         return record
     }
 
-    /// One app-owned cache path, always independently validated before the user receives the bytes.
+    /// One app-owned cache path, always independently validated before installation.
     func filesImageURL() throws -> URL {
         try directory().appendingPathComponent(ManagedROMInstall.filename)
     }
 
-    /// Persists verified bytes and a fresh pending attempt before the handoff can occur.
+    /// Persists verified bytes and a fresh pending attempt before the picker can be used.
     /// Recovery can replace the pending pointer while preserving the previous journal.
-    func beginFilesHandoff(_ record: ManagedROMInstall.Record, image: ManagedROMInstall,
+    func prepareFilesInstallation(_ record: ManagedROMInstall.Record, image: ManagedROMInstall,
                            replacing previous: ManagedROMInstall.Record?) throws {
         try Task.checkCancellation()
         guard activeOperation == nil else { throw DemoOperationError.busy }
@@ -116,25 +116,39 @@ actor InstallationRecordStore {
         }
         guard try loadFilesInstallation() == previous,
               previous == nil || previous?.observedDeviceID != nil || record.recovery,
-              !record.copyReported, record.observedDeviceID == nil else { throw DemoOperationError.contextChanged }
+              !record.mayVerify, record.observedDeviceID == nil else { throw DemoOperationError.contextChanged }
         try durableWrite(image.bytes, to: filesImageURL())
         try saveFilesRecord(record)
     }
 
-    /// Records the user-reported copy separately from system document export or post-boot success.
-    func reportFilesCopy(_ expected: ManagedROMInstall.Record) throws -> ManagedROMInstall.Record {
-        guard activeOperation == nil, try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
-        var updated = expected
-        try updated.reportCopy()
-        try saveFilesRecord(updated)
-        return updated
+    /// Reserves the deployment gate while validating or programming the picked volume.
+    func beginFilesProgramming(_ expected: ManagedROMInstall.Record) throws -> UUID {
+        try Task.checkCancellation()
+        guard activeOperation == nil else { throw DemoOperationError.busy }
+        guard try workbenchManagedOwner() == nil, try loadManaged() == nil else {
+            throw DemoOperationError.pendingManagedTransaction
+        }
+        guard !expected.mayVerify, try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
+        let id = UUID()
+        activeOperation = (id, false)
+        return id
+    }
+
+    /// Durably consumes authorization for one write before creating a file on the ROM volume.
+    func saveFilesWriteIntent(_ dispatched: ManagedROMInstall.Record, replacing expected: ManagedROMInstall.Record,
+                              lease: UUID) throws {
+        try Task.checkCancellation()
+        guard activeOperation?.id == lease, try loadFilesInstallation() == expected,
+              !expected.mayVerify, dispatched.writeDispatched == true,
+              dispatched.operationID == expected.operationID else { throw DemoOperationError.contextChanged }
+        try saveFilesRecord(dispatched)
     }
 
     /// Reserves the normal device gate for one explicit verification attempt without creating a write token.
     func beginFilesVerification(_ expected: ManagedROMInstall.Record) throws -> UUID {
         try Task.checkCancellation()
         guard activeOperation == nil else { throw DemoOperationError.busy }
-        guard expected.copyReported, expected.observedDeviceID == nil,
+        guard expected.mayVerify, expected.observedDeviceID == nil,
               try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
         let id = UUID()
         activeOperation = (id, false)
@@ -143,9 +157,10 @@ actor InstallationRecordStore {
 
     /// Updates the roster and then resolves the pending record; a failed final save still blocks deployment.
     func associateFilesInstallation(_ expected: ManagedROMInstall.Record,
-                                    observation: ManagedROMInstall.Observation) throws -> ManagedROMInstall.Record {
+                                    observation: ManagedROMInstall.Observation,
+                                    lease: UUID? = nil) throws -> ManagedROMInstall.Record {
         try Task.checkCancellation()
-        guard activeOperation == nil, try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
+        guard activeOperation?.id == lease, try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
         var updated = expected
         let association = try updated.associate(observation)
         var roster = try loadAssociations()
@@ -254,7 +269,9 @@ actor InstallationRecordStore {
         guard activeOperation == nil else { throw DemoOperationError.busy }
         guard try workbenchManagedOwner() == nil else { throw DemoOperationError.pendingManagedTransaction }
         guard try loadManaged() == nil else { throw DemoOperationError.pendingManagedTransaction }
-        if let files = try loadFilesInstallation(), files.observedDeviceID == nil {
+        // A legacy handoff could have been copied outside the app before its copy report.
+        if let files = try loadFilesInstallation(), files.observedDeviceID == nil,
+           files.schema == 1 || files.mayVerify {
             throw DemoOperationError.pendingFilesInstallation
         }
         let id = UUID()

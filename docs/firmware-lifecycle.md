@@ -233,25 +233,47 @@ matching hello after recovery. First-page initial boot had one preserved TCP
 timeout before later separate read-only success; its cause remains unresolved.
 First installation from non-Firmingo firmware, sandbox, minimum OS and power
 loss inside a chip command remain unqualified.
-## Files-assisted Nano installation in Workbench
+## Mobile Nano installation in Workbench
 
-Workbench build 14 has a Files-assisted setup and recovery path on iPhone and
-iPad for the pinned Nano FMS2 `1.0.0-rc.1` composite. Its SHA-256 is
+Workbench installs the reviewed Nano FMS2 `1.0.0-rc.1` composite on iPhone and
+iPad. The image contains the Firmingo resident and a State A starter sketch.
+Its SHA-256 is
 `5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af`.
-For a prepared app build, add `--mobile-rom-image REVIEWED_UF2` to
-`prepare-sdk-package.mjs`. Source builds can import those same verified bytes
-from Files. The composite contains the resident and known State A starter.
+Prepare the app with `prepare-sdk-package.mjs --mobile-rom-image REVIEWED_UF2`
+alongside the usual compiler arguments. Source builds can import those exact
+image bytes if the app was built without the image.
 
-In a Workbench document, open **Install or Recover Firmingo**. Prepare a new
-attempt, save the UF2 locally, enter ROM mode with REC, and copy the file to
-the root of `RPI-RP2` in Files. Leave D2 disconnected. Return to the sheet and
-report the copy after the Nano reboots. Workbench resumes the pending record
-across app launches and performs a bounded fresh hello, checks FMS2 capabilities,
-and probes the starter and binary console before you review the device association.
-Evidence consists of a verified source image, a user-reported copy and functional
-observations from the running device. The exact flash contents require separate
-readback. Pending records block Workbench deployments. Recovery starts a fresh
-explicit Files attempt from the verified cache and retains the previous journal.
+1. Open **Install or Recover Firmingo**, then **Install Firmingo**.
+2. Connect only the Nano you intend to replace. Leave D2 disconnected.
+   Bridge REC to GND and press RESET, then remove REC–GND once the boot drive
+   appears.
+3. Tap **Choose Boot Drive…** and select the `RPI-RP2` volume root under
+   **Locations**. Selecting it starts installation. Keep the Nano connected
+   and allow local-network access if prompted.
+4. Workbench waits for the ROM drive to detach, then checks Nano identity,
+   resident version and FMS2 capabilities, the State A starter, and an exact
+   256-byte USB Ethernet console reply. On success it saves the device
+   association and reports that Firmingo is ready.
+
+The bootloader exposes generic RP2040 metadata. Workbench checks that the
+selection is the root of a local mounted ROM-shaped volume and validates
+`INFO_UF2.TXT`. Connect just one intended Nano in ROM mode, because Files
+does not expose its physical board model or its Firmingo device ID before
+programming. When a known device ID or prior boot is available, the SDK also
+checks it after reboot. Functional verification provides no flash readback.
+
+The Swift entry point is `ManagedROMInstall.install(in:record:at:saveWriteIntent:progress:)`.
+Use the system's in-place folder picker to supply the selected URL. Pass a
+fresh `ManagedROMInstall.Record` and implement `saveWriteIntent` as a
+durable compare-and-replace of that exact pending record. The SDK validates
+the image and volume before this callback and rechecks the pinned directory
+before creating the UF2. A restored dispatched record only allows a
+verification check. **Verify Again** in Workbench opens a new session to
+check the connected board. **Recover Firmingo** starts a new explicitly
+selected ROM transfer and retains the previous journal. Unresolved intent
+blocks Workbench managed deployments.
+
+### Historical Files export check
 
 The signed build from SDK commit `a5d7575` installed over Wi-Fi on the
 11-inch iPad Pro (3rd generation) running iPadOS 27.2.1. Workbench saved the

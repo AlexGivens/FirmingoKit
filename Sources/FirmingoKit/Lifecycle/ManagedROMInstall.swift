@@ -2,7 +2,7 @@ import Foundation
 
 /// One reviewed Nano FMS2 initial/recovery image and its post-boot verification contract.
 public struct ManagedROMInstall: Sendable {
-    /// Filename used for a user-directed copy from Files to the RP2040 ROM volume.
+    /// Filename of the reviewed distributable and app-cache image.
     public static let filename = "Firmingo-Nano-FMS2-1.0.0-rc.1.uf2"
     /// Reviewed composite digest. The resident-only UF2 has a different identity.
     public static let imageSHA256 = "5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af"
@@ -12,7 +12,7 @@ public struct ManagedROMInstall: Sendable {
     public static let firmwareVersion = "1.0.0-rc.1"
     /// Bound on a complete image read.
     public static let imageBytes = 316_416
-    /// Validated composite bytes for the user to copy to the selected ROM volume.
+    /// Validated composite bytes for the selected ROM volume.
     public let bytes: Data
 
     /// Verifies the independently pinned bytes and the disjoint resident/managed-sector layout before handoff.
@@ -50,7 +50,7 @@ public struct ManagedROMInstall: Sendable {
         public let device: FirmingoDevice
     }
 
-    /// Durable context for an explicit Files handoff. Restoring one grants no authority to write or probe.
+    /// Durable context for an explicit ROM install. Restoring a dispatched attempt grants no write authority.
     public struct Record: Codable, Equatable, Sendable {
         /// Local record format, independent of the firmware release version.
         public let schema: UInt32
@@ -68,13 +68,18 @@ public struct ManagedROMInstall: Sendable {
         public let recovery: Bool
         /// Operator's report of the external copy. It does not establish that a write succeeded.
         public private(set) var copyReported: Bool
+        /// Presence records durable authorization immediately before the one filesystem write attempt.
+        public private(set) var writeDispatched: Bool?
         /// Recorded functional observation after the user reviewed and associated the device.
         public private(set) var observedDeviceID: String?
         /// Running boot accepted when the user reviewed and associated the device.
         public private(set) var observedBootID: String?
+        /// This operation may be checked without issuing another write.
+        public var mayVerify: Bool { copyReported || writeDispatched == true }
+
         /// Captures exact candidate selection with no automatic file or device activity.
         public init(recovery: Bool, expectedDeviceID: String? = nil, previousBootID: String? = nil) throws {
-            schema = 1; operationID = UUID()
+            schema = 2; operationID = UUID()
             imageSHA256 = ManagedROMInstall.imageSHA256; firmwareBuildID = ManagedROMInstall.firmwareBuildID
             self.recovery = recovery; self.expectedDeviceID = expectedDeviceID; self.previousBootID = previousBootID
             copyReported = false
@@ -82,10 +87,11 @@ public struct ManagedROMInstall: Sendable {
         }
         /// Bounds the shape and exact reviewed candidate before any restored operation can be acted upon.
         public func validate() throws {
-            guard schema == 1, imageSHA256 == ManagedROMInstall.imageSHA256,
+            guard [1, 2].contains(schema), imageSHA256 == ManagedROMInstall.imageSHA256,
                   firmwareBuildID == ManagedROMInstall.firmwareBuildID,
                   (observedBootID == nil) == (observedDeviceID == nil),
-                  observedDeviceID == nil || copyReported,
+                  observedDeviceID == nil || mayVerify,
+                  writeDispatched == nil || (writeDispatched == true && !copyReported),
                   previousBootID == nil || expectedDeviceID != nil,
                   previousBootID == nil || observedBootID == nil || previousBootID != observedBootID,
                   expectedDeviceID == nil || observedDeviceID == nil || expectedDeviceID == observedDeviceID,
@@ -97,14 +103,20 @@ public struct ManagedROMInstall: Sendable {
         /// Records the user's copy report without granting a managed device association.
         public mutating func reportCopy() throws {
             try validate()
-            guard !copyReported else { throw FirmingoError.protocolViolation("The copy was already reported") }
+            guard !mayVerify else { throw FirmingoError.protocolViolation("An installation attempt was already recorded") }
             copyReported = true
+        }
+        /// Consumes the write opportunity for this attempt before any possible flash change.
+        mutating func dispatchWrite() throws {
+            try validate()
+            guard !mayVerify else { throw FirmingoError.protocolViolation("An installation attempt was already recorded") }
+            writeDispatched = true
         }
         /// Records a reviewed post-copy observation and derives its exact SDK association.
         public mutating func associate(_ observation: Observation) throws -> ManagedDeviceAssociation {
             try validate()
             let device = observation.device
-            guard copyReported, observedDeviceID == nil, expectedDeviceID == nil || expectedDeviceID == device.deviceID else {
+            guard mayVerify, observedDeviceID == nil, expectedDeviceID == nil || expectedDeviceID == device.deviceID else {
                 throw FirmingoError.protocolViolation("Files installation evidence is missing or selects a different Nano")
             }
             try ManagedROMInstall.check(device, previousBootID: previousBootID)
@@ -121,6 +133,11 @@ public struct ManagedROMInstall: Sendable {
                                previousBootID: String? = nil) async throws -> Observation {
         let session = try await FirmingoSession.connect(to: endpoint, expectedBoard: .nanoRP2040Connect,
                                                         expectedBackend: .application, expectedDeviceID: expectedDeviceID)
+        return try await observe(on: session, previousBootID: previousBootID)
+    }
+
+    /// Uses the same checked session for hello and all functional observations.
+    static func observe(on session: FirmingoSession, previousBootID: String?) async throws -> Observation {
         do {
             let device = session.device
             try check(device, previousBootID: previousBootID)

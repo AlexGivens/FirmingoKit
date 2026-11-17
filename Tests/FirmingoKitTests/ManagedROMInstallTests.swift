@@ -8,6 +8,16 @@ struct ManagedROMInstallTests {
     @Test func filesRecordDoesNotCreateAssociation() throws {
         var record = try ManagedROMInstall.Record(recovery: true, expectedDeviceID: "5031503337360009", previousBootID: "1122334455667788")
         #expect(!record.copyReported)
+        let encoded = try JSONEncoder().encode(record)
+        var legacy = try #require(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
+        legacy["schema"] = 1
+        legacy.removeValue(forKey: "writeDispatched")
+        var pending = try JSONDecoder().decode(ManagedROMInstall.Record.self, from: JSONSerialization.data(withJSONObject: legacy))
+        try pending.validate()
+        #expect(pending.writeDispatched == nil)
+        #expect(!pending.mayVerify)
+        try pending.dispatchWrite()
+        #expect(pending.mayVerify)
         try record.reportCopy()
         #expect(record.copyReported)
         #expect(record.observedDeviceID == nil)
@@ -18,6 +28,35 @@ struct ManagedROMInstallTests {
         #expect(throws: FirmingoError.self) { try record.reportCopy() }
         #expect(throws: FirmingoError.self) { try ManagedROMInstall.Record(recovery: false, previousBootID: "1122334455667788") }
         #expect(throws: FirmwareLifecycleError.self) { try ManagedROMInstall(bytes: Data(repeating: 0, count: ManagedROMInstall.imageBytes)) }
+    }
+
+    /// A dispatched record remains consumed after an app restart even before a successful write.
+    @Test func restoredWriteIntentCannotBeDispatchedAgain() throws {
+        var record = try ManagedROMInstall.Record(recovery: false)
+        try record.dispatchWrite()
+        var restored = try JSONDecoder().decode(ManagedROMInstall.Record.self, from: JSONEncoder().encode(record))
+        try restored.validate()
+        #expect(restored.mayVerify)
+        #expect(!restored.copyReported)
+        #expect(restored.observedDeviceID == nil)
+        #expect(throws: FirmingoError.self) { try restored.dispatchWrite() }
+        #expect(throws: FirmingoError.self) { try restored.reportCopy() }
+    }
+
+    /// A correctly named ordinary directory and copied ROM metadata never reach write admission.
+    @Test func ordinaryDirectoryWithROMMarkersIsRejectedBeforeAdmission() async throws {
+        let parent = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        let directory = parent.appendingPathComponent("RPI-RP2", isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: parent) }
+        let marker = Data("UF2 Bootloader v3.0\r\nModel: Raspberry Pi RP2\r\nBoard-ID: RPI-RP2\r\n".utf8)
+        try marker.write(to: directory.appendingPathComponent("INFO_UF2.TXT"))
+        await #expect(throws: FirmwareInstallationError.self) {
+            try await ManagedROMVolume.program(Data([0]), in: directory) {
+                Issue.record("The ordinary directory reached write admission")
+            }
+        }
+        #expect(try FileManager.default.contentsOfDirectory(atPath: directory.path) == ["INFO_UF2.TXT"])
     }
 
     /// Checks disjoint mapped payload ranges independently of the production image hash.
