@@ -275,6 +275,43 @@ check the connected board. **Recover Firmingo** starts a new explicitly
 selected ROM transfer and retains the previous journal. Unresolved intent
 blocks Workbench managed deployments.
 
+### iPad in-app recovery result
+
+On 2026-11-17, signed Workbench build 16 completed the in-app boot-drive
+workflow on the 11-inch iPad Pro (3rd generation), iPadOS 27.2.1, with
+the selected Nano RP2040 Connect connected directly. The user opened the
+`RPI-RP2` root from Workbench with D2 disconnected and removed REC before
+selection. The app transferred the corrected UF2, observed ROM detachment,
+checked a new boot, verified the State A starter and exact 256-byte binary
+reply, and saved the device association. The user saw “Firmingo is ready.
+You can start coding.” and “Exact 256-byte reply verified” with D13 off.
+No local export, Files app copy, or separate post-transfer action was needed.
+
+Build 15's original sparse composite wrote the resident and rebooted, but
+the starter check timed out. iPad Settings showed the expected Ethernet
+lease and a separate Workbench inspection reported the correct version.
+A read-only ROM comparison on the Mac matched the resident and found all
+4,096 bytes of the managed sector erased. The earlier attempt was retained
+as unconfirmed. The [RP2040 mass-storage ROM](https://github.com/raspberrypi/pico-bootrom-rp2040/blob/master/bootrom/virtual_disk.c)
+tracks erases by UF2 block number. Firmingo's composer now aligns block
+groups with physical sectors and preserves all previously included payload
+bytes, including the exact resident and starter. Build 16 uses this layout.
+
+| Evidence | Identity |
+| --- | --- |
+| Firmware composer revision | `590c79a` |
+| Signed Workbench source revision | `c6224c8` |
+| Prepared SDK snapshot SHA-256 | `699c8db08f2b6e7cc4340a83578d49511a9b98094685370530cb4d05329fa186` |
+| Signed app executable SHA-256 | `90fbe546cd7e5c92199c51f464ca2daec1b8574b55b94a926370e3e8176a3b87` |
+| Build 15 unconfirmed journal SHA-256 | `73b506487cb1f563bea64979f60f2d06309722e243b64e276f7b1471b612d5e1` |
+| Build 16 confirmed journal SHA-256 | `49fd8950dc7b6a73131519163cc28ddad7e578704c3b200b3e19ac2ae294cacd` |
+| Saved association record SHA-256 | `d3123e9e08dae99728f90170f4947d7951f231cd53b514b94662d00e2d2efd86` |
+
+This qualifies the selected iPad recovery from a missing starter. First
+installation from non-Firmingo firmware, iPhone, physical interruption
+during the transfer, and the post-install offline multi-file upload still
+require their own checks.
+
 ### Historical Files export check
 
 The signed build from SDK commit `a5d7575` installed over Wi-Fi on the

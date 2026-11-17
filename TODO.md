@@ -401,9 +401,14 @@ See [delivery integration](docs/compiler-delivery.md) for exact identities and c
   [firmware lifecycle](docs/firmware-lifecycle.md#mobile-nano-installation-in-workbench).
 - [x] Pass FMS2 source bundles through Swift and Workbench with versioned receipts
   and original helper diagnostics. See [Swift source bundles](docs/compiler.md#swift-source-bundles).
-- [ ] Qualify in-app boot-drive installation and interrupted-transfer recovery on iPad
-  and iPhone, including first installation on a board running non-Firmingo
-  firmware and a subsequent offline multi-file compile/upload.
+- [x] Qualify in-app boot-drive recovery from an erased starter on the selected
+  iPad. Workbench observed a new boot, verified the starter and exact console
+  bytes, and saved the association automatically. The earlier sparse-image
+  failure and ROM comparison are retained in the
+  [iPad result](docs/firmware-lifecycle.md#ipad-in-app-recovery-result).
+- [ ] Qualify in-app first installation from non-Firmingo firmware and recovery
+  after a physically interrupted transfer on iPad and iPhone. Run an offline
+  multi-file compile/upload after the mobile setup flow.
 
 - [x] First increment locally validated: app-owned shared scenario engine and versioned CLI, Test Lab in the existing demo, migrated compiler cases, bounded correlated evidence, local tests/builds and updated CI definitions. One signed macOS binary passed real WASM vectors and diagnostic recovery; remote CI and physical/UI qualification remain separate. [Work log and scope](docs/workbench-consolidation.md).
 - [x] Implement compiler lifecycle/deadline/stress consolidation: shared scenarios, real mobile scene adapter, bounded evidence and independent CLI checks. One signed macOS Workbench passes actual busy/cancellation, 60.633-second deadline expiry/fresh recovery and twenty exact repeated builds; all platform builds pass. [Work log](docs/workbench-compiler-scenarios.md). Physical lifecycle passes are recorded below; paired compiler evidence is tracked separately.
