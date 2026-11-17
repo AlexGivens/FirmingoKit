@@ -200,11 +200,11 @@ evidence; physical recovery and update compatibility are still acceptance work.
 | Operation | macOS, each board | iOS/iPadOS, each board |
 | --- | --- | --- |
 | Local artifact acquisition/validation | Implemented, deterministic tests | Implemented, simulator tests; physical file access unqualified |
-| Artifact preflight/physical guidance | Implemented; explicit physical selection required | Implemented; external computer route |
-| SDK ROM first installation | Experimental backend; selected Nano/macOS 27 replacement passes exact echo/readback; first installation from non-Firmingo and sandbox pending | Unavailable; no direct backend |
+| Artifact preflight/physical guidance | Implemented; explicit physical selection required | Nano in-app boot-drive selection and reviewed image validation |
+| SDK ROM first installation | Experimental backend; selected Nano/macOS 27 replacement passes exact echo/readback; first installation from non-Firmingo and sandbox pending | Nano in-app boot-drive installer; see mobile evidence below |
 | Qualified updates | Pending compatibility and execution evidence | Pending |
-| SDK interruption records / new full reinstall request | Selected post-erase, first-page and accepted-prefix host-restart/new full Nano recoveries pass exact echo/readback; first-page initial timeout retained; other board/sandbox cases pending | Records/verification build; computer required for transfer |
-| Fresh-hello verification | Selected Nano/macOS release hello and exact echo pass; no installed-image attestation | API/simulator tests; networking/file access unqualified |
+| SDK interruption records / new full reinstall request | Selected post-erase, first-page and accepted-prefix host-restart/new full Nano recoveries pass exact echo/readback; first-page initial timeout retained; other board/sandbox cases pending | Nano in-app recovery or read-only verification from the saved attempt; interruption qualification pending |
+| Fresh-hello verification | Selected Nano/macOS release hello and exact echo pass; no installed-image attestation | Nano live hello verified on iPad; see exact mobile results below |
 
 Hardware qualification must start with a board not running Firmingo, install
 through an actual signed SDK host, connect, and exchange exact bytes. Updates and
@@ -236,9 +236,11 @@ loss inside a chip command remain unqualified.
 ## Mobile Nano installation in Workbench
 
 Workbench installs the reviewed Nano FMS2 `1.0.0-rc.1` composite on iPhone and
-iPad. The image contains the Firmingo resident and a State A starter sketch.
+iPad. The image contains the Firmingo resident and a State A starter sketch. The
+319,488-byte UF2 aligns each 16-block group with a physical erase sector,
+including six erased padding pages after the last resident payload page.
 Its SHA-256 is
-`5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af`.
+`c37f6ad2fba3f0c3071b4446386fec888cd35089ed68ca67d6c7d1d37b87a584`.
 Prepare the app with `prepare-sdk-package.mjs --mobile-rom-image REVIEWED_UF2`
 alongside the usual compiler arguments. Source builds can import those exact
 image bytes if the app was built without the image.

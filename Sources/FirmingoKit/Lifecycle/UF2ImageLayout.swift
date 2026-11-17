@@ -26,19 +26,24 @@ struct UF2ImageLayout {
         blockCount = count
     }
 
-    /// Validates a reviewed Nano composite whose only non-resident writes cover the first managed sector.
+    /// Validates the reviewed composite with whole UF2 erase groups, including erased resident tail padding.
     static func validateManagedInitial(bytes: Data, residentBlocks: UInt32) throws {
-        guard residentBlocks > 0, residentBlocks <= 8192, bytes.count / 512 == Int(residentBlocks) + 16 else {
+        guard residentBlocks > 0, residentBlocks <= 8192 else {
             throw FirmwareLifecycleError.invalidImage("invalid resident or managed-sector extent")
         }
-        _ = try validateBlocks(bytes: bytes, board: .nanoRP2040Connect) { number in
-            number < residentBlocks ? FirmwareReleaseContract.flashStart + number * 256 :
-                0x10200000 + (number - residentBlocks) * 256
+        let alignedResidentBlocks = (residentBlocks + 15) & ~UInt32(15)
+        guard bytes.count / 512 == Int(alignedResidentBlocks) + 16 else {
+            throw FirmwareLifecycleError.invalidImage("incomplete ROM erase groups")
+        }
+        _ = try validateBlocks(bytes: bytes, board: .nanoRP2040Connect, erasedBlocks: residentBlocks..<alignedResidentBlocks) { number in
+            number < alignedResidentBlocks ? FirmwareReleaseContract.flashStart + number * 256 :
+                0x10200000 + (number - alignedResidentBlocks) * 256
         }
     }
 
     /// Applies the shared finite RP2040 header, sequence, padding and per-block flash bounds.
     private static func validateBlocks(bytes: Data, board: FirmingoBoard,
+                                       erasedBlocks: Range<UInt32> = 0..<0,
                                        addressForBlock: (UInt32) -> UInt32) throws -> Int {
         guard !bytes.isEmpty, bytes.count % 512 == 0,
               bytes.count <= FirmwareReleaseContract.maximumImageBytes else {
@@ -58,6 +63,7 @@ struct UF2ImageLayout {
                   Self.u32(data, at: offset + 24) == count,
                   Self.u32(data, at: offset + 28) == 0xe48bff56,
                   number < count, numbers.insert(number).inserted,
+                  !erasedBlocks.contains(number) || data[offset + 32..<offset + 288].allSatisfy({ $0 == 0xff }),
                   data[offset + 288..<offset + 508].allSatisfy({ $0 == 0 }) else {
                 throw FirmwareLifecycleError.invalidImage("invalid UF2 header, padding, or block sequence")
             }

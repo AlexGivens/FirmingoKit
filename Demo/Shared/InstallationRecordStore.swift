@@ -116,7 +116,7 @@ actor InstallationRecordStore {
         }
         guard try loadFilesInstallation() == previous,
               previous == nil || previous?.observedDeviceID != nil || record.recovery,
-              !record.mayVerify, record.observedDeviceID == nil else { throw DemoOperationError.contextChanged }
+              record.usesCurrentImage, !record.mayVerify, record.observedDeviceID == nil else { throw DemoOperationError.contextChanged }
         try durableWrite(image.bytes, to: filesImageURL())
         try saveFilesRecord(record)
     }
@@ -128,7 +128,8 @@ actor InstallationRecordStore {
         guard try workbenchManagedOwner() == nil, try loadManaged() == nil else {
             throw DemoOperationError.pendingManagedTransaction
         }
-        guard !expected.mayVerify, try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
+        guard expected.usesCurrentImage, !expected.mayVerify,
+              try loadFilesInstallation() == expected else { throw DemoOperationError.contextChanged }
         let id = UUID()
         activeOperation = (id, false)
         return id

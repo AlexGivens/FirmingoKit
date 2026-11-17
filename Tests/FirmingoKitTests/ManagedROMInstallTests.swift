@@ -11,12 +11,15 @@ struct ManagedROMInstallTests {
         let encoded = try JSONEncoder().encode(record)
         var legacy = try #require(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
         legacy["schema"] = 1
+        legacy["imageSHA256"] = "5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af"
         legacy.removeValue(forKey: "writeDispatched")
         var pending = try JSONDecoder().decode(ManagedROMInstall.Record.self, from: JSONSerialization.data(withJSONObject: legacy))
         try pending.validate()
         #expect(pending.writeDispatched == nil)
         #expect(!pending.mayVerify)
-        try pending.dispatchWrite()
+        #expect(!pending.usesCurrentImage)
+        #expect(throws: FirmwareInstallationError.self) { try pending.dispatchWrite() }
+        try pending.reportCopy()
         #expect(pending.mayVerify)
         try record.reportCopy()
         #expect(record.copyReported)
@@ -59,23 +62,32 @@ struct ManagedROMInstallTests {
         #expect(try FileManager.default.contentsOfDirectory(atPath: directory.path) == ["INFO_UF2.TXT"])
     }
 
-    /// Checks disjoint mapped payload ranges independently of the production image hash.
-    @Test func managedInitialLayoutRejectsGapWrites() throws {
+    /// Checks ROM block-number alignment, erased padding and the disjoint ranges independently of the hash.
+    @Test func managedInitialLayoutRejectsGapWritesAndUnalignedSector() throws {
         var image = Data()
-        for number in 0..<17 {
-            let address = number == 0 ? 0x10000000 : 0x10200000 + (number - 1) * 256
+        for number in 0..<32 {
+            let address = number < 16 ? 0x10000000 + number * 256 : 0x10200000 + (number - 16) * 256
             var page = Data(repeating: 0, count: 512)
-            let words = [0x0a324655, 0x9e5d5157, 0x2000, address, 256, number, 17, 0xe48bff56]
+            let words = [0x0a324655, 0x9e5d5157, 0x2000, address, 256, number, 32, 0xe48bff56]
             for (position, word) in words.enumerated() {
                 page.replaceSubrange(position * 4..<position * 4 + 4, with: u32(UInt32(word)))
+            }
+            if (1..<16).contains(number) {
+                page.replaceSubrange(32..<288, with: repeatElement(UInt8(0xff), count: 256))
             }
             page.replaceSubrange(508..<512, with: u32(0x0ab16f30))
             image.append(page)
         }
         try UF2ImageLayout.validateManagedInitial(bytes: image, residentBlocks: 1)
         #expect(throws: FirmwareLifecycleError.self) { try UF2ImageLayout(bytes: image, board: .nanoRP2040Connect) }
-        image.replaceSubrange(524..<528, with: u32(0x10100000))
-        #expect(throws: FirmwareLifecycleError.self) { try UF2ImageLayout.validateManagedInitial(bytes: image, residentBlocks: 1) }
+        var unexpectedData = image
+        unexpectedData[512 + 32] = 0
+        #expect(throws: FirmwareLifecycleError.self) { try UF2ImageLayout.validateManagedInitial(bytes: unexpectedData, residentBlocks: 1) }
+        var gap = image
+        gap.replaceSubrange((16 * 512 + 12)..<(16 * 512 + 16), with: u32(0x10100000))
+        #expect(throws: FirmwareLifecycleError.self) { try UF2ImageLayout.validateManagedInitial(bytes: gap, residentBlocks: 1) }
+        let unaligned = Data(image.prefix(512)) + Data(image.suffix(16 * 512))
+        #expect(throws: FirmwareLifecycleError.self) { try UF2ImageLayout.validateManagedInitial(bytes: unaligned, residentBlocks: 1) }
     }
 
     /// An echo-capable sketch with the wrong starter identity, nonce, or initialized state cannot qualify.

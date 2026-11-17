@@ -64,7 +64,7 @@ import UniformTypeIdentifiers
                                 Button("Use This Nano") { associate(record, observation: observation) }
                             }
                         }
-                    } else {
+                    } else if record.usesCurrentImage {
                         Section("Select the Boot Drive") {
                             if let expected = record.expectedDeviceID {
                                 LabeledContent("Expected device", value: expected)
@@ -82,7 +82,7 @@ import UniformTypeIdentifiers
                             .disabled(image == nil || !loaded)
                     }
                 }
-                if record == nil || record?.mayVerify == true {
+                if record == nil || record?.mayVerify == true || record?.usesCurrentImage == false {
                     Section {
                         Button("Recover Firmingo", systemImage: "arrow.clockwise") { begin(recovery: true) }
                             .disabled(image == nil || !loaded)
@@ -136,6 +136,7 @@ import UniformTypeIdentifiers
             }
             status = if record?.observedDeviceID != nil { "Firmingo is ready. You can start coding." }
                 else if record?.mayVerify == true { "An earlier installation needs verification. Choose Verify Again or start a new recovery." }
+                else if record?.usesCurrentImage == false { "A revised boot-drive image is ready. Start a new recovery to use it." }
                 else if record != nil { "Select the connected Nano’s boot drive to continue." }
                 else if image != nil { "Ready to install Firmingo." }
                 else { "This build needs the reviewed Nano UF2." }

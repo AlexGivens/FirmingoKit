@@ -11,7 +11,7 @@ if (!directory || !expected || !destination || (options.length !== 0 && (options
   throw new Error("Use prepare-sdk-package.mjs PACKAGE TRUSTED_MANIFEST_SHA256 NEW_OUTPUT [--mobile-rom-image REVIEWED_UF2]");
 const mobileImage = options[1] && resolve(options[1]);
 const mobilePath = "Demo/Shared/Firmingo-Nano-FMS2-1.0.0-rc.1.uf2";
-const mobileDigest = "5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af";
+const mobileDigest = "c37f6ad2fba3f0c3071b4446386fec888cd35089ed68ca67d6c7d1d37b87a584";
 const sdk = fileURLToPath(new URL("../../", import.meta.url));
 const git = args => {
   const result = spawnSync("git", ["--no-optional-locks", "-C", sdk, ...args], { encoding: "utf8", timeout: 15000 });
@@ -40,8 +40,8 @@ try {
   if (copied.sha256 !== service.sha256 || copied.bytes !== service.bytes) throw new Error("Prepared service differs from reviewed package");
   records.push({ path: resource + "/compiler.wasm", ...copied });
   if (mobileImage) {
-    const image = fileRecord(mobileImage, 316416, join(output, mobilePath));
-    if (image.bytes !== 316416 || image.sha256 !== mobileDigest) throw new Error("Select the exact reviewed Nano FMS2 composite image");
+    const image = fileRecord(mobileImage, 319488, join(output, mobilePath));
+    if (image.bytes !== 319488 || image.sha256 !== mobileDigest) throw new Error("Select the exact reviewed Nano FMS2 composite image");
     records.push({ path: mobilePath, ...image });
   }
   // Carry the complete paired service/source/notice delivery with this SDK distribution, outside app resources.

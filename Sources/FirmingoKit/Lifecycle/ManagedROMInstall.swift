@@ -5,13 +5,15 @@ public struct ManagedROMInstall: Sendable {
     /// Filename of the reviewed distributable and app-cache image.
     public static let filename = "Firmingo-Nano-FMS2-1.0.0-rc.1.uf2"
     /// Reviewed composite digest. The resident-only UF2 has a different identity.
-    public static let imageSHA256 = "5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af"
+    public static let imageSHA256 = "c37f6ad2fba3f0c3071b4446386fec888cd35089ed68ca67d6c7d1d37b87a584"
+    /// Retained only to read historical installation records from the earlier package.
+    private static let legacyImageSHA256 = "5fdb0ed35ed5f68b357a01351f32ed11480679cb868ad593af3d05d00c7e90af"
     /// Exact bundled SDK descriptor associated with the reviewed resident within the composite.
     public static let firmwareBuildID = "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5"
     /// Expected version reported by the running resident.
     public static let firmwareVersion = "1.0.0-rc.1"
     /// Bound on a complete image read.
-    public static let imageBytes = 316_416
+    public static let imageBytes = 319_488
     /// Validated composite bytes for the selected ROM volume.
     public let bytes: Data
 
@@ -50,6 +52,28 @@ public struct ManagedROMInstall: Sendable {
         public let device: FirmingoDevice
     }
 
+    /// Names the phase that failed after the Nano was expected to boot.
+    public enum VerificationError: LocalizedError, Sendable {
+        /// The host did not receive a usable hello from the expected Nano.
+        case firmwareHello(any Error)
+        /// The installed starter's console could not be opened or closed.
+        case starterConsole(any Error)
+        /// The installed starter did not return the expected initialized state.
+        case starterState(any Error)
+        /// The installed starter did not return the exact binary challenge.
+        case binaryEcho(any Error)
+
+        /// Keeps diagnostic phases distinct in the installer and Verify Again.
+        public var errorDescription: String? {
+            switch self {
+            case .firmwareHello(let cause): "The Nano did not answer the firmware check. \(cause.localizedDescription)"
+            case .starterConsole(let cause): "Could not verify the starter console. \(cause.localizedDescription)"
+            case .starterState(let cause): "Could not verify the installed starter sketch. \(cause.localizedDescription)"
+            case .binaryEcho(let cause): "Could not verify the starter’s binary echo. \(cause.localizedDescription)"
+            }
+        }
+    }
+
     /// Durable context for an explicit ROM install. Restoring a dispatched attempt grants no write authority.
     public struct Record: Codable, Equatable, Sendable {
         /// Local record format, independent of the firmware release version.
@@ -70,12 +94,15 @@ public struct ManagedROMInstall: Sendable {
         public private(set) var copyReported: Bool
         /// Presence records durable authorization immediately before the one filesystem write attempt.
         public private(set) var writeDispatched: Bool?
-        /// Recorded functional observation after the user reviewed and associated the device.
+        /// Recorded functional observation after the device is associated.
         public private(set) var observedDeviceID: String?
-        /// Running boot accepted when the user reviewed and associated the device.
+        /// Running boot accepted when the device is associated.
         public private(set) var observedBootID: String?
         /// This operation may be checked without issuing another write.
         public var mayVerify: Bool { copyReported || writeDispatched == true }
+
+        /// This attempt carries the currently admitted transfer image.
+        public var usesCurrentImage: Bool { imageSHA256 == ManagedROMInstall.imageSHA256 }
 
         /// Captures exact candidate selection with no automatic file or device activity.
         public init(recovery: Bool, expectedDeviceID: String? = nil, previousBootID: String? = nil) throws {
@@ -87,7 +114,7 @@ public struct ManagedROMInstall: Sendable {
         }
         /// Bounds the shape and exact reviewed candidate before any restored operation can be acted upon.
         public func validate() throws {
-            guard [1, 2].contains(schema), imageSHA256 == ManagedROMInstall.imageSHA256,
+            guard [1, 2].contains(schema), usesCurrentImage || imageSHA256 == ManagedROMInstall.legacyImageSHA256,
                   firmwareBuildID == ManagedROMInstall.firmwareBuildID,
                   (observedBootID == nil) == (observedDeviceID == nil),
                   observedDeviceID == nil || mayVerify,
@@ -110,6 +137,9 @@ public struct ManagedROMInstall: Sendable {
         mutating func dispatchWrite() throws {
             try validate()
             guard !mayVerify else { throw FirmingoError.protocolViolation("An installation attempt was already recorded") }
+            guard usesCurrentImage else {
+                throw FirmwareInstallationError.invalidRequest("start a new recovery with the current boot-drive image")
+            }
             writeDispatched = true
         }
         /// Records a reviewed post-copy observation and derives its exact SDK association.
@@ -131,8 +161,12 @@ public struct ManagedROMInstall: Sendable {
     /// are user-confirmed. A matching hello and live echo establish observed functionality.
     public static func observe(at endpoint: FirmingoEndpoint, expectedDeviceID: String? = nil,
                                previousBootID: String? = nil) async throws -> Observation {
-        let session = try await FirmingoSession.connect(to: endpoint, expectedBoard: .nanoRP2040Connect,
-                                                        expectedBackend: .application, expectedDeviceID: expectedDeviceID)
+        let session: FirmingoSession
+        do {
+            session = try await FirmingoSession.connect(to: endpoint, expectedBoard: .nanoRP2040Connect,
+                expectedBackend: .application, expectedDeviceID: expectedDeviceID)
+        } catch is CancellationError { throw CancellationError() }
+        catch { throw VerificationError.firmwareHello(error) }
         return try await observe(on: session, previousBootID: previousBootID)
     }
 
@@ -141,14 +175,26 @@ public struct ManagedROMInstall: Sendable {
         do {
             let device = session.device
             try check(device, previousBootID: previousBootID)
-            try await session.openConsole()
+            do { try await session.openConsole() }
+            catch is CancellationError { throw CancellationError() }
+            catch { throw VerificationError.starterConsole(error) }
             let nonce = UInt8.random(in: .min ... .max)
-            let state = try await exchange(Data([1, nonce]), count: 24, on: session)
-            try checkStarter(state, nonce: nonce)
+            do {
+                let state = try await exchange(Data([1, nonce]), count: 24, on: session)
+                try checkStarter(state, nonce: nonce)
+            } catch is CancellationError { throw CancellationError() }
+            catch { throw VerificationError.starterState(error) }
             let challenge = Data((UInt8.min...UInt8.max).shuffled())
-            let reply = try await exchange(Data([2]) + challenge, count: challenge.count, on: session)
-            guard reply == challenge else { throw FirmingoError.protocolViolation("The installation sketch did not return the exact challenge") }
-            try await session.closeConsole()
+            do {
+                let reply = try await exchange(Data([2]) + challenge, count: challenge.count, on: session)
+                guard reply == challenge else {
+                    throw FirmingoError.protocolViolation("The starter returned different bytes")
+                }
+            } catch is CancellationError { throw CancellationError() }
+            catch { throw VerificationError.binaryEcho(error) }
+            do { try await session.closeConsole() }
+            catch is CancellationError { throw CancellationError() }
+            catch { throw VerificationError.starterConsole(error) }
             await session.disconnect()
             return Observation(device: device)
         } catch {

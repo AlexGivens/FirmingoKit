@@ -55,7 +55,7 @@ extension ManagedROMInstall {
             }
             return try await Self.observe(on: session, previousBootID: record.previousBootID)
         }
-        throw FirmingoError.timedOut
+        throw VerificationError.firmwareHello(FirmingoError.timedOut)
     }
 }
 
