@@ -250,7 +250,10 @@ image bytes if the app was built without the image.
    Bridge REC to GND and press RESET, then remove REC–GND once the boot drive
    appears.
 3. Tap **Choose Boot Drive…** and select the `RPI-RP2` volume root under
-   **Locations**. Selecting it starts installation. Keep the Nano connected
+   **Locations**. On iPhone, use the picker's upper-left back button to reach
+   **Browse** and **Locations** if it opens inside a previous folder. If a
+   **Browse** tab is visible, tap it again to show Locations. Open `RPI-RP2`
+   and select its root. Selecting it starts installation. Keep the Nano connected
    and allow local-network access if prompted.
 4. Workbench waits for the ROM drive to detach, then checks Nano identity,
    resident version and FMS2 capabilities, the State A starter, and an exact
@@ -307,10 +310,38 @@ bytes, including the exact resident and starter. Build 16 uses this layout.
 | Build 16 confirmed journal SHA-256 | `49fd8950dc7b6a73131519163cc28ddad7e578704c3b200b3e19ac2ae294cacd` |
 | Saved association record SHA-256 | `d3123e9e08dae99728f90170f4947d7951f231cd53b514b94662d00e2d2efd86` |
 
-This qualifies the selected iPad recovery from a missing starter. First
-installation from non-Firmingo firmware, iPhone, physical interruption
-during the transfer, and the post-install offline multi-file upload still
-require their own checks.
+This qualifies the selected iPad recovery from a missing starter. The later
+iPhone first-install result is recorded below. First installation from
+non-Firmingo firmware on iPad, physical interruption during the transfer,
+and the post-install offline multi-file upload require their own checks.
+
+### iPhone first installation from non-Firmingo firmware
+
+On 2026-11-18, the same signed Workbench build 16 completed first installation
+on an iPhone 15 Pro Max running iOS 27.2.1, build 24B156. The selected Nano
+started with a minimal non-Firmingo blink sketch compiled using Arduino CLI
+1.5.1 and Arduino-Pico 6.0.0. ROM verification and a separate 71,168-byte
+readback matched that baseline before booting. The user observed D13 blinking
+on the iPhone before entering ROM mode. The baseline has no Firmingo or
+networking code.
+
+The first picker presentation opened within another location. The user
+returned through **Browse** to **Locations**, opened the `RPI-RP2` root
+and selected it. The prepared record remained unconsumed during that navigation.
+Workbench then transferred the bundled image, detected ROM detachment, verified
+the resident, starter and exact 256-byte reply, and saved an association bound
+to the same installation operation. The app's completed journal and association
+were independently collected and compared. The user reported successful
+installation, “Exact 256-byte reply verified” and D13 off. Both jumpers remained
+disconnected during transfer and normal operation.
+
+No new access prompt appeared, so this result covers the already-authorized
+host. The Mac prepared the non-Firmingo test baseline and deployed Workbench.
+The Firmingo installation itself ran through the iPhone's in-app picker,
+followed by automatic network verification and association. The
+[exact test record](workbench-mobile-rom-iphone.json) includes source and
+binary identities, the baseline source, journal hashes, observations and
+remaining qualification items.
 
 ### Historical Files export check
 

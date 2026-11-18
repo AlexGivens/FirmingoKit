@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "date": "2026-11-18",
+  "timezone": "America/Phoenix",
+  "status": "passed",
+  "scope": "Selected Nano first installation from a verified non-Firmingo blink baseline through the iPhone in-app boot-drive picker",
+  "host": {
+    "model": "iPhone 15 Pro Max",
+    "productType": "iPhone16,2",
+    "osVersion": "27.2.1",
+    "osBuild": "24B156",
+    "connection": "Nano connected directly to unlocked iPhone; Mac deployment/report collection over Wi-Fi"
+  },
+  "app": {
+    "identifier": "com.firmingokit.demo",
+    "version": "16",
+    "sdkCommit": "c6224c8641f6371d9d10ca59be2c288a0bf31ac5",
+    "preparedInventorySHA256": "699c8db08f2b6e7cc4340a83578d49511a9b98094685370530cb4d05329fa186",
+    "executable": {
+      "bytes": 5721040,
+      "sha256": "90fbe546cd7e5c92199c51f464ca2daec1b8574b55b94a926370e3e8176a3b87"
+    },
+    "signatureVerified": true,
+    "sameSignedInputAsIPadRecovery": true
+  },
+  "board": {
+    "model": "Arduino Nano RP2040 Connect",
+    "deviceID": "5031503337360009",
+    "romReportedChip": "RP2040",
+    "romReportedFlashKiB": 16384,
+    "boardRevision": "not newly measured",
+    "hardwareAuthorization": "D2 and REC disconnected during transfer and normal boot"
+  },
+  "baseline": {
+    "schema": 1,
+    "purpose": "non-Firmingo first-install hardware-test baseline only",
+    "source": "// Hardware-qualification baseline only. No Firmingo, networking, or updater.\n#include <Arduino.h>\n\nvoid setup() {\n    pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n    digitalWrite(LED_BUILTIN, HIGH);\n    delay(500);\n    digitalWrite(LED_BUILTIN, LOW);\n    delay(500);\n}\n",
+    "sourceSHA256": "8a735903d012801bec35469a31571761a67266bef32bc03fde9a69405d2b22fc",
+    "uf2SHA256": "d927b605db3a63f8d68864641299a62d2a3a51c001abf0610548bac56c150b47",
+    "uf2Bytes": 142336,
+    "blocks": 278,
+    "payloadBytes": 71168,
+    "board": "nano_rp2040_connect",
+    "cliVersion": "1.5.1",
+    "coreVersion": "6.0.0",
+    "normalModeBehavior": "D13 on 500 ms / off 500 ms; no Firmingo or network service",
+    "compileCommand": "arduino-cli --config-file arduino-cli.local.yaml compile --fqbn rp2040:rp2040:arduino_nano_connect:usbstack=picosdk,flash=16777216_0,freq=125,ipbtstack=ipv4only,opt=Small,rtti=Disabled,exceptions=Disabled --warnings all --build-path build/mobile-rom-iphone/blink-build --output-dir build/mobile-rom-iphone/blink-output build/mobile-rom-iphone/non_firmingo_blink",
+    "memorySummary": {
+      "programBytes": 54372,
+      "staticRAMBytes": 8944
+    },
+    "flashReadback": {
+      "bytes": 71168,
+      "sha256": "783209cc18bb4d781d8e4977430556d6a8a28241305fc4a3fe1d8be9857db2e5"
+    },
+    "flashReadbackMatchedAllUF2PayloadBytes": true,
+    "bootCommandSucceeded": true,
+    "userObservedBlinkBeforeROM": true,
+    "purposeLimit": "Hardware-test starting condition only; no SDK restoration feature"
+  },
+  "firmingoImage": {
+    "filename": "Firmingo-Nano-FMS2-1.0.0-rc.1.uf2",
+    "bytes": 319488,
+    "sha256": "c37f6ad2fba3f0c3071b4446386fec888cd35089ed68ca67d6c7d1d37b87a584",
+    "firmwareVersion": "1.0.0-rc.1",
+    "firmwareBuildID": "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5",
+    "composerCommit": "590c79a",
+    "layout": "Whole erase-sector UF2 groups; six erased resident-tail padding pages"
+  },
+  "installation": {
+    "imageSHA256": "c37f6ad2fba3f0c3071b4446386fec888cd35089ed68ca67d6c7d1d37b87a584",
+    "firmwareBuildID": "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5",
+    "copyReported": false,
+    "writeDispatched": true,
+    "observedBootID": "13b57e6f3e232513",
+    "observedDeviceID": "5031503337360009",
+    "operationID": "9EF91AD7-2F66-4F54-BDA6-7357F3D69960",
+    "recovery": false,
+    "schema": 2
+  },
+  "savedAssociation": {
+    "deviceID": "5031503337360009",
+    "evidence": "reviewedInstallationRecord",
+    "firmwareBuildID": "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5",
+    "installationOperationID": "9EF91AD7-2F66-4F54-BDA6-7357F3D69960",
+    "version": 1
+  },
+  "observations": {
+    "initialPickerNavigation": "Operator initially could not switch volumes. Upper-left back navigation to Browse/Locations exposed RPI-RP2.",
+    "initialPickerDifficultyStartedWrite": false,
+    "preparedRecordPreservedThroughPickerNavigation": true,
+    "selectedVolumeRoot": "RPI-RP2",
+    "source": "Bundled reviewed UF2",
+    "externalFilesCopyRequired": false,
+    "ROMDriveDetachDetectedByInstaller": true,
+    "automaticHelloCapabilitiesAndStarterChecksPassed": true,
+    "exactConsoleBytes": 256,
+    "automaticAssociationMatchedInstallationOperation": true,
+    "userReportedInstallationSuccessful": true,
+    "userReportedStarterConsole": "Exact 256-byte reply verified",
+    "userReportedD13AfterInstall": "off",
+    "newAccessPromptShown": false,
+    "firstPermissionPromptQualified": false
+  },
+  "evidence": {
+    "romIdentityLog": {
+      "bytes": 94,
+      "sha256": "a6f6f73da6c993b20f815555ed88b0b9cacfcc3df109ae3ba6750ecf07e35b8f"
+    },
+    "baselineLoadLog": {
+      "bytes": 2209,
+      "sha256": "757f13dae7e2608f91dbb396f2da557fccfd23b5f3a9fc00e35caaa964a58f0e"
+    },
+    "baselineVerifyLog": {
+      "bytes": 3905,
+      "sha256": "9d9b3dcd6b6d0233a4e6cc3a28f25f486d63bc3eb40fa1f8cd77fcb1607f42ea"
+    },
+    "baselineReadbackLog": {
+      "bytes": 5210,
+      "sha256": "207b7c2313e017e138104470b6ee0d0a725d6fb1f029827a309f79ed06273e40"
+    },
+    "baselineRebootLog": {
+      "bytes": 47,
+      "sha256": "ec01d4b1cb33d63c2cc601a53215453468ad30b007b147b0b732cc1f09d648d9"
+    },
+    "preparedInstallationRecord": {
+      "bytes": 269,
+      "sha256": "5a3608f0bac4dd0dab1ef62fa5829ea1fb21e98a32259a8ea4e0b087d00e1d81"
+    },
+    "completedInstallationRecord": {
+      "bytes": 366,
+      "sha256": "f66a98b85eddd3fea3060de84d8b4c25c968786c2fd34f1969906775ef43c1ac"
+    },
+    "savedAssociationsEnvelope": {
+      "bytes": 340,
+      "sha256": "f645e210601a04fcd26732fc82ca7af2fcf1bfa2e2eef7f3d92a9e164369f1de"
+    },
+    "originals": "Ignored local build directories in Firmingo and FirmingoKit"
+  },
+  "remaining": [
+    "First installation from non-Firmingo firmware on iPad",
+    "Physically interrupted mobile transfer and new explicit recovery on each claimed host",
+    "Offline multi-file compilation and managed upload after the mobile setup workflow",
+    "First-use permission UX, broader board/OS/cable matrix and release distribution"
+  ],
+  "limits": [
+    "One selected Nano and iPhone host; no throughput or cold-attachment matrix",
+    "Functional post-install verification; no final flash readback from the iPhone",
+    "Boot-drive markers are generic RP2040 metadata; physical Nano selection is user-confirmed",
+    "No new CI execution or fresh firmware build matrix"
+  ]
+}
