@@ -412,9 +412,14 @@ See [delivery integration](docs/compiler-delivery.md) for exact identities and c
   association. Retain the initial picker-navigation difficulty and explicit
   Browse/Locations instructions in the
   [iPhone result](docs/firmware-lifecycle.md#iphone-first-installation-from-non-firmingo-firmware).
-- [ ] Qualify iPad first installation from non-Firmingo firmware and recovery
-  after a physically interrupted transfer on each claimed mobile host. Run an
-  offline multi-file compile/upload after the mobile setup flow.
+- [x] Qualify iPad first installation from a freshly verified non-Firmingo
+  blink baseline using the same signed Workbench 16 and boot-drive picker.
+  A new boot, starter, exact 256-byte reply and saved association passed.
+  User-reported approval prompts and automatic restart are retained in the
+  [iPad first-install result](docs/firmware-lifecycle.md#ipad-first-installation-from-non-firmingo-firmware).
+- [ ] Qualify recovery after a physically interrupted transfer on each claimed
+  mobile host. Run an offline multi-file compile/upload after the mobile setup
+  flow.
 
 - [x] First increment locally validated: app-owned shared scenario engine and versioned CLI, Test Lab in the existing demo, migrated compiler cases, bounded correlated evidence, local tests/builds and updated CI definitions. One signed macOS binary passed real WASM vectors and diagnostic recovery; remote CI and physical/UI qualification remain separate. [Work log and scope](docs/workbench-consolidation.md).
 - [x] Implement compiler lifecycle/deadline/stress consolidation: shared scenarios, real mobile scene adapter, bounded evidence and independent CLI checks. One signed macOS Workbench passes actual busy/cancellation, 60.633-second deadline expiry/fresh recovery and twenty exact repeated builds; all platform builds pass. [Work log](docs/workbench-compiler-scenarios.md). Physical lifecycle passes are recorded below; paired compiler evidence is tracked separately.

@@ -1,0 +1,177 @@
+{
+  "schema": 1,
+  "date": "2026-11-18",
+  "timezone": "America/Phoenix",
+  "status": "passed",
+  "scope": "Selected Nano first installation from a freshly readback-verified non-Firmingo blink baseline through the iPad in-app boot-drive picker",
+  "host": {
+    "model": "iPad Pro (11-inch) (3rd generation)",
+    "productType": "iPad13,4",
+    "osVersion": "27.2.1",
+    "osBuild": "24B156",
+    "connection": "Nano connected directly to unlocked iPad; Mac deployment/report collection over Wi-Fi"
+  },
+  "app": {
+    "identifier": "com.firmingokit.demo",
+    "version": "16",
+    "sdkCommit": "c6224c8641f6371d9d10ca59be2c288a0bf31ac5",
+    "preparedInventorySHA256": "699c8db08f2b6e7cc4340a83578d49511a9b98094685370530cb4d05329fa186",
+    "executable": {
+      "bytes": 5721040,
+      "sha256": "90fbe546cd7e5c92199c51f464ca2daec1b8574b55b94a926370e3e8176a3b87"
+    },
+    "signatureVerified": true,
+    "sameSignedInputAsIPadRecoveryAndIPhoneFirstInstallation": true
+  },
+  "board": {
+    "model": "Arduino Nano RP2040 Connect",
+    "deviceID": "5031503337360009",
+    "romReportedChip": "RP2040",
+    "romReportedFlashKiB": 16384,
+    "boardRevision": "not newly measured",
+    "hardwareAuthorization": "D2 disconnected; REC removed after entering ROM mode"
+  },
+  "baseline": {
+    "schema": 1,
+    "purpose": "non-Firmingo first-install hardware-test baseline only",
+    "source": "// Hardware-qualification baseline only. No Firmingo, networking, or updater.\n#include <Arduino.h>\n\nvoid setup() {\n    pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n    digitalWrite(LED_BUILTIN, HIGH);\n    delay(500);\n    digitalWrite(LED_BUILTIN, LOW);\n    delay(500);\n}\n",
+    "sourceSHA256": "8a735903d012801bec35469a31571761a67266bef32bc03fde9a69405d2b22fc",
+    "uf2SHA256": "d927b605db3a63f8d68864641299a62d2a3a51c001abf0610548bac56c150b47",
+    "uf2Bytes": 142336,
+    "blocks": 278,
+    "payloadBytes": 71168,
+    "board": "nano_rp2040_connect",
+    "cliVersion": "1.5.1",
+    "coreVersion": "6.0.0",
+    "normalModeBehavior": "D13 on 500 ms / off 500 ms; no Firmingo or network service",
+    "buildProvenance": "Identical blink source/binary prepared for the preceding iPhone first-install test; freshly programmed, verified and read back for this iPad test",
+    "sourceAndImagePinsRechecked": true,
+    "memorySummary": {
+      "programBytes": 54372,
+      "staticRAMBytes": 8944
+    },
+    "flashReadback": {
+      "bytes": 71168,
+      "sha256": "783209cc18bb4d781d8e4977430556d6a8a28241305fc4a3fe1d8be9857db2e5"
+    },
+    "flashReadbackMatchedAllUF2PayloadBytes": true,
+    "bootCommandSucceeded": true,
+    "userObservedBlinkBeforeROM": true,
+    "purposeLimit": "Hardware-test starting condition only; no SDK restoration feature"
+  },
+  "firmingoImage": {
+    "filename": "Firmingo-Nano-FMS2-1.0.0-rc.1.uf2",
+    "bytes": 319488,
+    "sha256": "c37f6ad2fba3f0c3071b4446386fec888cd35089ed68ca67d6c7d1d37b87a584",
+    "firmwareVersion": "1.0.0-rc.1",
+    "firmwareBuildID": "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5",
+    "composerCommit": "590c79a",
+    "layout": "Whole erase-sector UF2 groups; six erased resident-tail padding pages"
+  },
+  "installation": {
+    "imageSHA256": "c37f6ad2fba3f0c3071b4446386fec888cd35089ed68ca67d6c7d1d37b87a584",
+    "observedDeviceID": "5031503337360009",
+    "copyReported": false,
+    "recovery": false,
+    "schema": 2,
+    "firmwareBuildID": "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5",
+    "observedBootID": "350b775505eb9431",
+    "operationID": "4B87DC9E-2F90-4050-8DB4-66BC29D2F173",
+    "writeDispatched": true
+  },
+  "savedAssociation": {
+    "deviceID": "5031503337360009",
+    "evidence": "reviewedInstallationRecord",
+    "firmwareBuildID": "33a0e866c2873b20aaf9303dc10c7af4d6920e99bb1ba2eee6b0c009034523b5",
+    "installationOperationID": "4B87DC9E-2F90-4050-8DB4-66BC29D2F173",
+    "version": 1
+  },
+  "previousInstallation": {
+    "operationID": "F0304C08-00DF-4376-83BC-3CDAB0861673",
+    "observedBootID": "5a9b9ffb08c8e655",
+    "sameOperationReused": false
+  },
+  "observations": {
+    "initialCondition": "User observed D13 continuing to blink after moving the non-Firmingo Nano to the iPad",
+    "selectedVolumeRoot": "RPI-RP2",
+    "source": "Bundled reviewed UF2",
+    "externalFilesCopyRequired": false,
+    "ROMDriveDetachDetectedByInstaller": true,
+    "automaticHelloCapabilitiesAndStarterChecksPassed": true,
+    "exactConsoleBytes": 256,
+    "automaticAssociationMatchedNewInstallationOperation": true,
+    "userReportedFinalStatus": "Firmingo is ready. You can start coding.",
+    "userReportedStarterConsole": "Exact 256-byte reply verified",
+    "userReportedD13AfterInstall": "off",
+    "userReportedPhysicalReconnectAfterSelectingDrive": false,
+    "userReportedAutomaticRestart": true,
+    "connectionApprovalPrompts": [
+      {
+        "phase": "Initial connection of the blink baseline to the iPad",
+        "reported": true
+      },
+      {
+        "phase": "Automatic re-enumeration after installation",
+        "reported": true
+      }
+    ],
+    "permissionPromptWording": "not captured",
+    "promptClassification": "User-reported connection approval; accessory versus local-network prompt not independently identified",
+    "firstLocalNetworkPermissionQualified": false
+  },
+  "evidence": {
+    "romIdentityLog": {
+      "bytes": 94,
+      "sha256": "a6f6f73da6c993b20f815555ed88b0b9cacfcc3df109ae3ba6750ecf07e35b8f"
+    },
+    "baselineLoadLog": {
+      "bytes": 2209,
+      "sha256": "757f13dae7e2608f91dbb396f2da557fccfd23b5f3a9fc00e35caaa964a58f0e"
+    },
+    "baselineVerifyLog": {
+      "bytes": 3905,
+      "sha256": "9d9b3dcd6b6d0233a4e6cc3a28f25f486d63bc3eb40fa1f8cd77fcb1607f42ea"
+    },
+    "baselineReadbackLog": {
+      "bytes": 5208,
+      "sha256": "6464974b195d2c21c791f7427d8aa4a8ef5950c65bc19a49e72c598082afa099"
+    },
+    "baselineRebootLog": {
+      "bytes": 47,
+      "sha256": "ec01d4b1cb33d63c2cc601a53215453468ad30b007b147b0b732cc1f09d648d9"
+    },
+    "priorInstallationRecord": {
+      "bytes": 366,
+      "sha256": "b21328a4b26cdb3eb7aa04cb168cec869e13a862ceae6277996df3b84b02c905"
+    },
+    "priorAssociationsEnvelope": {
+      "bytes": 340,
+      "sha256": "9ea3045e03fad6ec6706432c8c8f974bda3b370c75b6d198eb3cee44135dc508"
+    },
+    "dispatchedInstallationRecord": {
+      "bytes": 292,
+      "sha256": "b12762c6f8dd733a739de575d297b9ba4aeefe9e9523d8956980c321c6d5e4ba"
+    },
+    "completedInstallationRecord": {
+      "bytes": 366,
+      "sha256": "232138e2a976850423494c20a5eebdf7a71c0cc2a83450e99f1620b64cd4d6cb"
+    },
+    "savedAssociationsEnvelope": {
+      "bytes": 340,
+      "sha256": "07ce35d5e3c4d55f9ed8c2f758f912a8b3de9e740482e58e4e74d6985a8d5957"
+    },
+    "originals": "Ignored local build directories in Firmingo and FirmingoKit"
+  },
+  "remaining": [
+    "Physically interrupted mobile transfer and new explicit recovery on each claimed host",
+    "Offline multi-file compilation and managed upload after the mobile setup workflow",
+    "First-use local-network permission UX, broader board/OS/cable matrix and release distribution"
+  ],
+  "limits": [
+    "One selected Nano and iPad host; no throughput or cold-attachment matrix",
+    "Functional post-install verification; no final flash readback from the iPad",
+    "Boot-drive markers are generic RP2040 metadata; physical Nano selection is user-confirmed",
+    "Approval prompts observed without captured wording or proof they were first authorization",
+    "Existing signed app and baseline reused; no new build, CI execution or firmware build matrix"
+  ]
+}

@@ -311,9 +311,9 @@ bytes, including the exact resident and starter. Build 16 uses this layout.
 | Saved association record SHA-256 | `d3123e9e08dae99728f90170f4947d7951f231cd53b514b94662d00e2d2efd86` |
 
 This qualifies the selected iPad recovery from a missing starter. The later
-iPhone first-install result is recorded below. First installation from
-non-Firmingo firmware on iPad, physical interruption during the transfer,
-and the post-install offline multi-file upload require their own checks.
+iPhone and iPad first-install results are recorded below. Physical interruption
+during the transfer and the post-install offline multi-file upload require
+their own checks.
 
 ### iPhone first installation from non-Firmingo firmware
 
@@ -342,6 +342,38 @@ followed by automatic network verification and association. The
 [exact test record](workbench-mobile-rom-iphone.json) includes source and
 binary identities, the baseline source, journal hashes, observations and
 remaining qualification items.
+
+### iPad first installation from non-Firmingo firmware
+
+On 2026-11-18, the same signed Workbench build 16 completed first installation
+on an 11-inch iPad Pro (3rd generation) running iPadOS 27.2.1, build 24B156.
+The selected Nano was freshly programmed with the identical non-Firmingo blink
+baseline used for the iPhone check. ROM verification and a separate
+71,168-byte readback matched all baseline payload bytes before reboot. The user
+observed D13 continuing to blink after moving the Nano to the iPad.
+
+The user entered ROM mode, opened **Install or Recover Firmingo**, started
+**Install Firmingo** and selected the `RPI-RP2` root through the in-app picker.
+Workbench transferred the reviewed image, observed ROM detachment and checked
+the new boot, resident, State A starter and exact 256-byte reply. The saved
+association matched the new installation operation. The prior iPad record
+was captured before the test, and its operation and boot identities differed
+from the new record.
+
+The user reported “Firmingo is ready. You can start coding.”,
+“Exact 256-byte reply verified” and D13 off. Connection approval prompts
+appeared on initial attachment and after the automatic restart. The user
+confirmed that no physical unplug/reconnect was needed after selecting the
+boot drive. Prompt wording was not captured, so accessory approval and
+local-network permission are unclassified in this result.
+
+The [exact iPad test record](workbench-mobile-rom-ipad.json) pins the app,
+source image, baseline, fresh readback and installation/association records.
+The Mac prepared the test baseline and deployed Workbench. Firmingo installation
+and verification ran on the iPad. Together with the iPhone result, this covers
+the selected Nano's first-install path on both recorded mobile hosts.
+Physically interrupted transfers, subsequent offline multi-file upload and
+the broader board/OS matrix remain separate qualification items.
 
 ### Historical Files export check
 
